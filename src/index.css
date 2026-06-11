@@ -2291,13 +2291,13 @@ button {
     width: 300px;
     max-width: 80vw;
     height: 100dvh;
-    background: rgba(10, 14, 22, 0.96);
+    background: rgba(8, 12, 18, 0.98);
     backdrop-filter: blur(32px);
     -webkit-backdrop-filter: blur(32px);
-    padding: 80px 16px 28px;
+    padding: 0;
     z-index: 1001;
     transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    gap: 6px;
+    gap: 0;
     border-left: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: -8px 0 40px rgba(0,0,0,0.4)
   }
@@ -2307,48 +2307,75 @@ button {
     display: flex
   }
 
-  .nav-links a,
-  .nav-links a::after {
-    all: unset
+  .nav-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0
   }
 
-  .nav-links a {
-    display: block;
-    padding: 14px 20px;
-    font-size: 0.95rem;
-    font-weight: 500;
+  .nav-drawer-body {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 24px 12px 28px 12px;
+    flex: 1;
+    overflow-y: auto
+  }
+
+  .nav-drawer-body li {
+    list-style: none
+  }
+
+  .nav-drawer-body a {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
     border-radius: 12px;
-    width: 100%;
-    text-align: right;
-    letter-spacing: 0.02em;
-    color: rgba(255,255,255,0.65);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
     cursor: pointer;
-    transition: all var(--t-fast)
+    transition: all var(--t-fast);
+    width: 100%;
+    box-sizing: border-box
   }
 
-  .nav-links a:active {
+  .nav-drawer-body a:active {
     background: rgba(255, 107, 0, 0.1);
     color: var(--orange)
   }
 
-  .nav-links a.active {
-    background: rgba(255, 107, 0, 0.12);
+  .nav-drawer-body a.active {
+    background: rgba(255, 107, 0, 0.1);
     color: var(--orange);
     font-weight: 600
   }
 
-  .nav-links .nav-cta {
-    margin-top: 12px;
-    text-align: center;
-    padding: 14px 20px !important;
+  .nav-drawer-body a:hover {
+    color: #fff
+  }
+
+  .nav-drawer-body .nav-cta {
+    background: var(--orange-grad) !important;
+    color: #fff !important;
+    justify-content: center;
+    margin-top: 8px;
+    padding: 12px 14px !important;
     font-weight: 600 !important;
-    color: #fff !important
+    border-radius: 12px !important
+  }
+
+  .nav-drawer-body a span {
+    flex: 1;
+    text-align: left
   }
 
   .nav-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
     background: rgba(255, 255, 255, 0.08);
     border: none;
     color: var(--text);

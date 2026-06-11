@@ -23,6 +23,8 @@ const iconMap = {
   'globe': 'Globe',
   'graduation-cap': 'GraduationCap',
   'handshake': 'Handshake',
+  'home': 'Home',
+  'info': 'Info',
   'heart': 'Heart',
   'layers': 'Layers',
   'lightbulb': 'Lightbulb',

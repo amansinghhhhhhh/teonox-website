@@ -20,13 +20,18 @@ export default function Navbar() {
       <div className="nav-inner">
         <Link to="/" className="nav-logo"><img src="/assets/asset-002.png" alt="TEONOX" style={{height:44,width:'auto'}} /></Link>
         <ul className="nav-links" id="navLinks">
-          <li><Link to="/" className={is('/')} onClick={closeNav}>Home</Link></li>
-          <li><Link to="/about" className={is('/about')} onClick={closeNav}>About</Link></li>
-          <li><Link to="/hire" className={is('/hire')} onClick={closeNav}>Hire</Link></li>
-          <li><Link to="/careers" className={is('/careers')} onClick={closeNav}>Careers</Link></li>
-          <li><Link to="/blog" className={is('/blog')} onClick={closeNav}>Insights</Link></li>
-          <li><Link to="/programs" className={'nav-cta '+is('/programs')} onClick={closeNav}>Programs</Link></li>
-          <li><button className="nav-close" id="navClose" aria-label="Close menu" onClick={closeNav}><Icon name="x" /></button></li>
+          <div className="nav-drawer-header">
+            <Link to="/" onClick={closeNav}><img src="/assets/asset-002.png" alt="TEONOX" style={{height:32,width:'auto'}} /></Link>
+            <button className="nav-close" id="navClose" aria-label="Close menu" onClick={closeNav}><Icon name="x" /></button>
+          </div>
+          <div className="nav-drawer-body">
+            <li><Link to="/" className={is('/')} onClick={closeNav}><Icon name="home" /><span>Home</span></Link></li>
+            <li><Link to="/about" className={is('/about')} onClick={closeNav}><Icon name="info" /><span>About</span></Link></li>
+            <li><Link to="/hire" className={is('/hire')} onClick={closeNav}><Icon name="briefcase" /><span>Hire</span></Link></li>
+            <li><Link to="/careers" className={is('/careers')} onClick={closeNav}><Icon name="heart" /><span>Careers</span></Link></li>
+            <li><Link to="/blog" className={is('/blog')} onClick={closeNav}><Icon name="file-text" /><span>Insights</span></Link></li>
+            <li><Link to="/programs" className={'nav-cta '+is('/programs')} onClick={closeNav}><Icon name="book-open" /><span>Programs</span></Link></li>
+          </div>
         </ul>
         <button className="nav-toggle" onClick={openNav}>
           <Icon name="menu" />
