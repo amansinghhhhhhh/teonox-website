@@ -2596,15 +2596,6 @@ a {
   box-shadow: 0 8px 28px rgba(255, 92, 26, 0.4) !important;
 }
 
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text);
-  cursor: pointer;
-  padding: 4px;
-}
-
 /* ─── HERO ─── */
 .hero {
   min-height: 100vh;
