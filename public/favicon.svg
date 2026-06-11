@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 26.89 20.43">
+  <!-- Generator: Adobe Illustrator 29.5.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 137)  -->
+  <defs>
+    <style>
+      .st0 {
+        font-size: 8.86px;
+      }
+
+      .st0, .st1, .st2, .st3 {
+        font-family: GillSansMT-Bold, 'Gill Sans MT';
+        font-weight: 700;
+      }
+
+      .st0, .st3 {
+        fill: #231f20;
+      }
+
+      .st1, .st4 {
+        fill: #273441;
+      }
+
+      .st1, .st2 {
+        font-size: 63.66px;
+      }
+
+      .st5, .st2 {
+        fill: #fff;
+      }
+
+      .st3 {
+        font-size: 12.5px;
+      }
+
+      .st6 {
+        fill: #f15b27;
+      }
+    </style>
+  </defs>
+  <rect class="st4" x="-404.43" y="136.7" width="360.51" height="113.47"/>
+  <g>
+    <text class="st1" transform="translate(-322.05 61.19) scale(.86 1)"><tspan x="0" y="0">teonox </tspan></text>
+    <path class="st4" d="M-139.36,27.45v11.06s11.03,3.02,11.03-11.03l-11.03-.04Z"/>
+    <path class="st6" d="M8.9,14.86V3.8s11.03-3.02,11.03,11.03l-11.03.04Z"/>
+    <path class="st4" d="M-140.61,26.19v-11.06s-11.03-3.02-11.03,11.03l11.03.04Z"/>
+  </g>
+  <g>
+    <text class="st2" transform="translate(-322.05 210.55) scale(.86 1)"><tspan x="0" y="0">teonox </tspan></text>
+    <path class="st5" d="M-139.36,176.81v11.06s11.03,3.02,11.03-11.03l-11.03-.04Z"/>
+    <path class="st6" d="M-139.36,175.56v-11.06s11.03-3.02,11.03,11.03l-11.03.04Z"/>
+    <path class="st5" d="M-140.61,175.56v-11.06s-11.03-3.02-11.03,11.03l11.03.04Z"/>
+  </g>
+  <rect class="st4" x="-388.09" y="-60.09" width="23.36" height="23.36"/>
+  <rect class="st6" x="-359.74" y="-60.09" width="23.36" height="23.36"/>
+  <text class="st3" transform="translate(-328.57 -44.97) scale(.86 1)"><tspan x="0" y="0">Font Family : - Gill Sans MT Bold</tspan></text>
+  <text class="st0" transform="translate(-391.17 -25.08) scale(.86 1)"><tspan x="0" y="0">273441</tspan></text>
+  <text class="st0" transform="translate(-360.92 -25.08) scale(.86 1)"><tspan x="0" y="0">F15B27</tspan></text>
+</svg>
