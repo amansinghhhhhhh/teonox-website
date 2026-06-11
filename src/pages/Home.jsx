@@ -228,11 +228,14 @@ export default function Home() {
                       />
                     </div>
                     <div className="field">
-                      <input
-                        type="text"
-                        name="Interested In"
-                        placeholder="I'm interested in"
-                      />
+                      <select name="Interested In">
+                        <option value="">I'm interested in</option>
+                        <option value="Joining the Program">Joining the Program</option>
+                        <option value="Hiring Talent">Hiring Talent</option>
+                        <option value="Partnering with Teonox">Partnering with Teonox</option>
+                        <option value="Applying as Trainer">Applying as Trainer</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                     {heroError && (
                       <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "0 0 8px", textAlign: "center" }}>{heroError}</p>
