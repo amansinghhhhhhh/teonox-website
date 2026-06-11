@@ -1,5 +1,5 @@
 const API_URL =
-    "https://orchid-goat-842546.hostingersite.com/admin/wp-json/wp/v2";
+    "https://cms.teonox.com/wp-json/wp/v2";
 
 // Categories
 export const getCategories = async () => {
