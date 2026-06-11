@@ -180,6 +180,9 @@ button {
 }
 
 .nav-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--text2);
@@ -188,6 +191,10 @@ button {
   transition: var(--t-fast);
   letter-spacing: 0.01em;
   position: relative
+}
+
+.nav-links a span {
+  order: 1
 }
 
 .nav-links a::after {
@@ -254,6 +261,18 @@ button {
 
 .nav-close {
   display: none
+}
+
+.nav-drawer-header {
+  display: none
+}
+
+.nav-drawer-body {
+  display: contents
+}
+
+.nav-drawer-body li {
+  list-style: none
 }
 
 .nav-overlay {
@@ -2304,15 +2323,16 @@ button {
 
   .nav-links.open {
     right: 0;
-    display: flex
+    display: flex;
+    justify-content: left;
+    align-items: flex-end
   }
 
   .nav-drawer-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 16px 16px 12px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    justify-content: flex-start;
+    padding: 12px 4px 4px 12px;
     flex-shrink: 0
   }
 
@@ -2320,7 +2340,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 22px;
-    padding: 24px 12px 28px 12px;
+    padding: 24px 12px 28px 4px;
     flex: 1;
     overflow-y: auto
   }

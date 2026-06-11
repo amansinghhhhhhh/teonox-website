@@ -21,7 +21,6 @@ export default function Navbar() {
         <Link to="/" className="nav-logo"><img src="/assets/asset-002.png" alt="TEONOX" style={{height:44,width:'auto'}} /></Link>
         <ul className="nav-links" id="navLinks">
           <div className="nav-drawer-header">
-            <Link to="/" onClick={closeNav}><img src="/assets/asset-002.png" alt="TEONOX" style={{height:32,width:'auto'}} /></Link>
             <button className="nav-close" id="navClose" aria-label="Close menu" onClick={closeNav}><Icon name="x" /></button>
           </div>
           <div className="nav-drawer-body">
