@@ -10,6 +10,7 @@ import {
 } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
 import { submitForm } from "../services/formService";
+import { validateEmail, validatePhone } from "../utils/validation.js";
 
 export default function Home() {
   useLucide();
@@ -71,7 +72,11 @@ export default function Home() {
 
   const [homeBlogs, setHomeBlogs] = useState([]);
   const [heroSubmitted, setHeroSubmitted] = useState(false);
+  const [heroSubmitting, setHeroSubmitting] = useState(false);
+  const [heroError, setHeroError] = useState("");
   const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [contactError, setContactError] = useState("");
   const [programs, setPrograms] = useState([]);
   const [progCategories, setProgCategories] = useState([]);
   const [progFilter, setProgFilter] = useState("");
@@ -191,10 +196,17 @@ export default function Home() {
                   <form
                     onSubmit={async (e) => {
                       e.preventDefault();
+                      setHeroError("");
                       const fd = new FormData(e.target);
                       const fields = {};
                       fd.forEach((value, key) => { fields[key] = value; });
-                      try { await submitForm("Home Hero Enquiry", fields); } catch {}
+                      const email = fields["Email Address"] || "";
+                      const phone = fields["Phone Number"] || "";
+                      if (email && !validateEmail(email)) { setHeroError("Please enter a valid email address."); return; }
+                      if (phone && !validatePhone(phone)) { setHeroError("Please enter a valid 10-digit Indian phone number."); return; }
+                      setHeroSubmitting(true);
+                      try { await submitForm("Home Hero Enquiry", fields); } catch { setHeroError("Something went wrong. Please try again."); setHeroSubmitting(false); return; }
+                      setHeroSubmitting(false);
                       e.target.reset();
                       setHeroSubmitted(true);
                     }}
@@ -229,16 +241,20 @@ export default function Home() {
                         placeholder="I'm interested in"
                       />
                     </div>
+                    {heroError && (
+                      <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "0 0 8px", textAlign: "center" }}>{heroError}</p>
+                    )}
                     <button
                       type="submit"
                       className="btn btn-primary"
                       style={{ justifyContent: "center" }}
+                      disabled={heroSubmitting}
                     >
-                      Submit{" "}
-                      <i
+                      {heroSubmitting ? "Submitting..." : "Submit"}{" "}
+                      {!heroSubmitting && <i
                         data-lucide="arrow-right"
                         style={{ width: "16px", height: "16px" }}
-                      ></i>
+                      ></i>}
                     </button>
                   </form>
                 )}
@@ -1182,10 +1198,17 @@ export default function Home() {
                 <form
                   onSubmit={async (e) => {
                     e.preventDefault();
+                    setContactError("");
                     const fd = new FormData(e.target);
                     const fields = {};
                     fd.forEach((value, key) => { fields[key] = value; });
-                    try { await submitForm("Home Contact", fields); } catch {}
+                    const email = fields["Email Address"] || "";
+                    const phone = fields["Phone Number"] || "";
+                    if (email && !validateEmail(email)) { setContactError("Please enter a valid email address."); return; }
+                    if (phone && !validatePhone(phone)) { setContactError("Please enter a valid 10-digit Indian phone number."); return; }
+                    setContactSubmitting(true);
+                    try { await submitForm("Home Contact", fields); } catch { setContactError("Something went wrong. Please try again."); setContactSubmitting(false); return; }
+                    setContactSubmitting(false);
                     e.target.reset();
                     setContactSubmitted(true);
                   }}
@@ -1244,16 +1267,20 @@ export default function Home() {
                       placeholder="Tell us about yourself or what you're looking for..."
                     ></textarea>
                   </div>
+                  {contactError && (
+                    <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "0 0 8px", textAlign: "center" }}>{contactError}</p>
+                  )}
                   <button
                     type="submit"
                     className="btn btn-primary"
                     style={{ justifyContent: "center" }}
+                    disabled={contactSubmitting}
                   >
-                    Send Message{" "}
-                    <i
+                    {contactSubmitting ? "Submitting..." : "Send Message"}{" "}
+                    {!contactSubmitting && <i
                       data-lucide="send"
                       style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    ></i>}
                   </button>
                 </form>
               )}

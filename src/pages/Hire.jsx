@@ -2,29 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLucide from '../hooks/useLucide.js';
 import useScrollReveal from '../hooks/useScrollReveal.js';
-
-const WEBHOOK = "https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec";
+import { submitForm } from '../services/formService';
+import { validateEmail, validatePhone } from '../utils/validation.js';
 
 export default function Hire() {
   useLucide();
   useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const submitForm = async (formName, formEl) => {
-    const fd = new FormData(formEl);
-    const fields = {};
-    fd.forEach((value, key) => { fields[key] = value; });
-    try {
-      await fetch(WEBHOOK, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formName, fields }),
-      });
-    } catch {}
-    formEl.reset();
-    setSubmitted(true);
-  };
   
 
   useEffect(() => {
@@ -112,12 +99,28 @@ export default function Hire() {
             <p style={{ color:"var(--text)",fontWeight:"600",fontSize:"1rem" }}>Thank you! We'll get back to you shortly.</p>
           </div>
         ) : (
-          <form onSubmit={(e) => { e.preventDefault(); submitForm("Hire Talent", e.target); }}>
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            setError("");
+            const fd = new FormData(e.target);
+            const fields = {};
+            fd.forEach((value, key) => { fields[key] = value; });
+            const email = fields["Email Address"] || "";
+            const phone = fields["Phone Number"] || "";
+            if (email && !validateEmail(email)) { setError("Please enter a valid email address."); return; }
+            if (phone && !validatePhone(phone)) { setError("Please enter a valid 10-digit Indian phone number."); return; }
+            setSubmitting(true);
+            try { await submitForm("Hire Talent", fields); } catch { setError("Something went wrong. Please try again."); setSubmitting(false); return; }
+            setSubmitting(false);
+            e.target.reset();
+            setSubmitted(true);
+          }}>
             <div className="form-row"><div className="field"><label>Company Name</label><input type="text" name="Company Name" placeholder="Enter company name"  /></div><div className="field"><label>Contact Person</label><input type="text" name="Contact Person" placeholder="Full name"  /></div></div>
             <div className="form-row"><div className="field"><label>Email Address</label><input type="email" name="Email Address" placeholder="your@email.com"  /></div><div className="field"><label>Phone Number</label><input type="tel" name="Phone Number" placeholder="8087177760"  /></div></div>
             <div className="form-row"><div className="field"><label>Hiring Requirement</label><input type="text" name="Hiring Requirement" placeholder="e.g. Digital Marketing Executive"  /></div><div className="field"><label>Open Positions</label><input type="number" name="Open Positions" placeholder="Number of hires"  /></div></div>
             <div className="field"><label>Message</label><textarea name="Message" placeholder="Tell us about your requirements..."></textarea></div>
-            <button type="submit" className="btn btn-primary" style={{width:'100%',justifyContent:'center'}}>Request Talent <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i></button>
+            {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
+            <button type="submit" className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} disabled={submitting}>{submitting ? "Submitting..." : "Request Talent"} {!submitting && <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i>}</button>
           </form>
         )}
       </div>

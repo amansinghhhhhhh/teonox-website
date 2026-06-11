@@ -3,37 +3,20 @@ import { Link } from 'react-router-dom';
 import useLucide from '../hooks/useLucide.js';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import { getCareers } from '../api/wordpressApi';
-
-const WEBHOOK = "https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec";
+import { submitForm } from '../services/formService';
+import { validateEmail, validatePhone, validateFile } from '../utils/validation.js';
 
 export default function Careers() {
   useLucide();
   useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [careers, setCareers] = useState([]);
 
   useEffect(() => {
     getCareers().then(setCareers).catch(console.error);
   }, []);
-
-  const submitForm = async (formName, formEl) => {
-    const fd = new FormData(formEl);
-    const fields = {};
-    fd.forEach((value, key) => {
-      if (typeof value === "string") fields[key] = value;
-    });
-    try {
-      await fetch(WEBHOOK, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formName, fields }),
-      });
-    } catch {}
-    formEl.reset();
-    setSubmitted(true);
-  };
-  
 
   useEffect(() => {
     const hdls = [];
@@ -153,7 +136,22 @@ export default function Careers() {
               <p style={{ color:"var(--text)",fontWeight:"600",fontSize:"1rem" }}>Thank you! We'll get back to you shortly.</p>
             </div>
           ) : (
-            <form id="careers-form" onSubmit={(e) => { e.preventDefault(); submitForm("Careers Application", e.target); }}>
+            <form id="careers-form" onSubmit={async (e) => {
+              e.preventDefault();
+              setError("");
+              const fd = new FormData(e.target);
+              const fields = {};
+              fd.forEach((value, key) => { fields[key] = value; });
+              const email = fields["Email"] || "";
+              const file = fields["Resume"];
+              if (email && !validateEmail(email)) { setError("Please enter a valid email address."); return; }
+              if (file && file instanceof File && file.size > 0) { const fv = validateFile(file); if (!fv.valid) { setError(fv.message); return; } }
+              setSubmitting(true);
+              try { await submitForm("Careers Application", fields); } catch { setError("Something went wrong. Please try again."); setSubmitting(false); return; }
+              setSubmitting(false);
+              e.target.reset();
+              setSubmitted(true);
+            }}>
               <div style={{marginBottom:'28px'}}>
                 <h3 style={{fontFamily:'var(--font-head)',fontSize:'1.15rem',fontWeight:'700',color:'#fff',margin:'0 0 4px'}}>Interested In Working With TEONOX?</h3>
                 <p style={{fontSize:'0.82rem',color:'rgba(255,255,255,0.4)',fontWeight:'300',margin:'0'}}>Fill in your details and we'll get back to you.</p>
@@ -161,8 +159,9 @@ export default function Careers() {
               <div className="form-row"><div className="field"><label>Full Name</label><input type="text" name="Full Name" placeholder="Enter your full name"  /></div><div className="field"><label>Email</label><input type="email" name="Email" placeholder="you@example.com"  /></div></div>
               <div className="form-row"><div className="field"><label>Role</label><select name="Role"><option value="">Select</option><option value="Digital Marketing Trainer">Digital Marketing Trainer</option><option value="Business Development Manager">Business Development Manager</option><option value="AI & Data Science Trainer">AI & Data Science Trainer</option><option value="Head of Academics">Head of Academics</option><option value="Other">Other</option></select></div><div className="field"><label>Experience</label><input type="text" name="Experience" placeholder="e.g. 5 years"  /></div></div>
               <div className="field"><label>Why TEONOX?</label><textarea name="Why TEONOX" rows="4" placeholder="Tell us why you would like to work with us..."></textarea></div>
-              <div className="field"><label>Upload Resume / CV</label><input type="file" accept=".pdf,.doc,.docx" /></div>
-              <button type="submit" className="btn btn-primary">Submit Application <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i></button>
+              <div className="field"><label>Upload Resume / CV</label><input type="file" name="Resume" accept=".pdf,.doc,.docx" /></div>
+              {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
+              <button type="submit" className="btn btn-primary" disabled={submitting}>{submitting ? "Submitting..." : "Submit Application"} {!submitting && <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i>}</button>
             </form>
           )}
         </div>
