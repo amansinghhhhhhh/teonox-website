@@ -2270,20 +2270,36 @@ button {
 }
 
 @media(max-width:768px) {
+  .nav {
+    padding: 14px 0;
+  }
+
+  .nav.scrolled {
+    padding: 8px 0;
+  }
+
+  .nav-inner {
+    padding: 0 16px;
+  }
+
   .nav-links {
     display: flex;
     flex-direction: column;
     position: fixed;
     top: 0;
-    right: -300px;
-    width: 280px;
-    height: 100vh;
-    background: rgb(10, 14, 22);
-    padding: 80px 28px 28px;
+    right: -100%;
+    width: 300px;
+    max-width: 80vw;
+    height: 100dvh;
+    background: rgba(10, 14, 22, 0.96);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    padding: 80px 24px 28px;
     z-index: 1001;
-    transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    gap: 2px;
-    border-left: 1px solid rgba(255, 255, 255, 0.06)
+    transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    gap: 4px;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: -8px 0 40px rgba(0,0,0,0.4)
   }
 
   .nav-links.open {
@@ -2292,43 +2308,80 @@ button {
   }
 
   .nav-links a {
-    padding: 14px 18px;
+    padding: 12px 16px;
     font-size: 0.95rem;
-    border-radius: 10px
+    border-radius: 10px;
+    width: 100%
   }
 
   .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.04)
+    background: rgba(255, 255, 255, 0.06)
+  }
+
+  .nav-links a.active {
+    background: rgba(255, 107, 0, 0.1);
+    color: var(--orange)
+  }
+
+  .nav-links .nav-cta {
+    margin-top: 8px;
+    text-align: center
   }
 
   .nav-close {
     position: absolute;
-    top: 18px;
-    right: 18px;
+    top: 16px;
+    right: 16px;
     background: rgba(255, 255, 255, 0.08);
     border: none;
     color: var(--text);
     cursor: pointer;
     padding: 6px;
-    border-radius: 8px;
-    width: 34px;
-    height: 34px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    transition: background var(--t-fast)
   }
 
   .nav-close:hover {
-    background: rgba(255, 255, 255, 0.12)
+    background: rgba(255, 255, 255, 0.15)
   }
 
   .nav-toggle {
-    display: flex
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08)
   }
 
-  .nav-overlay,
+  .nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.08)
+  }
+
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease
+  }
+
   .nav-overlay.show {
-    display: none !important
+    opacity: 1;
+    pointer-events: auto;
+    display: block
   }
 
   .hire-grid,
@@ -5180,67 +5233,6 @@ a {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 280px;
-    height: 100vh;
-    background: rgb(10, 14, 22);
-    padding: 80px 28px 28px;
-    z-index: 1001;
-    transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    gap: 10px;
-    border-left: 1px solid rgba(255, 255, 255, 0.06)
-  }
-
-  .nav-links.open {
-    right: 0;
-    display: flex
-  }
-
-  .nav-links a {
-    border-radius: 10px;
-    padding: 9px 13px;
-    font-size: .95rem;
-  }
-
-  .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.04)
-  }
-
-  .nav-close {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    background: rgba(255, 255, 255, 0.08);
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 8px;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
-
-  .nav-close:hover {
-    background: rgba(255, 255, 255, 0.12)
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  .nav-overlay,
-  .nav-overlay.show {
-    display: none !important
-  }
-
   .program-cards,
   .hire-grid {
     grid-template-columns: repeat(2, 1fr);
