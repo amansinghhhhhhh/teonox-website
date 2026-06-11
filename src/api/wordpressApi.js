@@ -1,4 +1,5 @@
-const API_URL = "/api";
+const API_URL =
+    "https://cms.teonox.com/wp-json/wp/v2";
 
 // Categories
 export const getCategories = async () => {
