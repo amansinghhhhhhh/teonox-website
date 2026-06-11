@@ -9,6 +9,7 @@ import {
   getProgramCategories,
 } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
+import emailjs from "@emailjs/browser";
 
 const WEBHOOK =
   "https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec";
@@ -321,7 +322,9 @@ export default function Home() {
                     )}
                     <div className="prog-card-top">
                       <h3
-                        dangerouslySetInnerHTML={{ __html: program.title.rendered }}
+                        dangerouslySetInnerHTML={{
+                          __html: program.title.rendered,
+                        }}
                         style={{
                           display: "-webkit-box",
                           WebkitLineClamp: "2",
