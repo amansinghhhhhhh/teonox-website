@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useLucide from "../hooks/useLucide.js";
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { getBlogBySlug, getRelatedBlogs } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
 export default function Blog_Details() {
-  useLucide();
   useScrollReveal();
 
   const { slug } = useParams();
@@ -68,10 +67,7 @@ export default function Blog_Details() {
               transition: "color var(--t-fast)",
             }}
           >
-            <i
-              data-lucide="arrow-left"
-              style={{ width: "16px", height: "16px" }}
-            ></i>
+            <Icon name="arrow-left" size={16} />
             Back to Insights
           </Link>
 
@@ -114,14 +110,14 @@ export default function Blog_Details() {
               style={{ justifyContent: "center", marginBottom: "20px" }}
             >
               <div className="pg-hero-meta-item">
-                <i data-lucide="user"></i>
+                <Icon name="user" />
                 <strong>
                   {blog._embedded?.author?.[0]?.name || "TEONOX Team"}
                 </strong>
               </div>
               <div className="pg-hero-meta-divider"></div>
               <div className="pg-hero-meta-item">
-                <i data-lucide="calendar"></i>
+                <Icon name="calendar" />
                 <strong>
                   {new Date(blog.date).toLocaleDateString("en-US", {
                     day: "numeric",
@@ -132,7 +128,7 @@ export default function Blog_Details() {
               </div>
               <div className="pg-hero-meta-divider"></div>
               <div className="pg-hero-meta-item">
-                <i data-lucide="clock"></i>
+                <Icon name="clock" />
                 <strong>{readTime} min read</strong>
               </div>
             </div>
@@ -281,3 +277,5 @@ export default function Blog_Details() {
     </div>
   );
 }
+
+

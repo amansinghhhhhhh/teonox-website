@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import useLucide from "../hooks/useLucide.js";
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import useTypewriter from "../hooks/useTypewriter.js";
 import {
@@ -13,7 +13,6 @@ import { submitForm } from "../services/formService";
 import { validateEmail, validatePhone } from "../utils/validation.js";
 
 export default function Home() {
-  useLucide();
   useScrollReveal();
   useTypewriter();
 
@@ -135,16 +134,10 @@ export default function Home() {
               <div className="hero-actions">
                 <a href="programs.html" className="btn btn-primary">
                   Explore Programs
-                  <i
-                    data-lucide="arrow-right"
-                    style={{ width: "16px", height: "16px" }}
-                  ></i>
+                  <Icon name="arrow-right" size={16} />
                 </a>
                 <a href="#contact" className="btn btn-outline">
-                  <i
-                    data-lucide="phone"
-                    style={{ width: "16px", height: "16px" }}
-                  ></i>
+                  <Icon name="phone" size={16} />
                   Speak to Our Team
                 </a>
               </div>
@@ -251,10 +244,7 @@ export default function Home() {
                       disabled={heroSubmitting}
                     >
                       {heroSubmitting ? "Submitting..." : "Submit"}{" "}
-                      {!heroSubmitting && <i
-                        data-lucide="arrow-right"
-                        style={{ width: "16px", height: "16px" }}
-                      ></i>}
+                      {!heroSubmitting && <Icon name="arrow-right" size={16} />}
                     </button>
                   </form>
                 )}
@@ -375,10 +365,7 @@ export default function Home() {
                     </p>
                     <span className="btn btn-outline btn-sm prog-card-cta">
                       View Program{" "}
-                      <i
-                        data-lucide="arrow-right"
-                        style={{ width: "14px", height: "14px" }}
-                      ></i>
+                      <Icon name="arrow-right" size={14} />
                     </span>
                   </div>
                 </Link>
@@ -474,10 +461,7 @@ export default function Home() {
               </div>
               <div className="approach-card-body">
                 <div className="approach-icon">
-                  <i
-                    data-lucide="book-open"
-                    style={{ width: "20px", height: "20px" }}
-                  ></i>
+                  <Icon name="book-open" size={20} />
                 </div>
                 <h3>Learn</h3>
                 <p>
@@ -494,10 +478,7 @@ export default function Home() {
               </div>
               <div className="approach-card-body">
                 <div className="approach-icon">
-                  <i
-                    data-lucide="briefcase"
-                    style={{ width: "20px", height: "20px" }}
-                  ></i>
+                  <Icon name="briefcase" size={20} />
                 </div>
                 <h3>Apply</h3>
                 <p>
@@ -514,10 +495,7 @@ export default function Home() {
               </div>
               <div className="approach-card-body">
                 <div className="approach-icon">
-                  <i
-                    data-lucide="trending-up"
-                    style={{ width: "20px", height: "20px" }}
-                  ></i>
+                  <Icon name="trending-up" size={20} />
                 </div>
                 <h3>Lead</h3>
                 <p>
@@ -551,20 +529,14 @@ export default function Home() {
               <div className="bento-img">
                 <img src="assets/asset-012.jpg" alt="Live Brand Projects" />
                 <div className="bento-chip">
-                  <i
-                    data-lucide="briefcase"
-                    style={{ width: "13px", height: "13px" }}
-                  ></i>
+                  <Icon name="briefcase" size={13} />
                   Live Projects
                 </div>
               </div>
               <div className="bento-body">
                 <h4>
                   <span className="bento-icon">
-                    <i
-                      data-lucide="briefcase"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    <Icon name="briefcase" size={16} />
                   </span>
                   Live Brand Projects
                 </h4>
@@ -578,20 +550,14 @@ export default function Home() {
               <div className="bento-img">
                 <img src="assets/asset-013.jpg" alt="AI & Future Labs" />
                 <div className="bento-chip">
-                  <i
-                    data-lucide="cpu"
-                    style={{ width: "13px", height: "13px" }}
-                  ></i>
+                  <Icon name="cpu" size={13} />
                   AI & Future
                 </div>
               </div>
               <div className="bento-body">
                 <h4>
                   <span className="bento-icon">
-                    <i
-                      data-lucide="cpu"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    <Icon name="cpu" size={16} />
                   </span>
                   AI & Future Labs
                 </h4>
@@ -605,20 +571,14 @@ export default function Home() {
               <div className="bento-img">
                 <img src="assets/asset-014.jpg" alt="Industry Mentorship" />
                 <div className="bento-chip">
-                  <i
-                    data-lucide="users"
-                    style={{ width: "13px", height: "13px" }}
-                  ></i>
+                  <Icon name="users" size={13} />
                   Mentorship
                 </div>
               </div>
               <div className="bento-body">
                 <h4>
                   <span className="bento-icon">
-                    <i
-                      data-lucide="users"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    <Icon name="users" size={16} />
                   </span>
                   Industry Mentorship
                 </h4>
@@ -632,20 +592,14 @@ export default function Home() {
               <div className="bento-img">
                 <img src="assets/asset-015.jpg" alt="Business Simulations" />
                 <div className="bento-chip">
-                  <i
-                    data-lucide="monitor"
-                    style={{ width: "13px", height: "13px" }}
-                  ></i>
+                  <Icon name="monitor" size={13} />
                   Simulations
                 </div>
               </div>
               <div className="bento-body">
                 <h4>
                   <span className="bento-icon">
-                    <i
-                      data-lucide="monitor"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    <Icon name="monitor" size={16} />
                   </span>
                   Business Simulations
                 </h4>
@@ -659,20 +613,14 @@ export default function Home() {
               <div className="bento-img">
                 <img src="assets/asset-016.jpg" alt="Agency Exposure" />
                 <div className="bento-chip">
-                  <i
-                    data-lucide="building-2"
-                    style={{ width: "13px", height: "13px" }}
-                  ></i>
+                  <Icon name="building-2" size={13} />
                   Agency
                 </div>
               </div>
               <div className="bento-body">
                 <h4>
                   <span className="bento-icon">
-                    <i
-                      data-lucide="building-2"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    <Icon name="building-2" size={16} />
                   </span>
                   Agency & Industry Exposure
                 </h4>
@@ -689,20 +637,14 @@ export default function Home() {
                   alt="Portfolio & Career Development"
                 />
                 <div className="bento-chip">
-                  <i
-                    data-lucide="folder"
-                    style={{ width: "13px", height: "13px" }}
-                  ></i>
+                  <Icon name="folder" size={13} />
                   Portfolio
                 </div>
               </div>
               <div className="bento-body">
                 <h4>
                   <span className="bento-icon">
-                    <i
-                      data-lucide="folder"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>
+                    <Icon name="folder" size={16} />
                   </span>
                   Portfolio & Career Development
                 </h4>
@@ -795,25 +737,25 @@ export default function Home() {
               <h4>Career Roles</h4>
               <ul className="career-list">
                 <li>
-                  <i data-lucide="megaphone"></i>Digital Marketing Executive
+                  <Icon name="megaphone" />Digital Marketing Executive
                 </li>
                 <li>
-                  <i data-lucide="trending-up"></i>Growth Associate
+                  <Icon name="trending-up" />Growth Associate
                 </li>
                 <li>
-                  <i data-lucide="bar-chart-3"></i>Performance Marketer
+                  <Icon name="bar-chart-3" />Performance Marketer
                 </li>
                 <li>
-                  <i data-lucide="pie-chart"></i>Business Analyst
+                  <Icon name="pie-chart" />Business Analyst
                 </li>
                 <li>
-                  <i data-lucide="handshake"></i>Sales & Growth Associate
+                  <Icon name="handshake" />Sales & Growth Associate
                 </li>
                 <li>
-                  <i data-lucide="cpu"></i>AI Operations Associate
+                  <Icon name="cpu" />AI Operations Associate
                 </li>
                 <li>
-                  <i data-lucide="file-text"></i>Content Strategist
+                  <Icon name="file-text" />Content Strategist
                 </li>
               </ul>
             </div>
@@ -821,22 +763,22 @@ export default function Home() {
               <h4>Industries</h4>
               <ul className="career-list">
                 <li>
-                  <i data-lucide="rocket"></i>Startups
+                  <Icon name="rocket" />Startups
                 </li>
                 <li>
-                  <i data-lucide="building-2"></i>Agencies
+                  <Icon name="building-2" />Agencies
                 </li>
                 <li>
-                  <i data-lucide="cloud"></i>SaaS Companies
+                  <Icon name="cloud" />SaaS Companies
                 </li>
                 <li>
-                  <i data-lucide="shopping-cart"></i>E-commerce
+                  <Icon name="shopping-cart" />E-commerce
                 </li>
                 <li>
-                  <i data-lucide="briefcase"></i>Consulting
+                  <Icon name="briefcase" />Consulting
                 </li>
                 <li>
-                  <i data-lucide="monitor"></i>Media & Technology
+                  <Icon name="monitor" />Media & Technology
                 </li>
               </ul>
               <div className="outcome-box">
@@ -864,16 +806,16 @@ export default function Home() {
               </p>
               <ul className="work-benefits">
                 <li>
-                  <i data-lucide="check"></i>Business-first learning environment
+                  <Icon name="check" />Business-first learning environment
                 </li>
                 <li>
-                  <i data-lucide="check"></i>Premium learner audience
+                  <Icon name="check" />Premium learner audience
                 </li>
                 <li>
-                  <i data-lucide="check"></i>Long-term collaboration mindset
+                  <Icon name="check" />Long-term collaboration mindset
                 </li>
                 <li>
-                  <i data-lucide="check"></i>Freedom to teach real-world
+                  <Icon name="check" />Freedom to teach real-world
                   thinking
                 </li>
               </ul>
@@ -919,16 +861,10 @@ export default function Home() {
                 style={{ marginBottom: "12px", display: "flex" }}
               >
                 Request Talent{" "}
-                <i
-                  data-lucide="arrow-right"
-                  style={{ width: "16px", height: "16px" }}
-                ></i>
+                <Icon name="arrow-right" size={16} />
               </a>
               <a href="#contact" className="hire-cta-btn">
-                <i
-                  data-lucide="phone"
-                  style={{ width: "16px", height: "16px" }}
-                ></i>{" "}
+                <Icon name="phone" size={16} />{" "}
                 Speak to Our Team
               </a>
             </div>
@@ -953,37 +889,25 @@ export default function Home() {
           <div className="hire-grid reveal">
             <div className="hire-card reveal-delay-1">
               <div className="hire-card-icon">
-                <i
-                  data-lucide="megaphone"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="megaphone" size={22} />
               </div>
               <h4>Digital Marketing & Growth Professionals</h4>
             </div>
             <div className="hire-card reveal-delay-2">
               <div className="hire-card-icon">
-                <i
-                  data-lucide="bar-chart-4"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="bar-chart-4" size={22} />
               </div>
               <h4>AI & Business Analytics Talent</h4>
             </div>
             <div className="hire-card reveal-delay-3">
               <div className="hire-card-icon">
-                <i
-                  data-lucide="phone"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="phone" size={22} />
               </div>
               <h4>Sales & Revenue Operations Professionals</h4>
             </div>
             <div className="hire-card reveal-delay-4">
               <div className="hire-card-icon">
-                <i
-                  data-lucide="rocket"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="rocket" size={22} />
               </div>
               <h4>Full-Stack Business Growth Professionals</h4>
             </div>
@@ -994,10 +918,7 @@ export default function Home() {
             <div className="hire-why-grid">
               <div className="hire-why-item">
                 <div className="hire-why-icon">
-                  <i
-                    data-lucide="briefcase"
-                    style={{ width: "18px", height: "18px" }}
-                  ></i>
+                  <Icon name="briefcase" size={18} />
                 </div>
                 <div>
                   <h5>Trained on real business scenarios</h5>
@@ -1009,10 +930,7 @@ export default function Home() {
               </div>
               <div className="hire-why-item">
                 <div className="hire-why-icon">
-                  <i
-                    data-lucide="cpu"
-                    style={{ width: "18px", height: "18px" }}
-                  ></i>
+                  <Icon name="cpu" size={18} />
                 </div>
                 <div>
                   <h5>AI & data-first mindset</h5>
@@ -1024,10 +942,7 @@ export default function Home() {
               </div>
               <div className="hire-why-item">
                 <div className="hire-why-icon">
-                  <i
-                    data-lucide="message-square"
-                    style={{ width: "18px", height: "18px" }}
-                  ></i>
+                  <Icon name="message-square" size={18} />
                 </div>
                 <div>
                   <h5>Strong communication & sales</h5>
@@ -1039,10 +954,7 @@ export default function Home() {
               </div>
               <div className="hire-why-item">
                 <div className="hire-why-icon">
-                  <i
-                    data-lucide="target"
-                    style={{ width: "18px", height: "18px" }}
-                  ></i>
+                  <Icon name="target" size={18} />
                 </div>
                 <div>
                   <h5>Outcome-driven execution</h5>
@@ -1082,10 +994,7 @@ export default function Home() {
               style={{ flexShrink: "0", marginBottom: "8px" }}
             >
               View All{" "}
-              <i
-                data-lucide="arrow-right"
-                style={{ width: "14px", height: "14px" }}
-              ></i>
+              <Icon name="arrow-right" size={14} />
             </Link>
           </div>
           <div className="blog-grid">
@@ -1277,10 +1186,7 @@ export default function Home() {
                     disabled={contactSubmitting}
                   >
                     {contactSubmitting ? "Submitting..." : "Send Message"}{" "}
-                    {!contactSubmitting && <i
-                      data-lucide="send"
-                      style={{ width: "16px", height: "16px" }}
-                    ></i>}
+                    {!contactSubmitting && <Icon name="send" size={16} />}
                   </button>
                 </form>
               )}
@@ -1291,3 +1197,5 @@ export default function Home() {
     </div>
   );
 }
+
+

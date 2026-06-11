@@ -1,0 +1,54 @@
+import * as Icons from 'lucide-react';
+
+const iconMap = {
+  'arrow-left': 'ArrowLeft',
+  'arrow-right': 'ArrowRight',
+  'arrow-down': 'ArrowDown',
+  'award': 'Award',
+  'bar-chart-3': 'BarChart3',
+  'bar-chart-4': 'BarChart4',
+  'book-open': 'BookOpen',
+  'briefcase': 'Briefcase',
+  'building-2': 'Building2',
+  'calendar': 'Calendar',
+  'check': 'Check',
+  'chevron-down': 'ChevronDown',
+  'clock': 'Clock',
+  'cloud': 'Cloud',
+  'compass': 'Compass',
+  'cpu': 'Cpu',
+  'download': 'Download',
+  'file-text': 'FileText',
+  'folder': 'Folder',
+  'globe': 'Globe',
+  'graduation-cap': 'GraduationCap',
+  'handshake': 'Handshake',
+  'heart': 'Heart',
+  'layers': 'Layers',
+  'lightbulb': 'Lightbulb',
+  'mail': 'Mail',
+  'map-pin': 'MapPin',
+  'megaphone': 'Megaphone',
+  'menu': 'Menu',
+  'message-circle': 'MessageCircle',
+  'message-square': 'MessageSquare',
+  'monitor': 'Monitor',
+  'phone': 'Phone',
+  'pie-chart': 'PieChart',
+  'quote': 'Quote',
+  'rocket': 'Rocket',
+  'send': 'Send',
+  'shopping-cart': 'ShoppingCart',
+  'target': 'Target',
+  'trending-up': 'TrendingUp',
+  'user': 'User',
+  'users': 'Users',
+  'x': 'X',
+  'zap': 'Zap',
+};
+
+export default function Icon({ name, size = 16, className, style }) {
+  const Component = Icons[iconMap[name] || name];
+  if (!Component) return null;
+  return <Component size={size} className={className} style={style} />;
+}

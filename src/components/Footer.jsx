@@ -1,3 +1,4 @@
+import Icon from '../components/Icon.jsx';
 import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
             <Link to="/" className="nav-logo"><img src="/assets/asset-028.png" alt="TEONOX" style={{height:44,width:'auto'}} /></Link>
             <p>Building industry-ready professionals through experiential, practitioner-led learning. Bridging the gap between education and execution.</p>
             <div className="hero-actions" style={{marginTop:16}}>
-              <Link to="/contact" className="btn btn-primary btn-sm">Enquire Now <i data-lucide="arrow-right" style={{width:12,height:12}}></i></Link>
+              <Link to="/contact" className="btn btn-primary btn-sm">Enquire Now <Icon name="arrow-right" size={12} /></Link>
             </div>
           </div>
           <div className="footer-col"><h5>Quick Links</h5><ul><li><Link to="/">Home</Link></li><li><Link to="/about">About</Link></li><li><Link to="/programs">Program</Link></li><li><Link to="/hire">Hire From Us</Link></li></ul></div>

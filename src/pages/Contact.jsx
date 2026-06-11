@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useLucide from '../hooks/useLucide.js';
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import { submitForm } from '../services/formService';
 import { validateEmail, validatePhone } from '../utils/validation.js';
 
 export default function Contact() {
-  useLucide();
   useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -39,9 +38,9 @@ export default function Contact() {
         <h3 className="contact-sidebar-title">Get In Touch</h3>
         <p>Tell us a little about yourself. We'd love to learn more about your goals and how we can help.</p>
         <ul className="contact-info">
-          <li><div className="contact-info-icon"><i data-lucide="map-pin" style={{width:'18px',height:'18px'}}></i></div><div><strong>Visit Us</strong><span>TEONOX Campus, Pune</span></div></li>
-          <li><div className="contact-info-icon"><i data-lucide="phone" style={{width:'18px',height:'18px'}}></i></div><div><strong>Call Us</strong><span>8087177760</span></div></li>
-          <li><div className="contact-info-icon"><i data-lucide="mail" style={{width:'18px',height:'18px'}}></i></div><div><strong>Email Us</strong><span>info@teonox.com</span></div></li>
+          <li><div className="contact-info-icon"><Icon name="map-pin" size={18} /></div><div><strong>Visit Us</strong><span>TEONOX Campus, Pune</span></div></li>
+          <li><div className="contact-info-icon"><Icon name="phone" size={18} /></div><div><strong>Call Us</strong><span>8087177760</span></div></li>
+          <li><div className="contact-info-icon"><Icon name="mail" size={18} /></div><div><strong>Email Us</strong><span>info@teonox.com</span></div></li>
         </ul>
       </div>
       <div className="form-wrap">
@@ -76,7 +75,7 @@ export default function Contact() {
             <div className="field"><label>Interested In</label><select name="Interested In"><option value="">Select</option><option value="TEONOX Business Growth Program">TEONOX Business Growth Program</option><option value="Career Guidance">Career Guidance</option><option value="Partnership Opportunities">Partnership Opportunities</option><option value="Corporate Training">Corporate Training</option><option value="Hiring from TEONOX">Hiring from TEONOX</option><option value="General Enquiry">General Enquiry</option></select></div>
             <div className="field"><label>Your Message</label><textarea name="Your Message" placeholder="Tell us about your goals, questions, or how we can help..."></textarea></div>
             {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
-            <button type="submit" className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} disabled={submitting}>{submitting ? "Submitting..." : "Let's Connect"} {!submitting && <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i>}</button>
+            <button type="submit" className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} disabled={submitting}>{submitting ? "Submitting..." : "Let's Connect"} {!submitting && <Icon name="arrow-right" size={16} />}</button>
           </form>
         )}
       </div>
@@ -108,19 +107,19 @@ export default function Contact() {
       </div>
       <div className="faq-grid">
         <div className="faq-item reveal reveal-d1">
-          <div className="faq-q">Do I need prior experience to join? <i data-lucide="chevron-down"></i></div>
+          <div className="faq-q">Do I need prior experience to join? <Icon name="chevron-down" /></div>
           <div className="faq-a">No. The program is designed for students, fresh graduates, and individuals looking to build practical business skills.</div>
         </div>
         <div className="faq-item reveal reveal-d2">
-          <div className="faq-q">Is this only for marketing careers? <i data-lucide="chevron-down"></i></div>
+          <div className="faq-q">Is this only for marketing careers? <Icon name="chevron-down" /></div>
           <div className="faq-a">No. While marketing is a key focus area, the program also covers AI, analytics, sales, communication, and business growth skills that are valuable across industries.</div>
         </div>
         <div className="faq-item reveal reveal-d3">
-          <div className="faq-q">Will I work on real projects? <i data-lucide="chevron-down"></i></div>
+          <div className="faq-q">Will I work on real projects? <Icon name="chevron-down" /></div>
           <div className="faq-a">Yes. Practical exposure, projects, workshops, and industry-oriented learning are core parts of the TEONOX experience.</div>
         </div>
         <div className="faq-item reveal reveal-d4">
-          <div className="faq-q">Who will teach me? <i data-lucide="chevron-down"></i></div>
+          <div className="faq-q">Who will teach me? <Icon name="chevron-down" /></div>
           <div className="faq-a">You'll learn from industry practitioners, business leaders, and professionals with real-world experience.</div>
         </div>
       </div>
@@ -141,3 +140,5 @@ export default function Contact() {
 </div>
   );
 }
+
+

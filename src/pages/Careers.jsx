@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useLucide from '../hooks/useLucide.js';
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import { getCareers } from '../api/wordpressApi';
 import { submitForm } from '../services/formService';
 import { validateEmail, validatePhone, validateFile } from '../utils/validation.js';
 
 export default function Careers() {
-  useLucide();
   useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -38,7 +37,7 @@ export default function Careers() {
         <h2 className="section-title">Help Shape The Future of Learning.</h2>
         <p className="section-sub" style={{maxWidth:'100%'}}>At TEONOX, we're building more than programs. We're building an ecosystem where students gain practical skills, real-world exposure, and the confidence to succeed. If you're passionate about education, business, technology, and impact — we'd love to hear from you.</p>
         <div className="hero-actions" style={{marginTop:'20px'}}>
-          <a href="#" className="btn btn-primary btn-sm">View Opportunities <i data-lucide="arrow-down" style={{width:'14px',height:'14px'}}></i></a>
+          <a href="#" className="btn btn-primary btn-sm">View Opportunities <Icon name="arrow-down" size={14} /></a>
         </div>
       </div>
       <div className="about-img-wrap" style={{aspectRatio:'16/10'}}>
@@ -52,10 +51,10 @@ export default function Careers() {
       <p className="section-sub" style={{maxWidth:'100%'}}>Every workshop, project, mentorship session, and interaction has the potential to influence someone's future. We're looking for people who believe learning should be practical, relevant, and connected to the real world.</p>
     </div>
     <div className="hire-why-grid" style={{marginBottom:'56px',gridTemplateColumns:'repeat(4,1fr)'}}>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><i data-lucide="book-open" style={{width:'20px',height:'20px'}}></i></div><h5>Learn Continuously</h5><p>Work alongside professionals from diverse industries.</p></div>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><i data-lucide="heart" style={{width:'20px',height:'20px'}}></i></div><h5>Create Impact</h5><p>Help students develop skills that transform careers.</p></div>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><i data-lucide="lightbulb" style={{width:'20px',height:'20px'}}></i></div><h5>Collaborate Freely</h5><p>An environment that values ideas and innovation.</p></div>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><i data-lucide="clock" style={{width:'20px',height:'20px'}}></i></div><h5>Think Long-Term</h5><p>Focus on meaningful outcomes, not short-term metrics.</p></div>
+      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="book-open" size={20} /></div><h5>Learn Continuously</h5><p>Work alongside professionals from diverse industries.</p></div>
+      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="heart" size={20} /></div><h5>Create Impact</h5><p>Help students develop skills that transform careers.</p></div>
+      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="lightbulb" size={20} /></div><h5>Collaborate Freely</h5><p>An environment that values ideas and innovation.</p></div>
+      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="clock" size={20} /></div><h5>Think Long-Term</h5><p>Focus on meaningful outcomes, not short-term metrics.</p></div>
     </div>
 
     <div className="reveal" style={{marginBottom:'28px'}}>
@@ -79,12 +78,12 @@ export default function Careers() {
               <div>
                 <h3 className="job-expandable-title">{a.job_title}</h3>
                 <div className="job-expandable-meta">
-                  <span><i data-lucide="map-pin"></i> {a.location}</span>
-                  <span><i data-lucide="clock"></i> {a.employment_type}</span>
+                  <span><Icon name="map-pin" /> {a.location}</span>
+                  <span><Icon name="clock" /> {a.employment_type}</span>
                   <span className="job-tag highlight">{a.experience}</span>
                 </div>
               </div>
-              <button className="job-toggle" aria-label="Toggle"><i data-lucide="chevron-down"></i></button>
+              <button className="job-toggle" aria-label="Toggle"><Icon name="chevron-down" /></button>
             </div>
             <div className="job-expandable-body" style={{display:'none'}}>
               <div className="job-section"><h4>Role Overview</h4><p>{a.role_overview}</p></div>
@@ -93,7 +92,7 @@ export default function Careers() {
                   {responsibilities.map((r) =>
                     a[r.key] ? (
                       <div key={r.key} className="job-list-item">
-                        <div className="job-list-icon"><i data-lucide={r.icon}></i></div>
+                        <div className="job-list-icon"><Icon name={r.icon} /></div>
                         <div><h5>{r.label}</h5><p>{a[r.key]}</p></div>
                       </div>
                     ) : null
@@ -113,7 +112,7 @@ export default function Careers() {
               {a.education && (
                 <div className="job-section"><h4>Education</h4><p>{a.education}</p></div>
               )}
-              <div style={{marginTop:'24px'}}><a href="#careers-form" className="btn btn-primary">Apply for This Position <i data-lucide="arrow-right" style={{width:'14px',height:'14px'}}></i></a></div>
+              <div style={{marginTop:'24px'}}><a href="#careers-form" className="btn btn-primary">Apply for This Position <Icon name="arrow-right" size={14} /></a></div>
             </div>
           </div>
         );
@@ -161,7 +160,7 @@ export default function Careers() {
               <div className="field"><label>Why TEONOX?</label><textarea name="Why TEONOX" rows="4" placeholder="Tell us why you would like to work with us..."></textarea></div>
               <div className="field"><label>Upload Resume / CV</label><input type="file" name="Resume" accept=".pdf,.doc,.docx" /></div>
               {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
-              <button type="submit" className="btn btn-primary" disabled={submitting}>{submitting ? "Submitting..." : "Submit Application"} {!submitting && <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i>}</button>
+              <button type="submit" className="btn btn-primary" disabled={submitting}>{submitting ? "Submitting..." : "Submit Application"} {!submitting && <Icon name="arrow-right" size={16} />}</button>
             </form>
           )}
         </div>
@@ -173,3 +172,5 @@ export default function Careers() {
 </div>
   );
 }
+
+

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useLucide from "../hooks/useLucide.js";
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 
 import { getPrograms, getProgramCategories } from "../api/wordpressApi";
@@ -9,8 +9,6 @@ export default function Programs() {
   const [selectedProgramCategory, setSelectedProgramCategory] = useState("");
   const [programs, setPrograms] = useState([]);
   const [programCategories, setProgramCategories] = useState([]);
-
-  useLucide();
   useScrollReveal();
   //   const dh = (sel, fn) => {
   //     document.querySelectorAll(sel).forEach((el) => {
@@ -81,10 +79,7 @@ export default function Programs() {
             >
               <a href="#" className="btn btn-primary btn-sm">
                 Explore Articles{" "}
-                <i
-                  data-lucide="arrow-right"
-                  style={{ width: "14px", height: "14px" }}
-                ></i>
+                <Icon name="arrow-right" size={14} />
               </a>
               <a href="#" className="btn btn-outline btn-sm">
                 Subscribe for Updates
@@ -183,3 +178,5 @@ export default function Programs() {
     </div>
   );
 }
+
+

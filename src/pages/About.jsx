@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import useLucide from '../hooks/useLucide.js';
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 
 
 export default function About() {
-  useLucide();
   useScrollReveal();
   
 
@@ -67,12 +66,12 @@ export default function About() {
       <p className="section-sub" style={{maxWidth:'100%'}}>Technology is evolving faster than ever. AI is transforming how businesses operate. Consumer behaviour changes constantly. But much of traditional education still struggles to keep pace. Today's employers increasingly look for people who can:</p>
     </div>
     <div className="about-stats" style={{marginTop:'32px',gridTemplateColumns:'repeat(2,1fr)'}}>
-      <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="check" style={{width:'16px',height:'16px'}}></i></div><div><h5>Work with data</h5><p>Transform raw data into actionable business decisions</p></div></div>
-      <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="check" style={{width:'16px',height:'16px'}}></i></div><div><h5>Use AI tools effectively</h5><p>Leverage modern AI for productivity and automation</p></div></div>
-      <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="check" style={{width:'16px',height:'16px'}}></i></div><div><h5>Understand customer behaviour</h5><p>Analyze and predict consumer patterns</p></div></div>
-      <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="check" style={{width:'16px',height:'16px'}}></i></div><div><h5>Execute campaigns and projects</h5><p>Drive outcomes from strategy to delivery</p></div></div>
-      <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="check" style={{width:'16px',height:'16px'}}></i></div><div><h5>Communicate ideas clearly</h5><p>Present, persuade, and collaborate effectively</p></div></div>
-      <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="check" style={{width:'16px',height:'16px'}}></i></div><div><h5>Adapt to new technologies</h5><p>Stay current in a rapidly evolving landscape</p></div></div>
+      <div className="hire-why-item"><div className="hire-why-icon"><Icon name="check" size={16} /></div><div><h5>Work with data</h5><p>Transform raw data into actionable business decisions</p></div></div>
+      <div className="hire-why-item"><div className="hire-why-icon"><Icon name="check" size={16} /></div><div><h5>Use AI tools effectively</h5><p>Leverage modern AI for productivity and automation</p></div></div>
+      <div className="hire-why-item"><div className="hire-why-icon"><Icon name="check" size={16} /></div><div><h5>Understand customer behaviour</h5><p>Analyze and predict consumer patterns</p></div></div>
+      <div className="hire-why-item"><div className="hire-why-icon"><Icon name="check" size={16} /></div><div><h5>Execute campaigns and projects</h5><p>Drive outcomes from strategy to delivery</p></div></div>
+      <div className="hire-why-item"><div className="hire-why-icon"><Icon name="check" size={16} /></div><div><h5>Communicate ideas clearly</h5><p>Present, persuade, and collaborate effectively</p></div></div>
+      <div className="hire-why-item"><div className="hire-why-icon"><Icon name="check" size={16} /></div><div><h5>Adapt to new technologies</h5><p>Stay current in a rapidly evolving landscape</p></div></div>
     </div>
     <div className="outcome-box reveal" style={{marginTop:'32px',textAlign:'left'}}>
       <p style={{fontSize:'0.9rem',fontWeight:'400'}}>Yet these skills are often learned <em>after</em> entering the workforce rather than before. <strong>That's the gap we're working to close.</strong></p>
@@ -93,3 +92,5 @@ export default function About() {
 </div>
   );
 }
+
+

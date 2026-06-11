@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useLucide from '../hooks/useLucide.js';
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import { submitForm } from '../services/formService';
 import { validateEmail, validatePhone } from '../utils/validation.js';
 
 export default function Hire() {
-  useLucide();
   useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -34,7 +33,7 @@ export default function Hire() {
         <h2 className="section-title">Hire Business-Ready Talent.<br />Not Just Certified Candidates.</h2>
         <p className="section-sub" style={{maxWidth:'100%'}}>TEONOX learners are trained through practical projects, industry exposure, AI-powered workflows, and real business challenges — helping them bring confidence, adaptability, and execution-focused thinking to modern workplaces.</p>
         <div className="hero-actions" style={{marginTop:'20px'}}>
-          <a href="#" className="btn btn-primary btn-sm">Speak to Our Team <i data-lucide="arrow-right" style={{width:'14px',height:'14px'}}></i></a>
+          <a href="#" className="btn btn-primary btn-sm">Speak to Our Team <Icon name="arrow-right" size={14} /></a>
         </div>
       </div>
       <div className="about-img-wrap" style={{aspectRatio:'16/10'}}>
@@ -51,11 +50,11 @@ export default function Hire() {
     <div className="hire-why reveal" style={{marginBottom:'56px'}}>
       <h3 className="hire-why-title">What Makes TEONOX Professionals Different?</h3>
       <div className="hire-why-grid">
-        <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="zap" style={{width:'16px',height:'16px'}}></i></div><div><h5>Practical Exposure</h5><p>Worked on projects, campaigns, simulations, and business challenges.</p></div></div>
-        <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="cpu" style={{width:'16px',height:'16px'}}></i></div><div><h5>AI-Ready</h5><p>Trained to use modern AI tools and workflows for productivity and decision-making.</p></div></div>
-        <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="message-circle" style={{width:'16px',height:'16px'}}></i></div><div><h5>Strong Communication</h5><p>Experienced in presentations, collaboration, and professional communication.</p></div></div>
-        <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="briefcase" style={{width:'16px',height:'16px'}}></i></div><div><h5>Business Understanding</h5><p>Exposure to marketing, analytics, sales, and business growth fundamentals.</p></div></div>
-        <div className="hire-why-item"><div className="hire-why-icon"><i data-lucide="trending-up" style={{width:'16px',height:'16px'}}></i></div><div><h5>Growth Mindset</h5><p>Prepared to learn quickly, adapt, and contribute in fast-moving environments.</p></div></div>
+        <div className="hire-why-item"><div className="hire-why-icon"><Icon name="zap" size={16} /></div><div><h5>Practical Exposure</h5><p>Worked on projects, campaigns, simulations, and business challenges.</p></div></div>
+        <div className="hire-why-item"><div className="hire-why-icon"><Icon name="cpu" size={16} /></div><div><h5>AI-Ready</h5><p>Trained to use modern AI tools and workflows for productivity and decision-making.</p></div></div>
+        <div className="hire-why-item"><div className="hire-why-icon"><Icon name="message-circle" size={16} /></div><div><h5>Strong Communication</h5><p>Experienced in presentations, collaboration, and professional communication.</p></div></div>
+        <div className="hire-why-item"><div className="hire-why-icon"><Icon name="briefcase" size={16} /></div><div><h5>Business Understanding</h5><p>Exposure to marketing, analytics, sales, and business growth fundamentals.</p></div></div>
+        <div className="hire-why-item"><div className="hire-why-icon"><Icon name="trending-up" size={16} /></div><div><h5>Growth Mindset</h5><p>Prepared to learn quickly, adapt, and contribute in fast-moving environments.</p></div></div>
       </div>
     </div>
 
@@ -65,19 +64,19 @@ export default function Hire() {
     </div>
     <div className="hire-grid">
       <div className="hire-card reveal reveal-d1">
-        <div className="hire-card-icon"><i data-lucide="trending-up" style={{width:'22px',height:'22px'}}></i></div>
+        <div className="hire-card-icon"><Icon name="trending-up" size={22} /></div>
         <h4>Digital Marketing & Growth Professionals</h4>
       </div>
       <div className="hire-card reveal reveal-d2">
-        <div className="hire-card-icon"><i data-lucide="bar-chart-3" style={{width:'22px',height:'22px'}}></i></div>
+        <div className="hire-card-icon"><Icon name="bar-chart-3" size={22} /></div>
         <h4>AI & Business Analytics Talent</h4>
       </div>
       <div className="hire-card reveal reveal-d3">
-        <div className="hire-card-icon"><i data-lucide="users" style={{width:'22px',height:'22px'}}></i></div>
+        <div className="hire-card-icon"><Icon name="users" size={22} /></div>
         <h4>Sales & Revenue Operations Professionals</h4>
       </div>
       <div className="hire-card reveal reveal-d4">
-        <div className="hire-card-icon"><i data-lucide="layers" style={{width:'22px',height:'22px'}}></i></div>
+        <div className="hire-card-icon"><Icon name="layers" size={22} /></div>
         <h4>Full-Stack Business Growth Professionals</h4>
       </div>
     </div>
@@ -120,7 +119,7 @@ export default function Hire() {
             <div className="form-row"><div className="field"><label>Hiring Requirement</label><input type="text" name="Hiring Requirement" placeholder="e.g. Digital Marketing Executive"  /></div><div className="field"><label>Open Positions</label><input type="number" name="Open Positions" placeholder="Number of hires"  /></div></div>
             <div className="field"><label>Message</label><textarea name="Message" placeholder="Tell us about your requirements..."></textarea></div>
             {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
-            <button type="submit" className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} disabled={submitting}>{submitting ? "Submitting..." : "Request Talent"} {!submitting && <i data-lucide="arrow-right" style={{width:'16px',height:'16px'}}></i>}</button>
+            <button type="submit" className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} disabled={submitting}>{submitting ? "Submitting..." : "Request Talent"} {!submitting && <Icon name="arrow-right" size={16} />}</button>
           </form>
         )}
       </div>
@@ -128,7 +127,7 @@ export default function Hire() {
         <h3 className="contact-sidebar-title">Great Teams Are Built With Great People.</h3>
         <p>Let's work together to create meaningful opportunities for the next generation of professionals.</p>
         <div className="hero-actions" style={{marginTop:'24px'}}>
-          <a href="#" className="btn btn-outline btn-sm" style={{borderColor:'var(--border2)',color:'var(--text)'}}>Partner With TEONOX <i data-lucide="arrow-right" style={{width:'14px',height:'14px'}}></i></a>
+          <a href="#" className="btn btn-outline btn-sm" style={{borderColor:'var(--border2)',color:'var(--text)'}}>Partner With TEONOX <Icon name="arrow-right" size={14} /></a>
         </div>
       </div>
     </div>
@@ -138,3 +137,5 @@ export default function Hire() {
 </div>
   );
 }
+
+

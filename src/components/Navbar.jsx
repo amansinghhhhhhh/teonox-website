@@ -1,3 +1,4 @@
+import Icon from '../components/Icon.jsx';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 export default function Navbar() {
@@ -25,10 +26,10 @@ export default function Navbar() {
           <li><Link to="/careers" className={is('/careers')} onClick={closeNav}>Careers</Link></li>
           <li><Link to="/blog" className={is('/blog')} onClick={closeNav}>Insights</Link></li>
           <li><Link to="/programs" className={'nav-cta '+is('/programs')} onClick={closeNav}>Programs</Link></li>
-          <li><button className="nav-close" id="navClose" aria-label="Close menu" onClick={closeNav}><i data-lucide="x"></i></button></li>
+          <li><button className="nav-close" id="navClose" aria-label="Close menu" onClick={closeNav}><Icon name="x" /></button></li>
         </ul>
         <button className="nav-toggle" onClick={openNav}>
-          <i data-lucide="menu"></i>
+          <Icon name="menu" />
         </button>
       </div>
     </nav>

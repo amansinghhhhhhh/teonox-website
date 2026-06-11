@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useLucide from "../hooks/useLucide.js";
+import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { getProgramBySlug, getMediaUrl } from "../api/wordpressApi";
 
@@ -9,8 +9,6 @@ export default function Program_Details() {
   const [program, setProgram] = useState(null);
   const [loading, setLoading] = useState(true);
   const [careerImgUrls, setCareerImgUrls] = useState({});
-
-  useLucide();
   useScrollReveal();
 
   useEffect(() => {
@@ -103,12 +101,12 @@ export default function Program_Details() {
               </h1>
               <div className="pg-hero-meta">
                 <div className="pg-hero-meta-item">
-                  <i data-lucide="clock"></i>
+                  <Icon name="clock" />
                   Duration: <strong>{program.acf.duration}</strong>
                 </div>
                 <div className="pg-hero-meta-divider"></div>
                 <div className="pg-hero-meta-item">
-                  <i data-lucide="graduation-cap"></i>
+                  <Icon name="graduation-cap" />
                   Best For: <strong>{program.acf.best_for}</strong>
                 </div>
               </div>
@@ -123,10 +121,7 @@ export default function Program_Details() {
               <div className="pg-hero-actions">
                 <a href={program.acf.brochure_url} className="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
                   Download Brochure{" "}
-                  <i
-                    data-lucide="download"
-                    style={{ width: "14px", height: "14px" }}
-                  ></i>
+                  <Icon name="download" size={14} />
                 </a>
                 <a
                   href={program.acf.consultation_url}
@@ -138,10 +133,7 @@ export default function Program_Details() {
                   target="_blank" rel="noopener noreferrer"
                 >
                   Book a Career Consultation{" "}
-                  <i
-                    data-lucide="calendar"
-                    style={{ width: "14px", height: "14px" }}
-                  ></i>
+                  <Icon name="calendar" size={14} />
                 </a>
               </div>
             </div>
@@ -181,16 +173,7 @@ export default function Program_Details() {
                     gap: "12px",
                   }}
                 >
-                  <i
-                    data-lucide="quote"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      color: "var(--orange)",
-                      flexShrink: "0",
-                      marginTop: "2px",
-                    }}
-                  ></i>
+                  <Icon name="quote" size={20} />
                   <span>
                     TEONOX was created to help bridge the gap between{" "}
                     <strong style={{ color: "var(--text)" }}>
@@ -216,30 +199,21 @@ export default function Program_Details() {
           <div className="program-cards" style={{ marginTop: "32px" }}>
             <div className="program-card reveal reveal-d1">
               <div className="program-card-icon">
-                <i
-                  data-lucide="graduation-cap"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="graduation-cap" size={22} />
               </div>
               <h4>Students &amp; Fresh Graduates</h4>
               <p>Build practical skills before entering the workforce.</p>
             </div>
             <div className="program-card reveal reveal-d2">
               <div className="program-card-icon">
-                <i
-                  data-lucide="trending-up"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="trending-up" size={22} />
               </div>
               <h4>Young Professionals</h4>
               <p>Upgrade your capabilities and accelerate your growth.</p>
             </div>
             <div className="program-card reveal reveal-d3">
               <div className="program-card-icon">
-                <i
-                  data-lucide="compass"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="compass" size={22} />
               </div>
               <h4>Career Explorers</h4>
               <p>
@@ -249,10 +223,7 @@ export default function Program_Details() {
             </div>
             <div className="program-card reveal reveal-d4">
               <div className="program-card-icon">
-                <i
-                  data-lucide="lightbulb"
-                  style={{ width: "22px", height: "22px" }}
-                ></i>
+                <Icon name="lightbulb" size={22} />
               </div>
               <h4>Aspiring Entrepreneurs</h4>
               <p>
@@ -277,7 +248,7 @@ export default function Program_Details() {
             <div className="cp-item reveal reveal-d1">
               <div className="cp-dot-wrap">
                 <div className="cp-dot">
-                  <i data-lucide="compass"></i>
+                  <Icon name="compass" />
                 </div>
               </div>
               <span className="cp-name">Strategy</span>
@@ -288,7 +259,7 @@ export default function Program_Details() {
             <div className="cp-item reveal reveal-d2">
               <div className="cp-dot-wrap">
                 <div className="cp-dot">
-                  <i data-lucide="rocket"></i>
+                  <Icon name="rocket" />
                 </div>
               </div>
               <span className="cp-name">Execution</span>
@@ -299,7 +270,7 @@ export default function Program_Details() {
             <div className="cp-item reveal reveal-d3">
               <div className="cp-dot-wrap">
                 <div className="cp-dot">
-                  <i data-lucide="target"></i>
+                  <Icon name="target" />
                 </div>
               </div>
               <span className="cp-name">Analytics</span>
@@ -310,7 +281,7 @@ export default function Program_Details() {
             <div className="cp-item reveal reveal-d4">
               <div className="cp-dot-wrap">
                 <div className="cp-dot">
-                  <i data-lucide="cpu"></i>
+                  <Icon name="cpu" />
                 </div>
               </div>
               <span className="cp-name">AI</span>
@@ -321,7 +292,7 @@ export default function Program_Details() {
             <div className="cp-item reveal reveal-d5">
               <div className="cp-dot-wrap">
                 <div className="cp-dot">
-                  <i data-lucide="handshake"></i>
+                  <Icon name="handshake" />
                 </div>
               </div>
               <span className="cp-name">Sales Mindset</span>
@@ -357,7 +328,7 @@ export default function Program_Details() {
             ].map((item, i) => (
               <div key={i} className={`skill-card reveal reveal-d${(i % 5) + 1}`} style={{ textAlign: "center" }}>
                 <div className="skill-card-icon" style={{ margin: "0 auto" }}>
-                  <i data-lucide={item.icon} style={{ width: "24px", height: "24px" }}></i>
+                  <Icon name={item.icon} size={24} />
                 </div>
                 <div className="skill-card-title">{item.title}</div>
                 <div className="skill-card-desc">{item.desc}</div>
@@ -401,10 +372,7 @@ export default function Program_Details() {
                       color: "var(--orange)",
                     }}
                   >
-                    <i
-                      data-lucide="briefcase"
-                      style={{ width: "22px", height: "22px" }}
-                    ></i>
+                    <Icon name="briefcase" size={22} />
                   </div>
                   <h5
                     style={{
@@ -439,10 +407,7 @@ export default function Program_Details() {
                       color: "rgb(59,130,246)",
                     }}
                   >
-                    <i
-                      data-lucide="globe"
-                      style={{ width: "22px", height: "22px" }}
-                    ></i>
+                    <Icon name="globe" size={22} />
                   </div>
                   <h5
                     style={{
@@ -477,10 +442,7 @@ export default function Program_Details() {
                       color: "rgb(16,185,129)",
                     }}
                   >
-                    <i
-                      data-lucide="cpu"
-                      style={{ width: "22px", height: "22px" }}
-                    ></i>
+                    <Icon name="cpu" size={22} />
                   </div>
                   <h5
                     style={{
@@ -515,10 +477,7 @@ export default function Program_Details() {
                       color: "rgb(245,158,11)",
                     }}
                   >
-                    <i
-                      data-lucide="message-circle"
-                      style={{ width: "22px", height: "22px" }}
-                    ></i>
+                    <Icon name="message-circle" size={22} />
                   </div>
                   <h5
                     style={{
@@ -554,10 +513,7 @@ export default function Program_Details() {
                       color: "rgb(139,92,246)",
                     }}
                   >
-                    <i
-                      data-lucide="trending-up"
-                      style={{ width: "22px", height: "22px" }}
-                    ></i>
+                    <Icon name="trending-up" size={22} />
                   </div>
                   <h5
                     style={{
@@ -612,7 +568,7 @@ export default function Program_Details() {
                     {imgUrl ? (
                       <img src={imgUrl} alt={path.career_path_card_heading} style={{ width: "24px", height: "24px", objectFit: "contain", borderRadius: "6px" }} />
                     ) : (
-                      <i data-lucide="briefcase" style={{ width: "20px", height: "20px" }}></i>
+                      <Icon name="briefcase" size={20} />
                     )}
                   </div>
                   <h4 style={{ fontSize: "0.85rem" }}>
@@ -709,17 +665,11 @@ export default function Program_Details() {
               >
                 <a href="contact.html" className="btn btn-primary">
                   Apply as Trainer{" "}
-                  <i
-                    data-lucide="arrow-right"
-                    style={{ width: "16px", height: "16px" }}
-                  ></i>
+                  <Icon name="arrow-right" size={16} />
                 </a>
                 <a href="#" className="btn btn-outline">
                   Download Brochure{" "}
-                  <i
-                    data-lucide="download"
-                    style={{ width: "14px", height: "14px" }}
-                  ></i>
+                  <Icon name="download" size={14} />
                 </a>
               </div>
             </div>
@@ -729,3 +679,5 @@ export default function Program_Details() {
     </div>
   );
 }
+
+
