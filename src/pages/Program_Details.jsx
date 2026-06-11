@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Icon from '../components/Icon.jsx';
+import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { getProgramBySlug, getMediaUrl } from "../api/wordpressApi";
 
@@ -16,11 +16,19 @@ export default function Program_Details() {
     getProgramBySlug(slug)
       .then(async (data) => {
         const paths = data?.acf?.where_this_program_can_take_you || [];
-        const imgIds = [...new Set(paths.map((p) => p.career_path_card_image).filter(Boolean))];
+        const imgIds = [
+          ...new Set(
+            paths.map((p) => p.career_path_card_image).filter(Boolean),
+          ),
+        ];
         let imgMap = {};
         if (imgIds.length) {
-          const urls = await Promise.all(imgIds.map((id) => getMediaUrl(id).catch(() => null)));
-          imgIds.forEach((id, i) => { imgMap[id] = urls[i]; });
+          const urls = await Promise.all(
+            imgIds.map((id) => getMediaUrl(id).catch(() => null)),
+          );
+          imgIds.forEach((id, i) => {
+            imgMap[id] = urls[i];
+          });
         }
         if (!cancelled) {
           setProgram(data);
@@ -29,7 +37,9 @@ export default function Program_Details() {
         }
       })
       .catch(console.error);
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [slug]);
 
   useEffect(() => {
@@ -81,7 +91,15 @@ export default function Program_Details() {
     return (
       <div className="page active">
         <section className="section" style={{ paddingTop: "140px" }}>
-          <div className="container" style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div
+            className="container"
+            style={{
+              minHeight: "60vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             Loading...
           </div>
         </section>
@@ -96,9 +114,7 @@ export default function Program_Details() {
           {/* Banner */}
           <div className="pg-hero">
             <div className="pg-hero-content">
-              <h1>
-                {program.acf.hero_heading}
-              </h1>
+              <h1>{program.acf.hero_heading}</h1>
               <div className="pg-hero-meta">
                 <div className="pg-hero-meta-item">
                   <Icon name="clock" />
@@ -111,17 +127,17 @@ export default function Program_Details() {
                 </div>
               </div>
               <p className="pg-hero-sub">
-                <strong>
-                  {program.acf.hero_description}
-                </strong>
+                <strong>{program.acf.hero_description}</strong>
               </p>
-              <p className="pg-hero-desc">
-                {program.acf.card_description}
-              </p>
+              <p className="pg-hero-desc">{program.acf.card_description}</p>
               <div className="pg-hero-actions">
-                <a href={program.acf.brochure_url} className="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
-                  Download Brochure{" "}
-                  <Icon name="download" size={14} />
+                <a
+                  href={program.acf.brochure_url}
+                  className="btn btn-outline btn-sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Brochure <Icon name="download" size={14} />
                 </a>
                 <a
                   href={program.acf.consultation_url}
@@ -130,17 +146,23 @@ export default function Program_Details() {
                     borderColor: "var(--orange)",
                     color: "var(--orange)",
                   }}
-                  target="_blank" rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Book a Career Consultation{" "}
-                  <Icon name="calendar" size={14} />
+                  Book a Career Consultation <Icon name="calendar" size={14} />
                 </a>
               </div>
             </div>
             <div className="pg-hero-visual">
               <div className="pg-hero-glow"></div>
               <div className="pg-hero-img-wrap">
-                <img src={program._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "assets/asset-023.jpg"} alt={program.title?.rendered || "Program"} />
+                <img
+                  src={
+                    program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                    "assets/asset-023.jpg"
+                  }
+                  alt={program.title?.rendered || "Program"}
+                />
               </div>
             </div>
           </div>
@@ -239,7 +261,10 @@ export default function Program_Details() {
           <div className="container" style={{ textAlign: "center" }}>
             <div className="reveal" style={{ marginBottom: "56px" }}>
               <span className="section-label">Curriculum Pillars</span>
-              <h2 className="section-title" style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}>
+              <h2
+                className="section-title"
+                style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}
+              >
                 The <em>5 Pillars</em> of the Program
               </h2>
             </div>
@@ -319,15 +344,46 @@ export default function Program_Details() {
             style={{ marginTop: "40px", gridTemplateColumns: "repeat(3,1fr)" }}
           >
             {[
-              { icon: "briefcase", title: "Business-First Curriculum", desc: "Designed around how businesses actually operate, not how textbooks are structured." },
-              { icon: "cpu", title: "Deep AI Integration", desc: "AI isn't a separate module. It is embedded throughout the learning experience." },
-              { icon: "play-circle", title: "Learn By Doing", desc: "Projects, simulations, workshops, business challenges, and practical execution." },
-              { icon: "users", title: "Industry-Led Learning", desc: "Learn from professionals who actively work with businesses and growth teams." },
-              { icon: "target", title: "Outcome Accountability", desc: "We focus on what you can build, present, solve, and execute—not just what you can memorize." },
-              { icon: "award", title: "Certificate of Excellence", desc: "Earn a credential that reflects real capability, not just attendance." },
+              {
+                icon: "briefcase",
+                title: "Business-First Curriculum",
+                desc: "Designed around how businesses actually operate, not how textbooks are structured.",
+              },
+              {
+                icon: "cpu",
+                title: "Deep AI Integration",
+                desc: "AI isn't a separate module. It is embedded throughout the learning experience.",
+              },
+              {
+                icon: "play-circle",
+                title: "Learn By Doing",
+                desc: "Projects, simulations, workshops, business challenges, and practical execution.",
+              },
+              {
+                icon: "users",
+                title: "Industry-Led Learning",
+                desc: "Learn from professionals who actively work with businesses and growth teams.",
+              },
+              {
+                icon: "target",
+                title: "Outcome Accountability",
+                desc: "We focus on what you can build, present, solve, and execute—not just what you can memorize.",
+              },
+              {
+                icon: "award",
+                title: "Certificate of Excellence",
+                desc: "Earn a credential that reflects real capability, not just attendance.",
+              },
             ].map((item, i) => (
-              <div key={i} className={`skill-card reveal reveal-d${(i % 5) + 1}`} style={{ textAlign: "center" }}>
-                <div className="skill-card-icon" style={{ margin: "0 auto" }}>
+              <div
+                key={i}
+                className={`skill-card reveal reveal-d${(i % 5) + 1}`}
+                style={{ textAlign: "center" }}
+              >
+                <div
+                  className="skill-card-icon"
+                  style={{ margin: "0 auto 12px" }}
+                >
                   <Icon name={item.icon} size={24} />
                 </div>
                 <div className="skill-card-title">{item.title}</div>
@@ -551,9 +607,10 @@ export default function Program_Details() {
             className="skills-grid"
             style={{
               marginTop: "36px",
-              gridTemplateColumns: program.acf.where_this_program_can_take_you?.length <= 4
-                ? `repeat(${program.acf.where_this_program_can_take_you?.length || 1}, 1fr)`
-                : "repeat(4, 1fr)"
+              gridTemplateColumns:
+                program.acf.where_this_program_can_take_you?.length <= 4
+                  ? `repeat(${program.acf.where_this_program_can_take_you?.length || 1}, 1fr)`
+                  : "repeat(4, 1fr)",
             }}
           >
             {program.acf.where_this_program_can_take_you?.map((path, i) => {
@@ -566,7 +623,16 @@ export default function Program_Details() {
                 >
                   <div className="program-card-icon">
                     {imgUrl ? (
-                      <img src={imgUrl} alt={path.career_path_card_heading} style={{ width: "24px", height: "24px", objectFit: "contain", borderRadius: "6px" }} />
+                      <img
+                        src={imgUrl}
+                        alt={path.career_path_card_heading}
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          objectFit: "contain",
+                          borderRadius: "6px",
+                        }}
+                      />
                     ) : (
                       <Icon name="briefcase" size={20} />
                     )}
@@ -664,12 +730,10 @@ export default function Program_Details() {
                 style={{ marginTop: "28px", flexWrap: "wrap" }}
               >
                 <a href="contact.html" className="btn btn-primary">
-                  Apply as Trainer{" "}
-                  <Icon name="arrow-right" size={16} />
+                  Apply as Trainer <Icon name="arrow-right" size={16} />
                 </a>
                 <a href="#" className="btn btn-outline">
-                  Download Brochure{" "}
-                  <Icon name="download" size={14} />
+                  Download Brochure <Icon name="download" size={14} />
                 </a>
               </div>
             </div>
@@ -679,5 +743,3 @@ export default function Program_Details() {
     </div>
   );
 }
-
-

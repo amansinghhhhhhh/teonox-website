@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import Icon from '../components/Icon.jsx';
+import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import useTypewriter from "../hooks/useTypewriter.js";
 import {
@@ -132,11 +132,11 @@ export default function Home() {
                 industry-led learning.
               </p>
               <div className="hero-actions">
-                <a href="programs.html" className="btn btn-primary">
+                <a href="/programs" className="btn btn-primary">
                   Explore Programs
                   <Icon name="arrow-right" size={16} />
                 </a>
-                <a href="#contact" className="btn btn-outline">
+                <a href="/contact" className="btn btn-outline">
                   <Icon name="phone" size={16} />
                   Speak to Our Team
                 </a>
@@ -192,13 +192,29 @@ export default function Home() {
                       setHeroError("");
                       const fd = new FormData(e.target);
                       const fields = {};
-                      fd.forEach((value, key) => { fields[key] = value; });
+                      fd.forEach((value, key) => {
+                        fields[key] = value;
+                      });
                       const email = fields["Email Address"] || "";
                       const phone = fields["Phone Number"] || "";
-                      if (email && !validateEmail(email)) { setHeroError("Please enter a valid email address."); return; }
-                      if (phone && !validatePhone(phone)) { setHeroError("Please enter a valid 10-digit Indian phone number."); return; }
+                      if (email && !validateEmail(email)) {
+                        setHeroError("Please enter a valid email address.");
+                        return;
+                      }
+                      if (phone && !validatePhone(phone)) {
+                        setHeroError(
+                          "Please enter a valid 10-digit Indian phone number.",
+                        );
+                        return;
+                      }
                       setHeroSubmitting(true);
-                      try { await submitForm("Home Hero Enquiry", fields); } catch { setHeroError("Something went wrong. Please try again."); setHeroSubmitting(false); return; }
+                      try {
+                        await submitForm("Home Hero Enquiry", fields);
+                      } catch {
+                        setHeroError("Something went wrong. Please try again.");
+                        setHeroSubmitting(false);
+                        return;
+                      }
                       setHeroSubmitting(false);
                       e.target.reset();
                       setHeroSubmitted(true);
@@ -230,15 +246,30 @@ export default function Home() {
                     <div className="field">
                       <select name="Interested In">
                         <option value="">I'm interested in</option>
-                        <option value="Joining the Program">Joining the Program</option>
+                        <option value="Joining the Program">
+                          Joining the Program
+                        </option>
                         <option value="Hiring Talent">Hiring Talent</option>
-                        <option value="Partnering with Teonox">Partnering with Teonox</option>
-                        <option value="Applying as Trainer">Applying as Trainer</option>
+                        <option value="Partnering with Teonox">
+                          Partnering with Teonox
+                        </option>
+                        <option value="Applying as Trainer">
+                          Applying as Trainer
+                        </option>
                         <option value="Other">Other</option>
                       </select>
                     </div>
                     {heroError && (
-                      <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "0 0 8px", textAlign: "center" }}>{heroError}</p>
+                      <p
+                        style={{
+                          color: "#ef4444",
+                          fontSize: "0.85rem",
+                          margin: "0 0 8px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {heroError}
+                      </p>
                     )}
                     <button
                       type="submit"
@@ -367,8 +398,7 @@ export default function Home() {
                       })()}
                     </p>
                     <span className="btn btn-outline btn-sm prog-card-cta">
-                      View Program{" "}
-                      <Icon name="arrow-right" size={14} />
+                      View Program <Icon name="arrow-right" size={14} />
                     </span>
                   </div>
                 </Link>
@@ -740,25 +770,32 @@ export default function Home() {
               <h4>Career Roles</h4>
               <ul className="career-list">
                 <li>
-                  <Icon name="megaphone" />Digital Marketing Executive
+                  <Icon name="megaphone" />
+                  Digital Marketing Executive
                 </li>
                 <li>
-                  <Icon name="trending-up" />Growth Associate
+                  <Icon name="trending-up" />
+                  Growth Associate
                 </li>
                 <li>
-                  <Icon name="bar-chart-3" />Performance Marketer
+                  <Icon name="bar-chart-3" />
+                  Performance Marketer
                 </li>
                 <li>
-                  <Icon name="pie-chart" />Business Analyst
+                  <Icon name="pie-chart" />
+                  Business Analyst
                 </li>
                 <li>
-                  <Icon name="handshake" />Sales & Growth Associate
+                  <Icon name="handshake" />
+                  Sales & Growth Associate
                 </li>
                 <li>
-                  <Icon name="cpu" />AI Operations Associate
+                  <Icon name="cpu" />
+                  AI Operations Associate
                 </li>
                 <li>
-                  <Icon name="file-text" />Content Strategist
+                  <Icon name="file-text" />
+                  Content Strategist
                 </li>
               </ul>
             </div>
@@ -766,22 +803,28 @@ export default function Home() {
               <h4>Industries</h4>
               <ul className="career-list">
                 <li>
-                  <Icon name="rocket" />Startups
+                  <Icon name="rocket" />
+                  Startups
                 </li>
                 <li>
-                  <Icon name="building-2" />Agencies
+                  <Icon name="building-2" />
+                  Agencies
                 </li>
                 <li>
-                  <Icon name="cloud" />SaaS Companies
+                  <Icon name="cloud" />
+                  SaaS Companies
                 </li>
                 <li>
-                  <Icon name="shopping-cart" />E-commerce
+                  <Icon name="shopping-cart" />
+                  E-commerce
                 </li>
                 <li>
-                  <Icon name="briefcase" />Consulting
+                  <Icon name="briefcase" />
+                  Consulting
                 </li>
                 <li>
-                  <Icon name="monitor" />Media & Technology
+                  <Icon name="monitor" />
+                  Media & Technology
                 </li>
               </ul>
               <div className="outcome-box">
@@ -809,17 +852,20 @@ export default function Home() {
               </p>
               <ul className="work-benefits">
                 <li>
-                  <Icon name="check" />Business-first learning environment
+                  <Icon name="check" />
+                  Business-first learning environment
                 </li>
                 <li>
-                  <Icon name="check" />Premium learner audience
+                  <Icon name="check" />
+                  Premium learner audience
                 </li>
                 <li>
-                  <Icon name="check" />Long-term collaboration mindset
+                  <Icon name="check" />
+                  Long-term collaboration mindset
                 </li>
                 <li>
-                  <Icon name="check" />Freedom to teach real-world
-                  thinking
+                  <Icon name="check" />
+                  Freedom to teach real-world thinking
                 </li>
               </ul>
               <div
@@ -859,16 +905,14 @@ export default function Home() {
             </div>
             <div className="hire-header-right">
               <a
-                href="#contact"
+                href="/hire"
                 className="btn btn-primary"
                 style={{ marginBottom: "12px", display: "flex" }}
               >
-                Request Talent{" "}
-                <Icon name="arrow-right" size={16} />
+                Request Talent <Icon name="arrow-right" size={16} />
               </a>
-              <a href="#contact" className="hire-cta-btn">
-                <Icon name="phone" size={16} />{" "}
-                Speak to Our Team
+              <a href="/contact" className="hire-cta-btn">
+                <Icon name="phone" size={16} /> Speak to Our Team
               </a>
             </div>
           </div>
@@ -996,8 +1040,7 @@ export default function Home() {
               className="btn btn-outline"
               style={{ flexShrink: "0", marginBottom: "8px" }}
             >
-              View All{" "}
-              <Icon name="arrow-right" size={14} />
+              View All <Icon name="arrow-right" size={14} />
             </Link>
           </div>
           <div className="blog-grid">
@@ -1113,13 +1156,31 @@ export default function Home() {
                     setContactError("");
                     const fd = new FormData(e.target);
                     const fields = {};
-                    fd.forEach((value, key) => { fields[key] = value; });
+                    fd.forEach((value, key) => {
+                      fields[key] = value;
+                    });
                     const email = fields["Email Address"] || "";
                     const phone = fields["Phone Number"] || "";
-                    if (email && !validateEmail(email)) { setContactError("Please enter a valid email address."); return; }
-                    if (phone && !validatePhone(phone)) { setContactError("Please enter a valid 10-digit Indian phone number."); return; }
+                    if (email && !validateEmail(email)) {
+                      setContactError("Please enter a valid email address.");
+                      return;
+                    }
+                    if (phone && !validatePhone(phone)) {
+                      setContactError(
+                        "Please enter a valid 10-digit Indian phone number.",
+                      );
+                      return;
+                    }
                     setContactSubmitting(true);
-                    try { await submitForm("Home Contact", fields); } catch { setContactError("Something went wrong. Please try again."); setContactSubmitting(false); return; }
+                    try {
+                      await submitForm("Home Contact", fields);
+                    } catch {
+                      setContactError(
+                        "Something went wrong. Please try again.",
+                      );
+                      setContactSubmitting(false);
+                      return;
+                    }
                     setContactSubmitting(false);
                     e.target.reset();
                     setContactSubmitted(true);
@@ -1180,7 +1241,16 @@ export default function Home() {
                     ></textarea>
                   </div>
                   {contactError && (
-                    <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "0 0 8px", textAlign: "center" }}>{contactError}</p>
+                    <p
+                      style={{
+                        color: "#ef4444",
+                        fontSize: "0.85rem",
+                        margin: "0 0 8px",
+                        textAlign: "center",
+                      }}
+                    >
+                      {contactError}
+                    </p>
                   )}
                   <button
                     type="submit"
@@ -1200,5 +1270,3 @@ export default function Home() {
     </div>
   );
 }
-
-
