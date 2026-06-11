@@ -2573,39 +2573,6 @@ a {
   display: block;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text2);
-  transition: color var(--transition);
-}
-
-.nav-links a:hover {
-  color: var(--text);
-}
-
-.nav-cta {
-  background: var(--orange-grad) !important;
-  color: #fff !important;
-  padding: 10px 26px;
-  border-radius: 100px;
-  font-weight: 600 !important;
-  font-size: 0.85rem !important;
-  transition: transform var(--transition), box-shadow var(--transition) !important;
-}
-
-.nav-cta:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 28px rgba(255, 92, 26, 0.4) !important;
-}
-
 /* ─── HERO ─── */
 .hero {
   min-height: 100vh;
