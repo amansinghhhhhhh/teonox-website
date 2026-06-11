@@ -1,5 +1,5 @@
 const API_URL =
-    "https://cms.teonox.com/wp-json/wp/v2";
+    "https://cms.teonox.com/index.php?rest_route=/wp/v2";
 
 // Categories
 export const getCategories = async () => {
@@ -13,7 +13,7 @@ export const getCategories = async () => {
 
 // All Blogs
 export const getBlogs = async (categoryId = "") => {
-    let url = `${API_URL}/posts?_embed&per_page=20`;
+    let url = `${API_URL}/posts&_embed&per_page=20`;
 
     if (categoryId) {
         url += `&categories=${categoryId}`;
@@ -26,7 +26,7 @@ export const getBlogs = async (categoryId = "") => {
 // Single Blog By Slug
 export const getBlogBySlug = async (slug) => {
     const res = await fetch(
-        `${API_URL}/posts?slug=${slug}&_embed`
+        `${API_URL}/posts&slug=${slug}&_embed`
     );
 
     const data = await res.json();
@@ -40,7 +40,7 @@ export const getRelatedBlogs = async (
     currentPostId
 ) => {
     const res = await fetch(
-        `${API_URL}/posts?_embed&categories=${categoryId}&per_page=4`
+        `${API_URL}/posts&_embed&categories=${categoryId}&per_page=4`
     );
 
     const posts = await res.json();
@@ -67,7 +67,7 @@ export const getPrograms = async (
     categoryId = ""
 ) => {
     let url =
-        `${API_URL}/program?_embed&per_page=20`;
+        `${API_URL}/program&_embed&per_page=20`;
 
     if (categoryId) {
         url += `&program-category=${categoryId}`;
@@ -83,7 +83,7 @@ export const getProgramBySlug = async (
     slug
 ) => {
     const res = await fetch(
-        `${API_URL}/program?slug=${slug}&_embed`
+        `${API_URL}/program&slug=${slug}&_embed`
     );
 
     const data = await res.json();
@@ -97,7 +97,7 @@ export const getRelatedPrograms = async (
     currentProgramId
 ) => {
     const res = await fetch(
-        `${API_URL}/program?_embed&program-category=${categoryId}&per_page=4`
+        `${API_URL}/program&_embed&program-category=${categoryId}&per_page=4`
     );
 
     const programs = await res.json();
@@ -116,6 +116,6 @@ export const getMediaUrl = async (id) => {
 
 // Careers
 export const getCareers = async () => {
-    const res = await fetch(`${API_URL}/career?_embed`);
+    const res = await fetch(`${API_URL}/career&_embed`);
     return await res.json();
 };
