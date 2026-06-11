@@ -6,32 +6,30 @@ A React + Vite frontend for **TEONOX**, a corporate training provider. Content i
 
 ## Tech Stack
 
-| Technology | Purpose |
-|---|---|
-| **React 19** | UI library |
-| **react-router-dom 7** | Client-side routing |
-| **Vite 8** | Build tool & dev server |
-| **WordPress REST API** | Headless CMS backend |
-| **ACF** | Custom fields for dynamic content |
-| **lucide** | Icon library |
+| Technology             | Purpose                           |
+| ---------------------- | --------------------------------- |
+| **React 19**           | UI library                        |
+| **react-router-dom 7** | Client-side routing               |
+| **Vite 8**             | Build tool & dev server           |
+| **WordPress REST API** | Headless CMS backend              |
+| **ACF**                | Custom fields for dynamic content |
+| **lucide**             | Icon library                      |
 
 ## Pages & Routes
 
-| Route | Page | Dynamic Content |
-|---|---|---|
-| `/` | Home | Programs (categories + cards) |
-| `/about` | About | — |
-| `/programs` | Programs | Program listing |
-| `/programs/:slug` | Program Details | Hero section, Career Paths |
-| `/hire` | Hire | — |
-| `/careers` | Careers | Current Opportunities (accordion) |
-| `/blog` | Blog | Post listing |
-| `/blog/:slug` | Blog Details | — |
-| `/contact` | Contact | — |
+| Route             | Page            | Dynamic Content                   |
+| ----------------- | --------------- | --------------------------------- |
+| `/`               | Home            | Programs (categories + cards)     |
+| `/about`          | About           | —                                 |
+| `/programs`       | Programs        | Program listing                   |
+| `/programs/:slug` | Program Details | Hero section, Career Paths        |
+| `/hire`           | Hire            | —                                 |
+| `/careers`        | Careers         | Current Opportunities (accordion) |
+| `/blog`           | Blog            | Post listing                      |
+| `/blog/:slug`     | Blog Details    | —                                 |
+| `/contact`        | Contact         | —                                 |
 
 ## WordPress API
-
-**Base URL:** `https://orchid-goat-842546.hostingersite.com/admin/wp-json/wp/v2`
 
 - Custom Post Types: `program`, `career`, `post`
 - Taxonomy: `program-category`
@@ -39,12 +37,12 @@ A React + Vite frontend for **TEONOX**, a corporate training provider. Content i
 
 ## Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
 | `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+| `npm run lint`    | Run ESLint               |
 
 ## Project Structure
 
