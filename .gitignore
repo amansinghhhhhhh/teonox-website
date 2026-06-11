@@ -7,7 +7,7 @@ dist
 # Environment variables
 .env.local
 .env.*.local
-.env
+.env 
 
 # IDE & OS files
 .vscode/
