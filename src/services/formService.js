@@ -27,7 +27,7 @@ export const submitForm = async (formName, fields) => {
         email: textFields["Email Address"] || textFields["Email"] || "",
         phone: textFields["Phone Number"] || "",
         message: textFields["Message"] || textFields["Your Message"] || "",
-        program: textFields["Program"] || "",
+        program: textFields["Program"] || textFields["Interested In"] || "",
         resume_link: textFields["Resume Link"] || "",
       },
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
