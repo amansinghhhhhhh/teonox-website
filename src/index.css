@@ -2344,7 +2344,7 @@ button {
 
   .career-grid,
   .hire-why-grid {
-    grid-template-columns: 1fr
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .hire-header {
@@ -5192,7 +5192,7 @@ a {
     padding: 80px 28px 28px;
     z-index: 1001;
     transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    gap: 2px;
+    gap: 10px;
     border-left: 1px solid rgba(255, 255, 255, 0.06)
   }
 
@@ -5202,9 +5202,9 @@ a {
   }
 
   .nav-links a {
-    padding: 14px 18px;
-    font-size: 0.95rem;
-    border-radius: 10px
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: .95rem;
   }
 
   .nav-links a:hover {
@@ -5343,7 +5343,7 @@ a {
   }
 
   .hero {
-    padding-top: 70px;
+    padding-top: 20px;
     min-height: calc(100vh - 20px);
   }
 
@@ -5420,7 +5420,7 @@ a {
   }
 
   .hero h1 {
-    font-size: 1.5rem;
+    font-size: 3.5rem;
   }
 }
 
