@@ -9,10 +9,7 @@ import {
   getProgramCategories,
 } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
-import emailjs from "@emailjs/browser";
-
-const WEBHOOK =
-  "https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec";
+import { submitForm } from "../services/formService";
 
 export default function Home() {
   useLucide();
@@ -78,26 +75,6 @@ export default function Home() {
   const [programs, setPrograms] = useState([]);
   const [progCategories, setProgCategories] = useState([]);
   const [progFilter, setProgFilter] = useState("");
-
-  const submitForm = async (formName, formEl, setSubmitted) => {
-    const fd = new FormData(formEl);
-    const fields = {};
-    fd.forEach((value, key) => {
-      fields[key] = value;
-    });
-
-    try {
-      await fetch(WEBHOOK, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formName, fields }),
-      });
-    } catch {}
-
-    formEl.reset();
-    setSubmitted(true);
-  };
 
   useEffect(() => {
     getBlogs()
@@ -212,13 +189,14 @@ export default function Home() {
                   </div>
                 ) : (
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
-                      submitForm(
-                        "Home Hero Enquiry",
-                        e.target,
-                        setHeroSubmitted,
-                      );
+                      const fd = new FormData(e.target);
+                      const fields = {};
+                      fd.forEach((value, key) => { fields[key] = value; });
+                      try { await submitForm("Home Hero Enquiry", fields); } catch {}
+                      e.target.reset();
+                      setHeroSubmitted(true);
                     }}
                   >
                     <div className="field">
@@ -1202,9 +1180,14 @@ export default function Home() {
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
-                    submitForm("Home Contact", e.target, setContactSubmitted);
+                    const fd = new FormData(e.target);
+                    const fields = {};
+                    fd.forEach((value, key) => { fields[key] = value; });
+                    try { await submitForm("Home Contact", fields); } catch {}
+                    e.target.reset();
+                    setContactSubmitted(true);
                   }}
                 >
                   <div className="form-row">
