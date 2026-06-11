@@ -142,8 +142,10 @@ export default function Careers() {
               const fields = {};
               fd.forEach((value, key) => { fields[key] = value; });
               const email = fields["Email"] || "";
+              const phone = fields["Phone Number"] || "";
               const file = fields["Resume"];
               if (email && !validateEmail(email)) { setError("Please enter a valid email address."); return; }
+              if (phone && !validatePhone(phone)) { setError("Please enter a valid 10-digit Indian phone number."); return; }
               if (file && file instanceof File && file.size > 0) { const fv = validateFile(file); if (!fv.valid) { setError(fv.message); return; } }
               setSubmitting(true);
               try { await submitForm("Careers Application", fields); } catch { setError("Something went wrong. Please try again."); setSubmitting(false); return; }
@@ -156,8 +158,8 @@ export default function Careers() {
                 <p style={{fontSize:'0.82rem',color:'rgba(255,255,255,0.4)',fontWeight:'300',margin:'0'}}>Fill in your details and we'll get back to you.</p>
               </div>
               <div className="form-row"><div className="field"><label>Full Name</label><input type="text" name="Full Name" placeholder="Enter your full name"  /></div><div className="field"><label>Email</label><input type="email" name="Email" placeholder="you@example.com"  /></div></div>
-              <div className="form-row"><div className="field"><label>Role</label><select name="Role"><option value="">Select</option><option value="Digital Marketing Trainer">Digital Marketing Trainer</option><option value="Business Development Manager">Business Development Manager</option><option value="AI & Data Science Trainer">AI & Data Science Trainer</option><option value="Head of Academics">Head of Academics</option><option value="Other">Other</option></select></div><div className="field"><label>Experience</label><input type="text" name="Experience" placeholder="e.g. 5 years"  /></div></div>
-              <div className="field"><label>Why TEONOX?</label><textarea name="Why TEONOX" rows="4" placeholder="Tell us why you would like to work with us..."></textarea></div>
+              <div className="form-row"><div className="field"><label>Role</label><select name="Role"><option value="">Select</option><option value="Digital Marketing Trainer">Digital Marketing Trainer</option><option value="Business Development Manager">Business Development Manager</option><option value="AI & Data Science Trainer">AI & Data Science Trainer</option><option value="Head of Academics">Head of Academics</option><option value="Other">Other</option></select></div><div className="field"><label>Phone Number</label><input type="tel" name="Phone Number" placeholder="+91 98765 43210"  /></div></div>
+              <div className="form-row"><div className="field"><label>Experience</label><input type="text" name="Experience" placeholder="e.g. 5 years"  /></div><div className="field"><label>Why TEONOX?</label><textarea name="Why TEONOX" rows="4" placeholder="Tell us why you would like to work with us..."></textarea></div></div>
               <div className="field"><label>Upload Resume / CV</label><input type="file" name="Resume" accept=".pdf,.doc,.docx" /></div>
               {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
               <button type="submit" className="btn btn-primary" disabled={submitting}>{submitting ? "Submitting..." : "Submit Application"} {!submitting && <Icon name="arrow-right" size={16} />}</button>

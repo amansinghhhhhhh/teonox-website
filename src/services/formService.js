@@ -6,7 +6,9 @@ export const submitForm = async (formName, fields) => {
   const textFields = {};
 
   for (const [key, value] of Object.entries(fields)) {
-    if (!(value instanceof File)) {
+    if (value instanceof File && value.size > 0) {
+      textFields[key] = `[Uploaded: ${value.name} (${(value.size / 1024).toFixed(1)} KB)]`;
+    } else if (!(value instanceof File)) {
       textFields[key] = value;
     }
   }
@@ -28,7 +30,7 @@ export const submitForm = async (formName, fields) => {
         phone: textFields["Phone Number"] || "",
         message: textFields["Message"] || textFields["Your Message"] || textFields["Why TEONOX"] || textFields["Tell us about"] || "",
         program: textFields["Program"] || textFields["Interested In"] || textFields["Hiring Requirement"] || "",
-        resume_link: textFields["Resume Link"] || "",
+        resume_link: textFields["Resume Link"] || textFields["Resume"] || "",
       },
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
     ),
