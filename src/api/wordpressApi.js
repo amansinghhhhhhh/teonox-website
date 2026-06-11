@@ -1,4 +1,4 @@
-const API_URL = "/api-proxy.php";
+const API_URL = "/api";
 
 // Categories
 export const getCategories = async () => {
