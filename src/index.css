@@ -2307,7 +2307,13 @@ button {
     display: flex
   }
 
+  .nav-links a,
+  .nav-links a::after {
+    all: unset
+  }
+
   .nav-links a {
+    display: block;
     padding: 14px 20px;
     font-size: 0.95rem;
     font-weight: 500;
@@ -2316,26 +2322,27 @@ button {
     text-align: right;
     letter-spacing: 0.02em;
     color: rgba(255,255,255,0.65);
+    cursor: pointer;
     transition: all var(--t-fast)
   }
 
-  .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
-    padding-right: 24px
+  .nav-links a:active {
+    background: rgba(255, 107, 0, 0.1);
+    color: var(--orange)
   }
 
   .nav-links a.active {
-    background: rgba(255, 107, 0, 0.1);
+    background: rgba(255, 107, 0, 0.12);
     color: var(--orange);
-    padding-right: 24px
+    font-weight: 600
   }
 
   .nav-links .nav-cta {
     margin-top: 12px;
     text-align: center;
     padding: 14px 20px !important;
-    font-weight: 600 !important
+    font-weight: 600 !important;
+    color: #fff !important
   }
 
   .nav-close {
