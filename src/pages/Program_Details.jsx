@@ -119,18 +119,22 @@ export default function Program_Details() {
               <div className="pg-hero-meta">
                 <div className="pg-hero-meta-item">
                   <Icon name="clock" />
-                  Duration: <strong>{decodeEntities(program.acf.duration)}</strong>
+                  Duration:{" "}
+                  <strong>{decodeEntities(program.acf.duration)}</strong>
                 </div>
                 <div className="pg-hero-meta-divider"></div>
                 <div className="pg-hero-meta-item">
                   <Icon name="graduation-cap" />
-                  Best For: <strong>{decodeEntities(program.acf.best_for)}</strong>
+                  Best For:{" "}
+                  <strong>{decodeEntities(program.acf.best_for)}</strong>
                 </div>
               </div>
               <p className="pg-hero-sub">
                 <strong>{decodeEntities(program.acf.hero_description)}</strong>
               </p>
-              <p className="pg-hero-desc">{decodeEntities(program.acf.card_description)}</p>
+              <p className="pg-hero-desc">
+                {decodeEntities(program.acf.card_description)}
+              </p>
               <div className="pg-hero-actions">
                 <a
                   href={program.acf.brochure_url}
@@ -340,10 +344,7 @@ export default function Program_Details() {
             </h2>
           </div>
 
-          <div
-            className="skills-grid"
-            style={{ marginTop: "40px", gridTemplateColumns: "repeat(3,1fr)" }}
-          >
+          <div className="skills-grid" style={{ marginTop: "40px" }}>
             {[
               {
                 icon: "briefcase",
