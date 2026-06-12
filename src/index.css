@@ -4525,8 +4525,30 @@ a {
     margin: 0 auto;
   }
 
+  .pg-hero-glow {
+    width: 300px;
+    height: 300px;
+    right: -60px;
+    top: -60px;
+  }
+
+  .pg-hero-meta {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .pg-hero-float-card {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .pg-hero-glow {
+    display: none;
+  }
+
+  .pg-hero-visual {
+    max-width: 100%;
   }
 }
 
