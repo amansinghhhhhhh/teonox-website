@@ -5375,6 +5375,16 @@ a {
     text-align: center;
   }
 
+  .footer-brand .hero-actions {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .footer-brand .hero-actions .btn {
+    width: auto;
+    text-align: left;
+  }
+
   .hero-sub {
     max-width: 100%;
     font-size: 0.92rem;
