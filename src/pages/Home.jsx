@@ -321,7 +321,8 @@ export default function Home() {
           <div className="prog-grid">
             {programs.map((program, i) => {
               const image =
-                program._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+                program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                "/assets/asset-023.jpg";
               return (
                 <Link
                   key={program.id}
@@ -329,15 +330,13 @@ export default function Home() {
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <div className={`prog-card reveal reveal-d${(i % 3) + 1}`}>
-                    {image && (
-                      <img
-                        className="prog-card-img"
-                        src={image}
-                        alt={decodeEntities(
+                    <img
+                      className="prog-card-img"
+                      src={image}
+                      alt={decodeEntities(
                           program.title.rendered?.replace(/<[^>]+>/g, ""),
                         )}
                       />
-                    )}
                     <div className="prog-card-top">
                       <h3
                         dangerouslySetInnerHTML={{

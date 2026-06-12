@@ -159,7 +159,7 @@ export default function Program_Details() {
                 <img
                   src={
                     program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                    "assets/asset-023.jpg"
+                    "/assets/asset-023.jpg"
                   }
                   alt={program.title?.rendered || "Program"}
                 />

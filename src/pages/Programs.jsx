@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import { decodeEntities } from "../utils/decode.js";
 
 import { getPrograms, getProgramCategories } from "../api/wordpressApi";
 
@@ -87,89 +88,109 @@ export default function Programs() {
             </div>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "8px",
-              justifyContent: "center",
-              margin: "40px 0 48px",
-              cursor: "pointer",
-            }}
-          >
-            <span
-              className={
-                selectedProgramCategory === ""
-                  ? "nav-cta"
-                  : "job-tag job-tag-new"
-              }
+          <div className="prog-filters reveal">
+            <button
+              className={"prog-filter" + (selectedProgramCategory === "" ? " active" : "")}
               onClick={() => setSelectedProgramCategory("")}
+              data-filter="all"
             >
               All
-            </span>
-
+            </button>
             {programCategories.map((cat) => (
-              <span
-                className={
-                  selectedProgramCategory === cat.id ? "nav-cta" : "job-tag"
-                }
+              <button
                 key={cat.id}
+                className={
+                  "prog-filter" + (selectedProgramCategory === cat.id ? " active" : "")
+                }
                 onClick={() => setSelectedProgramCategory(cat.id)}
+                data-filter={cat.slug}
               >
                 {cat.name}
-              </span>
+              </button>
             ))}
           </div>
 
-          <div className="blog-grid">
-            {programs.map((program, index) => {
-              const featuredMedia =
-                program._embedded?.["wp:featuredmedia"]?.[0];
+          <div className="prog-grid">
+            {programs.map((program, i) => {
               const image =
-                featuredMedia?.source_url || "assets/asset-023.jpg";
-
-              const programCategory =
-                program._embedded?.["wp:term"]?.[0]?.[0]?.name || "General";
-
+                program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                "/assets/asset-023.jpg";
               return (
                 <Link
                   key={program.id}
                   to={`/programs/${program.slug}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <div
-                    className={`blog-card reveal reveal-d${(index % 3) + 1}`}
-                  >
-                    <div className="blog-img">
-                      <img src={image} alt={program.title.rendered} />
-
-                      <span className="blog-tag">{programCategory}</span>
-                    </div>
-
-                    <div className="blog-body">
-                      <h4
+                  <div className={`prog-card reveal reveal-d${(i % 3) + 1}`}>
+                    <img
+                      className="prog-card-img"
+                      src={image}
+                      alt={decodeEntities(
+                        program.title.rendered?.replace(/<[^>]+>/g, ""),
+                      )}
+                    />
+                    <div className="prog-card-top">
+                      <h3
                         dangerouslySetInnerHTML={{
                           __html: program.title.rendered,
                         }}
-                      />
-
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            program.excerpt?.rendered
-                              ?.replace(/<[^>]+>/g, "")
-                              ?.slice(0, 120) + "...",
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: "2",
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
                         }}
                       />
-
-                      <div className="blog-meta">
-                        <span>By TEONOX Team</span>
-                        <span>—</span>
-                        <span>
-                          {new Date(program.date).toLocaleDateString()}
-                        </span>
+                    </div>
+                    <div className="prog-card-meta">
+                      <div className="prog-card-meta-item">
+                        <p
+                          style={{
+                            opacity: "0.7",
+                            fontSize: "0.72rem",
+                            margin: "0",
+                            lineHeight: "1.2",
+                          }}
+                        >
+                          Duration
+                        </p>
+                        <div style={{ fontWeight: "600", fontSize: "0.85rem" }}>
+                          {program.acf?.duration || "—"}
+                        </div>
+                      </div>
+                      <div className="prog-card-meta-item">
+                        <p
+                          style={{
+                            opacity: "0.7",
+                            fontSize: "0.72rem",
+                            margin: "0",
+                            lineHeight: "1.2",
+                          }}
+                        >
+                          Best For
+                        </p>
+                        <div style={{ fontWeight: "600", fontSize: "0.85rem" }}>
+                          {program.acf?.best_for || "—"}
+                        </div>
                       </div>
                     </div>
+                    <p className="prog-card-desc">
+                      {(() => {
+                        const raw = program.acf?.card_description
+                          ? program.acf.card_description
+                          : program.excerpt?.rendered || "";
+                        const clean = decodeEntities(
+                          raw.replace(/<[^>]*>/g, ""),
+                        );
+                        const words = clean.split(" ");
+                        return words.length > 12
+                          ? words.slice(0, 12).join(" ") + "..."
+                          : clean;
+                      })()}
+                    </p>
+                    <span className="btn btn-outline btn-sm prog-card-cta">
+                      View Program <Icon name="arrow-right" size={14} />
+                    </span>
                   </div>
                 </Link>
               );
