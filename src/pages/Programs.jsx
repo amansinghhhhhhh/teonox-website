@@ -126,8 +126,6 @@ export default function Programs() {
               const image =
                 program._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
 
-              const webpImage = image?.replace(/\.(jpg|jpeg|png|gif)$/i, '.webp');
-
               const programCategory =
                 program._embedded?.["wp:term"]?.[0]?.[0]?.name || "General";
 
@@ -141,10 +139,7 @@ export default function Programs() {
                     className={`blog-card reveal reveal-d${(index % 3) + 1}`}
                   >
                     <div className="blog-img">
-                      <picture>
-                        <source srcSet={webpImage} type="image/webp" />
-                        <img src={image} alt={program.title.rendered} />
-                      </picture>
+                      <img src={image} alt={program.title.rendered} />
 
                       <span className="blog-tag">{programCategory}</span>
                     </div>
