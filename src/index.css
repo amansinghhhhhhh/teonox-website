@@ -2298,7 +2298,7 @@ button {
   }
 
   .nav-inner {
-    padding: 0 16px;
+    padding: 0 16px !important;
   }
 
   .nav-links {
@@ -2322,6 +2322,7 @@ button {
   }
 
   .nav-links.open {
+    display: none;
     right: 0;
     display: flex;
     justify-content: left;
