@@ -344,7 +344,7 @@ export default function Program_Details() {
             </h2>
           </div>
 
-          <div className="skills-grid" style={{ marginTop: "40px" }}>
+          <div className="skills-grid">
             {[
               {
                 icon: "briefcase",
