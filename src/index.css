@@ -2298,7 +2298,7 @@ button {
   }
 
   .nav-inner {
-    padding: 0 16px;
+    padding: 0 16px !important;
   }
 
   .nav-links {
@@ -2322,8 +2322,9 @@ button {
   }
 
   .nav-links.open {
+    display: none;
     right: 0;
-    display: flex;
+    /* display: flex; */
     justify-content: left;
     align-items: flex-end
   }
@@ -5357,7 +5358,7 @@ a {
   }
 
   .hero {
-    padding-top: 20px;
+    padding-top: 0px;
     min-height: calc(100vh - 20px);
   }
 
