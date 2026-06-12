@@ -602,16 +602,7 @@ export default function Program_Details() {
               Where This Program Can Take You
             </h2>
           </div>
-          <div
-            className="skills-grid"
-            style={{
-              marginTop: "36px",
-              gridTemplateColumns:
-                program.acf.where_this_program_can_take_you?.length <= 4
-                  ? `repeat(${program.acf.where_this_program_can_take_you?.length || 1}, 1fr)`
-                  : "repeat(4, 1fr)",
-            }}
-          >
+          <div className="skills-grid">
             {program.acf.where_this_program_can_take_you?.map((path, i) => {
               const imgUrl = careerImgUrls[path.career_path_card_image];
               return (
