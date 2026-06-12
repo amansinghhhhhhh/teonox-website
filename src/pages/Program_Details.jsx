@@ -412,10 +412,7 @@ export default function Program_Details() {
                   What You Graduate With
                 </h2>
               </div>
-              <div
-                className="skills-grid"
-                style={{ gridTemplateColumns: "repeat(5,1fr)" }}
-              >
+              <div className="skills-grid graduate-grid">
                 <div style={{ textAlign: "center" }}>
                   <div
                     style={{

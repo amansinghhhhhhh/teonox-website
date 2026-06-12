@@ -1477,6 +1477,10 @@ button {
   margin-top: 40px
 }
 
+.graduate-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
 .skill-card {
   background: var(--surface);
   border: 1px solid var(--border);
