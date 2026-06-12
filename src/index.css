@@ -2324,7 +2324,7 @@ button {
   .nav-links.open {
     display: none;
     right: 0;
-    display: flex;
+    /* display: flex; */
     justify-content: left;
     align-items: flex-end
   }
