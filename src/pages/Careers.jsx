@@ -335,35 +335,11 @@ export default function Careers() {
               className="contact-wrap"
               style={{ gridTemplateColumns: "1fr 1fr" }}
             >
-              <div
-                className="contact-sidebar"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  background: "linear-gradient(160deg,#0d1926 0%,#111e2e 100%)",
-                  padding: "48px 40px",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "-40px",
-                    right: "-40px",
-                    width: "200px",
-                    height: "200px",
-                    borderRadius: "50%",
-                    background:
-                      "radial-gradient(circle,rgba(255,107,0,0.08),transparent 70%)",
-                    pointerEvents: "none",
-                  }}
-                ></div>
-                <h3 className="careers-sidebar-title">
+              <div className="contact-sidebar">
+                <h3 className="contact-sidebar-title">
                   Let's Create Opportunities Together.
                 </h3>
-                <p className="careers-sidebar-sub">
+                <p>
                   Whether you're a business leader, educator, founder, or
                   industry practitioner, there are many ways to contribute to
                   the TEONOX ecosystem.

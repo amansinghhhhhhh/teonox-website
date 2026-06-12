@@ -392,14 +392,7 @@ export default function Hire() {
                 </form>
               )}
             </div>
-            <div
-              className="contact-sidebar"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
+            <div className="contact-sidebar">
               <h3 className="contact-sidebar-title">
                 Great Teams Are Built With Great People.
               </h3>
