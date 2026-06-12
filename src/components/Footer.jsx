@@ -77,7 +77,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 TEONOX. All rights reserved. Powered by A2 Digital.</p>
+          <p>&copy; 2026 TEONOX. All rights reserved. Powered by A2 Digital.</p>
           <div className="footer-socials">
             <a href="#" aria-label="LinkedIn">
               <svg

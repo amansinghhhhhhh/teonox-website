@@ -5449,6 +5449,10 @@ a {
     padding: 0 20px;
   }
 
+  .footer .nav-logo {
+    padding-left: 2px;
+  }
+
   .section {
     padding: 45px 0;
   }
@@ -5489,6 +5493,10 @@ a {
 
   .nav-inner {
     padding: 0 16px;
+  }
+
+  .footer .nav-logo {
+    padding-left: 2px;
   }
 
   .section {
