@@ -378,7 +378,7 @@ export default function Home() {
                           Best For
                         </p>
                         <div style={{ fontWeight: "600", fontSize: "0.85rem" }}>
-                          {program.acf?.best_for || "—"}
+                          {decodeEntities(program.acf?.best_for) || "—"}
                         </div>
                       </div>
                     </div>

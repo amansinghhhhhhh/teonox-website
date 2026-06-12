@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import { decodeEntities } from "../utils/decode.js";
 import { getProgramBySlug, getMediaUrl } from "../api/wordpressApi";
 
 export default function Program_Details() {
@@ -114,22 +115,22 @@ export default function Program_Details() {
           {/* Banner */}
           <div className="pg-hero">
             <div className="pg-hero-content">
-              <h1>{program.acf.hero_heading}</h1>
+              <h1>{decodeEntities(program.acf.hero_heading)}</h1>
               <div className="pg-hero-meta">
                 <div className="pg-hero-meta-item">
                   <Icon name="clock" />
-                  Duration: <strong>{program.acf.duration}</strong>
+                  Duration: <strong>{decodeEntities(program.acf.duration)}</strong>
                 </div>
                 <div className="pg-hero-meta-divider"></div>
                 <div className="pg-hero-meta-item">
                   <Icon name="graduation-cap" />
-                  Best For: <strong>{program.acf.best_for}</strong>
+                  Best For: <strong>{decodeEntities(program.acf.best_for)}</strong>
                 </div>
               </div>
               <p className="pg-hero-sub">
-                <strong>{program.acf.hero_description}</strong>
+                <strong>{decodeEntities(program.acf.hero_description)}</strong>
               </p>
-              <p className="pg-hero-desc">{program.acf.card_description}</p>
+              <p className="pg-hero-desc">{decodeEntities(program.acf.card_description)}</p>
               <div className="pg-hero-actions">
                 <a
                   href={program.acf.brochure_url}
@@ -161,7 +162,7 @@ export default function Program_Details() {
                     program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
                     "/assets/asset-023.jpg"
                   }
-                  alt={program.title?.rendered || "Program"}
+                  alt={decodeEntities(program.title?.rendered) || "Program"}
                 />
               </div>
             </div>
@@ -625,7 +626,7 @@ export default function Program_Details() {
                     {imgUrl ? (
                       <img
                         src={imgUrl}
-                        alt={path.career_path_card_heading}
+                        alt={decodeEntities(path.career_path_card_heading)}
                         style={{
                           width: "24px",
                           height: "24px",
@@ -638,7 +639,7 @@ export default function Program_Details() {
                     )}
                   </div>
                   <h4 style={{ fontSize: "0.85rem" }}>
-                    {path.career_path_card_heading}
+                    {decodeEntities(path.career_path_card_heading)}
                   </h4>
                 </div>
               );
