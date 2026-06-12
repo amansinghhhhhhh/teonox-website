@@ -10,7 +10,7 @@ export default function Footer() {
               <img
                 src="/assets/asset-028.png"
                 alt="TEONOX"
-                style={{ height: 44, width: "auto" }}
+                style={{ height: 50, width: "auto", marginLeft: -20 }}
               />
             </Link>
             <p>
