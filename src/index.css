@@ -2322,9 +2322,8 @@ button {
   }
 
   .nav-links.open {
-    display: none;
+    display: flex;
     right: 0;
-    /* display: flex; */
     justify-content: left;
     align-items: flex-end
   }
