@@ -123,8 +123,10 @@ export default function Programs() {
 
           <div className="blog-grid">
             {programs.map((program, index) => {
+              const featuredMedia =
+                program._embedded?.["wp:featuredmedia"]?.[0];
               const image =
-                program._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+                featuredMedia?.source_url || "assets/asset-023.jpg";
 
               const programCategory =
                 program._embedded?.["wp:term"]?.[0]?.[0]?.name || "General";
