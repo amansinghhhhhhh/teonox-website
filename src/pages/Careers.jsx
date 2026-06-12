@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Icon from '../components/Icon.jsx';
-import useScrollReveal from '../hooks/useScrollReveal.js';
-import { getCareers } from '../api/wordpressApi';
-import { submitForm } from '../services/formService';
-import { validateEmail, validatePhone, validateFile } from '../utils/validation.js';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Icon from "../components/Icon.jsx";
+import useScrollReveal from "../hooks/useScrollReveal.js";
+import { getCareers } from "../api/wordpressApi";
+import { submitForm } from "../services/formService";
+import {
+  validateEmail,
+  validatePhone,
+  validateFile,
+} from "../utils/validation.js";
 
 export default function Careers() {
   useScrollReveal();
@@ -19,160 +23,563 @@ export default function Careers() {
 
   useEffect(() => {
     const hdls = [];
-    const dh = (sel, fn) => { document.querySelectorAll(sel).forEach(el => { el.addEventListener('click', fn); hdls.push(() => el.removeEventListener('click', fn)); }); };
-    dh('.job-expandable-header', function() { const c = this.closest('.job-expandable'); const b = c.querySelector('.job-expandable-body'); const o = c.classList.contains('open'); c.classList.toggle('open'); if(b) b.style.display = o ? 'none' : ''; });
-    dh('.faq-item', function() { this.classList.toggle('open'); });
-    dh('.prog-filter', function() { document.querySelectorAll('.prog-filter').forEach(b => b.classList.remove('active')); this.classList.add('active'); const f = this.dataset.filter; document.querySelectorAll('.prog-card').forEach(c => { if(f === 'all') { c.style.display=''; return; } c.style.display = c.textContent.toLowerCase().includes(f) ? '' : 'none'; }); });
-    dh('a[href^="#"]', function(e) { const h = this.getAttribute('href'); if(h && h.length>1) { const t = document.querySelector(h); if(t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); } } });
-    return () => hdls.forEach(f => f());
+    const dh = (sel, fn) => {
+      document.querySelectorAll(sel).forEach((el) => {
+        el.addEventListener("click", fn);
+        hdls.push(() => el.removeEventListener("click", fn));
+      });
+    };
+    dh(".job-expandable-header", function () {
+      const c = this.closest(".job-expandable");
+      const b = c.querySelector(".job-expandable-body");
+      const o = c.classList.contains("open");
+      c.classList.toggle("open");
+      if (b) b.style.display = o ? "none" : "";
+    });
+    dh(".faq-item", function () {
+      this.classList.toggle("open");
+    });
+    dh(".prog-filter", function () {
+      document
+        .querySelectorAll(".prog-filter")
+        .forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+      const f = this.dataset.filter;
+      document.querySelectorAll(".prog-card").forEach((c) => {
+        if (f === "all") {
+          c.style.display = "";
+          return;
+        }
+        c.style.display = c.textContent.toLowerCase().includes(f) ? "" : "none";
+      });
+    });
+    dh('a[href^="#"]', function (e) {
+      const h = this.getAttribute("href");
+      if (h && h.length > 1) {
+        const t = document.querySelector(h);
+        if (t) {
+          e.preventDefault();
+          t.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    });
+    return () => hdls.forEach((f) => f());
   });
 
   return (
     <div className="page active">
-<section className="section" style={{paddingTop:'140px'}}>
-  <div className="container">
-    <div className="about-grid reveal" style={{marginBottom:'56px'}}>
-      <div>
-        <span className="section-label">Careers</span>
-        <h2 className="section-title">Help Shape The Future of Learning.</h2>
-        <p className="section-sub" style={{maxWidth:'100%'}}>At TEONOX, we're building more than programs. We're building an ecosystem where students gain practical skills, real-world exposure, and the confidence to succeed. If you're passionate about education, business, technology, and impact — we'd love to hear from you.</p>
-        <div className="hero-actions" style={{marginTop:'20px'}}>
-          <a href="#" className="btn btn-primary btn-sm">View Opportunities <Icon name="arrow-down" size={14} /></a>
-        </div>
-      </div>
-      <div className="about-img-wrap" style={{aspectRatio:'16/10'}}>
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&fit=crop&auto=format" alt="" />
-      </div>
-    </div>
-
-    <div className="reveal" style={{marginBottom:'36px'}}>
-      <span className="section-label">Why Work With Us</span>
-      <h2 className="section-title" style={{fontSize:'clamp(1.4rem,2.5vw,2rem)'}}>Build More Than Careers. Build Impact.</h2>
-      <p className="section-sub" style={{maxWidth:'100%'}}>Every workshop, project, mentorship session, and interaction has the potential to influence someone's future. We're looking for people who believe learning should be practical, relevant, and connected to the real world.</p>
-    </div>
-    <div className="hire-why-grid" style={{marginBottom:'56px',gridTemplateColumns:'repeat(4,1fr)'}}>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="book-open" size={20} /></div><h5>Learn Continuously</h5><p>Work alongside professionals from diverse industries.</p></div>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="heart" size={20} /></div><h5>Create Impact</h5><p>Help students develop skills that transform careers.</p></div>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="lightbulb" size={20} /></div><h5>Collaborate Freely</h5><p>An environment that values ideas and innovation.</p></div>
-      <div className="hire-why-item" style={{flexDirection:'column',alignItems:'center',textAlign:'center',padding:'28px',background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--r2)'}}><div className="hire-why-icon" style={{width:'48px',height:'48px',marginBottom:'12px'}}><Icon name="clock" size={20} /></div><h5>Think Long-Term</h5><p>Focus on meaningful outcomes, not short-term metrics.</p></div>
-    </div>
-
-    <div className="reveal" style={{marginBottom:'28px'}}>
-      <span className="section-label">Open Positions</span>
-      <h2 className="section-title" style={{fontSize:'clamp(1.4rem,2.5vw,2rem)'}}>Current Opportunities</h2>
-    </div>
-
-    <div className="reveal" style={{marginBottom:'36px'}}>
-      {careers.map((career, i) => {
-        const a = career.acf;
-        const responsibilities = [
-          { icon: "book-open", label: "Training Delivery", key: "training_delivery" },
-          { icon: "layers", label: "Curriculum Enhancement", key: "curriculum_enhancement" },
-          { icon: "users", label: "Student Development", key: "student_development" },
-          { icon: "megaphone", label: "Engagement & Outreach", key: "engagement_outreach" },
-          { icon: "smile", label: "Learning Experience", key: "learning_experience" },
-        ];
-        return (
-          <div key={career.id} className="job-expandable">
-            <div className="job-expandable-header">
-              <div>
-                <h3 className="job-expandable-title">{a.job_title}</h3>
-                <div className="job-expandable-meta">
-                  <span><Icon name="map-pin" /> {a.location}</span>
-                  <span><Icon name="clock" /> {a.employment_type}</span>
-                  <span className="job-tag highlight">{a.experience}</span>
-                </div>
+      <section className="section" style={{ paddingTop: "140px" }}>
+        <div className="container">
+          <div className="about-grid reveal" style={{ marginBottom: "56px" }}>
+            <div>
+              <span className="section-label">Careers</span>
+              <h2 className="section-title">
+                Help Shape The Future of Learning.
+              </h2>
+              <p className="section-sub" style={{ maxWidth: "100%" }}>
+                At TEONOX, we're building more than programs. We're building an
+                ecosystem where students gain practical skills, real-world
+                exposure, and the confidence to succeed. If you're passionate
+                about education, business, technology, and impact — we'd love to
+                hear from you.
+              </p>
+              <div className="hero-actions" style={{ marginTop: "20px" }}>
+                <a href="#" className="btn btn-primary btn-sm">
+                  View Opportunities <Icon name="arrow-down" size={14} />
+                </a>
               </div>
-              <button className="job-toggle" aria-label="Toggle"><Icon name="chevron-down" /></button>
             </div>
-            <div className="job-expandable-body" style={{display:'none'}}>
-              <div className="job-section"><h4>Role Overview</h4><p>{a.role_overview}</p></div>
-              <div className="job-section"><h4>Key Responsibilities</h4>
-                <div className="job-list">
-                  {responsibilities.map((r) =>
-                    a[r.key] ? (
-                      <div key={r.key} className="job-list-item">
-                        <div className="job-list-icon"><Icon name={r.icon} /></div>
-                        <div><h5>{r.label}</h5><p>{a[r.key]}</p></div>
-                      </div>
-                    ) : null
-                  )}
-                </div>
-              </div>
-              {a.must_have_skills && (
-                <div className="job-section"><h4>Must-Have Skills</h4>
-                  <div className="job-bullets" dangerouslySetInnerHTML={{ __html: a.must_have_skills }} />
-                </div>
-              )}
-              {a.good_to_have && (
-                <div className="job-section"><h4>Good-to-Have</h4>
-                  <div className="job-bullets" dangerouslySetInnerHTML={{ __html: a.good_to_have }} />
-                </div>
-              )}
-              {a.education && (
-                <div className="job-section"><h4>Education</h4><p>{a.education}</p></div>
-              )}
-              <div style={{marginTop:'24px'}}><a href="#careers-form" className="btn btn-primary">Apply for This Position <Icon name="arrow-right" size={14} /></a></div>
+            <div className="about-img-wrap" style={{ aspectRatio: "16/10" }}>
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&fit=crop&auto=format"
+                alt=""
+              />
             </div>
           </div>
-        );
-      })}
-    </div>
 
-    <div className="reveal" style={{marginTop:'56px'}}>
-      <div className="contact-wrap" style={{gridTemplateColumns:'1fr 1fr'}}>
-        <div className="contact-sidebar" style={{display:'flex',flexDirection:'column',justifyContent:'center',background:'linear-gradient(160deg,#0d1926 0%,#111e2e 100%)',padding:'48px 40px',position:'relative',overflow:'hidden'}}>
-          <div style={{position:'absolute',top:'-40px',right:'-40px',width:'200px',height:'200px',borderRadius:'50%',background:'radial-gradient(circle,rgba(255,107,0,0.08),transparent 70%)',pointerEvents:'none'}}></div>
-          <h3 className="careers-sidebar-title">Let's Create Opportunities Together.</h3>
-          <p className="careers-sidebar-sub">Whether you're a business leader, educator, founder, or industry practitioner, there are many ways to contribute to the TEONOX ecosystem.</p>
-        </div>
-        <div className="form-wrap" style={{background:'linear-gradient(180deg,rgba(13,25,38,0.5) 0%,var(--surface) 100%)'}}>
-          {submitted ? (
-            <div style={{ textAlign:"center", padding:"24px 0" }}>
-              <div style={{ width:"48px",height:"48px",borderRadius:"50%",background:"var(--orange-grad)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 12px" }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+          <div className="reveal" style={{ marginBottom: "36px" }}>
+            <span className="section-label">Why Work With Us</span>
+            <h2
+              className="section-title"
+              style={{ fontSize: "clamp(1.4rem,2.5vw,2rem)" }}
+            >
+              Build More Than Careers. Build Impact.
+            </h2>
+            <p className="section-sub" style={{ maxWidth: "100%" }}>
+              Every workshop, project, mentorship session, and interaction has
+              the potential to influence someone's future. We're looking for
+              people who believe learning should be practical, relevant, and
+              connected to the real world.
+            </p>
+          </div>
+          <div
+            className="hire-why-grid"
+            style={{
+              marginBottom: "56px",
+              gridTemplateColumns: "repeat(4,1fr)",
+            }}
+          >
+            <div
+              className="hire-why-item"
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "28px",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--r2)",
+              }}
+            >
+              <div
+                className="hire-why-icon"
+                style={{ width: "48px", height: "48px", marginBottom: "12px" }}
+              >
+                <Icon name="book-open" size={20} />
               </div>
-              <p style={{ color:"var(--text)",fontWeight:"600",fontSize:"1rem" }}>Thank you! We'll get back to you shortly.</p>
+              <h5>Learn Continuously</h5>
+              <p>Work alongside professionals from diverse industries.</p>
             </div>
-          ) : (
-            <form id="careers-form" onSubmit={async (e) => {
-              e.preventDefault();
-              setError("");
-              const fd = new FormData(e.target);
-              const fields = {};
-              fd.forEach((value, key) => { fields[key] = value; });
-              const email = fields["Email"] || "";
-              const phone = fields["Phone Number"] || "";
-              const file = fields["Resume"];
-              if (email && !validateEmail(email)) { setError("Please enter a valid email address."); return; }
-              if (phone && !validatePhone(phone)) { setError("Please enter a valid 10-digit Indian phone number."); return; }
-              if (file && file instanceof File && file.size > 0) { const fv = validateFile(file); if (!fv.valid) { setError(fv.message); return; } }
-              setSubmitting(true);
-              try { await submitForm("Careers Application", fields); } catch { setError("Something went wrong. Please try again."); setSubmitting(false); return; }
-              setSubmitting(false);
-              e.target.reset();
-              setSubmitted(true);
-            }}>
-              <div style={{marginBottom:'28px'}}>
-                <h3 style={{fontFamily:'var(--font-head)',fontSize:'1.15rem',fontWeight:'700',color:'#fff',margin:'0 0 4px'}}>Interested In Working With TEONOX?</h3>
-                <p style={{fontSize:'0.82rem',color:'rgba(255,255,255,0.4)',fontWeight:'300',margin:'0'}}>Fill in your details and we'll get back to you.</p>
+            <div
+              className="hire-why-item"
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "28px",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--r2)",
+              }}
+            >
+              <div
+                className="hire-why-icon"
+                style={{ width: "48px", height: "48px", marginBottom: "12px" }}
+              >
+                <Icon name="heart" size={20} />
               </div>
-              <div className="form-row"><div className="field"><label>Full Name</label><input type="text" name="Full Name" placeholder="Enter your full name"  /></div><div className="field"><label>Email</label><input type="email" name="Email" placeholder="you@example.com"  /></div></div>
-              <div className="form-row"><div className="field"><label>Role</label><select name="Role"><option value="">Select</option><option value="Digital Marketing Trainer">Digital Marketing Trainer</option><option value="Business Development Manager">Business Development Manager</option><option value="AI & Data Science Trainer">AI & Data Science Trainer</option><option value="Head of Academics">Head of Academics</option><option value="Other">Other</option></select></div><div className="field"><label>Phone Number</label><input type="tel" name="Phone Number" placeholder="+91 98765 43210"  /></div></div>
-              <div className="form-row"><div className="field"><label>Experience</label><input type="text" name="Experience" placeholder="e.g. 5 years"  /></div><div className="field"><label>Why TEONOX?</label><textarea name="Why TEONOX" rows="4" placeholder="Tell us why you would like to work with us..."></textarea></div></div>
-              <div className="field"><label>Upload Resume / CV</label><input type="file" name="Resume" accept=".pdf,.doc,.docx" /></div>
-              {error && <p style={{ color:"#ef4444", fontSize:"0.85rem", margin:"0 0 8px", textAlign:"center" }}>{error}</p>}
-              <button type="submit" className="btn btn-primary" disabled={submitting}>{submitting ? "Submitting..." : "Submit Application"} {!submitting && <Icon name="arrow-right" size={16} />}</button>
-            </form>
-          )}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+              <h5>Create Impact</h5>
+              <p>Help students develop skills that transform careers.</p>
+            </div>
+            <div
+              className="hire-why-item"
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "28px",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--r2)",
+              }}
+            >
+              <div
+                className="hire-why-icon"
+                style={{ width: "48px", height: "48px", marginBottom: "12px" }}
+              >
+                <Icon name="lightbulb" size={20} />
+              </div>
+              <h5>Collaborate Freely</h5>
+              <p>An environment that values ideas and innovation.</p>
+            </div>
+            <div
+              className="hire-why-item"
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "28px",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--r2)",
+              }}
+            >
+              <div
+                className="hire-why-icon"
+                style={{ width: "48px", height: "48px", marginBottom: "12px" }}
+              >
+                <Icon name="clock" size={20} />
+              </div>
+              <h5>Think Long-Term</h5>
+              <p>Focus on meaningful outcomes, not short-term metrics.</p>
+            </div>
+          </div>
 
-</div>
+          <div className="reveal" style={{ marginBottom: "28px" }}>
+            <span className="section-label">Open Positions</span>
+            <h2
+              className="section-title"
+              style={{ fontSize: "clamp(1.4rem,2.5vw,2rem)" }}
+            >
+              Current Opportunities
+            </h2>
+          </div>
+
+          <div className="reveal" style={{ marginBottom: "36px" }}>
+            {careers.map((career, i) => {
+              const a = career.acf;
+              const responsibilities = [
+                {
+                  icon: "book-open",
+                  label: "Training Delivery",
+                  key: "training_delivery",
+                },
+                {
+                  icon: "layers",
+                  label: "Curriculum Enhancement",
+                  key: "curriculum_enhancement",
+                },
+                {
+                  icon: "users",
+                  label: "Student Development",
+                  key: "student_development",
+                },
+                {
+                  icon: "megaphone",
+                  label: "Engagement & Outreach",
+                  key: "engagement_outreach",
+                },
+                {
+                  icon: "smile",
+                  label: "Learning Experience",
+                  key: "learning_experience",
+                },
+              ];
+              return (
+                <div key={career.id} className="job-expandable">
+                  <div className="job-expandable-header">
+                    <div>
+                      <h3 className="job-expandable-title">{a.job_title}</h3>
+                      <div className="job-expandable-meta">
+                        <span>
+                          <Icon name="map-pin" /> {a.location}
+                        </span>
+                        <span>
+                          <Icon name="clock" /> {a.employment_type}
+                        </span>
+                        <span className="job-tag highlight">
+                          {a.experience}
+                        </span>
+                      </div>
+                    </div>
+                    <button className="job-toggle" aria-label="Toggle">
+                      <Icon name="chevron-down" />
+                    </button>
+                  </div>
+                  <div
+                    className="job-expandable-body"
+                    style={{ display: "none" }}
+                  >
+                    <div className="job-section">
+                      <h4>Role Overview</h4>
+                      <p>{a.role_overview}</p>
+                    </div>
+                    <div className="job-section">
+                      <h4>Key Responsibilities</h4>
+                      <div className="job-list">
+                        {responsibilities.map((r) =>
+                          a[r.key] ? (
+                            <div key={r.key} className="job-list-item">
+                              <div className="job-list-icon">
+                                <Icon name={r.icon} />
+                              </div>
+                              <div>
+                                <h5>{r.label}</h5>
+                                <p>{a[r.key]}</p>
+                              </div>
+                            </div>
+                          ) : null,
+                        )}
+                      </div>
+                    </div>
+                    {a.must_have_skills && (
+                      <div className="job-section">
+                        <h4>Must-Have Skills</h4>
+                        <div
+                          className="job-bullets"
+                          dangerouslySetInnerHTML={{
+                            __html: a.must_have_skills,
+                          }}
+                        />
+                      </div>
+                    )}
+                    {a.good_to_have && (
+                      <div className="job-section">
+                        <h4>Good-to-Have</h4>
+                        <div
+                          className="job-bullets"
+                          dangerouslySetInnerHTML={{ __html: a.good_to_have }}
+                        />
+                      </div>
+                    )}
+                    {a.education && (
+                      <div className="job-section">
+                        <h4>Education</h4>
+                        <p>{a.education}</p>
+                      </div>
+                    )}
+                    <div style={{ marginTop: "24px" }}>
+                      <a href="#careers-form" className="btn btn-primary">
+                        Apply for This Position{" "}
+                        <Icon name="arrow-right" size={14} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="reveal" style={{ marginTop: "56px" }}>
+            <div
+              className="contact-wrap"
+              style={{ gridTemplateColumns: "1fr 1fr" }}
+            >
+              <div
+                className="contact-sidebar"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  background: "linear-gradient(160deg,#0d1926 0%,#111e2e 100%)",
+                  padding: "48px 40px",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-40px",
+                    right: "-40px",
+                    width: "200px",
+                    height: "200px",
+                    borderRadius: "50%",
+                    background:
+                      "radial-gradient(circle,rgba(255,107,0,0.08),transparent 70%)",
+                    pointerEvents: "none",
+                  }}
+                ></div>
+                <h3 className="careers-sidebar-title">
+                  Let's Create Opportunities Together.
+                </h3>
+                <p className="careers-sidebar-sub">
+                  Whether you're a business leader, educator, founder, or
+                  industry practitioner, there are many ways to contribute to
+                  the TEONOX ecosystem.
+                </p>
+              </div>
+              <div
+                className="form-wrap"
+                style={{
+                  background:
+                    "linear-gradient(180deg,rgba(13,25,38,0.5) 0%,var(--surface) 100%)",
+                }}
+              >
+                {submitted ? (
+                  <div style={{ textAlign: "center", padding: "24px 0" }}>
+                    <div
+                      style={{
+                        width: "48px",
+                        height: "48px",
+                        borderRadius: "50%",
+                        background: "var(--orange-grad)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "0 auto 12px",
+                      }}
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#fff"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <p
+                      style={{
+                        color: "var(--text)",
+                        fontWeight: "600",
+                        fontSize: "1rem",
+                      }}
+                    >
+                      Thank you! We'll get back to you shortly.
+                    </p>
+                  </div>
+                ) : (
+                  <form
+                    id="careers-form"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      setError("");
+                      const fd = new FormData(e.target);
+                      const fields = {};
+                      fd.forEach((value, key) => {
+                        fields[key] = value;
+                      });
+                      const email = fields["Email"] || "";
+                      const phone = fields["Phone Number"] || "";
+                      const file = fields["Resume"];
+                      if (email && !validateEmail(email)) {
+                        setError("Please enter a valid email address.");
+                        return;
+                      }
+                      if (phone && !validatePhone(phone)) {
+                        setError(
+                          "Please enter a valid 10-digit Indian phone number.",
+                        );
+                        return;
+                      }
+                      if (file && file instanceof File && file.size > 0) {
+                        const fv = validateFile(file);
+                        if (!fv.valid) {
+                          setError(fv.message);
+                          return;
+                        }
+                      }
+                      setSubmitting(true);
+                      try {
+                        await submitForm("Careers Application", fields);
+                      } catch {
+                        setError("Something went wrong. Please try again.");
+                        setSubmitting(false);
+                        return;
+                      }
+                      setSubmitting(false);
+                      e.target.reset();
+                      setSubmitted(true);
+                    }}
+                  >
+                    <div style={{ marginBottom: "28px" }}>
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-head)",
+                          fontSize: "1.15rem",
+                          fontWeight: "700",
+                          color: "#fff",
+                          margin: "0 0 4px",
+                        }}
+                      >
+                        Interested In Working With TEONOX?
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: "0.82rem",
+                          color: "rgba(255,255,255,0.4)",
+                          fontWeight: "300",
+                          margin: "0",
+                        }}
+                      >
+                        Fill in your details and we'll get back to you.
+                      </p>
+                    </div>
+                    <div className="form-row">
+                      <div className="field">
+                        <label>Full Name</label>
+                        <input
+                          type="text"
+                          name="Full Name"
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+                      <div className="field">
+                        <label>Email</label>
+                        <input
+                          type="email"
+                          name="Email"
+                          placeholder="you@example.com"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="field">
+                        <label>Role</label>
+                        <select name="Role">
+                          <option value="">Select</option>
+                          <option value="Digital Marketing Trainer">
+                            Digital Marketing Trainer
+                          </option>
+                          <option value="Business Development Manager">
+                            Business Development Manager
+                          </option>
+                          <option value="AI & Data Science Trainer">
+                            AI & Data Science Trainer
+                          </option>
+                          <option value="Head of Academics">
+                            Head of Academics
+                          </option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div className="field">
+                        <label>Phone Number</label>
+                        <input
+                          type="tel"
+                          name="Phone Number"
+                          placeholder="+91 98765 43210"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="field">
+                        <label>Experience</label>
+                        <input
+                          type="text"
+                          name="Experience"
+                          placeholder="e.g. 5 years"
+                        />
+                      </div>
+                      <div className="field">
+                        <label>Why TEONOX?</label>
+                        <textarea
+                          name="Why TEONOX"
+                          rows="4"
+                          placeholder="Tell us why you would like to work with us..."
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="field">
+                      <label>Upload Resume / CV</label>
+                      <input
+                        type="file"
+                        name="Resume"
+                        accept=".pdf,.doc,.docx"
+                      />
+                    </div>
+                    {error && (
+                      <p
+                        style={{
+                          color: "#ef4444",
+                          fontSize: "0.85rem",
+                          margin: "0 0 8px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {error}
+                      </p>
+                    )}
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={submitting}
+                    >
+                      {submitting ? "Submitting..." : "Submit Application"}{" "}
+                      {!submitting && <Icon name="arrow-right" size={16} />}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
-
-
