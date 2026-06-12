@@ -2174,7 +2174,7 @@ button {
   color: var(--text3);
   margin-top: 12px;
   line-height: 1.7;
-  max-width: 280px;
+  /* max-width: 280px; */
   font-weight: 300
 }
 
@@ -2318,7 +2318,7 @@ button {
     transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     gap: 0;
     border-left: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: -8px 0 40px rgba(0,0,0,0.4)
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.4)
   }
 
   .nav-links.open {
@@ -2359,7 +2359,7 @@ button {
     border-radius: 12px;
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255, 255, 255, 0.55);
     cursor: pointer;
     transition: all var(--t-fast);
     width: 100%;
@@ -2435,7 +2435,7 @@ button {
     position: fixed;
     inset: 0;
     z-index: 999;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     opacity: 0;
@@ -5139,7 +5139,7 @@ a {
   color: var(--text3);
   margin-top: 14px;
   line-height: 1.7;
-  max-width: 280px;
+  /* max-width: 280px; */
   font-weight: 300;
 }
 
@@ -5282,6 +5282,7 @@ a {
 }
 
 @media (max-width: 768px) {
+
   .program-cards,
   .hire-grid {
     grid-template-columns: repeat(2, 1fr);
