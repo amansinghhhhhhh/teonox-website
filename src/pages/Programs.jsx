@@ -64,7 +64,7 @@ export default function Programs() {
 
   return (
     <div className="page active">
-      <section className="section" style={{ paddingTop: "140px" }}>
+      <section id="programs-page" className="section" style={{ paddingTop: "140px" }}>
         <div className="container">
           <div className="section-center reveal">
             <span className="section-label">Insights</span>
