@@ -5989,7 +5989,9 @@ a {
   margin-top: 12px;
 }
 
-.cp-header h2 em {
+.cp-header,
+h2,
+em {
   font-style: normal;
   background: linear-gradient(135deg, #FF6B00, #FFA726);
   -webkit-background-clip: text;
