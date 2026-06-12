@@ -330,10 +330,7 @@ export default function Careers() {
           </div>
 
           <div className="reveal" style={{ marginTop: "56px" }}>
-            <div
-              className="contact-wrap"
-              style={{ gridTemplateColumns: "1fr 1fr" }}
-            >
+            <div className="contact-wrap" style={{}}>
               <div className="contact-sidebar">
                 <h3 className="contact-sidebar-title">
                   Let's Create Opportunities Together.
