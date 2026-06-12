@@ -79,7 +79,7 @@ export default function Blog() {
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
               >
-                {cat.name}
+                {decodeEntities(cat.name)}
               </span>
             ))}
           </div>
@@ -87,7 +87,8 @@ export default function Blog() {
           <div className="blog-grid">
             {blogs.map((blog, index) => {
               const image =
-                blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+                blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                "/assets/asset-023.jpg";
 
               const category =
                 blog._embedded?.["wp:term"]?.[0]?.[0]?.name || "General";
@@ -104,7 +105,7 @@ export default function Blog() {
                     <div className="blog-img">
                       <img src={image} alt={decodeEntities(blog.title.rendered?.replace(/<[^>]+>/g, ""))} />
 
-                      <span className="blog-tag">{category}</span>
+                      <span className="blog-tag">{decodeEntities(category)}</span>
                     </div>
 
                     <div className="blog-body">
