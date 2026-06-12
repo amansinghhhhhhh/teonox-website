@@ -5429,6 +5429,7 @@ a {
   }
 
   .reveal-left,
+  .reveal-right,
   .about-section .reveal,
   .approach-section .reveal,
   .work-section .reveal {
@@ -5436,6 +5437,7 @@ a {
   }
 
   .reveal-left.visible,
+  .reveal-right.visible,
   .about-section .reveal.visible,
   .approach-section .reveal.visible,
   .work-section .reveal.visible {
