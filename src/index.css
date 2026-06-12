@@ -5407,6 +5407,10 @@ a {
     padding: 0 20px;
   }
 
+  .nav-inner {
+    padding: 0 20px;
+  }
+
   .section {
     padding: 45px 0;
   }
@@ -5422,10 +5426,28 @@ a {
   .nav-links a {
     padding: 16px 18px
   }
+
+  .reveal-left,
+  .about-section .reveal,
+  .approach-section .reveal,
+  .work-section .reveal {
+    transform: translateY(20px);
+  }
+
+  .reveal-left.visible,
+  .about-section .reveal.visible,
+  .approach-section .reveal.visible,
+  .work-section .reveal.visible {
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 480px) {
   .container {
+    padding: 0 16px;
+  }
+
+  .nav-inner {
     padding: 0 16px;
   }
 
@@ -6427,6 +6449,7 @@ a {
 .guarantee-section {
   padding: 60px 0;
   position: relative;
+  overflow: hidden;
 }
 
 .guarantee-glow-blob {
