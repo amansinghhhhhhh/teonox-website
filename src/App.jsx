@@ -25,12 +25,23 @@ export default function App() {
     );
     return () => clearTimeout(t);
   }, []);
-  useEffect(() => {
-    const h = () =>
-      document.getElementById("preloader")?.classList.add("hidden");
-    window.addEventListener("load", h);
-    return () => window.removeEventListener("load", h);
-  }, []);
+  // useEffect(() => {
+  //   const h = () =>
+  //     document.getElementById("preloader")?.classList.add("hidden");
+  //   window.addEventListener("load", h);
+  //   return () => window.removeEventListener("load", h);
+  // }, []);
+useEffect(() => {
+
+  const preloader = document.getElementById("preloader");
+
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add("hidden");
+    }, 500);
+  }
+
+}, []);
 
   return (
     <>

@@ -5357,7 +5357,7 @@ a {
   }
 
   .hero {
-    padding-top: 20px;
+    padding-top: 0px;
     min-height: calc(100vh - 20px);
   }
 

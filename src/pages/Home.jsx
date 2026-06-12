@@ -67,7 +67,7 @@ export default function Home() {
       }
     }
     return () => hdls.forEach((f) => f());
-  });
+  }, []);
 
   const [homeBlogs, setHomeBlogs] = useState([]);
   const [heroSubmitted, setHeroSubmitted] = useState(false);
