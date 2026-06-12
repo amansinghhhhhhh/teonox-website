@@ -11,6 +11,7 @@ import Contact from "./pages/Contact.jsx";
 import Program_Details from "./pages/Program_Details.jsx";
 import Programs from "./pages/Programs.jsx";
 import Blog_Details from "./pages/Blog_Details.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -70,6 +71,7 @@ useEffect(() => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<Blog_Details />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
