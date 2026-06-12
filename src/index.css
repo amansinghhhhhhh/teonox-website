@@ -5471,10 +5471,12 @@ a {
 }
 
 .prog-filters {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 32px;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 35px;
+  display: flex;
+  margin-top: 40px;
+  justify-content: center;
 }
 
 .prog-filter {
