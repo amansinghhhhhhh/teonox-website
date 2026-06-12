@@ -116,7 +116,6 @@ export default function Careers() {
             className="hire-why-grid"
             style={{
               marginBottom: "56px",
-              gridTemplateColumns: "repeat(4,1fr)",
             }}
           >
             <div
