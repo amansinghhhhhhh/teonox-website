@@ -4532,23 +4532,8 @@ a {
     top: -60px;
   }
 
-  .pg-hero-meta {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
   .pg-hero-float-card {
     display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .pg-hero-glow {
-    display: none;
-  }
-
-  .pg-hero-visual {
-    max-width: 100%;
   }
 }
 
@@ -5989,9 +5974,7 @@ a {
   margin-top: 12px;
 }
 
-.cp-header,
-h2,
-em {
+.cp-header h2 em {
   font-style: normal;
   background: linear-gradient(135deg, #FF6B00, #FFA726);
   -webkit-background-clip: text;

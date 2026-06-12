@@ -267,7 +267,7 @@ export default function Program_Details() {
             <div className="reveal" style={{ marginBottom: "56px" }}>
               <span className="section-label">Curriculum Pillars</span>
               <h2
-                className="section-title cp-header"
+                className="section-title "
                 style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}
               >
                 The <em>5 Pillars</em> of the Program
