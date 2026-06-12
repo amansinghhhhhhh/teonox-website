@@ -101,11 +101,11 @@ export default function Hire() {
             </p>
           </div>
 
-          <div className="hire-why reveal" style={{ marginBottom: "56px" }}>
+          <div className="hire-why reveal " style={{ marginBottom: "56px" }}>
             <h3 className="hire-why-title">
               What Makes TEONOX Professionals Different?
             </h3>
-            <div className="hire-why-grid">
+            <div className="hire-why-grid hire-new-wire">
               <div className="hire-why-item">
                 <div className="hire-why-icon">
                   <Icon name="zap" size={16} />
@@ -220,10 +220,7 @@ export default function Hire() {
             </p>
           </div>
 
-          <div
-            className="contact-wrap reveal"
-            style={{ marginTop: "32px", gridTemplateColumns: "1fr 1fr" }}
-          >
+          <div className="contact-wrap reveal" style={{}}>
             <div className="form-wrap" id="form-wrap-id">
               <h3
                 style={{

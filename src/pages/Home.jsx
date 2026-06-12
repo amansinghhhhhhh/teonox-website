@@ -334,9 +334,9 @@ export default function Home() {
                       className="prog-card-img"
                       src={image}
                       alt={decodeEntities(
-                          program.title.rendered?.replace(/<[^>]+>/g, ""),
-                        )}
-                      />
+                        program.title.rendered?.replace(/<[^>]+>/g, ""),
+                      )}
+                    />
                     <div className="prog-card-top">
                       <h3
                         dangerouslySetInnerHTML={{
@@ -932,7 +932,7 @@ export default function Home() {
               Trained for Impact. Ready to Contribute.
             </h3>
           </div>
-          <div className="hire-grid reveal">
+          <div className="hire-grid">
             <div className="hire-card reveal-delay-1">
               <div className="hire-card-icon">
                 <Icon name="megaphone" size={22} />
@@ -1017,15 +1017,7 @@ export default function Home() {
 
       <section className="section blog-section" id="blog">
         <div className="container">
-          <div
-            className="reveal"
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              marginBottom: "0",
-            }}
-          >
+          <div className="reveal blog-new" style={{}}>
             <div>
               <span className="section-label">Insights</span>
               <h2 className="section-title">Blog / Insights</h2>
@@ -1048,16 +1040,16 @@ export default function Home() {
                 blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
                 "/assets/asset-019.webp";
               const category =
-                decodeEntities(blog._embedded?.["wp:term"]?.[0]?.[0]?.name) || "General";
+                decodeEntities(blog._embedded?.["wp:term"]?.[0]?.[0]?.name) ||
+                "General";
               const imageAlt = decodeEntities(
                 blog.title.rendered?.replace(/<[^>]+>/g, ""),
               );
-              const excerpt =
-                decodeEntities(
-                  (blog.excerpt?.rendered
-                    ?.replace(/<[^>]+>/g, "")
-                    ?.slice(0, 120) || "") + "...",
-                );
+              const excerpt = decodeEntities(
+                (blog.excerpt?.rendered
+                  ?.replace(/<[^>]+>/g, "")
+                  ?.slice(0, 120) || "") + "...",
+              );
 
               return (
                 <Link

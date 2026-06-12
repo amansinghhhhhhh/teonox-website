@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="footer" style={{ borderTopColor: "transparent" }}>
       <div className="container">
-        <div className="footer-grid reveal">
+        <div className="footer-grid">
           <div className="footer-brand">
             <Link to="/" className="nav-logo">
               <img

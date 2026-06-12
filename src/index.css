@@ -808,7 +808,9 @@ button {
 
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0)
+  transform: translateY(0);
+  grid-template-columns: 1fr 1fr;
+  margin-top: 32px;
 }
 
 .reveal-d1 {
@@ -1755,6 +1757,13 @@ button {
   margin-top: 48px
 }
 
+.blog-new {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
 .blog-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -2476,6 +2485,15 @@ button {
 }
 
 @media(max-width:480px) {
+  .reveal.visible {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-new {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px
+  }
 
   .hire-grid,
   .skills-grid,
@@ -3790,6 +3808,10 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+.hire-new-wire {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .hire-why-item {
