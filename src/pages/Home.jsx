@@ -1046,16 +1046,18 @@ export default function Home() {
             {homeBlogs.map((blog, index) => {
               const image =
                 blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                "assets/asset-019.webp";
+                "/assets/asset-019.webp";
               const category =
-                blog._embedded?.["wp:term"]?.[0]?.[0]?.name || "General";
+                decodeEntities(blog._embedded?.["wp:term"]?.[0]?.[0]?.name) || "General";
               const imageAlt = decodeEntities(
                 blog.title.rendered?.replace(/<[^>]+>/g, ""),
               );
               const excerpt =
-                (blog.excerpt?.rendered
-                  ?.replace(/<[^>]+>/g, "")
-                  ?.slice(0, 120) || "") + "...";
+                decodeEntities(
+                  (blog.excerpt?.rendered
+                    ?.replace(/<[^>]+>/g, "")
+                    ?.slice(0, 120) || "") + "...",
+                );
 
               return (
                 <Link
