@@ -1,47 +1,47 @@
-import emailjs from "@emailjs/browser";
-
 const WEBHOOK = import.meta.env.VITE_WEBHOOK_URL;
+
+// Convert a File to a base64 payload the Apps Script can rebuild into a Drive file.
+const fileToBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      // reader.result looks like "data:<mime>;base64,<data>" — strip the prefix.
+      const base64 = String(reader.result).split(",")[1] || "";
+      resolve(base64);
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
 
 export const submitForm = async (formName, fields) => {
   const textFields = {};
+  const files = [];
 
   for (const [key, value] of Object.entries(fields)) {
     if (value instanceof File && value.size > 0) {
-      textFields[key] = `[Uploaded: ${value.name} (${(value.size / 1024).toFixed(1)} KB)]`;
+      const data = await fileToBase64(value);
+      files.push({
+        field: key,
+        name: value.name,
+        mimeType: value.type || "application/octet-stream",
+        data,
+      });
     } else if (!(value instanceof File)) {
       textFields[key] = value;
     }
   }
 
-  const results = await Promise.allSettled([
-    fetch(WEBHOOK, {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify({ formName, fields: textFields }),
-    }),
-    emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      {
-        form_name: formName,
-        name: textFields["Full Name"] || textFields["Contact Person"] || textFields["Company Name"] || "",
-        email: textFields["Email Address"] || textFields["Email"] || "",
-        phone: textFields["Phone Number"] || "",
-        message: textFields["Message"] || textFields["Your Message"] || textFields["Why TEONOX"] || textFields["Tell us about"] || "",
-        program: textFields["Program"] || textFields["Interested In"] || textFields["Hiring Requirement"] || "",
-        resume_link: textFields["Resume Link"] || textFields["Resume"] || "",
-      },
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-    ),
-  ]);
-
-  const rejected = results.filter((r) => r.status === "rejected");
-  if (rejected.length > 0) {
-    console.error("Form submission errors:", rejected.map((r) => r.reason));
-  }
-
-  if (results.every((r) => r.status === "rejected")) {
-    throw new Error("All submission methods failed");
-  }
+  // Single source of truth now: the Google Apps Script webhook.
+  // It saves text to the Sheet, stores files in Drive, and sends the email.
+  //
+  // Apps Script doesn't return CORS headers, so we use mode "no-cors":
+  // the request still reaches the server and runs, but the response is
+  // "opaque" (unreadable). A network failure still rejects this fetch,
+  // which the caller catches; an HTTP error cannot be detected here.
+  await fetch(WEBHOOK, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ formName, fields: textFields, files }),
+  });
 };
