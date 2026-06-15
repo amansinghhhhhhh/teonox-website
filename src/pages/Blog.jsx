@@ -34,7 +34,7 @@ export default function Blog() {
       <section className="section" style={{ paddingTop: "140px" }}>
         <div className="container">
           <div className="section-center reveal">
-            <span className="section-label">Insights</span>
+            <span className="section-label">Insights for the Future of Marketing</span>
             <h2 className="section-title">Blogs</h2>
             <p className="section-sub" style={{ maxWidth: "600px" }}>
               Explore practical perspectives on AI, marketing, business growth,

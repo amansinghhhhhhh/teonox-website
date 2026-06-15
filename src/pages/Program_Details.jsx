@@ -372,7 +372,7 @@ export default function Program_Details() {
                 desc: "Focus on what you can build, present, solve, analyze, and execute—creating skills that translate into real opportunities.",
               },
               {
-                icon: "award",
+                icon: "chart-spline",
                 title: "Sales & Growth Mindset",
                 desc: "Understand how businesses generate revenue, build relationships, communicate value, and drive sustainable growth.",
               },

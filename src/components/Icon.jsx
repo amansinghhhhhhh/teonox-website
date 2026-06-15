@@ -49,6 +49,7 @@ const iconMap = {
   zap: "Zap",
   "play-circle": "PlayCircle",
   sime: "Sime",
+  "chart-spline":"chartSpline",
 };
 
 export default function Icon({ name, size = 16, className, style }) {
