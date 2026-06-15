@@ -1069,6 +1069,19 @@ button {
     color: var(--text);
 }
 
+.cp-item:nth-child(1) {
+    margin-top: -10px;
+}
+.cp-item:nth-child(2) {
+    margin-top: -10px;
+}
+.cp-item:nth-child(4) {
+    margin-top: -10px;
+}
+.cp-item:nth-child(5) {
+    margin-top: -10px;
+}
+
 .approach-card p {
   font-size: 0.88rem;
   color: var(--text2);
