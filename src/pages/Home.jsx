@@ -9,6 +9,7 @@ import {
   getProgramCategories,
 } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
+import { sanitizeHtml } from "../utils/sanitize.js";
 import { submitForm } from "../services/formService";
 import { validateEmail, validatePhone } from "../utils/validation.js";
 
@@ -340,7 +341,7 @@ export default function Home() {
                     <div className="prog-card-top">
                       <h3
                         dangerouslySetInnerHTML={{
-                          __html: program.title.rendered,
+                          __html: sanitizeHtml(program.title.rendered),
                         }}
                         style={{
                           display: "-webkit-box",
@@ -1067,7 +1068,7 @@ export default function Home() {
                     <div className="blog-body">
                       <h4
                         dangerouslySetInnerHTML={{
-                          __html: blog.title.rendered,
+                          __html: sanitizeHtml(blog.title.rendered),
                         }}
                       />
                       <p>{decodeEntities(excerpt)}</p>

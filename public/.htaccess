@@ -6,3 +6,15 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+
+# Security headers (conservative — site functionality ko nahi todte)
+<IfModule mod_headers.c>
+  # MIME-sniffing band karo
+  Header always set X-Content-Type-Options "nosniff"
+  # Clickjacking se bachav — site sirf apne origin mein iframe ho sakti hai
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Referrer info leak kam karo
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Browser features jo ye site use nahi karti unhe disable karo
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>

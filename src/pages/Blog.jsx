@@ -4,6 +4,7 @@ import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { getBlogs, getCategories } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
+import { sanitizeHtml } from "../utils/sanitize.js";
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("");  
   const [blogs, setBlogs] = useState([]);
@@ -111,16 +112,17 @@ export default function Blog() {
                     <div className="blog-body">
                       <h4
                         dangerouslySetInnerHTML={{
-                          __html: blog.title.rendered,
+                          __html: sanitizeHtml(blog.title.rendered),
                         }}
                       />
 
                       <p
                         dangerouslySetInnerHTML={{
-                          __html:
+                          __html: sanitizeHtml(
                             blog.excerpt?.rendered
                               ?.replace(/<[^>]+>/g, "")
                               ?.slice(0, 120) + "...",
+                          ),
                         }}
                       />
 

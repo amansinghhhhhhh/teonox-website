@@ -9,6 +9,7 @@ import {
   validatePhone,
   validateFile,
 } from "../utils/validation.js";
+import { sanitizeHtml } from "../utils/sanitize.js";
 
 export default function Careers() {
   useScrollReveal();
@@ -297,7 +298,7 @@ export default function Careers() {
                         <div
                           className="job-bullets"
                           dangerouslySetInnerHTML={{
-                            __html: a.must_have_skills,
+                            __html: sanitizeHtml(a.must_have_skills),
                           }}
                         />
                       </div>
@@ -307,7 +308,7 @@ export default function Careers() {
                         <h4>Good-to-Have</h4>
                         <div
                           className="job-bullets"
-                          dangerouslySetInnerHTML={{ __html: a.good_to_have }}
+                          dangerouslySetInnerHTML={{ __html: sanitizeHtml(a.good_to_have) }}
                         />
                       </div>
                     )}

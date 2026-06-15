@@ -26,7 +26,7 @@ export const getBlogs = async (categoryId = "") => {
 // Single Blog By Slug
 export const getBlogBySlug = async (slug) => {
     const res = await fetch(
-        `${API_URL}/posts&slug=${slug}&_embed`
+        `${API_URL}/posts&slug=${encodeURIComponent(slug)}&_embed`
     );
 
     const data = await res.json();
@@ -83,7 +83,7 @@ export const getProgramBySlug = async (
     slug
 ) => {
     const res = await fetch(
-        `${API_URL}/program&slug=${slug}&_embed`
+        `${API_URL}/program&slug=${encodeURIComponent(slug)}&_embed`
     );
 
     const data = await res.json();

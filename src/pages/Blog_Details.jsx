@@ -4,6 +4,7 @@ import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { getBlogBySlug, getRelatedBlogs } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
+import { sanitizeHtml } from "../utils/sanitize.js";
 export default function Blog_Details() {
   useScrollReveal();
 
@@ -147,7 +148,7 @@ export default function Blog_Details() {
             >
               <span
                 dangerouslySetInnerHTML={{
-                  __html: blog.title.rendered,
+                  __html: sanitizeHtml(blog.title.rendered),
                 }}
               />
             </h1>
@@ -168,7 +169,7 @@ export default function Blog_Details() {
                 textAlign: "center",
               }}
               dangerouslySetInnerHTML={{
-                __html: blog.excerpt.rendered,
+                __html: sanitizeHtml(blog.excerpt.rendered),
               }}
             />
           </div> */}
@@ -195,7 +196,7 @@ export default function Blog_Details() {
                 lineHeight: "1.9",
               }}
               dangerouslySetInnerHTML={{
-                __html: blog.content.rendered,
+                __html: sanitizeHtml(blog.content.rendered),
               }}
             />
           </div>
@@ -246,7 +247,7 @@ export default function Blog_Details() {
                       <div className="blog-body">
                         <h4
                           dangerouslySetInnerHTML={{
-                            __html: post.title.rendered,
+                            __html: sanitizeHtml(post.title.rendered),
                           }}
                         />
 

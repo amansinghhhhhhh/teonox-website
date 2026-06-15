@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Icon from '../components/Icon.jsx';
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { decodeEntities } from "../utils/decode.js";
+import { sanitizeHtml } from "../utils/sanitize.js";
 
 import { getPrograms, getProgramCategories } from "../api/wordpressApi";
 
@@ -132,7 +133,7 @@ export default function Programs() {
                     <div className="prog-card-top">
                       <h3
                         dangerouslySetInnerHTML={{
-                          __html: program.title.rendered,
+                          __html: sanitizeHtml(program.title.rendered),
                         }}
                         style={{
                           display: "-webkit-box",
