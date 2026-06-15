@@ -59,23 +59,26 @@ export default function About() {
             <div className="reveal">
               <span className="section-label">Our Story</span>
               <h2 className="section-title">
-                We Started TEONOX Because We Saw a Gap.
+                Backed by A2 Digital. Built for the Future of Work.
               </h2>
               <p className="section-sub" style={{ maxWidth: "100%" }}>
-                For 12+ years, A2 Digital has been helping businesses grow through digital marketing, technology, strategy, and performance-driven execution.
+                TEONOX is built on 12+ years of industry experience through A2 Digital—a digital growth company helping businesses scale through marketing, technology, strategy, analytics, and performance-driven execution.
               </p>
               <p className="section-sub">
-                As a full-service digital growth company, A2 Digital works with businesses across industries to build brands, generate leads, drive customer acquisition, improve marketing performance, and scale growth through data, technology, and digital innovation.
+                Over the years, we've worked with businesses, built teams, hired talent, and solved real growth challenges. And we kept noticing the same gap. Students were graduating with knowledge. Businesses were hiring for capability.
               </p>
               <p className="section-sub">
-                Along the way, we worked with hundreds of professionals, hired fresh graduates, trained teams, and collaborated with businesses across industries and we kept noticing the same challenge.
+                Many talented individuals lacked exposure to real projects, modern tools, industry workflows, and the practical skills needed to contribute with confidence.
+              </p>
+              <p className="section-sub">
+                We saw this challenge firsthand for years. That's why we created TEONOX.
+              </p>
+              <p className="section-sub">
+                A learning ecosystem designed to bridge the gap between education and industry by helping students develop practical skills, real-world confidence, and future-ready capabilities.
               </p>
               <div className="about-quote" style={{ marginTop: "24px" }}>
                 <p>
-                  "Every year, talented students graduate with degrees,
-                  certifications, and ambitions. But when it came to stepping
-                  into the workplace, many felt unprepared. Not because they
-                  lacked potential. Because they lacked exposure."
+                  "Built around <strong>Technology, Execution, Ownership, Next-Generation Opportunities, and Excellence</strong>, it reflects our belief that success comes not just from what you know, but from what you can build, solve, and achieve."
                 </p>
               </div>
               <p
@@ -87,14 +90,9 @@ export default function About() {
                   marginTop: "16px",
                 }}
               >
-                Exposure to real projects. Exposure to modern tools. Exposure to
-                industry workflows. Exposure to how businesses actually operate.
-                At the same time, businesses were facing a challenge of their
-                own — they weren't struggling to find candidates. They were
-                struggling to find people who could confidently contribute from
-                day one. That's why TEONOX was created. A learning ecosystem
-                designed to help students gain the skills, experience,
-                confidence, and industry exposure needed to thrive.
+                These principles shape every learning experience, project, and opportunity at TEONOX.
+Backed by the industry experience and insights gained through years of building brands, managing campaigns, growing businesses, and developing teams at A2 Digital, TEONOX is a learning ecosystem designed to help students gain the skills, experience, confidence, and industry exposure needed to thrive in today's rapidly evolving world.
+
               </p>
             </div>
             <div className="reveal reveal-d2">
@@ -115,19 +113,13 @@ export default function About() {
                 className="section-title"
                 style={{ fontSize: "clamp(1.5rem,3vw,2.6rem)" }}
               >
-                To Build a Generation of Industry-Ready Professionals.
+                Building Future-Ready Professionals.
               </h2>
               <p
                 className="section-sub"
                 style={{ maxWidth: "100%", marginTop: "20px" }}
               >
-                We envision a future where students graduate with more than
-                academic knowledge. A future where they enter the workforce with
-                confidence. Where businesses can find capable talent. Where
-                young professionals understand how to solve problems, create
-                value, and adapt to change. And where India develops not just
-                graduates but future-ready professionals equipped for a global
-                digital economy.
+                To create a generation of confident, capable professionals who can adapt, contribute, and thrive in the modern digital economy.
               </p>
             </div>
             <div className="reveal-right">
@@ -136,21 +128,83 @@ export default function About() {
                 className="section-title"
                 style={{ fontSize: "clamp(1.5rem,3vw,2.6rem)" }}
               >
-                To Bridge the Gap Between Learning and Doing.
+                Bridging Learning and Doing.
               </h2>
               <p
                 className="section-sub"
                 style={{ maxWidth: "100%", marginTop: "20px" }}
               >
-                We aim to help students become more confident, capable, and
-                career-ready through practical learning experiences rooted in
-                real industry needs. At TEONOX: We don't just teach concepts. We
-                help you apply them. We don't focus on memorisation. We focus on
-                capability. We don't prepare you only for exams. We prepare you
-                for opportunities. We don't just help you learn skills. We help
-                you build confidence in using them.
+                To help students develop practical skills, industry exposure, and real-world confidence through experiential, industry-led learning.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+       <section className="section section-alt">
+        <div className="container">
+          <div className="" style={{ alignItems: "start" }}>
+            <div className="reveal-left">
+              <span className="section-label">Our Values</span>
+             
+              <div className="about-stats" style={{ marginTop: "32px" }}>
+            <div className="hire-why-item">
+              <div className="hire-why-icon">
+                <Icon name="sun-dim" size={16} />
+              </div>
+              <div>
+                <h5>Industry Relevance</h5>
+                <p>Everything we teach is rooted in the realities of modern business, ensuring students develop skills that matter in today's workplace.</p>
+              </div>
+            </div>
+            <div className="hire-why-item">
+              <div className="hire-why-icon">
+                <Icon name="sun-dim" size={16} />
+              </div>
+              <div>
+                <h5>Practical Learning</h5>
+                <p>We believe experience is one of the most powerful teachers. Learning should go beyond theory and translate into real-world application.</p>
+              </div>
+            </div>
+            <div className="hire-why-item">
+              <div className="hire-why-icon">
+                <Icon name="sun-dim" size={16} />
+              </div>
+              <div>
+                <h5>Innovation & Adaptability</h5>
+                <p>Technology, AI, and industries are constantly evolving. We encourage learners to embrace change, think creatively, and stay future-ready.</p>
+              </div>
+            </div>
+            <div className="hire-why-item">
+              <div className="hire-why-icon">
+                <Icon name="sun-dim" size={16} />
+              </div>
+              <div>
+                <h5>Ownership & Accountability</h5>
+                <p>Growth comes from taking responsibility for outcomes, actions, and continuous improvement.</p>
+              </div>
+            </div>
+            <div className="hire-why-item">
+              <div className="hire-why-icon">
+                <Icon name="sun-dim" size={16} />
+              </div>
+              <div>
+                <h5>Curiosity & Continuous Learning</h5>
+                <p>The most successful professionals never stop learning. We foster a mindset of exploration, growth, and lifelong development.</p>
+              </div>
+            </div>
+            <div className="hire-why-item">
+              <div className="hire-why-icon">
+                <Icon name="sun-dim" size={16} />
+              </div>
+              <div>
+                <h5>Impact Over Activity</h5>
+                <p>We value meaningful outcomes over busy work. Success is measured by the value created, problems solved, and progress achieved.</p>
+              </div>
+            </div>
+          </div>
+            </div>
+           
           </div>
         </div>
       </section>

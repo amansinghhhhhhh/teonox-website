@@ -495,7 +495,7 @@ export default function Home() {
                 <h3>Learn</h3>
                 <h4>With Purpose</h4>
                 <p>
-                  Understand how businesses grow, how decisions are made, and how modern professionals create value in a rapidly changing world.
+                  We believe learning should be intentional and meaningful. By connecting knowledge with aspirations and real-world impact, we empower learners to build skills that matter, stay curious, and grow continuously. At TEONOX, learning is driven by purpose, not just by passing exams.
                 </p>
               </div>
             </div>
@@ -511,7 +511,7 @@ export default function Home() {
                 <h3>Apply</h3>
                 <h4>With Mindset</h4>
                 <p>
-                  Turn knowledge into experience through practical projects, industry exposure, AI-powered workflows, and hands-on execution.
+                  Knowledge creates value only when put into action. We cultivate a growth mindset that encourages experimentation, resilience, and continuous improvement. Through hands-on learning and real-world practice, our learners develop the confidence to turn ideas into outcomes.
                 </p>
               </div>
             </div>
@@ -527,7 +527,7 @@ export default function Home() {
                 <h3>Lead</h3>
                 <h4>With Ownership</h4>
                 <p>
-                  Build the confidence to take initiative, solve problems, communicate ideas, and drive meaningful outcomes wherever your career takes you.
+                  Leadership begins with accountability. We foster an ownership mindset where individuals take responsibility, embrace challenges, and act with integrity. By thinking long-term and leading with purpose, our learners create impact, inspire others, and drive meaningful change.
                 </p>
               </div>
             </div>
