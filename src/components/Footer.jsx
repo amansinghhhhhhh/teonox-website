@@ -62,24 +62,24 @@ export default function Footer() {
             <h5>Contact</h5>
             <ul>
               <li>
-                <a href="#">
+                <a>
                   Office No. 13, 4th Floor, Revolution Mall, Near City Pride
                   Multiplex, Kothrud, Pune - 411038
                 </a>
               </li>
               <li>
-                <a href="#">info@teonox.com</a>
+                <a href="mailto:info@teonox.com">info@teonox.com</a>
               </li>
               <li>
-                <a href="#">+91-808-717-7760</a>
+                <a href="tel:8087177760">+91-808-717-7760</a>
               </li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2026 TEONOX. All rights reserved. Powered by A2 Digital.</p>
+          <p>&copy; 2026 TEONOX. All rights reserved. <a href="https://a2digisolution.com">Powered by A2 Digital.</a></p>
           <div className="footer-socials">
-            <a href="#" aria-label="LinkedIn">
+            <a href=" https://in.linkedin.com/company/teonoxofficial" aria-label="LinkedIn">
               <svg
                 width="20"
                 height="20"
@@ -93,7 +93,7 @@ export default function Footer() {
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/teonoxofficial" aria-label="Instagram">
               <svg
                 width="20"
                 height="20"
@@ -107,7 +107,7 @@ export default function Footer() {
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
               </svg>
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href="https://www.youtube.com/@teonoxofficial" aria-label="YouTube">
               <svg
                 width="20"
                 height="20"
@@ -120,7 +120,7 @@ export default function Footer() {
                 <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
               </svg>
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="https://x.com/teonoxofficial" aria-label="Twitter">
               <svg
                 width="20"
                 height="20"
@@ -132,7 +132,7 @@ export default function Footer() {
                 <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
               </svg>
             </a>
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/teonoxofficial" aria-label="Facebook">
               <svg
                 width="20"
                 height="20"

@@ -1061,6 +1061,14 @@ button {
   margin-bottom: 10px
 }
 
+.approach-card h4 {
+    font-family: var(--font-head);
+    font-size: 1.13rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
 .approach-card p {
   font-size: 0.88rem;
   color: var(--text2);
@@ -3810,7 +3818,7 @@ a {
 
 .hire-why-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 

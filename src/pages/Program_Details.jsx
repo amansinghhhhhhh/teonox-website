@@ -349,32 +349,32 @@ export default function Program_Details() {
               {
                 icon: "briefcase",
                 title: "Business-First Curriculum",
-                desc: "Designed around how businesses actually operate, not how textbooks are structured.",
+                desc: "Learn how businesses actually grow, make decisions, acquire customers, and create value—not just concepts from textbooks.",
               },
               {
                 icon: "cpu",
                 title: "Deep AI Integration",
-                desc: "AI isn't a separate module. It is embedded throughout the learning experience.",
+                desc: "AI isn't taught as a standalone topic. It's embedded across marketing, analytics, content, productivity, and business workflows.",
               },
               {
                 icon: "play-circle",
                 title: "Learn By Doing",
-                desc: "Projects, simulations, workshops, business challenges, and practical execution.",
+                desc: "Gain hands-on experience through live projects, simulations, workshops, business challenges, and practical execution.",
               },
               {
                 icon: "users",
                 title: "Industry-Led Learning",
-                desc: "Learn from professionals who actively work with businesses and growth teams.",
+                desc: "Learn directly from professionals who actively work with brands, growth teams, agencies, and businesses.",
               },
               {
                 icon: "target",
                 title: "Outcome Accountability",
-                desc: "We focus on what you can build, present, solve, and execute—not just what you can memorize.",
+                desc: "Focus on what you can build, present, solve, analyze, and execute—creating skills that translate into real opportunities.",
               },
               {
                 icon: "award",
-                title: "Certificate of Excellence",
-                desc: "Earn a credential that reflects real capability, not just attendance.",
+                title: "Sales & Growth Mindset",
+                desc: "Understand how businesses generate revenue, build relationships, communicate value, and drive sustainable growth.",
               },
             ].map((item, i) => (
               <div
@@ -720,7 +720,7 @@ export default function Program_Details() {
                 style={{ marginTop: "28px", flexWrap: "wrap" }}
               >
                 <a href="contact.html" className="btn btn-primary">
-                  Apply as Trainer <Icon name="arrow-right" size={16} />
+                  Apply now <Icon name="arrow-right" size={16} />
                 </a>
                 <a href="#" className="btn btn-outline">
                   Download Brochure <Icon name="download" size={14} />

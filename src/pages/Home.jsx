@@ -139,7 +139,7 @@ export default function Home() {
                 </a>
                 <a href="/contact" className="btn btn-outline">
                   <Icon name="phone" size={16} />
-                  Speak to Our Team
+                  Talk to a Career Advisor
                 </a>
               </div>
             </div>
@@ -247,17 +247,13 @@ export default function Home() {
                     <div className="field">
                       <select name="Interested In">
                         <option value="">I'm interested in</option>
-                        <option value="Joining the Program">
-                          Joining the Program
+                        <option value="AI-driven Digital Marketing & Business Strategy">
+                          AI-driven Digital Marketing & Business Strategy
                         </option>
-                        <option value="Hiring Talent">Hiring Talent</option>
-                        <option value="Partnering with Teonox">
-                          Partnering with Teonox
+                        <option value="AI-Driven Data Analytics & Business Intelligence">AI-Driven Data Analytics & Business Intelligence</option>
+                        <option value="AI-Driven Sales & Business Development">
+                          AI-Driven Sales & Business Development
                         </option>
-                        <option value="Applying as Trainer">
-                          Applying as Trainer
-                        </option>
-                        <option value="Other">Other</option>
                       </select>
                     </div>
                     {heroError && (
@@ -497,10 +493,9 @@ export default function Home() {
                   <Icon name="book-open" size={20} />
                 </div>
                 <h3>Learn</h3>
+                <h4>With Purpose</h4>
                 <p>
-                  Understand what actually matters — not just the skills, the
-                  mindset. Practical concepts, modern tools, and real-world
-                  thinking that makes you stand out.
+                  Understand how businesses grow, how decisions are made, and how modern professionals create value in a rapidly changing world.
                 </p>
               </div>
             </div>
@@ -514,10 +509,9 @@ export default function Home() {
                   <Icon name="briefcase" size={20} />
                 </div>
                 <h3>Apply</h3>
+                <h4>With Mindset</h4>
                 <p>
-                  Be a part of the systems and workflows that create an impact.
-                  You'll work on live projects, run real campaigns, use AI
-                  tools, dig into data, and get feedback that makes you better.
+                  Turn knowledge into experience through practical projects, industry exposure, AI-powered workflows, and hands-on execution.
                 </p>
               </div>
             </div>
@@ -531,16 +525,17 @@ export default function Home() {
                   <Icon name="trending-up" size={20} />
                 </div>
                 <h3>Lead</h3>
+                <h4>With Ownership</h4>
                 <p>
-                  Execution is just the start. You'll develop the strategic
-                  thinking, communication edge, and ownership mindset to drive
-                  outcomes in teams, with clients, or in your own venture.
+                  Build the confidence to take initiative, solve problems, communicate ideas, and drive meaningful outcomes wherever your career takes you.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      
 
       <div className="img-strip">
         <img src="strip image/01.jpg" alt="" />
@@ -735,6 +730,78 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+{/* Piller */}
+        <section className="cp-section">
+          <div className="container" style={{ textAlign: "center" }}>
+            <div className="reveal" style={{ marginBottom: "56px" }}>
+              <span className="section-label">Curriculum Pillars</span>
+              <h2
+                className="section-title "
+                style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}
+              >
+                The <em>5 Pillars</em> of the Program
+              </h2>
+            </div>
+          </div>
+          <div className="cp-track">
+            <div className="cp-item reveal reveal-d1">
+              <div className="cp-dot-wrap">
+                <div className="cp-dot">
+                  <Icon name="compass" />
+                </div>
+              </div>
+              <span className="cp-name">Strategy</span>
+              <p className="cp-desc">
+                How businesses think, position, grow, and decide
+              </p>
+            </div>
+            <div className="cp-item reveal reveal-d2">
+              <div className="cp-dot-wrap">
+                <div className="cp-dot">
+                  <Icon name="rocket" />
+                </div>
+              </div>
+              <span className="cp-name">Execution</span>
+              <p className="cp-desc">
+                Campaigns, projects, and operational workflows
+              </p>
+            </div>
+            <div className="cp-item reveal reveal-d3">
+              <div className="cp-dot-wrap">
+                <div className="cp-dot">
+                  <Icon name="target" />
+                </div>
+              </div>
+              <span className="cp-name">Analytics</span>
+              <p className="cp-desc">
+                Data, reporting, and decision-making insights
+              </p>
+            </div>
+            <div className="cp-item reveal reveal-d4">
+              <div className="cp-dot-wrap">
+                <div className="cp-dot">
+                  <Icon name="cpu" />
+                </div>
+              </div>
+              <span className="cp-name">AI</span>
+              <p className="cp-desc">
+                Modern AI for productivity and automation
+              </p>
+            </div>
+            <div className="cp-item reveal reveal-d5">
+              <div className="cp-dot-wrap">
+                <div className="cp-dot">
+                  <Icon name="handshake" />
+                </div>
+              </div>
+              <span className="cp-name">Sales Mindset</span>
+              <p className="cp-desc">
+                Communication, persuasion, and influence
+              </p>
+            </div>
+          </div>
+        </section>
 
       <section className="section" id="career-paths-home">
         <div className="container">

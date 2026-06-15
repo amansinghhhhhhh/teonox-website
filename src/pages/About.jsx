@@ -62,12 +62,13 @@ export default function About() {
                 We Started TEONOX Because We Saw a Gap.
               </h2>
               <p className="section-sub" style={{ maxWidth: "100%" }}>
-                For over a decade, A2 Digital has been helping businesses grow
-                through digital marketing, technology, strategy, and
-                performance-driven execution. Along the way, we worked with
-                hundreds of professionals, hired fresh graduates, trained teams,
-                and collaborated with businesses across industries — and we kept
-                noticing the same challenge.
+                For 12+ years, A2 Digital has been helping businesses grow through digital marketing, technology, strategy, and performance-driven execution.
+              </p>
+              <p className="section-sub">
+                As a full-service digital growth company, A2 Digital works with businesses across industries to build brands, generate leads, drive customer acquisition, improve marketing performance, and scale growth through data, technology, and digital innovation.
+              </p>
+              <p className="section-sub">
+                Along the way, we worked with hundreds of professionals, hired fresh graduates, trained teams, and collaborated with businesses across industries and we kept noticing the same challenge.
               </p>
               <div className="about-quote" style={{ marginTop: "24px" }}>
                 <p>
