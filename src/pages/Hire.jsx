@@ -64,15 +64,10 @@ export default function Hire() {
             <div>
               <span className="section-label">Hire From Us</span>
               <h2 className="section-title">
-                Hire Business-Ready Talent.
-                <br />
-                Not Just Certified Candidates.
+                Hire Talent That's Ready to Contribute.
               </h2>
               <p className="section-sub" style={{ maxWidth: "100%" }}>
-                TEONOX learners are trained through practical projects, industry
-                exposure, AI-powered workflows, and real business challenges —
-                helping them bring confidence, adaptability, and
-                execution-focused thinking to modern workplaces.
+                TEONOX learners are trained through practical projects, industry exposure, AI-powered workflows, and real business challenges helping them bring confidence, adaptability, and execution-focused thinking to modern workplaces.
               </p>
               <div className="hero-actions" style={{ marginTop: "20px" }}>
                 <a href="#form-wrap-id" className="btn btn-primary btn-sm">
