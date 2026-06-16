@@ -10,6 +10,22 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [activeFaq, setActiveFaq] = useState(null);
+  const faqs = [
+  {
+    question:
+      "Do I need prior experience to join?",
+    answer:
+      "No. The program is designed for students, fresh graduates, and individuals looking to build practical business skills.",
+  },
+  {
+    question:
+      "Is this only for marketing careers?",
+    answer:
+      "No. While marketing is a key focus area, the program also covers AI, analytics, sales, communication, and business growth skills that are valuable across industries.",
+  },
+
+];
 
   useEffect(() => {
     const hdls = [];
@@ -292,7 +308,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="reveal" style={{ marginTop: "56px" }}>
+          {/* <div className="reveal" style={{ marginTop: "56px" }}>
             <div className="about-grid" style={{ alignItems: "start" }}>
               <div>
                 <span className="section-label">Not Sure Where To Start?</span>
@@ -425,7 +441,392 @@ export default function Contact() {
                 Apply as Trainer
               </a>
             </div>
+          </div> */}
+
+  <section className="section">
+  
+    <div className="cp-banner reveal">
+      <div className="cp-banner-glow"></div>
+
+      <div className="cp-banner-content">
+        <span className="section-label">
+          Not Sure Where To Start?
+        </span>
+
+        <h2>
+          Book a <em>Career Conversation</em>
+        </h2>
+
+        <p>
+          Choosing the right path can feel overwhelming.
+          Whether you're exploring career options,
+          trying to understand industry trends,
+          or simply want guidance on your next step,
+          our team is happy to help.
+        </p>
+
+        <Link to="/contact" className="btn btn-primary">
+          Talk to a Career Advisor
+          <Icon name="arrow-right" size={16} />
+        </Link>
+      </div>
+    </div>
+  
+</section>
+
+<section
+  className="section"
+  style={{ paddingTop: 0 }}
+>
+
+    <div
+      className="section-center reveal"
+      style={{ marginBottom: 36 }}
+    >
+      <span className="section-label">
+        Other Ways To Reach Us
+      </span>
+    </div>
+
+    <div className="cp-contact-cards">
+
+      <div className="cp-contact-card reveal-delay-1">
+        <div className="cp-contact-card-icon">
+          <Icon name="map-pin" size={24} />
+        </div>
+
+        <h4>Visit Us</h4>
+
+        <p>TEONOX Campus, Pune</p>
+      </div>
+
+      <div className="cp-contact-card reveal-delay-2">
+        <div className="cp-contact-card-icon">
+          <Icon name="phone" size={24} />
+        </div>
+
+        <h4>Call Us</h4>
+
+        <p><a href="tel:8087177760">+91-808-717-7760</a></p>
+      </div>
+
+      <div className="cp-contact-card reveal-delay-3">
+        <div className="cp-contact-card-icon">
+          <Icon name="mail" size={24} />
+        </div>
+
+        <h4>Email Us</h4>
+
+        <p><a href="mailto:info@teonox.com">info@teonox.com</a></p>
+      </div>
+
+    </div>
+  
+</section>
+
+<section
+  className="section"
+  style={{ paddingTop: 0 }}
+>
+
+    <div
+      className="reveal"
+      style={{ marginBottom: 36 }}
+    >
+      <span className="section-label">
+        For Students
+      </span>
+
+      <h2
+        className="section-title"
+        style={{
+          fontSize:
+            "clamp(1.4rem,2.5vw,2rem)",
+        }}
+      >
+        Have Questions About The Program?
+      </h2>
+    </div>
+
+    <div className="cp-students-grid reveal">
+
+      <div className="cp-students-left">
+
+        <p
+          className="section-sub"
+          style={{ maxWidth: "100%" }}
+        >
+          You can reach out to us regarding:
+        </p>
+
+        <div
+          className="cp-benefits-grid"
+          style={{ marginTop: 20 }}
+        >
+
+          {[
+            "Curriculum & Learning Experience",
+            "Fees & Admissions",
+            "Career Opportunities",
+            "Industry Exposure",
+            "Projects & Practical Learning",
+            "Program Eligibility",
+          ].map((item) => (
+            <div
+              className="cp-benefit-card"
+              key={item}
+            >
+              <div className="cp-benefit-check">
+                <Icon
+                  name="check"
+                  size={14}
+                />
+              </div>
+
+              <span className="cp-benefit-text">
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+      <div>
+        <div
+          style={{
+            background: "var(--surface)",
+            border:
+              "1px solid var(--border)",
+            borderRadius: "20px",
+            padding: "36px 32px",
+            textAlign: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "-60px",
+              right: "-60px",
+              width: "200px",
+              height: "200px",
+              background:
+                "radial-gradient(circle,rgba(255,92,26,0.08) 0%,transparent 60%)",
+            }}
+          />
+
+          <div
+            style={{
+              width: 64,
+              height: 64,
+              margin: "0 auto 16px",
+              borderRadius: 16,
+              background:
+                "rgba(255,92,26,0.08)",
+              border:
+                "1px solid rgba(255,92,26,0.12)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            <Icon
+              name="message-circle"
+              size={28}
+            />
           </div>
+
+          <h3
+            style={{
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            We're Here to Help
+          </h3>
+
+          <p
+            style={{
+              fontSize: ".85rem",
+              color: "var(--text2)",
+              lineHeight: 1.7,
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            Our team is ready to answer every
+            question — no matter how small.
+            Your growth journey starts with a
+            single conversation.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+ 
+</section>
+
+<section
+  className="section"
+  style={{ paddingTop: 0 }}
+>
+
+    <div className="cp-biz-card reveal">
+
+      <div className="cp-biz-content">
+
+        <span className="section-label">
+          For Businesses
+        </span>
+
+        <h2
+          className="section-title"
+          style={{
+            fontSize:
+              "clamp(1.4rem,2.5vw,2rem)",
+          }}
+        >
+          Looking To Hire Business-Ready Talent?
+        </h2>
+
+        <p
+          className="section-sub"
+          style={{ maxWidth: "100%" }}
+        >
+          Connect with our team to learn more
+          about hiring opportunities,
+          industry partnerships, workshops,
+          guest lectures, and collaborative
+          initiatives.
+        </p>
+
+        <div className="cp-biz-ctas">
+
+          <Link
+            to="/hire"
+            className="cp-biz-cta primary"
+          >
+            Hire From TEONOX
+            <Icon
+              name="arrow-right"
+              size={16}
+            />
+          </Link>
+
+          <Link
+            to="/contact"
+            className="cp-biz-cta outline"
+          >
+            Partner With Us
+            <Icon
+              name="arrow-right"
+              size={16}
+            />
+          </Link>
+
+        </div>
+      </div>
+
+    </div>
+
+</section>
+
+
+
+{faqs.map((faq, index) => (
+  <div
+    key={faq.question}
+    className={`cp-faq-item ${
+      activeFaq === index ? "open" : ""
+    }`}
+    onClick={() =>
+      setActiveFaq(
+        activeFaq === index ? null : index
+      )
+    }
+  >
+    <div className="cp-faq-q">
+      {faq.question}
+
+      <div className="cp-faq-toggle">
+        <Icon name="chevron-down" size={16} />
+      </div>
+    </div>
+
+    <div className="cp-faq-a">
+      {faq.answer}
+    </div>
+  </div>
+))}
+
+
+
+<section
+  className="section"
+  style={{
+    paddingTop: 0,
+  }}
+>
+
+    <div className="cp-final reveal">
+
+      <div className="cp-final-glow"></div>
+
+      <div className="cp-final-content">
+
+        <span className="section-label">
+          Take The Next Step
+        </span>
+
+        <h2>
+          Every Great Career Starts With
+          <br />
+          <span>A Conversation.</span>
+        </h2>
+
+        <p>
+          The future belongs to people who
+          keep learning, adapting, and taking
+          action. Let's explore what's
+          possible together.
+        </p>
+
+        <div className="cp-final-actions">
+
+          <Link
+            to="/contact"
+            className="btn btn-primary"
+          >
+            Talk to a Career Advisor
+            <Icon
+              name="arrow-right"
+              size={16}
+            />
+          </Link>
+
+          <Link
+            to="/programs"
+            className="btn btn-outline"
+          >
+            Apply Now
+            <Icon
+              name="arrow-right"
+              size={16}
+            />
+          </Link>
+
+        </div>
+      </div>
+    </div>
+
+
+</section>
+          
         </div>
       </section>
     </div>

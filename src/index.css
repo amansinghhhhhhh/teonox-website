@@ -784,13 +784,12 @@ button {
   margin-bottom: 16px
 }
 
-.section-title em
-{
+.section-title em {
   font-style: normal;
-    background: linear-gradient(135deg, #FF6B00, #FFA726);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  background: linear-gradient(135deg, #FF6B00, #FFA726);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-sub {
@@ -1071,24 +1070,27 @@ button {
 }
 
 .approach-card h4 {
-    font-family: var(--font-head);
-    font-size: 1.13rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--text);
+  font-family: var(--font-head);
+  font-size: 1.13rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
 }
 
 .cp-item:nth-child(1) {
-    margin-top: -10px;
+  margin-top: -10px;
 }
+
 .cp-item:nth-child(2) {
-    margin-top: -10px;
+  margin-top: -10px;
 }
+
 .cp-item:nth-child(4) {
-    margin-top: -10px;
+  margin-top: -10px;
 }
+
 .cp-item:nth-child(5) {
-    margin-top: -10px;
+  margin-top: -10px;
 }
 
 .approach-card p {
@@ -2286,6 +2288,476 @@ button {
   border-color: rgba(255, 92, 26, 0.25);
   background: rgba(255, 92, 26, 0.08)
 }
+
+.cp-banner {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 56px 48px;
+  background: linear-gradient(135deg, rgba(255, 92, 26, 0.08) 0%, rgba(255, 140, 80, 0.04) 50%, var(--surface) 100%);
+  border: 1px solid rgba(255, 92, 26, 0.12)
+}
+
+.cp-banner::before {
+  content: '\201C';
+  position: absolute;
+  bottom: -20px;
+  right: 40px;
+  font-size: 12rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 92, 26, 0.06);
+  pointer-events: none;
+  font-family: var(--font-head)
+}
+
+.cp-banner-glow {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 92, 26, 0.1) 0%, transparent 60%);
+  pointer-events: none
+}
+
+.cp-banner-content {
+  position: relative;
+  z-index: 1
+}
+
+.cp-banner h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 12px
+}
+
+.cp-banner h2 em {
+  font-style: normal;
+  background: var(--orange-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text
+}
+
+.cp-banner p {
+  font-size: 0.95rem;
+  color: var(--text2);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 24px
+}
+
+.cp-contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px
+}
+
+.cp-contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: default
+}
+
+.cp-contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 92, 26, 0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s
+}
+
+.cp-contact-card:hover::before {
+  opacity: 1
+}
+
+.cp-contact-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 92, 26, 0.2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3)
+}
+
+.cp-contact-card-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
+  border-radius: 16px;
+  background: rgba(255, 92, 26, 0.08);
+  border: 1px solid rgba(255, 92, 26, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  transition: all 0.5s;
+  position: relative;
+  z-index: 1
+}
+
+.cp-contact-card:hover .cp-contact-card-icon {
+  background: rgba(255, 92, 26, 0.15);
+  transform: scale(1.1) rotate(-4deg);
+  border-color: rgba(255, 92, 26, 0.25)
+}
+
+.cp-contact-card h4 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1
+}
+
+.cp-contact-card p {
+  font-size: 0.85rem;
+  color: var(--text2);
+  font-weight: 300;
+  position: relative;
+  z-index: 1
+}
+
+.cp-students-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: end;
+}
+
+.cp-students-left {
+  padding-right: 20px
+}
+
+.cp-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px
+}
+
+.cp-benefit-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default
+}
+
+.cp-benefit-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 92, 26, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15)
+}
+
+.cp-benefit-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 92, 26, 0.1);
+  border: 1px solid rgba(255, 92, 26, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  flex-shrink: 0;
+  transition: all 0.4s
+}
+
+.cp-benefit-card:hover .cp-benefit-check {
+  background: var(--orange-grad);
+  color: #fff;
+  transform: rotate(-4deg)
+}
+
+.cp-benefit-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.3
+}
+
+.cp-no-question {
+  font-size: 0.88rem;
+  color: var(--text3);
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 16px;
+  padding: 12px 20px;
+  border-left: 3px solid var(--orange);
+  background: rgba(255, 92, 26, 0.04);
+  border-radius: 0 10px 10px 0
+}
+
+.cp-biz-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.2)
+}
+
+.cp-biz-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--orange-grad);
+  border-radius: 0 4px 4px 0
+}
+
+.cp-biz-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 92, 26, 0.05) 0%, transparent 60%);
+  pointer-events: none
+}
+
+.cp-biz-content {
+  position: relative;
+  z-index: 1
+}
+
+.cp-biz-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px
+}
+
+.cp-biz-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1)
+}
+
+.cp-biz-cta.primary {
+  background: var(--orange-grad);
+  color: #fff;
+  border: none
+}
+
+.cp-biz-cta.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(255, 92, 26, 0.35)
+}
+
+.cp-biz-cta.outline {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border2)
+}
+
+.cp-biz-cta.outline:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border3);
+  transform: translateY(-2px)
+}
+
+.cp-faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1)
+}
+
+.cp-faq-item:hover {
+  border-color: rgba(255, 92, 26, 0.12)
+}
+
+.cp-faq-item.open {
+  border-color: rgba(255, 92, 26, 0.18)
+}
+
+.cp-faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.4;
+  user-select: none
+}
+
+.cp-faq-toggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 92, 26, 0.06);
+  border: 1px solid rgba(255, 92, 26, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.4s;
+  color: var(--text3)
+}
+
+.cp-faq-item.open .cp-faq-toggle {
+  background: rgba(255, 92, 26, 0.12);
+  border-color: rgba(255, 92, 26, 0.2);
+  color: var(--orange);
+  transform: rotate(180deg)
+}
+
+.cp-faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+  opacity: 0;
+  padding-top: 0;
+  font-size: 0.85rem;
+  color: var(--text2);
+  font-weight: 300;
+  line-height: 1.7
+}
+
+.cp-faq-item.open .cp-faq-a {
+  max-height: 300px;
+  opacity: 1;
+  padding-top: 16px
+}
+
+.cp-final {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 64px 48px;
+  text-align: center;
+  background: linear-gradient(160deg, var(--surface) 0%, rgba(255, 92, 26, 0.04) 100%);
+  border: 1px solid rgba(255, 92, 26, 0.08);
+  box-shadow: 0 0 60px rgba(255, 92, 26, 0.04)
+}
+
+.cp-final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 30%, rgba(255, 92, 26, 0.06) 0%, transparent 60%);
+  pointer-events: none
+}
+
+.cp-final-glow {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 92, 26, 0.06) 0%, transparent 60%);
+  pointer-events: none
+}
+
+.cp-final-content {
+  position: relative;
+  z-index: 1
+}
+
+.cp-final h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 12px
+}
+
+.cp-final h2 span {
+  background: var(--orange-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text
+}
+
+.cp-final p {
+  font-size: 0.95rem;
+  color: var(--text2);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto 28px
+}
+
+.cp-final-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap
+}
+
+@media(max-width:1024px) {
+  .cp-students-grid {
+    grid-template-columns: 1fr
+  }
+
+  .cp-benefits-grid {
+    grid-template-columns: 1fr
+  }
+
+  .cp-banner {
+    padding: 36px 28px
+  }
+}
+
+@media(max-width:768px) {
+  .cp-contact-cards {
+    grid-template-columns: 1fr
+  }
+
+  .cp-final {
+    padding: 40px 24px
+  }
+
+  .cp-biz-card {
+    padding: 32px 24px
+  }
+
+  .cp-students-left {
+    padding-right: 0
+  }
+}
+
+@media(max-width:480px) {
+  .cp-biz-ctas {
+    flex-direction: column;
+    align-items: stretch
+  }
+
+  .cp-biz-cta {
+    justify-content: center
+  }
+}
+
 
 @media(max-width:1024px) {
 
