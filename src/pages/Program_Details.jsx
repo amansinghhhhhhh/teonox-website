@@ -9,6 +9,8 @@ export default function Program_Details() {
   const { slug } = useParams();
   const [program, setProgram] = useState(null);
   const intro = program?.introduction;
+  console.log("Program:", program);
+console.log("Introduction:", intro);
   const [loading, setLoading] = useState(true);
   const [careerImgUrls, setCareerImgUrls] = useState({});
   useScrollReveal();
@@ -182,17 +184,16 @@ export default function Program_Details() {
     {intro?.introduction_section_label}
 </div>
                 <h2>
-                  More Than a Course.
-                  <br />A <em>Business Growth Ecosystem.</em>
-                </h2>
-                <p className="pg-intro-text">
-                  Most programs focus on teaching tools. Businesses hire people
-                  who can{" "}
-                  <strong>
-                    think, solve problems, communicate ideas, work with data,
-                    leverage AI, and drive outcomes.
-                  </strong>
-                </p>
+    {intro?.introduction_heading}
+    <br />
+    <em>{intro?.introduction_heading_colored}</em>
+</h2>
+                <p
+    className="pg-intro-text"
+    dangerouslySetInnerHTML={{
+        __html: intro?.introduction_description,
+    }}
+/>
                 <div
                   className="pg-intro-highlight"
                   style={{
@@ -203,11 +204,8 @@ export default function Program_Details() {
                 >
                   <Icon name="quote" size={20} />
                   <span>
-                    TEONOX was created to help bridge the gap between{" "}
-                    <strong style={{ color: "var(--text)" }}>
-                      education and execution.
-                    </strong>
-                  </span>
+        {intro?.introduction_section_quote}
+    </span>
                 </div>
               </div>
             </div>
