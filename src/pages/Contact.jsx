@@ -24,7 +24,18 @@ export default function Contact() {
     answer:
       "No. While marketing is a key focus area, the program also covers AI, analytics, sales, communication, and business growth skills that are valuable across industries.",
   },
-
+  {
+    question:
+      "Will I work on real projects?",
+    answer:
+      "Yes. Practical exposure, projects, workshops, and industry-oriented learning are core parts of the TEONOX experience.",
+  },
+{
+    question:
+      "Who will teach me?",
+    answer:
+      "You'll learn from industry practitioners, business leaders, and professionals with real-world experience.",
+  },
 ];
 
   useEffect(() => {
