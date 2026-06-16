@@ -784,6 +784,15 @@ button {
   margin-bottom: 16px
 }
 
+.section-title em
+{
+  font-style: normal;
+    background: linear-gradient(135deg, #FF6B00, #FFA726);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .section-sub {
   font-size: 1rem;
   color: var(--text2);

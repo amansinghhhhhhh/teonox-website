@@ -9,8 +9,6 @@ export default function Program_Details() {
   const { slug } = useParams();
   const [program, setProgram] = useState(null);
   const intro = program?.introduction;
-  console.log("Program:", program);
-console.log("Introduction:", intro);
   const [loading, setLoading] = useState(true);
   const [careerImgUrls, setCareerImgUrls] = useState({});
   useScrollReveal();
