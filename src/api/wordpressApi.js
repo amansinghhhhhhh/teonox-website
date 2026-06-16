@@ -79,16 +79,20 @@ export const getPrograms = async (
 };
 
 // Single Program
-export const getProgramBySlug = async (
-    slug
-) => {
+export const getProgramBySlug = async (slug) => {
     const res = await fetch(
         `${API_URL}/program&slug=${encodeURIComponent(slug)}&_embed`
     );
 
     const data = await res.json();
 
-    return data[0];
+    const program = data[0];
+
+    // Add shortcut object
+    program.introduction =
+        program.acf?.introduction_group || {};
+
+    return program;
 };
 
 // Related Programs

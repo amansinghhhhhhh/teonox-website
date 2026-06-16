@@ -8,6 +8,7 @@ import { getProgramBySlug, getMediaUrl } from "../api/wordpressApi";
 export default function Program_Details() {
   const { slug } = useParams();
   const [program, setProgram] = useState(null);
+  const intro = program?.introduction;
   const [loading, setLoading] = useState(true);
   const [careerImgUrls, setCareerImgUrls] = useState({});
   useScrollReveal();
@@ -177,9 +178,9 @@ export default function Program_Details() {
             <div className="pg-intro-grid">
               <div className="pg-intro">
                 <div className="pg-intro-label">
-                  <span></span>
-                  Introduction
-                </div>
+    <span></span>
+    {intro?.introduction_section_label}
+</div>
                 <h2>
                   More Than a Course.
                   <br />A <em>Business Growth Ecosystem.</em>
