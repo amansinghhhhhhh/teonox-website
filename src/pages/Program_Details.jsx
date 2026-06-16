@@ -716,7 +716,7 @@ export default function Program_Details() {
                 className="hero-actions"
                 style={{ marginTop: "28px", flexWrap: "wrap" }}
               >
-                <a href="contact.html" className="btn btn-primary">
+                <a href="/contact" className="btn btn-primary">
                   Apply now <Icon name="arrow-right" size={16} />
                 </a>
                 <a href="#" className="btn btn-outline">

@@ -96,7 +96,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <strong>Call Us</strong>
-                    <span>+91-808-717-7760</span>
+                    <span><a href="tel:8087177760">+91-808-717-7760</a></span>
                   </div>
                 </li>
                 <li>
@@ -105,7 +105,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <strong>Email Us</strong>
-                    <span>info@teonox.com</span>
+                    <span><a href="mailto:info@teonox.com">info@teonox.com</a></span>
                   </div>
                 </li>
               </ul>
@@ -421,7 +421,7 @@ export default function Contact() {
               className="hero-actions"
               style={{ justifyContent: "center", marginTop: "24px" }}
             >
-              <a href="programs.html" className="btn btn-outline">
+              <a href="/programs" className="btn btn-outline">
                 Apply as Trainer
               </a>
             </div>

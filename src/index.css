@@ -1890,7 +1890,8 @@ button {
   background: linear-gradient(160deg, #0d1926 0%, #111e2e 100%);
   padding: 48px 40px;
   position: relative;
-  overflow: hidden
+  overflow: hidden;
+  gap: 10px;
 }
 
 .contact-sidebar::before {
@@ -2051,7 +2052,7 @@ button {
 
 .contact-info li {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 14px
 }
 
