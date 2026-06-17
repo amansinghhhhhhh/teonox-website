@@ -221,6 +221,7 @@ export default function Careers() {
           <div className="reveal" style={{ marginBottom: "36px" }}>
             {careers.map((career, i) => {
               const a = career.acf;
+              console.log(a.education);
               const responsibilities = [
                 {
                   icon: "book-open",
@@ -315,12 +316,15 @@ export default function Careers() {
                         />
                       </div>
                     )}
-                    {a.education && (
-                      <div className="job-section">
-                        <h4>Education</h4>
-                        <p>{a.education}</p>
-                      </div>
-                    )}
+                   {a.education && (
+  <div className="job-section">
+    <h4>Education</h4>
+
+    <div
+     dangerouslySetInnerHTML={{ __html: sanitizeHtml(a.education) }}
+    />
+  </div>
+)}
                     <div style={{ marginTop: "24px" }}>
                       <a href="#careers-form" className="btn btn-primary">
                         Apply for This Position{" "}

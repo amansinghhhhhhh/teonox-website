@@ -48,7 +48,7 @@ const iconMap = {
   x: "X",
   zap: "Zap",
   "play-circle": "PlayCircle",
-  sime: "Sime",
+  smile: "Smile",
   "chart-spline": "ChartSpline",
 "sun-dim": "SunDim",
 mic: "Mic",
