@@ -481,7 +481,7 @@ export default function Hire() {
               </p>
               <div className="hero-actions" style={{ marginTop: "24px" }}>
                 <a
-                  href="#"
+                  href="/contact"
                   className="btn btn-outline btn-sm"
                   style={{
                     borderColor: "var(--border2)",

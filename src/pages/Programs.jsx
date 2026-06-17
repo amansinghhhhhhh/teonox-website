@@ -79,11 +79,11 @@ export default function Programs() {
               className="hero-actions"
               style={{ justifyContent: "center", marginTop: "24px" }}
             >
-              <a href="#" className="btn btn-primary btn-sm">
+              <a href="/blog" className="btn btn-primary btn-sm">
                 Explore Articles{" "}
                 <Icon name="arrow-right" size={14} />
               </a>
-              <a href="#" className="btn btn-outline btn-sm">
+              <a href="/contact" className="btn btn-outline btn-sm">
                 Subscribe for Updates
               </a>
             </div>

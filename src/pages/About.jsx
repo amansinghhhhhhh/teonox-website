@@ -294,6 +294,194 @@ Backed by the industry experience and insights gained through years of building 
         </div>
       </section>
 
+      <section className="section video-gallery-section">
+  <div className="container">
+    <div className="reveal" style={{ marginBottom: "40px" }}>
+      <span className="section-label">Life at TEONOX</span>
+
+      <h2 className="section-title">
+        Moments That Define Us
+      </h2>
+
+      <p
+        className="section-sub"
+        style={{ maxWidth: "100%" }}
+      >
+        A glimpse into our world — real sessions,
+        real energy, real growth.
+      </p>
+    </div>
+
+    <div className="vc-wrap">
+      <button
+        className="vc-arrow vc-prev"
+        id="vcPrev"
+      >
+        &#10094;
+      </button>
+
+      <div
+        className="vc-viewport"
+        id="vcViewport"
+      >
+        <div className="vc-track" id="vcTrack">
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DV_KQluArs_/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DV_KQluArs_/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DWN5rOAjMts/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DWN5rOAjMts/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DWf3dceghLh/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DWf3dceghLh/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DYWhSgig_gL/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DYWhSgig_gL/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DV_KQluArs_/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DV_KQluArs_/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DWN5rOAjMts/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DWN5rOAjMts/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DWf3dceghLh/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DWf3dceghLh/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            className="video-card"
+            data-url="https://www.instagram.com/reel/DYWhSgig_gL/"
+          >
+            <div className="vc-thumb"></div>
+
+            <div className="vc-embed-wrap">
+              <iframe
+                src="https://www.instagram.com/reel/DYWhSgig_gL/embed"
+                frameBorder="0"
+                scrolling="no"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              ></iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button
+        className="vc-arrow vc-next"
+        id="vcNext"
+      >
+        &#10095;
+      </button>
+
+      <div className="vc-dots" id="vcDots">
+        <span className="vc-dot active"></span>
+        <span className="vc-dot"></span>
+        <span className="vc-dot"></span>
+        <span className="vc-dot"></span>
+      </div>
+    </div>
+  </div>
+</section>          
+
       <section className="section section-alt">
         <div className="container section-center">
           <div className="reveal">
