@@ -3,13 +3,25 @@ import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { submitForm } from "../services/formService";
-import { validateEmail, validatePhone } from "../utils/validation.js";
+import {
+  validateEmail,
+  validatePhone,
+  validateRequired,
+} from "../utils/validation.js";
 
 export default function Contact() {
   useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
+  const clearError = (name) =>
+    setFieldErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
   const [activeFaq, setActiveFaq] = useState(null);
   const faqs = [
   {
@@ -195,18 +207,34 @@ export default function Contact() {
                     fd.forEach((value, key) => {
                       fields[key] = value;
                     });
-                    const email = fields["Email Address"] || "";
-                    const phone = fields["Phone Number"] || "";
-                    if (email && !validateEmail(email)) {
-                      setError("Please enter a valid email address.");
+                    const errors = {};
+                    const val = (name, label, opts = {}) => {
+                      const v = fields[name] || "";
+                      if (!validateRequired(v))
+                        errors[name] = `${label} is required.`;
+                      else if (opts.email && !validateEmail(v))
+                        errors[name] = "Please enter a valid email address.";
+                      else if (opts.phone && !validatePhone(v.replace(/[\s\-\(\)\+]/g, "")))
+                        errors[name] = "Please enter a valid 10-digit Indian phone number.";
+                    };
+                    val("Full Name", "Full Name");
+                    val("Email Address", "Email Address", { email: true });
+                    val("Phone Number", "Phone Number", { phone: true });
+                    val("City", "City");
+                    val("Current Status", "Current Status");
+                    val("Interested In", "Interested In");
+                    val("Your Message", "Your Message");
+                    if (fields["Current Status"] === "" || fields["Current Status"] === "Select") {
+                      errors["Current Status"] = "Please select your current status.";
+                    }
+                    if (fields["Interested In"] === "" || fields["Interested In"] === "Select") {
+                      errors["Interested In"] = "Please select an option.";
+                    }
+                    if (Object.keys(errors).length) {
+                      setFieldErrors(errors);
                       return;
                     }
-                    if (phone && !validatePhone(phone)) {
-                      setError(
-                        "Please enter a valid 10-digit Indian phone number.",
-                      );
-                      return;
-                    }
+                    setFieldErrors({});
                     setSubmitting(true);
                     try {
                       await submitForm("Contact Page", fields);
@@ -220,40 +248,55 @@ export default function Contact() {
                     setSubmitted(true);
                   }}
                 >
-                  <div className="field">
+                  <div className={`field${fieldErrors["Full Name"] ? " field-invalid" : ""}`}>
                     <label>Full Name</label>
                     <input
                       type="text"
                       name="Full Name"
                       placeholder="Enter your full name"
+                      onChange={() => clearError("Full Name")}
                     />
+                    {fieldErrors["Full Name"] && (
+                      <span className="field-error">{fieldErrors["Full Name"]}</span>
+                    )}
                   </div>
                   <div className="form-row">
-                    <div className="field">
+                    <div className={`field${fieldErrors["Email Address"] ? " field-invalid" : ""}`}>
                       <label>Email Address</label>
                       <input
                         type="email"
                         name="Email Address"
                         placeholder="your@email.com"
+                        onChange={() => clearError("Email Address")}
                       />
+                      {fieldErrors["Email Address"] && (
+                        <span className="field-error">{fieldErrors["Email Address"]}</span>
+                      )}
                     </div>
-                    <div className="field">
+                    <div className={`field${fieldErrors["Phone Number"] ? " field-invalid" : ""}`}>
                       <label>Phone Number</label>
                       <input
                         type="tel"
                         name="Phone Number"
                         placeholder="8087177760"
+                        onChange={() => clearError("Phone Number")}
                       />
+                      {fieldErrors["Phone Number"] && (
+                        <span className="field-error">{fieldErrors["Phone Number"]}</span>
+                      )}
                     </div>
                   </div>
                   <div className="form-row">
-                    <div className="field">
+                    <div className={`field${fieldErrors["City"] ? " field-invalid" : ""}`}>
                       <label>City</label>
-                      <input type="text" name="City" placeholder="Your city" />
+                      <input type="text" name="City" placeholder="Your city" onChange={() => clearError("City")} />
+                      {fieldErrors["City"] && (
+                        <span className="field-error">{fieldErrors["City"]}</span>
+                      )}
                     </div>
-                    <div className="field">
+                    <div className={`field${fieldErrors["Current Status"] ? " field-invalid" : ""}`}>
                       <label>Current Status</label>
-                      <select name="Current Status">
+                      <select name="Current Status" onChange={() => clearError("Current Status")}>
                         <option value="">Select</option>
                         <option value="Student">Student</option>
                         <option value="Fresh Graduate">Fresh Graduate</option>
@@ -264,11 +307,14 @@ export default function Contact() {
                         <option value="Parent">Parent</option>
                         <option value="Other">Other</option>
                       </select>
+                      {fieldErrors["Current Status"] && (
+                        <span className="field-error">{fieldErrors["Current Status"]}</span>
+                      )}
                     </div>
                   </div>
-                  <div className="field">
+                  <div className={`field${fieldErrors["Interested In"] ? " field-invalid" : ""}`}>
                     <label>Interested In</label>
-                    <select name="Interested In">
+                    <select name="Interested In" onChange={() => clearError("Interested In")}>
                       <option value="">Select</option>
                       <option value="TEONOX Business Growth Program">
                         TEONOX Business Growth Program
@@ -285,13 +331,20 @@ export default function Contact() {
                       </option>
                       <option value="General Enquiry">General Enquiry</option>
                     </select>
+                    {fieldErrors["Interested In"] && (
+                      <span className="field-error">{fieldErrors["Interested In"]}</span>
+                    )}
                   </div>
-                  <div className="field">
+                  <div className={`field${fieldErrors["Your Message"] ? " field-invalid" : ""}`}>
                     <label>Your Message</label>
                     <textarea
                       name="Your Message"
                       placeholder="Tell us about your goals, questions, or how we can help..."
+                      onChange={() => clearError("Your Message")}
                     ></textarea>
+                    {fieldErrors["Your Message"] && (
+                      <span className="field-error">{fieldErrors["Your Message"]}</span>
+                    )}
                   </div>
                   {error && (
                     <p

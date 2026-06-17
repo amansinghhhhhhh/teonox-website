@@ -3,7 +3,14 @@ export const validateEmail = (email) => {
 };
 
 export const validatePhone = (phone) => {
-    return /^[6-9]\d{9}$/.test(phone);
+    const cleaned = phone.replace(/[\s\-\(\)\+]/g, "");
+    return /^[6-9]\d{9}$/.test(cleaned);
+};
+
+export const validateRequired = (value) => {
+    if (value === undefined || value === null) return false;
+    if (typeof value === "string" && !value.trim()) return false;
+    return true;
 };
 
 export const validateFile = (file) => {

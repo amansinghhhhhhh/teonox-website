@@ -2142,6 +2142,27 @@ button {
   min-height: 100px
 }
 
+.field.field-invalid input,
+.field.field-invalid select,
+.field.field-invalid textarea {
+  border-color: #ef4444
+}
+
+.field.field-invalid input:focus,
+.field.field-invalid select:focus,
+.field.field-invalid textarea:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12)
+}
+
+.field-error {
+  display: block;
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 4px;
+  font-weight: 500
+}
+
 .faq-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

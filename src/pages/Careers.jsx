@@ -7,6 +7,7 @@ import { submitForm } from "../services/formService";
 import {
   validateEmail,
   validatePhone,
+  validateRequired,
   validateFile,
 } from "../utils/validation.js";
 import { sanitizeHtml } from "../utils/sanitize.js";
@@ -16,7 +17,15 @@ export default function Careers() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [careers, setCareers] = useState([]);
+  const clearError = (name) =>
+    setFieldErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
 
   useEffect(() => {
     getCareers().then(setCareers).catch(console.error);
@@ -403,26 +412,35 @@ export default function Careers() {
                       fd.forEach((value, key) => {
                         fields[key] = value;
                       });
-                      const email = fields["Email"] || "";
-                      const phone = fields["Phone Number"] || "";
                       const file = fields["Resume"];
-                      if (email && !validateEmail(email)) {
-                        setError("Please enter a valid email address.");
-                        return;
-                      }
-                      if (phone && !validatePhone(phone)) {
-                        setError(
-                          "Please enter a valid 10-digit Indian phone number.",
-                        );
-                        return;
+                      const errors = {};
+                      const val = (name, label, opts = {}) => {
+                        const v = fields[name] || "";
+                        if (!validateRequired(v))
+                          errors[name] = `${label} is required.`;
+                        else if (opts.email && !validateEmail(v))
+                          errors[name] = "Please enter a valid email address.";
+                        else if (opts.phone && !validatePhone(v.replace(/[\s\-\(\)\+]/g, "")))
+                          errors[name] = "Please enter a valid 10-digit Indian phone number.";
+                      };
+                      val("Full Name", "Full Name");
+                      val("Email", "Email", { email: true });
+                      val("Role", "Role");
+                      val("Phone Number", "Phone Number", { phone: true });
+                      val("Experience", "Experience");
+                      val("Why TEONOX", "Why TEONOX");
+                      if (fields["Role"] === "Select" || fields["Role"] === "") {
+                        errors["Role"] = "Please select a role.";
                       }
                       if (file && file instanceof File && file.size > 0) {
                         const fv = validateFile(file);
-                        if (!fv.valid) {
-                          setError(fv.message);
-                          return;
-                        }
+                        if (!fv.valid) errors["Resume"] = fv.message;
                       }
+                      if (Object.keys(errors).length) {
+                        setFieldErrors(errors);
+                        return;
+                      }
+                      setFieldErrors({});
                       setSubmitting(true);
                       try {
                         await submitForm("Careers Application", fields);
@@ -460,27 +478,35 @@ export default function Careers() {
                       </p>
                     </div>
                     <div className="form-row">
-                      <div className="field">
+                      <div className={`field${fieldErrors["Full Name"] ? " field-invalid" : ""}`}>
                         <label>Full Name</label>
                         <input
                           type="text"
                           name="Full Name"
                           placeholder="Enter your full name"
+                          onChange={() => clearError("Full Name")}
                         />
+                        {fieldErrors["Full Name"] && (
+                          <span className="field-error">{fieldErrors["Full Name"]}</span>
+                        )}
                       </div>
-                      <div className="field">
+                      <div className={`field${fieldErrors["Email"] ? " field-invalid" : ""}`}>
                         <label>Email</label>
                         <input
                           type="email"
                           name="Email"
                           placeholder="you@example.com"
+                          onChange={() => clearError("Email")}
                         />
+                        {fieldErrors["Email"] && (
+                          <span className="field-error">{fieldErrors["Email"]}</span>
+                        )}
                       </div>
                     </div>
                     <div className="form-row">
-                      <div className="field">
+                      <div className={`field${fieldErrors["Role"] ? " field-invalid" : ""}`}>
                         <label>Role</label>
-                        <select name="Role">
+                        <select name="Role" onChange={() => clearError("Role")}>
                           <option value="">Select</option>
                           <option value="Digital Marketing Trainer">
                             Digital Marketing Trainer
@@ -496,41 +522,60 @@ export default function Careers() {
                           </option>
                           <option value="Other">Other</option>
                         </select>
+                        {fieldErrors["Role"] && (
+                          <span className="field-error">{fieldErrors["Role"]}</span>
+                        )}
                       </div>
-                      <div className="field">
+                      <div className={`field${fieldErrors["Phone Number"] ? " field-invalid" : ""}`}>
                         <label>Phone Number</label>
                         <input
                           type="tel"
                           name="Phone Number"
                           placeholder="+91 98765 43210"
+                          onChange={() => clearError("Phone Number")}
                         />
+                        {fieldErrors["Phone Number"] && (
+                          <span className="field-error">{fieldErrors["Phone Number"]}</span>
+                        )}
                       </div>
                     </div>
                     <div className="form-row">
-                      <div className="field">
+                      <div className={`field${fieldErrors["Experience"] ? " field-invalid" : ""}`}>
                         <label>Experience</label>
                         <input
                           type="text"
                           name="Experience"
                           placeholder="e.g. 5 years"
+                          onChange={() => clearError("Experience")}
                         />
+                        {fieldErrors["Experience"] && (
+                          <span className="field-error">{fieldErrors["Experience"]}</span>
+                        )}
                       </div>
-                      <div className="field">
+                      <div className={`field${fieldErrors["Why TEONOX"] ? " field-invalid" : ""}`}>
                         <label>Why TEONOX?</label>
                         <textarea
                           name="Why TEONOX"
                           rows="4"
                           placeholder="Tell us why you would like to work with us..."
+                          onChange={() => clearError("Why TEONOX")}
                         ></textarea>
+                        {fieldErrors["Why TEONOX"] && (
+                          <span className="field-error">{fieldErrors["Why TEONOX"]}</span>
+                        )}
                       </div>
                     </div>
-                    <div className="field">
+                    <div className={`field${fieldErrors["Resume"] ? " field-invalid" : ""}`}>
                       <label>Upload Resume / CV</label>
                       <input
                         type="file"
                         name="Resume"
                         accept=".pdf,.doc,.docx"
+                        onChange={() => clearError("Resume")}
                       />
+                      {fieldErrors["Resume"] && (
+                        <span className="field-error">{fieldErrors["Resume"]}</span>
+                      )}
                     </div>
                     {error && (
                       <p
