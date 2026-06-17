@@ -88,6 +88,9 @@ export default function Careers() {
                 <a href="#" className="btn btn-primary btn-sm">
                   View Opportunities <Icon name="arrow-down" size={14} />
                 </a>
+                <Link to="/hire" className="btn btn-outline" style={{ flexShrink: "0" }}                            >
+                              Partner With Us<Icon name="arrow-right" size={14} />
+                            </Link>
               </div>
             </div>
             <div className="about-img-wrap" style={{ aspectRatio: "16/10" }}>
