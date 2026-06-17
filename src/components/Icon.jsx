@@ -50,7 +50,9 @@ const iconMap = {
   "play-circle": "PlayCircle",
   sime: "Sime",
   "chart-spline": "ChartSpline",
-"sun-dim": "SunDim"
+"sun-dim": "SunDim",
+mic: "Mic",
+star: "Star",
 };
 
 export default function Icon({ name, size = 16, className, style }) {

@@ -6384,6 +6384,46 @@ a {
   }
 }
 
+/* Hire Collabration Section*/
+
+.collab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.collab-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:default;
+  transition:all 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.collab-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,92,26,0.15);
+  box-shadow:0 8px 24px rgba(0,0,0,0.15);
+}
+.collab-icon{
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  background:rgba(255,92,26,0.1);
+  border:1px solid rgba(255,92,26,0.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.collab-card span{font-size:0.85rem;font-weight:500}
+
+@media(max-width:768px){
+  .collab-grid{grid-template-columns:repeat(2,1fr)}
+  .container{padding:0 16px}
+}
+@media(max-width:480px){
+  .collab-grid{grid-template-columns:1fr}
+}
+
 /* ─── INSIGHTS ─── */
 .insights-grid {
   display: grid;

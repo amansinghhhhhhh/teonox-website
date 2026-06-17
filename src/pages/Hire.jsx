@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import industryCollaboration from "../hooks/industry-collaboration.js"
 import { submitForm } from "../services/formService";
 import { validateEmail, validatePhone } from "../utils/validation.js";
 
@@ -108,9 +109,7 @@ export default function Hire() {
                 <div>
                   <h5>Practical Exposure</h5>
                   <p>
-                    Worked on projects, campaigns, simulations, and business
-                    challenges.
-                  </p>
+                    Worked on projects, campaigns, simulations, and business challenges.                  </p>
                 </div>
               </div>
               <div className="hire-why-item">
@@ -179,24 +178,28 @@ export default function Hire() {
                 <Icon name="trending-up" size={22} />
               </div>
               <h4>Digital Marketing & Growth Professionals</h4>
+              <p>Individuals trained in digital marketing, content strategy, growth initiatives, and campaign execution.</p>
             </div>
             <div className="hire-card reveal reveal-d2">
               <div className="hire-card-icon">
                 <Icon name="bar-chart-3" size={22} />
               </div>
-              <h4>AI & Business Analytics Talent</h4>
+              <h4>AI & Analytics Talent</h4>
+              <p>Professionals equipped with analytical thinking, dashboarding, reporting, and AI-assisted workflows.</p>
             </div>
             <div className="hire-card reveal reveal-d3">
               <div className="hire-card-icon">
                 <Icon name="users" size={22} />
               </div>
-              <h4>Sales & Revenue Operations Professionals</h4>
+              <h4>Sales & Revenue Professionals</h4>
+              <p>Talent trained in communication, business development, client engagement, and revenue-focused thinking.</p>
             </div>
             <div className="hire-card reveal reveal-d4">
               <div className="hire-card-icon">
                 <Icon name="layers" size={22} />
               </div>
-              <h4>Full-Stack Business Growth Professionals</h4>
+              <h4>Multi-Disciplinary Growth Talent</h4>
+              <p>Professionals with exposure across marketing, AI, analytics, and business functions.</p>
             </div>
           </div>
 
@@ -214,6 +217,90 @@ export default function Hire() {
               sessions, and mentorship initiatives.
             </p>
           </div>
+
+    <div className="reveal">
+      <p
+        className="section-sub"
+        style={{
+          maxWidth: "100%",
+          marginBottom: "20px",
+        }}
+      >
+        We welcome partnerships with
+        organizations interested in:
+      </p>
+
+      <div className="collab-grid">
+
+        <div className="collab-card">
+          <div className="collab-icon">
+            <Icon
+              name="briefcase"
+              size={14}
+              style={{ color: "var(--orange)" }}
+            />
+          </div>
+          <span>Campus Hiring</span>
+        </div>
+
+        <div className="collab-card">
+          <div className="collab-icon">
+            <Icon
+              name="book-open"
+              size={14}
+              style={{ color: "var(--orange)" }}
+            />
+          </div>
+          <span>Internships</span>
+        </div>
+
+        <div className="collab-card">
+          <div className="collab-icon">
+            <Icon
+              name="zap"
+              size={14}
+              style={{ color: "var(--orange)" }}
+            />
+          </div>
+          <span>Live Projects</span>
+        </div>
+
+        <div className="collab-card">
+          <div className="collab-icon">
+            <Icon
+              name="users"
+              size={14}
+              style={{ color: "var(--orange)" }}
+            />
+          </div>
+          <span>Industry Workshops</span>
+        </div>
+
+        <div className="collab-card">
+          <div className="collab-icon">
+            <Icon
+              name="mic"
+              size={14}
+              style={{ color: "var(--orange)" }}
+            />
+          </div>
+          <span>Guest Sessions</span>
+        </div>
+
+        <div className="collab-card">
+          <div className="collab-icon">
+            <Icon
+              name="star"
+              size={14}
+              style={{ color: "var(--orange)" }}
+            />
+          </div>
+          <span>Mentorship Initiatives</span>
+        </div>
+
+      </div>
+    </div>
+
 
           <div className="contact-wrap reveal" style={{}}>
             <div className="form-wrap" id="form-wrap-id">
