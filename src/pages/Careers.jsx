@@ -221,7 +221,6 @@ export default function Careers() {
           <div className="reveal" style={{ marginBottom: "36px" }}>
             {careers.map((career, i) => {
               const a = career.acf;
-              console.log(a.education);
               const responsibilities = [
                 {
                   icon: "book-open",
@@ -317,7 +316,7 @@ export default function Careers() {
                       </div>
                     )}
                    {a.education && (
-  <div className="job-section">
+  <div className="">
     <h4>Education</h4>
 
     <div
