@@ -45,7 +45,7 @@ export default function Blog() {
               className="hero-actions"
               style={{ justifyContent: "center", marginTop: "24px" }}
             >
-              <a href="/program" className="btn btn-primary btn-sm">
+              <a href="/programs" className="btn btn-primary btn-sm">
                 Explore Programs{" "}
                 <Icon name="arrow-right" size={14} />
               </a>
