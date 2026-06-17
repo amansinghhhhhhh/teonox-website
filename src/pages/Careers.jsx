@@ -316,10 +316,10 @@ export default function Careers() {
                       </div>
                     )}
                    {a.education && (
-  <div className="">
+  <div className="job-section">
     <h4>Education</h4>
 
-    <div
+    <p
      dangerouslySetInnerHTML={{ __html: sanitizeHtml(a.education) }}
     />
   </div>
