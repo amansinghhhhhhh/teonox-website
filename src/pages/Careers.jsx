@@ -85,7 +85,7 @@ export default function Careers() {
                 hear from you.
               </p>
               <div className="hero-actions" style={{ marginTop: "20px" }}>
-                <a href="#" className="btn btn-primary btn-sm">
+                <a href="#careers-form" className="btn btn-primary btn-sm">
                   View Opportunities <Icon name="arrow-down" size={14} />
                 </a>
                 <Link to="/hire" className="btn btn-outline" style={{ flexShrink: "0" }}                            >

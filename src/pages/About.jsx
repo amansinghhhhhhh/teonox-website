@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
+import useVideoGallery from "../hooks/useVideoGallery.js"
 import useScrollReveal from "../hooks/useScrollReveal.js";
 
 export default function About() {
   useScrollReveal();
+  useVideoGallery();
 
   useEffect(() => {
     const hdls = [];
