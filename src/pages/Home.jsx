@@ -413,10 +413,10 @@ export default function Home() {
                 <div className="gc-card">
                   <div className="gc-left">
                     <div className="gc-badge">
-                      <span className="gc-badge-dot"></span>Placement Guarantee
+                      <span className="gc-badge-dot"></span>THE TEONOX PROMISE
                     </div>
                     <span className="gc-percent">100%</span>
-                    <span className="gc-percent-label">Job Placement</span>
+                    <span className="gc-percent-label">Job Guarantee</span>
                   </div>
                   <div className="gc-right">
                     <div className="gc-shield-wrap">
