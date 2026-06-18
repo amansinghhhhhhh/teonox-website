@@ -75,18 +75,7 @@ export default function Programs() {
               career development, and the skills shaping tomorrow's
               opportunities.
             </p>
-            <div
-              className="hero-actions"
-              style={{ justifyContent: "center", marginTop: "24px" }}
-            >
-              <a href="/blog" className="btn btn-primary btn-sm">
-                Explore Articles{" "}
-                <Icon name="arrow-right" size={14} />
-              </a>
-              <a href="/contact" className="btn btn-outline btn-sm">
-                Subscribe for Updates
-              </a>
-            </div>
+            
           </div>
 
           <div className="prog-filters reveal">
@@ -197,6 +186,19 @@ export default function Programs() {
               );
             })}
           </div>
+
+                      <div
+              className="hero-actions"
+              style={{ justifyContent: "center", marginTop: "24px" }}
+            >
+              <a href="/blog" className="btn btn-primary btn-sm">
+                Explore Articles{" "}
+                <Icon name="arrow-right" size={14} />
+              </a>
+              <a href="/contact" className="btn btn-outline btn-sm">
+                Subscribe for Updates
+              </a>
+            </div>
         </div>
       </section>
     </div>
