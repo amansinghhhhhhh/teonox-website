@@ -2773,7 +2773,7 @@ button {
       }
   .section-sub
   {
-    font-size: 14px;
+    font-size: 14px !important;
   }
   .cp-contact-cards {
     grid-template-columns: 1fr
@@ -6900,6 +6900,7 @@ a {
 
   .cp-desc {
     /* display: none; */
+    margin-top: 0;
   }
 }
 
