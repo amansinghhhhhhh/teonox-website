@@ -475,7 +475,7 @@ export default function Home() {
         <div className="container">
           <div className="reveal">
             <span className="section-label">The Teonox Approach</span>
-            <h2 className="section-title">Learn. Apply. Lead.</h2>
+            <h2 className="section-title">Learn. Apply. Lead</h2>
             <p className="section-sub">
               Brands see what you have built, solved and delivered. Companies
               don't ask "What did you study?" They ask "Can you execute & create
