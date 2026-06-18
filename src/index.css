@@ -5318,6 +5318,11 @@ a {
 }
 
 @media (max-width: 768px) {
+    .pg-hero-glow
+    {
+      display: none;
+    } 
+
   .skills-grid-new {
     grid-template-columns: repeat(2, 1fr);
   }
