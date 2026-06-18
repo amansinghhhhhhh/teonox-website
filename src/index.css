@@ -2757,6 +2757,24 @@ button {
 }
 
 @media(max-width:768px) {
+
+    .cp-track {
+        flex-direction: column;
+        align-content: center;
+    }
+
+  .cp-item
+  {
+    max-width: 100% !important;
+  }
+      .cp-item:nth-child(3)
+      {
+        margin-top: -10px !important;
+      }
+  .section-sub
+  {
+    font-size: 14px;
+  }
   .cp-contact-cards {
     grid-template-columns: 1fr
   }
@@ -3020,6 +3038,10 @@ button {
   .about-stats {
     grid-template-columns: repeat(3, 1fr)
   }
+
+  .contact-form-wrap {
+    padding: 30px 20px !important;
+}
 }
 
 @media(max-width:480px) {
@@ -5001,6 +5023,17 @@ a {
 }
 
 @media (max-width: 768px) {
+
+  .pg-hero-meta-divider
+  {
+    display: none;
+  }
+
+  .pg-hero-meta
+  {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   .pg-intro-grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -6038,6 +6071,7 @@ a {
     grid-template-columns: 1fr;
     padding: 40px 0 40px;
     gap: 24px;
+    margin-bottom: 25px;
   }
 
   .container {
@@ -6539,7 +6573,7 @@ a {
 /* ─── CURRICULUM PILLARS ─── */
 .cp-section {
   background: linear-gradient(180deg, #080b12 0%, #0c101e 100%);
-  padding: 90px 0 100px;
+  padding: 90px 0 90px;
   position: relative;
   border-top: 1px solid rgba(255, 107, 0, 0.06);
   border-bottom: 1px solid rgba(255, 107, 0, 0.06);
@@ -6803,7 +6837,6 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px 40px;
-    max-width: 600px;
   }
 
   .cp-track::before,
@@ -6837,16 +6870,17 @@ a {
 
 @media (max-width: 640px) {
   .cp-track {
-    gap: 24px;
+    gap: 30px;
   }
 
   .cp-item {
-    max-width: 100px;
+    /* max-width: 100px; */
+    gap: 15px;
   }
 
   .cp-dot {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
   }
 
   .cp-dot i {
@@ -6865,7 +6899,7 @@ a {
   }
 
   .cp-desc {
-    display: none;
+    /* display: none; */
   }
 }
 
