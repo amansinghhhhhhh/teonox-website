@@ -1029,7 +1029,7 @@ export default function Home() {
 
           <div className="hire-why reveal">
             <div className="hire-why-title">Why Hire From TEONOX</div>
-            <div className="hire-why-grid">
+            <div className="hire-why-grid home">
               <div className="hire-why-item">
                 <div className="hire-why-icon">
                   <Icon name="briefcase" size={18} />

@@ -1387,6 +1387,12 @@ button {
   gap: 20px
 }
 
+.hire-why-grid.home {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    display: grid;
+}
+
 .hire-why-item {
   display: flex;
   gap: 14px;
@@ -2732,6 +2738,10 @@ button {
 @media(max-width:768px) {
   .cp-contact-cards {
     grid-template-columns: 1fr
+  }
+
+  .hire-why-grid.home {
+    grid-template-columns: 1fr;
   }
 
   .cp-final {
