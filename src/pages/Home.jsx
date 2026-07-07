@@ -70,6 +70,7 @@ export default function Home() {
     return () => hdls.forEach((f) => f());
   }, []);
 
+  const videoRef = useRef(null);
   const [homeBlogs, setHomeBlogs] = useState([]);
   const [heroSubmitted, setHeroSubmitted] = useState(false);
   const [heroSubmitting, setHeroSubmitting] = useState(false);
@@ -88,6 +89,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const v = videoRef.current;
+    if (v) {
+      v.play().catch(() => {});
+    }
+  }, []);
+
+  useEffect(() => {
     getProgramCategories().then(setProgCategories).catch(console.error);
   }, []);
 
@@ -100,10 +108,12 @@ export default function Home() {
       <section className="hero">
         <div className="hero-bg">
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
             style={{
               position: "absolute",
               inset: "0",
@@ -748,7 +758,7 @@ export default function Home() {
             </div>
             <div className="reveal reveal-delay-2">
               <div className="about-img-wrap">
-                <img src="assets/asset-017.jpg" alt="Team at work" />
+                <img src="assets/about-us.jpg.webp" alt="Team at work" />
               </div>
             </div>
           </div>
