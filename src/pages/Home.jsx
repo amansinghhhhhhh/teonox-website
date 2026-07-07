@@ -250,7 +250,9 @@ export default function Home() {
                         <option value="AI-driven Digital Marketing & Business Strategy">
                           AI-driven Digital Marketing & Business Strategy
                         </option>
-                        <option value="AI-Driven Data Analytics & Business Intelligence">AI-Driven Data Analytics & Business Intelligence</option>
+                        <option value="AI-Driven Data Analytics & Business Intelligence">
+                          AI-Driven Data Analytics & Business Intelligence
+                        </option>
                         <option value="AI-Driven Sales & Business Development">
                           AI-Driven Sales & Business Development
                         </option>
@@ -485,7 +487,7 @@ export default function Home() {
           <div className="approach-grid">
             <div className="approach-card reveal reveal-delay-1">
               <div className="approach-card-img">
-                <img src="assets/asset-008.jpg" alt="Learning" />
+                <img src="assets/Learn.webp" alt="Learning" />
                 <span className="approach-step">01</span>
               </div>
               <div className="approach-card-body">
@@ -495,13 +497,17 @@ export default function Home() {
                 <h3>Learn</h3>
                 <h4>With Purpose</h4>
                 <p>
-                  We believe learning should be intentional and meaningful. By connecting knowledge with aspirations and real-world impact, we empower learners to build skills that matter, stay curious, and grow continuously. At TEONOX, learning is driven by purpose, not just by passing exams.
+                  We believe learning should be intentional and meaningful. By
+                  connecting knowledge with aspirations and real-world impact,
+                  we empower learners to build skills that matter, stay curious,
+                  and grow continuously. At TEONOX, learning is driven by
+                  purpose, not just by passing exams.
                 </p>
               </div>
             </div>
             <div className="approach-card reveal reveal-delay-2">
               <div className="approach-card-img">
-                <img src="assets/asset-009.jpg" alt="Applying skills" />
+                <img src="assets/apply.webp" alt="Applying skills" />
                 <span className="approach-step">02</span>
               </div>
               <div className="approach-card-body">
@@ -511,13 +517,17 @@ export default function Home() {
                 <h3>Apply</h3>
                 <h4>With Mindset</h4>
                 <p>
-                  Knowledge creates value only when put into action. We cultivate a growth mindset that encourages experimentation, resilience, and continuous improvement. Through hands-on learning and real-world practice, our learners develop the confidence to turn ideas into outcomes.
+                  Knowledge creates value only when put into action. We
+                  cultivate a growth mindset that encourages experimentation,
+                  resilience, and continuous improvement. Through hands-on
+                  learning and real-world practice, our learners develop the
+                  confidence to turn ideas into outcomes.
                 </p>
               </div>
             </div>
             <div className="approach-card reveal reveal-delay-3">
               <div className="approach-card-img">
-                <img src="assets/asset-010.jpg" alt="Leadership" />
+                <img src="assets/Lead.webp" alt="Leadership" />
                 <span className="approach-step">03</span>
               </div>
               <div className="approach-card-body">
@@ -527,15 +537,17 @@ export default function Home() {
                 <h3>Lead</h3>
                 <h4>With Ownership</h4>
                 <p>
-                  Leadership begins with accountability. We foster an ownership mindset where individuals take responsibility, embrace challenges, and act with integrity. By thinking long-term and leading with purpose, our learners create impact, inspire others, and drive meaningful change.
+                  Leadership begins with accountability. We foster an ownership
+                  mindset where individuals take responsibility, embrace
+                  challenges, and act with integrity. By thinking long-term and
+                  leading with purpose, our learners create impact, inspire
+                  others, and drive meaningful change.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      
 
       <div className="img-strip">
         <img src="strip image/01.jpg" alt="" />
@@ -555,7 +567,10 @@ export default function Home() {
           <div className="bento-grid">
             <div className="bento-item reveal reveal-delay-1">
               <div className="bento-img">
-                <img src="assets/asset-012.jpg" alt="Live Brand Projects" />
+                <img
+                  src="assets/Live Brand Projects.webp"
+                  alt="Live Brand Projects"
+                />
                 <div className="bento-chip">
                   <Icon name="briefcase" size={13} />
                   Live Projects
@@ -576,7 +591,10 @@ export default function Home() {
             </div>
             <div className="bento-item reveal reveal-delay-2">
               <div className="bento-img">
-                <img src="assets/asset-013.jpg" alt="AI & Future Labs" />
+                <img
+                  src="assets/AI & Future Labs.webp"
+                  alt="AI & Future Labs"
+                />
                 <div className="bento-chip">
                   <Icon name="cpu" size={13} />
                   AI & Future
@@ -597,7 +615,10 @@ export default function Home() {
             </div>
             <div className="bento-item reveal reveal-delay-1">
               <div className="bento-img">
-                <img src="assets/asset-014.jpg" alt="Industry Mentorship" />
+                <img
+                  src="assets/Industry Mentorship.webp"
+                  alt="Industry Mentorship"
+                />
                 <div className="bento-chip">
                   <Icon name="users" size={13} />
                   Mentorship
@@ -618,7 +639,10 @@ export default function Home() {
             </div>
             <div className="bento-item reveal reveal-delay-2">
               <div className="bento-img">
-                <img src="assets/asset-015.jpg" alt="Business Simulations" />
+                <img
+                  src="assets/Business Simulations.webp"
+                  alt="Business Simulations"
+                />
                 <div className="bento-chip">
                   <Icon name="monitor" size={13} />
                   Simulations
@@ -639,7 +663,7 @@ export default function Home() {
             </div>
             <div className="bento-item reveal reveal-delay-3">
               <div className="bento-img">
-                <img src="assets/asset-016.jpg" alt="Agency Exposure" />
+                <img src="assets/Agency Exposure.webp" alt="Agency Exposure" />
                 <div className="bento-chip">
                   <Icon name="building-2" size={13} />
                   Agency
@@ -661,7 +685,7 @@ export default function Home() {
             <div className="bento-item reveal reveal-delay-1">
               <div className="bento-img">
                 <img
-                  src="assets/asset-018.jpg"
+                  src="assets/Portfolio & Career Development.webp"
                   alt="Portfolio & Career Development"
                 />
                 <div className="bento-chip">
@@ -731,77 +755,73 @@ export default function Home() {
         </div>
       </section>
 
-{/* Piller */}
-        <section className="cp-section">
-          <div className="container" style={{ textAlign: "center" }}>
-            <div className="reveal" style={{ marginBottom: "56px" }}>
-              <span className="section-label">Curriculum Pillars</span>
-              <h2
-                className="section-title "
-                style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}
-              >
-                The <em>5 Pillars</em> of the Program
-              </h2>
-            </div>
+      {/* Piller */}
+      <section className="cp-section">
+        <div className="container" style={{ textAlign: "center" }}>
+          <div className="reveal" style={{ marginBottom: "56px" }}>
+            <span className="section-label">Curriculum Pillars</span>
+            <h2
+              className="section-title "
+              style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}
+            >
+              The <em>5 Pillars</em> of the Program
+            </h2>
           </div>
-          <div className="cp-track">
-            <div className="cp-item reveal reveal-d1">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="compass" />
-                </div>
+        </div>
+        <div className="cp-track">
+          <div className="cp-item reveal reveal-d1">
+            <div className="cp-dot-wrap">
+              <div className="cp-dot">
+                <Icon name="compass" />
               </div>
-              <span className="cp-name">Strategy</span>
-              <p className="cp-desc">
-                How businesses think, position, grow, and decide
-              </p>
             </div>
-            <div className="cp-item reveal reveal-d2">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="rocket" />
-                </div>
-              </div>
-              <span className="cp-name">Execution</span>
-              <p className="cp-desc">
-                Campaigns, projects, and operational workflows
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d3">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="target" />
-                </div>
-              </div>
-              <span className="cp-name">Analytics</span>
-              <p className="cp-desc">
-                Data, reporting, and decision-making insights
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d4">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="cpu" />
-                </div>
-              </div>
-              <span className="cp-name">AI</span>
-              <p className="cp-desc">
-                Modern AI for productivity and automation
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d5">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="handshake" />
-                </div>
-              </div>
-              <span className="cp-name">Sales Mindset</span>
-              <p className="cp-desc">
-                Communication, persuasion, and influence
-              </p>
-            </div>
+            <span className="cp-name">Strategy</span>
+            <p className="cp-desc">
+              How businesses think, position, grow, and decide
+            </p>
           </div>
-        </section>
+          <div className="cp-item reveal reveal-d2">
+            <div className="cp-dot-wrap">
+              <div className="cp-dot">
+                <Icon name="rocket" />
+              </div>
+            </div>
+            <span className="cp-name">Execution</span>
+            <p className="cp-desc">
+              Campaigns, projects, and operational workflows
+            </p>
+          </div>
+          <div className="cp-item reveal reveal-d3">
+            <div className="cp-dot-wrap">
+              <div className="cp-dot">
+                <Icon name="target" />
+              </div>
+            </div>
+            <span className="cp-name">Analytics</span>
+            <p className="cp-desc">
+              Data, reporting, and decision-making insights
+            </p>
+          </div>
+          <div className="cp-item reveal reveal-d4">
+            <div className="cp-dot-wrap">
+              <div className="cp-dot">
+                <Icon name="cpu" />
+              </div>
+            </div>
+            <span className="cp-name">AI</span>
+            <p className="cp-desc">Modern AI for productivity and automation</p>
+          </div>
+          <div className="cp-item reveal reveal-d5">
+            <div className="cp-dot-wrap">
+              <div className="cp-dot">
+                <Icon name="handshake" />
+              </div>
+            </div>
+            <span className="cp-name">Sales Mindset</span>
+            <p className="cp-desc">Communication, persuasion, and influence</p>
+          </div>
+        </div>
+      </section>
 
       <section className="section" id="career-paths-home">
         <div className="container">
@@ -941,7 +961,7 @@ export default function Home() {
             </div>
             <div className="reveal reveal-delay-2">
               <div className="work-img-wrap">
-                <img src="assets/asset-018.jpg" alt="Trainer speaking" />
+                <img src="assets/Work With Us.webp" alt="Trainer speaking" />
               </div>
             </div>
           </div>
