@@ -100,17 +100,17 @@ export default function Home() {
       <section className="hero">
         <div className="hero-bg">
           <video
-            autoplay
+            autoPlay
             muted
             loop
-            playsinline
+            playsInline
             style={{
               position: "absolute",
               inset: "0",
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              opacity: "0.5",
+              opacity: "0.25",
             }}
           >
             <source src="assets/asset-003.mp4" type="video/mp4" />
