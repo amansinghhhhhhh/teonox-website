@@ -97,16 +97,18 @@ export default function Careers() {
                 <a href="#careers-form" className="btn btn-primary btn-sm">
                   View Opportunities <Icon name="arrow-down" size={14} />
                 </a>
-                <Link to="/hire" className="btn btn-outline" style={{ flexShrink: "0" }}                            >
-                              Partner With Us<Icon name="arrow-right" size={14} />
-                            </Link>
+                <Link
+                  to="/hire"
+                  className="btn btn-outline"
+                  style={{ flexShrink: "0" }}
+                >
+                  Partner With Us
+                  <Icon name="arrow-right" size={14} />
+                </Link>
               </div>
             </div>
             <div className="about-img-wrap" style={{ aspectRatio: "16/10" }}>
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&fit=crop&auto=format"
-                alt=""
-              />
+              <img src="assets/career-banner.svg" alt="" />
             </div>
           </div>
 
@@ -320,19 +322,23 @@ export default function Careers() {
                         <h4>Good-to-Have</h4>
                         <div
                           className="job-bullets"
-                          dangerouslySetInnerHTML={{ __html: sanitizeHtml(a.good_to_have) }}
+                          dangerouslySetInnerHTML={{
+                            __html: sanitizeHtml(a.good_to_have),
+                          }}
                         />
                       </div>
                     )}
-                   {a.education && (
-  <div className="job-section">
-    <h4>Education</h4>
+                    {a.education && (
+                      <div className="job-section">
+                        <h4>Education</h4>
 
-    <p
-     dangerouslySetInnerHTML={{ __html: sanitizeHtml(a.education) }}
-    />
-  </div>
-)}
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: sanitizeHtml(a.education),
+                          }}
+                        />
+                      </div>
+                    )}
                     <div style={{ marginTop: "24px" }}>
                       <a href="#careers-form" className="btn btn-primary">
                         Apply for This Position{" "}
@@ -420,8 +426,12 @@ export default function Careers() {
                           errors[name] = `${label} is required.`;
                         else if (opts.email && !validateEmail(v))
                           errors[name] = "Please enter a valid email address.";
-                        else if (opts.phone && !validatePhone(v.replace(/[\s\-\(\)\+]/g, "")))
-                          errors[name] = "Please enter a valid 10-digit Indian phone number.";
+                        else if (
+                          opts.phone &&
+                          !validatePhone(v.replace(/[\s\-\(\)\+]/g, ""))
+                        )
+                          errors[name] =
+                            "Please enter a valid 10-digit Indian phone number.";
                       };
                       val("Full Name", "Full Name");
                       val("Email", "Email", { email: true });
@@ -429,7 +439,10 @@ export default function Careers() {
                       val("Phone Number", "Phone Number", { phone: true });
                       val("Experience", "Experience");
                       val("Why TEONOX", "Why TEONOX");
-                      if (fields["Role"] === "Select" || fields["Role"] === "") {
+                      if (
+                        fields["Role"] === "Select" ||
+                        fields["Role"] === ""
+                      ) {
                         errors["Role"] = "Please select a role.";
                       }
                       if (file && file instanceof File && file.size > 0) {
@@ -478,7 +491,9 @@ export default function Careers() {
                       </p>
                     </div>
                     <div className="form-row">
-                      <div className={`field${fieldErrors["Full Name"] ? " field-invalid" : ""}`}>
+                      <div
+                        className={`field${fieldErrors["Full Name"] ? " field-invalid" : ""}`}
+                      >
                         <label>Full Name</label>
                         <input
                           type="text"
@@ -487,10 +502,14 @@ export default function Careers() {
                           onChange={() => clearError("Full Name")}
                         />
                         {fieldErrors["Full Name"] && (
-                          <span className="field-error">{fieldErrors["Full Name"]}</span>
+                          <span className="field-error">
+                            {fieldErrors["Full Name"]}
+                          </span>
                         )}
                       </div>
-                      <div className={`field${fieldErrors["Email"] ? " field-invalid" : ""}`}>
+                      <div
+                        className={`field${fieldErrors["Email"] ? " field-invalid" : ""}`}
+                      >
                         <label>Email</label>
                         <input
                           type="email"
@@ -499,12 +518,16 @@ export default function Careers() {
                           onChange={() => clearError("Email")}
                         />
                         {fieldErrors["Email"] && (
-                          <span className="field-error">{fieldErrors["Email"]}</span>
+                          <span className="field-error">
+                            {fieldErrors["Email"]}
+                          </span>
                         )}
                       </div>
                     </div>
                     <div className="form-row">
-                      <div className={`field${fieldErrors["Role"] ? " field-invalid" : ""}`}>
+                      <div
+                        className={`field${fieldErrors["Role"] ? " field-invalid" : ""}`}
+                      >
                         <label>Role</label>
                         <select name="Role" onChange={() => clearError("Role")}>
                           <option value="">Select</option>
@@ -523,10 +546,14 @@ export default function Careers() {
                           <option value="Other">Other</option>
                         </select>
                         {fieldErrors["Role"] && (
-                          <span className="field-error">{fieldErrors["Role"]}</span>
+                          <span className="field-error">
+                            {fieldErrors["Role"]}
+                          </span>
                         )}
                       </div>
-                      <div className={`field${fieldErrors["Phone Number"] ? " field-invalid" : ""}`}>
+                      <div
+                        className={`field${fieldErrors["Phone Number"] ? " field-invalid" : ""}`}
+                      >
                         <label>Phone Number</label>
                         <input
                           type="tel"
@@ -535,12 +562,16 @@ export default function Careers() {
                           onChange={() => clearError("Phone Number")}
                         />
                         {fieldErrors["Phone Number"] && (
-                          <span className="field-error">{fieldErrors["Phone Number"]}</span>
+                          <span className="field-error">
+                            {fieldErrors["Phone Number"]}
+                          </span>
                         )}
                       </div>
                     </div>
                     <div className="form-row">
-                      <div className={`field${fieldErrors["Experience"] ? " field-invalid" : ""}`}>
+                      <div
+                        className={`field${fieldErrors["Experience"] ? " field-invalid" : ""}`}
+                      >
                         <label>Experience</label>
                         <input
                           type="text"
@@ -549,10 +580,14 @@ export default function Careers() {
                           onChange={() => clearError("Experience")}
                         />
                         {fieldErrors["Experience"] && (
-                          <span className="field-error">{fieldErrors["Experience"]}</span>
+                          <span className="field-error">
+                            {fieldErrors["Experience"]}
+                          </span>
                         )}
                       </div>
-                      <div className={`field${fieldErrors["Why TEONOX"] ? " field-invalid" : ""}`}>
+                      <div
+                        className={`field${fieldErrors["Why TEONOX"] ? " field-invalid" : ""}`}
+                      >
                         <label>Why TEONOX?</label>
                         <textarea
                           name="Why TEONOX"
@@ -561,11 +596,15 @@ export default function Careers() {
                           onChange={() => clearError("Why TEONOX")}
                         ></textarea>
                         {fieldErrors["Why TEONOX"] && (
-                          <span className="field-error">{fieldErrors["Why TEONOX"]}</span>
+                          <span className="field-error">
+                            {fieldErrors["Why TEONOX"]}
+                          </span>
                         )}
                       </div>
                     </div>
-                    <div className={`field${fieldErrors["Resume"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Resume"] ? " field-invalid" : ""}`}
+                    >
                       <label>Upload Resume / CV</label>
                       <input
                         type="file"
@@ -574,7 +613,9 @@ export default function Careers() {
                         onChange={() => clearError("Resume")}
                       />
                       {fieldErrors["Resume"] && (
-                        <span className="field-error">{fieldErrors["Resume"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Resume"]}
+                        </span>
                       )}
                     </div>
                     {error && (

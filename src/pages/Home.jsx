@@ -560,7 +560,7 @@ export default function Home() {
       </section>
 
       <div className="img-strip">
-        <img src="strip image/01.jpg" alt="" />
+        <img src="assets/01.webp" alt="" />
         <div className="img-strip-overlay"></div>
       </div>
 
@@ -979,7 +979,7 @@ export default function Home() {
       </section>
 
       <div className="img-strip">
-        <img src="strip image/02.jpg" alt="" />
+        <img src="assets/02.webp" alt="" />
         <div className="img-strip-overlay"></div>
       </div>
 
@@ -1184,7 +1184,7 @@ export default function Home() {
       </section>
 
       <div className="img-strip">
-        <img src="strip image/03.jpg" alt="" />
+        <img src="assets/03.webp" alt="" />
         <div className="img-strip-overlay"></div>
       </div>
 

@@ -80,7 +80,10 @@ export default function Hire() {
                 Hire Talent That's Ready to Contribute.
               </h2>
               <p className="section-sub" style={{ maxWidth: "100%" }}>
-                TEONOX learners are trained through practical projects, industry exposure, AI-powered workflows, and real business challenges helping them bring confidence, adaptability, and execution-focused thinking to modern workplaces.
+                TEONOX learners are trained through practical projects, industry
+                exposure, AI-powered workflows, and real business challenges
+                helping them bring confidence, adaptability, and
+                execution-focused thinking to modern workplaces.
               </p>
               <div className="hero-actions" style={{ marginTop: "20px" }}>
                 <a href="#form-wrap-id" className="btn btn-primary btn-sm">
@@ -89,7 +92,7 @@ export default function Hire() {
               </div>
             </div>
             <div className="about-img-wrap" style={{ aspectRatio: "16/10" }}>
-              <img src="assets/asset-024.jpg" alt="" />
+              <img src="assets/hire-banner.svg" alt="" />
             </div>
           </div>
 
@@ -121,7 +124,9 @@ export default function Hire() {
                 <div>
                   <h5>Practical Exposure</h5>
                   <p>
-                    Worked on projects, campaigns, simulations, and business challenges.                  </p>
+                    Worked on projects, campaigns, simulations, and business
+                    challenges.{" "}
+                  </p>
                 </div>
               </div>
               <div className="hire-why-item">
@@ -190,28 +195,40 @@ export default function Hire() {
                 <Icon name="trending-up" size={22} />
               </div>
               <h4>Digital Marketing & Growth Professionals</h4>
-              <p>Individuals trained in digital marketing, content strategy, growth initiatives, and campaign execution.</p>
+              <p>
+                Individuals trained in digital marketing, content strategy,
+                growth initiatives, and campaign execution.
+              </p>
             </div>
             <div className="hire-card reveal reveal-d2">
               <div className="hire-card-icon">
                 <Icon name="bar-chart-3" size={22} />
               </div>
               <h4>AI & Analytics Talent</h4>
-              <p>Professionals equipped with analytical thinking, dashboarding, reporting, and AI-assisted workflows.</p>
+              <p>
+                Professionals equipped with analytical thinking, dashboarding,
+                reporting, and AI-assisted workflows.
+              </p>
             </div>
             <div className="hire-card reveal reveal-d3">
               <div className="hire-card-icon">
                 <Icon name="users" size={22} />
               </div>
               <h4>Sales & Revenue Professionals</h4>
-              <p>Talent trained in communication, business development, client engagement, and revenue-focused thinking.</p>
+              <p>
+                Talent trained in communication, business development, client
+                engagement, and revenue-focused thinking.
+              </p>
             </div>
             <div className="hire-card reveal reveal-d4">
               <div className="hire-card-icon">
                 <Icon name="layers" size={22} />
               </div>
               <h4>Multi-Disciplinary Growth Talent</h4>
-              <p>Professionals with exposure across marketing, AI, analytics, and business functions.</p>
+              <p>
+                Professionals with exposure across marketing, AI, analytics, and
+                business functions.
+              </p>
             </div>
           </div>
 
@@ -230,89 +247,85 @@ export default function Hire() {
             </p>
           </div>
 
-    <div className="reveal">
-      <p
-        className="section-sub"
-        style={{
-          maxWidth: "100%",
-          marginBottom: "20px",
-        }}
-      >
-        We welcome partnerships with
-        organizations interested in:
-      </p>
+          <div className="reveal">
+            <p
+              className="section-sub"
+              style={{
+                maxWidth: "100%",
+                marginBottom: "20px",
+              }}
+            >
+              We welcome partnerships with organizations interested in:
+            </p>
 
-      <div className="collab-grid">
+            <div className="collab-grid">
+              <div className="collab-card">
+                <div className="collab-icon">
+                  <Icon
+                    name="briefcase"
+                    size={14}
+                    style={{ color: "var(--orange)" }}
+                  />
+                </div>
+                <span>Campus Hiring</span>
+              </div>
 
-        <div className="collab-card">
-          <div className="collab-icon">
-            <Icon
-              name="briefcase"
-              size={14}
-              style={{ color: "var(--orange)" }}
-            />
+              <div className="collab-card">
+                <div className="collab-icon">
+                  <Icon
+                    name="book-open"
+                    size={14}
+                    style={{ color: "var(--orange)" }}
+                  />
+                </div>
+                <span>Internships</span>
+              </div>
+
+              <div className="collab-card">
+                <div className="collab-icon">
+                  <Icon
+                    name="zap"
+                    size={14}
+                    style={{ color: "var(--orange)" }}
+                  />
+                </div>
+                <span>Live Projects</span>
+              </div>
+
+              <div className="collab-card">
+                <div className="collab-icon">
+                  <Icon
+                    name="users"
+                    size={14}
+                    style={{ color: "var(--orange)" }}
+                  />
+                </div>
+                <span>Industry Workshops</span>
+              </div>
+
+              <div className="collab-card">
+                <div className="collab-icon">
+                  <Icon
+                    name="mic"
+                    size={14}
+                    style={{ color: "var(--orange)" }}
+                  />
+                </div>
+                <span>Guest Sessions</span>
+              </div>
+
+              <div className="collab-card">
+                <div className="collab-icon">
+                  <Icon
+                    name="star"
+                    size={14}
+                    style={{ color: "var(--orange)" }}
+                  />
+                </div>
+                <span>Mentorship Initiatives</span>
+              </div>
+            </div>
           </div>
-          <span>Campus Hiring</span>
-        </div>
-
-        <div className="collab-card">
-          <div className="collab-icon">
-            <Icon
-              name="book-open"
-              size={14}
-              style={{ color: "var(--orange)" }}
-            />
-          </div>
-          <span>Internships</span>
-        </div>
-
-        <div className="collab-card">
-          <div className="collab-icon">
-            <Icon
-              name="zap"
-              size={14}
-              style={{ color: "var(--orange)" }}
-            />
-          </div>
-          <span>Live Projects</span>
-        </div>
-
-        <div className="collab-card">
-          <div className="collab-icon">
-            <Icon
-              name="users"
-              size={14}
-              style={{ color: "var(--orange)" }}
-            />
-          </div>
-          <span>Industry Workshops</span>
-        </div>
-
-        <div className="collab-card">
-          <div className="collab-icon">
-            <Icon
-              name="mic"
-              size={14}
-              style={{ color: "var(--orange)" }}
-            />
-          </div>
-          <span>Guest Sessions</span>
-        </div>
-
-        <div className="collab-card">
-          <div className="collab-icon">
-            <Icon
-              name="star"
-              size={14}
-              style={{ color: "var(--orange)" }}
-            />
-          </div>
-          <span>Mentorship Initiatives</span>
-        </div>
-
-      </div>
-    </div>
-
 
           <div className="contact-wrap reveal" style={{}}>
             <div className="form-wrap" id="form-wrap-id">
@@ -380,8 +393,12 @@ export default function Hire() {
                         errors[name] = `${label} is required.`;
                       else if (opts.email && !validateEmail(v))
                         errors[name] = "Please enter a valid email address.";
-                      else if (opts.phone && !validatePhone(v.replace(/[\s\-\(\)\+]/g, "")))
-                        errors[name] = "Please enter a valid 10-digit Indian phone number.";
+                      else if (
+                        opts.phone &&
+                        !validatePhone(v.replace(/[\s\-\(\)\+]/g, ""))
+                      )
+                        errors[name] =
+                          "Please enter a valid 10-digit Indian phone number.";
                       else if (opts.min && Number(v) < opts.min)
                         errors[name] = `${label} must be at least ${opts.min}.`;
                     };
@@ -410,7 +427,9 @@ export default function Hire() {
                   }}
                 >
                   <div className="form-row">
-                    <div className={`field${fieldErrors["Company Name"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Company Name"] ? " field-invalid" : ""}`}
+                    >
                       <label>Company Name</label>
                       <input
                         type="text"
@@ -419,10 +438,14 @@ export default function Hire() {
                         onChange={() => clearError("Company Name")}
                       />
                       {fieldErrors["Company Name"] && (
-                        <span className="field-error">{fieldErrors["Company Name"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Company Name"]}
+                        </span>
                       )}
                     </div>
-                    <div className={`field${fieldErrors["Contact Person"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Contact Person"] ? " field-invalid" : ""}`}
+                    >
                       <label>Contact Person</label>
                       <input
                         type="text"
@@ -431,12 +454,16 @@ export default function Hire() {
                         onChange={() => clearError("Contact Person")}
                       />
                       {fieldErrors["Contact Person"] && (
-                        <span className="field-error">{fieldErrors["Contact Person"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Contact Person"]}
+                        </span>
                       )}
                     </div>
                   </div>
                   <div className="form-row">
-                    <div className={`field${fieldErrors["Email Address"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Email Address"] ? " field-invalid" : ""}`}
+                    >
                       <label>Email Address</label>
                       <input
                         type="email"
@@ -445,10 +472,14 @@ export default function Hire() {
                         onChange={() => clearError("Email Address")}
                       />
                       {fieldErrors["Email Address"] && (
-                        <span className="field-error">{fieldErrors["Email Address"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Email Address"]}
+                        </span>
                       )}
                     </div>
-                    <div className={`field${fieldErrors["Phone Number"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Phone Number"] ? " field-invalid" : ""}`}
+                    >
                       <label>Phone Number</label>
                       <input
                         type="tel"
@@ -457,12 +488,16 @@ export default function Hire() {
                         onChange={() => clearError("Phone Number")}
                       />
                       {fieldErrors["Phone Number"] && (
-                        <span className="field-error">{fieldErrors["Phone Number"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Phone Number"]}
+                        </span>
                       )}
                     </div>
                   </div>
                   <div className="form-row">
-                    <div className={`field${fieldErrors["Hiring Requirement"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Hiring Requirement"] ? " field-invalid" : ""}`}
+                    >
                       <label>Hiring Requirement</label>
                       <input
                         type="text"
@@ -471,10 +506,14 @@ export default function Hire() {
                         onChange={() => clearError("Hiring Requirement")}
                       />
                       {fieldErrors["Hiring Requirement"] && (
-                        <span className="field-error">{fieldErrors["Hiring Requirement"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Hiring Requirement"]}
+                        </span>
                       )}
                     </div>
-                    <div className={`field${fieldErrors["Open Positions"] ? " field-invalid" : ""}`}>
+                    <div
+                      className={`field${fieldErrors["Open Positions"] ? " field-invalid" : ""}`}
+                    >
                       <label>Open Positions</label>
                       <input
                         type="number"
@@ -483,7 +522,9 @@ export default function Hire() {
                         onChange={() => clearError("Open Positions")}
                       />
                       {fieldErrors["Open Positions"] && (
-                        <span className="field-error">{fieldErrors["Open Positions"]}</span>
+                        <span className="field-error">
+                          {fieldErrors["Open Positions"]}
+                        </span>
                       )}
                     </div>
                   </div>

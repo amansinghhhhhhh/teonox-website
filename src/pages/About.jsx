@@ -120,7 +120,7 @@ export default function About() {
             </div>
             <div className="reveal reveal-d2">
               <div className="about-img-wrap">
-                <img src="assets/asset-022.jpg" alt="" />
+                <img src="assets/about-us.jpg.webp" alt="" />
               </div>
             </div>
           </div>
