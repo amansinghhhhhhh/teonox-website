@@ -138,9 +138,7 @@ export default function Home() {
                 <span className="cursor">|</span>
               </h1>
               <p className="hero-sub" style={{ maxWidth: "100%" }}>
-                Learn new-age Digital Marketing, AI & Automation, Data Analytics
-                and Sales & Business Development skills through experiential,
-                industry-led learning.
+              Master in-demand business skills like Digital Marketing, AI, Automation, Data Analytics & Digital Sales to get hired or get promoted.
               </p>
               <div className="hero-actions">
                 <a href="/programs" className="btn btn-primary">
@@ -149,7 +147,7 @@ export default function Home() {
                 </a>
                 <a href="/contact" className="btn btn-outline">
                   <Icon name="phone" size={16} />
-                  Talk to a Career Advisor
+                  Book a Call with Career Advisor
                 </a>
               </div>
             </div>
