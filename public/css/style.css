@@ -8217,3 +8217,187 @@ a {
     padding: 6px 14px;
   }
 }
+
+/* ─── MOBILE RESPONSIVE FIXES FOR STATIC PROGRAM PAGES ─── */
+
+@media(max-width:900px) {
+  .mesa-tracks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:1024px) {
+  .footer-grid.reveal.visible {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media(max-width:640px) {
+  .mesa-tracks {
+    grid-template-columns: 1fr;
+  }
+
+  .mesa-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mesa-stats {
+    flex-direction: column;
+  }
+
+  .mesa-card {
+    padding: 20px 16px;
+  }
+
+  .tools-cloud {
+    gap: 6px;
+  }
+
+  .tool-chip {
+    font-size: 0.65rem;
+    padding: 5px 10px 5px 6px;
+  }
+
+  .logo-badge {
+    width: 18px;
+    height: 18px;
+  }
+
+    /* Footer: 1 column */
+  .footer-grid.reveal.visible {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Career paths: 3-col → 1-col */
+  [style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Working professional: 2-col → 1-col */
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reserve Your Seat: flex → stack */
+  div[style*="gap:48px"][style*="display:flex"] {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  /* Reserve side cards: smaller */
+  [style*="min-width:240px"] {
+    min-width: 100% !important;
+  }
+
+  /* Section padding reduce on mobile */
+  .mesa-section {
+    margin-top: 40px;
+  }
+
+  .mesa-track {
+    padding: 12px 16px;
+  }
+
+  .mesa-track span {
+    font-size: 0.82rem;
+  }
+
+  .mesa-career {
+    padding: 12px;
+  }
+
+  /* FAQ grid */
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-item {
+    padding: 16px 18px;
+  }
+
+  /* Guarantee section */
+  .gc-wrapper {
+    flex-direction: column;
+  }
+
+  .gc-left,
+  .gc-right {
+    padding: 32px 24px !important;
+  }
+
+  .gc-right {
+    flex-direction: column;
+    gap: 20px !important;
+  }
+
+  /* Hero meta wrap */
+  .pg-hero-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pg-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pg-hero-actions .btn {
+    justify-content: center;
+  }
+
+  .pg-hero {
+    padding-top: 20px;
+  }
+
+  .section {
+    padding: 30px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media(max-width:480px) {
+  .tool-chip {
+    font-size: 0.6rem;
+    padding: 4px 8px 4px 5px;
+  }
+
+  .mesa-track .num {
+    width: 22px;
+    font-size: 0.75rem;
+  }
+
+  .mesa-stat .num {
+    font-size: 1.6rem;
+  }
+
+  .mesa-stat {
+    padding: 16px;
+  }
+
+  .pg-hero h1 {
+    font-size: clamp(1.6rem, 7vw, 2rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+  }
+
+  .section-sub {
+    font-size: 0.85rem;
+  }
+
+  .learn-card {
+    padding: 18px 14px;
+  }
+
+  .learn-card h4 {
+    font-size: 0.85rem;
+  }
+
+  .learn-card p {
+    font-size: 0.75rem;
+  }
+}
