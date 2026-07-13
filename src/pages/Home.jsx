@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import useTypewriter from "../hooks/useTypewriter.js";
-import {
-  getBlogs,
-  getPrograms,
-  getProgramCategories,
-} from "../api/wordpressApi";
+import { getBlogs } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
 import { sanitizeHtml } from "../utils/sanitize.js";
 import { submitForm } from "../services/formService";
@@ -78,9 +74,6 @@ export default function Home() {
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactSubmitting, setContactSubmitting] = useState(false);
   const [contactError, setContactError] = useState("");
-  const [programs, setPrograms] = useState([]);
-  const [progCategories, setProgCategories] = useState([]);
-  const [progFilter, setProgFilter] = useState("");
 
   useEffect(() => {
     getBlogs()
@@ -94,14 +87,6 @@ export default function Home() {
       v.play().catch(() => {});
     }
   }, []);
-
-  useEffect(() => {
-    getProgramCategories().then(setProgCategories).catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    getPrograms(progFilter).then(setPrograms).catch(console.error);
-  }, [progFilter]);
 
   return (
     <div className="page active">
@@ -138,7 +123,9 @@ export default function Home() {
                 <span className="cursor">|</span>
               </h1>
               <p className="hero-sub" style={{ maxWidth: "100%" }}>
-              Master in-demand business skills like Digital Marketing, AI, Automation, Data Analytics & Digital Sales to get hired or get promoted.
+                Master in-demand business skills like Digital Marketing, AI,
+                Automation, Data Analytics & Digital Sales to get hired or get
+                promoted.
               </p>
               <div className="hero-actions">
                 <a href="/programs" className="btn btn-primary">
@@ -297,186 +284,118 @@ export default function Home() {
 
       <section className="section" id="programs-home">
         <div className="container">
-          <div className="reveal" style={{ marginBottom: "48px" }}>
-            <h2 className="section-title">Our Programs</h2>
+          <div
+            className="reveal"
+            style={{ marginBottom: "20px", marginTop: "100px" }}
+          >
+            <span className="section-label">Our Programs</span>
+            <h2 className="section-title">Explore Our Programs</h2>
             <p className="section-sub">
               Practical, immersive programs designed to help you build skills
               that businesses actually hire for.
             </p>
           </div>
-          <div className="prog-filters reveal">
-            <button
-              className={"prog-filter" + (progFilter === "" ? " active" : "")}
-              onClick={() => setProgFilter("")}
-              data-filter="all"
-            >
-              All
-            </button>
-            {progCategories.map((cat) => (
-              <button
-                key={cat.id}
-                className={
-                  "prog-filter" + (progFilter === cat.id ? " active" : "")
-                }
-                onClick={() => setProgFilter(cat.id)}
-                data-filter={cat.slug}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
+
           <div className="prog-grid">
-            {programs.map((program, i) => {
-              const image =
-                program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                "/assets/asset-023.jpg";
-              return (
-                <Link
-                  key={program.id}
-                  to={`/programs/${program.slug}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <div className={`prog-card reveal reveal-d${(i % 3) + 1}`}>
-                    <img
-                      className="prog-card-img"
-                      src={image}
-                      alt={decodeEntities(
-                        program.title.rendered?.replace(/<[^>]+>/g, ""),
-                      )}
-                    />
+            {[
+              {
+                img: "/assets/asset-023.jpg",
+                type: "Foundation Program",
+                typeColor: "#ff5c1a",
+                title: "Business Digital Marketing With AI",
+                desc: "Master digital marketing from the ground up &mdash; SEO, paid ads, social media, analytics, AI tools, and business development.",
+                meta: [
+                  "6 Months Duration",
+                  "12th Passed, Graduates &amp; Working Professionals",
+                  "On Campus, Pune",
+                ],
+                href: "/program-bdm.html",
+              },
+              {
+                img: "/assets/asset-004.jpg",
+                type: "Specialization",
+                typeColor: "#22c55e",
+                title: "Specialization in Search Engine Optimization",
+                desc: "Go deep into SEO &mdash; technical audits, link building, and AI search visibility.",
+                meta: [
+                  "3 Months Duration",
+                  "12th Passed, Graduates &amp; Working Professionals",
+                  "On Campus, Pune",
+                ],
+                href: "/program-seo.html",
+              },
+              {
+                img: "/assets/asset-005.jpg",
+                type: "Specialization",
+                typeColor: "#a855f7",
+                title: "Specialization in Social Media Marketing",
+                desc: "Master organic growth and community building across every major social media platform.",
+                meta: [
+                  "3 Months Duration",
+                  "12th Passed, Graduates &amp; Working Professionals",
+                  "On Campus, Pune",
+                ],
+                href: "/program-social-media.html",
+              },
+              {
+                img: "/assets/asset-006.jpg",
+                type: "Specialization",
+                typeColor: "#ff5c1a",
+                title: "Specialization in Performance Marketing",
+                desc: "Run and scale paid campaigns across Google, Meta &amp; LinkedIn like a performance marketer.",
+                meta: [
+                  "3 Months Duration",
+                  "12th Passed, Graduates &amp; Working Professionals",
+                  "On Campus, Pune",
+                ],
+                href: "/program-performance.html",
+              },
+            ].map((prog, i) => (
+              <a
+                key={i}
+                href={prog.href}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className={`prog-card reveal reveal-d${(i % 3) + 1}`}>
+                  <img
+                    className="prog-card-img"
+                    src={prog.img}
+                    alt={prog.title}
+                  />
+                  <div className="prog-card-body">
                     <div className="prog-card-top">
-                      <h3
-                        dangerouslySetInnerHTML={{
-                          __html: sanitizeHtml(program.title.rendered),
-                        }}
+                      <span
+                        className="prog-card-type"
                         style={{
-                          display: "-webkit-box",
-                          WebkitLineClamp: "2",
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
+                          background: `${prog.typeColor}26`,
+                          color: prog.typeColor,
+                          borderColor: `${prog.typeColor}40`,
                         }}
-                      />
+                      >
+                        {prog.type}
+                      </span>
+                      <h3>{prog.title}</h3>
                     </div>
+                    <p
+                      className="prog-card-desc"
+                      dangerouslySetInnerHTML={{ __html: prog.desc }}
+                    />
                     <div className="prog-card-meta">
-                      <div className="prog-card-meta-item">
-                        <p
-                          style={{
-                            opacity: "0.7",
-                            fontSize: "0.72rem",
-                            margin: "0",
-                            lineHeight: "1.2",
-                          }}
-                        >
-                          Duration
-                        </p>
-                        <div style={{ fontWeight: "600", fontSize: "0.85rem" }}>
-                          {program.acf?.duration || "—"}
-                        </div>
-                      </div>
-                      <div className="prog-card-meta-item">
-                        <p
-                          style={{
-                            opacity: "0.7",
-                            fontSize: "0.72rem",
-                            margin: "0",
-                            lineHeight: "1.2",
-                          }}
-                        >
-                          Best For
-                        </p>
-                        <div style={{ fontWeight: "600", fontSize: "0.85rem" }}>
-                          {decodeEntities(program.acf?.best_for) || "—"}
-                        </div>
-                      </div>
+                      {prog.meta.map((m, j) => (
+                        <span
+                          key={j}
+                          className="prog-card-meta-item"
+                          dangerouslySetInnerHTML={{ __html: m }}
+                        />
+                      ))}
                     </div>
-                    <p className="prog-card-desc">
-                      {(() => {
-                        const raw = program.acf?.card_description
-                          ? program.acf.card_description
-                          : program.excerpt?.rendered || "";
-                        const clean = decodeEntities(
-                          raw.replace(/<[^>]*>/g, ""),
-                        );
-                        const words = clean.split(" ");
-                        return words.length > 12
-                          ? words.slice(0, 12).join(" ") + "..."
-                          : clean;
-                      })()}
-                    </p>
                     <span className="btn btn-outline btn-sm prog-card-cta">
                       View Program <Icon name="arrow-right" size={14} />
                     </span>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="reveal" style={{ marginTop: "56px" }}>
-            <div className="guarantee-section" style={{ padding: 0 }}>
-              <div className="guarantee-glow-blob"></div>
-              <div
-                className="guarantee-particle-bg"
-                id="guaranteeParticles"
-              ></div>
-              <div className="gc-wrapper">
-                <div className="gc-card">
-                  <div className="gc-left">
-                    <div className="gc-badge">
-                      <span className="gc-badge-dot"></span>THE TEONOX PROMISE
-                    </div>
-                    <span className="gc-percent">100%</span>
-                    <span className="gc-percent-label">Job Guarantee</span>
-                  </div>
-                  <div className="gc-right">
-                    <div className="gc-shield-wrap">
-                      <svg
-                        className="gc-shield"
-                        viewBox="0 0 84 84"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <defs>
-                          <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stopColor="#ea580c" />
-                            <stop offset="100%" stopColor="#fdba74" />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          d="M42 7L13 20V41C13 57 26 70 42 77C58 70 71 57 71 41V20L42 7Z"
-                          fill="url(#sg)"
-                          opacity="0.15"
-                        />
-                        <path
-                          d="M42 7L13 20V41C13 57 26 70 42 77C58 70 71 57 71 41V20L42 7Z"
-                          stroke="url(#sg)"
-                          strokeWidth="2"
-                          fill="none"
-                        />
-                        <path
-                          d="M29 42L38 51L55 34"
-                          stroke="url(#sg)"
-                          strokeWidth="4"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="gc-content">
-                      <div className="gc-title">
-                        We're So Confident, We Guarantee It.
-                      </div>
-                      <p className="gc-desc">
-                        Get hired after successful completion or{" "}
-                        <span className="gc-highlight">
-                          receive your fee back.*
-                        </span>
-                      </p>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>

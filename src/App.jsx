@@ -8,7 +8,6 @@ import Hire from "./pages/Hire.jsx";
 import Careers from "./pages/Careers.jsx";
 import Blog from "./pages/Blog.jsx";
 import Contact from "./pages/Contact.jsx";
-import Program_Details from "./pages/Program_Details.jsx";
 import Programs from "./pages/Programs.jsx";
 import Blog_Details from "./pages/Blog_Details.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -64,8 +63,7 @@ useEffect(() => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/programs/" element={<Programs />} />
-        <Route path="/programs/:slug" element={<Program_Details />} />
+        <Route path="/programs" element={<Programs />} />
         <Route path="/hire" element={<Hire />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/blog" element={<Blog />} />
