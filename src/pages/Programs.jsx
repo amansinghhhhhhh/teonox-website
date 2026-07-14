@@ -9,7 +9,7 @@ const programs = [
     desc: "Master digital marketing from the ground up &mdash; SEO, paid ads, social media, analytics, AI tools, and business development.",
     meta: [
       { value: "6 Months", label: "Duration" },
-      { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+      { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
       { value: "On Campus, Pune", label: "Mode" },
     ],
     href: "/program-bdm.html",
@@ -20,7 +20,7 @@ const programs = [
     desc: "Go deep into SEO &mdash; technical audits, link building, and AI search visibility.",
     meta: [
       { value: "3 Months", label: "Duration" },
-      { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+      { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
       { value: "On Campus, Pune", label: "Mode" },
     ],
     href: "/program-seo.html",
@@ -31,7 +31,7 @@ const programs = [
     desc: "Master organic growth and community building across every major social media platform.",
     meta: [
       { value: "3 Months", label: "Duration" },
-      { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+      { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
       { value: "On Campus, Pune", label: "Mode" },
     ],
     href: "/program-social-media.html",
@@ -42,7 +42,7 @@ const programs = [
     desc: "Run and scale paid campaigns across Google, Meta &amp; LinkedIn like a performance marketer.",
     meta: [
       { value: "3 Months", label: "Duration" },
-      { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+      { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
       { value: "On Campus, Pune", label: "Mode" },
     ],
     href: "/program-performance.html",

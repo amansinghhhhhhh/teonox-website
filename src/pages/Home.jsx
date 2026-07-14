@@ -304,7 +304,7 @@ export default function Home() {
                 desc: "Master digital marketing from the ground up &mdash; SEO, paid ads, social media, analytics, AI tools, and business development.",
                 meta: [
                   { value: "6 Months", label: "Duration" },
-                  { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+                  { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
                   { value: "On Campus, Pune", label: "Mode" },
                 ],
                 href: "/program-bdm.html",
@@ -315,7 +315,7 @@ export default function Home() {
                 desc: "Go deep into SEO &mdash; technical audits, link building, and AI search visibility.",
                 meta: [
                   { value: "3 Months", label: "Duration" },
-                  { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+                  { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
                   { value: "On Campus, Pune", label: "Mode" },
                 ],
                 href: "/program-seo.html",
@@ -326,7 +326,7 @@ export default function Home() {
                 desc: "Master organic growth and community building across every major social media platform.",
                 meta: [
                   { value: "3 Months", label: "Duration" },
-                  { value: "12th Passed, Graduates &amp; Working Professionals", label: "Eligibility" },
+                  { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
                   { value: "On Campus, Pune", label: "Mode" },
                 ],
                 href: "/program-social-media.html",
