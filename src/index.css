@@ -5418,7 +5418,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .tool-chip {
@@ -5657,6 +5657,11 @@ a {
   z-index: 1;
 }
 
+.limited-seats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .working-professional-section {
   margin-top: 16px;
   padding: 28px 32px;
@@ -5720,6 +5725,18 @@ a {
 
 @media (max-width: 540px) {
   .mesa-tracks {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .limited-seats-grid {
     grid-template-columns: 1fr;
   }
 
@@ -6861,6 +6878,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  margin-top: 40px;
 }
 
 .prog-filters {

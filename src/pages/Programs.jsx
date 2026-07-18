@@ -36,7 +36,12 @@ export default function Programs() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: "center", padding: "60px 0", color: "var(--text2)" }}>Loading programs...</div>
+            <div style={{ minHeight: "40vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div className="preloader-inner">
+                <img src="/assets/asset-001.png" alt="TEONOX" className="preloader-icon" />
+                <div className="preloader-ring"></div>
+              </div>
+            </div>
           ) : (
           <div className="prog-grid">
             {programs.map((prog, i) => {

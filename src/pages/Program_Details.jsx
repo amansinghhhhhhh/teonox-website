@@ -478,10 +478,7 @@ export default function Program_Details() {
                 >
                   <div
                     className="skills-grid"
-                    style={{
-                      gridTemplateColumns: "repeat(3,1fr)",
-                      gap: "10px",
-                    }}
+                    style={{ gap: "10px" }}
                   >
                     {careerPaths.map((path, i) => {
                       const imgUrl = careerImgs[path.career_path_card_image];
@@ -670,13 +667,12 @@ export default function Program_Details() {
           {limitedCards.length > 0 && (
             <div className="reveal" style={{ marginTop: "60px" }}>
               <div
+                className="limited-seats-grid"
                 style={{
                   background: "var(--surface)",
                   border: "1px solid var(--border)",
                   borderRadius: "20px",
                   padding: "40px",
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
                   gap: "40px",
                   alignItems: "center",
                 }}
