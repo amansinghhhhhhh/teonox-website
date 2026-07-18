@@ -1,40 +1,78 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import { decodeEntities } from "../utils/decode.js";
 import { getProgramBySlug, getMediaUrl } from "../api/wordpressApi";
 
+const overviewIconMap = {
+  Duration: "clock",
+  Format: "map-pin",
+  Structure: "layout",
+  Modules: "layers",
+  Tools: "wrench",
+  Outcome: "briefcase",
+};
+
+const whoIconMap = {
+  "Fresh Graduates": "graduation-cap",
+  "Working Professionals": "briefcase",
+};
+
+const howIcons = ["briefcase", "monitor", "wrench", "target", "check-circle"];
+
+const limitedIcons = ["users", "map-pin", "layers"];
+
 export default function Program_Details() {
   const { slug } = useParams();
   const [program, setProgram] = useState(null);
-  const intro = program?.introduction;
   const [loading, setLoading] = useState(true);
-  const [careerImgUrls, setCareerImgUrls] = useState({});
+  const [toolLogos, setToolLogos] = useState({});
+  const [careerImgs, setCareerImgs] = useState({});
   useScrollReveal();
 
   useEffect(() => {
     let cancelled = false;
     getProgramBySlug(slug)
       .then(async (data) => {
-        const paths = data?.acf?.where_this_program_can_take_you || [];
-        const imgIds = [
-          ...new Set(
-            paths.map((p) => p.career_path_card_image).filter(Boolean),
-          ),
+        if (!data) return;
+        const a = data.acf || {};
+
+        const tools = a["tools_you_will_get_hands-on_with_repeater"] || [];
+        const toolIds = [
+          ...new Set(tools.map((t) => t.tool_logo).filter(Boolean)),
         ];
-        let imgMap = {};
-        if (imgIds.length) {
+        const tMap = {};
+        if (toolIds.length) {
           const urls = await Promise.all(
-            imgIds.map((id) => getMediaUrl(id).catch(() => null)),
+            toolIds.map((id) => getMediaUrl(id).catch(() => null)),
           );
-          imgIds.forEach((id, i) => {
-            imgMap[id] = urls[i];
+          toolIds.forEach((id, i) => {
+            tMap[id] = urls[i];
           });
         }
+
+        const paths =
+          a.where_this_program_can_take_you_repeater ||
+          a.where_this_program_can_take_you ||
+          [];
+        const pIds = [
+          ...new Set(paths.map((p) => p.career_path_card_image).filter(Boolean)),
+        ];
+        const pMap = {};
+        if (pIds.length) {
+          const urls = await Promise.all(
+            pIds.map((id) => getMediaUrl(id).catch(() => null)),
+          );
+          pIds.forEach((id, i) => {
+            pMap[id] = urls[i];
+          });
+        }
+
         if (!cancelled) {
           setProgram(data);
-          setCareerImgUrls(imgMap);
+          setToolLogos(tMap);
+          setCareerImgs(pMap);
           setLoading(false);
         }
       })
@@ -52,29 +90,8 @@ export default function Program_Details() {
         hdls.push(() => el.removeEventListener("click", fn));
       });
     };
-    dh(".job-expandable-header", function () {
-      const c = this.closest(".job-expandable");
-      const b = c.querySelector(".job-expandable-body");
-      const o = c.classList.contains("open");
-      c.classList.toggle("open");
-      if (b) b.style.display = o ? "none" : "";
-    });
     dh(".faq-item", function () {
       this.classList.toggle("open");
-    });
-    dh(".prog-filter", function () {
-      document
-        .querySelectorAll(".prog-filter")
-        .forEach((b) => b.classList.remove("active"));
-      this.classList.add("active");
-      const f = this.dataset.filter;
-      document.querySelectorAll(".prog-card").forEach((c) => {
-        if (f === "all") {
-          c.style.display = "";
-          return;
-        }
-        c.style.display = c.textContent.toLowerCase().includes(f) ? "" : "none";
-      });
     });
     dh('a[href^="#"]', function (e) {
       const h = this.getAttribute("href");
@@ -102,629 +119,811 @@ export default function Program_Details() {
               justifyContent: "center",
             }}
           >
-            Loading...
+            <div className="preloader-inner">
+              <img src="/assets/asset-001.png" alt="TEONOX" className="preloader-icon" />
+              <div className="preloader-ring"></div>
+            </div>
           </div>
         </section>
       </div>
     );
   }
 
+  const a = program.acf || {};
+
+  const getOverviewIcon = (heading) => {
+    const key = Object.keys(overviewIconMap).find((k) =>
+      heading?.toLowerCase().includes(k.toLowerCase()),
+    );
+    return key ? overviewIconMap[key] : "layers";
+  };
+
+  const getWhoIcon = (heading) => {
+    const key = Object.keys(whoIconMap).find((k) =>
+      heading?.toLowerCase().includes(k.toLowerCase()),
+    );
+    return key ? whoIconMap[key] : "users";
+  };
+
+  const tools =
+    a["tools_you_will_get_hands-on_with_repeater"] || [];
+  const careerPaths =
+    a.where_this_program_can_take_you_repeater ||
+    a.where_this_program_can_take_you ||
+    [];
+  const tracks = a.what_you_will_learn_cards || [];
+  const overviewCards = a.program_overview_cards || [];
+  const whoCards = a.who_this_program_is_for_card || [];
+  const howCards = a.how_you_learn_repeater || [];
+  const limitedCards = a.limited_seats_cards || [];
+  const faqs = a["faq_q&a"] || [];
+
+  const imgUrl =
+    program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+    "/assets/asset-023.jpg";
+
+  const showGuarantee =
+    a.section_to_show === "Job Guarantee";
+  const showAssistance =
+    a.section_to_show === "Job Assistance";
+
   return (
-    <div className="page active">
+    <div className="page active" id="page-program">
       <section className="section" style={{ paddingTop: "140px" }}>
         <div className="container">
-          {/* Banner */}
+          {/* HERO */}
           <div className="pg-hero">
             <div className="pg-hero-content">
-              <h1>{decodeEntities(program.acf.hero_heading)}</h1>
-              <div className="pg-hero-meta">
-                <div className="pg-hero-meta-item">
-                  <Icon name="clock" />
-                  Duration:{" "}
-                  <strong>{decodeEntities(program.acf.duration)}</strong>
-                </div>
-                <div className="pg-hero-meta-divider"></div>
-                <div className="pg-hero-meta-item">
-                  <Icon name="graduation-cap" />
-                  Best For:{" "}
-                  <strong>{decodeEntities(program.acf.best_for)}</strong>
-                </div>
-              </div>
-              <p className="pg-hero-sub">
-                <strong>{decodeEntities(program.acf.hero_description)}</strong>
-              </p>
-              <p className="pg-hero-desc">
-                {decodeEntities(program.acf.card_description)}
-              </p>
-              <div className="pg-hero-actions">
-                <a
-                  href={program.acf.brochure_url}
-                  className="btn btn-outline btn-sm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Download Brochure <Icon name="download" size={14} />
-                </a>
-                <a
-                  href={program.acf.consultation_url}
-                  className="btn btn-outline btn-sm"
+              <h1>{decodeEntities(a.program_name || a.hero_heading)}</h1>
+              {a.program_short_description && (
+                <p
                   style={{
-                    borderColor: "var(--orange)",
-                    color: "var(--orange)",
+                    fontSize: "1.05rem",
+                    color: "var(--text)",
+                    fontWeight: 600,
+                    lineHeight: 1.5,
+                    marginBottom: "8px",
                   }}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
-                  Book a Career Consultation <Icon name="calendar" size={14} />
-                </a>
+                  <em
+                    dangerouslySetInnerHTML={{
+                      __html: a.program_short_description,
+                    }}
+                  />
+                </p>
+              )}
+              {a.program_hero_subheading && (
+                <p
+                  style={{
+                    fontSize: "0.92rem",
+                    color: "var(--text2)",
+                    lineHeight: 1.7,
+                    maxWidth: "540px",
+                    marginBottom: "16px",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: a.program_hero_subheading,
+                  }}
+                />
+              )}
+              <div className="pg-hero-meta">
+                {a.duration && (
+                  <span className="pg-hero-meta-item">
+                    <Icon name="clock" />{" "}
+                    <strong>{decodeEntities(a.duration)}</strong> Duration
+                  </span>
+                )}
+                {a.mode_on && (
+                  <span className="pg-hero-meta-item">
+                    <Icon name="map-pin" />{" "}
+                    <strong>{decodeEntities(a.mode_on)}</strong>
+                  </span>
+                )}
+              </div>
+              {a.program_hero_supporting_line && (
+                <p
+                  style={{
+                    fontSize: "0.85rem",
+                    color: "var(--text3)",
+                    lineHeight: 1.6,
+                    margin: "12px 0 20px",
+                    maxWidth: "540px",
+                    padding: "12px 16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderLeft: "3px solid var(--orange)",
+                    borderRadius: "0 10px 10px 0",
+                  }}
+                >
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: a.program_hero_supporting_line,
+                    }}
+                  />
+                </p>
+              )}
+              <div className="pg-hero-actions">
+                {a.download_the_brochure_button && (
+                  <a
+                    href={a.download_the_brochure_button}
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download the Brochure{" "}
+                    <Icon name="download" size={16} />
+                  </a>
+                )}
+                {a.book_a_call_with_career_advisor_button && (
+                  <a
+                    href={a.book_a_call_with_career_advisor_button}
+                    className="btn btn-outline"
+                    style={{
+                      borderColor: "var(--orange)",
+                      color: "var(--orange)",
+                    }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book a Call with Career Advisor{" "}
+                    <Icon name="calendar" size={14} />
+                  </a>
+                )}
               </div>
             </div>
             <div className="pg-hero-visual">
               <div className="pg-hero-glow"></div>
               <div className="pg-hero-img-wrap">
                 <img
-                  src={
-                    program._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                    "/assets/asset-023.jpg"
-                  }
+                  src={imgUrl}
                   alt={decodeEntities(program.title?.rendered) || "Program"}
                 />
               </div>
             </div>
           </div>
 
-          {/* Intro */}
-          <div className="pg-intro-wrap reveal">
-            <div className="pg-intro-grid">
-              <div className="pg-intro">
-                <div className="pg-intro-label">
-    <span></span>
-    {intro?.introduction_section_label}
-</div>
-                <h2>
-    {intro?.introduction_heading}
-    <br />
-    <em>{intro?.introduction_heading_colored}</em>
-</h2>
-                <p
-    className="pg-intro-text"
-    dangerouslySetInnerHTML={{
-        __html: intro?.introduction_description,
-    }}
-/>
+          {/* WHO THIS PROGRAM IS FOR */}
+          {whoCards.length > 0 && (
+            <>
+              <div className="reveal mesa-section">
+                <div className="section-eyebrow">
+                  {decodeEntities(
+                    a.who_this_program_is_for_label || "Who This Program Is For",
+                  )}
+                </div>
+              </div>
+              <div className="mesa-grid">
+                {whoCards.map((card, i) => (
+                  <div
+                    key={i}
+                    className={`mesa-card reveal reveal-d${i + 1}`}
+                  >
+                    <div className="mesa-badge">
+                      <Icon
+                        name={getWhoIcon(card.who_this_program_is_for_card_heading)}
+                        size={22}
+                      />
+                    </div>
+                    <h4>
+                      {decodeEntities(
+                        card.who_this_program_is_for_card_heading,
+                      )}
+                    </h4>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          card.who_this_program_is_for_card_paragraph,
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+              {a.who_this_program_is_for_card_note && (
                 <div
-                  className="pg-intro-highlight"
+                  className="reveal"
+                  style={{
+                    marginTop: "20px",
+                    padding: "14px 20px",
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.06)",
+                    borderRadius: "10px",
+                    fontSize: "15px",
+                    color: "var(--text2)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: a.who_this_program_is_for_card_note,
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
+
+          {/* PROGRAM OVERVIEW */}
+          {overviewCards.length > 0 && (
+            <>
+              <div className="reveal mesa-section">
+                <div className="section-eyebrow">
+                  {decodeEntities(
+                    a.program_overview_label || "Program Overview",
+                  )}
+                </div>
+              </div>
+              <div className="overview-grid">
+                {overviewCards.map((card, i) => {
+                  const iconName = getOverviewIcon(
+                    card.program_overview_heading,
+                  );
+                  return (
+                    <div
+                      key={i}
+                      className={`overview-card reveal reveal-d${(i % 5) + 1}`}
+                    >
+                      <div className="overview-card-icon">
+                        <Icon
+                          name={iconName}
+                          size={24}
+                          style={{ color: "var(--orange)" }}
+                        />
+                      </div>
+                      <div
+                        className="overview-card-value"
+                        style={{
+                          fontSize:
+                            iconName === "layout" || iconName === "briefcase"
+                              ? "1.1rem"
+                              : "1.6rem",
+                        }}
+                      >
+                        {decodeEntities(card.program_overview_heading)}
+                      </div>
+                      <div
+                        className="overview-card-desc"
+                        dangerouslySetInnerHTML={{
+                          __html: card.program_overview_paragraph,
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+          {/* CURRICULUM — WHAT YOU'LL LEARN */}
+          {tracks.length > 0 && (
+            <>
+              <div className="reveal mesa-section">
+                <div className="section-eyebrow">
+                  {decodeEntities(
+                    a.what_you_will_learn_label || "What You'll Learn",
+                  )}
+                </div>
+                <h2
+                  className="section-title"
+                  style={{ fontSize: "clamp(1.3rem,2.2vw,1.6rem)" }}
+                >
+                  {decodeEntities(a.what_you_will_learn_heading)}
+                </h2>
+                {a.What_You_Will_Learn_Paragraph && (
+                  <p
+                    className="section-sub"
+                    style={{ maxWidth: "100%" }}
+                    dangerouslySetInnerHTML={{
+                      __html: a.What_You_Will_Learn_Paragraph,
+                    }}
+                  />
+                )}
+              </div>
+              <div className="mesa-tracks">
+                {tracks.map((track, i) => (
+                  <div
+                    key={i}
+                    className={`mesa-track reveal reveal-d${(i % 5) + 1} ${i === tracks.length - 1 ? "featured" : ""}`}
+                  >
+                    <div className="num">
+                      {track.what_you_will_learn_number}
+                    </div>
+                    <span>
+                      {decodeEntities(track.what_you_will_learn_heading)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {a.what_you_will_learn_button && (
+                <div className="pg-hero-actions" style={{ marginTop: "24px" }}>
+                  <a
+                    href={a.what_you_will_learn_button}
+                    className="btn btn-primary"
+                  >
+                    Download the Brochure{" "}
+                    <Icon name="download" size={16} />
+                  </a>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* WHERE THIS PROGRAM CAN TAKE YOU */}
+          {careerPaths.length > 0 && (
+            <>
+              <div className="reveal mesa-section">
+                <div className="section-eyebrow">
+                  {decodeEntities(
+                    a.where_this_program_can_take_you_section_label ||
+                      "Where This Program Can Take You",
+                  )}
+                </div>
+                {a.where_this_program_can_take_you_section_paragraph && (
+                  <div
+                    className="working-professional-section"
+                    dangerouslySetInnerHTML={{
+                      __html: a.where_this_program_can_take_you_section_paragraph,
+                    }}
+                  />
+                )}
+              </div>
+
+              <div className="reveal" style={{ marginTop: "32px" }}>
+                <div
+                  style={{
+                    background: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "24px",
+                    padding: "32px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <div
+                    className="skills-grid"
+                    style={{
+                      gridTemplateColumns: "repeat(3,1fr)",
+                      gap: "10px",
+                    }}
+                  >
+                    {careerPaths.map((path, i) => {
+                      const imgUrl = careerImgs[path.career_path_card_image];
+                      return (
+                        <div
+                          key={i}
+                          className="program-card"
+                          style={{
+                            padding: "16px",
+                            textAlign: "center",
+                          }}
+                        >
+                          <div
+                            className="program-card-icon"
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              margin: "0 auto 10px",
+                            }}
+                          >
+                            {imgUrl ? (
+                              <img
+                                src={imgUrl}
+                                alt={decodeEntities(
+                                  path.career_path_card_heading,
+                                )}
+                                style={{
+                                  width: "24px",
+                                  height: "24px",
+                                  objectFit: "contain",
+                                  borderRadius: "6px",
+                                }}
+                              />
+                            ) : (
+                              <Icon name="briefcase" size={18} />
+                            )}
+                          </div>
+                          <h4 style={{ fontSize: "0.82rem" }}>
+                            {decodeEntities(path.career_path_card_heading)}
+                          </h4>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+
+              {a.where_this_program_can_take_you_section_note && (
+                <div
+                  className="outcome-box reveal"
+                  style={{
+                    marginTop: "20px",
+                    textAlign: "center",
+                    padding: "20px",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: a.where_this_program_can_take_you_section_note,
+                  }}
+                />
+              )}
+            </>
+          )}
+
+          {/* TOOLS */}
+          {tools.length > 0 && (
+            <>
+              <div className="reveal visible mesa-section">
+                <div className="section-eyebrow">
+                  {decodeEntities(
+                    a["tools_you_will_get_hands-on_with_label"] ||
+                      "Tools You'll Get Hands-On With",
+                  )}
+                </div>
+              </div>
+              <div
+                className="reveal visible tools-cloud"
+                style={{ marginTop: "20px" }}
+              >
+                {tools.map((tool, i) => {
+                  const logoUrl = toolLogos[tool.tool_logo];
+                  return (
+                    <span
+                      key={i}
+                      className={`tool-chip ${i < 2 ? "hi" : ""}`}
+                    >
+                      {logoUrl && (
+                        <span className="logo-badge">
+                          <img
+                            src={logoUrl}
+                            alt={decodeEntities(tool.tool_name)}
+                          />
+                        </span>
+                      )}
+                      {decodeEntities(tool.tool_name)}
+                    </span>
+                  );
+                })}
+              </div>
+              {a["tools_you_will_get_hands-on_with_paragraph"] && (
+                <div
+                  className="reveal visible"
+                  style={{
+                    marginTop: "16px",
+                    fontSize: "0.85rem",
+                    color: "var(--text3)",
+                    textAlign: "center",
+                  }}
+                >
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        a["tools_you_will_get_hands-on_with_paragraph"],
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
+
+          {/* HOW YOU LEARN */}
+          {howCards.length > 0 && (
+            <div className="reveal mesa-section">
+              <div
+                style={{
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "24px",
+                  padding: "48px 40px",
+                }}
+              >
+                <div className="section-eyebrow">
+                  {decodeEntities(
+                    a.how_you_learn_label || "How You Learn",
+                  )}
+                </div>
+                {a.how_you_learn_paragraph && (
+                  <p
+                    className="section-sub"
+                    style={{ maxWidth: "100%" }}
+                    dangerouslySetInnerHTML={{
+                      __html: a.how_you_learn_paragraph,
+                    }}
+                  />
+                )}
+                <div className="learn-grid" style={{ marginTop: "32px" }}>
+                  {howCards.map((card, i) => (
+                    <div
+                      key={i}
+                      className={`learn-card reveal reveal-d${(i % 5) + 1}`}
+                    >
+                      <div className="ico">
+                        <Icon
+                          name={howIcons[i] || "briefcase"}
+                          size={16}
+                        />
+                      </div>
+                      <h4>
+                        {decodeEntities(
+                          card.how_you_learn_card_heading,
+                        )}
+                      </h4>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            card.how_you_learn_card_paragraph || "",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+                {a.how_you_learn_note && (
+                  <div
+                    className="outcome-box reveal"
+                    style={{ marginTop: "24px", textAlign: "center" }}
+                    dangerouslySetInnerHTML={{
+                      __html: a.how_you_learn_note,
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* LIMITED SEATS */}
+          {limitedCards.length > 0 && (
+            <div className="reveal" style={{ marginTop: "60px" }}>
+              <div
+                style={{
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "20px",
+                  padding: "40px",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "40px",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-head)",
+                      fontSize: "clamp(1.3rem,2.5vw,1.8rem)",
+                      fontWeight: 800,
+                      letterSpacing: "-0.02em",
+                      margin: "0 0 12px",
+                    }}
+                  >
+                    {decodeEntities(
+                      a.limited_seats_label || "Limited Seats",
+                    )}
+                  </h2>
+                  {a.limited_seats_paragraph && (
+                    <p
+                      style={{
+                        fontSize: "0.92rem",
+                        color: "var(--text2)",
+                        lineHeight: 1.7,
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: a.limited_seats_paragraph,
+                      }}
+                    />
+                  )}
+                  {a.limited_seats_button_1 && (
+                    <div
+                      style={{
+                        marginTop: "24px",
+                        display: "flex",
+                        gap: "12px",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <a
+                        href={a.limited_seats_button_1}
+                        className="btn btn-primary"
+                        style={{ padding: "14px 32px", fontSize: "0.92rem" }}
+                      >
+                        Reserve Your Seat Now{" "}
+                        <Icon name="arrow-right" size={16} />
+                      </a>
+                    </div>
+                  )}
+                </div>
+                <div
                   style={{
                     display: "flex",
-                    alignItems: "flex-start",
+                    flexDirection: "column",
                     gap: "12px",
                   }}
                 >
-                  <Icon name="quote" size={20} />
-                  <span>
-        {intro?.introduction_section_quote}
-    </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Designed for Ambitious Learners title */}
-          <div className="reveal" style={{ marginTop: "80px" }}>
-            <span className="section-label">Who This Program Is For</span>
-            <h2
-              className="section-title"
-              style={{ fontSize: "clamp(1.4rem,2.5vw,2rem)" }}
-            >
-              Designed for Ambitious Learners
-            </h2>
-          </div>
-          {/* Designed for Ambitious Learners title - card */}
-          <div className="program-cards" style={{ marginTop: "32px" }}>
-            <div className="program-card reveal reveal-d1">
-              <div className="program-card-icon">
-                <Icon name="graduation-cap" size={22} />
-              </div>
-              <h4>Students &amp; Fresh Graduates</h4>
-              <p>Build practical skills before entering the workforce.</p>
-            </div>
-            <div className="program-card reveal reveal-d2">
-              <div className="program-card-icon">
-                <Icon name="trending-up" size={22} />
-              </div>
-              <h4>Young Professionals</h4>
-              <p>Upgrade your capabilities and accelerate your growth.</p>
-            </div>
-            <div className="program-card reveal reveal-d3">
-              <div className="program-card-icon">
-                <Icon name="compass" size={22} />
-              </div>
-              <h4>Career Explorers</h4>
-              <p>
-                Gain exposure to modern business functions before choosing a
-                specialization.
-              </p>
-            </div>
-            <div className="program-card reveal reveal-d4">
-              <div className="program-card-icon">
-                <Icon name="lightbulb" size={22} />
-              </div>
-              <h4>Aspiring Entrepreneurs</h4>
-              <p>
-                Understand how marketing, sales, analytics, and AI drive
-                business growth.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Piller */}
-        <section className="cp-section">
-          <div className="container" style={{ textAlign: "center" }}>
-            <div className="reveal" style={{ marginBottom: "56px" }}>
-              <span className="section-label">Curriculum Pillars</span>
-              <h2
-                className="section-title "
-                style={{ fontSize: "clamp(1.6rem,3.2vw,2.8rem)" }}
-              >
-                The <em>5 Pillars</em> of the Program
-              </h2>
-            </div>
-          </div>
-          <div className="cp-track">
-            <div className="cp-item reveal reveal-d1">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="compass" />
-                </div>
-              </div>
-              <span className="cp-name">Strategy</span>
-              <p className="cp-desc">
-                How businesses think, position, grow, and decide
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d2">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="rocket" />
-                </div>
-              </div>
-              <span className="cp-name">Execution</span>
-              <p className="cp-desc">
-                Campaigns, projects, and operational workflows
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d3">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="target" />
-                </div>
-              </div>
-              <span className="cp-name">Analytics</span>
-              <p className="cp-desc">
-                Data, reporting, and decision-making insights
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d4">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="cpu" />
-                </div>
-              </div>
-              <span className="cp-name">AI</span>
-              <p className="cp-desc">
-                Modern AI for productivity and automation
-              </p>
-            </div>
-            <div className="cp-item reveal reveal-d5">
-              <div className="cp-dot-wrap">
-                <div className="cp-dot">
-                  <Icon name="handshake" />
-                </div>
-              </div>
-              <span className="cp-name">Sales Mindset</span>
-              <p className="cp-desc">
-                Communication, persuasion, and influence
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <div className="container">
-          <div className="reveal" style={{ marginTop: "80px" }}>
-            <span className="section-label">Why Choose TEONOX</span>
-            <h2
-              className="section-title"
-              style={{ fontSize: "clamp(1.5rem,3vw,2.6rem)" }}
-            >
-              The TEONOX Difference
-            </h2>
-          </div>
-
-          <div className="skills-grid">
-            {[
-              {
-                icon: "briefcase",
-                title: "Business-First Curriculum",
-                desc: "Learn how businesses actually grow, make decisions, acquire customers, and create value—not just concepts from textbooks.",
-              },
-              {
-                icon: "cpu",
-                title: "Deep AI Integration",
-                desc: "AI isn't taught as a standalone topic. It's embedded across marketing, analytics, content, productivity, and business workflows.",
-              },
-              {
-                icon: "play-circle",
-                title: "Learn By Doing",
-                desc: "Gain hands-on experience through live projects, simulations, workshops, business challenges, and practical execution.",
-              },
-              {
-                icon: "users",
-                title: "Industry-Led Learning",
-                desc: "Learn directly from professionals who actively work with brands, growth teams, agencies, and businesses.",
-              },
-              {
-                icon: "target",
-                title: "Outcome Accountability",
-                desc: "Focus on what you can build, present, solve, analyze, and execute—creating skills that translate into real opportunities.",
-              },
-              {
-                icon: "chart-spline",
-                title: "Sales & Growth Mindset",
-                desc: "Understand how businesses generate revenue, build relationships, communicate value, and drive sustainable growth.",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`skill-card reveal reveal-d${(i % 5) + 1}`}
-                style={{ textAlign: "center" }}
-              >
-                <div
-                  className="skill-card-icon"
-                  style={{ margin: "0 auto 12px" }}
-                >
-                  <Icon name={item.icon} size={24} />
-                </div>
-                <div className="skill-card-title">{item.title}</div>
-                <div className="skill-card-desc">{item.desc}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="reveal" style={{ marginTop: "80px" }}>
-            <div
-              style={{
-                background: "var(--surface)",
-                border: "1px solid var(--border2)",
-                borderRadius: "var(--r3)",
-                padding: "48px 40px",
-              }}
-            >
-              <div style={{ marginBottom: "36px" }}>
-                <span className="section-label">Outcomes</span>
-                <h2
-                  className="section-title"
-                  style={{ fontSize: "clamp(1.5rem,3vw,2.6rem)" }}
-                >
-                  What You Graduate With
-                </h2>
-              </div>
-              <div className="skills-grid graduate-grid">
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "12px",
-                      background: "rgba(255,92,26,0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 10px",
-                      color: "var(--orange)",
-                    }}
-                  >
-                    <Icon name="briefcase" size={22} />
-                  </div>
-                  <h5
-                    style={{
-                      fontSize: "0.82rem",
-                      fontWeight: "700",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    Practical Experience
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "0.72rem",
-                      color: "var(--text3)",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    Project work that demonstrates your capabilities.
-                  </p>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "12px",
-                      background: "rgba(59,130,246,0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 10px",
-                      color: "rgb(59,130,246)",
-                    }}
-                  >
-                    <Icon name="globe" size={22} />
-                  </div>
-                  <h5
-                    style={{
-                      fontSize: "0.82rem",
-                      fontWeight: "700",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    Industry Exposure
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "0.72rem",
-                      color: "var(--text3)",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    Understanding of how modern businesses function.
-                  </p>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "12px",
-                      background: "rgba(16,185,129,0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 10px",
-                      color: "rgb(16,185,129)",
-                    }}
-                  >
-                    <Icon name="cpu" size={22} />
-                  </div>
-                  <h5
-                    style={{
-                      fontSize: "0.82rem",
-                      fontWeight: "700",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    AI Readiness
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "0.72rem",
-                      color: "var(--text3)",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    Hands-on experience using modern AI tools and workflows.
-                  </p>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "12px",
-                      background: "rgba(245,158,11,0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 10px",
-                      color: "rgb(245,158,11)",
-                    }}
-                  >
-                    <Icon name="message-circle" size={22} />
-                  </div>
-                  <h5
-                    style={{
-                      fontSize: "0.82rem",
-                      fontWeight: "700",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    Communication Skills
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "0.72rem",
-                      color: "var(--text3)",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    Confidence in presenting ideas and collaborating
-                    professionally.
-                  </p>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "12px",
-                      background: "rgba(139,92,246,0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 10px",
-                      color: "rgb(139,92,246)",
-                    }}
-                  >
-                    <Icon name="trending-up" size={22} />
-                  </div>
-                  <h5
-                    style={{
-                      fontSize: "0.82rem",
-                      fontWeight: "700",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    Business Acumen
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "0.72rem",
-                      color: "var(--text3)",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    The ability to think beyond tasks and understand outcomes.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="reveal" style={{ marginTop: "80px" }}>
-            <span className="section-label">Career Paths</span>
-            <h2
-              className="section-title"
-              style={{ fontSize: "clamp(1.5rem,3vw,2.6rem)" }}
-            >
-              Where This Program Can Take You
-            </h2>
-          </div>
-          <div className="skills-grid">
-            {program.acf.where_this_program_can_take_you?.map((path, i) => {
-              const imgUrl = careerImgUrls[path.career_path_card_image];
-              return (
-                <div
-                  key={i}
-                  className={`program-card reveal reveal-d${(i % 4) + 1}`}
-                  style={{ padding: "20px 16px", textAlign: "center" }}
-                >
-                  <div className="program-card-icon">
-                    {imgUrl ? (
-                      <img
-                        src={imgUrl}
-                        alt={decodeEntities(path.career_path_card_heading)}
+                  {limitedCards.map((card, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        background: "rgba(255,255,255,0.02)",
+                        border: "1px solid var(--border)",
+                        borderRadius: "14px",
+                        padding: "16px 20px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "14px",
+                      }}
+                    >
+                      <div
                         style={{
-                          width: "24px",
-                          height: "24px",
-                          objectFit: "contain",
-                          borderRadius: "6px",
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "10px",
+                          background: "rgba(255,92,26,0.08)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                        }}
+                      >
+                        <Icon
+                          name={limitedIcons[i] || "layers"}
+                          size={18}
+                          style={{ color: "var(--orange)" }}
+                        />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontWeight: 700,
+                            fontSize: "0.92rem",
+                          }}
+                        >
+                          {decodeEntities(
+                            card.limited_seats_heading,
+                          )}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: "0.78rem",
+                            color: "var(--text3)",
+                            marginTop: "1px",
+                          }}
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              card.limited_seats_paragraph || "",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* GUARANTEE / ASSISTANCE */}
+          {(showGuarantee || showAssistance) && (
+            <div className="reveal" style={{ marginTop: "60px" }}>
+              {showGuarantee && a.job_guarantee_group && (
+                <div className="mesa-banner">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "16px",
+                    }}
+                  >
+                    <div>
+                      <h4>
+                        {decodeEntities(
+                          a.job_guarantee_group
+                            .placement_guarantee_label ||
+                            "Placement Guarantee",
+                        )}
+                      </h4>
+                      <p
+                        style={{
+                          color: "var(--text2)",
+                          fontSize: "0.85rem",
+                          marginTop: "4px",
+                        }}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            a.job_guarantee_group.get_hired_paragraph,
                         }}
                       />
-                    ) : (
-                      <Icon name="briefcase" size={20} />
-                    )}
+                    </div>
                   </div>
-                  <h4 style={{ fontSize: "0.85rem" }}>
-                    {decodeEntities(path.career_path_card_heading)}
-                  </h4>
+                  {a.job_guarantee_group.reserve_your_seat && (
+                    <a
+                      href={a.job_guarantee_group.reserve_your_seat}
+                      className="btn btn-primary btn-sm"
+                    >
+                      Enroll Now{" "}
+                      <Icon name="arrow-right" size={14} />
+                    </a>
+                  )}
                 </div>
-              );
-            })}
-          </div>
-
-          <div className="reveal" style={{ marginTop: "80px" }}>
-            <div
-              style={{
-                background:
-                  "linear-gradient(135deg,rgba(255,92,26,0.06),transparent)",
-                border: "1px solid rgba(255,92,26,0.12)",
-                borderRadius: "var(--r3)",
-                padding: "48px 40px",
-              }}
-            >
-              <span
-                className="section-label"
-                style={{ display: "inline-block" }}
-              >
-                Powered By
-              </span>
-              <h2
-                className="section-title"
-                style={{
-                  fontSize: "clamp(1.3rem,2.5vw,2rem)",
-                  marginTop: "8px",
-                }}
-              >
-                Built on Industry Experience
-              </h2>
-              <p
-                className="section-sub"
-                style={{ maxWidth: "700px", margin: "16px 0 0" }}
-              >
-                TEONOX is built on insights gained through years of working with
-                businesses, brands, growth teams, and hiring professionals.
-              </p>
-              <p
-                className="section-sub"
-                style={{ maxWidth: "700px", margin: "12px 0 0" }}
-              >
-                Through this journey, we observed a clear gap between academic
-                learning and workplace expectations. This program is our
-                response — a learning experience designed to help students
-                become more capable, confident, and prepared for the realities
-                of modern business.
-              </p>
+              )}
+              {showAssistance && a.job_assistance_group && (
+                <div className="mesa-banner">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "16px",
+                    }}
+                  >
+                    <div>
+                      <h4>
+                        {decodeEntities(
+                          a.job_assistance_group
+                            .job_assistance_program_label ||
+                            "Job Assistance Program",
+                        )}
+                      </h4>
+                      <p
+                        style={{
+                          color: "var(--text2)",
+                          fontSize: "0.85rem",
+                          marginTop: "4px",
+                        }}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            a.job_assistance_group.get_hired_paragraph,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {a.job_assistance_group.reserve_your_seat && (
+                    <a
+                      href={a.job_assistance_group.reserve_your_seat}
+                      className="btn btn-primary btn-sm"
+                    >
+                      Enroll Now{" "}
+                      <Icon name="arrow-right" size={14} />
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
-          </div>
+          )}
 
-          <div
-            style={{ marginTop: "80px", marginBottom: "40px" }}
-            className="reveal"
-          >
-            <div
-              style={{
-                background: "var(--surface)",
-                border: "1px solid var(--border2)",
-                borderRadius: "var(--r3)",
-                padding: "56px 40px",
-              }}
-            >
-              <span className="section-label">
-                Ready To Build Skills That Matter?
-              </span>
-              <h2
-                className="section-title"
-                style={{
-                  fontSize: "clamp(1.6rem,3.5vw,2.8rem)",
-                  marginTop: "12px",
-                }}
-              >
-                Learn practical business skills.
-                <br />
-                Work on real projects.
-                <br />
-                Gain industry exposure.
-              </h2>
-              <p
-                className="section-sub"
-                style={{ maxWidth: "500px", margin: "12px 0 0" }}
-              >
-                Develop future-ready capabilities that help you stand out and
-                contribute from day one.
-              </p>
-              <div
-                className="hero-actions"
-                style={{ marginTop: "28px", flexWrap: "wrap" }}
-              >
-                <a href="/contact" className="btn btn-primary">
-                  Apply now <Icon name="arrow-right" size={16} />
-                </a>
-                <a href="#" className="btn btn-outline">
-                  Download Brochure <Icon name="download" size={14} />
-                </a>
+          {/* FAQ */}
+          {faqs.length > 0 && (
+            <>
+              <div className="reveal" style={{ marginTop: "60px" }}>
+                <span className="section-label">
+                  {decodeEntities(
+                    a.faq_label || "FAQ",
+                  )}
+                </span>
+                <h2
+                  className="section-title"
+                  style={{ fontSize: "clamp(1.3rem,2.5vw,1.8rem)" }}
+                >
+                  Frequently Asked Questions
+                </h2>
               </div>
-            </div>
-          </div>
+              <div className="faq-grid">
+                {faqs.map((faq, i) => (
+                  <div
+                    key={i}
+                    className={`faq-item reveal reveal-d${(i % 4) + 1}`}
+                  >
+                    <div className="faq-q">
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: faq.faq_question,
+                        }}
+                      />{" "}
+                      <Icon name="chevron-down" />
+                    </div>
+                    <div
+                      className="faq-a"
+                      dangerouslySetInnerHTML={{
+                        __html: faq.faq_answer,
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
     </div>

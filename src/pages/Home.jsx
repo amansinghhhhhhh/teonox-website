@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import useTypewriter from "../hooks/useTypewriter.js";
-import { getBlogs } from "../api/wordpressApi";
+import { getBlogs, getPrograms } from "../api/wordpressApi";
 import { decodeEntities } from "../utils/decode.js";
 import { sanitizeHtml } from "../utils/sanitize.js";
 import { submitForm } from "../services/formService";
@@ -68,6 +68,7 @@ export default function Home() {
 
   const videoRef = useRef(null);
   const [homeBlogs, setHomeBlogs] = useState([]);
+  const [programs, setPrograms] = useState([]);
   const [heroSubmitted, setHeroSubmitted] = useState(false);
   const [heroSubmitting, setHeroSubmitting] = useState(false);
   const [heroError, setHeroError] = useState("");
@@ -78,6 +79,12 @@ export default function Home() {
   useEffect(() => {
     getBlogs()
       .then((data) => setHomeBlogs(data.slice(0, 3)))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getPrograms()
+      .then((data) => setPrograms(data.slice(0, 3)))
       .catch(console.error);
   }, []);
 
@@ -297,58 +304,36 @@ export default function Home() {
           </div>
 
           <div className="prog-grid">
-            {[
-              {
-                img: "/assets/asset-023.jpg",
-                title: "Business Digital Marketing With AI",
-                desc: "Master digital marketing from the ground up &mdash; SEO, paid ads, social media, analytics, AI tools, and business development.",
-                meta: [
-                  { value: "6 Months", label: "Duration" },
-                  { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
-                  { value: "On Campus, Pune", label: "Mode" },
-                ],
-                href: "/program-bdm.html",
-              },
-              {
-                img: "/assets/asset-004.jpg",
-                title: "Specialization in Search Engine Optimization",
-                desc: "Go deep into SEO &mdash; technical audits, link building, and AI search visibility.",
-                meta: [
-                  { value: "3 Months", label: "Duration" },
-                  { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
-                  { value: "On Campus, Pune", label: "Mode" },
-                ],
-                href: "/program-seo.html",
-              },
-              {
-                img: "/assets/asset-005.jpg",
-                title: "Specialization in Social Media Marketing",
-                desc: "Master organic growth and community building across every major social media platform.",
-                meta: [
-                  { value: "3 Months", label: "Duration" },
-                  { value: "12th Passed, Graduates & Working Professionals", label: "Eligibility" },
-                  { value: "On Campus, Pune", label: "Mode" },
-                ],
-                href: "/program-social-media.html",
-              },
-            ].slice(0, 3).map((prog, i) => (
+            {programs.slice(0, 3).map((prog, i) => {
+              const a = prog.acf || {};
+              const imgUrl = prog._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/assets/asset-023.jpg";
+              return (
               <a
-                key={i}
-                href={prog.href}
+                key={prog.id}
+                href={`/program/${prog.slug}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div className={`prog-card reveal reveal-d${(i % 3) + 1}`}>
-                  <img className="prog-card-img" src={prog.img} alt={prog.title} />
+                  <img className="prog-card-img" src={imgUrl} alt={decodeEntities(prog.title?.rendered)} />
                   <div className="prog-card-body">
-                    <h3>{prog.title}</h3>
-                    <p className="prog-card-desc" dangerouslySetInnerHTML={{ __html: prog.desc }} />
+                    <h3>{decodeEntities(prog.title?.rendered)}</h3>
+                    <p className="prog-card-desc">{decodeEntities(a.program_short_description)}</p>
                     <div className="prog-card-meta">
-                      {prog.meta.map((m, j) => (
-                        <span key={j} className="prog-card-meta-item">
-                          <strong>{m.value}</strong>
-                          {m.label}
+                      {a.duration && (
+                        <span className="prog-card-meta-item">
+                          <strong>{decodeEntities(a.duration)}</strong> Duration
                         </span>
-                      ))}
+                      )}
+                      {a.best_for && (
+                        <span className="prog-card-meta-item">
+                          <strong>{decodeEntities(a.best_for)}</strong> Eligibility
+                        </span>
+                      )}
+                      {a.mode_on && (
+                        <span className="prog-card-meta-item">
+                          <strong>{decodeEntities(a.mode_on)}</strong> Mode
+                        </span>
+                      )}
                     </div>
                     <span className="btn btn-outline btn-sm prog-card-cta">
                       View Program <Icon name="arrow-right" size={14} />
@@ -356,7 +341,8 @@ export default function Home() {
                   </div>
                 </div>
               </a>
-            ))}
+              );
+            })}
           </div>
           <div style={{ textAlign: "center", marginTop: "36px" }}>
             <a href="/programs" className="btn btn-outline">

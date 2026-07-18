@@ -53,6 +53,14 @@ const iconMap = {
 "sun-dim": "SunDim",
 mic: "Mic",
 star: "Star",
+  wrench: "Wrench",
+  layout: "Layout",
+  search: "Search",
+  "share-2": "Share2",
+  "pen-tool": "PenTool",
+  camera: "Camera",
+  link: "Link",
+  "check-circle": "CheckCircle",
 };
 
 export default function Icon({ name, size = 16, className, style }) {

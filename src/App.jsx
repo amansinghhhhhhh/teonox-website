@@ -9,6 +9,7 @@ import Careers from "./pages/Careers.jsx";
 import Blog from "./pages/Blog.jsx";
 import Contact from "./pages/Contact.jsx";
 import Programs from "./pages/Programs.jsx";
+import Program_Details from "./pages/Program_Details.jsx";
 import Blog_Details from "./pages/Blog_Details.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
@@ -64,6 +65,7 @@ useEffect(() => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/programs" element={<Programs />} />
+        <Route path="/program/:slug" element={<Program_Details />} />
         <Route path="/hire" element={<Hire />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/blog" element={<Blog />} />

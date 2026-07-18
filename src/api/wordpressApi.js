@@ -1,5 +1,6 @@
-const API_URL =
-    "https://cms.teonox.com/index.php?rest_route=/wp/v2";
+const API_URL = import.meta.env.DEV
+  ? "/cms-api/index.php?rest_route=/wp/v2"
+  : "https://cms.teonox.com/index.php?rest_route=/wp/v2";
 
 // Categories
 export const getCategories = async () => {
