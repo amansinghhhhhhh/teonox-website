@@ -194,8 +194,11 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
     const res = await fetch('/api/blogs');
     if (res.ok) {
       const json = await safeJson(res);
-      if (json?.success && Array.isArray(json.data) && json.data.length > 0) {
-        return { blogs: json.data, isLive: true };
+      // Accept the Express proxy shape ({ success, data: [...] }) or a raw WP
+      // posts array (LiteSpeed [P] rewrite to cms.teonox.com).
+      const posts = Array.isArray(json) ? json : json?.data;
+      if (Array.isArray(posts) && posts.length > 0) {
+        return { blogs: posts, isLive: true };
       }
     }
   } catch (e) {
@@ -227,7 +230,9 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
     const res = await fetch(`/api/blogs/${idOrSlug}`);
     if (res.ok) {
       const json = await safeJson(res);
-      if (json?.success && json.data) return json.data;
+      // Express proxy shape ({ success, data }) or a raw WP post ([P] rewrite).
+      const post = json?.success ? json.data : json;
+      if (post) return post;
     }
   } catch (e) {}
 

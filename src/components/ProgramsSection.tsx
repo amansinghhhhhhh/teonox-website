@@ -15,6 +15,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { Reveal } from './Reveal';
+import { ProgramImage } from './ProgramImage';
 import { fetchLivePrograms, LiveProgramCard } from '../services/programService';
 
 interface ProgramsSectionProps {
@@ -157,19 +158,14 @@ export function ProgramsSection({
               className="card-premium bg-white rounded-[24px] border border-[#ECECEC] shadow-2xs hover:border-[#F15A29] flex flex-col justify-between overflow-hidden cursor-pointer group relative h-full"
             >
               <div>
-                {/* Header Image — strictly WP hero image; blank when none */}
+                {/* Header Image — strictly WP hero image; local placeholder when missing/failed */}
                 <div className="aspect-[16/10] w-full overflow-hidden relative bg-[#FAF8F5] rounded-t-[24px]">
                   <div className="img-zoom w-full h-full">
-                    {prog.image ? (
-                      <img
-                        src={prog.image}
-                        alt={prog.title}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full" />
-                    )}
+                    <ProgramImage
+                      src={prog.image}
+                      alt={prog.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
 
                   {/* Campus Tag */}

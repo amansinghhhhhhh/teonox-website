@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Program } from '../types';
 import { PROGRAMS_DATA } from '../data';
+import { ProgramImage } from './ProgramImage';
 import {
   fetchLivePrograms,
   fetchProgramCategories,
@@ -253,18 +254,13 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     className="bg-white rounded-[24px] border border-[#ECECEC] shadow-2xs hover:shadow-xl hover:border-[#F15A29] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between overflow-hidden cursor-pointer group relative"
                   >
                     <div>
-                      {/* Top Image Frame â€” strictly WP hero image; blank when none */}
+                      {/* Top Image Frame — strictly WP hero image; local placeholder when missing/failed */}
                       <div className="aspect-[16/10] w-full overflow-hidden relative bg-[#FAF8F5] rounded-t-[24px]">
-                        {prog.image ? (
-                          <img
-                            src={prog.image}
-                            alt={prog.title}
-                            referrerPolicy="no-referrer"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                          />
-                        ) : (
-                          <div className="w-full h-full" />
-                        )}
+                        <ProgramImage
+                          src={prog.image}
+                          alt={prog.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        />
 
                         {/* Top Right: Campus Badge */}
                         <div className="absolute top-3.5 right-3.5 z-20">

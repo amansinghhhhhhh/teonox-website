@@ -1,5 +1,9 @@
 import { ProgramDetailData, PROGRAM_DETAILS_MAP } from '../data/programDetails';
 import { PROGRAMS_DATA } from '../data';
+import dmAiImg from '../assets/images/uploaded_digital_marketing_ai.webp';
+import perfImg from '../assets/images/uploaded_performance.webp';
+import seoImg from '../assets/images/uploaded_seo.webp';
+import socialImg from '../assets/images/uploaded_social_media.webp';
 
 /**
  * Normalised data for a single program card on the /programs listing page.
@@ -572,13 +576,16 @@ export async function fetchLiveProgramDetail(
     const res = await fetch(`/api/programs/${encodeURIComponent(key)}`);
     if (res.ok) {
       const json = await safeJson(res);
-      if (json?.success && json.data) {
+      // Accept the Express proxy shape ({ success, data }) or a raw WP post
+      // (LiteSpeed [P] rewrite to cms.teonox.com).
+      const raw = json?.success ? json.data : json;
+      if (raw) {
         // Staging-only programs stay hidden on production even when reached
         // by direct URL (fall through to the static fallback / null).
-        if (!isProgramVisible(json.data)) return { detail: null, isLive: false };
-        const transformed = transformWpProgram(json.data);
+        if (!isProgramVisible(raw)) return { detail: null, isLive: false };
+        const transformed = transformWpProgram(raw);
         if (transformed) {
-          const detail = await applyResolvedHeroImage(json.data, transformed);
+          const detail = await applyResolvedHeroImage(raw, transformed);
           return { detail, isLive: true };
         }
       }
@@ -801,6 +808,19 @@ function isProgramVisible(post: any): boolean {
 }
 
 /**
+ * Bundled banner images for the static program cards, keyed by the static
+ * program ids in PROGRAMS_DATA. A default is provided so unknown ids never
+ * render a blank card banner.
+ */
+const FALLBACK_CARD_IMAGES: Record<string, string> = {
+  'business-digital-marketing-ai': dmAiImg,
+  'seo-specialization': seoImg,
+  'social-media-marketing': socialImg,
+  'performance-marketing': perfImg,
+  default: dmAiImg,
+};
+
+/**
  * Static fallback cards used when the WordPress CMS is unreachable (e.g. a CORS
  * block on cms.teonox.com). Derived from the bundled PROGRAMS_DATA so the
  * /programs listing and the home page section never collapse into the "Programs
@@ -826,6 +846,10 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
       categories.find((c) => c !== POPULAR_CATEGORY) || POPULAR_CATEGORY,
     categories,
     brochureUrl: '',
+    // Bundled local banners (no CMS/CORS dependency) so fallback cards never
+    // render with a blank image.
+    image:
+      FALLBACK_CARD_IMAGES[p.id] || FALLBACK_CARD_IMAGES.default,
   };
 });
 
@@ -857,8 +881,12 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     const res = await fetch(`/api/programs`);
     if (res.ok) {
       const json = await safeJson(res);
-      if (json?.success && Array.isArray(json.data)) {
-        const programs = await fromPosts(json.data);
+      // Accept both the Express proxy shape ({ success, data: [...] }) and a
+      // raw WordPress REST array (e.g. a LiteSpeed [P] rewrite that proxies
+      // /api/* straight to cms.teonox.com).
+      const posts = Array.isArray(json) ? json : json?.data;
+      if (Array.isArray(posts)) {
+        const programs = await fromPosts(posts);
         // Live CMS even when zero V2 programs exist (drives "coming soon").
         return { programs, isLive: true };
       }
@@ -909,8 +937,10 @@ export async function fetchProgramCategories(): Promise<
     const res = await fetch('/api/programs/categories');
     if (res.ok) {
       const json = await safeJson(res);
-      if (json?.success && Array.isArray(json.data) && json.data.length > 0) {
-        return mapTerms(json.data);
+      // Accept the Express proxy shape or a raw WP term array (LiteSpeed [P]).
+      const terms = Array.isArray(json) ? json : json?.data;
+      if (Array.isArray(terms) && terms.length > 0) {
+        return mapTerms(terms);
       }
     }
   } catch (e) {

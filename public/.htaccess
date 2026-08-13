@@ -1,6 +1,25 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # ============================================================
+  # SAME-ORIGIN API PROXY (permanent CORS bypass)
+  # Proxies /api/* to the WordPress CMS SERVER-SIDE so the browser
+  # only ever talks to https://teonox.com — never directly to
+  # cms.teonox.com — eliminating CORS failures entirely.
+  # Requires mod_proxy (Hostinger LiteSpeed ships with it).
+  # These rules MUST stay ABOVE the SPA fallback at the bottom.
+  # ============================================================
+  <IfModule mod_proxy.c>
+    RewriteRule ^api/programs/categories/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program-category&per_page=100&_fields=id,name,slug,count [P,L,QSA]
+    RewriteRule ^api/programs/([0-9]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program/$1&_embed [P,L,QSA]
+    RewriteRule ^api/programs/([^/]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program&slug=$1&_embed [P,L,QSA]
+    RewriteRule ^api/programs/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program&_embed&per_page=50 [P,L,QSA]
+    RewriteRule ^api/blogs/([^/]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/posts/$1&_embed [P,L,QSA]
+    RewriteRule ^api/blogs/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/posts&_embed&per_page=20 [P,L,QSA]
+    RewriteRule ^api/media/([0-9]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/media/$1&_fields=source_url [P,L,QSA]
+  </IfModule>
+
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
