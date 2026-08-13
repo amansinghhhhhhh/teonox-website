@@ -203,9 +203,10 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
   }
 
   // Strategy 2: Direct fetch to the WP CMS (env-resolved origin; works on
-  // static builds when the proxy is absent and CORS allows the origin).
+  // static builds when the proxy is absent and CORS allows the origin). The
+  // `_cb` param busts cached WP response headers (LiteSpeed/CDN).
   try {
-    const res = await fetch(`${WP_BASE}/wp/v2/posts&_embed&per_page=20`);
+    const res = await fetch(`${WP_BASE}/wp/v2/posts&_embed&per_page=20&_cb=${Date.now()}`);
     if (res.ok) {
       const posts = await safeJson(res);
       if (Array.isArray(posts) && posts.length > 0) {
@@ -232,7 +233,7 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
 
   // Try direct WP API by ID
   try {
-    const res = await fetch(`${WP_BASE}/wp/v2/posts/${idOrSlug}&_embed`);
+    const res = await fetch(`${WP_BASE}/wp/v2/posts/${idOrSlug}&_embed&_cb=${Date.now()}`);
     if (res.ok) {
       const p = await safeJson(res);
       return transformWpPost(p);
@@ -241,7 +242,7 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
 
   // Try direct WP API by slug
   try {
-    const res = await fetch(`${WP_BASE}/wp/v2/posts&slug=${idOrSlug}&_embed`);
+    const res = await fetch(`${WP_BASE}/wp/v2/posts&slug=${idOrSlug}&_embed&_cb=${Date.now()}`);
     if (res.ok) {
       const posts = await safeJson(res);
       if (posts && posts.length > 0) return transformWpPost(posts[0]);
@@ -256,7 +257,7 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
 export async function fetchLiveCategories(): Promise<{ categories: string[]; isLive: boolean }> {
   // Try direct WordPress REST API
   try {
-    const res = await fetch(`${WP_BASE}/wp/v2/categories&per_page=100`);
+    const res = await fetch(`${WP_BASE}/wp/v2/categories&per_page=100&_cb=${Date.now()}`);
     if (res.ok) {
       const data = await safeJson(res);
       if (Array.isArray(data) && data.length > 0) {

@@ -1,4 +1,5 @@
 import { ProgramDetailData, PROGRAM_DETAILS_MAP } from '../data/programDetails';
+import { PROGRAMS_DATA } from '../data';
 
 /**
  * Normalised data for a single program card on the /programs listing page.
@@ -281,7 +282,7 @@ async function resolveMediaUrl(attachmentId: number): Promise<string> {
   // Proxy unavailable (static build / 404 / HTML fallback) -> direct WP REST.
   try {
     const directRes = await fetch(
-      `${WP_BASE}/wp/v2/media/${attachmentId}&_fields=source_url`,
+      `${WP_BASE}/wp/v2/media/${attachmentId}&_fields=source_url&_cb=${Date.now()}`,
     );
     if (directRes.ok) {
       const json = await safeJson(directRes);
@@ -586,11 +587,12 @@ export async function fetchLiveProgramDetail(
     // proxy failed, fall through to direct fetch
   }
 
-  // Strategy 2: direct WordPress REST API
+  // Strategy 2: direct WordPress REST API (`_cb` busts cached WP response
+  // headers so a stale CORS header cannot keep blocking the request).
   const isNumeric = /^\d+$/.test(key);
   const url = isNumeric
-    ? `${WP_BASE}/wp/v2/program/${encodeURIComponent(key)}&_embed`
-    : `${WP_BASE}/wp/v2/program&slug=${encodeURIComponent(key)}&_embed`;
+    ? `${WP_BASE}/wp/v2/program/${encodeURIComponent(key)}&_embed&_cb=${Date.now()}`
+    : `${WP_BASE}/wp/v2/program&slug=${encodeURIComponent(key)}&_embed&_cb=${Date.now()}`;
 
   try {
     const res = await fetch(url);
@@ -799,9 +801,38 @@ function isProgramVisible(post: any): boolean {
 }
 
 /**
+ * Static fallback cards used when the WordPress CMS is unreachable (e.g. a CORS
+ * block on cms.teonox.com). Derived from the bundled PROGRAMS_DATA so the
+ * /programs listing and the home page section never collapse into the "Programs
+ * coming soon" state just because the live API could not be reached.
+ */
+const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p) => {
+  const mapped = new Set<string>([POPULAR_CATEGORY]);
+  const haystack = `${p.id} ${p.title}`.toLowerCase();
+  for (const { test, id } of CATEGORY_KEYWORDS) {
+    if (test.test(haystack)) mapped.add(id);
+  }
+  const categories = Array.from(mapped);
+  return {
+    id: p.id,
+    title: p.title,
+    brandBadge: 'PROGRAM',
+    description: p.description,
+    durationText: p.duration || 'Custom Duration',
+    certText: 'Official Certification',
+    targetText: p.eligibility ? `Designed for ${p.eligibility}` : '',
+    mode: p.mode || 'On Campus, Pune',
+    categoryId:
+      categories.find((c) => c !== POPULAR_CATEGORY) || POPULAR_CATEGORY,
+    categories,
+    brochureUrl: '',
+  };
+});
+
+/**
  * Fetch the full program listing from WordPress and normalise each post into a
- * LiveProgramCard. Returns an empty array (isLive: false) when the CMS is
- * unreachable, so the page can fall back to static data.
+ * LiveProgramCard. Falls back to FALLBACK_PROGRAM_CARDS (isLive: false) when
+ * the CMS is unreachable, so programs never disappear from the UI.
  */
 export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
   const fromPosts = async (posts: any[]): Promise<LiveProgramCard[]> => {
@@ -837,9 +868,11 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
   }
 
   // Strategy 2: direct WordPress REST API (may be CORS-blocked off the CMS
-  // origin, which is why the proxy is tried first).
+  // origin, which is why the proxy is tried first). The `_cb` query param busts
+  // any cached WP response headers (LiteSpeed/CDN) so a stale CORS header can
+  // never keep blocking the fetch.
   try {
-    const res = await fetch(`${WP_BASE}/wp/v2/program&_embed&per_page=50`);
+    const res = await fetch(`${WP_BASE}/wp/v2/program&_embed&per_page=50&_cb=${Date.now()}`);
     if (res.ok) {
       const posts = await safeJson(res);
       if (Array.isArray(posts)) {
@@ -851,7 +884,9 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     console.warn('Direct WP programs list fetch error', e);
   }
 
-  return { programs: [], isLive: false };
+  // Strategy 3: static fallback so programs never disappear when the CMS is
+  // unreachable (CORS, DNS, network, etc).
+  return { programs: FALLBACK_PROGRAM_CARDS, isLive: false };
 }
 
 /**
@@ -884,7 +919,7 @@ export async function fetchProgramCategories(): Promise<
 
   try {
     const res = await fetch(
-      `${WP_BASE}/wp/v2/program-category&per_page=100&_fields=id,name,slug,count`,
+      `${WP_BASE}/wp/v2/program-category&per_page=100&_fields=id,name,slug,count&_cb=${Date.now()}`,
     );
     if (res.ok) {
       const data = await safeJson(res);
