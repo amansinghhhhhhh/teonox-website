@@ -175,14 +175,6 @@ function acfField(p: any, name: string): any {
   return candidates.find((v) => v != null) ?? null;
 }
 
-/** True when a value is actually present (non-null, non-empty string/array). */
-function hasValue(v: any): boolean {
-  if (v == null) return false;
-  if (typeof v === 'string') return v.trim().length > 0;
-  if (Array.isArray(v)) return v.length > 0;
-  return true;
-}
-
 /**
  * Extract a usable image URL from an ACF image field, which can arrive in
  * multiple shapes depending on the field's `return_format`:
@@ -621,7 +613,8 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
   if (!isV2Program(p)) return null;
 
   const fields = postFields(p);
-  const title = str(fields.program_title || p.title?.rendered);
+  // Title: post.acf.program_title, falling back to the post's own WP title.
+  const title = str(acfField(p, 'program_title') || p.title?.rendered);
   if (!title) return null;
 
   const featured = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
@@ -650,35 +643,13 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
     }
   }
 
-  // ACF card fields are read DIRECTLY from the raw post (acf / flattened /
-  // meta) so whatever is saved in WordPress immediately overrides any local
-  // static string. The detail-tab repeater rows and the `program_duration`
-  // fallback only apply when a card field is completely empty/absent.
-  const cardDuration = acfField(p, 'card_duration');
-  const cardCertifications = acfField(p, 'card_certifications');
-  const cardDesignedFor = acfField(p, 'card_designed_for');
-  const programDuration = acfField(p, 'program_duration');
-
-  const firstCert = rows(fields.certifications).find((r: any) => str(r.cert_title)) as any;
-  const firstDesignedFor = rows(fields.designed_for).find(
-    (r: any) => str(r.designed_for_title) || str(r.designed_for_text),
-  ) as any;
-
-  const durationText = hasValue(cardDuration)
-    ? str(cardDuration)
-    : hasValue(programDuration)
-      ? str(programDuration)
-      : 'Custom Duration';
-  const certText = hasValue(cardCertifications)
-    ? str(cardCertifications)
-    : firstCert
-      ? str(firstCert.cert_title)
-      : 'Official Certification';
-  const targetText = hasValue(cardDesignedFor)
-    ? str(cardDesignedFor)
-    : firstDesignedFor
-      ? `Designed for ${str(firstDesignedFor.designed_for_title || firstDesignedFor.designed_for_text)}`
-      : '';
+  // Pure ACF mapping: card content is taken 1:1 from the WordPress ACF fields
+  // (post.acf.card_duration / card_certifications / card_designed_for). No
+  // hardcoded defaults or static string overrides — an empty field stays empty
+  // so the CMS is the single source of truth.
+  const cardDuration = str(acfField(p, 'card_duration'));
+  const cardCertifications = str(acfField(p, 'card_certifications'));
+  const cardDesignedFor = str(acfField(p, 'card_designed_for'));
 
   return {
     id: str(p.slug || p.id),
@@ -687,9 +658,9 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
     description:
       str(fields.program_subheading) ||
       stripHtml(p.excerpt?.rendered || p.content?.rendered || '').slice(0, 160),
-    durationText,
-    certText,
-    targetText,
+    durationText: cardDuration,
+    certText: cardCertifications,
+    targetText: cardDesignedFor,
     mode: str(fields.program_mode) || 'On Campus, Pune',
     image: img,
     brochureUrl: str(fields.card_brochure_url),
@@ -855,48 +826,12 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
 });
 
 /**
- * Display order for the program listing, matching the reference layout:
- * Flagship first, then Performance, then SEO. Cards are matched by keyword on
- * slug + title so the sort survives WP slug changes (e.g. a `-2` suffix).
- */
-const CARD_ORDER_PRIORITY: Array<{ pattern: RegExp }> = [
-  { pattern: /business-digital-marketing-with-ai/i },
-  { pattern: /performance-marketing/i },
-  { pattern: /search-engine-optimization/i },
-];
-
-/**
- * Programs excluded from the listing. Social Media Marketing was dropped from
- * the reference layout, so its WP post never becomes a card here.
- */
-const CARD_EXCLUSIONS: Array<{ pattern: RegExp }> = [
-  { pattern: /social-media-marketing/i },
-];
-
-/**
- * Sort live cards into the target order (Flagship, Performance, SEO) and drop
- * excluded programs. Unknown future programs that match neither the priority
- * list nor the exclusions are appended after the known three.
- */
-function orderListingCards(cards: LiveProgramCard[]): LiveProgramCard[] {
-  const remaining = cards.filter((c) => {
-    const hay = `${c.id} ${c.title}`.toLowerCase();
-    return !CARD_EXCLUSIONS.some(({ pattern }) => pattern.test(hay));
-  });
-  const ordered: LiveProgramCard[] = [];
-  for (const { pattern } of CARD_ORDER_PRIORITY) {
-    const idx = remaining.findIndex((c) =>
-      pattern.test(`${c.id} ${c.title}`.toLowerCase()),
-    );
-    if (idx !== -1) ordered.push(...remaining.splice(idx, 1));
-  }
-  return [...ordered, ...remaining];
-}
-
-/**
  * Fetch the full program listing from WordPress and normalise each post into a
  * LiveProgramCard. Falls back to FALLBACK_PROGRAM_CARDS (isLive: false) when
  * the CMS is unreachable, so programs never disappear from the UI.
+ *
+ * Every published V2 program returned by the WordPress REST API is rendered —
+ * no hardcoded ordering or exclusion of specific programs.
  */
 export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
   const fromPosts = async (posts: any[]): Promise<LiveProgramCard[]> => {
@@ -928,7 +863,8 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
       if (Array.isArray(posts)) {
         const programs = await fromPosts(posts);
         // Live CMS even when zero V2 programs exist (drives "coming soon").
-        return { programs: orderListingCards(programs), isLive: true };
+        // Programs render in the order WordPress returns them.
+        return { programs, isLive: true };
       }
     }
   } catch (e) {

@@ -122,7 +122,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPage
         title: progOrTitle.title,
         repeatedTitle: progOrTitle.title,
         description: progOrTitle.description,
-        duration: progOrTitle.durationText ? progOrTitle.durationText.split('|')[0].trim() : '8 Weeks',
+        duration: progOrTitle.durationText ? progOrTitle.durationText.split('|')[0].trim() : '',
         durationLabel: 'Duration',
         eligibility: '12th Passed, Graduates & Working Professionals',
         eligibilityLabel: 'Eligibility',
