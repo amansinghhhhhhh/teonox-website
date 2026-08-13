@@ -1,20 +1,12 @@
 import { BlogPost } from '../types';
 
 /**
- * WordPress CMS origin, resolved like programService:
- *  1. import.meta.env.VITE_CMS_URL (baked at build time by Vite)
- *  2. window.__CMS_URL__            (optional runtime override)
- *  3. Default https://cms.teonox.com
- * Used for direct WP REST calls when the same-origin /api/* Express proxy is
- * not running (e.g. a static Hostinger build served without server.ts).
+ * Blog CMS traffic is always routed through the same-origin `/api/*` proxy
+ * (Express server.ts, Vite dev proxy, or the .htaccess [P] rewrite on
+ * production). The browser NEVER calls cms.teonox.com directly, so the CMS
+ * origin stays out of the browser entirely (avoids CORS and stale-LiteSpeed-
+ * header issues).
  */
-const CMS_ORIGIN: string =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CMS_URL) ||
-  (typeof window !== 'undefined' &&
-    (window as any).__CMS_URL__ as string | undefined) ||
-  'https://cms.teonox.com';
-
-const WP_BASE = `${CMS_ORIGIN.replace(/\/+$/, '')}/index.php?rest_route=`;
 
 /** JSON-only response reader; returns null for HTML/404 static-host fallbacks. */
 async function safeJson(res: Response): Promise<any> {
@@ -202,25 +194,10 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
       }
     }
   } catch (e) {
-    // API proxy failed, try direct WordPress REST API
+    // API proxy failed, use fallback data
   }
 
-  // Strategy 2: Direct fetch to the WP CMS (env-resolved origin; works on
-  // static builds when the proxy is absent and CORS allows the origin). The
-  // `_cb` param busts cached WP response headers (LiteSpeed/CDN).
-  try {
-    const res = await fetch(`${WP_BASE}/wp/v2/posts&_embed&per_page=20&_cb=${Date.now()}`);
-    if (res.ok) {
-      const posts = await safeJson(res);
-      if (Array.isArray(posts) && posts.length > 0) {
-        return { blogs: posts.map(transformWpPost), isLive: true };
-      }
-    }
-  } catch (e) {
-    console.warn('Direct WP fetch error, using fallback blog posts', e);
-  }
-
-  // Strategy 3: Fallback data
+  // Strategy 2: Fallback data
   return { blogs: FALLBACK_BLOGS, isLive: false };
 }
 
@@ -236,49 +213,12 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
     }
   } catch (e) {}
 
-  // Try direct WP API by ID
-  try {
-    const res = await fetch(`${WP_BASE}/wp/v2/posts/${idOrSlug}&_embed&_cb=${Date.now()}`);
-    if (res.ok) {
-      const p = await safeJson(res);
-      return transformWpPost(p);
-    }
-  } catch (e) {}
-
-  // Try direct WP API by slug
-  try {
-    const res = await fetch(`${WP_BASE}/wp/v2/posts&slug=${idOrSlug}&_embed&_cb=${Date.now()}`);
-    if (res.ok) {
-      const posts = await safeJson(res);
-      if (posts && posts.length > 0) return transformWpPost(posts[0]);
-    }
-  } catch (e) {}
-
   // Find in fallback
   const found = FALLBACK_BLOGS.find((b) => b.id === idOrSlug || b.slug === idOrSlug);
   return found || null;
 }
 
 export async function fetchLiveCategories(): Promise<{ categories: string[]; isLive: boolean }> {
-  // Try direct WordPress REST API
-  try {
-    const res = await fetch(`${WP_BASE}/wp/v2/categories&per_page=100&_cb=${Date.now()}`);
-    if (res.ok) {
-      const data = await safeJson(res);
-      if (Array.isArray(data) && data.length > 0) {
-        const categories = data
-          .filter((cat: any) => cat.slug !== 'uncategorized' && cat.count > 0)
-          .map((cat: any) => decodeHtmlEntities(cat.name))
-          .filter(Boolean);
-        if (categories.length > 0) {
-          return { categories, isLive: true };
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('Direct WP categories fetch error, using fallback categories', e);
-  }
-
-  // Fallback data
+  // Categories come from the same-origin proxy; without it we use fallback data
   return { categories: FALLBACK_CATEGORIES, isLive: false };
 }

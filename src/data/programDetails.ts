@@ -149,6 +149,292 @@ export interface ProgramDetailData {
 }
 
 export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
+  'business-digital-marketing-ai': {
+    id: 'business-digital-marketing-ai',
+    programTitle: 'BUSINESS DIGITAL MARKETING WITH AI',
+    badge: 'FLAGSHIP CERTIFICATION PROGRAM',
+    subHeading: 'Complete Digital Marketing Mastery Across AI, SEO, Paid Ads, Analytics & Business Growth',
+    duration: '6 Months',
+    mode: 'On Campus, Pune',
+    heroIntro:
+      'Business Digital Marketing With AI is the flagship 6-month certification program at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
+    heroImage: imgDigitalMarketingAi,
+    overview: {
+      highlight:
+        'Business Digital Marketing With AI is the flagship 6-month certification program at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
+      main: 'The program covers the full digital marketing stack: marketing fundamentals and strategy, SEO and search, paid advertising across Google and Meta, social media and content, email and automation, web analytics, and AI-powered marketing workflows. Throughout, learners work on real projects, build portfolios and prepare for internships, jobs and freelancing.',
+      expanded: [
+        'AI is embedded throughout the curriculum — from content and creative generation to campaign optimization, analytics and reporting — so learners graduate ready for AI-augmented marketing roles.',
+        'The final months focus on business growth: measurement, conversion optimization, customer journeys and growth strategy, followed by placement and career support.'
+      ]
+    },
+    designedFor: [
+      {
+        title: 'Students & Graduates',
+        icon: GraduationCap,
+        text: '12th-pass students and graduates who want a complete, industry-ready digital marketing career.'
+      },
+      {
+        title: 'Working Professionals',
+        icon: Briefcase,
+        text: 'Professionals from any field who want to transition into digital marketing and growth roles.'
+      },
+      {
+        title: 'Business Owners & Entrepreneurs',
+        icon: Zap,
+        text: 'Founders and business owners who want to market and grow their own businesses.'
+      },
+      {
+        title: 'Freelancers & Aspiring Consultants',
+        icon: Users,
+        text: 'Individuals who want to offer high-value digital marketing services to clients.'
+      },
+      {
+        title: 'Marketing Beginners',
+        icon: Sparkles,
+        text: 'Complete beginners looking for one structured path from fundamentals to advanced marketing skills.'
+      },
+      {
+        title: 'Career Switchers',
+        icon: Rocket,
+        text: 'Professionals seeking a practical, portfolio-driven path into the digital economy.'
+      },
+      {
+        title: 'Job Seekers',
+        icon: Target,
+        text: 'Candidates who want placement support, interview preparation and a competitive portfolio.'
+      },
+      {
+        title: 'Creators & Content Marketers',
+        icon: PenTool,
+        text: 'Creators who want to add strategy, analytics, paid promotion and AI workflows to their skills.'
+      },
+      {
+        title: 'Anyone Building an Online Business',
+        icon: Building2,
+        text: 'Anyone launching a product, service or brand who needs end-to-end digital marketing skills.'
+      }
+    ],
+    keyReasons: [
+      'One complete curriculum covering the entire digital marketing stack in 6 months',
+      'AI-powered marketing skills embedded throughout every module',
+      'Learn SEO, Google Ads, Meta Ads, social media, email, analytics and business growth',
+      'Hands-on projects and portfolio building from week one',
+      'Industry-recognized TEONOX certification plus support for Google, Meta, HubSpot and other certifications',
+      'Placement assistance, resume and LinkedIn optimization and interview preparation',
+      'Internship and freelancing opportunities for eligible learners',
+      'On-campus immersive training at TEONOX, Pune with mentors and community',
+      'Eligible for 12th-pass students, graduates and working professionals',
+      'Designed for career growth across agencies, startups, brands and businesses'
+    ],
+    keyReasonsFootnote:
+      'The 6-month curriculum spans strategy, AI, SEO, paid ads, social, analytics and business growth with live projects and career support.',
+    benefits: {
+      students: {
+        title: 'For Students',
+        intro:
+          'Students and graduates can build a complete, job-ready digital marketing skill set with a portfolio that makes them stand out.',
+        heading: 'Build a Complete, Job-Ready Profile',
+        bullets: [
+          'Master the full digital marketing stack with AI workflows integrated throughout.',
+          'Build a real portfolio across SEO, paid ads, social media, email and analytics.',
+          'Get placement assistance, interview prep and guidance for entry-level marketing roles.'
+        ]
+      },
+      business: {
+        title: 'For Business Owners',
+        intro:
+          'Business owners can learn how to attract customers, build brands and grow revenue using digital marketing and AI.',
+        heading: 'Market & Grow Your Business',
+        bullets: [
+          'Understand how to acquire and retain customers across search, social and paid channels.',
+          'Use analytics and AI to make smarter marketing decisions and optimize spend.',
+          'Build sustainable marketing systems instead of depending on agencies for everything.'
+        ]
+      },
+      corporate: {
+        title: 'For Working Professionals',
+        intro:
+          'Professionals can transition into or advance within digital marketing and growth roles.',
+        heading: 'Fast-Track a Career in Digital Marketing',
+        bullets: [
+          'Upgrade from general roles to in-demand digital marketing and growth positions.',
+          'Learn AI-augmented workflows used by modern marketing teams.',
+          'Gain certification, portfolio and mentorship support to switch careers with confidence.'
+        ]
+      }
+    },
+    prerequisites: {
+      intro:
+        'The program is designed for 12th-pass students, graduates and working professionals. No prior marketing experience is required — beginners are welcome. Learners should be comfortable with:',
+      bullets: [
+        'Using a computer and browsing the internet',
+        'Basic English communication and writing',
+        'A willingness to learn tools, analytics and AI platforms',
+        'Curiosity about business and how companies market themselves'
+      ],
+      note: 'Eligibility: 12th Passed, Graduates & Working Professionals.'
+    },
+    outcomes: {
+      intro: 'After completing the program, learners should be able to:',
+      bullets: [
+        'Plan and execute complete digital marketing strategies',
+        'Implement SEO and organic growth across search engines',
+        'Run Google Ads and Meta Ads campaigns end to end',
+        'Manage social media, content and community programs',
+        'Set up email marketing and automation flows',
+        'Use web analytics to measure and optimize performance',
+        'Apply AI tools across content, creative, analytics and campaigns',
+        'Design customer journeys and conversion-focused funnels',
+        'Present data-backed recommendations to teams and clients',
+        'Build a professional portfolio ready for jobs or freelancing'
+      ],
+      projectsNote:
+        'The program culminates in capstone projects covering a full marketing plan, live campaign work, analytics reporting and an AI-powered marketing workflow portfolio.'
+    },
+    valueSequence: [
+      'Marketing Strategy',
+      'SEO & Search',
+      'Paid Advertising',
+      'Social Media',
+      'Analytics & AI',
+      'Business Growth'
+    ],
+    valueProposition:
+      'The value of the flagship program lies in turning a beginner into a complete, AI-enabled digital marketer ready for real business impact.',
+    certifications: [
+      {
+        title: 'TEONOX Certification in Business Digital Marketing With AI',
+        badge: 'TEONOX ACADEMY',
+        bgGradient: 'from-orange-50 to-amber-50',
+        borderColor: '#FED7AA',
+        type: 'teonox'
+      },
+      {
+        title: 'Google Digital Marketing & Analytics Certification Support',
+        badge: 'GOOGLE CERTIFIED',
+        bgGradient: 'from-blue-50 to-indigo-50',
+        borderColor: '#BFDBFE',
+        type: 'google'
+      },
+      {
+        title: 'Meta Certified Digital Marketing Associate Support',
+        badge: 'META CERTIFIED',
+        bgGradient: 'from-indigo-50 to-purple-50',
+        borderColor: '#C7D2FE',
+        type: 'meta'
+      },
+      {
+        title: 'HubSpot & Google Analytics 4 (GA4) Certification Support',
+        badge: 'PLATFORM CERTIFIED',
+        bgGradient: 'from-emerald-50 to-teal-50',
+        borderColor: '#A7F3D0',
+        type: 'hubspot'
+      }
+    ],
+    placementAssistance: {
+      intro:
+        'Eligible learners can receive career support for digital marketing and related roles through tailored career services:',
+      bullets: [
+        'Resume and LinkedIn optimization for marketing roles',
+        'Portfolio preparation featuring live project case studies',
+        'Interview preparation and marketing scenario practice',
+        'Mock interviews with marketing and hiring professionals',
+        'Career guidance and freelancing positioning',
+        'Job opportunity assistance through TEONOX hiring networks'
+      ],
+      careerPaths: [
+        'Digital Marketing Executive',
+        'SEO Specialist',
+        'Social Media Marketer',
+        'Paid Ads Specialist',
+        'Content Marketer',
+        'Email & Automation Marketer',
+        'Growth Analyst',
+        'Freelance Digital Marketer'
+      ]
+    },
+    opportunities: {
+      internships: {
+        title: 'Practical Internship Exposure',
+        note: 'Internship opportunities are subject to availability and applicable eligibility criteria.',
+        items: [
+          { title: 'Real marketing projects', iconName: 'Target' },
+          { title: 'SEO and content assignments', iconName: 'Search' },
+          { title: 'Google and Meta ad campaigns', iconName: 'Zap' },
+          { title: 'Social media management', iconName: 'Share2' },
+          { title: 'Email and automation flows', iconName: 'Mail' },
+          { title: 'Analytics and reporting', iconName: 'BarChart' }
+        ]
+      },
+      freelancing: {
+        title: 'Freelancing & Client Services',
+        note: 'The program can prepare learners to offer high-demand services to clients, brands, and agencies.',
+        items: [
+          { title: 'Digital Marketing Strategy', iconName: 'Lightbulb' },
+          { title: 'SEO Services', iconName: 'Search' },
+          { title: 'Social Media Management', iconName: 'Share2' },
+          { title: 'Google Ads Management', iconName: 'Megaphone' },
+          { title: 'Meta Ads Management', iconName: 'Target' },
+          { title: 'Content Marketing', iconName: 'FileText' },
+          { title: 'Email Marketing', iconName: 'Mail' },
+          { title: 'AI-Powered Marketing', iconName: 'Bot' },
+          { title: 'Landing Page & Funnel Design', iconName: 'Layout' },
+          { title: 'Analytics & Reporting', iconName: 'PieChart' }
+        ]
+      }
+    },
+    faqs: [
+      {
+        q: '1. What is the Business Digital Marketing With AI program?',
+        a: 'It is the flagship 6-month certification program at TEONOX that builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth.'
+      },
+      {
+        q: '2. Do I need prior marketing experience?',
+        a: 'No. The program is designed for 12th-pass students, graduates and working professionals. Beginners start with fundamentals and progress to advanced, AI-powered marketing.'
+      },
+      {
+        q: '3. What is the duration of the program?',
+        a: 'The program duration is 6 months.'
+      },
+      {
+        q: '4. What is the mode of delivery?',
+        a: 'The program is delivered On Campus in Pune with hands-on projects, mentorship and a learning community.'
+      },
+      {
+        q: '5. What topics are covered?',
+        a: 'The curriculum covers marketing strategy, SEO and search, Google Ads, Meta Ads, social media and content, email and automation, web analytics, AI-powered marketing workflows and business growth.'
+      },
+      {
+        q: '6. Will I learn AI?',
+        a: 'Yes. AI is embedded throughout the program — content and creative generation, campaign optimization, analytics, reporting and marketing operations.'
+      },
+      {
+        q: '7. Will I get a certification?',
+        a: 'Yes. Learners earn the TEONOX Certification in Business Digital Marketing With AI, with support for Google, Meta, HubSpot and GA4 certifications.'
+      },
+      {
+        q: '8. Does the program include practical projects?',
+        a: 'Yes. Learners build a portfolio through live projects covering a full marketing plan, campaign work, analytics reporting and an AI-powered marketing workflow.'
+      },
+      {
+        q: '9. Does the program offer placement support?',
+        a: 'Eligible learners receive placement assistance including resume and LinkedIn optimization, interview preparation, mock interviews and job opportunity assistance through TEONOX hiring networks.'
+      },
+      {
+        q: '10. Can I freelance after completing this program?',
+        a: 'Yes. The skills are applicable to freelancing in SEO, social media, paid ads, content, email and AI-powered marketing services.'
+      },
+      {
+        q: '11. Who is this program for?',
+        a: 'It is for students and graduates, working professionals, career switchers, business owners, freelancers and job seekers who want a complete digital marketing skill set.'
+      },
+      {
+        q: '12. Why choose the flagship program over a specialization?',
+        a: 'The flagship program covers the entire digital marketing stack in one 6-month path, while specializations focus on one advanced area like SEO, Social Media or Performance Marketing.'
+      }
+    ]
+  },
   'social-media-marketing': {
     id: 'social-media-marketing',
     programTitle: 'SPECIALIZATION IN SOCIAL MEDIA MARKETING',

@@ -88,29 +88,14 @@ function termTaxonomySlug(t: any): string {
  * live CMS content with the existing static data as a seamless fallback.
  *
  * Fetch strategy (mirrors blogService):
- *   1. Local dev proxy  /api/programs/:id
- *   2. Direct WordPress REST API  https://cms.teonox.com/index.php?rest_route=/wp/v2/programs...
- *   3. Static fallback  PROGRAM_DETAILS_MAP[idOrSlug]
- */
-
-/**
- * CMS origin + WP REST base, resolved from build/runtime config in this order:
- *   1. `import.meta.env.VITE_CMS_URL`  (baked at build time by Vite)
- *   2. `window.__CMS_URL__`             (optional runtime override, avoids a rebuild)
- *   3. Default https://cms.teonox.com
+ *   1. Same-origin proxy  /api/programs/:id   (Express server.ts, Vite dev
+ *      proxy, or the .htaccess [P] rewrite on production)
+ *   2. Static fallback  PROGRAM_DETAILS_MAP[idOrSlug]
  *
- * Every same-origin `/api/*` proxy route (Express / server.ts, Vite dev proxy)
- * is tried FIRST because it bypasses CORS; if that proxy is not running — e.g.
- * a static Hostinger Vite build served without the Node server — the client
- * falls through to the direct WordPress REST URL below using this origin.
+ * The browser NEVER calls cms.teonox.com directly: all CMS traffic is routed
+ * through the same-origin `/api/*` proxy so the CMS origin stays out of the
+ * browser entirely (avoids CORS and stale-LiteSpeed-header issues).
  */
-const CMS_ORIGIN: string =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CMS_URL) ||
-  (typeof window !== 'undefined' &&
-    (window as any).__CMS_URL__ as string | undefined) ||
-  'https://cms.teonox.com';
-
-const WP_BASE = `${CMS_ORIGIN.replace(/\/+$/, '')}/index.php?rest_route=`;
 
 // ---- Certification card styles ----
 // WordPress editors only pick a Certification Type (cert_type) from a dropdown.
@@ -283,23 +268,9 @@ async function resolveMediaUrl(attachmentId: number): Promise<string> {
     console.warn(`WP media resolution via proxy failed for id ${attachmentId}`, e);
   }
 
-  // Proxy unavailable (static build / 404 / HTML fallback) -> direct WP REST.
-  try {
-    const directRes = await fetch(
-      `${WP_BASE}/wp/v2/media/${attachmentId}&_fields=source_url&_cb=${Date.now()}`,
-    );
-    if (directRes.ok) {
-      const json = await safeJson(directRes);
-      const url = imageUrl(json);
-      if (url) {
-        mediaUrlCache.set(attachmentId, url);
-        return url;
-      }
-    }
-  } catch (e) {
-    console.warn(`WP media resolution via direct REST failed for id ${attachmentId}`, e);
-  }
-
+  // Proxy unavailable (static build / 404 / HTML fallback) -> leave empty so
+  // the caller's placeholder handles it. The browser must never call the CMS
+  // origin directly.
   mediaUrlCache.set(attachmentId, '');
   return '';
 }
@@ -563,6 +534,16 @@ async function applyResolvedHeroImage(post: any, detail: ProgramDetailData): Pro
 }
 
 /**
+ * Map a static card id to the canonical slug of its live WP post. The flagship
+ * card is id `business-digital-marketing-ai` but the CMS post is
+ * `business-digital-marketing-with-ai-v2`, so a detail request for the static
+ * id also tries the canonical slug on the proxy.
+ */
+const PROGRAM_DETAIL_SLUG_ALIASES: Record<string, string> = {
+  'business-digital-marketing-ai': 'business-digital-marketing-with-ai-v2',
+};
+
+/**
  * Fetch a single program's detail content by id (slug) or numeric WP id.
  * Returns static PROGRAM_DETAILS_MAP data when the CMS is unreachable.
  */
@@ -570,55 +551,36 @@ export async function fetchLiveProgramDetail(
   idOrSlug: string,
 ): Promise<{ detail: ProgramDetailData | null; isLive: boolean }> {
   const key = idOrSlug || '';
+  const canonical = PROGRAM_DETAIL_SLUG_ALIASES[key] || key;
+  const slugs = canonical === key ? [key] : [canonical, key];
 
-  // Strategy 1: local proxy (same-origin, no CORS) relays raw WP post
-  try {
-    const res = await fetch(`/api/programs/${encodeURIComponent(key)}`);
-    if (res.ok) {
-      const json = await safeJson(res);
-      // Accept the Express proxy shape ({ success, data }) or a raw WP post
-      // (LiteSpeed [P] rewrite to cms.teonox.com).
-      const raw = json?.success ? json.data : json;
-      if (raw) {
-        // Staging-only programs stay hidden on production even when reached
-        // by direct URL (fall through to the static fallback / null).
-        if (!isProgramVisible(raw)) return { detail: null, isLive: false };
-        const transformed = transformWpProgram(raw);
-        if (transformed) {
-          const detail = await applyResolvedHeroImage(raw, transformed);
-          return { detail, isLive: true };
+  // Strategy 1: local proxy (same-origin, no CORS) relays raw WP post.
+  for (const slug of slugs) {
+    try {
+      const res = await fetch(`/api/programs/${encodeURIComponent(slug)}`);
+      if (res.ok) {
+        const json = await safeJson(res);
+        // Accept the Express proxy shape ({ success, data }) or a raw WP post
+        // (LiteSpeed [P] rewrite to cms.teonox.com).
+        const raw = json?.success ? json.data : json;
+        if (raw) {
+          // Staging-only programs stay hidden on production even when reached
+          // by direct URL (fall through to the static fallback / null).
+          if (!isProgramVisible(raw)) return { detail: null, isLive: false };
+          const transformed = transformWpProgram(raw);
+          if (transformed) {
+            const detail = await applyResolvedHeroImage(raw, transformed);
+            return { detail, isLive: true };
+          }
         }
       }
+    } catch (e) {
+      // proxy failed for this slug, try the next candidate
     }
-  } catch (e) {
-    // proxy failed, fall through to direct fetch
   }
 
-  // Strategy 2: direct WordPress REST API (`_cb` busts cached WP response
-  // headers so a stale CORS header cannot keep blocking the request).
-  const isNumeric = /^\d+$/.test(key);
-  const url = isNumeric
-    ? `${WP_BASE}/wp/v2/program/${encodeURIComponent(key)}&_embed&_cb=${Date.now()}`
-    : `${WP_BASE}/wp/v2/program&slug=${encodeURIComponent(key)}&_embed&_cb=${Date.now()}`;
-
-  try {
-    const res = await fetch(url);
-    if (res.ok) {
-      const data = await safeJson(res);
-      const post = isNumeric ? data : Array.isArray(data) ? data[0] : null;
-      if (post && isProgramVisible(post)) {
-        const transformed = transformWpProgram(post);
-        if (transformed) {
-          const detail = await applyResolvedHeroImage(post, transformed);
-          return { detail, isLive: true };
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('Direct WP programs fetch error, using fallback detail', e);
-  }
-
-  // Strategy 3: static fallback
+  // Strategy 2: static fallback so the detail page never dead-ends when the
+  // CMS is unreachable (CORS, DNS, network, proxy down, etc).
   return { detail: PROGRAM_DETAILS_MAP[key] || null, isLive: false };
 }
 
@@ -776,7 +738,7 @@ export function isStagingEnv(): boolean {
   );
 }
 
-/** True when a program is flagged staging-only (ACF flag OR a `-v2` slug). */
+/** True when a program is flagged staging-only via its ACF field. */
 export function isStagingOnlyProgram(post: any): boolean {
   if (!post || typeof post !== 'object') return false;
 
@@ -790,12 +752,9 @@ export function isStagingOnlyProgram(post: any): boolean {
     }
   }
 
-  // Safety net: any unpublished-looking V2 slug ending in `-v2` is treated as
-  // staging-only unless the editor explicitly renamed it. Post 410's slug is
-  // `business-digital-marketing-with-ai-v2`.
-  const slug = str(post.slug).toLowerCase();
-  if (slug.endsWith('-v2')) return true;
-
+  // NOTE: a slug ending in `-v2` is NOT treated as staging-only. The flagship
+  // program's live slug is `business-digital-marketing-with-ai-v2`, so slug
+  // heuristics must never hide it on production.
   return false;
 }
 
@@ -862,8 +821,8 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
   const fromPosts = async (posts: any[]): Promise<LiveProgramCard[]> => {
     // Strict V2-only guard applied in EVERY environment (dev, staging, prod):
     // legacy V1 posts never become cards on this site. Staging-only programs
-    // (ACF staging_only flag or `-v2` slug) are additionally hidden here so
-    // unreleased V2 bets never surface on the live production site.
+    // (ACF staging_only flag) are additionally hidden here so unreleased V2
+    // bets never surface on the live production site.
     const eligible = posts.filter((p) => isV2Program(p) && isProgramVisible(p));
     const cards: LiveProgramCard[] = [];
     for (const post of eligible) {
@@ -892,35 +851,18 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
       }
     }
   } catch (e) {
-    console.warn('Proxy programs list fetch failed, falling back to direct WP', e);
+    console.warn('Proxy programs list fetch failed, using static fallback', e);
   }
 
-  // Strategy 2: direct WordPress REST API (may be CORS-blocked off the CMS
-  // origin, which is why the proxy is tried first). The `_cb` query param busts
-  // any cached WP response headers (LiteSpeed/CDN) so a stale CORS header can
-  // never keep blocking the fetch.
-  try {
-    const res = await fetch(`${WP_BASE}/wp/v2/program&_embed&per_page=50&_cb=${Date.now()}`);
-    if (res.ok) {
-      const posts = await safeJson(res);
-      if (Array.isArray(posts)) {
-        const programs = await fromPosts(posts);
-        return { programs, isLive: true };
-      }
-    }
-  } catch (e) {
-    console.warn('Direct WP programs list fetch error', e);
-  }
-
-  // Strategy 3: static fallback so programs never disappear when the CMS is
-  // unreachable (CORS, DNS, network, etc).
+  // Strategy 2: static fallback so programs never disappear when the CMS is
+  // unreachable (CORS, DNS, network, proxy down, etc).
   return { programs: FALLBACK_PROGRAM_CARDS, isLive: false };
 }
 
 /**
  * Fetch the `program-category` custom taxonomy terms for the /programs page.
- * Categories drive the sidebar/tab UI directly from WordPress data. Tries the
- * local proxy first (same-origin, no CORS), then the direct WP REST API.
+ * Categories drive the sidebar/tab UI directly from WordPress data via the
+ * same-origin proxy (the browser never calls the CMS origin directly).
  */
 export async function fetchProgramCategories(): Promise<
   { id: number; name: string; slug: string; count: number }[]
@@ -944,21 +886,7 @@ export async function fetchProgramCategories(): Promise<
       }
     }
   } catch (e) {
-    console.warn('Proxy program-category fetch failed, falling back to direct WP', e);
-  }
-
-  try {
-    const res = await fetch(
-      `${WP_BASE}/wp/v2/program-category&per_page=100&_fields=id,name,slug,count&_cb=${Date.now()}`,
-    );
-    if (res.ok) {
-      const data = await safeJson(res);
-      if (Array.isArray(data) && data.length > 0) {
-        return mapTerms(data);
-      }
-    }
-  } catch (e) {
-    console.warn('Direct WP program-category fetch error', e);
+    console.warn('Proxy program-category fetch failed, returning empty', e);
   }
 
   return [];
