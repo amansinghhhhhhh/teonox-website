@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" role="img" aria-label="Starcom">
+  <g font-family="Arial, Helvetica, sans-serif">
+    <polygon points="120,8 124,18 134,18 127,24 130,34 120,28 110,34 113,24 106,18 116,18" fill="#E87722"/>
+    <text x="10" y="40" font-weight="900" font-size="30" font-family="Arial, Helvetica, sans-serif" fill="#111111">Starcom</text>
+  </g>
+</svg>

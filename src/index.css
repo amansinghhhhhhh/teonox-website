@@ -1,0 +1,408 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #FFFFFF;
+    --bg-warm: #FFF6EE;
+    --bg-warm-2: #FFEEDD;
+    --ink: #201A17;
+    --ink-soft: #736657;
+    --ink-faint: #A79885;
+    --orange: #FF6A2B;
+    --orange-2: #FF8A50;
+    --orange-deep: #D8420F;
+    --orange-pale: #FFE4CF;
+    --line: #F0DFCE;
+    --white: #ffffff;
+    --approach-bg: #201A17;
+    --footer-bg: #17110D;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFFFFF;
+    color: #201A17;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* .pt-20 {
+    padding-top: 70px;
+  } */
+
+  .font-display,
+  .font-heading,
+  .font-sora {
+    font-family: 'Sora', sans-serif;
+  }
+
+  .font-body,
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-eyebrow,
+  .font-mono,
+  .font-ibm {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Font size definitions */
+  .text-hero-h1 {
+    font-size: clamp(38px, 4.6vw, 60px);
+    line-height: 1.15;
+  }
+
+  .text-section-h2 {
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.2;
+  }
+
+  .text-about-h2 {
+    font-size: clamp(28px, 3.2vw, 38px);
+    line-height: 1.22;
+  }
+
+  .text-career-h2 {
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.25;
+  }
+
+  .text-card-h3 {
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.3;
+  }
+
+  .text-card-h4 {
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.35;
+  }
+
+  .text-body-lede {
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.6;
+  }
+
+  .text-card-desc {
+    font-size: clamp(14.5px, 1.4vw, 15px);
+    line-height: 1.55;
+  }
+
+  .text-small-meta {
+    font-size: clamp(12.5px, 1.2vw, 13.5px);
+    line-height: 1.4;
+  }
+
+  .text-eyebrow {
+    font-size: 12.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .text-button {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .text-nav-link {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .text-logo {
+    font-size: 22px;
+    font-weight: 800;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF6EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #A79885;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #736657;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.06);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Sassriver-style Interactive Button */
+.btn-sassriver-primary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #F15A29 0%, #D84315 100%);
+  color: #FFFFFF;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  box-shadow: 0 10px 25px -5px rgba(241, 90, 41, 0.4), 0 8px 10px -6px rgba(241, 90, 41, 0.2);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-sassriver-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 35px -5px rgba(241, 90, 41, 0.55), 0 10px 15px -5px rgba(241, 90, 41, 0.3);
+  background: linear-gradient(135deg, #FF6B38 0%, #F15A29 100%);
+}
+
+.btn-sassriver-secondary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-sassriver-secondary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.8s ease-in-out;
+}
+
+.btn-sassriver-secondary:hover::after {
+  transform: translateX(100%) rotate(25deg);
+}
+
+.btn-sassriver-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(241, 90, 41, 0.6);
+  color: #FFFFFF;
+  box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   PREMIUM CARD SYSTEM - reusable across every section
+   ============================================================ */
+.card-premium {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+  will-change: transform;
+}
+
+.card-premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.55) 48%,
+    transparent 62%
+  );
+  transform: translateX(-140%) skewX(-15deg);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: inherit;
+}
+
+.card-premium:hover::after {
+  transform: translateX(140%) skewX(-15deg);
+}
+
+.card-premium:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px -15px rgba(241, 90, 41, 0.28),
+    0 12px 24px -10px rgba(17, 17, 17, 0.12);
+}
+
+/* Soft floating icon badge */
+.icon-badge-float {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease, color 0.35s ease;
+}
+
+.card-premium:hover .icon-badge-float,
+.group:hover .icon-badge-float {
+  transform: translateY(-4px) rotate(-6deg) scale(1.08);
+}
+
+/* Magnetic underline used for nav / text links */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #FF6A2B, #FFB27A);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Subtle dotted-grid decorative background */
+.bg-grid-dots {
+  background-image: radial-gradient(rgba(32, 26, 23, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Number / stat counter pop */
+.stat-pop {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.group:hover .stat-pop {
+  transform: scale(1.08);
+}
+
+/* Section divider squiggle underline for headings */
+.heading-accent {
+  position: relative;
+  display: inline-block;
+}
+
+.heading-accent::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: -6px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 106, 43, 0.35), rgba(255, 178, 122, 0.15));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underline-grow 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+/* Keyframes */
+@keyframes underline-grow {
+  to { transform: scaleX(1); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoom-in-soft {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-zoom-in-soft {
+  animation: zoom-in-soft 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Image zoom-on-hover helper (pair with overflow-hidden parent) */
+.img-zoom {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .img-zoom {
+  transform: scale(1.08);
+}
+
+/* Smooth scroll for whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -1,0 +1,900 @@
+import { ProgramDetailData, PROGRAM_DETAILS_MAP } from '../data/programDetails';
+
+/**
+ * Normalised data for a single program card on the /programs listing page.
+ * Populated from the WP "Card Information" ACF fields, with the detail-tab
+ * fields as fallbacks when a card-specific value hasn't been entered yet.
+ */
+export interface LiveProgramCard {
+  id: string;
+  title: string;
+  brandBadge: string;
+  description: string;
+  durationText: string;
+  certText: string;
+  targetText: string;
+  mode: string;
+  image?: string;
+  brochureUrl: string;
+  categoryId: string;
+  categories: string[];
+}
+
+/**
+ * Curated sidebar categories (ProgramsPage) ->
+ * mapping table from WP `program-category` term slug to those curated ids.
+ * Every program card also always belongs to the "popular" tab (see below).
+ */
+export const PROGRAM_TERM_TO_CATEGORY: Record<string, string> = {
+  ai: 'genai',
+  'gen-ai': 'genai',
+  'gen-ai-marketing': 'genai',
+  'popular': 'popular',
+  'popular-programs': 'popular',
+  marketing: 'performance',
+  'performance-marketing': 'performance',
+  'performance-paid-ads': 'performance',
+  'paid-ads': 'performance',
+  'media-buying': 'performance',
+  seo: 'seo',
+  search: 'seo',
+  growth: 'seo',
+  'seo-search-growth': 'seo',
+  'search-engine-optimization': 'seo',
+  social: 'social',
+  'social-media': 'social',
+  'social-media-content': 'social',
+  content: 'social',
+  business: 'master',
+  master: 'master',
+  'master-certification': 'master',
+  executive: 'master',
+};
+
+/**
+ * Keyword fallback for posts that have no `program-category` term assigned in
+ * WordPress yet. Scans the slug + title so the v2 test program (and any draft)
+ * still lands on the correct curated tab instead of only "Popular Programs".
+ */
+const CATEGORY_KEYWORDS: Array<{ test: RegExp; id: string }> = [
+  { test: /seo|search|organic|search-engine/i, id: 'seo' },
+  { test: /social media|social|content|community/i, id: 'social' },
+  { test: /performance|paid ads|paid-ads|media buying|ads/i, id: 'performance' },
+  { test: /gen\s?ai|generative|artificial intelligence|\bai\b/i, id: 'genai' },
+  { test: /master|executive|diploma|certification/i, id: 'master' },
+];
+
+const POPULAR_CATEGORY = 'popular';
+
+/** Decode an embedded WP term's taxonomy slug, e.g. "program-category". */
+function termTaxonomySlug(t: any): string {
+  return (t?.taxonomy || '').toString().toLowerCase();
+}
+
+/**
+ * Data-fetching + transformer utility for Program detail content.
+ *
+ * The WordPress CMS stores program content via the ACF "Program Fields V2"
+ * field group (see src/data/programFieldsV2.json). ACF PRO exposes those
+ * fields in the REST API either flattened at the top level of the post object
+ * or nested under an `acf` object, depending on the site's ACF REST settings.
+ * `transformWpProgram` accepts either shape and normalises it back into the
+ * frontend `ProgramDetailData` type so `ProgramDetailPage.tsx` can render
+ * live CMS content with the existing static data as a seamless fallback.
+ *
+ * Fetch strategy (mirrors blogService):
+ *   1. Local dev proxy  /api/programs/:id
+ *   2. Direct WordPress REST API  https://cms.teonox.com/index.php?rest_route=/wp/v2/programs...
+ *   3. Static fallback  PROGRAM_DETAILS_MAP[idOrSlug]
+ */
+
+/**
+ * CMS origin + WP REST base, resolved from build/runtime config in this order:
+ *   1. `import.meta.env.VITE_CMS_URL`  (baked at build time by Vite)
+ *   2. `window.__CMS_URL__`             (optional runtime override, avoids a rebuild)
+ *   3. Default https://cms.teonox.com
+ *
+ * Every same-origin `/api/*` proxy route (Express / server.ts, Vite dev proxy)
+ * is tried FIRST because it bypasses CORS; if that proxy is not running — e.g.
+ * a static Hostinger Vite build served without the Node server — the client
+ * falls through to the direct WordPress REST URL below using this origin.
+ */
+const CMS_ORIGIN: string =
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CMS_URL) ||
+  (typeof window !== 'undefined' &&
+    (window as any).__CMS_URL__ as string | undefined) ||
+  'https://cms.teonox.com';
+
+const WP_BASE = `${CMS_ORIGIN.replace(/\/+$/, '')}/index.php?rest_route=`;
+
+// ---- Certification card styles ----
+// WordPress editors only pick a Certification Type (cert_type) from a dropdown.
+// The frontend derives the Tailwind gradient + border color from that type so
+// non-technical editors never have to enter raw CSS classes. If an existing
+// payload still sends cert_bg_gradient / cert_border_color, they win as overrides.
+const CERT_STYLES: Record<string, { gradient: string; border: string }> = {
+  teonox: { gradient: 'from-orange-50 to-amber-50', border: '#FED7AA' },
+  google: { gradient: 'from-blue-50 to-indigo-50', border: '#BFDBFE' },
+  analytics: { gradient: 'from-amber-50 to-orange-50', border: '#FDE68A' },
+  semrush: { gradient: 'from-slate-100 to-gray-50', border: '#E2E8F0' },
+  hubspot: { gradient: 'from-orange-50 to-amber-50', border: '#FED7AA' },
+  meta: { gradient: 'from-rose-50 to-orange-50', border: '#FECDD3' },
+  youtube: { gradient: 'from-red-50 to-rose-50', border: '#FECDD3' },
+  linkedin: { gradient: 'from-sky-50 to-blue-50', border: '#BAE6FD' },
+  other: { gradient: 'from-gray-100 to-slate-100', border: '#E2E8F0' },
+  default: { gradient: 'from-gray-50 to-slate-50', border: '#E2E8F0' },
+};
+
+// ---- HTML entity decoding helpers (kept local, consistent with blogService) ----
+function decodeHtmlEntities(str: string = ''): string {
+  return str
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8216;/g, "'")
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&#8211;/g, '-')
+    .replace(/&#8212;/g, '—')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&nbsp;/g, ' ');
+}
+
+function stripHtml(html: string = ''): string {
+  return decodeHtmlEntities(html.replace(/<[^>]*>/g, '')).trim();
+}
+
+// ---- Small type helpers for defensive ACF payload access ----
+function str(v: any): string {
+  if (typeof v === 'string') return decodeHtmlEntities(v);
+  return v ? String(v) : '';
+}
+function rows(v: any): any[] {
+  return Array.isArray(v) ? v : [];
+}
+function group(v: any): any {
+  return v && typeof v === 'object' && !Array.isArray(v) ? v : {};
+}
+
+/**
+ * ACF fields may be nested under an `acf` object or flattened at the top level
+ * of the post, depending on the site's ACF REST settings. Return whichever
+ * shape carries the actual field values (top-level fallback mirrors
+ * `transformWpProgram` so image resolvers always read the same source).
+ */
+function postFields(p: any): any {
+  const acf = group(p?.acf);
+  return Object.keys(acf).length > 0 ? acf : p || {};
+}
+
+/**
+ * Extract a usable image URL from an ACF image field, which can arrive in
+ * multiple shapes depending on the field's `return_format`:
+ *   - "array"    -> { url, source_url, sizes: {...}, ... }
+ *   - "url"      -> "https://.../image.webp"
+ *   - "id"       -> 145 (attachment ID; resolved via the WP media API by
+ *                       `resolveWpImageUrl`)
+ * Also accepts a full image object from the WP media API (`{ source_url }`).
+ * Returns '' for every non-URL shape so callers fall through to resolution.
+ */
+function imageUrl(v: any): string {
+  if (!v) return '';
+  if (typeof v === 'string') {
+    const trimmed = v.trim();
+    // A numeric string is an attachment ID, never a URL. Let the resolver turn
+    // it into a real media URL instead of rendering a broken `src="123"`.
+    if (/^\d+$/.test(trimmed)) return '';
+    return trimmed;
+  }
+  if (typeof v === 'number') return '';
+  if (Array.isArray(v)) return imageUrl(v[0]);
+  if (typeof v === 'object') {
+    const top =
+      v.url || v.source_url || v.full_url || v.guid?.rendered || '';
+    if (top) return top;
+    // Last resort: prefer the largest (full/medium_large) size registered by ACF.
+    const sizes = group(v.sizes);
+    return (
+      sizes.full ||
+      sizes['1536x1536'] ||
+      sizes.large ||
+      sizes.medium_large ||
+      sizes.medium ||
+      sizes.thumbnail ||
+      ''
+    );
+  }
+  return '';
+}
+
+// Coerce an ACF image value into an attachment ID when it is a numeric ID (in
+// either number or numeric-string form). Returns 0 for object/URL shapes.
+function toAttachmentId(v: any): number {
+  if (typeof v === 'number' && Number.isInteger(v) && v > 0) return v;
+  if (typeof v === 'string' && /^\d+$/.test(v.trim())) {
+    return Number.parseInt(v.trim(), 10);
+  }
+  if (v && typeof v === 'object' && !Array.isArray(v)) {
+    const id = v.id ?? v.ID ?? v.attachment_id;
+    return toAttachmentId(id);
+  }
+  return 0;
+}
+
+// ---- WP media attachment ID -> URL resolution (cached) ----
+const mediaUrlCache = new Map<number, string>();
+
+/**
+ * Parse a fetch Response as JSON, but ONLY when it is actually JSON. Static
+ * hosts (e.g. a Hostinger Vite build served without the Node server) return the
+ * SPA's index.html for any unknown `/api/*` path, which would otherwise make
+ * `res.json()` throw. Returns null for HTML / 404 / network failure so callers
+ * can cleanly fall through to the direct WordPress REST API.
+ */
+async function safeJson(res: Response): Promise<any> {
+  if (!res) return null;
+  const type = (res.headers.get('content-type') || '').toLowerCase();
+  if (type && !type.includes('application/json')) return null;
+  try {
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Resolve an ACF image attachment ID to a live source URL.
+ *
+ * STRICTLY no direct cross-origin fetch on first attempt: the same-origin
+ * `/api/media/:id` route (Express, or the Vite dev-server proxy) is tried
+ * first — it performs the WordPress REST call server-side so no CORS request
+ * reaches the browser on localhost/staging/prod. When that proxy is absent
+ * (static Hostinger build without server.ts), a direct WordPress REST call is
+ * used as a fallback so images still resolve.
+ *
+ * Accepts both proxy response shapes: wrapped `{ success, data: { source_url } }`
+ * or a raw WP payload `{ source_url }`.
+ *
+ * Returns '' (never throws) when resolution fails, so callers render an
+ * unobtrusive empty state instead of breaking the page.
+ */
+async function resolveMediaUrl(attachmentId: number): Promise<string> {
+  if (!attachmentId || !Number.isInteger(attachmentId) || attachmentId <= 0) return '';
+  if (mediaUrlCache.has(attachmentId)) return mediaUrlCache.get(attachmentId) || '';
+
+  try {
+    const proxyRes = await fetch(`/api/media/${attachmentId}`);
+    if (proxyRes.ok) {
+      const json = await safeJson(proxyRes);
+      const url = imageUrl(json?.data || json);
+      if (url) {
+        mediaUrlCache.set(attachmentId, url);
+        return url;
+      }
+    }
+  } catch (e) {
+    console.warn(`WP media resolution via proxy failed for id ${attachmentId}`, e);
+  }
+
+  // Proxy unavailable (static build / 404 / HTML fallback) -> direct WP REST.
+  try {
+    const directRes = await fetch(
+      `${WP_BASE}/wp/v2/media/${attachmentId}&_fields=source_url`,
+    );
+    if (directRes.ok) {
+      const json = await safeJson(directRes);
+      const url = imageUrl(json);
+      if (url) {
+        mediaUrlCache.set(attachmentId, url);
+        return url;
+      }
+    }
+  } catch (e) {
+    console.warn(`WP media resolution via direct REST failed for id ${attachmentId}`, e);
+  }
+
+  mediaUrlCache.set(attachmentId, '');
+  return '';
+}
+
+/**
+ * Resolve the authoritative image URL for a WP post. Accepts any ACF shape
+ * (object / URL / numeric comment ID, in number or string form) and optionally
+ * falls back to the post's featured media when the field is completely
+ * empty/unresolvable.
+ */
+async function resolveWpImageUrl(
+  raw: any,
+  featuredUrl: string,
+): Promise<string> {
+  const direct = imageUrl(raw);
+  if (direct) return direct;
+  const id = toAttachmentId(raw);
+  if (id > 0) {
+    const resolved = await resolveMediaUrl(id);
+    if (resolved) return resolved;
+  }
+  return featuredUrl || '';
+}
+
+// ACF V2 benefits tab groups (students / business / corporate) share the same
+// sub-field shape, just with a different name prefix.
+function mapBenefitGroup(g: any, prefix: string) {
+  const root = group(g);
+  return {
+    title: str(root[`${prefix}_title`]),
+    intro: str(root[`${prefix}_benefit_intro_text`] || root[`${prefix}_intro`]),
+    heading: str(root[`${prefix}_benefit_lead_in_bold`] || root[`${prefix}_heading`]),
+    bullets: rows(root[`${prefix}_benefit_points`] || root[`${prefix}_bullets`]).map((r: any) =>
+      str(r.bullet || r.benefit_point),
+    ),
+  };
+}
+
+// Opportunity groups (internships / freelancing) share the same shape.
+function mapOpportunityGroup(g: any, prefix: string) {
+  const root = group(g);
+  return {
+    title: str(root[`${prefix}_title`]),
+    intro: str(root[`${prefix}_intro`]),
+    leadInBold: str(root[`${prefix}_lead_in_bold`]),
+    note: str(root[`${prefix}_note`]),
+    items: rows(root[`${prefix}_items`] || root[`${prefix}_list`]).map((r: any) => ({
+      title: str(r.item_title),
+      iconName: str(r.item_icon_name),
+    })),
+  };
+}
+
+/**
+ * Recursively strip the leading "[V2] " data-entry marker from every string so
+ * live CMS content renders with clean production-style copy. Used by the
+ * production detail page (preview scaffold previously did this internally).
+ */
+export function stripV2Prefixes<T>(value: T): T {
+  if (typeof value === 'string') {
+    return (value.startsWith('[V2] ') ? value.slice(5) : value) as T;
+  }
+  if (Array.isArray(value)) {
+    return value.map(stripV2Prefixes) as T;
+  }
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const key of Object.keys(value)) {
+      out[key] = stripV2Prefixes((value as Record<string, unknown>)[key]);
+    }
+    return out as T;
+  }
+  return value;
+}
+
+/**
+ * Convert a raw WordPress post (with ACF V2 fields) into ProgramDetailData.
+ * Returns null when the payload carries no program-specific content.
+ */
+export function transformWpProgram(p: any): ProgramDetailData | null {
+  if (!p || typeof p !== 'object') return null;
+
+  // Strict V2 ACF guard: legacy V1 posts carry no V2 fields and must never be
+  // rendered as live program content on this site.
+  if (!isV2Program(p)) return null;
+
+  // ACF fields may live at the top level or under an `acf` object.
+  const fields = postFields(p);
+
+  const title = str(fields.program_title || p.title?.rendered);
+  const featured = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  const heroImg =
+    imageUrl(fields.hero_image || fields.program_hero_image || p.hero_image) ||
+    featured ||
+    '';
+
+  // "THIS COURSE IS DESIGNED FOR" section image — strictly dynamic from the
+  // ACF `designed_for_image` field (object / URL / attachment ID). No static
+  // fallback: numeric IDs are resolved later by `applyResolvedHeroImage`.
+  const designedForImg = imageUrl(fields.designed_for_image);
+
+  // Bottom CTA banner fields — strictly dynamic from ACF. Numeric image IDs are
+  // resolved later by `applyResolvedHeroImage` via the same-origin media proxy.
+  const ctaImage = imageUrl(fields.cta_image);
+
+  // Exit early if the post doesn't expose ACF program fields at all.
+  if (!title && !fields.program_badge && !fields.overview) return null;
+
+  const benefitRoot = group(fields.benefits);
+
+  const detail: ProgramDetailData = {
+    id: str(p.slug || p.id),
+    programTitle: title,
+    badge: str(fields.program_badge) || 'PROGRAM',
+    subHeading: str(fields.program_subheading),
+    duration: str(fields.program_duration),
+    mode: str(fields.program_mode),
+    heroIntro: str(fields.hero_intro),
+    heroImage: heroImg,
+    designedForImage: designedForImg || undefined,
+    designedForIntro: str(fields.designed_for_intro) || undefined,
+    overview: (() => {
+      const o = group(fields.overview);
+      return {
+        highlight: str(o.overview_highlight),
+        main: str(o.overview_main),
+        expanded: rows(o.overview_expanded).map((r: any) => str(r.overview_expanded_paragraph)),
+      };
+    })(),
+    designedFor: rows(fields.designed_for).map((r: any) => ({
+      title: str(r.designed_for_title),
+      icon: undefined,
+      text: str(r.designed_for_text),
+    })),
+    keyReasons: rows(fields.key_reasons).map((r: any) => ({
+      title: str(r.reason_title_bold),
+      text: str(r.reason_text),
+    })),
+    keyReasonsFootnote: str(fields.key_reasons_footnote) || undefined,
+    benefits: {
+      students: mapBenefitGroup(benefitRoot.benefits_students, 'benefits_students'),
+      business: mapBenefitGroup(benefitRoot.benefits_business, 'benefits_business'),
+      corporate: mapBenefitGroup(benefitRoot.benefits_corporate, 'benefits_corporate'),
+    },
+    prerequisites: (() => {
+      const o = group(fields.prerequisites);
+      return {
+        intro: str(o.prerequisites_intro),
+        bullets: rows(o.prerequisites_bullets).map((r: any) => str(r.bullet)),
+        note: str(o.prerequisites_note),
+      };
+    })(),
+    outcomes: (() => {
+      const o = group(fields.outcomes);
+      return {
+        intro: str(o.outcome_intro_text) || str(o.outcomes_intro) || undefined,
+        leadInBold: str(o.outcome_lead_in_bold) || str(o.outcomes_lead_in_bold) || undefined,
+        bullets: rows(o.outcome_bullets || o.outcomes_bullets).map((r: any) => str(r.bullet || r.outcome_bullet)),
+        projectsNote: str(o.outcomes_projects_note),
+      };
+    })(),
+    valueSequence: rows(fields.value_sequence).map((r: any) => str(r.step)),
+    valueProposition: str(fields.value_bold_paragraph_1) || str(fields.value_proposition) || undefined,
+    valueBodyParagraph: str(fields.value_body_paragraph) || undefined,
+    valueBoldParagraph2: str(fields.value_bold_paragraph_2) || undefined,
+    valueGreyParagraph: str(fields.value_grey_paragraph) || undefined,
+    valueHighlightOrangeBold: str(fields.value_highlight_orange_bold) || undefined,
+    certifications: rows(fields.certifications).map((r: any) => {
+      const type = (str(r.cert_type) || 'other') as string;
+      const style = CERT_STYLES[type] || CERT_STYLES.default;
+      return {
+        title: str(r.cert_title),
+        badge: str(r.cert_badge),
+        bgGradient: str(r.cert_bg_gradient) || style.gradient,
+        borderColor: str(r.cert_border_color) || style.border,
+        type: type as ProgramDetailData['certifications'][number]['type'],
+      };
+    }),
+    certificationsIntro: str(fields.certifications_intro) || undefined,
+    certificationsPathwaysLeadIn: str(fields.certifications_pathways_lead_in) || undefined,
+    certificationsImportantTitle: str(fields.certifications_important_title) || undefined,
+    certificationsImportantText: str(fields.certifications_important_text) || undefined,
+    placementAssistance: (() => {
+      const o = group(fields.placement_assistance);
+      return {
+        intro: str(o.placement_assistance_intro),
+        bullets: rows(o.placement_assistance_bullets).map((r: any) => str(r.bullet)),
+        careerPaths: rows(o.placement_assistance_career_paths).map((r: any) => str(r.career_path)),
+      };
+    })(),
+    opportunities: {
+      internships: mapOpportunityGroup(
+        group(fields.opportunities).opportunities_internships,
+        'opportunities_internships',
+      ),
+      freelancing: mapOpportunityGroup(
+        group(fields.opportunities).opportunities_freelancing,
+        'opportunities_freelancing',
+      ),
+    },
+    faqs: rows(fields.faqs).map((r: any) => ({
+      q: str(r.faq_question),
+      a: str(r.faq_answer),
+    })),
+    cta: {
+      title: str(fields.cta_title) || undefined,
+      description: str(fields.cta_description) || undefined,
+      image: ctaImage || undefined,
+      primaryButtonText: str(fields.cta_primary_button_text) || undefined,
+      primaryButtonUrl: str(fields.cta_primary_button_url) || undefined,
+      secondaryButtonText: str(fields.cta_secondary_button_text) || undefined,
+      secondaryButtonUrl: str(fields.cta_secondary_button_url) || undefined,
+      brandTagline: str(fields.cta_brand_tagline) || undefined,
+    },
+  };
+
+  return detail;
+}
+
+/**
+ * Resolve the authoritative image URLs for a raw WP post and, when a resolved
+ * URL is found, override it on an already-transformed detail. The synchronous
+ * transformWpProgram can only read object/URL ACF shapes + the featured media
+ * URL, so numeric attachment IDs (ACF "id" return format) are resolved here
+ * against the WP media API and written back into the detail. Covers both the
+ * hero image and the "THIS COURSE IS DESIGNED FOR" section image.
+ */
+async function applyResolvedHeroImage(post: any, detail: ProgramDetailData): Promise<ProgramDetailData> {
+  const fields = postFields(post);
+  const featured = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
+  let next: ProgramDetailData = detail;
+
+  const rawHero = fields.hero_image || fields.program_hero_image || post.hero_image;
+  const resolvedHero = await resolveWpImageUrl(rawHero, featured);
+  if (resolvedHero && resolvedHero !== detail.heroImage) {
+    next = { ...next, heroImage: resolvedHero };
+  }
+
+  // The designed-for section image has no featured-media fallback: strictly the
+  // ACF field, and only resolved when a usable URL is produced.
+  const rawDesigned = fields.designed_for_image;
+  if (rawDesigned) {
+    const resolvedDesigned = await resolveWpImageUrl(rawDesigned, '');
+    if (resolvedDesigned && resolvedDesigned !== detail.designedForImage) {
+      next = { ...next, designedForImage: resolvedDesigned };
+    }
+  }
+
+  // Bottom CTA banner image has no featured-media fallback: strictly the ACF
+  // field, resolved via the media proxy. Falls back to `undefined` (component
+  // then shows its default counsellor image).
+  const rawCta = fields.cta_image;
+  if (rawCta) {
+    const resolvedCta = await resolveWpImageUrl(rawCta, '');
+    if (resolvedCta && resolvedCta !== detail.cta?.image) {
+      next = { ...next, cta: { ...(next.cta || {}), image: resolvedCta } };
+    }
+  }
+
+  return next;
+}
+
+/**
+ * Fetch a single program's detail content by id (slug) or numeric WP id.
+ * Returns static PROGRAM_DETAILS_MAP data when the CMS is unreachable.
+ */
+export async function fetchLiveProgramDetail(
+  idOrSlug: string,
+): Promise<{ detail: ProgramDetailData | null; isLive: boolean }> {
+  const key = idOrSlug || '';
+
+  // Strategy 1: local proxy (same-origin, no CORS) relays raw WP post
+  try {
+    const res = await fetch(`/api/programs/${encodeURIComponent(key)}`);
+    if (res.ok) {
+      const json = await safeJson(res);
+      if (json?.success && json.data) {
+        // Staging-only programs stay hidden on production even when reached
+        // by direct URL (fall through to the static fallback / null).
+        if (!isProgramVisible(json.data)) return { detail: null, isLive: false };
+        const transformed = transformWpProgram(json.data);
+        if (transformed) {
+          const detail = await applyResolvedHeroImage(json.data, transformed);
+          return { detail, isLive: true };
+        }
+      }
+    }
+  } catch (e) {
+    // proxy failed, fall through to direct fetch
+  }
+
+  // Strategy 2: direct WordPress REST API
+  const isNumeric = /^\d+$/.test(key);
+  const url = isNumeric
+    ? `${WP_BASE}/wp/v2/program/${encodeURIComponent(key)}&_embed`
+    : `${WP_BASE}/wp/v2/program&slug=${encodeURIComponent(key)}&_embed`;
+
+  try {
+    const res = await fetch(url);
+    if (res.ok) {
+      const data = await safeJson(res);
+      const post = isNumeric ? data : Array.isArray(data) ? data[0] : null;
+      if (post && isProgramVisible(post)) {
+        const transformed = transformWpProgram(post);
+        if (transformed) {
+          const detail = await applyResolvedHeroImage(post, transformed);
+          return { detail, isLive: true };
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Direct WP programs fetch error, using fallback detail', e);
+  }
+
+  // Strategy 3: static fallback
+  return { detail: PROGRAM_DETAILS_MAP[key] || null, isLive: false };
+}
+
+/**
+ * Convert a raw WordPress post (with ACF V2 "Card Information" fields) into a
+ * LiveProgramCard for the /programs listing page. Card-specific ACF fields win;
+ * detail-tab / post fields are used as fallbacks so cards render fully even
+ * before the new card fields are populated on the CMS.
+ */
+export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCard | null {
+  if (!p || typeof p !== 'object') return null;
+
+  // Strict V2 ACF guard: legacy V1 posts must never become cards here.
+  if (!isV2Program(p)) return null;
+
+  const fields = postFields(p);
+  const title = str(fields.program_title || p.title?.rendered);
+  if (!title) return null;
+
+  const featured = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  const img = resolvedImage || imageUrl(fields.hero_image || p.hero_image) || featured || '';
+
+  const terms = (p._embedded?.['wp:term'] || []).flat();
+  const programCategories = terms
+    .filter((t: any) => termTaxonomySlug(t) === 'program-category')
+    .map((t: any) => decodeHtmlEntities(t.name))
+    .filter(Boolean);
+
+  const mapped = new Set<string>([POPULAR_CATEGORY]);
+  for (const name of programCategories) {
+    const slug = name.toString().toLowerCase().replace(/\s+/g, '-');
+    const curated = PROGRAM_TERM_TO_CATEGORY[slug] || PROGRAM_TERM_TO_CATEGORY[name.toString().toLowerCase()];
+    if (curated) mapped.add(curated);
+  }
+
+  // No WP term mapped to a curated tab yet (e.g. posts created before the
+  // taxonomy was filled in)? Derive a tab from the slug + title keywords so
+  // the card still appears under the right category, not only "Popular".
+  if (mapped.size === 1) {
+    const haystack = `${str(p.slug)} ${title}`.toLowerCase();
+    for (const { test, id } of CATEGORY_KEYWORDS) {
+      if (test.test(haystack)) mapped.add(id);
+    }
+  }
+
+  const firstCert = rows(fields.certifications).find((r: any) => str(r.cert_title)) as any;
+  const firstDesignedFor = rows(fields.designed_for).find(
+    (r: any) => str(r.designed_for_title) || str(r.designed_for_text),
+  ) as any;
+
+  return {
+    id: str(p.slug || p.id),
+    title,
+    brandBadge: str(fields.program_badge),
+    description:
+      str(fields.program_subheading) ||
+      stripHtml(p.excerpt?.rendered || p.content?.rendered || '').slice(0, 160),
+    durationText:
+      str(fields.card_duration) ||
+      str(fields.program_duration) ||
+      'Custom Duration',
+    certText:
+      str(fields.card_certifications) ||
+      (firstCert ? str(firstCert.cert_title) : '') ||
+      'Official Certification',
+    targetText:
+      str(fields.card_designed_for) ||
+      (firstDesignedFor ? `Designed for ${str(firstDesignedFor.designed_for_title || firstDesignedFor.designed_for_text)}` : ''),
+    mode: str(fields.program_mode) || 'On Campus, Pune',
+    image: img,
+    brochureUrl: str(fields.card_brochure_url),
+    categoryId: mapped.has('popular') && mapped.size > 1
+      ? Array.from(mapped).find((c) => c !== POPULAR_CATEGORY) || POPULAR_CATEGORY
+      : POPULAR_CATEGORY,
+    categories: Array.from(mapped),
+  };
+}
+
+/**
+ * Strict V2 ACF guard (isolates the new site from legacy V1 content).
+ *
+ * A program post may ONLY appear on this new build when it carries real
+ * content in the new "Program Fields V2" group. Legacy V1 posts use a
+ * completely different ACF shape (program_name, duration, best_for, category,
+ * hero_heading, who_this_program_is_for_label, ...) and belong exclusively to
+ * teonox.com — they are never fetched or rendered here.
+ *
+ * The distinguishing V2-only field names are listed below. Any post that has
+ * a non-empty value in one of them qualifies; legacy V1 posts expose none of
+ * them and are therefore filtered out in every environment (dev, staging and
+ * production alike) so broken V1 cards/routes can never reach the UI.
+ */
+const V2_PROGRAM_FIELDS = [
+  'program_title',
+  'program_badge',
+  'program_subheading',
+  'program_duration',
+  'program_mode',
+  'card_duration',
+  'card_certifications',
+  'card_designed_for',
+  'card_brochure_url',
+  'hero_intro',
+  'designed_for',
+  'designed_for_image',
+  'designed_for_intro',
+  'key_reasons',
+  'value_sequence',
+  'value_proposition',
+  'value_bold_paragraph_1',
+  'value_body_paragraph',
+  'value_bold_paragraph_2',
+  'value_grey_paragraph',
+  'value_highlight_orange_bold',
+  'certifications_intro',
+  'certifications_pathways_lead_in',
+  'certifications_important_title',
+  'certifications_important_text',
+  'faqs',
+];
+
+/** True when a raw WP post carries any non-empty V2-only ACF field. */
+function isV2Program(p: any): boolean {
+  if (!p || typeof p !== 'object') return false;
+  // Read via `postFields` (same source as transformWpProgram / mapWpProgramCard)
+  // so the check holds whether ACF REST serves fields nested under `acf` or
+  // flattened at the top level of the post.
+  const fields = postFields(p);
+  return V2_PROGRAM_FIELDS.some((name) => {
+    const v = fields[name];
+    if (v == null) return false;
+    if (typeof v === 'string') return v.trim().length > 0;
+    if (Array.isArray(v)) return v.length > 0;
+    if (typeof v === 'number') return v > 0;
+    if (typeof v === 'object') return Object.keys(v).length > 0;
+    return false;
+  });
+}
+
+/**
+ * Detect whether the app is running in a staging/preview context. Staging-only
+ * programs are hidden on the live production site (teonox.com) but shown in
+ * every other context so editors can preview unreleased V2 programs freely.
+ */
+export function isStagingEnv(): boolean {
+  if (typeof window !== 'undefined' && window.location?.hostname) {
+    const host = window.location.hostname.toLowerCase();
+    if (host.includes('hostingersite.com') || host === 'localhost' || host.startsWith('127.')) {
+      return true;
+    }
+  }
+  return (
+    typeof import.meta !== 'undefined' &&
+    import.meta.env?.VITE_IS_STAGING === 'true'
+  );
+}
+
+/** True when a program is flagged staging-only (ACF flag OR a `-v2` slug). */
+export function isStagingOnlyProgram(post: any): boolean {
+  if (!post || typeof post !== 'object') return false;
+
+  // ACF flag: `staging_only` / `is_staging_only` set to any truthy value
+  // (ACF true_false delivers 1 / "1" / true depending on the transport).
+  const fields = postFields(post);
+  for (const name of ['staging_only', 'is_staging_only']) {
+    const v = fields[name];
+    if (v === true || v === 1 || v === '1' || v === 'true' || v === 'yes') {
+      return true;
+    }
+  }
+
+  // Safety net: any unpublished-looking V2 slug ending in `-v2` is treated as
+  // staging-only unless the editor explicitly renamed it. Post 410's slug is
+  // `business-digital-marketing-with-ai-v2`.
+  const slug = str(post.slug).toLowerCase();
+  if (slug.endsWith('-v2')) return true;
+
+  return false;
+}
+
+/**
+ * True when a raw post should be visible in the current environment: staging
+ * always shows everything; production hides staging-only programs.
+ */
+function isProgramVisible(post: any): boolean {
+  return isStagingEnv() || !isStagingOnlyProgram(post);
+}
+
+/**
+ * Fetch the full program listing from WordPress and normalise each post into a
+ * LiveProgramCard. Returns an empty array (isLive: false) when the CMS is
+ * unreachable, so the page can fall back to static data.
+ */
+export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
+  const fromPosts = async (posts: any[]): Promise<LiveProgramCard[]> => {
+    // Strict V2-only guard applied in EVERY environment (dev, staging, prod):
+    // legacy V1 posts never become cards on this site. Staging-only programs
+    // (ACF staging_only flag or `-v2` slug) are additionally hidden here so
+    // unreleased V2 bets never surface on the live production site.
+    const eligible = posts.filter((p) => isV2Program(p) && isProgramVisible(p));
+    const cards: LiveProgramCard[] = [];
+    for (const post of eligible) {
+      const raw = group(post.acf).hero_image || post.hero_image;
+      const featured = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
+      const resolved = await resolveWpImageUrl(raw, featured);
+      const card = mapWpProgramCard(post, resolved);
+      if (card) cards.push(card);
+    }
+    return cards;
+  };
+
+  // Strategy 1: local proxy (same-origin, no CORS) relays raw WP posts.
+  try {
+    const res = await fetch(`/api/programs`);
+    if (res.ok) {
+      const json = await safeJson(res);
+      if (json?.success && Array.isArray(json.data)) {
+        const programs = await fromPosts(json.data);
+        // Live CMS even when zero V2 programs exist (drives "coming soon").
+        return { programs, isLive: true };
+      }
+    }
+  } catch (e) {
+    console.warn('Proxy programs list fetch failed, falling back to direct WP', e);
+  }
+
+  // Strategy 2: direct WordPress REST API (may be CORS-blocked off the CMS
+  // origin, which is why the proxy is tried first).
+  try {
+    const res = await fetch(`${WP_BASE}/wp/v2/program&_embed&per_page=50`);
+    if (res.ok) {
+      const posts = await safeJson(res);
+      if (Array.isArray(posts)) {
+        const programs = await fromPosts(posts);
+        return { programs, isLive: true };
+      }
+    }
+  } catch (e) {
+    console.warn('Direct WP programs list fetch error', e);
+  }
+
+  return { programs: [], isLive: false };
+}
+
+/**
+ * Fetch the `program-category` custom taxonomy terms for the /programs page.
+ * Categories drive the sidebar/tab UI directly from WordPress data. Tries the
+ * local proxy first (same-origin, no CORS), then the direct WP REST API.
+ */
+export async function fetchProgramCategories(): Promise<
+  { id: number; name: string; slug: string; count: number }[]
+> {
+  const mapTerms = (data: any[]) =>
+    (Array.isArray(data) ? data : []).map((t: any) => ({
+      id: Number(t.id),
+      name: decodeHtmlEntities(t.name || ''),
+      slug: String(t.slug || ''),
+      count: Number(t.count || 0),
+    }));
+
+  try {
+    const res = await fetch('/api/programs/categories');
+    if (res.ok) {
+      const json = await safeJson(res);
+      if (json?.success && Array.isArray(json.data) && json.data.length > 0) {
+        return mapTerms(json.data);
+      }
+    }
+  } catch (e) {
+    console.warn('Proxy program-category fetch failed, falling back to direct WP', e);
+  }
+
+  try {
+    const res = await fetch(
+      `${WP_BASE}/wp/v2/program-category&per_page=100&_fields=id,name,slug,count`,
+    );
+    if (res.ok) {
+      const data = await safeJson(res);
+      if (Array.isArray(data) && data.length > 0) {
+        return mapTerms(data);
+      }
+    }
+  } catch (e) {
+    console.warn('Direct WP program-category fetch error', e);
+  }
+
+  return [];
+}

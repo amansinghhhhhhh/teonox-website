@@ -1,0 +1,351 @@
+{
+  "_comment_top_level": "Cheat sheet for entering a Program into WP Admin. Every value below maps 1:1 to a field key in programFieldsV2.json (group group_pfv2_program_fields). In the WP REST response this object appears as post.acf. Values use real content from src/data/programDetails.ts (seo-specialization) with a [V2] prefix on every display string so you can verify live V2 rendering against static data on the frontend.",
+  "program_title": "[V2] SPECIALIZATION IN SEARCH ENGINE OPTIMIZATION",
+  "program_badge": "[V2] 8-WEEK ADVANCED SPECIALIZATION PROGRAM",
+  "program_subheading": "[V2] Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth",
+  "program_duration": "[V2] 8 Weeks",
+  "program_mode": "[V2] On Campus, Pune",
+  "hero_intro": "[V2] Search & Organic Growth Intelligence is an intensive 8-week advanced specialization program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.",
+  "hero_image": {
+    "ID": 12345,
+    "url": "https://cms.teonox.com/wp-content/uploads/program-seo-hero.webp",
+    "filename": "program-seo-hero.webp",
+    "mime_type": "image/webp"
+  },
+  "overview": {
+    "overview_highlight": "[V2] Search & Organic Growth Intelligence is an intensive 8-week advanced specialization program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.",
+    "overview_main": "[V2] The program covers advanced search strategy, technical SEO, website architecture, Core Web Vitals, JavaScript SEO, Semantic SEO, Entity SEO, structured data, Programmatic SEO, advanced content engineering, off-page authority and Digital PR.",
+    "overview_expanded": [
+      {
+        "overview_expanded_paragraph": "[V2] A major focus is placed on the future of search, including AI Search, AEO, GEO, AI citations and visibility across Google AI Overviews, ChatGPT, Gemini, Perplexity and Microsoft Copilot, along with Search Everywhere Optimization across social, video, marketplace and other discovery platforms."
+      },
+      {
+        "overview_expanded_paragraph": "[V2] The curriculum spans the complete organic growth ecosystem, from search intelligence and technical infrastructure to AI visibility, authority building, analytics and business growth."
+      }
+    ]
+  },
+  "designed_for": [
+    {
+      "designed_for_title": "[V2] Digital Marketing Students",
+      "designed_for_text": "[V2] Students seeking an advanced SEO specialization to build high-value careers in Search, Organic Growth and AI Discovery."
+    },
+    {
+      "designed_for_title": "[V2] SEO Executives & Specialists",
+      "designed_for_text": "[V2] SEO Executives, Specialists and Managers looking to level up to Technical SEO, AI Search and Organic Strategy."
+    },
+    {
+      "designed_for_title": "[V2] Content & Growth Professionals",
+      "designed_for_text": "[V2] Content and Organic Growth professionals wanting to engineer search authority and scalable content systems."
+    },
+    {
+      "designed_for_title": "[V2] Digital Marketing Professionals",
+      "designed_for_text": "[V2] Marketing generalists expanding their domain into technical infrastructure, semantic search and search analytics."
+    },
+    {
+      "designed_for_title": "[V2] Website & E-Commerce Owners",
+      "designed_for_text": "[V2] E-Commerce and website professionals looking to build sustainable organic channels and product search visibility."
+    },
+    {
+      "designed_for_title": "[V2] Business Owners & Entrepreneurs",
+      "designed_for_text": "[V2] Entrepreneurs building long-term organic authority instead of depending entirely on paid ads."
+    },
+    {
+      "designed_for_title": "[V2] Freelancers & Consultants",
+      "designed_for_text": "[V2] SEO Consultants and freelancers looking to offer high-ticket technical, AI search and Digital PR services."
+    },
+    {
+      "designed_for_title": "[V2] Agency Professionals",
+      "designed_for_text": "[V2] Agency leads preparing client portfolios for the future of AI-powered search, AEO and GEO."
+    },
+    {
+      "designed_for_title": "[V2] AI Search Enthusiasts",
+      "designed_for_text": "[V2] Professionals preparing for the future of AI-powered search across ChatGPT, Gemini, Perplexity and Copilot."
+    }
+  ],
+  "key_reasons": [
+    {
+      "key_reason": "[V2] Organic Growth Strategy: Move beyond basic SEO into advanced organic growth strategy."
+    },
+    {
+      "key_reason": "[V2] Technical Mastery: Master Technical SEO, JavaScript SEO and website architecture."
+    },
+    {
+      "key_reason": "[V2] Topic & Entity Authority: Build Semantic SEO, Entity SEO and Topical Authority."
+    },
+    {
+      "key_reason": "[V2] AI Search Visibility: Understand AEO, GEO and AI Search visibility."
+    },
+    {
+      "key_reason": "[V2] Scalable Content: Learn Programmatic SEO and scalable content systems."
+    },
+    {
+      "key_reason": "[V2] Digital PR: Master advanced off-page SEO and Digital PR."
+    },
+    {
+      "key_reason": "[V2] Scale & Localization: Learn Local, International and E-Commerce SEO at scale."
+    },
+    {
+      "key_reason": "[V2] AI Automation: Use AI and automation for SEO operations."
+    },
+    {
+      "key_reason": "[V2] Measurable ROI: Measure organic growth through advanced analytics and ROI."
+    },
+    {
+      "key_reason": "[V2] Career Readiness: Develop consulting, freelancing and agency-ready SEO capabilities."
+    }
+  ],
+  "key_reasons_footnote": "[V2] The curriculum spans the complete organic growth ecosystem, from search intelligence and technical infrastructure to AI visibility, authority building, analytics and business growth.",
+  "benefits": {
+    "benefits_students": {
+      "benefits_students_title": "[V2] For Students",
+      "benefits_students_intro": "[V2] Develop a high-value specialization for careers in SEO, Technical SEO, Organic Growth, Content SEO and AI Search Optimization.",
+      "benefits_students_heading": "[V2] Master Modern Search Ecosystems",
+      "benefits_students_bullets": [
+        {
+          "bullet": "[V2] Move beyond keyword-and-ranking-based SEO and develop a deeper understanding of how modern search engines, entities, content systems and AI discovery platforms work."
+        },
+        {
+          "bullet": "[V2] Build strong fundamentals in Technical SEO, JavaScript SEO and website architecture."
+        },
+        {
+          "bullet": "[V2] Learn to design Programmatic SEO and scalable content engines."
+        },
+        {
+          "bullet": "[V2] Prepare for high-demand roles in enterprise SEO and AI search optimization."
+        }
+      ]
+    },
+    "benefits_business": {
+      "benefits_business_title": "[V2] For Business Owners",
+      "benefits_business_intro": "[V2] Learn how to build sustainable organic visibility instead of depending entirely on paid advertising.",
+      "benefits_business_heading": "[V2] Build Sustainable Organic Assets",
+      "benefits_business_bullets": [
+        {
+          "bullet": "[V2] Understand SEO strategy, website performance, content authority and local visibility."
+        },
+        {
+          "bullet": "[V2] Establish brand presence across AI search engines like ChatGPT, Gemini and Perplexity."
+        },
+        {
+          "bullet": "[V2] Reduce long-term customer acquisition costs by scaling organic lead generation."
+        },
+        {
+          "bullet": "[V2] Evaluate the commercial value of organic growth and manage technical teams effectively."
+        }
+      ]
+    },
+    "benefits_corporate": {
+      "benefits_corporate_title": "[V2] For Corporate Employees",
+      "benefits_corporate_intro": "[V2] Upgrade from routine SEO execution to search strategy and organic growth intelligence.",
+      "benefits_corporate_heading": "[V2] Drive Strategic Enterprise Growth",
+      "benefits_corporate_bullets": [
+        {
+          "bullet": "[V2] Develop advanced capabilities in technical SEO, content strategy, search analytics, AI visibility, automation, Digital PR and enterprise SEO."
+        },
+        {
+          "bullet": "[V2] Engineer topical authority and entity-based content systems for large sites."
+        },
+        {
+          "bullet": "[V2] Implement automated SEO workflows and monitoring dashboards."
+        },
+        {
+          "bullet": "[V2] Demonstrate clear organic ROI to executive stakeholders."
+        }
+      ]
+    }
+  },
+  "prerequisites": {
+    "prerequisites_intro": "[V2] This is an advanced specialization program, so basic knowledge of SEO and Digital Marketing is recommended. Learners should ideally understand:",
+    "prerequisites_bullets": [
+      { "bullet": "[V2] SEO fundamentals" },
+      { "bullet": "[V2] Keyword research" },
+      { "bullet": "[V2] Basic On-Page and Off-Page SEO" },
+      { "bullet": "[V2] Search engines and SERPs" },
+      { "bullet": "[V2] Websites and content fundamentals" },
+      { "bullet": "[V2] Basic Google Search Console and Analytics" }
+    ],
+    "prerequisites_note": "[V2] Coding knowledge is not mandatory, although basic familiarity with HTML and website technology can be helpful for advanced Technical SEO topics."
+  },
+  "outcomes": {
+    "outcomes_intro": "[V2] After completing the program, learners should be able to:",
+    "outcomes_bullets": [
+      { "bullet": "[V2] Build advanced SEO and organic growth strategies" },
+      { "bullet": "[V2] Conduct search intent and competitor intelligence" },
+      { "bullet": "[V2] Design SEO-friendly website architecture" },
+      { "bullet": "[V2] Perform advanced Technical SEO audits" },
+      { "bullet": "[V2] Optimize Core Web Vitals and web performance" },
+      { "bullet": "[V2] Understand JavaScript SEO and modern web technologies" },
+      { "bullet": "[V2] Build Semantic SEO and Topical Authority systems" },
+      { "bullet": "[V2] Develop Entity SEO and Knowledge Graph strategies" },
+      { "bullet": "[V2] Implement advanced structured data" },
+      { "bullet": "[V2] Develop Programmatic SEO strategies" },
+      { "bullet": "[V2] Optimize for AI Search, AEO and GEO" },
+      { "bullet": "[V2] Build authority through advanced link acquisition and Digital PR" },
+      { "bullet": "[V2] Develop Local, International and E-Commerce SEO strategies" },
+      { "bullet": "[V2] Automate SEO workflows using AI and automation" },
+      { "bullet": "[V2] Measure SEO performance, conversions and ROI" }
+    ],
+    "outcomes_projects_note": "[V2] The program concludes with advanced capstone work covering Technical SEO, Topical Authority, Programmatic SEO, AI Search Visibility, Digital PR, Local SEO, E-Commerce SEO, automation, analytics and complete organic growth strategy."
+  },
+  "value_sequence": [
+    { "step": "[V2] Search Strategy" },
+    { "step": "[V2] Technical Audit" },
+    { "step": "[V2] Topical Authority" },
+    { "step": "[V2] AI Visibility" },
+    { "step": "[V2] Digital PR" },
+    { "step": "[V2] Organic Growth" }
+  ],
+  "value_proposition": "[V2] The value of the program lies in moving beyond traditional SEO to master AI search, technical engineering, entity authority, and scalable organic growth.",
+  "certifications": [
+    {
+      "cert_title": "[V2] TEONOX Certification in Search & Organic Growth Intelligence",
+      "cert_badge": "[V2] TEONOX ACADEMY",
+      "cert_type": "teonox"
+    },
+    {
+      "cert_title": "[V2] Google Ads certifications",
+      "cert_badge": "[V2] GOOGLE ADS",
+      "cert_type": "google"
+    },
+    {
+      "cert_title": "[V2] Google Analytics certification",
+      "cert_badge": "[V2] GA4 ANALYTICS",
+      "cert_type": "analytics"
+    },
+    {
+      "cert_title": "[V2] Google Digital Marketing certifications where applicable",
+      "cert_badge": "[V2] GOOGLE DIGITAL",
+      "cert_type": "google"
+    },
+    {
+      "cert_title": "[V2] SEMrush certifications",
+      "cert_badge": "[V2] SEMRUSH SEO",
+      "cert_type": "semrush"
+    },
+    {
+      "cert_title": "[V2] HubSpot certifications",
+      "cert_badge": "[V2] HUBSPOT",
+      "cert_type": "hubspot"
+    },
+    {
+      "cert_title": "[V2] Other platform/tool certifications relevant to modules taught",
+      "cert_badge": "[V2] SPECIALIZED TOOLS",
+      "cert_type": "other"
+    }
+  ],
+  "placement_assistance": {
+    "placement_assistance_intro": "[V2] Eligible learners can receive career support and guidance to position themselves for specialized high-growth roles in search and organic marketing.",
+    "placement_assistance_bullets": [
+      { "bullet": "[V2] Resume and LinkedIn optimization tailored for Technical & Search roles" },
+      { "bullet": "[V2] SEO portfolio development and live technical audit case studies" },
+      { "bullet": "[V2] Interview preparation and technical defense strategy" },
+      { "bullet": "[V2] Mock interviews with enterprise search leads" },
+      { "bullet": "[V2] Career guidance and consulting positioning" },
+      { "bullet": "[V2] Job opportunity assistance through TEONOX hiring connections" }
+    ],
+    "placement_assistance_career_paths": [
+      { "career_path": "[V2] SEO Specialist" },
+      { "career_path": "[V2] Technical SEO Specialist" },
+      { "career_path": "[V2] Organic Growth Specialist" },
+      { "career_path": "[V2] SEO Strategist" },
+      { "career_path": "[V2] Content SEO Specialist" },
+      { "career_path": "[V2] Search Analyst" },
+      { "career_path": "[V2] SEO Consultant" }
+    ]
+  },
+  "opportunities": {
+    "opportunities_internships": {
+      "opportunities_internships_title": "[V2] Practical Internship Exposure",
+      "opportunities_internships_note": "[V2] Internship opportunities are subject to availability and applicable eligibility criteria.",
+      "opportunities_internships_items": [
+        { "item_title": "[V2] SEO audits" },
+        { "item_title": "[V2] Technical SEO projects" },
+        { "item_title": "[V2] Keyword and competitor research" },
+        { "item_title": "[V2] Content optimization" },
+        { "item_title": "[V2] Local SEO projects" },
+        { "item_title": "[V2] AI Search visibility projects" },
+        { "item_title": "[V2] Link building and Digital PR" },
+        { "item_title": "[V2] SEO analytics and reporting" }
+      ]
+    },
+    "opportunities_freelancing": {
+      "opportunities_freelancing_title": "[V2] Freelancing & Consulting Services",
+      "opportunities_freelancing_note": "[V2] Learners can develop skills applicable to high-value client services, retainers, and agency scaling.",
+      "opportunities_freelancing_items": [
+        { "item_title": "[V2] SEO Audits" },
+        { "item_title": "[V2] Technical SEO" },
+        { "item_title": "[V2] Local SEO" },
+        { "item_title": "[V2] E-Commerce SEO" },
+        { "item_title": "[V2] Content SEO" },
+        { "item_title": "[V2] On-Page SEO" },
+        { "item_title": "[V2] AEO & GEO Consulting" },
+        { "item_title": "[V2] AI Search Optimization" },
+        { "item_title": "[V2] Link Building & Digital PR" },
+        { "item_title": "[V2] SEO Analytics" },
+        { "item_title": "[V2] SEO Strategy & Consulting" }
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "faq_question": "[V2] 1. What is Search & Organic Growth Intelligence?",
+      "faq_answer": "[V2] It is an 8-week advanced specialization program focused on SEO, Technical SEO, content authority, AI Search, AEO, GEO, Digital PR, automation and sustainable organic growth."
+    },
+    {
+      "faq_question": "[V2] 2. How is this different from a regular SEO course?",
+      "faq_answer": "[V2] A regular SEO course typically teaches how to optimize websites for search engines. Search & Organic Growth Intelligence goes further by teaching how to engineer visibility, authority and organic growth across traditional search engines, AI search platforms, social search and other discovery ecosystems."
+    },
+    {
+      "faq_question": "[V2] 3. Is this course suitable for beginners?",
+      "faq_answer": "[V2] It is designed as an advanced specialization. Basic knowledge of SEO and Digital Marketing is recommended."
+    },
+    {
+      "faq_question": "[V2] 4. Does the course cover Technical SEO?",
+      "faq_answer": "[V2] Yes. It covers crawling, indexation, crawl budgets, robots.txt, XML sitemaps, canonicalization, rendering, JavaScript SEO, log files, redirects, HTTP status codes and technical monitoring."
+    },
+    {
+      "faq_question": "[V2] 5. Will I learn AEO and GEO?",
+      "faq_answer": "[V2] Yes. A dedicated module covers Answer Engine Optimization, Generative Engine Optimization, AI citation optimization, citation-worthy content, passage optimization, entity authority and AI search visibility measurement."
+    },
+    {
+      "faq_question": "[V2] 6. Does the course cover ChatGPT and other AI search platforms?",
+      "faq_answer": "[V2] Yes. The curriculum addresses visibility across ChatGPT, Google AI Overviews, Gemini, Perplexity and Microsoft Copilot as part of the evolving AI Search ecosystem."
+    },
+    {
+      "faq_question": "[V2] 7. Will I learn Semantic SEO and Entity SEO?",
+      "faq_answer": "[V2] Yes. The program covers Semantic Search, Topical Maps, Topical Authority, entities, Knowledge Graphs, entity associations, brand entities and structured data for entity reinforcement."
+    },
+    {
+      "faq_question": "[V2] 8. Is Programmatic SEO included?",
+      "faq_answer": "[V2] Yes. It covers template-based SEO systems, datasets, database-driven pages, dynamic landing pages, location and comparison pages, directories, marketplaces, automated internal linking and scaling Programmatic SEO."
+    },
+    {
+      "faq_question": "[V2] 9. Does the course cover SEO beyond Google?",
+      "faq_answer": "[V2] Yes. Search Everywhere Optimization includes YouTube, Instagram, LinkedIn, Pinterest, Reddit, Quora, marketplaces, Amazon, App Stores, podcasts and broader social search."
+    },
+    {
+      "faq_question": "[V2] 10. Does the course cover Local and E-Commerce SEO?",
+      "faq_answer": "[V2] Yes. Dedicated advanced modules cover Local SEO at scale, International SEO and E-Commerce SEO, including multi-location businesses, international websites, category and product optimization, product schema and marketplace SEO."
+    },
+    {
+      "faq_question": "[V2] 11. Will I learn SEO automation and AI workflows?",
+      "faq_answer": "[V2] Yes. The program covers automated keyword clustering, content briefs, topical maps, technical audits, internal linking, schema generation, monitoring, reporting, APIs, Google Sheets, Make, Zapier, Python applications and AI agents for SEO."
+    },
+    {
+      "faq_question": "[V2] 12. Can business owners benefit from this course?",
+      "faq_answer": "[V2] Yes. It can help business owners understand how to build long-term search visibility, strengthen digital authority, reduce excessive dependence on paid acquisition and evaluate SEO investments more effectively."
+    },
+    {
+      "faq_question": "[V2] 13. Can I freelance after completing the course?",
+      "faq_answer": "[V2] Yes. The skills can be applied to SEO audits, Technical SEO, Local SEO, E-Commerce SEO, Content SEO, AEO/GEO, AI Search Optimization, Digital PR, analytics and SEO consulting."
+    },
+    {
+      "faq_question": "[V2] 14. Does the program include practical projects?",
+      "faq_answer": "[V2] Yes. Capstone projects include an Enterprise Technical SEO Audit, Topical Authority Development, Programmatic SEO, AI Search Visibility, Digital PR, Multi-Location SEO, E-Commerce SEO, SEO Automation, Analytics Dashboard and Complete Organic Growth Strategy."
+    },
+    {
+      "faq_question": "[V2] 15. What makes this course future-ready?",
+      "faq_answer": "[V2] Search is expanding beyond traditional blue-link results into AI answers, generative engines, social search, video, marketplaces and multi-platform discovery."
+    }
+  ]
+}

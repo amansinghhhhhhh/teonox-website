@@ -1,0 +1,8 @@
+{
+  "name": "TEONOX White website",
+  "description": "Building industry-ready professionals through experiential, practitioner-led learning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

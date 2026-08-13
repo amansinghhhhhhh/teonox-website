@@ -1,0 +1,1007 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+
+import careersGoogleLogo from '../assets/careers/google.svg';
+import careersMetaLogo from '../assets/careers/meta.svg';
+import careersAmazonLogo from '../assets/careers/amazon.png';
+import careersMicrosoftLogo from '../assets/careers/microsoft.png';
+import careersAdobeLogo from '../assets/careers/adobe.png';
+import careersHubspotLogo from '../assets/careers/hubspot.svg';
+import careersShopifyLogo from '../assets/careers/shopify.svg';
+import careersFlipkartLogo from '../assets/careers/flipkart.png';
+import careersZomatoLogo from '../assets/careers/zomato.svg';
+import careersSwiggyLogo from '../assets/careers/swiggy.svg';
+import careersRazorpayLogo from '../assets/careers/razorpay.svg';
+import careersPaytmLogo from '../assets/careers/paytm.svg';
+import {
+  ArrowUpRight,
+  Play,
+  Linkedin,
+  FileText,
+  Sparkles,
+  X,
+  CheckCircle2,
+  TrendingUp,
+  Briefcase,
+  Users,
+  Target,
+  BarChart3,
+  Search,
+  Zap,
+  Globe,
+  Award,
+  ChevronRight,
+  Monitor,
+  Building2,
+  CheckSquare,
+  Layers,
+  Compass,
+  ArrowRight,
+  Cpu,
+  GraduationCap
+} from 'lucide-react';
+
+import heroImg from '../assets/images/career_hero_img_1785591513714.webp';
+
+interface CareerOutcomesPageProps {
+  onEnquireClick: (topic?: string) => void;
+  onExplorePrograms: () => void;
+}
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+});
+
+const scaleIn = (delay = 0) => ({
+  initial: { opacity: 0, scale: 0.9 },
+  whileInView: { opacity: 1, scale: 1 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] as any },
+});
+
+/* Animated horizontal capability bar for the Salary & Growth section */
+function GrowthBar({ percent, delay = 0 }: { percent: number; delay?: number }) {
+  return (
+    <div className="h-1.5 w-full rounded-full bg-[#2B2B2B] overflow-hidden mt-3">
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: `${percent}%` }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
+        className="h-full rounded-full bg-gradient-to-r from-[#F15A29] to-[#FFB27A]"
+      />
+    </div>
+  );
+}
+
+export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: CareerOutcomesPageProps) {
+  // Video Modal State for Testimonials (Section 11)
+  const [activeVideo, setActiveVideo] = useState<{
+    name: string;
+    role: string;
+    title: string;
+    videoUrl: string;
+    thumbnail: string;
+  } | null>(null);
+
+  // Active Step for Placement Process (Section 02)
+  const [activePlacementStep, setActivePlacementStep] = useState<number>(0);
+
+  // Active Stage for Career Roadmap (Section 04)
+  const [activeRoadmapIndex, setActiveRoadmapIndex] = useState<number>(0);
+
+  // Active Portfolio Preview (Section 08)
+  const [activePortfolioTab, setActivePortfolioTab] = useState<number>(0);
+
+  // Active Industry Category Filter for Hiring Companies (Section 07)
+  const [activeSector, setActiveSector] = useState<string>('All Industries');
+
+  // Placement Process Steps
+  const placementSteps = [
+    {
+      title: "Training",
+      code: "01",
+      focus: "Hands-on execution of core channels, tools & strategy",
+      detail: "Deep dive into real-world tools, consumer psychology, data analytics, and generative AI frameworks under expert guidance.",
+      icon: GraduationCap,
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Projects",
+      code: "02",
+      focus: "Live campaign briefs & real budget handling",
+      detail: "Translating concepts into active marketing campaigns with real client constraints, audience personas, and spend allocation.",
+      icon: Target,
+      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Portfolio",
+      code: "03",
+      focus: "Verified campaign reports & technical audits",
+      detail: "Building a bulletproof digital showcase of SEO audits, ROAS reports, content strategies, and AI workflows.",
+      icon: Briefcase,
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Resume",
+      code: "04",
+      focus: "ATS-optimized executive profile & metrics formatting",
+      detail: "Structuring your experience with quantifiable business outcomes, commercial math, and tool stack highlights.",
+      icon: FileText,
+      image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Mock Interview",
+      code: "05",
+      focus: "1-on-1 strategy defense with industry HR heads",
+      detail: "Defending campaign choices, handling stress scenarios, and answering high-stakes commercial growth questions.",
+      icon: Users,
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Placement Assistance",
+      code: "06",
+      focus: "Direct referral access to top agency & corporate teams",
+      detail: "Connecting verified student portfolios with hiring managers across startups, agencies, and global enterprises.",
+      icon: Award,
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+    }
+  ];
+
+  // Career Roadmap Stages
+  const roadmapStages = [
+    { name: "Learn", code: "01", detail: "Foundational marketing principles, consumer math & AI tools", highlight: "Core Competency" },
+    { name: "Specialize", code: "02", detail: "Deep channel mastery in SEO, PPC, Analytics or Content", highlight: "Channel Authority" },
+    { name: "Gain Experience", code: "03", detail: "Executing real client budgets & live optimization loops", highlight: "Real-World Practice" },
+    { name: "Apply", code: "04", detail: "Solving complex commercial growth & acquisition problems", highlight: "Strategic Thinking" },
+    { name: "Build Expertise", code: "05", detail: "Developing custom attribution & CRO growth frameworks", highlight: "Advanced Mastery" },
+    { name: "Grow", code: "06", detail: "Scaling campaigns, managing team budgets & cross-functional strategy", highlight: "Leadership Scaling" },
+    { name: "Lead", code: "07", detail: "Head of Marketing, Agency Director, Founder or Senior Consultant", highlight: "Executive Impact" }
+  ];
+
+  // Job Roles List with Real Indian Working Professionals Photography
+  const jobRolesList = [
+    {
+      title: "Digital Marketing Executive",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+      tag: "Execution & Campaigns"
+    },
+    {
+      title: "SEO Specialist",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      tag: "Search & Technical Audit"
+    },
+    {
+      title: "Performance Marketer",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      tag: "Paid Ads & ROAS"
+    },
+    {
+      title: "Social Media Specialist",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80",
+      tag: "Brand & Engagement"
+    },
+    {
+      title: "Google Ads Specialist",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+      tag: "PPC & Conversion Funnels"
+    },
+    {
+      title: "Content Marketer",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+      tag: "Copywriting & Storytelling"
+    },
+    {
+      title: "Data Analyst",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+      tag: "Traffic & User Behavior"
+    },
+    {
+      title: "Marketing Analyst",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      tag: "Attribution & Metrics"
+    },
+    {
+      title: "E-Commerce Marketer",
+      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80",
+      tag: "Store Sales & Retention"
+    },
+    {
+      title: "AI Marketing Specialist",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      tag: "Generative AI & Automation"
+    },
+    {
+      title: "Growth Marketer",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+      tag: "A/B Testing & Scaling"
+    },
+    {
+      title: "Growth Strategist",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80",
+      tag: "Go-To-Market Leadership"
+    }
+  ];
+
+  // Official Hiring Brands List with Real Logos (local assets)
+  const officialBrands = [
+    { name: "Google", logo: careersGoogleLogo },
+    { name: "Meta", logo: careersMetaLogo },
+    { name: "Amazon", logo: careersAmazonLogo },
+    { name: "Microsoft", logo: careersMicrosoftLogo },
+    { name: "Adobe", logo: careersAdobeLogo },
+    { name: "HubSpot", logo: careersHubspotLogo },
+    { name: "Shopify", logo: careersShopifyLogo },
+    { name: "Flipkart", logo: careersFlipkartLogo },
+    { name: "Zomato", logo: careersZomatoLogo },
+    { name: "Swiggy", logo: careersSwiggyLogo },
+    { name: "Razorpay", logo: careersRazorpayLogo },
+    { name: "Paytm", logo: careersPaytmLogo }
+  ];
+
+  // Portfolio Previews Data
+  const portfolioPreviews = [
+    {
+      title: "SEO Audits",
+      icon: Search,
+      desc: "Comprehensive technical crawler reports, Core Web Vitals diagnostic, keyword positioning & backlink profile indexing.",
+      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["Technical Site Architecture", "On-Page Content Gaps", "Keyword Intent Mapping", "Backlink Risk Audit"]
+    },
+    {
+      title: "Campaign Strategies",
+      icon: Target,
+      desc: "Omnichannel customer journey maps, audience segmentation personas, offer strategy & full budget allocation plans.",
+      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["Funnel Architecture", "Creative Briefs", "CAC & LTV Modeling", "Budget Scaling Matrix"]
+    },
+    {
+      title: "Websites",
+      icon: Globe,
+      desc: "Responsive conversion-optimized landings, UX wireframes, lead magnet triggers & analytics pixel mapping.",
+      img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["High-Converting Wireframes", "Custom CTA Placements", "Tag Manager Integration", "Speed & Accessibility"]
+    },
+    {
+      title: "Content Plans",
+      icon: FileText,
+      desc: "Editorial calendars, viral short-form video hooks, thought leadership pillars & pillar-cluster blog strategies.",
+      img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["Content Pillars Matrix", "Social Distribution Grid", "Copywriting Frameworks", "SEO Cluster Strategy"]
+    },
+    {
+      title: "Social Media Strategies",
+      icon: Users,
+      desc: "Brand voice positioning, community growth playbooks, influencer brief templates & organic reach optimization.",
+      img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["Audience Growth Playbooks", "Creative Asset Specs", "Engagement Funnel", "Influencer ROI Tracker"]
+    },
+    {
+      title: "Advertising Campaigns",
+      icon: Zap,
+      desc: "Meta & Google Ad account structures, dynamic ad copy variations, landing page alignment & bid strategy rules.",
+      img: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["Account Structure Blueprints", "A/B Creative Test Matrix", "Custom Audience Audiences", "ROAS Benchmark System"]
+    },
+    {
+      title: "Analytics Reports",
+      icon: BarChart3,
+      desc: "Custom Google Analytics 4 dashboards, multi-touch attribution modeling, funnel drop-off audit & ROAS reports.",
+      img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["GA4 Custom Explorations", "Looker Studio Dashboards", "Conversion Drop-Off Audit", "Multi-Touch Attribution"]
+    },
+    {
+      title: "AI-Powered Marketing Workflows",
+      icon: Cpu,
+      desc: "Custom prompt engineering libraries, automated keyword clustering scripts, generative ad variant engines.",
+      img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+      bullets: ["Custom AI Prompt Library", "Automated Content Pipeline", "AI Ad Copy Generator", "Workflow Automation"]
+    }
+  ];
+
+  // Testimonial Videos List
+  const testimonialVideos = [
+    {
+      name: "Ananya Sharma",
+      role: "Performance Marketer @ Growth Agency",
+      title: "Transitioning from Non-Tech to Performance Marketing",
+      thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      name: "Rohan Verma",
+      role: "SEO Strategist @ E-Commerce Brand",
+      title: "How Live Projects Helped Me Land My First SEO Specialist Role",
+      thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      name: "Priya Nair",
+      role: "AI Marketing Specialist @ SaaS Enterprise",
+      title: "Combining Marketing Strategy with Generative AI Workflows",
+      thumbnail: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    }
+  ];
+
+  return (
+    <div className="w-full bg-[#FAF8F5] text-[#111111] font-['Sora',sans-serif] selection:bg-[#F15A29] selection:text-white overflow-x-hidden pt-20 sm:pt-24">
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 01: HERO (Editorial White & High Contrast Luxury Layout)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="relative w-full bg-white py-12 sm:py-16 border-b border-[#EBE4DC] overflow-hidden">
+        {/* Subtle Ambient Glow */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#111111 1.2px, transparent 1.2px)`, backgroundSize: '24px 24px' }} />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+            {/* Left Column: Hero Editorial Headings & Exact Locked Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-7 space-y-6"
+            >
+              <div className="space-y-3">
+                <h1 className="text-[32px] sm:text-[46px] lg:text-[54px] font-[800] leading-[1.08] tracking-tight text-[#111111]">
+                  CAREER OUTCOMES
+                </h1>
+
+                <p className="text-[18px] sm:text-[24px] font-[800] text-[#F15A29] leading-tight">
+                  Learn Skills. Build Experience. Create Opportunities.
+                </p>
+              </div>
+
+              <p className="font-inter text-base sm:text-lg text-[#444444] leading-relaxed max-w-2xl font-medium">
+                At TEONOX, career preparation goes beyond completing a course. Our approach focuses on building the skills, practical experience, portfolio, confidence and professional readiness needed to pursue opportunities in the Digital Marketing and AI-Driven World.
+              </p>
+
+              {/* CTAs */}
+              <div className="pt-2 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() => onEnquireClick("Career Advisory")}
+                  className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm sm:text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
+                >
+                  <span>Talk to a Career Advisor</span>
+                  <ArrowUpRight className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={onExplorePrograms}
+                  className="px-7 py-3.5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm sm:text-base font-bold border border-[#EBE4DC] hover:border-[#111111] transition-all cursor-pointer shadow-xs"
+                >
+                  <span>Explore Programs</span>
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Premium Photography Composition */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="relative rounded-3xl overflow-hidden border border-[#EBE4DC] shadow-xl group">
+                <img
+                  src={heroImg}
+                  alt="Successful TEONOX graduate in digital marketing career"
+                  className="w-full h-[320px] sm:h-[420px] object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 02: PLACEMENT PROCESS (Dark Interactive Animated Roadmap)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+        {/* Background Radial Lights */}
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-white tracking-tight leading-[1.18]">
+              PLACEMENT PROCESS
+            </h2>
+            <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+              From Training to Career Readiness
+            </p>
+            <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed max-w-2xl mx-auto font-medium">
+              Students’ progress through skill development, practical projects, portfolio building, resume preparation, mock interviews and placement assistance, helping them approach opportunities with greater confidence.
+            </p>
+          </div>
+
+          {/* Step Selector Tabs & Detailed Cards Display */}
+          <div className="space-y-12">
+            {/* Interactive Timeline Tabs */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {placementSteps.map((step, idx) => {
+                const isActive = activePlacementStep === idx;
+                const IconComp = step.icon;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActivePlacementStep(idx)}
+                    className={`p-4 sm:p-5 rounded-2xl font-sora text-left transition-all cursor-pointer border flex flex-col justify-between space-y-3 ${
+                      isActive
+                        ? 'bg-[#F15A29] text-white border-[#F15A29] shadow-xl scale-[1.03]'
+                        : 'bg-[#141414] text-[#AAAAAA] border-[#262626] hover:border-[#F15A29]/50 hover:text-white'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className={`font-mono text-xs font-extrabold px-2 py-0.5 rounded ${
+                        isActive ? 'bg-white text-[#F15A29]' : 'bg-[#222222] text-[#888888]'
+                      }`}>
+                        {step.code}
+                      </span>
+                      <IconComp className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#F15A29]'}`} />
+                    </div>
+                    <p className="text-base font-extrabold leading-snug">{step.title}</p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Milestone Card Showcase */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activePlacementStep}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-[#141414] border border-[#2B2B2B] shadow-2xl relative overflow-hidden"
+              >
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F15A29]/20 border border-[#F15A29]/30 text-[#F15A29] font-mono text-xs font-bold uppercase">
+                    <span>STEP {placementSteps[activePlacementStep].code} OF 06</span>
+                  </div>
+
+                  <h3 className="text-3xl sm:text-4xl font-extrabold font-sora text-white">
+                    {placementSteps[activePlacementStep].title}
+                  </h3>
+
+                  <p className="font-sora text-lg sm:text-xl font-bold text-[#F15A29]">
+                    {placementSteps[activePlacementStep].focus}
+                  </p>
+
+                  <p className="font-inter text-base text-[#CCCCCC] leading-relaxed">
+                    {placementSteps[activePlacementStep].detail}
+                  </p>
+
+                  <div className="pt-2 flex items-center gap-3">
+                    <button
+                      onClick={() => setActivePlacementStep((prev) => (prev + 1) % placementSteps.length)}
+                      className="px-6 py-3 rounded-full bg-white text-[#111111] font-sora text-sm font-extrabold flex items-center gap-2 hover:bg-[#F15A29] hover:text-white transition-all cursor-pointer"
+                    >
+                      <span>Next Phase</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 relative">
+                  <div className="rounded-2xl overflow-hidden border border-[#333333] shadow-2xl h-[280px] sm:h-[340px]">
+                    <img
+                      src={placementSteps[activePlacementStep].image}
+                      alt={placementSteps[activePlacementStep].title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 03: INTERNSHIP PROCESS (Curved Visual Cards & Dashboard)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#FAF8F5] border-b border-[#EBE4DC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+          {/* Section Header */}
+          <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
+              INTERNSHIP PROCESS
+            </h2>
+            <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+              Turn Learning into Experience
+            </p>
+            <p className="font-inter text-base sm:text-lg text-[#555555] leading-relaxed max-w-2xl mx-auto font-medium">
+              Eligible students get opportunities to apply their learning through internships, live projects and practical assignments, experiencing how Digital Marketing works in real business environments.
+            </p>
+          </motion.div>
+
+          {/* Visual Showcase Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Live Projects & Campaign Tools",
+                tag: "Practical Execution",
+                img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                title: "Real Client Meetings & Strategy",
+                tag: "Business Communication",
+                img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                title: "Marketing Analytics & Dashboards",
+                tag: "Data & Performance",
+                img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+              }
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                {...fadeUp(idx * 0.12)}
+                whileHover={{ y: -8 }}
+                className="card-premium p-6 rounded-3xl bg-white border border-[#EBE4DC] shadow-sm hover:shadow-xl hover:border-[#F15A29]/50 transition-all space-y-5 flex flex-col justify-between group"
+              >
+                <div className="space-y-4">
+                  <div className="h-56 rounded-2xl overflow-hidden border border-[#EBE4DC] relative">
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" />
+                  </div>
+                  <h3 className="font-sora text-xl font-extrabold text-[#111111] group-hover:text-[#F15A29] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 04: CAREER ROADMAP (Interactive Node Journey Path)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0F0F0F] text-white border-b border-white/10 relative overflow-hidden">
+        {/* Glow Effects */}
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+
+          {/* Section Header */}
+          <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-white tracking-tight leading-[1.18]">
+              CAREER ROADMAP
+            </h2>
+            <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+              Your Skills. Multiple Career Paths.
+            </p>
+            <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed max-w-2xl mx-auto font-medium">
+              Start your journey as a specialist, grow into a strategist, and progress toward leadership, consulting, freelancing, entrepreneurship or agency opportunities.
+            </p>
+          </motion.div>
+
+          {/* Interactive Horizontal Node Navigation */}
+          <div className="space-y-10">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {roadmapStages.map((stage, idx) => {
+                const isActive = activeRoadmapIndex === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveRoadmapIndex(idx)}
+                    className={`px-5 py-3 rounded-full font-sora text-sm font-extrabold transition-all cursor-pointer flex items-center gap-2.5 ${
+                      isActive
+                        ? 'bg-[#F15A29] text-white shadow-xl shadow-[#F15A29]/30 scale-105'
+                        : 'bg-[#1C1C1C] text-[#888888] hover:text-white border border-[#2A2A2A]'
+                    }`}
+                  >
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${
+                      isActive ? 'bg-white text-[#F15A29]' : 'bg-[#333333] text-white'
+                    }`}>
+                      {stage.code}
+                    </span>
+                    <span>{stage.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Stage Detail Highlight Card */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeRoadmapIndex}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="max-w-3xl mx-auto p-8 sm:p-10 rounded-3xl bg-[#181818] border border-[#2E2E2E] shadow-2xl text-center space-y-4"
+              >
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F15A29]/20 text-[#F15A29] font-mono text-xs font-bold uppercase">
+                  <span>STAGE {roadmapStages[activeRoadmapIndex].code} • {roadmapStages[activeRoadmapIndex].highlight}</span>
+                </div>
+
+                <h3 className="text-3xl sm:text-4xl font-extrabold font-sora text-white">
+                  {roadmapStages[activeRoadmapIndex].name}
+                </h3>
+
+                <p className="font-inter text-base sm:text-lg text-[#EBE4DC] leading-relaxed max-w-xl mx-auto">
+                  {roadmapStages[activeRoadmapIndex].detail}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 05: JOB ROLES (Floating Professional Showcase)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-white border-b border-[#EBE4DC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+          {/* Section Header */}
+          <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
+              JOB ROLES
+            </h2>
+            <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+              One Industry. Multiple Career Opportunities.
+            </p>
+            <p className="font-inter text-base sm:text-lg text-[#555555] font-semibold">
+              Build capabilities for roles such as:
+            </p>
+          </motion.div>
+
+          {/* Professional Role Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {jobRolesList.map((role, idx) => (
+              <motion.div
+                key={idx}
+                {...fadeUp((idx % 4) * 0.08)}
+                whileHover={{ y: -6 }}
+                className="card-premium p-5 rounded-3xl bg-[#FAF8F5] border border-[#EBE4DC] shadow-xs hover:shadow-xl hover:border-[#F15A29]/50 transition-all flex flex-col justify-between space-y-4 group"
+              >
+                <div className="h-44 rounded-2xl overflow-hidden border border-[#EBE4DC] relative">
+                  <img src={role.image} alt={role.title} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" />
+                </div>
+                <div>
+                  <h3 className="font-sora text-base sm:text-lg font-extrabold text-[#111111] group-hover:text-[#F15A29] transition-colors">
+                    {role.title}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 06: SALARY & GROWTH POTENTIAL (Business Growth Matrix)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+            {/* Left Column: Exact Locked Content */}
+            <motion.div {...fadeUp(0)} className="lg:col-span-6 space-y-6">
+              <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-white tracking-tight leading-[1.18]">
+                SALARY & GROWTH POTENTIAL
+              </h2>
+
+              <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+                Your Career Can Grow with Your Skills.
+              </p>
+
+              <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed font-medium">
+                Compensation in Digital Marketing varies significantly based on skills, specialization, experience, city, company, portfolio and demonstrated performance.
+              </p>
+
+              <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed font-medium">
+                Rather than promising a fixed salary, TEONOX focuses on developing capabilities that can help learners compete for better opportunities as their expertise grows.
+              </p>
+            </motion.div>
+
+            {/* Right Column: Premium Interactive Growth Matrix */}
+            <motion.div {...fadeUp(0.15)} className="lg:col-span-6">
+              <div className="card-premium p-8 rounded-3xl bg-[#141414] border border-[#2B2B2B] shadow-2xl space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#2A2A2A]">
+                  <span className="font-sora text-sm font-bold text-white">Skill Capability & Value Scale</span>
+                  <span className="font-mono text-xs text-[#F15A29] font-bold">Demonstrated ROI</span>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    { tier: "Foundational Specialist", focus: "Tool execution & channel campaigns", growth: "Core Entry Level", bar: 40 },
+                    { tier: "Performance Strategist", focus: "ROAS optimization & funnel math", growth: "Accelerated Growth", bar: 70 },
+                    { tier: "Growth Lead & Consultant", focus: "Commercial strategy & team leadership", growth: "High Impact", bar: 95 }
+                  ].map((item, idx) => (
+                    <motion.div key={idx} {...fadeUp(0.1 * idx)} className="p-5 rounded-2xl bg-[#1A1A1A] border border-[#2B2B2B] hover:border-[#F15A29]/50 transition-colors">
+                      <div className="flex items-center justify-between gap-4">
+                        <div>
+                          <p className="font-sora text-base font-extrabold text-white">{item.tier}</p>
+                          <p className="font-inter text-xs text-[#AAAAAA] mt-0.5">{item.focus}</p>
+                        </div>
+                        <span className="px-3 py-1 rounded-full bg-[#F15A29]/15 text-[#F15A29] font-mono text-xs font-bold shrink-0">
+                          {item.growth}
+                        </span>
+                      </div>
+                      <GrowthBar percent={item.bar} delay={0.2 + idx * 0.15} />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 07: COMPANIES HIRING (Official Logo Ecosystem)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#FAF8F5] border-b border-[#EBE4DC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+          {/* Section Header */}
+          <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
+              COMPANIES HIRING
+            </h2>
+            <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+              Digital Skills Are Needed Across Industries.
+            </p>
+          </motion.div>
+
+          {/* Official Brands Grid with Real Company Logos */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 max-w-6xl mx-auto">
+            {officialBrands.map((brand, idx) => (
+              <motion.div
+                key={idx}
+                {...scaleIn((idx % 6) * 0.06)}
+                whileHover={{ y: -4, scale: 1.03 }}
+                className="p-6 rounded-2xl bg-white border border-[#EBE4DC] shadow-sm hover:border-[#F15A29] hover:shadow-xl transition-all duration-300 flex items-center justify-center h-28 group"
+              >
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="h-11 sm:h-12 w-auto object-contain shrink-0 group-hover:scale-105 transition-transform duration-300"
+                />
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 08: PORTFOLIO DEVELOPMENT (Visual Project Showcase Cards)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+        {/* Ambient Glowing Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`, backgroundSize: '28px 28px' }} />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
+
+          {/* Section Header with EXACT Locked Content */}
+          <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-white tracking-tight leading-[1.18]">
+              PORTFOLIO DEVELOPMENT
+            </h2>
+            <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+              Don&apos;t Just Say What You Know. Show What You Can Do.
+            </p>
+          </motion.div>
+
+          {/* 8 Image Showcase Grid (Only High-Res Images & Project Titles) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {portfolioPreviews.map((item, idx) => {
+              return (
+                <motion.div
+                  key={idx}
+                  {...fadeUp((idx % 4) * 0.1)}
+                  whileHover={{ y: -8 }}
+                  className="card-premium rounded-2xl bg-[#141414] border border-[#2B2B2B] hover:border-[#F15A29] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col group"
+                >
+                  {/* Clean High Quality Project Image */}
+                  <div className="h-56 sm:h-60 overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+
+                  {/* Clean Project Title Below Image */}
+                  <div className="p-5 border-t border-[#262626] bg-[#141414]">
+                    <h3 className="font-sora text-base sm:text-lg font-extrabold text-white group-hover:text-[#F15A29] transition-colors">
+                      {item.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 09: RESUME & LINKEDIN SUPPORT (Editorial Layout)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-white border-b border-[#EBE4DC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+            {/* Left Column: Exact Locked Content */}
+            <motion.div {...fadeUp(0)} className="lg:col-span-6 space-y-6">
+              <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
+                RESUME & LINKEDIN SUPPORT
+              </h2>
+
+              <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+                Position Yourself for the Opportunity You Want.
+              </p>
+
+              <p className="font-inter text-base sm:text-lg text-[#555555] leading-relaxed font-medium">
+                Get guidance to build a professional resume, LinkedIn profile and digital presence that communicates your skills, projects, certifications and capabilities effectively.
+              </p>
+            </motion.div>
+
+            {/* Right Column: Previews */}
+            <div className="lg:col-span-6 space-y-6">
+              <motion.div {...fadeUp(0.1)} className="card-premium p-8 rounded-3xl bg-[#FAF8F5] border border-[#EBE4DC] space-y-4 shadow-md hover:border-[#F15A29] transition-colors">
+                <div className="flex items-center gap-3 text-[#0A66C2]">
+                  <Linkedin className="w-7 h-7" />
+                  <span className="font-sora text-lg font-extrabold text-[#111111]">LinkedIn Profile Optimization</span>
+                </div>
+                <p className="font-inter text-sm text-[#555555] leading-relaxed">
+                  Positioning headline, keyword optimization for recruiter searchability, and project portfolio attachments.
+                </p>
+              </motion.div>
+
+              <motion.div {...fadeUp(0.2)} className="card-premium p-8 rounded-3xl bg-[#FAF8F5] border border-[#EBE4DC] space-y-4 shadow-md hover:border-[#F15A29] transition-colors">
+                <div className="flex items-center gap-3 text-[#F15A29]">
+                  <FileText className="w-7 h-7" />
+                  <span className="font-sora text-lg font-extrabold text-[#111111]">ATS-Friendly Resume Structuring</span>
+                </div>
+                <p className="font-inter text-sm text-[#555555] leading-relaxed">
+                  Formatting real campaign metrics, ROI outcomes, tool stack proficiency and verified client project credentials.
+                </p>
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 10: INTERVIEW PREPARATION (Premium Interview Room Scene)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+            {/* Left Column: Exact Locked Content */}
+            <motion.div {...fadeUp(0)} className="lg:col-span-6 space-y-6">
+              <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-white tracking-tight leading-[1.18]">
+                INTERVIEW PREPARATION
+              </h2>
+
+              <p className="text-xl sm:text-2xl font-extrabold text-[#F15A29]">
+                Knowledge Gets Tested. Confidence Gets Noticed.
+              </p>
+
+              <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed font-medium">
+                Prepare through interview guidance, mock interviews, practical questions, campaign scenarios and role-specific preparation designed to improve professional readiness.
+              </p>
+            </motion.div>
+
+            {/* Right Column: Real HR Interview Scene */}
+            <motion.div {...fadeUp(0.15)} className="lg:col-span-6">
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl group">
+                <img
+                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80"
+                  alt="Real HR interview scene"
+                  className="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 12: CLOSING CTA (Cinematic Minimal Dark Section)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white relative overflow-hidden">
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-10">
+
+
+          <motion.p {...fadeUp(0)} className="font-inter text-lg sm:text-2xl text-[#CCCCCC] max-w-2xl mx-auto leading-relaxed font-medium">
+            Develop the skills, experience, portfolio and confidence to take your next step in the Digital &amp; AI economy.
+          </motion.p>
+
+          <motion.div {...fadeUp(0.15)} className="pt-4 flex flex-wrap items-center justify-center gap-5">
+            <button
+              onClick={onExplorePrograms}
+              className="px-9 py-5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
+            >
+              <span>Explore Programs</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => onEnquireClick('Career Advisory')}
+              className="px-9 py-5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#111111] font-sora text-base font-bold border border-white/20 transition-all cursor-pointer backdrop-blur-md"
+            >
+              <span>Talk to a Career Advisor</span>
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+
+      {/* Video Modal Popup */}
+      <AnimatePresence>
+        {activeVideo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="relative w-full max-w-4xl bg-[#181818] border border-[#333333] rounded-3xl overflow-hidden shadow-2xl"
+            >
+              <div className="p-4 flex items-center justify-between border-b border-[#333333] text-white">
+                <div>
+                  <h4 className="font-sora font-extrabold text-base">{activeVideo.name}</h4>
+                  <p className="font-mono text-xs text-[#F15A29]">{activeVideo.role}</p>
+                </div>
+                <button
+                  onClick={() => setActiveVideo(null)}
+                  className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="relative pt-[56.25%] bg-black">
+                <iframe
+                  src={activeVideo.videoUrl}
+                  title={activeVideo.name}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+    </div>
+  );
+}

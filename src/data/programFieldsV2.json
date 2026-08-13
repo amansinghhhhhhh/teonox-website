@@ -1,0 +1,2600 @@
+{
+  "key": "group_pfv2_program_fields",
+  "title": "Program Fields V2",
+  "fields": [
+    {
+      "key": "field_pfv2_tab_card_information",
+      "label": "Card Information",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_staging_only",
+      "label": "Staging-Only Program",
+      "name": "staging_only",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "When enabled, this program is hidden on the live production site (teonox.com) and only appears on staging (hostingersite.com) / localhost. Use this to test unreleased V2 programs without exposing them publicly. The frontend also treats any slug ending in -v2 as staging-only for safety.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 0,
+      "ui": 1,
+      "ui_on_text": "Staging Only",
+      "ui_off_text": "Live",
+      "message": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_program_title",
+      "label": "Program Title",
+      "name": "program_title",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_program_badge",
+      "label": "Program Badge",
+      "name": "program_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_program_subheading",
+      "label": "Program Subheading",
+      "name": "program_subheading",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_program_duration",
+      "label": "Program Duration",
+      "name": "program_duration",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_program_mode",
+      "label": "Program Mode",
+      "name": "program_mode",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_card_duration",
+      "label": "Card Duration",
+      "name": "card_duration",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Short duration/commitment text shown on the program listing card (e.g. \"6 Months | 4 Capstone Projects\").",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_card_certifications",
+      "label": "Card Certifications",
+      "name": "card_certifications",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Short certification/badge line shown on the program listing card (e.g. \"Official Certification from TEONOX & Google\").",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_card_designed_for",
+      "label": "Card Designed For",
+      "name": "card_designed_for",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Short target-audience line shown on the program listing card (e.g. \"Designed for Graduates, Career Switchers & Founders\").",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_card_brochure_url",
+      "label": "Card Brochure URL",
+      "name": "card_brochure_url",
+      "aria-label": "",
+      "type": "url",
+      "instructions": "Link to the downloadable brochure PDF used by the card's Brochure button.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "https://",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_hero_intro",
+      "label": "Hero Intro",
+      "name": "hero_intro",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_hero_image",
+      "label": "Hero Image",
+      "name": "hero_image",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "Upload from the WordPress Media Library (Library: All). This image is authoritative and instantly and consistently updates BOTH the program card image and the detail page hero banner. Resolution order on the frontend: 1) this ACF Hero Image (object, URL, or media ID all supported) -> 2) the standard Featured Image -> 3) static graphic fallback. No other field is required.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "library": "all",
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": "",
+      "preview_size": "medium",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_overview",
+      "label": "Overview",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_overview",
+      "label": "Overview",
+      "name": "overview",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_pfv2_overview_highlight",
+          "label": "Overview Highlight",
+          "name": "overview_highlight",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_overview_main",
+          "label": "Overview Main",
+          "name": "overview_main",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 5,
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_overview_expanded",
+          "label": "Overview Expanded",
+          "name": "overview_expanded",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "table",
+          "pagination": 0,
+          "min": 0,
+          "max": 0,
+          "collapsed": "",
+          "button_label": "Add Row",
+          "rows_per_page": 20,
+          "sub_fields": [
+            {
+              "key": "field_pfv2_overview_expanded_paragraph",
+              "label": "Overview Expanded Paragraph",
+              "name": "overview_expanded_paragraph",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "parent_repeater": "field_pfv2_overview_expanded",
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_designed_for",
+      "label": "Designed For",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_designed_for_image",
+      "label": "Designed For Image",
+      "name": "designed_for_image",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "Optional image shown in the 'THIS COURSE IS DESIGNED FOR' section. Upload from the WordPress Media Library. Strictly dynamic (no static fallback): if left empty, the frontend renders an empty container. Prefer uniformly sized, high-quality images.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "library": "all",
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": "",
+      "preview_size": "medium",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_designed_for_intro",
+      "label": "Designed For Intro",
+      "name": "designed_for_intro",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Section introduction paragraph shown above the audience list in the 'THIS COURSE IS DESIGNED FOR' section (e.g. 'The program is suitable for learners at different stages of their career or business journey.'). Leave empty to hide it entirely.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_designed_for",
+      "label": "Designed For",
+      "name": "designed_for",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "pagination": 0,
+      "min": 0,
+      "max": 0,
+      "collapsed": "",
+      "button_label": "Add Row",
+      "rows_per_page": 20,
+      "sub_fields": [
+        {
+          "key": "field_pfv2_designed_for_title",
+          "label": "Designed For Title",
+          "name": "designed_for_title",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_pfv2_designed_for",
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_designed_for_text",
+          "label": "Designed For Text",
+          "name": "designed_for_text",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "parent_repeater": "field_pfv2_designed_for",
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_key_reasons",
+      "label": "Key Reasons",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_key_reasons",
+      "label": "Key Reasons",
+      "name": "key_reasons",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "pagination": 0,
+      "min": 0,
+      "max": 0,
+      "collapsed": "",
+      "button_label": "Add Row",
+      "rows_per_page": 20,
+      "sub_fields": [
+        {
+          "key": "field_pfv2_reason_title_bold",
+          "label": "Reason Title (Bold Prefix)",
+          "name": "reason_title_bold",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "Bold prefix / headline for this reason (e.g. 'Understand how algorithms influence growth'). Optional.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_pfv2_key_reasons",
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_reason_text",
+          "label": "Reason Text",
+          "name": "reason_text",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "Inline non-bold description text that follows the bold title. Leave empty to show only the title.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 2,
+          "parent_repeater": "field_pfv2_key_reasons",
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_key_reasons_footnote",
+      "label": "Key Reasons Footnote",
+      "name": "key_reasons_footnote",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_benefits",
+      "label": "Benefits",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_benefits",
+      "label": "Benefits",
+      "name": "benefits",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_pfv2_benefits_students",
+          "label": "Students",
+          "name": "benefits_students",
+          "aria-label": "",
+          "type": "group",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "block",
+          "sub_fields": [
+            {
+              "key": "field_pfv2_benefits_students_title",
+              "label": "Students Title",
+              "name": "benefits_students_title",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_students_intro",
+              "label": "Students Intro",
+              "name": "benefits_students_benefit_intro_text",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_students_heading",
+              "label": "Students Heading",
+              "name": "benefits_students_benefit_lead_in_bold",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_students_bullets",
+              "label": "Students Bullets",
+              "name": "benefits_students_benefit_points",
+              "aria-label": "",
+              "type": "repeater",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "layout": "table",
+              "pagination": 0,
+              "min": 0,
+              "max": 0,
+              "collapsed": "",
+              "button_label": "Add Row",
+              "rows_per_page": 20,
+              "sub_fields": [
+                {
+                  "key": "field_pfv2_bullet",
+                  "label": "Bullet",
+                  "name": "bullet",
+                  "aria-label": "",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                  },
+                  "default_value": "",
+                  "maxlength": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "parent_repeater": "field_pfv2_benefits_students_bullets",
+                  "show_in_rest": 1
+                }
+              ],
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_benefits_business",
+          "label": "Business",
+          "name": "benefits_business",
+          "aria-label": "",
+          "type": "group",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "block",
+          "sub_fields": [
+            {
+              "key": "field_pfv2_benefits_business_title",
+              "label": "Business Title",
+              "name": "benefits_business_title",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_business_intro",
+              "label": "Business Intro",
+              "name": "benefits_business_benefit_intro_text",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_business_heading",
+              "label": "Business Heading",
+              "name": "benefits_business_benefit_lead_in_bold",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_business_bullets",
+              "label": "Business Bullets",
+              "name": "benefits_business_benefit_points",
+              "aria-label": "",
+              "type": "repeater",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "layout": "table",
+              "pagination": 0,
+              "min": 0,
+              "max": 0,
+              "collapsed": "",
+              "button_label": "Add Row",
+              "rows_per_page": 20,
+              "sub_fields": [
+                {
+                  "key": "field_pfv2_benefits_business_bullet",
+                  "label": "Bullet",
+                  "name": "bullet",
+                  "aria-label": "",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                  },
+                  "default_value": "",
+                  "maxlength": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "parent_repeater": "field_pfv2_benefits_business_bullets",
+                  "show_in_rest": 1
+                }
+              ],
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_benefits_corporate",
+          "label": "Corporate",
+          "name": "benefits_corporate",
+          "aria-label": "",
+          "type": "group",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "block",
+          "sub_fields": [
+            {
+              "key": "field_pfv2_benefits_corporate_title",
+              "label": "Corporate Title",
+              "name": "benefits_corporate_title",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_corporate_intro",
+              "label": "Corporate Intro",
+              "name": "benefits_corporate_benefit_intro_text",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_corporate_heading",
+              "label": "Corporate Heading",
+              "name": "benefits_corporate_benefit_lead_in_bold",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_benefits_corporate_bullets",
+              "label": "Corporate Bullets",
+              "name": "benefits_corporate_benefit_points",
+              "aria-label": "",
+              "type": "repeater",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "layout": "table",
+              "pagination": 0,
+              "min": 0,
+              "max": 0,
+              "collapsed": "",
+              "button_label": "Add Row",
+              "rows_per_page": 20,
+              "sub_fields": [
+                {
+                  "key": "field_pfv2_benefits_corporate_bullet",
+                  "label": "Bullet",
+                  "name": "bullet",
+                  "aria-label": "",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                  },
+                  "default_value": "",
+                  "maxlength": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "parent_repeater": "field_pfv2_benefits_corporate_bullets",
+                  "show_in_rest": 1
+                }
+              ],
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_prerequisites",
+      "label": "Prerequisites",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_prerequisites",
+      "label": "Prerequisites",
+      "name": "prerequisites",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_pfv2_prerequisites_intro",
+          "label": "Prerequisites Intro",
+          "name": "prerequisites_intro",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_prerequisites_bullets",
+          "label": "Prerequisites Bullets",
+          "name": "prerequisites_bullets",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "table",
+          "pagination": 0,
+          "min": 0,
+          "max": 0,
+          "collapsed": "",
+          "button_label": "Add Row",
+          "rows_per_page": 20,
+          "sub_fields": [
+            {
+              "key": "field_pfv2_prerequisites_bullet",
+              "label": "Bullet",
+              "name": "bullet",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "parent_repeater": "field_pfv2_prerequisites_bullets",
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_prerequisites_note",
+          "label": "Prerequisites Note",
+          "name": "prerequisites_note",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_outcomes",
+      "label": "Outcomes",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_outcomes",
+      "label": "Outcomes",
+      "name": "outcomes",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_pfv2_outcome_intro_text",
+          "label": "Outcome Intro Text",
+          "name": "outcome_intro_text",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_outcome_lead_in_bold",
+          "label": "Outcome Lead In Bold",
+          "name": "outcome_lead_in_bold",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "Bold lead-in paragraph for the outcomes section (e.g. 'Depending on the projects and modules completed, learners will develop capabilities to:'). Leave empty to hide it entirely.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_outcome_bullets",
+          "label": "Outcome Bullets",
+          "name": "outcome_bullets",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "table",
+          "pagination": 0,
+          "min": 0,
+          "max": 0,
+          "collapsed": "",
+          "button_label": "Add Row",
+          "rows_per_page": 20,
+          "sub_fields": [
+            {
+              "key": "field_pfv2_outcome_bullet",
+              "label": "Bullet",
+              "name": "outcome_bullet",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "parent_repeater": "field_pfv2_outcome_bullets",
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_outcomes_projects_note",
+          "label": "Outcomes Projects Note",
+          "name": "outcomes_projects_note",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_value_flow",
+      "label": "Value Flow",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_bold_paragraph_1",
+      "label": "Value Bold Paragraph 1",
+      "name": "value_bold_paragraph_1",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Styled as the first bold paragraph in the 'VALUE OF THIS COURSE' section (e.g. 'The value of the program lies in...'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_body_paragraph",
+      "label": "Value Body Paragraph",
+      "name": "value_body_paragraph",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Regular body text paragraph (e.g. 'A learner could study SEO, Google Ads, WordPress, Analytics, Copywriting and AI separately...'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_bold_paragraph_2",
+      "label": "Value Bold Paragraph 2",
+      "name": "value_bold_paragraph_2",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Styled as the second bold paragraph (e.g. 'A professional needs to understand how these disciplines connect.'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_sequence",
+      "label": "Value Sequence",
+      "name": "value_sequence",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "pagination": 0,
+      "min": 0,
+      "max": 0,
+      "collapsed": "",
+      "button_label": "Add Row",
+      "rows_per_page": 20,
+      "sub_fields": [
+        {
+          "key": "field_pfv2_value_sequence_step",
+          "label": "Step",
+          "name": "step",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_pfv2_value_sequence",
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_grey_paragraph",
+      "label": "Value Grey Paragraph",
+      "name": "value_grey_paragraph",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Styled as the light grey paragraph (e.g. 'The program is designed around this broader perspective.'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_highlight_orange_bold",
+      "label": "Value Highlight Orange Bold",
+      "name": "value_highlight_orange_bold",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Styled as the orange bold callout paragraph (e.g. 'That shift from tool operator to marketing thinker is one of the core values of the program.'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_value_proposition",
+      "label": "Value Proposition (Legacy Fallback)",
+      "name": "value_proposition",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Legacy fallback used when 'Value Bold Paragraph 1' is empty. Prefer 'Value Bold Paragraph 1'.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_certifications",
+      "label": "Certifications",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_certifications_intro",
+      "label": "Certifications Intro",
+      "name": "certifications_intro",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Intro paragraph for the 'CERTIFICATIONS INCLUDED' section (e.g. 'The program can combine a TEONOX Program Certification with preparation for relevant platform certifications...'). Leave empty to hide it.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_certifications_pathways_lead_in",
+      "label": "Certifications Pathways Lead In",
+      "name": "certifications_pathways_lead_in",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Bold lead-in rendered above the certification cards (e.g. 'Certification pathways may include areas such as:'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_certifications",
+      "label": "Certifications",
+      "name": "certifications",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "pagination": 0,
+      "min": 0,
+      "max": 0,
+      "collapsed": "",
+      "button_label": "Add Row",
+      "rows_per_page": 20,
+      "sub_fields": [
+        {
+          "key": "field_pfv2_cert_title",
+          "label": "Certification Title",
+          "name": "cert_title",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_pfv2_certifications",
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_cert_badge",
+          "label": "Certification Badge",
+          "name": "cert_badge",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_pfv2_certifications",
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_cert_type",
+          "label": "Certification Type",
+          "name": "cert_type",
+          "aria-label": "",
+          "type": "select",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "choices": {
+            "teonox": "Teonox",
+            "google": "Google",
+            "analytics": "Analytics (Google Analytics)",
+            "semrush": "SEMrush",
+            "hubspot": "HubSpot",
+            "meta": "Meta",
+            "other": "Other / Specialized Tools"
+          },
+          "default_value": false,
+          "return_format": "value",
+          "multiple": 0,
+          "allow_null": 0,
+          "ui": 0,
+          "ajax": 0,
+          "placeholder": "",
+          "parent_repeater": "field_pfv2_certifications",
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_certifications_important_title",
+      "label": "Certifications Important Title",
+      "name": "certifications_important_title",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Bold title for the 'Important' information box in the certifications section (e.g. 'Important:'). Leave empty to omit the title.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_certifications_important_text",
+      "label": "Certifications Important Text",
+      "name": "certifications_important_text",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Body paragraph for the 'Important' box (e.g. 'Third-party certifications are subject to the respective provider's current availability, eligibility requirements, examination process and policies.'). Leave empty to omit.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_placement",
+      "label": "Placement Assistance",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_placement_assistance",
+      "label": "Placement Assistance",
+      "name": "placement_assistance",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_pfv2_placement_assistance_intro",
+          "label": "Placement Assistance Intro",
+          "name": "placement_assistance_intro",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_placement_assistance_bullets",
+          "label": "Placement Assistance Bullets",
+          "name": "placement_assistance_bullets",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "table",
+          "pagination": 0,
+          "min": 0,
+          "max": 0,
+          "collapsed": "",
+          "button_label": "Add Row",
+          "rows_per_page": 20,
+          "sub_fields": [
+            {
+              "key": "field_pfv2_placement_assistance_bullet",
+              "label": "Bullet",
+              "name": "bullet",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "parent_repeater": "field_pfv2_placement_assistance_bullets",
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_placement_assistance_career_paths",
+          "label": "Placement Assistance Career Paths",
+          "name": "placement_assistance_career_paths",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "table",
+          "pagination": 0,
+          "min": 0,
+          "max": 0,
+          "collapsed": "",
+          "button_label": "Add Row",
+          "rows_per_page": 20,
+          "sub_fields": [
+            {
+              "key": "field_pfv2_placement_assistance_career_path",
+              "label": "Career Path",
+              "name": "career_path",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "parent_repeater": "field_pfv2_placement_assistance_career_paths",
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_opportunities",
+      "label": "Opportunities",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_opportunities",
+      "label": "Opportunities",
+      "name": "opportunities",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_pfv2_opportunities_internships",
+          "label": "Internships",
+          "name": "opportunities_internships",
+          "aria-label": "",
+          "type": "group",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "block",
+          "sub_fields": [
+            {
+              "key": "field_pfv2_opportunities_internships_title",
+              "label": "Internships Title",
+              "name": "opportunities_internships_title",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_internships_intro",
+              "label": "Internships Intro Text",
+              "name": "opportunities_internships_intro",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "Intro paragraph for the Internship tab (e.g. 'Internships can help learners bridge the gap between classroom learning and actual execution.'). Leave empty to hide.",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_internships_lead_in_bold",
+              "label": "Internships Lead In Bold",
+              "name": "opportunities_internships_lead_in_bold",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "Bold lead-in for the Internship tab (e.g. 'Depending on availability and eligibility, learners may receive opportunities through:'). Leave empty to hide.",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_internships_note",
+              "label": "Internships Note",
+              "name": "opportunities_internships_note",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_internships_items",
+              "label": "Internships Items",
+              "name": "opportunities_internships_items",
+              "aria-label": "",
+              "type": "repeater",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "layout": "table",
+              "pagination": 0,
+              "min": 0,
+              "max": 0,
+              "collapsed": "",
+              "button_label": "Add Row",
+              "rows_per_page": 20,
+              "sub_fields": [
+                {
+                  "key": "field_pfv2_opportunities_internships_item_title",
+                  "label": "Item Title",
+                  "name": "item_title",
+                  "aria-label": "",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                  },
+                  "default_value": "",
+                  "maxlength": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "parent_repeater": "field_pfv2_opportunities_internships_items",
+                  "show_in_rest": 1
+                }
+              ],
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_opportunities_freelancing",
+          "label": "Freelancing",
+          "name": "opportunities_freelancing",
+          "aria-label": "",
+          "type": "group",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "block",
+          "sub_fields": [
+            {
+              "key": "field_pfv2_opportunities_freelancing_title",
+              "label": "Freelancing Title",
+              "name": "opportunities_freelancing_title",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_freelancing_intro",
+              "label": "Freelancing Intro Text",
+              "name": "opportunities_freelancing_intro",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "Intro paragraph for the Freelancing tab (e.g. 'Digital Marketing provides multiple opportunities to build an independent professional career.'). Leave empty to hide.",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_freelancing_lead_in_bold",
+              "label": "Freelancing Lead In Bold",
+              "name": "opportunities_freelancing_lead_in_bold",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "Bold lead-in for the Freelancing tab (e.g. 'Students can explore services such as:'). Leave empty to hide.",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_freelancing_note",
+              "label": "Freelancing Note",
+              "name": "opportunities_freelancing_note",
+              "aria-label": "",
+              "type": "textarea",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "new_lines": "",
+              "rows": 4,
+              "show_in_rest": 1
+            },
+            {
+              "key": "field_pfv2_opportunities_freelancing_items",
+              "label": "Freelancing Items",
+              "name": "opportunities_freelancing_items",
+              "aria-label": "",
+              "type": "repeater",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "layout": "table",
+              "pagination": 0,
+              "min": 0,
+              "max": 0,
+              "collapsed": "",
+              "button_label": "Add Row",
+              "rows_per_page": 20,
+              "sub_fields": [
+                {
+                  "key": "field_pfv2_opportunities_freelancing_item_title",
+                  "label": "Item Title",
+                  "name": "item_title",
+                  "aria-label": "",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                  },
+                  "default_value": "",
+                  "maxlength": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "parent_repeater": "field_pfv2_opportunities_freelancing_items",
+                  "show_in_rest": 1
+                }
+              ],
+              "show_in_rest": 1
+            }
+          ],
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_faq",
+      "label": "FAQ",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_faqs",
+      "label": "FAQs",
+      "name": "faqs",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "pagination": 0,
+      "min": 0,
+      "max": 0,
+      "collapsed": "",
+      "button_label": "Add Row",
+      "rows_per_page": 20,
+      "sub_fields": [
+        {
+          "key": "field_pfv2_faq_question",
+          "label": "FAQ Question",
+          "name": "faq_question",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_pfv2_faqs",
+          "show_in_rest": 1
+        },
+        {
+          "key": "field_pfv2_faq_answer",
+          "label": "FAQ Answer",
+          "name": "faq_answer",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": 4,
+          "parent_repeater": "field_pfv2_faqs",
+          "show_in_rest": 1
+        }
+      ],
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_tab_cta_banner",
+      "label": "CTA Banner",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "Bottom call-to-action banner ('Ready to Start Your Digital Marketing Journey?'). Every element is dynamic: leave a field empty to fall back to its default copy.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_title",
+      "label": "CTA Title",
+      "name": "cta_title",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Headline string shown in the bottom CTA banner (e.g. 'Ready to Start Your Digital Marketing Journey?'). Leave empty to use the default.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_description",
+      "label": "CTA Description",
+      "name": "cta_description",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Body description text in the bottom CTA banner. Leave empty to use the default.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "new_lines": "",
+      "rows": 4,
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_image",
+      "label": "CTA Image",
+      "name": "cta_image",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "Left person/counsellor image shown in the bottom CTA banner. Upload from the WordPress Media Library. Leave empty to use the default counsellor image.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "library": "all",
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": "",
+      "preview_size": "medium",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_primary_button_text",
+      "label": "CTA Primary Button Text",
+      "name": "cta_primary_button_text",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Primary button label (e.g. 'Apply Now'). Leave empty to use the default.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_primary_button_url",
+      "label": "CTA Primary Button URL",
+      "name": "cta_primary_button_url",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Primary button link/action (e.g. '/apply' or 'mailto:admissions@teonox.com'). Leave empty to keep the default enquiry behaviour.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_secondary_button_text",
+      "label": "CTA Secondary Button Text",
+      "name": "cta_secondary_button_text",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Secondary button label (e.g. 'Talk to Career Advisor'). Leave empty to use the default.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_secondary_button_url",
+      "label": "CTA Secondary Button URL",
+      "name": "cta_secondary_button_url",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Secondary button link/action (e.g. '/contact'). Leave empty to keep the default enquiry behaviour.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    },
+    {
+      "key": "field_pfv2_cta_brand_tagline",
+      "label": "CTA Brand Tagline",
+      "name": "cta_brand_tagline",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Bottom tagline (e.g. 'TEONOX | Learn. Apply. Lead.'). Leave empty to use the default.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_rest": 1
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "program"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1
+}
