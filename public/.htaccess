@@ -3,6 +3,13 @@
   RewriteBase /
 
   # ============================================================
+  # API CACHE BYPASS — mark every /api/* request as no-cache so the
+  # proxy below is never served from a stale LiteSpeed cache.
+  # ============================================================
+  RewriteCond %{REQUEST_URI} ^/api/ [NC]
+  RewriteRule .* - [E=Cache-Control:no-cache]
+
+  # ============================================================
   # SAME-ORIGIN API PROXY (permanent CORS bypass)
   # Proxies /api/* to the WordPress CMS SERVER-SIDE so the browser
   # only ever talks to https://teonox.com — never directly to
@@ -24,6 +31,29 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
+</IfModule>
+
+# ============================================================
+# API PROXY NO-CACHE RESPONSE HEADERS
+# Every /api/* response must carry no-store headers so LiteSpeed /
+# LSCache / the static host and the browser NEVER serve a stale
+# cached 200 for program/blog/media API calls. fetch('/api/...')
+# therefore always reaches the live WordPress CMS.
+# ============================================================
+SetEnvIf Request_URI "^/api/" API_PROXY_REQUEST
+
+<IfModule mod_headers.c>
+  # URI-based rule covers every /api/* subpath (programs, blogs, media, ...).
+  Header always set Cache-Control "no-cache, no-store, must-revalidate" env=API_PROXY_REQUEST
+  Header always set Pragma "no-cache" env=API_PROXY_REQUEST
+  Header always set Expires "0" env=API_PROXY_REQUEST
+
+  # Also cover a bare /api/ path (FilesMatch matches the requested filename).
+  <FilesMatch "^api">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+  </FilesMatch>
 </IfModule>
 
 # Security headers (conservative — site functionality ko nahi todte)

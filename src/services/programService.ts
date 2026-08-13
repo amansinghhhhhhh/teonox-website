@@ -271,7 +271,7 @@ async function resolveMediaUrl(attachmentId: number): Promise<string> {
   if (mediaUrlCache.has(attachmentId)) return mediaUrlCache.get(attachmentId) || '';
 
   try {
-    const proxyRes = await fetch(`/api/media/${attachmentId}`);
+    const proxyRes = await fetch(`/api/media/${attachmentId}?_t=${Date.now()}`);
     if (proxyRes.ok) {
       const json = await safeJson(proxyRes);
       const url = imageUrl(json?.data || json);
@@ -573,7 +573,7 @@ export async function fetchLiveProgramDetail(
   // Strategy 1: local proxy (same-origin, no CORS) relays raw WP post.
   for (const slug of slugs) {
     try {
-      const res = await fetch(`/api/programs/${encodeURIComponent(slug)}`);
+      const res = await fetch(`/api/programs/${encodeURIComponent(slug)}?_t=${Date.now()}`);
       if (res.ok) {
         const json = await safeJson(res);
         // Accept the Express proxy shape ({ success, data }) or a raw WP post
@@ -853,13 +853,15 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
 
   // Strategy 1: local proxy (same-origin, no CORS) relays raw WP posts.
   try {
-    const res = await fetch(`/api/programs`);
+    const res = await fetch(`/api/programs?_t=${Date.now()}`);
     if (res.ok) {
       const json = await safeJson(res);
       // Accept both the Express proxy shape ({ success, data: [...] }) and a
       // raw WordPress REST array (e.g. a LiteSpeed [P] rewrite that proxies
       // /api/* straight to cms.teonox.com).
       const posts = Array.isArray(json) ? json : json?.data;
+      // TEMP: verification log — remove after confirming live payload on teonox.com
+      console.log('[API Live Programs Payload]:', posts);
       if (Array.isArray(posts)) {
         const programs = await fromPosts(posts);
         // Live CMS even when zero V2 programs exist (drives "coming soon").
@@ -893,7 +895,7 @@ export async function fetchProgramCategories(): Promise<
     }));
 
   try {
-    const res = await fetch('/api/programs/categories');
+    const res = await fetch(`/api/programs/categories?_t=${Date.now()}`);
     if (res.ok) {
       const json = await safeJson(res);
       // Accept the Express proxy shape or a raw WP term array (LiteSpeed [P]).

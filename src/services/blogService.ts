@@ -183,7 +183,7 @@ function transformWpPost(p: any): BlogPost {
 export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boolean }> {
   // Strategy 1: Attempt local API proxy /api/blogs
   try {
-    const res = await fetch('/api/blogs');
+    const res = await fetch(`/api/blogs?_t=${Date.now()}`);
     if (res.ok) {
       const json = await safeJson(res);
       // Accept the Express proxy shape ({ success, data: [...] }) or a raw WP
@@ -204,7 +204,7 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
 export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | null> {
   // Try proxy first
   try {
-    const res = await fetch(`/api/blogs/${idOrSlug}`);
+    const res = await fetch(`/api/blogs/${idOrSlug}?_t=${Date.now()}`);
     if (res.ok) {
       const json = await safeJson(res);
       // Express proxy shape ({ success, data }) or a raw WP post ([P] rewrite).
