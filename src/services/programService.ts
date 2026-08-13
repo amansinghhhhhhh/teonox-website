@@ -160,6 +160,30 @@ function postFields(p: any): any {
 }
 
 /**
+ * Read a single ACF field value from a raw WP REST post, in priority order:
+ *  1. `post.acf.<name>`      (ACF "show in REST" nested object — the norm)
+ *  2. `post.<name>`          (ACF flattened at the top level of the post)
+ *  3. `post.meta.<name>`     (registered meta key, flat object)
+ * Returns the raw value, or null when the field is absent.
+ */
+function acfField(p: any, name: string): any {
+  const candidates = [
+    group(p?.acf)[name],
+    p?.[name],
+    group(p?.meta)[name],
+  ];
+  return candidates.find((v) => v != null) ?? null;
+}
+
+/** True when a value is actually present (non-null, non-empty string/array). */
+function hasValue(v: any): boolean {
+  if (v == null) return false;
+  if (typeof v === 'string') return v.trim().length > 0;
+  if (Array.isArray(v)) return v.length > 0;
+  return true;
+}
+
+/**
  * Extract a usable image URL from an ACF image field, which can arrive in
  * multiple shapes depending on the field's `return_format`:
  *   - "array"    -> { url, source_url, sizes: {...}, ... }
@@ -626,10 +650,35 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
     }
   }
 
+  // ACF card fields are read DIRECTLY from the raw post (acf / flattened /
+  // meta) so whatever is saved in WordPress immediately overrides any local
+  // static string. The detail-tab repeater rows and the `program_duration`
+  // fallback only apply when a card field is completely empty/absent.
+  const cardDuration = acfField(p, 'card_duration');
+  const cardCertifications = acfField(p, 'card_certifications');
+  const cardDesignedFor = acfField(p, 'card_designed_for');
+  const programDuration = acfField(p, 'program_duration');
+
   const firstCert = rows(fields.certifications).find((r: any) => str(r.cert_title)) as any;
   const firstDesignedFor = rows(fields.designed_for).find(
     (r: any) => str(r.designed_for_title) || str(r.designed_for_text),
   ) as any;
+
+  const durationText = hasValue(cardDuration)
+    ? str(cardDuration)
+    : hasValue(programDuration)
+      ? str(programDuration)
+      : 'Custom Duration';
+  const certText = hasValue(cardCertifications)
+    ? str(cardCertifications)
+    : firstCert
+      ? str(firstCert.cert_title)
+      : 'Official Certification';
+  const targetText = hasValue(cardDesignedFor)
+    ? str(cardDesignedFor)
+    : firstDesignedFor
+      ? `Designed for ${str(firstDesignedFor.designed_for_title || firstDesignedFor.designed_for_text)}`
+      : '';
 
   return {
     id: str(p.slug || p.id),
@@ -638,17 +687,9 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
     description:
       str(fields.program_subheading) ||
       stripHtml(p.excerpt?.rendered || p.content?.rendered || '').slice(0, 160),
-    durationText:
-      str(fields.card_duration) ||
-      str(fields.program_duration) ||
-      'Custom Duration',
-    certText:
-      str(fields.card_certifications) ||
-      (firstCert ? str(firstCert.cert_title) : '') ||
-      'Official Certification',
-    targetText:
-      str(fields.card_designed_for) ||
-      (firstDesignedFor ? `Designed for ${str(firstDesignedFor.designed_for_title || firstDesignedFor.designed_for_text)}` : ''),
+    durationText,
+    certText,
+    targetText,
     mode: str(fields.program_mode) || 'On Campus, Pune',
     image: img,
     brochureUrl: str(fields.card_brochure_url),
@@ -797,9 +838,10 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
     title: p.title,
     brandBadge: 'PROGRAM',
     description: p.description,
-    durationText: p.duration || 'Custom Duration',
-    certText: 'Official Certification',
-    targetText: p.eligibility ? `Designed for ${p.eligibility}` : '',
+    durationText: p.durationText || p.duration || 'Custom Duration',
+    certText: p.certText || 'Official Certification',
+    targetText:
+      p.targetText || (p.eligibility ? `Designed for ${p.eligibility}` : ''),
     mode: p.mode || 'On Campus, Pune',
     categoryId:
       categories.find((c) => c !== POPULAR_CATEGORY) || POPULAR_CATEGORY,
@@ -811,6 +853,45 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
       FALLBACK_CARD_IMAGES[p.id] || FALLBACK_CARD_IMAGES.default,
   };
 });
+
+/**
+ * Display order for the program listing, matching the reference layout:
+ * Flagship first, then Performance, then SEO. Cards are matched by keyword on
+ * slug + title so the sort survives WP slug changes (e.g. a `-2` suffix).
+ */
+const CARD_ORDER_PRIORITY: Array<{ pattern: RegExp }> = [
+  { pattern: /business-digital-marketing-with-ai/i },
+  { pattern: /performance-marketing/i },
+  { pattern: /search-engine-optimization/i },
+];
+
+/**
+ * Programs excluded from the listing. Social Media Marketing was dropped from
+ * the reference layout, so its WP post never becomes a card here.
+ */
+const CARD_EXCLUSIONS: Array<{ pattern: RegExp }> = [
+  { pattern: /social-media-marketing/i },
+];
+
+/**
+ * Sort live cards into the target order (Flagship, Performance, SEO) and drop
+ * excluded programs. Unknown future programs that match neither the priority
+ * list nor the exclusions are appended after the known three.
+ */
+function orderListingCards(cards: LiveProgramCard[]): LiveProgramCard[] {
+  const remaining = cards.filter((c) => {
+    const hay = `${c.id} ${c.title}`.toLowerCase();
+    return !CARD_EXCLUSIONS.some(({ pattern }) => pattern.test(hay));
+  });
+  const ordered: LiveProgramCard[] = [];
+  for (const { pattern } of CARD_ORDER_PRIORITY) {
+    const idx = remaining.findIndex((c) =>
+      pattern.test(`${c.id} ${c.title}`.toLowerCase()),
+    );
+    if (idx !== -1) ordered.push(...remaining.splice(idx, 1));
+  }
+  return [...ordered, ...remaining];
+}
 
 /**
  * Fetch the full program listing from WordPress and normalise each post into a
@@ -847,7 +928,7 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
       if (Array.isArray(posts)) {
         const programs = await fromPosts(posts);
         // Live CMS even when zero V2 programs exist (drives "coming soon").
-        return { programs, isLive: true };
+        return { programs: orderListingCards(programs), isLive: true };
       }
     }
   } catch (e) {

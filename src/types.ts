@@ -14,6 +14,9 @@ export interface Program {
   image?: string;
   highlights?: string[];
   categories?: string[];
+  durationText?: string;
+  certText?: string;
+  targetText?: string;
 }
 
 export interface ApproachPillar {
