@@ -854,20 +854,54 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
   // Strategy 1: local proxy (same-origin, no CORS) relays raw WP posts.
   try {
     const res = await fetch(`/api/programs?_t=${Date.now()}`);
-    if (res.ok) {
-      const json = await safeJson(res);
-      // Accept both the Express proxy shape ({ success, data: [...] }) and a
-      // raw WordPress REST array (e.g. a LiteSpeed [P] rewrite that proxies
-      // /api/* straight to cms.teonox.com).
-      const posts = Array.isArray(json) ? json : json?.data;
-      // TEMP: verification log — remove after confirming live payload on teonox.com
-      console.log('[API Live Programs Payload]:', posts);
-      if (Array.isArray(posts)) {
-        const programs = await fromPosts(posts);
-        // Live CMS even when zero V2 programs exist (drives "coming soon").
-        // Programs render in the order WordPress returns them.
-        return { programs, isLive: true };
-      }
+    if (!res.ok) {
+      // Proxy URL itself is breaking (404/500 etc.) — surface it before falling
+      // through to the static cards so it is visible in DevTools.
+      console.error('[API Proxy Failed]: Status', res.status);
+    }
+
+    // TEMP verification logs — remove after confirming the live payload on teonox.com.
+    const rawText = await res.text();
+    let rawJson: any = null;
+    try {
+      rawJson = rawText ? JSON.parse(rawText) : null;
+    } catch (e) {
+      // Not JSON — proxy returned HTML (SPA index.html fallback / Apache error page).
+      console.error(
+        '[API Proxy Failed]: non-JSON response (HTML fallback or error page)',
+        rawText.slice(0, 200),
+      );
+    }
+    console.log('[API Live Programs Payload]:', rawJson);
+
+    // Extract the array safely from any common wrapper shape.
+    let posts: any[] = [];
+    if (Array.isArray(rawJson)) {
+      posts = rawJson;
+    } else if (Array.isArray(rawJson?.data)) {
+      posts = rawJson.data;
+    } else if (Array.isArray(rawJson?.posts)) {
+      posts = rawJson.posts;
+    } else if (Array.isArray(rawJson?.items)) {
+      posts = rawJson.items;
+    }
+    console.log('[Extracted Live Programs Count]:', posts.length);
+
+    // A valid proxy response is any JSON whose top level IS an array or wraps
+    // one (Express { success, data } / { posts } / { items } / raw WP array).
+    // Empty arrays still count as live (drives the "coming soon" state); only
+    // HTML/garbage responses fall through to the static cards.
+    const isLiveResponse =
+      Array.isArray(rawJson) ||
+      Array.isArray(rawJson?.data) ||
+      Array.isArray(rawJson?.posts) ||
+      Array.isArray(rawJson?.items);
+
+    if (isLiveResponse) {
+      const programs = await fromPosts(posts);
+      // Live CMS even when zero V2 programs exist (drives "coming soon").
+      // Programs render in the order WordPress returns them.
+      return { programs, isLive: true };
     }
   } catch (e) {
     console.warn('Proxy programs list fetch failed, using static fallback', e);
