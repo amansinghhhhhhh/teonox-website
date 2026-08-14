@@ -22,6 +22,10 @@ export interface LiveProgramCard {
   image?: string;
   brochureUrl: string;
   categoryId: string;
+  /** Assigned `program-category` term slugs (from embedded WP terms). */
+  categorySlugs: string[];
+  /** Assigned `program-category` term IDs (from post['program-category'] / embedded terms). */
+  categoryIds: string[];
   categories: string[];
 }
 
@@ -582,9 +586,27 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
   const featured = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
   const img = resolvedImage || imageUrl(fields.hero_image || p.hero_image) || featured || '';
 
-  const terms = (p._embedded?.['wp:term'] || []).flat();
-  const programCategories = terms
-    .filter((t: any) => termTaxonomySlug(t) === 'program-category')
+  // Assigned `program-category` terms, read from BOTH the embedded term objects
+  // (WP REST `_embed`) and the post's direct `program-category` term-ID array.
+  const wpTerms: any[] = (p._embedded?.['wp:term'] || []).flat();
+  const programCategoryTerms = wpTerms.filter(
+    (t: any) => termTaxonomySlug(t) === 'program-category',
+  );
+  const categorySlugs: string[] = [
+    ...new Set(programCategoryTerms.map((t: any) => str(t.slug)).filter(Boolean)),
+  ];
+  const directTermIds: any[] = Array.isArray(p['program-category'])
+    ? p['program-category']
+    : [];
+  const categoryIds: string[] = [
+    ...new Set(
+      [...directTermIds, ...programCategoryTerms.map((t: any) => t.id)]
+        .map((id: any) => String(id))
+        .filter(Boolean),
+    ),
+  ];
+
+  const programCategories = programCategoryTerms
     .map((t: any) => decodeHtmlEntities(t.name))
     .filter(Boolean);
 
@@ -629,6 +651,8 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
     categoryId: mapped.has('popular') && mapped.size > 1
       ? Array.from(mapped).find((c) => c !== POPULAR_CATEGORY) || POPULAR_CATEGORY
       : POPULAR_CATEGORY,
+    categorySlugs,
+    categoryIds,
     categories: Array.from(mapped),
   };
 }
@@ -778,6 +802,8 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
     mode: p.mode || 'On Campus, Pune',
     categoryId:
       categories.find((c) => c !== POPULAR_CATEGORY) || POPULAR_CATEGORY,
+    categorySlugs: categories,
+    categoryIds: [],
     categories,
     brochureUrl: '',
     // Bundled local banners (no CMS/CORS dependency) so fallback cards never
@@ -793,7 +819,8 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
  * the CMS is unreachable, so programs never disappear from the UI.
  *
  * Every published V2 program returned by the WordPress REST API is rendered —
- * no hardcoded ordering or exclusion of specific programs.
+ * no hardcoded ordering or exclusion of specific programs. Card order is the
+ * API order (`orderby=date&order=desc`, newest first) — never sorted client-side.
  */
 export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
   const fromPosts = (posts: any[]): LiveProgramCard[] => {
@@ -814,7 +841,7 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
 
   // Strategy 1: direct WordPress REST API (raw WP array).
   try {
-    const res = await fetch(`${CMS_URL}/program&_embed&per_page=50&_cb=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/program&_embed&per_page=50&orderby=date&order=desc&_cb=${Date.now()}`);
     if (!res.ok) {
       // The REST URL itself is breaking (404/500 etc.) — surface it before
       // falling through to the static cards so it is visible in DevTools.
@@ -891,7 +918,7 @@ export async function fetchProgramCategories(): Promise<
 
   try {
     const res = await fetch(
-      `${CMS_URL}/program-category&per_page=100&_fields=id,name,slug,count&_cb=${Date.now()}`,
+      `${CMS_URL}/program-category&per_page=100&_cb=${Date.now()}`,
     );
     if (res.ok) {
       const json = await safeJson(res);

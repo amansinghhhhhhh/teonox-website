@@ -20,6 +20,8 @@ import {
   Send,
   Sparkles,
   Mail,
+  LayoutGrid,
+  TrendingUp,
 } from 'lucide-react';
 import { Program } from '../types';
 import { PROGRAMS_DATA } from '../data';
@@ -27,7 +29,6 @@ import { ProgramImage } from './ProgramImage';
 import {
   fetchLivePrograms,
   fetchProgramCategories,
-  PROGRAM_TERM_TO_CATEGORY,
   LiveProgramCard,
 } from '../services/programService';
 import imgCounsellor from '../assets/images/counsellor_support_1785420263109.webp';
@@ -45,47 +46,62 @@ interface ProgramCategory {
 }
 
 /**
- * Curated category tabs shown on the /programs page. Which tabs actually render
- * is driven by the WordPress `program-category` taxonomy (see fetchProgramCategories):
- * a curated tab is only displayed when at least one matching WP term exists.
+ * Fallback tabs shown only when the WP `program-category` taxonomy fetch fails.
+ * When the CMS is reachable, tabs are built live from the taxonomy terms — the
+ * names/icons come straight from WordPress, not from hardcoded strings.
  */
-const CURATED_CATEGORIES: Array<ProgramCategory & { order: number }> = [
-  { id: 'popular', name: 'Popular Programs', icon: Flame, order: 0 },
-  { id: 'genai', name: 'GEN AI & Marketing', icon: Brain, isNew: true, order: 1 },
-  { id: 'performance', name: 'Performance & Paid Ads', icon: Target, order: 2 },
-  { id: 'seo', name: 'SEO & Search Growth', icon: Search, order: 3 },
-  { id: 'social', name: 'Social Media & Content', icon: Share2, order: 4 },
-  { id: 'master', name: 'Master Certification', icon: Award, order: 5 },
+const FALLBACK_CATEGORIES: ProgramCategory[] = [
+  { id: 'all', name: 'All Programs', icon: LayoutGrid },
+  { id: 'popular', name: 'Popular Programs', icon: Flame },
+  { id: 'genai', name: 'GEN AI & Marketing', icon: Brain, isNew: true },
+  { id: 'performance', name: 'Performance & Paid Ads', icon: Target },
+  { id: 'seo', name: 'SEO & Search Growth', icon: Search },
+  { id: 'social', name: 'Social Media & Content', icon: Share2 },
+  { id: 'master', name: 'Master Certification', icon: Award },
 ];
 
-export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPageProps) {
-  const [activeCategory, setActiveCategory] = useState<string>('popular');
-  const [liveCards, setLiveCards] = useState<LiveProgramCard[] | null>(null);
-  const [categories, setCategories] = useState<ProgramCategory[]>(() =>
-    CURATED_CATEGORIES.map(({ order, ...cat }) => cat)
-  );
+/** Icons assigned to dynamic WP `program-category` term slugs. */
+const TERM_ICONS: Record<string, React.ElementType> = {
+  'popular-programs': Flame,
+  'gen-ai-marketing': Brain,
+  'performance-paid-ads': Target,
+  'seo-search-growth': Search,
+  'social-media-content': Share2,
+  'master-certification': Award,
+  ai: Brain,
+  marketing: TrendingUp,
+  business: Briefcase,
+};
 
-  // Fetch WP taxonomy terms and show only the curated tabs they back.
+/** WP term slugs that should carry the "NEW" badge. */
+const NEW_TERM_SLUGS = new Set(['gen-ai-marketing']);
+
+export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPageProps) {
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [liveCards, setLiveCards] = useState<LiveProgramCard[] | null>(null);
+  const [categories, setCategories] = useState<ProgramCategory[]>(FALLBACK_CATEGORIES);
+
+  // Build the sidebar tabs live from the WP `program-category` taxonomy (fully
+  // dynamic — names come from WordPress, not hardcoded). "All Programs" always
+  // comes first, then categories with programs before the empties.
   useEffect(() => {
     let cancelled = false;
     fetchProgramCategories().then(
       (terms) => {
         if (cancelled || terms.length === 0) return;
-        const present = new Set<string>();
-        for (const t of terms) {
-          const mapped =
-            PROGRAM_TERM_TO_CATEGORY[t.slug] ||
-            PROGRAM_TERM_TO_CATEGORY[t.name.toLowerCase()];
-          if (mapped) present.add(mapped);
-        }
-        if (present.size === 0) return;
-        setCategories(
-          CURATED_CATEGORIES.filter((c) => present.has(c.id))
-            .sort((a, b) => a.order - b.order)
-            .map(({ order, ...cat }) => cat)
-        );
-        if (!present.has('popular')) return;
-        setActiveCategory((prev) => (present.has(prev) ? prev : 'popular'));
+        const tabs: ProgramCategory[] = [
+          { id: 'all', name: 'All Programs', icon: LayoutGrid },
+          ...terms
+            .slice()
+            .sort((a, b) => (b.count ?? 0) - (a.count ?? 0))
+            .map((t) => ({
+              id: String(t.slug || t.id),
+              name: t.name,
+              icon: TERM_ICONS[String(t.slug)] || Sparkles,
+              isNew: NEW_TERM_SLUGS.has(String(t.slug)) || undefined,
+            })),
+        ];
+        setCategories(tabs);
       },
       () => {},
     );
@@ -109,9 +125,17 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPage
     };
   }, []);
 
-  const filteredPrograms = (liveCards ?? []).filter((p) =>
-    p.categories.includes(activeCategory)
-  );
+  const filteredPrograms = (liveCards ?? []).filter((p) => {
+    if (activeCategory === 'all') return true;
+    // Match the selected category tab against the program's assigned
+    // `program-category` slugs OR term IDs (plus the curated ids used by the
+    // static fallback tabs when the taxonomy fetch fails).
+    return (
+      p.categorySlugs?.includes(activeCategory) ||
+      p.categoryIds?.includes(activeCategory) ||
+      p.categories?.includes(activeCategory)
+    );
+  });
 
   const isLoading = liveCards === null;
 
