@@ -183,10 +183,12 @@ function acfField(p: any, name: string): any {
  * multiple shapes depending on the field's `return_format`:
  *   - "array"    -> { url, source_url, sizes: {...}, ... }
  *   - "url"      -> "https://.../image.webp"
- *   - "id"       -> 145 (attachment ID; resolved via the WP media API by
- *                       `resolveWpImageUrl`)
+ *   - "id"       -> 145 (attachment ID; NOT resolvable without a separate
+ *                      /wp/v2/media fetch, which is forbidden — such fields
+ *                      resolve to '' and callers use embedded/static images)
  * Also accepts a full image object from the WP media API (`{ source_url }`).
- * Returns '' for every non-URL shape so callers fall through to resolution.
+ * Returns '' for every non-URL shape so callers fall through to the next image
+ * source.
  */
 function imageUrl(v: any): string {
   if (!v) return '';
@@ -218,22 +220,39 @@ function imageUrl(v: any): string {
   return '';
 }
 
-// Coerce an ACF image value into an attachment ID when it is a numeric ID (in
-// either number or numeric-string form). Returns 0 for object/URL shapes.
-function toAttachmentId(v: any): number {
-  if (typeof v === 'number' && Number.isInteger(v) && v > 0) return v;
-  if (typeof v === 'string' && /^\d+$/.test(v.trim())) {
-    return Number.parseInt(v.trim(), 10);
-  }
-  if (v && typeof v === 'object' && !Array.isArray(v)) {
-    const id = v.id ?? v.ID ?? v.attachment_id;
-    return toAttachmentId(id);
-  }
-  return 0;
-}
+/** Generic card image shown only when a WP post exposes no usable image at all. */
+const DEFAULT_CARD_IMAGE = dmAiImg;
 
-// ---- WP media attachment ID -> URL resolution (cached) ----
-const mediaUrlCache = new Map<number, string>();
+/**
+ * Resolve a program card's image URL WITHOUT any additional /wp/v2/media fetch.
+ * WordPress 401s individual media requests (attachment 400 is protected on the
+ * CMS), so the URL is read synchronously from data already in the post payload:
+ *
+ *   1. `_embedded['wp:featuredmedia']` (already included via `&_embed`)
+ *   2. ACF image fields that store a URL string or `{ url }` object
+ *      (numeric attachment IDs are not resolvable without a media fetch)
+ *   3. `DEFAULT_CARD_IMAGE` — only when the post has no usable image data
+ */
+function getProgramImage(post: any): string {
+  if (!post || typeof post !== 'object') return DEFAULT_CARD_IMAGE;
+
+  // 1. Featured media embedded via &_embed (source_url or the large size).
+  const embeddedMedia = post._embedded?.['wp:featuredmedia']?.[0];
+  const featuredUrl =
+    embeddedMedia?.source_url ||
+    embeddedMedia?.media_details?.sizes?.large?.source_url ||
+    '';
+  if (featuredUrl) return featuredUrl;
+
+  // 2. ACF image field(s) — URL/array return formats only (never numeric IDs).
+  for (const name of ['card_image', 'program_image', 'hero_image', 'program_hero_image']) {
+    const url = imageUrl(acfField(post, name));
+    if (url) return url;
+  }
+
+  // 3. Static fallback ONLY if the post has no image set.
+  return DEFAULT_CARD_IMAGE;
+}
 
 /**
  * Parse a fetch Response as JSON, but ONLY when it is actually JSON. When the
@@ -250,63 +269,6 @@ async function safeJson(res: Response): Promise<any> {
   } catch {
     return null;
   }
-}
-
-/**
- * Resolve an ACF image attachment ID to a live source URL.
- *
- * Fetches the WordPress REST API directly (the /api/* same-origin proxy is not
- * used on production — Hostinger LiteSpeed does not enable mod_proxy). Requires
- * the CMS to send `Access-Control-Allow-Origin`; on CORS failure this returns
- * '' and callers render their placeholder image.
- *
- * Accepts the raw WP payload `{ source_url }`.
- *
- * Returns '' (never throws) when resolution fails, so callers render an
- * unobtrusive empty state instead of breaking the page.
- */
-async function resolveMediaUrl(attachmentId: number): Promise<string> {
-  if (!attachmentId || !Number.isInteger(attachmentId) || attachmentId <= 0) return '';
-  if (mediaUrlCache.has(attachmentId)) return mediaUrlCache.get(attachmentId) || '';
-
-  try {
-    const res = await fetch(`${CMS_URL}/media/${attachmentId}&_fields=source_url&_cb=${Date.now()}`);
-    if (res.ok) {
-      const json = await safeJson(res);
-      const url = imageUrl(json?.data || json);
-      if (url) {
-        mediaUrlCache.set(attachmentId, url);
-        return url;
-      }
-    }
-  } catch (e) {
-    console.warn(`WP media resolution failed for id ${attachmentId}`, e);
-  }
-
-  // CORS blocked / fetch failed -> leave empty so the caller's placeholder
-  // handles it.
-  mediaUrlCache.set(attachmentId, '');
-  return '';
-}
-
-/**
- * Resolve the authoritative image URL for a WP post. Accepts any ACF shape
- * (object / URL / numeric comment ID, in number or string form) and optionally
- * falls back to the post's featured media when the field is completely
- * empty/unresolvable.
- */
-async function resolveWpImageUrl(
-  raw: any,
-  featuredUrl: string,
-): Promise<string> {
-  const direct = imageUrl(raw);
-  if (direct) return direct;
-  const id = toAttachmentId(raw);
-  if (id > 0) {
-    const resolved = await resolveMediaUrl(id);
-    if (resolved) return resolved;
-  }
-  return featuredUrl || '';
 }
 
 // ACF V2 benefits tab groups (students / business / corporate) share the same
@@ -382,12 +344,12 @@ export function transformWpProgram(p: any): ProgramDetailData | null {
     '';
 
   // "THIS COURSE IS DESIGNED FOR" section image — strictly dynamic from the
-  // ACF `designed_for_image` field (object / URL / attachment ID). No static
-  // fallback: numeric IDs are resolved later by `applyResolvedHeroImage`.
+  // ACF `designed_for_image` field (URL/object only). Numeric attachment IDs
+  // are not resolvable client-side (media fetches 401), so they stay empty.
   const designedForImg = imageUrl(fields.designed_for_image);
 
   // Bottom CTA banner fields — strictly dynamic from ACF. Numeric image IDs are
-  // resolved later by `applyResolvedHeroImage` via the direct media REST call.
+  // not resolvable client-side (media fetches 401), so they stay empty.
   const ctaImage = imageUrl(fields.cta_image);
 
   // Exit early if the post doesn't expose ACF program fields at all.
@@ -506,39 +468,38 @@ export function transformWpProgram(p: any): ProgramDetailData | null {
 
 /**
  * Resolve the authoritative image URLs for a raw WP post and, when a resolved
- * URL is found, override it on an already-transformed detail. The synchronous
- * transformWpProgram can only read object/URL ACF shapes + the featured media
- * URL, so numeric attachment IDs (ACF "id" return format) are resolved here
- * against the WP media API and written back into the detail. Covers both the
- * hero image and the "THIS COURSE IS DESIGNED FOR" section image.
+ * URL is found, override it on an already-transformed detail. Image extraction
+ * is purely synchronous — only URL/object ACF shapes and the embedded featured
+ * media URL are read (NO separate /wp/v2/media fetches, which WordPress 401s).
+ * Numeric attachment IDs yield '' and the existing detail value is kept.
  */
-async function applyResolvedHeroImage(post: any, detail: ProgramDetailData): Promise<ProgramDetailData> {
+function applyResolvedHeroImage(post: any, detail: ProgramDetailData): ProgramDetailData {
   const fields = postFields(post);
   const featured = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
   let next: ProgramDetailData = detail;
 
   const rawHero = fields.hero_image || fields.program_hero_image || post.hero_image;
-  const resolvedHero = await resolveWpImageUrl(rawHero, featured);
+  const resolvedHero = imageUrl(rawHero) || featured;
   if (resolvedHero && resolvedHero !== detail.heroImage) {
     next = { ...next, heroImage: resolvedHero };
   }
 
   // The designed-for section image has no featured-media fallback: strictly the
-  // ACF field, and only resolved when a usable URL is produced.
+  // ACF field, and only applied when it carries a usable URL.
   const rawDesigned = fields.designed_for_image;
   if (rawDesigned) {
-    const resolvedDesigned = await resolveWpImageUrl(rawDesigned, '');
+    const resolvedDesigned = imageUrl(rawDesigned);
     if (resolvedDesigned && resolvedDesigned !== detail.designedForImage) {
       next = { ...next, designedForImage: resolvedDesigned };
     }
   }
 
   // Bottom CTA banner image has no featured-media fallback: strictly the ACF
-  // field, resolved via the direct media REST call. Falls back to `undefined`
-  // (component then shows its default counsellor image).
+  // field (URL/object only). Falls back to `undefined` (component then shows
+  // its default counsellor image).
   const rawCta = fields.cta_image;
   if (rawCta) {
-    const resolvedCta = await resolveWpImageUrl(rawCta, '');
+    const resolvedCta = imageUrl(rawCta);
     if (resolvedCta && resolvedCta !== detail.cta?.image) {
       next = { ...next, cta: { ...(next.cta || {}), image: resolvedCta } };
     }
@@ -586,7 +547,7 @@ export async function fetchLiveProgramDetail(
           if (!isProgramVisible(raw)) return { detail: null, isLive: false };
           const transformed = transformWpProgram(raw);
           if (transformed) {
-            const detail = await applyResolvedHeroImage(raw, transformed);
+            const detail = applyResolvedHeroImage(raw, transformed);
             return { detail, isLive: true };
           }
         }
@@ -835,7 +796,7 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
  * no hardcoded ordering or exclusion of specific programs.
  */
 export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
-  const fromPosts = async (posts: any[]): Promise<LiveProgramCard[]> => {
+  const fromPosts = (posts: any[]): LiveProgramCard[] => {
     // Strict V2-only guard applied in EVERY environment (dev, staging, prod):
     // legacy V1 posts never become cards on this site. Staging-only programs
     // (ACF staging_only flag) are additionally hidden here so unreleased V2
@@ -843,10 +804,9 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     const eligible = posts.filter((p) => isV2Program(p) && isProgramVisible(p));
     const cards: LiveProgramCard[] = [];
     for (const post of eligible) {
-      const raw = group(post.acf).hero_image || post.hero_image;
-      const featured = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
-      const resolved = await resolveWpImageUrl(raw, featured);
-      const card = mapWpProgramCard(post, resolved);
+      // Image extracted synchronously from embedded featured media / ACF fields
+      // (NO /wp/v2/media fetch — those 401 on the CMS).
+      const card = mapWpProgramCard(post, getProgramImage(post));
       if (card) cards.push(card);
     }
     return cards;
@@ -899,7 +859,7 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
       Array.isArray(rawJson?.items);
 
     if (isLiveResponse) {
-      const programs = await fromPosts(posts);
+      const programs = fromPosts(posts);
       // Live CMS even when zero V2 programs exist (drives "coming soon").
       // Programs render in the order WordPress returns them.
       return { programs, isLive: true };
