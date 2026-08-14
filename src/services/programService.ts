@@ -88,14 +88,17 @@ function termTaxonomySlug(t: any): string {
  * live CMS content with the existing static data as a seamless fallback.
  *
  * Fetch strategy (mirrors blogService):
- *   1. Same-origin proxy  /api/programs/:id   (Express server.ts, Vite dev
- *      proxy, or the .htaccess [P] rewrite on production)
+ *   1. Direct WordPress REST API  https://cms.teonox.com/index.php?rest_route=/wp/v2...
+ *      (the same-origin /api/* proxy is NOT used on production — Hostinger's
+ *      LiteSpeed does not enable mod_proxy, so /api/* served index.html)
  *   2. Static fallback  PROGRAM_DETAILS_MAP[idOrSlug]
  *
- * The browser NEVER calls cms.teonox.com directly: all CMS traffic is routed
- * through the same-origin `/api/*` proxy so the CMS origin stays out of the
- * browser entirely (avoids CORS and stale-LiteSpeed-header issues).
+ * Direct CMS fetches require the CMS to send `Access-Control-Allow-Origin`
+ * headers; when the browser blocks them, the static fallback keeps the UI up.
  */
+
+/** Direct WordPress REST API base (ACF fields live under `post.acf`). */
+const CMS_URL = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
 
 // ---- Certification card styles ----
 // WordPress editors only pick a Certification Type (cert_type) from a dropdown.
@@ -233,11 +236,10 @@ function toAttachmentId(v: any): number {
 const mediaUrlCache = new Map<number, string>();
 
 /**
- * Parse a fetch Response as JSON, but ONLY when it is actually JSON. Static
- * hosts (e.g. a Hostinger Vite build served without the Node server) return the
- * SPA's index.html for any unknown `/api/*` path, which would otherwise make
- * `res.json()` throw. Returns null for HTML / 404 / network failure so callers
- * can cleanly fall through to the direct WordPress REST API.
+ * Parse a fetch Response as JSON, but ONLY when it is actually JSON. When the
+ * CMS answers with HTML (e.g. a redirect or a stale LiteSpeed error page),
+ * `res.json()` would throw. Returns null for HTML / 404 / network failure so
+ * callers can cleanly fall through to the static fallback.
  */
 async function safeJson(res: Response): Promise<any> {
   if (!res) return null;
@@ -253,15 +255,12 @@ async function safeJson(res: Response): Promise<any> {
 /**
  * Resolve an ACF image attachment ID to a live source URL.
  *
- * STRICTLY no direct cross-origin fetch on first attempt: the same-origin
- * `/api/media/:id` route (Express, or the Vite dev-server proxy) is tried
- * first — it performs the WordPress REST call server-side so no CORS request
- * reaches the browser on localhost/staging/prod. When that proxy is absent
- * (static Hostinger build without server.ts), a direct WordPress REST call is
- * used as a fallback so images still resolve.
+ * Fetches the WordPress REST API directly (the /api/* same-origin proxy is not
+ * used on production — Hostinger LiteSpeed does not enable mod_proxy). Requires
+ * the CMS to send `Access-Control-Allow-Origin`; on CORS failure this returns
+ * '' and callers render their placeholder image.
  *
- * Accepts both proxy response shapes: wrapped `{ success, data: { source_url } }`
- * or a raw WP payload `{ source_url }`.
+ * Accepts the raw WP payload `{ source_url }`.
  *
  * Returns '' (never throws) when resolution fails, so callers render an
  * unobtrusive empty state instead of breaking the page.
@@ -271,9 +270,9 @@ async function resolveMediaUrl(attachmentId: number): Promise<string> {
   if (mediaUrlCache.has(attachmentId)) return mediaUrlCache.get(attachmentId) || '';
 
   try {
-    const proxyRes = await fetch(`/api/media/${attachmentId}?_t=${Date.now()}`);
-    if (proxyRes.ok) {
-      const json = await safeJson(proxyRes);
+    const res = await fetch(`${CMS_URL}/media/${attachmentId}&_fields=source_url&_cb=${Date.now()}`);
+    if (res.ok) {
+      const json = await safeJson(res);
       const url = imageUrl(json?.data || json);
       if (url) {
         mediaUrlCache.set(attachmentId, url);
@@ -281,12 +280,11 @@ async function resolveMediaUrl(attachmentId: number): Promise<string> {
       }
     }
   } catch (e) {
-    console.warn(`WP media resolution via proxy failed for id ${attachmentId}`, e);
+    console.warn(`WP media resolution failed for id ${attachmentId}`, e);
   }
 
-  // Proxy unavailable (static build / 404 / HTML fallback) -> leave empty so
-  // the caller's placeholder handles it. The browser must never call the CMS
-  // origin directly.
+  // CORS blocked / fetch failed -> leave empty so the caller's placeholder
+  // handles it.
   mediaUrlCache.set(attachmentId, '');
   return '';
 }
@@ -389,7 +387,7 @@ export function transformWpProgram(p: any): ProgramDetailData | null {
   const designedForImg = imageUrl(fields.designed_for_image);
 
   // Bottom CTA banner fields — strictly dynamic from ACF. Numeric image IDs are
-  // resolved later by `applyResolvedHeroImage` via the same-origin media proxy.
+  // resolved later by `applyResolvedHeroImage` via the direct media REST call.
   const ctaImage = imageUrl(fields.cta_image);
 
   // Exit early if the post doesn't expose ACF program fields at all.
@@ -536,8 +534,8 @@ async function applyResolvedHeroImage(post: any, detail: ProgramDetailData): Pro
   }
 
   // Bottom CTA banner image has no featured-media fallback: strictly the ACF
-  // field, resolved via the media proxy. Falls back to `undefined` (component
-  // then shows its default counsellor image).
+  // field, resolved via the direct media REST call. Falls back to `undefined`
+  // (component then shows its default counsellor image).
   const rawCta = fields.cta_image;
   if (rawCta) {
     const resolvedCta = await resolveWpImageUrl(rawCta, '');
@@ -553,7 +551,7 @@ async function applyResolvedHeroImage(post: any, detail: ProgramDetailData): Pro
  * Map a static card id to the canonical slug of its live WP post. The flagship
  * card is id `business-digital-marketing-ai` but the CMS post is
  * `business-digital-marketing-with-ai-v2`, so a detail request for the static
- * id also tries the canonical slug on the proxy.
+ * id also tries the canonical slug on the CMS.
  */
 const PROGRAM_DETAIL_SLUG_ALIASES: Record<string, string> = {
   'business-digital-marketing-ai': 'business-digital-marketing-with-ai-v2',
@@ -570,15 +568,18 @@ export async function fetchLiveProgramDetail(
   const canonical = PROGRAM_DETAIL_SLUG_ALIASES[key] || key;
   const slugs = canonical === key ? [key] : [canonical, key];
 
-  // Strategy 1: local proxy (same-origin, no CORS) relays raw WP post.
+  // Strategy 1: direct WordPress REST API (raw WP post).
   for (const slug of slugs) {
     try {
-      const res = await fetch(`/api/programs/${encodeURIComponent(slug)}?_t=${Date.now()}`);
+      // Numeric WP ids hit /program/{id}; slugs hit /program&slug=...
+      const isNumeric = /^\d+$/.test(slug);
+      const url = isNumeric
+        ? `${CMS_URL}/program/${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`
+        : `${CMS_URL}/program&slug=${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`;
+      const res = await fetch(url);
       if (res.ok) {
         const json = await safeJson(res);
-        // Accept the Express proxy shape ({ success, data }) or a raw WP post
-        // (LiteSpeed [P] rewrite to cms.teonox.com).
-        const raw = json?.success ? json.data : json;
+        const raw = isNumeric ? json : Array.isArray(json) ? json[0] : null;
         if (raw) {
           // Staging-only programs stay hidden on production even when reached
           // by direct URL (fall through to the static fallback / null).
@@ -591,7 +592,7 @@ export async function fetchLiveProgramDetail(
         }
       }
     } catch (e) {
-      // proxy failed for this slug, try the next candidate
+      // CORS/fetch failed for this slug, try the next candidate
     }
   }
 
@@ -851,13 +852,13 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     return cards;
   };
 
-  // Strategy 1: local proxy (same-origin, no CORS) relays raw WP posts.
+  // Strategy 1: direct WordPress REST API (raw WP array).
   try {
-    const res = await fetch(`/api/programs?_t=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/program&_embed&per_page=50&_cb=${Date.now()}`);
     if (!res.ok) {
-      // Proxy URL itself is breaking (404/500 etc.) — surface it before falling
-      // through to the static cards so it is visible in DevTools.
-      console.error('[API Proxy Failed]: Status', res.status);
+      // The REST URL itself is breaking (404/500 etc.) — surface it before
+      // falling through to the static cards so it is visible in DevTools.
+      console.error('[Programs API Failed]: Status', res.status);
     }
 
     // TEMP verification logs — remove after confirming the live payload on teonox.com.
@@ -866,9 +867,9 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     try {
       rawJson = rawText ? JSON.parse(rawText) : null;
     } catch (e) {
-      // Not JSON — proxy returned HTML (SPA index.html fallback / Apache error page).
+      // Not JSON — CMS returned HTML (error page / redirect).
       console.error(
-        '[API Proxy Failed]: non-JSON response (HTML fallback or error page)',
+        '[Programs API Failed]: non-JSON response (HTML fallback or error page)',
         rawText.slice(0, 200),
       );
     }
@@ -887,10 +888,10 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     }
     console.log('[Extracted Live Programs Count]:', posts.length);
 
-    // A valid proxy response is any JSON whose top level IS an array or wraps
-    // one (Express { success, data } / { posts } / { items } / raw WP array).
-    // Empty arrays still count as live (drives the "coming soon" state); only
-    // HTML/garbage responses fall through to the static cards.
+    // A valid WP response is any JSON whose top level IS an array or wraps one
+    // (raw WP array / { data } / { posts } / { items }). Empty arrays still
+    // count as live (drives the "coming soon" state); only HTML/garbage
+    // responses fall through to the static cards.
     const isLiveResponse =
       Array.isArray(rawJson) ||
       Array.isArray(rawJson?.data) ||
@@ -904,7 +905,7 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
       return { programs, isLive: true };
     }
   } catch (e) {
-    console.warn('Proxy programs list fetch failed, using static fallback', e);
+    console.warn('Programs list fetch failed, using static fallback', e);
   }
 
   // Strategy 2: static fallback so programs never disappear when the CMS is
@@ -914,8 +915,8 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
 
 /**
  * Fetch the `program-category` custom taxonomy terms for the /programs page.
- * Categories drive the sidebar/tab UI directly from WordPress data via the
- * same-origin proxy (the browser never calls the CMS origin directly).
+ * Categories drive the sidebar/tab UI directly from WordPress data (direct
+ * REST fetch — no same-origin proxy on production).
  */
 export async function fetchProgramCategories(): Promise<
   { id: number; name: string; slug: string; count: number }[]
@@ -929,17 +930,18 @@ export async function fetchProgramCategories(): Promise<
     }));
 
   try {
-    const res = await fetch(`/api/programs/categories?_t=${Date.now()}`);
+    const res = await fetch(
+      `${CMS_URL}/program-category&per_page=100&_fields=id,name,slug,count&_cb=${Date.now()}`,
+    );
     if (res.ok) {
       const json = await safeJson(res);
-      // Accept the Express proxy shape or a raw WP term array (LiteSpeed [P]).
       const terms = Array.isArray(json) ? json : json?.data;
       if (Array.isArray(terms) && terms.length > 0) {
         return mapTerms(terms);
       }
     }
   } catch (e) {
-    console.warn('Proxy program-category fetch failed, returning empty', e);
+    console.warn('Direct program-category fetch failed, returning empty', e);
   }
 
   return [];

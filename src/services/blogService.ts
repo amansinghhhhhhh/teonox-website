@@ -1,12 +1,16 @@
 import { BlogPost } from '../types';
 
 /**
- * Blog CMS traffic is always routed through the same-origin `/api/*` proxy
- * (Express server.ts, Vite dev proxy, or the .htaccess [P] rewrite on
- * production). The browser NEVER calls cms.teonox.com directly, so the CMS
- * origin stays out of the browser entirely (avoids CORS and stale-LiteSpeed-
- * header issues).
+ * Blog CMS traffic hits the WordPress REST API directly
+ * (https://cms.teonox.com/index.php?rest_route=/wp/v2/...). The /api/* same-
+ * origin proxy is NOT used on production — Hostinger's LiteSpeed does not
+ * enable mod_proxy, so /api/* served index.html. Direct fetches require the
+ * CMS to send `Access-Control-Allow-Origin`; when the browser blocks them, the
+ * static fallback keeps the UI up.
  */
+
+/** Direct WordPress REST API base. */
+const CMS_URL = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
 
 /** JSON-only response reader; returns null for HTML/404 static-host fallbacks. */
 async function safeJson(res: Response): Promise<any> {
@@ -181,20 +185,18 @@ function transformWpPost(p: any): BlogPost {
 }
 
 export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boolean }> {
-  // Strategy 1: Attempt local API proxy /api/blogs
+  // Strategy 1: direct WordPress REST API.
   try {
-    const res = await fetch(`/api/blogs?_t=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/posts&_embed&per_page=50&_cb=${Date.now()}`);
     if (res.ok) {
       const json = await safeJson(res);
-      // Accept the Express proxy shape ({ success, data: [...] }) or a raw WP
-      // posts array (LiteSpeed [P] rewrite to cms.teonox.com).
       const posts = Array.isArray(json) ? json : json?.data;
       if (Array.isArray(posts) && posts.length > 0) {
-        return { blogs: posts, isLive: true };
+        return { blogs: posts.map(transformWpPost), isLive: true };
       }
     }
   } catch (e) {
-    // API proxy failed, use fallback data
+    // CORS/fetch failed, use fallback data
   }
 
   // Strategy 2: Fallback data
@@ -202,14 +204,25 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
 }
 
 export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | null> {
-  // Try proxy first
+  // Try direct WP API by numeric id first.
   try {
-    const res = await fetch(`/api/blogs/${idOrSlug}?_t=${Date.now()}`);
+    const res = await fetch(
+      `${CMS_URL}/posts/${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
+    );
     if (res.ok) {
-      const json = await safeJson(res);
-      // Express proxy shape ({ success, data }) or a raw WP post ([P] rewrite).
-      const post = json?.success ? json.data : json;
-      if (post) return post;
+      const post = await safeJson(res);
+      if (post) return transformWpPost(post);
+    }
+  } catch (e) {}
+
+  // Then by slug.
+  try {
+    const res = await fetch(
+      `${CMS_URL}/posts&slug=${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
+    );
+    if (res.ok) {
+      const posts = await safeJson(res);
+      if (Array.isArray(posts) && posts.length > 0) return transformWpPost(posts[0]);
     }
   } catch (e) {}
 
@@ -219,6 +232,22 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
 }
 
 export async function fetchLiveCategories(): Promise<{ categories: string[]; isLive: boolean }> {
-  // Categories come from the same-origin proxy; without it we use fallback data
+  // Direct WP categories fetch; fall back to the static list when CORS/network fails.
+  try {
+    const res = await fetch(`${CMS_URL}/categories&per_page=100&_cb=${Date.now()}`);
+    if (res.ok) {
+      const data = await safeJson(res);
+      if (Array.isArray(data) && data.length > 0) {
+        const categories = data
+          .filter((cat: any) => cat.slug !== 'uncategorized' && cat.count > 0)
+          .map((cat: any) => decodeHtmlEntities(cat.name))
+          .filter(Boolean);
+        if (categories.length > 0) return { categories, isLive: true };
+      }
+    }
+  } catch (e) {
+    console.warn('Direct WP categories fetch failed, using fallback categories', e);
+  }
+
   return { categories: FALLBACK_CATEGORIES, isLive: false };
 }

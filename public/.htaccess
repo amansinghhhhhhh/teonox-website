@@ -2,58 +2,13 @@
   RewriteEngine On
   RewriteBase /
 
-  # ============================================================
-  # API CACHE BYPASS — mark every /api/* request as no-cache so the
-  # proxy below is never served from a stale LiteSpeed cache.
-  # ============================================================
-  RewriteCond %{REQUEST_URI} ^/api/ [NC]
-  RewriteRule .* - [E=Cache-Control:no-cache]
-
-  # ============================================================
-  # SAME-ORIGIN API PROXY (permanent CORS bypass)
-  # Proxies /api/* to the WordPress CMS SERVER-SIDE so the browser
-  # only ever talks to https://teonox.com — never directly to
-  # cms.teonox.com — eliminating CORS failures entirely.
-  # Requires mod_proxy (Hostinger LiteSpeed ships with it).
-  # These rules MUST stay ABOVE the SPA fallback at the bottom.
-  # ============================================================
-  <IfModule mod_proxy.c>
-    RewriteRule ^api/programs/categories/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program-category&per_page=100&_fields=id,name,slug,count [P,L,QSA]
-    RewriteRule ^api/programs/([0-9]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program/$1&_embed [P,L,QSA]
-    RewriteRule ^api/programs/([^/]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program&slug=$1&_embed [P,L,QSA]
-    RewriteRule ^api/programs/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/program&_embed&per_page=50 [P,L,QSA]
-    RewriteRule ^api/blogs/([^/]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/posts/$1&_embed [P,L,QSA]
-    RewriteRule ^api/blogs/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/posts&_embed&per_page=20 [P,L,QSA]
-    RewriteRule ^api/media/([0-9]+)/?$ https://cms.teonox.com/index.php?rest_route=/wp/v2/media/$1&_fields=source_url [P,L,QSA]
-  </IfModule>
-
+  # SPA fallback: serve index.html for any unknown non-file/non-dir path.
+  # (The old /api/* mod_proxy block was removed — Hostinger LiteSpeed does not
+  # enable mod_proxy, so /api/* was serving index.html and causing rewrite loops.)
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
-</IfModule>
-
-# ============================================================
-# API PROXY NO-CACHE RESPONSE HEADERS
-# Every /api/* response must carry no-store headers so LiteSpeed /
-# LSCache / the static host and the browser NEVER serve a stale
-# cached 200 for program/blog/media API calls. fetch('/api/...')
-# therefore always reaches the live WordPress CMS.
-# ============================================================
-SetEnvIf Request_URI "^/api/" API_PROXY_REQUEST
-
-<IfModule mod_headers.c>
-  # URI-based rule covers every /api/* subpath (programs, blogs, media, ...).
-  Header always set Cache-Control "no-cache, no-store, must-revalidate" env=API_PROXY_REQUEST
-  Header always set Pragma "no-cache" env=API_PROXY_REQUEST
-  Header always set Expires "0" env=API_PROXY_REQUEST
-
-  # Also cover a bare /api/ path (FilesMatch matches the requested filename).
-  <FilesMatch "^api">
-    Header set Cache-Control "no-cache, no-store, must-revalidate"
-    Header set Pragma "no-cache"
-    Header set Expires 0
-  </FilesMatch>
 </IfModule>
 
 # Security headers (conservative — site functionality ko nahi todte)
