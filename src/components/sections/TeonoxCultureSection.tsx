@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { Reveal } from '../Reveal';
+import { MomentsSection } from './MomentsSection';
 import { CULTURE_PILLARS, CULTURE_STATS, CULTURE_EXPERTS } from '../../data/cultureData';
 import studentBannerImg from '../../assets/images/student_culture_banner.webp';
 
@@ -304,7 +305,12 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
             </div>
           </Reveal>
         </div>
+      </div>
 
+      {/* ─── Moments That Define Us (shared with About page) ─── */}
+      <MomentsSection />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ─── Industry Comes to TEONOX: Speaker Cards Row ─── */}
         <Reveal className="mb-12 sm:mb-16">
           <div className="text-center mb-8">

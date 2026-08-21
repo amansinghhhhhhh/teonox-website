@@ -74,7 +74,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="https://www.facebook.com/teonoxedu/"
+                                href="https://www.facebook.com/teonoxofficial"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -84,7 +84,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://www.youtube.com/@teonox"
+                                href="https://www.youtube.com/@teonoxofficial"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"

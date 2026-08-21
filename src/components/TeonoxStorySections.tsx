@@ -16,7 +16,7 @@ import {
   Rocket
 } from 'lucide-react';
 
-import whatIsTeonoxImg from '../assets/images/what_is_teonox_1787218678580.webp';
+import whatIsTeonoxImg from '../assets/images/home/what-is-teonox.webp';
 import whyTeonoxImg from '../assets/images/regenerated_image_1785582895360.webp';
 
 interface TeonoxStorySectionsProps {
@@ -179,7 +179,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                   <img
                     src={whatIsTeonoxImg}
                     alt="Young tech and marketing professionals at TEONOX campus"
-                    className="w-full h-[340px] sm:h-[420px] object-cover group-hover/img:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                    className="w-full h-[340px] sm:h-[420px] object-cover object-center group-hover/img:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                 </div>
               </div>
             </motion.div>
