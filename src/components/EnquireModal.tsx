@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronDown, CheckCircle2, MessageSquare } from 'lucide-react';
-import imgCounsellor from '../assets/images/counsellor_modal_img_1785398242839.webp';
 import { submitForm } from '../services/formService';
+import popupFormImg from '../assets/images/popup_form_image.webp';
 
 interface EnquireModalProps {
   isOpen: boolean;
@@ -108,20 +108,18 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
         </button>
 
         {/* LEFT GRAPHIC PANEL */}
-        <div className="relative w-full md:w-[46%] bg-[#FAF8F5] flex flex-col items-center justify-center min-h-[320px] md:min-h-[480px] overflow-hidden border-b md:border-b-0 md:border-r border-[#EDE4DA]">
-          
+        <div className="relative w-full md:w-[46%] bg-orange-50/30 flex flex-col items-center justify-center min-h-[320px] md:min-h-[480px] overflow-hidden border-b md:border-b-0 md:border-r border-[#EDE4DA] p-4 sm:p-6">
+
           {/* Subtle Background Radial Glow */}
 
           {/* Counsellor Image */}
-          <div className="relative w-full h-full min-h-[320px] md:min-h-[480px]">
+          <div className="w-full h-full flex items-center justify-center">
             <img
-              src={imgCounsellor}
+              src={popupFormImg}
               alt="Career Counsellor"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80';
-              }}
-              className="w-full h-full object-cover object-center"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-contain object-center"
             />
           </div>
         </div>

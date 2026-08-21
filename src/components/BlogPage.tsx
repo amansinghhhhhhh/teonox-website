@@ -131,7 +131,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
   };
 
   return (
-    <div className="bg-white text-[#111111] pt-20 sm:pt-24 pb-20 min-h-screen overflow-x-hidden">
+    <div className="bg-white text-[#111111] pt-20 sm:pt-24 pb-0 min-h-screen overflow-x-hidden">
       
       {/* ────────────────────────────────────────
           SECTION 01 - HERO
@@ -383,7 +383,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
       {/* ────────────────────────────────────────
           SECTION 05 - NEWSLETTER
           ──────────────────────────────────────── */}
-      <section id="newsletter-section" className="mt-12 py-12 sm:py-16 bg-gradient-to-b from-[#111111] via-[#1A1410] to-[#0E0C0A] text-white relative overflow-hidden">
+      <section id="newsletter-section" className="mt-12 py-16 sm:py-24 bg-gradient-to-b from-[#111111] via-[#1A1410] to-[#0E0C0A] text-white relative overflow-hidden">
         
         {/* Soft Orange Glow */}
 

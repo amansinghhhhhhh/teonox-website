@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useInView } from 'motion/react';
-import admissionsHeroImg from '../assets/images/regenerated_image_1785591698934.webp';
+import admissionsHeroImg from '../assets/images/admissions/admissions_hero.webp';
 import {
   CheckCircle2, ArrowUpRight, HelpCircle, Laptop, Globe, MessageSquare,
   Clock, Compass, FileCheck, GraduationCap, Award, Users, BookOpen,
@@ -126,7 +126,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
   ];
 
   return (
-    <div className="pt-20 pb-12 bg-white text-[#201A17] min-h-screen overflow-x-hidden">
+    <div className="pt-20 pb-0 bg-white text-[#201A17] min-h-screen overflow-x-hidden">
 
       {/* ═══════════════════════════════════════
           SECTION 01 - HERO
@@ -198,24 +198,14 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-[28px] overflow-hidden border-2 border-[#F0DFCE] shadow-2xl group p-2.5 bg-white">
-                <div className="rounded-[20px] overflow-hidden">
-                  <img
-                    src={admissionsHeroImg}
-                    alt="Students receiving admissions counselling at TEONOX"
-                    className="w-full h-[320px] sm:h-[420px] object-cover object-center group-hover:scale-[1.05] transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                {/* Floating orbit badge */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute -top-5 -right-5 w-20 h-20 rounded-2xl bg-white border border-[#F0DFCE] shadow-xl flex flex-col items-center justify-center gap-0.5"
-                >
-                  <span className="font-sora text-[20px] font-[900] text-[#FF6A2B] leading-none">9</span>
-                  <span className="font-inter text-[9px] text-[#888888] text-center leading-tight">Simple<br />Steps</span>
-                </motion.div>
+              <div className="relative rounded-3xl overflow-hidden border-2 border-[#F0DFCE] shadow-2xl aspect-[4/3] max-h-[380px] sm:max-h-[420px]">
+                <img
+                  src={admissionsHeroImg}
+                  alt="Students receiving admissions counselling at TEONOX"
+                  className="w-full h-full object-cover object-[15%_center]"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </motion.div>
           </div>

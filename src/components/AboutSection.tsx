@@ -1,6 +1,6 @@
 ﻿import { motion } from 'motion/react';
 import { Sparkles } from 'lucide-react';
-import leaderImage from '../assets/images/regenerated_image_1785583093264.webp';
+const leaderImage = '/images/Amit-Teonox.webp';
 
 interface AboutSectionProps {
   onConnect?: () => void;
@@ -103,7 +103,7 @@ export function AboutSection({ onConnect }: AboutSectionProps) {
               <img
                 src={leaderImage}
                 alt="TEONOX Executive Leader"
-                className="w-full h-[360px] sm:h-[420px] lg:h-[460px] object-cover object-center rounded-[18px] transition-transform duration-700 group-hover:scale-[1.02]"
+                className="w-full h-[360px] sm:h-[420px] lg:h-[460px] object-cover object-top rounded-[18px] transition-transform duration-700 group-hover:scale-[1.02]"
                 referrerPolicy="no-referrer" loading="lazy" decoding="async" />
             </motion.div>
           </div>

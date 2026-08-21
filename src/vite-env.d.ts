@@ -8,6 +8,9 @@ interface ImportMetaEnv {
   /** Force staging environment (shows staging-only programs). Set to 'true'
    *  when building the Hostinger staging deploy. */
   readonly VITE_IS_STAGING?: string;
+  /** Absolute URL or path to the TEONOX program brochure PDF. When unset the
+   *  brochure modal falls back to /brochure/teonox-brochure.pdf. */
+  readonly VITE_BROCHURE_URL?: string;
 }
 
 interface ImportMeta {

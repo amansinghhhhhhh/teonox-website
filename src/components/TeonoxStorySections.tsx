@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
-import { Reveal } from './Reveal';
 import {
   BookOpen,
   Target,
@@ -17,10 +16,7 @@ import {
   Rocket
 } from 'lucide-react';
 
-import stage1Img from '../assets/images/regenerated_image_1785500917222.webp';
-import stage2Img from '../assets/images/regenerated_image_1785500919105.webp';
-import stage3Img from '../assets/images/regenerated_image_1785500921424.webp';
-import whatIsTeonoxImg from '../assets/images/regenerated_image_1785593271713.webp';
+import whatIsTeonoxImg from '../assets/images/what_is_teonox_1787218678580.webp';
 import whyTeonoxImg from '../assets/images/regenerated_image_1785582895360.webp';
 
 interface TeonoxStorySectionsProps {
@@ -195,7 +191,11 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
 
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 02: WHY TEONOX? (Light Theme Redesign)
-          ───────────────────────────────────────────────────────────────── */}
+          ─────────────────────────────────────────────────────────────────
+          HIDDEN per request (old "WHY TEONOX?" fox section). Kept as reference —
+          wrapped in {false && (...)} so it still type-checks but never renders.
+      */}
+      {false && (
       <section
         ref={section2Ref}
         id="why-teonox"
@@ -289,96 +289,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
           </div>
         </div>
       </section>
-
-
-      {/* ─────────────────────────────────────────────────────────────────
-          SECTION 03: LEARNING METHODOLOGY (LEARN. APPLY. LEAD.)
-          ───────────────────────────────────────────────────────────────── */}
-      <section id="learn-apply-lead" className="py-10 sm:py-14 bg-[#FAF8F5] text-[#111111] relative overflow-hidden border-b border-[#EFEBE4]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          {/* Header */}
-          <Reveal className="mb-10 text-left max-w-3xl">
-            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">
-              Learning <span className="text-[#F15A29] heading-accent">Methodology</span>
-            </h2>
-          </Reveal>
-
-          {/* 3 Reference Style Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Card 1: Learn */}
-            <Reveal delay={0} y={32}>
-            <div className="card-premium bg-white border border-[#E5E0D8] rounded-[24px] shadow-md overflow-hidden flex flex-col group hover:border-[#F15A29]/50 h-full">
-              <div className="h-[230px] relative overflow-hidden bg-[#F4F1EA]">
-                <img 
-                  src={stage1Img} 
-                  alt="Indian student learning digital skills" 
-                  className="img-zoom w-full h-full object-cover object-center" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-                <span className="absolute top-4 left-4 font-mono text-[11px] font-[800] text-white px-3 py-1 rounded-full bg-[#F15A29]/90 backdrop-blur-sm shadow-md">01</span>
-              </div>
-
-              <div className="p-7 bg-white flex-1 flex flex-col justify-start space-y-3">
-                <h3 className="font-sora text-[24px] font-[800] text-[#111111] group-hover:text-[#F15A29] transition-colors">
-                  Learn
-                </h3>
-                <p className="font-inter text-[16px] text-[#555555] leading-relaxed font-normal">
-                  Learn from industry-driven curriculum.
-                </p>
-              </div>
-            </div>
-            </Reveal>
-
-            {/* Card 2: Apply */}
-            <Reveal delay={0.12} y={32}>
-            <div className="card-premium bg-white border border-[#E5E0D8] rounded-[24px] shadow-md overflow-hidden flex flex-col group hover:border-[#F15A29]/50 h-full">
-              <div className="h-[230px] relative overflow-hidden bg-[#F4F1EA]">
-                <img 
-                  src={stage2Img} 
-                  alt="Indian students working on practical projects" 
-                  className="img-zoom w-full h-full object-cover object-center" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-                <span className="absolute top-4 left-4 font-mono text-[11px] font-[800] text-white px-3 py-1 rounded-full bg-[#F15A29]/90 backdrop-blur-sm shadow-md">02</span>
-              </div>
-
-              <div className="p-7 bg-white flex-1 flex flex-col justify-start space-y-3">
-                <h3 className="font-sora text-[24px] font-[800] text-[#111111] group-hover:text-[#F15A29] transition-colors">
-                  Apply
-                </h3>
-                <p className="font-inter text-[16px] text-[#555555] leading-relaxed font-normal">
-                  Apply through practical projects and real-world execution.
-                </p>
-              </div>
-            </div>
-            </Reveal>
-
-            {/* Card 3: Lead */}
-            <Reveal delay={0.24} y={32}>
-            <div className="card-premium bg-white border border-[#E5E0D8] rounded-[24px] shadow-md overflow-hidden flex flex-col group hover:border-[#F15A29]/50 h-full">
-              <div className="h-[230px] relative overflow-hidden bg-[#F4F1EA]">
-                <img 
-                  src={stage3Img} 
-                  alt="Indian student leading with confidence" 
-                  className="img-zoom w-full h-full object-cover object-center" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-                <span className="absolute top-4 left-4 font-mono text-[11px] font-[800] text-white px-3 py-1 rounded-full bg-[#F15A29]/90 backdrop-blur-sm shadow-md">03</span>
-              </div>
-
-              <div className="p-7 bg-white flex-1 flex flex-col justify-start space-y-3">
-                <h3 className="font-sora text-[24px] font-[800] text-[#111111] group-hover:text-[#F15A29] transition-colors">
-                  Lead
-                </h3>
-                <p className="font-inter text-[16px] text-[#555555] leading-relaxed font-normal">
-                  Lead with skills, confidence and business thinking.
-                </p>
-              </div>
-            </div>
-            </Reveal>
-
-          </div>
-        </div>
-      </section>
+      )}
 
     </div>
   );

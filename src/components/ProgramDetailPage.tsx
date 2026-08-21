@@ -116,7 +116,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   }
 
   return (
-    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif] relative overflow-hidden">
+    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
       <div className="w-[88%] max-w-7xl mx-auto relative z-10">
         <ProgramV2Layout detail={displayDetail} heroLoading={loading} onEnquire={(label) => onEnquire(label)} />
       </div>

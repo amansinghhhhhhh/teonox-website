@@ -167,7 +167,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
   };
 
   return (
-    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif] relative overflow-hidden">
+    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
 
       <div className="w-[90%] max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16">
         {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -393,7 +393,9 @@ mode: progOrTitle.mode || 'On Campus, Pune',
         {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             SECTION 04: Talk To Our Team CTA (TEONOX UI Theme Redesign)
             â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="relative w-full bg-[#111111] text-white rounded-[28px] sm:rounded-[36px] p-6 sm:p-8 lg:p-10 overflow-hidden shadow-2xl border border-white/12">
+        </div>
+
+      <section className="mt-12 sm:mt-16 relative w-full bg-[#111111] text-white overflow-hidden">
           {/* Ambient Orange Glow Effects */}
           <div className="absolute inset-0 pointer-events-none">
             <div
@@ -405,7 +407,8 @@ mode: progOrTitle.mode || 'On Campus, Pune',
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+          <div className="w-[90%] max-w-7xl mx-auto relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5 text-left">
               <div className="space-y-2.5">
@@ -467,8 +470,8 @@ mode: progOrTitle.mode || 'On Campus, Pune',
               </div>
             </div>
           </div>
+          </div>
         </section>
-      </div>
     </div>
   );
 }

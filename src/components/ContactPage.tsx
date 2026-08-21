@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import { validateEmail, validatePhone, validateRequired } from '../utils/validation';
+import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
+import campusImg from '../assets/images/contact/campus.webp';
 
 interface ContactPageProps {
   onEnquireClick?: (topic?: string) => void;
@@ -123,7 +125,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
   };
 
   return (
-    <div className="bg-white text-[#111111] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif] relative overflow-hidden">
+    <div className="bg-white text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
       {/* Subtle Background Orange Glow */}
 
       <div className="w-[85%] max-w-7xl mx-auto relative z-10 space-y-16 sm:space-y-24">
@@ -283,9 +285,10 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
             <motion.div {...fadeUp(0.15)} className="relative">
               <div className="rounded-2xl overflow-hidden border border-[#F8E3D8] shadow-lg bg-white relative aspect-[4/3] group">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
+                  src={bookCounsellingImg}
                   alt="Book a Counselling Session"
-                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -302,9 +305,10 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
             <motion.div {...fadeUp(0)} className="order-2 lg:order-1 relative">
               <div className="rounded-2xl overflow-hidden border border-[#EFEFEF] shadow-lg bg-white aspect-[4/3] relative group">
                 <img
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80"
+                  src={campusImg}
                   alt="TEONOX Campus"
-                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -668,39 +672,40 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
           </div>
         </section>
 
-        {/* ────────────────────────────────────────
-            FOOTER CTA
-            ──────────────────────────────────────── */}
-        <motion.section {...scaleIn(0)} className="bg-[#201A17] text-white rounded-3xl p-10 sm:p-16 text-center relative overflow-hidden shadow-2xl">
+        </div>
 
-          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <h2 className="font-sora text-[32px] sm:text-[48px] font-[800] text-white leading-[1.15] tracking-tight">
-              Ready to Build Your Future?
-            </h2>
+      {/* ────────────────────────────────────────
+          FOOTER CTA (FULL WIDTH)
+          ──────────────────────────────────────── */}
+      <motion.section {...scaleIn(0)} className="mt-12 sm:mt-16 bg-[#201A17] text-white px-6 sm:px-16 py-16 sm:py-24 text-center relative overflow-hidden">
 
-            <p className="font-inter text-[16px] sm:text-[18px] text-[#A79885] max-w-xl mx-auto leading-relaxed">
-              Talk to our team today and take the first step toward your career.
-            </p>
+        <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+          <h2 className="font-sora text-[32px] sm:text-[48px] font-[800] text-white leading-[1.15] tracking-tight">
+            Ready to Build Your Future?
+          </h2>
 
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-              <button
-                onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
-                className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-lg shadow-[#F15A29]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer"
-              >
-                Book Counselling
-              </button>
+          <p className="font-inter text-[16px] sm:text-[18px] text-[#A79885] max-w-xl mx-auto leading-relaxed">
+            Talk to our team today and take the first step toward your career.
+          </p>
 
-              <button
-                onClick={handleOpenWhatsApp}
-                className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-sora font-[600] text-[15px] border border-white/20 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
-              >
-                <MessageCircle className="w-4 h-4 text-[#10B981]" />
-                <span>Chat on WhatsApp</span>
-              </button>
-            </div>
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
+              className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-lg shadow-[#F15A29]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+            >
+              Book Counselling
+            </button>
+
+            <button
+              onClick={handleOpenWhatsApp}
+              className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-sora font-[600] text-[15px] border border-white/20 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
+            >
+              <MessageCircle className="w-4 h-4 text-[#10B981]" />
+              <span>Chat on WhatsApp</span>
+            </button>
           </div>
-        </motion.section>
-      </div>
+        </div>
+      </motion.section>
     </div>
   );
 }

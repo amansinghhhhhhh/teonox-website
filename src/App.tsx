@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react'
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TeonoxStorySections } from './components/TeonoxStorySections';
+import { LearningMethodologySection } from './components/LearningMethodologySection';
 import { ToolsSection } from './components/ToolsSection';
 import { ProgramsSection } from './components/ProgramsSection';
 import { LearningExperienceSection } from './components/LearningExperienceSection';
@@ -10,10 +11,14 @@ import { CareerPathsSection } from './components/CareerPathsSection';
 import { WorkWithUsSection } from './components/WorkWithUsSection';
 import { HireFromUsSection } from './components/HireFromUsSection';
 import { InsightsSection } from './components/InsightsSection';
-import { CampusGlimpsesSection } from './components/CampusGlimpsesSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
+import { BrochureModal } from './components/BrochureModal';
+import { BrochureCTABanner } from './components/BrochureCTABanner';
+import { TeonoxCultureSection } from './components/sections/TeonoxCultureSection';
+import { LifeAtTeonoxSection } from './components/sections/LifeAtTeonoxSection';
+import { CertificationsSection } from './components/CertificationsSection';
 import { Program, BlogPost } from './types';
 import { PROGRAMS_DATA, INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
@@ -199,6 +204,8 @@ export default function App() {
   const [selectedInterest, setSelectedInterest] = useState<string>('');
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState<boolean>(false);
   const [enquireDefaultCourse, setEnquireDefaultCourse] = useState<string>('');
+  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState<boolean>(false);
+  const [brochureDefaultCourse, setBrochureDefaultCourse] = useState<string>('');
   const [blogLoading, setBlogLoading] = useState<boolean>(initialRoute.blogLoading);
   const requestedPostIdRef = useRef<string | null>(null);
 
@@ -331,6 +338,11 @@ export default function App() {
     setIsEnquireModalOpen(true);
   };
 
+  const handleBrochureClick = (interestTopic: string = '') => {
+    setBrochureDefaultCourse(interestTopic);
+    setIsBrochureModalOpen(true);
+  };
+
   const handleNavClick = (href: string, _label: string) => {
     navigate(href);
   };
@@ -440,28 +452,48 @@ export default function App() {
             <Hero
               onExploreClick={() => navigate('/programs')}
               onEnquireClick={() => handleEnquireClick()}
+              onBrochureClick={() => handleBrochureClick()}
             />
 
-            {/* Premium Story Sections (What is TEONOX?, Why TEONOX?, Learning Methodology) */}
+            {/* Premium Story Sections (What is TEONOX?, Why TEONOX?) */}
             <TeonoxStorySections onNavigate={(href, label) => handleNavClick(href, label)} />
 
-            {/* Industry Standard Tools Section */}
-            <ToolsSection />
+            {/* Reworked Why TEONOX - "More Than a Course. A Community That Builds You."
+                COMMENTED OUT per request. Restore by uncommenting the line below.
+            {false && <WhyTeonoxSection onExplorePrograms={() => handleNavClick('/programs', 'Programs')} />} */}
 
-            {/* Our Programs */}
+            {/* Our Programs - directly after the Why TEONOX section and before Learning Methodology */}
             <ProgramsSection
               onSelectProgram={(program) => handleSelectProgram(program)}
               onEnquireProgram={(programName) => handleEnquireClick(programName)}
             />
 
+            {/* Learning Methodology */}
+            <LearningMethodologySection />
+
+            {/* Industry Standard Tools Section */}
+            <ToolsSection />
+
+            {/* Download Brochure Conversion Banner */}
+            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
+
             {/* The Learning Experience */}
             <LearningExperienceSection />
+
+            {/* Download Brochure Conversion Banner */}
+            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
+
+            {/* Certifications Showcase */}
+            <CertificationsSection />
 
             {/* About TEONOX */}
             <AboutSection onConnect={() => navigate('/about')} />
 
             {/* Career Paths */}
             <CareerPathsSection />
+
+            {/* Download Brochure Conversion Banner */}
+            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
 
             {/* Work With Us */}
             <WorkWithUsSection
@@ -473,8 +505,16 @@ export default function App() {
               onEnquireHire={() => handleEnquireClick('Hire Talent from TEONOX')}
             />
 
-            {/* Campus Glimpses */}
-            <CampusGlimpsesSection />
+            {/* TEONOX Culture — hero, pillars, feature block, industry experts */}
+            <TeonoxCultureSection
+              onVisitCampus={() => handleEnquireClick('Visit Campus / Campus Tour')}
+            />
+
+            {/* Life at TEONOX gallery */}
+            <LifeAtTeonoxSection />
+
+            {/* Download Brochure conversion banner (same as the one below Career Paths) */}
+            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
 
             {/* Blog / Insights */}
             <InsightsSection
@@ -503,6 +543,13 @@ export default function App() {
         onClose={() => setIsEnquireModalOpen(false)}
         onNavigate={(href, label) => handleNavClick(href, label)}
         defaultCourse={enquireDefaultCourse}
+      />
+
+      {/* Download Brochure Popup Form Modal */}
+      <BrochureModal
+        isOpen={isBrochureModalOpen}
+        onClose={() => setIsBrochureModalOpen(false)}
+        defaultCourse={brochureDefaultCourse}
       />
     </div>
   );

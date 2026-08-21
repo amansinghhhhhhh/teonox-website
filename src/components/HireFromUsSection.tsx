@@ -1,12 +1,9 @@
 import { motion } from 'motion/react';
-import { ArrowRight, MessageSquare, Sparkles, CheckCircle2, TrendingUp, Cpu, Award, Target, Briefcase, Zap } from 'lucide-react';
+import { ArrowRight, MessageSquare, Sparkles, CheckCircle2, TrendingUp, Cpu, Award, Target, Briefcase, Zap, Rocket } from 'lucide-react';
 import { PartnerLogos } from './PartnerLogos';
 
-import imgRecruiterHero from '../assets/images/regenerated_image_1785584081868.webp';
-import imgMktgTalent from '../assets/images/teonox_mktg_talent_1785245399010.webp';
-import imgAiTalent from '../assets/images/teonox_ai_talent_1785245415765.webp';
-import imgSalesTalent from '../assets/images/teonox_sales_talent_1785245430239.webp';
-import imgGrowthTalent from '../assets/images/teonox_growth_talent_1785245444249.webp';
+// High-quality stock visuals (Unsplash, auto-WebP)
+const imgRecruiterHero = '/images/hire-talent-handshake.webp';
 
 interface HireFromUsSectionProps {
   onEnquireHire: () => void;
@@ -21,28 +18,28 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
       title: 'Digital Marketing & Growth Professionals',
       subtitle: 'Performance Marketing & SEO',
       tags: ['Meta & Google Ads', 'SEO Optimization', 'Growth Loops'],
-      image: imgMktgTalent,
+      icon: TrendingUp,
     },
     {
       id: '02',
       title: 'AI & Business Analytics Talent',
       subtitle: 'Automations & Data Dashboards',
       tags: ['AI Workflows', 'PowerBI / Tableau', 'Predictive Modeling'],
-      image: imgAiTalent,
+      icon: Cpu,
     },
     {
       id: '03',
       title: 'Sales & Revenue Operations Professionals',
       subtitle: 'CRM & High-Velocity Pipelines',
       tags: ['HubSpot / Salesforce', 'Outbound Strategy', 'Revenue Funnels'],
-      image: imgSalesTalent,
+      icon: Briefcase,
     },
     {
       id: '04',
       title: 'Full-Stack Business Growth Professionals',
       subtitle: 'Cross-Functional Strategy',
       tags: ['Campaign Strategy', 'Product Growth', '360° Execution'],
-      image: imgGrowthTalent,
+      icon: Rocket,
     },
   ];
 
@@ -233,11 +230,9 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
                   {/* Circular Realistic Image Avatar with Glowing Border */}
                   <div className="relative mb-6 group-hover:scale-105 transition-transform duration-300">
                     <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden p-1 bg-gradient-to-b from-[#F15A29] to-[#FF9E7D] shadow-[0_10px_25px_rgba(241,90,41,0.22)]">
-                      <img
-                        src={role.image}
-                        alt={role.title}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full rounded-full object-cover object-center bg-white" loading="lazy" decoding="async" />
+                      <div className="w-full h-full rounded-full bg-[#FFF0EB] flex items-center justify-center">
+                        <role.icon className="w-12 h-12 text-[#FF5722]" strokeWidth={1.75} />
+                      </div>
                     </div>
                     {/* Floating mini badge */}
                     <div className="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-white border border-[#F0E3D8] shadow-md flex items-center justify-center text-[#F15A29]">

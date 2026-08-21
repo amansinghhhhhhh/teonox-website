@@ -22,11 +22,10 @@ import {
   HelpCircle,
   Lightbulb
 } from 'lucide-react';
-
-import heroImg from '../assets/images/whyteonox_hero_img_1785591499511.webp';
-import stage1Img from '../assets/images/regenerated_image_1785500917222.webp';
-import stage2Img from '../assets/images/regenerated_image_1785500919105.webp';
-import stage3Img from '../assets/images/regenerated_image_1785500921424.webp';
+import heroImg from '../assets/images/why-teonox/why_teonox_hero.webp';
+import stage1Img from '../assets/images/learn.webp';
+import stage2Img from '../assets/images/apply.webp';
+import stage3Img from '../assets/images/Lead.webp';
 
 interface WhyTeonoxPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -157,12 +156,13 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-3xl overflow-hidden border border-[#EBE4DC] shadow-xl group">
+              <div className="relative rounded-3xl overflow-hidden border border-[#EBE4DC] shadow-xl group aspect-[16/10]">
                 <img
                   src={heroImg}
                   alt="Young marketer mastering digital strategy & AI execution at TEONOX"
-                  className="w-full h-[320px] sm:h-[400px] object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </motion.div>
@@ -366,7 +366,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 </div>
                 <div className="lg:col-span-5">
                   <div className="rounded-2xl overflow-hidden border border-[#EBE4DC] shadow-md h-[320px] relative group">
-                    <img src={stage1Img} alt="Learn Phase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={stage1Img} alt="Students building strong marketing foundations in a live masterclass at TEONOX" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                 </div>
               </motion.div>
@@ -399,7 +399,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 </div>
                 <div className="lg:col-span-5">
                   <div className="rounded-2xl overflow-hidden border border-[#EBE4DC] shadow-md h-[320px] relative group">
-                    <img src={stage2Img} alt="Apply Phase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={stage2Img} alt="Learners running real-budget ad campaigns on live analytics dashboards" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                 </div>
               </motion.div>
@@ -432,7 +432,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 </div>
                 <div className="lg:col-span-5">
                   <div className="rounded-2xl overflow-hidden border border-[#EBE4DC] shadow-md h-[320px] relative group">
-                    <img src={stage3Img} alt="Lead Phase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={stage3Img} alt="TEONOX student confidently presenting a growth strategy to a team" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                 </div>
               </motion.div>
@@ -1151,7 +1151,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 06: THE TEONOX DIFFERENCE (FORMULA & SUMMARY)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#111111] text-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-[#111111] text-white relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
         </div>
 

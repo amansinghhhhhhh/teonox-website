@@ -7,8 +7,12 @@ import {
   BarChart3, Search, Share2, Bot, UserCheck, Quote, Globe, Cpu, Play
 } from 'lucide-react';
 
-import heroImg from '../assets/images/regenerated_image_1785594738988.webp';
-import imgLeader from '../assets/images/about_us.webp';
+import heroImg from '../assets/images/about/about_hero.webp';
+import momentThumb1 from '../assets/images/about/moments/moment-1.webp';
+import momentThumb2 from '../assets/images/about/moments/moment-2.webp';
+import momentThumb3 from '../assets/images/about/moments/moment-3.webp';
+import momentThumb4 from '../assets/images/about/moments/moment-4.webp';
+import imgLeader from '../assets/images/about/about_agency_experience.webp';
 import imgAbstractSphere from '../assets/images/about_abstract_sphere_1785405313900.webp';
 import imgStudentPromise from '../assets/images/about_student_promise_1785405327744.webp';
 import imgGallery1 from '../assets/images/about_gallery_collaboration_1785405341342.webp';
@@ -59,10 +63,10 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
   };
 
   const TEONOX_VIDEOS = [
-    { id: 'v1', title: 'Live AI Campaign Build & Performance Strategy', videoUrl: 'https://www.instagram.com/reel/DV_KQluArs_/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/652674066_17918278113295636_4131405383375062786_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Hr4BNWrI9FoQ7kNvwF2SqvO&_nc_oc=AdoquvazmI32qA3PGvU72_XWj4GdMHmq6bA5M1Tdn29j2lmsnJVS7btqsoEHfKqcFr4&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=6IVeNJ3PBE_6Z1rDOrnIPw&_nc_ss=7b60f&oh=00_AQH5vOl1McgcmSPQzL2FokU2wP8plibgN-HQJOBC4AfofQ&oe=6A75FD1A' },
-    { id: 'v2', title: 'Real Brand Pitch & Student Case Presentation', videoUrl: 'https://www.instagram.com/reel/DWN5rOAjMts/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/656401774_17919298452295636_313729976479143819_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=RlXPUPTkil8Q7kNvwFuxmW4&_nc_oc=Adowcb2M0jnabVq5ZrzUI0r45krIFC7LGu6nYCJ3jddRmjf5EK6AL1DnNzvxGUfWquE&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=zQyVok3ki2Cm0yH_JRALLg&_nc_ss=7b60f&oh=00_AQHwqhdp2kWVzFcA6VHzQ-UjEXu6kFE5FRCIpz9GVkn1gQ&oe=6A761DA9' },
-    { id: 'v3', title: 'Mentorship & 1-on-1 Growth Guidance Session', videoUrl: 'https://www.instagram.com/reel/DWf3dceghLh/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/656637297_17920488102295636_3506271017755900266_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=27JMoHydojgQ7kNvwEpdh4E&_nc_oc=Adqesm2ey5zRdSn7ba7zTTkhNLPsG4gfze67Exx0FmB-Hv0JbLdo7veRwsi2SB9lnWU&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=zndB1nQcmqQqK5kOyeVpIQ&_nc_ss=7b60f&oh=00_AQEMNdIHAdshLc0LDGdo-axqhGGC-fhPyLfzEESJh0UKYg&oe=6A75F3A9' },
-    { id: 'v4', title: 'Analytics Breakdown & Funnel Optimization', videoUrl: 'https://www.instagram.com/reel/DYWhSgig_gL/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/702500970_17928472422295636_7925865670483555619_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=WXkcf5zeIIIQ7kNvwFV4Cdq&_nc_oc=AdpbGJJN9NqwNtw5lu12aklS51p_LSDnfeua-aWpj5SDxwfLh8sgVeGpAa3P9nUKitA&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=-e6WTEPpQgHO_1vRlOq2gA&_nc_ss=7b60f&oh=00_AQGFtH9SCEQ5csQpNi16fdZ1CSM70HxJVtdLimxvh1Mzpg&oe=6A760637' },
+    { id: 'v1', title: 'Live AI Campaign Build & Performance Strategy', videoUrl: 'https://www.instagram.com/reel/DV_KQluArs_/embed', thumbnail: momentThumb1 },
+    { id: 'v2', title: 'Real Brand Pitch & Student Case Presentation', videoUrl: 'https://www.instagram.com/reel/DWN5rOAjMts/embed', thumbnail: momentThumb2 },
+    { id: 'v3', title: 'Mentorship & 1-on-1 Growth Guidance Session', videoUrl: 'https://www.instagram.com/reel/DWf3dceghLh/embed', thumbnail: momentThumb3 },
+    { id: 'v4', title: 'Analytics Breakdown & Funnel Optimization', videoUrl: 'https://www.instagram.com/reel/DYWhSgig_gL/embed', thumbnail: momentThumb4 },
   ];
 
   const stats = [
@@ -114,7 +118,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
   ];
 
   return (
-    <div className="pt-20 sm:pt-24 pb-16 bg-white min-h-screen text-[#201A17] font-['Sora',sans-serif] overflow-x-hidden">
+    <div className="pt-20 sm:pt-24 pb-0 bg-white min-h-screen text-[#201A17] font-['Sora',sans-serif] overflow-x-hidden">
 
       {/* ═══════════════════════════════════════
           SECTION 01 - HERO
@@ -164,6 +168,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                     src={heroImg}
                     alt="TEONOX team"
                     className="w-full h-[320px] sm:h-[420px] object-cover object-center group-hover:scale-[1.05] transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -228,6 +234,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                     src={imgLeader}
                     alt="A2 Digital Founder & Mentors at TEONOX"
                     className="w-full h-[480px] sm:h-[560px] object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -517,16 +525,14 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                       src={video.thumbnail}
                       alt={video.title}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-300" />
-                    <div onClick={() => setPlayingId(video.id)} className="absolute inset-0 flex items-center justify-center">
+                    <div onClick={() => setPlayingId(video.id)} className="absolute inset-x-0 top-[70%] -translate-y-1/2 flex items-center justify-center">
                       <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 shadow-xl flex items-center justify-center text-[#111111] group-hover:bg-[#FF6A2B] group-hover:text-white group-hover:scale-110 transition-all duration-300">
                         <Play className="w-7 h-7 sm:w-8 sm:h-8 ml-1" fill="currentColor" />
                       </span>
-                    </div>
-                    <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="font-sora text-[12.5px] sm:text-[13.5px] font-[700] text-white leading-snug">{video.title}</p>
                     </div>
                   </>
                 )}
@@ -572,7 +578,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             </div>
             <div className="lg:col-span-5">
               <div className="relative rounded-[24px] overflow-hidden border border-[#FFE8D6] shadow-lg group">
-                <img src={imgStudentPromise} alt="TEONOX Student" className="rounded-2xl w-full h-[320px] object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={imgStudentPromise} alt="TEONOX Student" className="rounded-2xl w-full h-auto min-h-[280px] object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
             </div>
           </motion.div>

@@ -88,7 +88,7 @@ export function LegalShell({
   };
 
   return (
-    <div className="bg-white text-[#111111] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif] relative">
+    <div className="bg-white text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative">
       {/* ── HERO ─────────────────────────────────────── */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-[#FFF8F5] via-white to-white border-b border-[#F0DFCE]/60 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#F15A29_0.7px,transparent_0.7px)] [background-size:28px_28px] opacity-[0.03] pointer-events-none" />

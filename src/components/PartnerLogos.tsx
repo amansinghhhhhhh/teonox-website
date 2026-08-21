@@ -1,21 +1,26 @@
 ﻿import { Reveal } from './Reveal';
 
-import unileverLogo from '../assets/partners/unilever.svg';
-import boatLogo from '../assets/partners/boat.svg';
-import swiggyLogo from '../assets/partners/swiggy.svg';
-import uberLogo from '../assets/partners/uber.svg';
-import zomatoLogo from '../assets/partners/zomato.svg';
-import ogilvyLogo from '../assets/partners/ogilvy.svg';
-import starcomLogo from '../assets/partners/starcom.svg';
-import godrejLogo from '../assets/partners/godrej.svg';
-import groupmLogo from '../assets/partners/groupm.svg';
-import blackcabLogo from '../assets/partners/blackcab.svg';
-import googleLogo from '../assets/partners/google.png';
-import schbangLogo from '../assets/partners/schbang.png';
-import naukriLogo from '../assets/partners/naukri.png';
-import wavemakerLogo from '../assets/partners/wavemaker.png';
-import nykaaLogo from '../assets/partners/nykaa.png';
-import dentsuLogo from '../assets/partners/dentsu.png';
+import adityaBirlaLogo from '../assets/partners/aditya-birla.webp';
+import adobeLogo from '../assets/partners/adobe.webp';
+import amazonLogo from '../assets/partners/amazon.webp';
+import boatLogo from '../assets/partners/boat.webp';
+import colgateLogo from '../assets/partners/colgate.webp';
+import godrejLogo from '../assets/partners/godrej.webp';
+import googleLogo from '../assets/partners/google.webp';
+import groupmLogo from '../assets/partners/groupm.webp';
+import iciciLogo from '../assets/partners/icici.webp';
+import indeedLogo from '../assets/partners/indeed.webp';
+import kinnectLogo from '../assets/partners/kinnect.webp';
+import lifeboyLogo from '../assets/partners/lifeboy.webp';
+import linkedinLogo from '../assets/partners/linkedin.webp';
+import medianetLogo from '../assets/partners/medianet.webp';
+import microsoftLogo from '../assets/partners/microsoft.webp';
+import naukriLogo from '../assets/partners/naukri.webp';
+import pupleLogo from '../assets/partners/puple.webp';
+import samsungLogo from '../assets/partners/samsung.webp';
+import schbangLogo from '../assets/partners/schbang.webp';
+import uberLogo from '../assets/partners/uber.webp';
+import webLogo from '../assets/partners/web.webp';
 
 interface Partner {
   id: string;
@@ -25,25 +30,30 @@ interface Partner {
 
 export function PartnerLogos() {
   const partnersRow1: Partner[] = [
-    { id: 'schbang', name: 'Schbang', image: schbangLogo },
-    { id: 'unilever', name: 'Unilever', image: unileverLogo },
-    { id: 'wavemaker', name: 'Wavemaker', image: wavemakerLogo },
-    { id: 'naukri', name: 'Naukri', image: naukriLogo },
-    { id: 'starcom', name: 'Starcom', image: starcomLogo },
-    { id: 'nykaa', name: 'Nykaa', image: nykaaLogo },
-    { id: 'google', name: 'Google', image: googleLogo },
+    { id: 'aditya-birla', name: 'Aditya Birla', image: adityaBirlaLogo },
+    { id: 'adobe', name: 'Adobe', image: adobeLogo },
+    { id: 'amazon', name: 'Amazon', image: amazonLogo },
+    { id: 'boat', name: 'boAt', image: boatLogo },
+    { id: 'colgate', name: 'Colgate', image: colgateLogo },
     { id: 'godrej', name: 'Godrej', image: godrejLogo },
+    { id: 'google', name: 'Google', image: googleLogo },
+    { id: 'groupm', name: 'GroupM', image: groupmLogo },
+    { id: 'icici', name: 'ICICI', image: iciciLogo },
+    { id: 'indeed', name: 'Indeed', image: indeedLogo },
+    { id: 'kinnect', name: 'Kinnect', image: kinnectLogo },
   ];
 
   const partnersRow2: Partner[] = [
-    { id: 'dentsu', name: 'Dentsu', image: dentsuLogo },
-    { id: 'blackcab', name: 'Black Cab', image: blackcabLogo },
-    { id: 'boat', name: 'boAt', image: boatLogo },
+    { id: 'lifeboy', name: 'Lifebuoy', image: lifeboyLogo },
+    { id: 'linkedin', name: 'LinkedIn', image: linkedinLogo },
+    { id: 'medianet', name: 'Media.net', image: medianetLogo },
+    { id: 'microsoft', name: 'Microsoft', image: microsoftLogo },
+    { id: 'naukri', name: 'Naukri', image: naukriLogo },
+    { id: 'puple', name: 'Puple', image: pupleLogo },
+    { id: 'samsung', name: 'Samsung', image: samsungLogo },
+    { id: 'schbang', name: 'Schbang', image: schbangLogo },
     { id: 'uber', name: 'Uber', image: uberLogo },
-    { id: 'swiggy', name: 'Swiggy', image: swiggyLogo },
-    { id: 'zomato', name: 'Zomato', image: zomatoLogo },
-    { id: 'ogilvy', name: 'Ogilvy', image: ogilvyLogo },
-    { id: 'groupm', name: 'GroupM', image: groupmLogo },
+    { id: 'web', name: 'Web', image: webLogo },
   ];
 
   const doubleRow1 = [...partnersRow1, ...partnersRow1, ...partnersRow1];
@@ -54,13 +64,13 @@ export function PartnerLogos() {
       {partners.map((partner, idx) => (
         <div
           key={`${partner.id}-${idx}`}
-          className="flex items-center justify-center min-w-[160px] sm:min-w-[185px] h-[72px] px-7 rounded-2xl bg-white border border-[#EDE4DA] shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-[#F15A29]/50 hover:shadow-[0_6px_20px_rgba(241,90,41,0.12)] hover:-translate-y-1 transition-all duration-300 group cursor-default shrink-0 select-none"
+          className="flex items-center justify-center min-w-[200px] sm:min-w-[230px] h-[96px] sm:h-[104px] px-5 py-2 rounded-2xl bg-white border border-[#EDE4DA] shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-[#F15A29]/50 hover:shadow-[0_6px_20px_rgba(241,90,41,0.12)] hover:-translate-y-1 transition-all duration-300 group cursor-default shrink-0 select-none"
         >
           <img
             src={partner.image}
             alt={partner.name}
             loading="lazy"
-            className="h-8 sm:h-9 w-auto object-contain shrink-0"
+            className="h-[80%] w-[90%] object-contain mx-auto shrink-0"
           />
         </div>
       ))}
