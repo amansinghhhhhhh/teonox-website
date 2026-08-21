@@ -179,8 +179,8 @@ export function Footer({ onNavigate }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="tel:+918087177760" className="hover:text-[#FF8A50] transition-colors link-underline">
-                  +91-808-717-7760
+                <a href="tel:+919890004828" className="hover:text-[#FF8A50] transition-colors link-underline">
+                  +91 989-000-4828
                 </a>
               </li>
             </ul>

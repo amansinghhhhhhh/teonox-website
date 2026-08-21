@@ -117,7 +117,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
   };
 
   const handleOpenWhatsApp = () => {
-    window.open('https://wa.me/918087177760?text=Hello%20TEONOX%20Team%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs.', '_blank');
+    window.open('https://wa.me/919890004828?text=Hello%20TEONOX%20Team%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs.', '_blank');
   };
 
   const handleOpenGoogleMaps = () => {
@@ -241,11 +241,11 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   Speak directly with a Career Advisor.
                 </h3>
                 <p className="font-sora text-[18px] font-[700] text-[#111111] mb-6">
-                  Phone: <a href="tel:+918087177760" className="text-[#F15A29] hover:underline">+91 80871 77760</a>
+                  Phone: <a href="tel:+919890004828" className="text-[#F15A29] hover:underline">+91 989-000-4828</a>
                 </p>
               </div>
               <a
-                href="tel:+918087177760"
+                href="tel:+919890004828"
                 className="w-full sm:w-auto self-start px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[600] text-[14px] transition-all duration-300 shadow-xs inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Call Now</span>
@@ -593,8 +593,8 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                     </div>
                     <div>
                       <p className="font-sora text-xs font-bold text-[#111111]">Direct Line</p>
-                      <a href="tel:+918087177760" className="font-inter text-xs text-[#F15A29] font-semibold hover:underline">
-                        +91 80871 77760
+                      <a href="tel:+919890004828" className="font-inter text-xs text-[#F15A29] font-semibold hover:underline">
+                        +91 989-000-4828
                       </a>
                     </div>
                   </div>

@@ -243,8 +243,8 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4.5 h-4.5 text-[#F15A29] shrink-0" />
-                <a href="tel:8087177760" className="hover:text-[#F15A29] transition-colors">
-                  +91 80871 77760
+                <a href="tel:+919890004828" className="hover:text-[#F15A29] transition-colors">
+                  +91 989-000-4828
                 </a>
               </li>
             </ul>

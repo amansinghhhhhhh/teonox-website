@@ -1,22 +1,17 @@
 import { useState, useRef } from 'react';
 import {
   Sparkles,
-  Users,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   MapPin,
   Quote,
   ArrowRight,
-  GraduationCap,
-  FolderKanban,
-  Award,
   Star,
-  type LucideIcon,
 } from 'lucide-react';
 import { Reveal } from '../Reveal';
 import { MomentsSection } from './MomentsSection';
-import { CULTURE_PILLARS, CULTURE_STATS, CULTURE_EXPERTS } from '../../data/cultureData';
+import { CULTURE_PILLARS, CULTURE_EXPERTS } from '../../data/cultureData';
 import studentBannerImg from '../../assets/images/student_culture_banner.webp';
 
 interface TeonoxCultureSectionProps {
@@ -28,9 +23,6 @@ const ACCENTS = [
   { text: 'text-[#F15A29]', bg: 'bg-[#FFF0EB]' },
   { text: 'text-[#111111]', bg: 'bg-[#F0EFEC]' },
 ];
-
-/* Blue icon per stat metric. */
-const STAT_ICONS: LucideIcon[] = [GraduationCap, FolderKanban, Users, Award];
 
 /* Banner photo per pillar (hard-coded on each pillar object in cultureData.ts). */
 
@@ -82,8 +74,6 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
   const togglePillar = (i: number) => {
     setExpandedPillar((cur) => (cur === i ? null : i));
   };
-
-  const stats = CULTURE_STATS.map((s, i) => ({ ...s, icon: STAT_ICONS[i] ?? Award }));
 
   return (
     <section
@@ -225,10 +215,10 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
           </div>
         </Reveal>
 
-        {/* ─── 3-Column Visual Feature Block ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr_3fr] gap-5 lg:gap-6 mb-12 sm:mb-16">
-          {/* Left (40%): dark "THIS IS TEONOX" card */}
-          <Reveal>
+        {/* ─── Feature Block: image feature + quote card ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 mb-12 sm:mb-16">
+          {/* Left (~60%): dark "THIS IS TEONOX" card */}
+          <Reveal className="lg:col-span-7">
             <div className="relative h-full min-h-[320px] rounded-[26px] bg-[#111111] overflow-hidden group">
               <img
                 src={studentBannerImg}
@@ -260,34 +250,12 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
             </div>
           </Reveal>
 
-          {/* Center (30%): 2x2 metrics grid with orange icons */}
-          <Reveal delay={0.1}>
-            <div className="grid grid-cols-2 gap-4 h-full">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="bg-white border border-[#E9E6E1] rounded-[20px] p-4 sm:p-5 flex flex-col justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center mb-3">
-                    <stat.icon className="w-5 h-5" />
-                  </div>
-                  <span className="font-sora text-[clamp(24px,3vw,34px)] font-[800] leading-none text-[#111111]">
-                    {stat.value}
-                  </span>
-                  <span className="font-inter text-[12px] sm:text-[12.5px] font-[600] text-[#665A4E] mt-1.5">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* Right (30%): light quote card */}
-          <Reveal delay={0.2}>
-            <div className="relative h-full min-h-[220px] rounded-[26px] bg-[#F5F2ED] border border-[#E5DFD7] p-6 sm:p-7 flex flex-col justify-between overflow-hidden">
+          {/* Right (~40%): light quote card */}
+          <Reveal delay={0.1} className="lg:col-span-5">
+            <div className="relative h-full min-h-[220px] rounded-[26px] bg-[#F5F2ED] border border-[#E5DFD7] p-7 sm:p-10 flex flex-col justify-between overflow-hidden">
               <div className="relative">
                 <Quote className="w-7 h-7 text-[#F15A29]" />
-                <p className="font-sora text-[18px] sm:text-[20px] font-[700] leading-snug text-[#111111] mt-3">
+                <p className="font-sora text-[20px] sm:text-[24px] font-[700] leading-snug text-[#111111] mt-3">
                   Culture doesn't happen on a screen. It happens when people come together.
                 </p>
                 <span className="inline-flex items-center gap-1.5 font-inter text-[13.5px] font-[600] text-[#665A4E] mt-4">
@@ -297,7 +265,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
               </div>
               <button
                 onClick={onVisitCampus}
-                className="relative mt-6 inline-flex items-center justify-center gap-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[13.5px] font-[700] uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_10px_25px_-8px_rgba(241,90,41,0.5)] transition-all active:scale-95 cursor-pointer w-full"
+                className="relative mt-6 inline-flex items-center justify-center gap-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[13.5px] font-[700] uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_10px_25px_-8px_rgba(241,90,41,0.5)] transition-all active:scale-95 cursor-pointer w-full whitespace-nowrap"
               >
                 Visit Our Campus
                 <ArrowRight className="w-4 h-4" />

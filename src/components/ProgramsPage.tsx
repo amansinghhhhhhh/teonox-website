@@ -431,13 +431,13 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                 </button>
 
                 <a
-                  href="tel:0917795687988"
+                  href="tel:+919890004828"
                   className="btn-sassriver-secondary px-5 py-3.5 text-[14.5px] sm:text-[15.5px] group cursor-pointer"
                 >
                   <div className="w-7 h-7 rounded-full bg-[#F15A29] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 group-hover:bg-[#FF6B38] transition-all duration-300">
                     <Phone className="w-3.5 h-3.5 fill-white text-white" />
                   </div>
-                  <span className="tracking-tight text-white group-hover:text-[#FF8A50] transition-colors duration-300">+91 77956 87988</span>
+                  <span className="tracking-tight text-white group-hover:text-[#FF8A50] transition-colors duration-300">+91 989-000-4828</span>
                 </a>
               </div>
 

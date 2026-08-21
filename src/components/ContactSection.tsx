@@ -24,7 +24,7 @@ export function ContactSection({
     if (onEnquireClick) {
       onEnquireClick('Talk to TEONOX - Growth CTA');
     } else {
-      window.open('https://wa.me/918087177760?text=Hello%20TEONOX%20Team%2C%20I%20would%20like%20to%20talk%20about%20programs.', '_blank');
+      window.open('https://wa.me/919890004828?text=Hello%20TEONOX%20Team%2C%20I%20would%20like%20to%20talk%20about%20programs.', '_blank');
     }
   };
 
