@@ -64,7 +64,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://www.instagram.com/teonox_edu/"
+                href="https://www.instagram.com/teonoxofficial"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
