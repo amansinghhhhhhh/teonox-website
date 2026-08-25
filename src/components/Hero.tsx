@@ -14,7 +14,7 @@ const phrases = [
   'Corporate AI automation training',
 ];
 
-const LONGEST_PHRASE = phrases.reduce((a, b) => (b.length > a.length ? b : a), phrases[0] || '');
+const LONGEST_PHRASE = 'Corporate AI automation training';
 
 export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroProps) {
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -60,14 +60,14 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
             <Sparkles className="w-8 h-8 md:w-10 md:h-10 fill-[#F15A29]/20" />
           </div>
 
-          <h1 className="font-sora text-[clamp(26px,5.2vw,72px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]">
+          <h1 className="font-sora text-[clamp(24px,3.8vw,52px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]">
             Gen AI Course in Pune
             <br />
             <span className="inline-flex flex-wrap items-center justify-center gap-2 mt-2">
               <span>with Assured Placement</span>
               
               {/* Highlighted Rounded Pill Box with Typewriter Animation */}
-              <span className="relative inline-grid max-w-full w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[52px] sm:min-h-[64px]">
+              <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[42px] sm:min-h-[52px]">
                 {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
                 <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
                   {LONGEST_PHRASE}
@@ -88,7 +88,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
 
               {/* Vector Scribble / Pen Icon on Right */}
               <span className="text-[#201A17] -rotate-12 translate-y-1 inline-block animate-float-slow">
-                <PenTool className="w-7 h-7 sm:w-9 sm:h-9 text-[#201A17]" />
+                <PenTool className="w-5 h-5 sm:w-7 sm:h-7 text-[#201A17]" />
               </span>
             </span>
           </h1>
