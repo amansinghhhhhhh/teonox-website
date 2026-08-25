@@ -112,7 +112,7 @@ export function ToolsSection() {
         {/* Section Heading */}
         <Reveal className="text-left mb-8 w-full">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
-            Every Program Includes Training on <span className="text-[#F15A29] heading-accent">50+ AI, Marketing &amp; Business Tools</span>
+            We are top Digital Marketing Training Institute in Pune <span className="text-[#F15A29] heading-accent">& Provide 50+ Digital Marketing Tools</span>
           </h2>
         </Reveal>
 
