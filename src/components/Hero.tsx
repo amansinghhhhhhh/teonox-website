@@ -8,10 +8,10 @@ interface HeroProps {
 }
 
 const phrases = [
-  'Actually Hire For',
-  'Pay Top Salaries For',
-  'Build Startups With',
-  'Accelerate Growth With',
+  '12+ Year Experience Faculty',
+  'Integrated with AI and GenAI Tools',
+  'Upskill in AI and automation',
+  'Corporate AI automation training',
 ];
 
 const LONGEST_PHRASE = phrases.reduce((a, b) => (b.length > a.length ? b : a), phrases[0] || '');
