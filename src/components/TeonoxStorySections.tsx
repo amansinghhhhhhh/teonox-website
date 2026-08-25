@@ -104,7 +104,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
 
               {/* Highlight Tagline Card */}
               <div className="p-6 sm:p-7 rounded-[22px] bg-white border-l-4 border-l-[#F15A29] border border-[#EBE4DC] shadow-[0_10px_30px_-10px_rgba(241,90,41,0.12)] space-y-2">
-                <motion.p
+                <motion.h3
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -112,7 +112,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                   className="font-sora text-[20px] sm:text-[23px] font-[800] text-[#111111] leading-snug tracking-tight"
                 >
                 A Gen AI School of Marketing & Business for the AI Era
-                </motion.p>
+                </motion.h3>
               </div>
 
               <motion.p
