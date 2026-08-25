@@ -89,7 +89,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 space-y-6"
+              className="lg:col-span-7 space-y-6 text-center lg:text-left"
             >
 
               <motion.h2
@@ -120,7 +120,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="font-inter text-[16px] sm:text-[17.5px] text-[#444444] leading-[1.7] font-normal max-w-2xl"
+                  className="font-inter text-[16px] sm:text-[17.5px] text-stone-800 leading-[1.7] font-medium max-w-2xl mx-auto lg:mx-0"
               >
                 Build future-ready skills in Marketing, Digital, Business &amp; AI to create careers, grow businesses and lead in the digital economy.
               </motion.p>
@@ -158,7 +158,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                       window.location.href = '/contact';
                     }
                   }}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora text-[15px] font-[700] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-[15px] font-[700] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 group cursor-pointer mx-auto lg:mx-0"
                 >
                   <span>Talk to a career expert</span>
                   <ArrowUpRight className="w-4.5 h-4.5 stroke-[2.5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />

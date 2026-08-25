@@ -74,11 +74,11 @@ export function BrochureCTABanner({
                 yellow
                   ? 'inline-flex items-center justify-center gap-2.5 font-sora font-[700] bg-gradient-to-r from-[#FACC15] to-[#F59E0B] text-[#111111] rounded-full shadow-[0_10px_25px_-5px_rgba(250,204,21,0.5)]'
                   : 'btn-sassriver-primary'
-              } w-full sm:w-auto px-7 py-4 text-[14.5px] sm:text-[15.5px] uppercase tracking-wider group cursor-pointer active:scale-95 transition-all`}
+              } w-full sm:w-auto py-3.5 px-5 sm:px-7 text-sm sm:text-[15.5px] uppercase tracking-wider group cursor-pointer active:scale-95 transition-all`}
             >
-              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-300" />
-              <span>{buttonLabel}</span>
-              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1.5 transition-transform duration-300" />
+              <Download className="w-4 h-4 shrink-0 group-hover:translate-y-0.5 transition-transform duration-300" />
+              <span className="whitespace-nowrap">{buttonLabel}</span>
+              <ArrowRight className="w-4 h-4 ml-1 shrink-0 group-hover:translate-x-1.5 transition-transform duration-300" />
             </button>
           </div>
         </div>

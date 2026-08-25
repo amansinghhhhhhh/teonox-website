@@ -33,24 +33,34 @@ function scrollRow(ref: React.RefObject<HTMLDivElement | null>, dir: number) {
 /* Infinite loop for the pillars row: content is rendered twice (copy A + copy B).
    When the scroll position crosses into copy B, snap back into copy A instantly —
    the two copies are pixel-identical, so the wrap is invisible and continuous. */
-const PILLAR_STEP = 320; // one card (300px) + gap (20px)
+const PILLAR_STEP = 320; // desktop fallback: one card (300px) + gap (20px)
+const PILLAR_GAP = 20; // gap-5 between cards
+
+/* Actual per-card step (card width + gap), measured at runtime so the
+   arrows scroll exactly one card on every breakpoint (280px mobile / 300px sm+). */
+function measureStep(el: HTMLDivElement): number {
+  const first = el.firstElementChild as HTMLElement | null;
+  return first ? first.offsetWidth + PILLAR_GAP : PILLAR_STEP;
+}
 
 function scrollPillarsLoop(ref: React.RefObject<HTMLDivElement | null>, dir: number) {
   const el = ref.current;
   if (!el) return;
+  const step = measureStep(el);
   const N = CULTURE_PILLARS.length;
   if (dir < 0 && el.scrollLeft <= 48) {
-    el.scrollLeft = N * PILLAR_STEP; // jump to copy B start (visually identical to 0)
+    el.scrollLeft = N * step; // jump to copy B start (visually identical to 0)
   }
-  el.scrollBy({ left: dir * PILLAR_STEP, behavior: 'smooth' });
+  el.scrollBy({ left: dir * step, behavior: 'smooth' });
 }
 
 function onPillarsScroll(ref: React.RefObject<HTMLDivElement | null>) {
   const el = ref.current;
   if (!el) return;
+  const step = measureStep(el);
   const N = CULTURE_PILLARS.length;
-  if (el.scrollLeft >= N * PILLAR_STEP) {
-    el.scrollLeft -= N * PILLAR_STEP; // seamless loop back into copy A
+  if (el.scrollLeft >= N * step) {
+    el.scrollLeft -= N * step; // seamless loop back into copy A
   }
 }
 
@@ -59,9 +69,13 @@ function ScrollArrow({ dir, onClick }: { dir: 'left' | 'right'; onClick: () => v
     <button
       onClick={onClick}
       aria-label={dir === 'left' ? 'Scroll left' : 'Scroll right'}
-      className="hidden md:flex w-10 h-10 items-center justify-center rounded-full bg-white border border-[#E5E0D8] text-[#111111] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-colors cursor-pointer shadow-sm"
+      className="flex w-8 h-8 md:w-10 md:h-10 shrink-0 items-center justify-center rounded-full bg-white border border-[#E5E0D8] text-[#111111] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-colors cursor-pointer shadow-sm"
     >
-      {dir === 'left' ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+      {dir === 'left' ? (
+        <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+      ) : (
+        <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+      )}
     </button>
   );
 }
@@ -107,8 +121,8 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
 
         {/* ─── 6 Core Pillar Cards (Interactive Slider) ─── */}
         <Reveal className="mb-12 sm:mb-16">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="font-sora text-[20px] sm:text-[24px] font-[800] tracking-tight">
+          <div className="flex flex-col items-center gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
+            <h3 className="font-sora text-[20px] sm:text-[24px] font-[800] tracking-tight text-center sm:text-left">
               Culture Initiatives to <span className="text-[#F15A29]">Showcase</span>
             </h3>
             <div className="flex items-center gap-2.5">
@@ -135,7 +149,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
                   {/* Top image banner (cropped only for the image itself) */}
                   <div className="relative">
                     <div
-                      className="relative h-[150px] overflow-hidden rounded-t-[22px] cursor-pointer"
+                      className="relative h-[200px] overflow-hidden rounded-t-[22px] cursor-pointer"
                       onClick={() => togglePillar(i)}
                     >
                       <img
@@ -282,7 +296,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
         {/* ─── Industry Comes to TEONOX: Speaker Cards Row ─── */}
         <Reveal className="mb-12 sm:mb-16">
           <div className="text-center mb-8">
-            <h3 className="font-sora text-[24px] sm:text-[32px] font-[800] uppercase tracking-tight">
+            <h3 className="font-sora text-[24px] sm:text-[32px] font-[800] leading-tight uppercase tracking-tight">
               Industry Comes to <span className="text-[#F15A29] heading-accent">TEONOX</span>
             </h3>
             <div className="mx-auto mt-3.5 w-16 h-1.5 rounded-full bg-gradient-to-r from-[#FACC15] to-[#F59E0B]" />

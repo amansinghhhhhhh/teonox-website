@@ -8,9 +8,9 @@ import {
 } from 'lucide-react';
 
 import heroImg from '../assets/images/about/about_hero.webp';
-import imgLeader from '../assets/images/about/about_agency_experience.webp';
+import imgLeader from '../assets/images/about/sir.webp';
 import imgAbstractSphere from '../assets/images/about_abstract_sphere_1785405313900.webp';
-import imgStudentPromise from '../assets/images/about_student_promise_1785405327744.webp';
+import imgStudentPromise from '../assets/images/about/promise.webp';
 import imgGallery1 from '../assets/images/about_gallery_collaboration_1785405341342.webp';
 import imgGallery2 from '../assets/images/about_gallery_workshop_1785405360873.webp';
 import imgGallery3 from '../assets/images/about_gallery_working_1785405378588.webp';
@@ -111,7 +111,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-14">
 
             {/* Left */}
-            <motion.div {...fadeLeft(0)} className="lg:col-span-7 space-y-6">
+            <motion.div {...fadeLeft(0)} className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <motion.h1 {...fadeUp(0.1)} className="font-sora text-[28px] sm:text-[38px] lg:text-[46px] font-[900] text-[#111111] tracking-tight leading-[1.12]">
                 Building Future-Ready Professionals for the{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6A2B] to-[#D8420F]">
@@ -198,7 +198,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
             <motion.div {...fadeLeft(0)} className="lg:col-span-7 space-y-6">
-              <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] text-[#111111] tracking-tight leading-[1.15]">
+              <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] leading-tight text-[#111111] tracking-tight leading-[1.15]">
                 Built on <span className="text-[#FF6A2B]">12+ Years</span> of Real Agency Experience at A2 Digital
               </h2>
               <div className="space-y-4 font-inter text-[15.5px] sm:text-[16.5px] leading-[1.75] text-[#444444]">
@@ -232,7 +232,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-[#FAFAFC] border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="text-center mb-12">
-            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] text-[#111111]">Vision & Mission</h2>
+            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] leading-tight text-[#111111]">Vision & Mission</h2>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[
@@ -267,7 +267,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">
               What Makes TEONOX <span className="text-[#FF6A2B]">Different?</span>
             </h2>
             <p className="font-inter text-[16px] text-[#555555]">At TEONOX, learning extends beyond software and certifications into true business capability.</p>
@@ -278,8 +278,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
               <motion.div key={d.num} {...fadeUp(i * 0.12)}
                 className="relative p-8 sm:p-10 rounded-3xl bg-[#FFF9F5] border border-[#FFE8D6] overflow-hidden group hover:border-[#FF6A2B] hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
               >
-                {/* big number watermark */}
-                <div className="absolute -top-4 -right-2 font-mono text-[80px] font-extrabold text-[#FFD8C0] group-hover:text-[#FF6A2B]/20 transition-colors leading-none select-none pointer-events-none">{d.num}</div>
+                {/* big number watermark — pinned top-right, faded on mobile so it never overlaps copy */}
+                <div className="absolute -top-4 -right-2 font-mono text-[52px] sm:text-[80px] font-extrabold text-[#FFD8C0] opacity-60 sm:opacity-100 group-hover:text-[#FF6A2B]/20 transition-colors leading-none select-none pointer-events-none">{d.num}</div>
                 <p className="font-inter text-[13px] text-[#999999] mb-2 italic relative z-10">{d.contrast}</p>
                 <h3 className="font-sora text-[22px] sm:text-[24px] font-[800] text-[#111111] mb-4 relative z-10 group-hover:text-[#FF6A2B] transition-colors">{d.title}</h3>
                 <div className="border-t border-[#FFE2CC] pt-4 relative z-10">
@@ -309,7 +309,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="w-[88%] max-w-7xl mx-auto relative z-10">
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-white">The TEONOX <span className="text-[#FF6A2B]">Philosophy</span></h2>
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-white">The TEONOX <span className="text-[#FF6A2B]">Philosophy</span></h2>
             <p className="font-inter text-[16px] text-[#A79885]">Education should prepare you not only for your first job, but for an entire career.</p>
           </motion.div>
 
@@ -337,7 +337,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="max-w-3xl mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">
               The TEONOX <span className="text-[#FF6A2B]">Learning Experience</span>
             </h2>
             <p className="font-inter text-[16px] text-[#555555]">Every TEONOX program is designed around experiential learning. Our learners don't just watch demonstrations, they actively participate in solving real business challenges.</p>
@@ -375,14 +375,14 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-[#FAFAFC] border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="max-w-3xl mb-10 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] text-[#111111]">Beyond <span className="text-[#FF6A2B]">Digital Marketing</span></h2>
+            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] leading-tight text-[#111111]">Beyond <span className="text-[#FF6A2B]">Digital Marketing</span></h2>
             <p className="font-inter text-[16px] text-[#555555]">While Digital Marketing remains one of our core strengths, TEONOX believes that modern professionals require a broader understanding of business. Our curriculum integrates:</p>
           </motion.div>
 
           <div className="flex flex-wrap gap-3">
             {skills.map((skill, index) => (
               <motion.div key={index} {...scaleIn(0.03 * index)}
-                className="px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-xs text-[#201A17] font-sora text-[14.5px] font-semibold hover:border-[#FF6A2B] hover:bg-[#FFF8F5] hover:text-[#D8420F] hover:-translate-y-0.5 transition-all flex items-center gap-2 cursor-default"
+                className="px-3.5 py-2 sm:px-5 sm:py-3 rounded-2xl bg-white border border-slate-200 shadow-xs text-[#201A17] font-sora text-[13px] sm:text-[14.5px] font-semibold hover:border-[#FF6A2B] hover:bg-[#FFF8F5] hover:text-[#D8420F] hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 cursor-default"
               >
                 <div className="w-2 h-2 rounded-full bg-[#FF6A2B]" />
                 {skill}
@@ -403,7 +403,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-[#111111]">Built for <span className="text-[#FF6A2B]">Every Learner</span></h2>
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">Built for <span className="text-[#FF6A2B]">Every Learner</span></h2>
             <p className="font-inter text-[16px] text-[#555555]">TEONOX provides structured learning pathways designed to support your specific professional goals.</p>
           </motion.div>
 
@@ -445,13 +445,13 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             </motion.div>
 
             <motion.div {...fadeRight(0.15)} className="lg:col-span-4 flex justify-center">
-              <div className="w-full p-8 rounded-3xl bg-[#2B231F] border border-white/10 hover:border-[#FF6A2B]/50 transition-all duration-400 text-center space-y-4 group">
+              <div className="w-full p-8 pb-10 rounded-3xl bg-[#2B231F] border border-white/10 hover:border-[#FF6A2B]/50 transition-all duration-400 text-center space-y-4 group">
                 <div className="w-16 h-16 rounded-2xl bg-[#FF6A2B]/15 flex items-center justify-center mx-auto group-hover:bg-[#FF6A2B] transition-all duration-300">
                   <ShieldCheck className="w-8 h-8 text-[#FF6A2B] group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="font-sora text-xl font-bold text-white">Always Up-To-Date</h3>
                 <p className="font-inter text-[13.5px] text-[#A79885] leading-relaxed">Curriculum refreshed quarterly with real industry input</p>
-                <div className="flex flex-wrap gap-2 justify-center pt-2">
+                <div className="flex flex-wrap gap-2 justify-center pt-4">
                   {['AI', 'Marketing', 'Data', 'Sales'].map(tag => (
                     <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 font-sora text-[11px] font-[600] text-white/80">{tag}</span>
                   ))}
@@ -478,7 +478,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           {/* More Than Education */}
           <motion.div {...fadeUp(0)} className="bg-white p-9 sm:p-12 rounded-3xl border border-[#FFE8D6] shadow-sm space-y-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF6A2B]/5 rounded-bl-full pointer-events-none" />
-            <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] leading-tight text-[#111111]">
               More Than <span className="text-[#FF6A2B]">Education</span>
             </h2>
             <p className="font-inter text-[16px] sm:text-[17px] leading-relaxed text-[#444444]">
@@ -495,7 +495,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           {/* Our Promise */}
           <motion.div {...fadeUp(0.1)} className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-white p-9 sm:p-12 rounded-3xl border border-[#FFE8D6] shadow-sm">
             <div className="lg:col-span-7 space-y-5">
-              <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] text-[#111111]">Our <span className="text-[#FF6A2B]">Promise</span></h2>
+              <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] leading-tight text-[#111111]">Our <span className="text-[#FF6A2B]">Promise</span></h2>
               <div className="space-y-4 font-inter text-[16px] text-[#444444] leading-relaxed">
                 <p className="font-semibold text-rose-600">We cannot promise instant success. We cannot promise shortcuts.</p>
                 <p>What we do promise is an environment where motivated learners can build the skills, mindset and practical experience required to compete confidently in the Digital & AI economy.</p>

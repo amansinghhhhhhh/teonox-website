@@ -480,9 +480,6 @@ export default function App() {
             {/* The Learning Experience */}
             <LearningExperienceSection />
 
-            {/* Download Brochure Conversion Banner */}
-            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
-
             {/* Certifications Showcase */}
             <CertificationsSection />
 

@@ -4,7 +4,6 @@ import galleryImg2 from '../assets/images/life-at-teonox/svl05964.webp';
 import galleryImg3 from '../assets/images/life-at-teonox/svl05970.webp';
 import galleryImg4 from '../assets/images/life-at-teonox/svl05973.webp';
 import galleryImg5 from '../assets/images/life-at-teonox/svl05977.webp';
-import galleryImg6 from '../assets/images/life-at-teonox/svl05980.webp';
 import galleryImg7 from '../assets/images/life-at-teonox/svl05981.webp';
 import pillarLearnImg from '../assets/images/culture-initiatives/learn.webp';
 import pillarConnectImg from '../assets/images/culture-initiatives/connect.webp';
@@ -223,10 +222,6 @@ export const CULTURE_GALLERY = [
   {
     src: galleryImg5,
     alt: 'Group discussion among TEONOX students',
-  },
-  {
-    src: galleryImg6,
-    alt: 'TEONOX students working together on real projects',
   },
   {
     src: galleryImg7,

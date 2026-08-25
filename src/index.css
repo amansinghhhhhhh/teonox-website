@@ -193,6 +193,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
+  white-space: nowrap;
   border-radius: 9999px;
   background: linear-gradient(135deg, #F15A29 0%, #D84315 100%);
   color: #FFFFFF;
@@ -215,6 +216,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
+  white-space: nowrap;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
@@ -266,26 +268,10 @@
   will-change: transform;
 }
 
-.card-premium::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  pointer-events: none;
-  background: linear-gradient(
-    115deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.55) 48%,
-    transparent 62%
-  );
-  transform: translateX(-140%) skewX(-15deg);
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: inherit;
-}
-
-.card-premium:hover::after {
-  transform: translateX(140%) skewX(-15deg);
-}
+/* NOTE: the diagonal glass/sheen ::after glare effect was removed — on dark
+   cards (e.g. CareerOutcomesPage SALARY & GROWTH section) it left a heavy
+   static white streak, especially after tap on touch devices where :hover
+   sticks. Hover feedback is now handled purely by lift + shadow below. */
 
 .card-premium:hover {
   transform: translateY(-10px);

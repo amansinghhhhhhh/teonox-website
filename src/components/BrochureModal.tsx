@@ -225,9 +225,9 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
               {BROCHURE_DOWNLOAD_URL && (
                 <button
                   onClick={triggerBrochureDownload}
-                  className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer"
+                  className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4 shrink-0" />
                   Download Brochure
                 </button>
               )}

@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { Reveal } from './Reveal';
 
-import learnImg from '../assets/images/learn.webp';
+import learnImg from '../assets/images/learn-updated.webp';
 import applyImg from '../assets/images/apply.webp';
 import leadImg from '../assets/images/Lead.webp';
 
@@ -236,7 +236,7 @@ export function LearningMethodologySection() {
               <span className="font-mono text-[13px] font-[800] text-[#F15A29] bg-[#FFF0EB] border border-[#F3DCC9] rounded-full px-3 py-1">
                 {activePhase.number}
               </span>
-              <h3 className="font-sora text-[28px] sm:text-[34px] font-[800] tracking-tight">
+              <h3 className="font-sora text-[28px] sm:text-[34px] font-[800] leading-tight tracking-tight">
                 {activePhase.label}
               </h3>
             </div>

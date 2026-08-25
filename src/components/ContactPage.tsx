@@ -4,7 +4,6 @@ import {
   MapPin,
   MessageCircle,
   Phone,
-  Map,
   CheckCircle2,
   Send,
   Users,
@@ -612,23 +611,15 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-6 space-y-2.5 border-t border-[#F5F5F5] mt-6">
-                <button
-                  onClick={handleOpenGoogleMaps}
-                  className="w-full py-3.5 px-6 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[14px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Compass className="w-4 h-4" />
-                  <span>Get Directions on Google Maps</span>
-                </button>
-
+              <div className="pt-6 border-t border-[#F5F5F5] mt-6">
                 <a
                   href="https://maps.app.goo.gl/1EPnX5kVCPbZsTP16"
                   target="_blank"
-                  rel="noreferrer"
-                  className="w-full py-2.5 px-6 rounded-full bg-[#111111] hover:bg-[#201A17] text-white font-sora font-[600] text-[13px] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 px-6 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-sm sm:text-base transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <Map className="w-3.5 h-3.5 text-[#F15A29]" />
-                  <span>Open maps.app.goo.gl Location</span>
+                  <Compass className="w-4 h-4 shrink-0" />
+                  <span className="whitespace-nowrap">Get Directions on Google Maps</span>
                 </a>
               </div>
             </motion.div>

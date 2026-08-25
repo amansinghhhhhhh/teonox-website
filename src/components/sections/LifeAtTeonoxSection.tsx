@@ -56,7 +56,7 @@ export function LifeAtTeonoxSection() {
           {/* Header row: copy left, CTA right */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-7 sm:mb-9">
             <div className="max-w-xl">
-              <h3 className="font-sora text-[24px] sm:text-[32px] font-[800] tracking-tight">
+              <h3 className="font-sora text-[24px] sm:text-[32px] font-[800] leading-tight tracking-tight">
                 Life at <span className="text-[#F15A29] heading-accent">TEONOX</span>
               </h3>
               <p className="font-inter text-[14.5px] sm:text-[15.5px] text-[#665A4E] mt-3 leading-relaxed">
@@ -72,9 +72,11 @@ export function LifeAtTeonoxSection() {
             </button>
           </div>
 
-          {/* Full-width hero carousel */}
+          {/* Full-width hero carousel — relative wrapper bounds ONLY the image,
+              so the absolute counter chip + arrows anchor to the media itself.
+              Dots live in their own inline-flow block below, outside this context. */}
           <div
-            className="relative"
+            className="relative rounded-3xl overflow-hidden"
             onTouchStart={onCarouselTouchStart}
             onTouchEnd={onCarouselTouchEnd}
           >
@@ -125,20 +127,20 @@ export function LifeAtTeonoxSection() {
             >
               <ChevronRight className="w-5 h-5" />
             </button>
+          </div>
 
-            {/* Dots */}
-            <div className="flex items-center justify-center gap-2 mt-5">
-              {CULTURE_GALLERY.map((img, i) => (
-                <button
-                  key={img.alt}
-                  onClick={() => setSlide(i)}
-                  aria-label={`Go to photo ${i + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    i === slide ? 'w-8 bg-[#F15A29]' : 'w-2.5 bg-[#111111]/20 hover:bg-[#111111]/40'
-                  }`}
-                />
-              ))}
-            </div>
+          {/* Dots — separate inline-flow block directly under the slider card */}
+          <div className="flex items-center justify-center gap-2 mt-5">
+            {CULTURE_GALLERY.map((img, i) => (
+              <button
+                key={img.alt}
+                onClick={() => setSlide(i)}
+                aria-label={`Go to photo ${i + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === slide ? 'w-8 bg-[#F15A29]' : 'w-2.5 bg-[#111111]/20 hover:bg-[#111111]/40'
+                }`}
+              />
+            ))}
           </div>
         </Reveal>
       </div>

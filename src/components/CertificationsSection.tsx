@@ -158,10 +158,10 @@ export function CertificationsSection() {
               </div>
             </div>
 
-            {/* Floating chip */}
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 rounded-full bg-[#111111] text-white px-4 py-2 shadow-lg">
-              <BadgeCheck className="w-4 h-4 text-[#FF8A50]" />
-              <span className="font-inter text-[12.5px] font-[600]">Verifiable industry credential</span>
+            {/* Floating chip (in-flow below card on mobile, overlapping pill on sm+) */}
+            <div className="mt-4 flex w-fit mx-auto items-center gap-2 rounded-full bg-[#111111] text-white px-4 py-2 shadow-lg sm:mt-0 sm:w-auto sm:inline-flex sm:absolute sm:-bottom-3 sm:left-1/2 sm:-translate-x-1/2">
+              <BadgeCheck className="w-4 h-4 shrink-0 text-[#FF8A50]" />
+              <span className="font-inter text-[12.5px] font-[600] whitespace-nowrap">Verifiable industry credential</span>
             </div>
           </div>
         </Reveal>

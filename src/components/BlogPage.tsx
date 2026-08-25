@@ -206,7 +206,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           
           {/* Scroll Gradient Mask Container */}
           <div className="relative group">
-            <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-1 pl-1 pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {categoryTabs.map((cat, ci) => {
                 const isActive = selectedCategory === cat;
                 return (
@@ -285,14 +285,14 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-[#EBE2D9]">
-                  <div className="font-inter text-[13px] text-[#777777] flex items-center gap-3">
-                    <span className="font-sora font-semibold text-[#111111]">{featuredArticle.author}</span>
-                    <span>•</span>
+                <div className="flex items-center justify-between gap-3 pt-4 border-t border-[#EBE2D9]">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-inter text-xs text-stone-500">
+                    <span className="font-sora font-semibold text-[13px] text-[#111111]">{featuredArticle.author}</span>
+                    <span aria-hidden="true">•</span>
                     <span>{featuredArticle.date}</span>
                     {featuredArticle.readTime && (
                       <>
-                        <span>•</span>
+                        <span aria-hidden="true">•</span>
                         <span>{featuredArticle.readTime}</span>
                       </>
                     )}
@@ -356,7 +356,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                   </div>
 
                   {/* Author & Date */}
-                  <div className="pt-4 border-t border-[#EBE2D9] flex items-center justify-between font-inter text-[12px] text-[#777777]">
+                  <div className="pt-4 pb-2 border-t border-[#EBE2D9] flex flex-wrap items-center justify-between gap-x-2 gap-y-1 font-inter text-[12px] text-stone-500">
                     <span className="font-sora font-semibold text-[#111111]">{article.author}</span>
                     <span>{article.date}</span>
                   </div>

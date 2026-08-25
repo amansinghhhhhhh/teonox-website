@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
@@ -6,6 +6,7 @@ import momentThumb1 from '../../assets/images/about/moments/moment-1.webp';
 import momentThumb2 from '../../assets/images/about/moments/moment-2.webp';
 import momentThumb3 from '../../assets/images/about/moments/moment-3.webp';
 import momentThumb4 from '../../assets/images/about/moments/moment-4.webp';
+import { fetchLatestShorts, type MomentVideo } from '../../services/youtubeService';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
@@ -21,7 +22,7 @@ const scaleIn = (delay = 0) => ({
   transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
 });
 
-const TEONOX_VIDEOS = [
+const TEONOX_VIDEOS: MomentVideo[] = [
   { id: 'v1', title: 'Live AI Campaign Build & Performance Strategy', videoUrl: 'https://www.instagram.com/reel/DV_KQluArs_/embed', thumbnail: momentThumb1 },
   { id: 'v2', title: 'Real Brand Pitch & Student Case Presentation', videoUrl: 'https://www.instagram.com/reel/DWN5rOAjMts/embed', thumbnail: momentThumb2 },
   { id: 'v3', title: 'Mentorship & 1-on-1 Growth Guidance Session', videoUrl: 'https://www.instagram.com/reel/DWf3dceghLh/embed', thumbnail: momentThumb3 },
@@ -30,7 +31,21 @@ const TEONOX_VIDEOS = [
 
 export function MomentsSection() {
   const [playingId, setPlayingId] = useState<string | null>(null);
+  // null = live fetch still in flight → render static cards immediately (no layout jump)
+  const [liveShorts, setLiveShorts] = useState<MomentVideo[] | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchLatestShorts().then(({ shorts }) => {
+      if (!cancelled && shorts.length > 0) setLiveShorts(shorts);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const videos = liveShorts ?? TEONOX_VIDEOS;
 
   const scrollSlider = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
@@ -58,8 +73,8 @@ export function MomentsSection() {
           </div>
         </motion.div>
 
-        <div ref={scrollContainerRef} className="flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {TEONOX_VIDEOS.map((video, vi) => (
+        <div ref={scrollContainerRef} className="mt-4 flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {videos.map((video, vi) => (
             <motion.div key={video.id} {...scaleIn(vi * 0.1)}
               className="w-[280px] sm:w-[320px] shrink-0 aspect-[9/16] rounded-3xl overflow-hidden relative group cursor-pointer border border-slate-200 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 snap-start bg-black"
             >

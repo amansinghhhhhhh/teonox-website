@@ -211,7 +211,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                 Select Category
               </div>
 
-              <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 pb-2 lg:pb-0 scrollbar-none">
+              <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 py-1 pr-4 lg:pr-0 scrollbar-none">
                 {categories.map((cat) => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.id;
@@ -287,7 +287,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                         />
 
                         {/* Top Right: Campus Badge */}
-                        <div className="absolute top-3.5 right-3.5 z-20">
+                        <div className="absolute top-3 right-3 z-20">
                           <span className="font-mono text-[10.5px] font-[700] px-2.5 py-1 rounded-full bg-[#111111]/90 text-white backdrop-blur-md border border-white/20 flex items-center gap-1 shadow-2xs">
                             <MapPin className="w-3 h-3 text-[#F15A29]" />
                             <span>{prog.mode}</span>
@@ -333,7 +333,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     </div>
 
                     {/* Bottom Action Buttons (Brochure / Enquire + View Details) */}
-                    <div className="p-5 sm:p-6 pt-0 flex items-center gap-2.5">
+                    <div className="p-4 sm:p-6 pt-0 flex flex-row items-center justify-between gap-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -395,7 +395,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
             â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         </div>
 
-      <section className="mt-12 sm:mt-16 relative w-full bg-[#111111] text-white overflow-hidden">
+      <section className="mt-8 sm:mt-16 relative w-full bg-[#111111] text-white overflow-hidden py-8 sm:py-10 lg:py-14">
           {/* Ambient Orange Glow Effects */}
           <div className="absolute inset-0 pointer-events-none">
             <div
@@ -408,26 +408,26 @@ mode: progOrTitle.mode || 'On Campus, Pune',
           </div>
 
           <div className="w-[90%] max-w-7xl mx-auto relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
             {/* Left Content */}
-            <div className="lg:col-span-7 space-y-5 text-left">
+            <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
               <div className="space-y-2.5">
                 <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[40px] font-[800] text-white leading-[1.1] tracking-tight">
                   Talk to our team <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A50] to-[#F15A29]">directly</span>
                 </h2>
-                <p className="font-inter text-[14.5px] sm:text-[16px] text-[#C4B8AD] leading-relaxed max-w-xl">
+                <p className="font-inter text-[14.5px] sm:text-[16px] text-[#C4B8AD] leading-relaxed max-w-xl mx-auto lg:mx-0">
                   Contact us and our academic counsellor will get in touch with you shortly to answer your questions.
                 </p>
               </div>
 
               {/* Action Buttons styled with Sassriver Theme Animations */}
-              <div className="pt-1 flex flex-wrap items-center gap-3.5">
+              <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
                 <button
                   onClick={() => onEnquireProgram('Academic Counsellor Callback')}
-                  className="btn-sassriver-primary px-7 py-3.5 text-[13.5px] sm:text-[14.5px] uppercase tracking-wider group cursor-pointer"
+                  className="btn-sassriver-primary py-3.5 px-5 sm:px-7 text-[13.5px] sm:text-[14.5px] uppercase tracking-wider group cursor-pointer"
                 >
-                  <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                  <span>Enquire Now</span>
+                  <Send className="w-4 h-4 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  <span className="whitespace-nowrap">Enquire Now</span>
                 </button>
 
                 <a
@@ -437,12 +437,12 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                   <div className="w-7 h-7 rounded-full bg-[#F15A29] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 group-hover:bg-[#FF6B38] transition-all duration-300">
                     <Phone className="w-3.5 h-3.5 fill-white text-white" />
                   </div>
-                  <span className="tracking-tight text-white group-hover:text-[#FF8A50] transition-colors duration-300">+91 989-000-4828</span>
+                  <span className="whitespace-nowrap tracking-tight text-white group-hover:text-[#FF8A50] transition-colors duration-300">+91 989-000-4828</span>
                 </a>
               </div>
 
               {/* Quick Info Badges */}
-              <div className="pt-3.5 grid grid-cols-2 sm:grid-cols-3 gap-3 border-t border-white/10 text-white/80 font-inter text-[12px] sm:text-[12.5px]">
+              <div className="pt-3.5 grid grid-cols-2 sm:grid-cols-3 gap-3 border-t border-white/[0.07] text-white/80 font-inter text-[12px] sm:text-[12.5px]">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#F15A29] shrink-0" />
                   <span>1-on-1 Guidance</span>

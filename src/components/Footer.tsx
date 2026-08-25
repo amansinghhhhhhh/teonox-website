@@ -26,7 +26,7 @@ export function Footer({ onNavigate }: FooterProps) {
 
   return (
     <footer className="bg-[#17110D] text-[#EDE4DB] pt-20 pb-8 border-t border-[#2C241D]">
-      <div className="w-[80%] mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top 4-Column Grid */}
         <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-[#2C241D]">
@@ -216,9 +216,9 @@ export function Footer({ onNavigate }: FooterProps) {
 
             {/* Dynamic keyword links */}
             <div className="lg:col-span-2">
-              <p className="flex flex-wrap items-center gap-y-3">
+              <p className="flex flex-wrap items-center gap-y-3 w-full">
                 {programLinks.map((program, index) => (
-                  <span key={program.id} className="flex items-center">
+                  <span key={program.id} className="flex items-center min-w-0">
                     {index > 0 && (
                       <span className="text-[#3A2E25] mx-3 select-none" aria-hidden="true">
                         |
@@ -230,7 +230,7 @@ export function Footer({ onNavigate }: FooterProps) {
                         e.preventDefault();
                         onNavigate(`/program/${program.id}`, program.title);
                       }}
-                      className="font-inter text-[15px] sm:text-[15.5px] font-[500] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline whitespace-nowrap"
+                      className="font-inter text-[15px] sm:text-[15.5px] font-[500] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline whitespace-normal break-words leading-snug"
                     >
                       {program.title}
                     </a>
@@ -242,7 +242,7 @@ export function Footer({ onNavigate }: FooterProps) {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="pt-7 flex flex-col sm:flex-row items-center justify-between font-inter text-[14px] font-[400] text-[#7A6E60] gap-3">
+        <div className="pt-7 flex flex-col sm:flex-row items-start justify-start gap-3 sm:items-center sm:justify-between font-inter text-[14px] font-[400] text-[#7A6E60]">
           <span>© 2026 TEONOX. All rights reserved.</span>
           <span>Powered by A2 Digital.</span>
         </div>
