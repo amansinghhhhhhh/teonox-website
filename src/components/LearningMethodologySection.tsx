@@ -161,7 +161,7 @@ export function LearningMethodologySection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <Reveal className="mb-8 sm:mb-10 text-left max-w-3xl">
+        <Reveal className="mb-8 sm:mb-10 text-left">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">
             Learning Methodology for <span className="text-[#F15A29] heading-accent">AI, Digital Marketing & Automation</span>
           </h2>
