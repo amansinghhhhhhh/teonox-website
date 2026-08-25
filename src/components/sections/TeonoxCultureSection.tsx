@@ -92,7 +92,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
   return (
     <section
       id="teonox-culture"
-      className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-24 text-[#111111] bg-gradient-to-b from-[#F3F5F8] via-[#FBFAF9] to-[#F3F5F8]"
+      className="relative w-full overflow-hidden py-16 md:py-24 text-[#111111] bg-gradient-to-b from-[#F3F5F8] via-[#FBFAF9] to-[#F3F5F8]"
     >
       {/* Ambient gradient glows + dot pattern */}
       <div className="absolute inset-0 pointer-events-none">
@@ -292,9 +292,9 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
       {/* ─── Moments That Define Us (shared with About page) ─── */}
       <MomentsSection />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 flex flex-col items-center">
         {/* ─── Industry Comes to TEONOX: Speaker Cards Row ─── */}
-        <Reveal className="mb-12 sm:mb-16">
+        <Reveal className="w-full">
           <div className="text-center mb-10">
             <h3 className="font-sora text-[24px] sm:text-[32px] font-[800] leading-tight uppercase tracking-tight">
               Industry Comes to <span className="text-[#F15A29] heading-accent">TEONOX</span>
