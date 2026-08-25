@@ -122,7 +122,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                   className="font-inter text-[16px] sm:text-[17.5px] text-stone-800 leading-[1.7] font-medium max-w-2xl mx-auto lg:mx-0"
               >
-                Build future-ready skills in Marketing, Digital, Business &amp; AI to create careers, grow businesses and lead in the digital economy.
+              Teonox is a Gen AI School of Marketing in Pune helping students, graduates, professionals and businesses build future-ready skills in AI, Digital Marketing, Business and Automation. Whether you are looking for an AI course with placement in Pune, exploring the best course after graduation in Pune, or planning to upskill in AI and automation in Pune, Teonox combines practical learning, AI-powered tools and real-world business applications to help you become career-ready.
               </motion.p>
 
               {/* Feature Micro Badges */}
