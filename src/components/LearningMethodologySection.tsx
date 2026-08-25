@@ -31,6 +31,7 @@ interface Phase {
   id: string;
   number: string;
   label: string;
+  heading: string;
   subtitle: string;
   image: string;
   imageAlt: string;
@@ -45,6 +46,7 @@ const PHASES: Phase[] = [
     id: 'learn',
     number: '01',
     label: 'LEARN',
+    heading: 'Build Industry-Ready AI & Digital Marketing Skills',
     subtitle: 'Learn from industry-driven curriculum.',
     image: learnImg,
     imageAlt: 'Indian student learning digital skills',
@@ -78,6 +80,7 @@ const PHASES: Phase[] = [
     id: 'apply',
     number: '02',
     label: 'APPLY',
+    heading: 'Apply Skills Through Practical Projects',
     subtitle: 'Apply through practical projects and real-world execution.',
     image: applyImg,
     imageAlt: 'Indian students working on practical projects',
@@ -111,6 +114,7 @@ const PHASES: Phase[] = [
     id: 'lead',
     number: '03',
     label: 'LEAD',
+    heading: 'Lead With AI, Automation & Business Skills',
     subtitle: 'Lead with skills, confidence and business thinking.',
     image: leadImg,
     imageAlt: 'Indian student leading with confidence',
@@ -159,10 +163,10 @@ export function LearningMethodologySection() {
         {/* Header */}
         <Reveal className="mb-8 sm:mb-10 text-left max-w-3xl">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">
-            Learning <span className="text-[#F15A29] heading-accent">Methodology</span>
+            Learning Methodology for <span className="text-[#F15A29] heading-accent">AI, Digital Marketing & Automation</span>
           </h2>
           <p className="font-inter text-[15px] sm:text-[16px] text-[#665A4E] leading-relaxed mt-3 max-w-xl">
-            A structured journey — from learning the fundamentals to leading with real results.
+            At Teonox, we believe learning should be practical, interactive, and career-focused. Our Business Digital Marketing Classes in Pune combine industry-driven learning with live projects, real-world case studies, AI-powered tools, and hands-on campaign execution. Whether you're looking for a Digital Marketing Course in Pune, Digital Marketing Classes Online, or Offline Digital Marketing Courses in Pune, our flexible learning options help you build practical, industry-relevant skills with guidance from experienced professionals. If you're searching for a Digital Marketing Course Near Me, Teonox provides a hands-on learning experience designed to help you gain confidence, develop job-ready expertise, and build a successful career in digital marketing.
           </p>
         </Reveal>
 
@@ -237,7 +241,7 @@ export function LearningMethodologySection() {
                 {activePhase.number}
               </span>
               <h3 className="font-sora text-[28px] sm:text-[34px] font-[800] leading-tight tracking-tight">
-                {activePhase.label}
+                {activePhase.heading}
               </h3>
             </div>
             <p className="font-inter text-[16px] sm:text-[17px] text-[#555555] leading-relaxed mt-2">
