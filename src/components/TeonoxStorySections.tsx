@@ -111,7 +111,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                   transition={{ duration: 0.6, delay: 0.15 }}
                   className="font-sora text-[20px] sm:text-[23px] font-[800] text-[#111111] leading-snug tracking-tight"
                 >
-                  A School of Marketing, AI and Business for the AI Era.
+                A Gen AI School of Marketing & Business for the AI Era
                 </motion.p>
               </div>
 
