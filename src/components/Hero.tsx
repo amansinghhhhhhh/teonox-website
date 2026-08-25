@@ -96,7 +96,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
 
         {/* Supporting Paragraph */}
         <p className="font-inter text-[17.5px] sm:text-[20px] font-[400] text-[#665A4E] leading-relaxed mx-auto mb-10 max-w-4xl animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-          Master in-demand business skills like Digital Marketing, AI, Automation, Data Analytics &amp; Digital Sales to get hired, or get promoted. No lectures, no theory dumps.
+        Best Business Digital Marketing Courses in Pune with 100% Job Placement & affordable fees. Choose from Offline / Online learning options with classes integrated with AI and GenAI tools. With a 6-8 month duration and industry-recognized certification, it is one of the Best courses after graduation in Pune for students and professionals looking to build a career in digital marketing. Join weTeonox, the Gen AI School of Marketing in Pune, and master AI-powered, performance-driven, and practical digital marketing skills.
         </p>
 
         {/* Action Buttons */}
