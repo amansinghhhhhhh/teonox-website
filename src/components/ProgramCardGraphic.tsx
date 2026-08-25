@@ -1,11 +1,12 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
 import { Camera, Trash2, Upload } from 'lucide-react';
 
-import dmAiImg from '../assets/images/uploaded_digital_marketing_ai.webp';
-import perfImg from '../assets/images/uploaded_performance.webp';
-import seoImg from '../assets/images/uploaded_seo.webp';
-import socialImg from '../assets/images/uploaded_social_media.webp';
-import execBizImg from '../assets/images/exec_biz_digital_ai_1785234719696.webp';
+// High-quality stock covers (Unsplash, auto-WebP)
+const dmAiImg = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';
+const perfImg = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';
+const seoImg = 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=900&q=80';
+const socialImg = 'https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=900&q=80';
+const execBizImg = 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=900&q=80';
 
 interface ProgramCardGraphicProps {
   programId: string;

@@ -1,6 +1,8 @@
-import { Globe, Linkedin, Instagram, Facebook, Youtube } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Globe, Linkedin, Instagram, Facebook, Youtube, BookOpen, ArrowUpRight } from 'lucide-react';
 import { TeonoxLogo } from './TeonoxLogo';
 import { Reveal } from './Reveal';
+import { fetchFooterPrograms } from '../services/programService';
 
 interface FooterProps {
   onEnquireClick: () => void;
@@ -8,9 +10,23 @@ interface FooterProps {
 }
 
 export function Footer({ onNavigate }: FooterProps) {
+  // Dynamically fetched program links for the IIDE-style SEO keyword block.
+  // Any program published in WordPress Admin automatically appears here.
+  const [programLinks, setProgramLinks] = useState<{ id: string; title: string }[]>([]);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchFooterPrograms().then((result) => {
+      if (mounted) setProgramLinks(result.programs);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <footer className="bg-[#17110D] text-[#EDE4DB] pt-20 pb-8 border-t border-[#2C241D]">
-      <div className="w-[80%] mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top 4-Column Grid */}
         <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-[#2C241D]">
@@ -172,8 +188,61 @@ export function Footer({ onNavigate }: FooterProps) {
 
         </Reveal>
 
+        {/* Explore Programs — SEO keyword links (IIDE style) */}
+        <div className="py-10 border-b border-[#2C241D]">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+            {/* Heading + View All */}
+            <div>
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-[#F15A29]/15 text-[#FF8A50] flex items-center justify-center shrink-0">
+                  <BookOpen className="w-[18px] h-[18px]" />
+                </div>
+                <h4 className="font-mono text-[14px] font-[700] uppercase tracking-[0.08em] text-[#EDE4DB]">
+                  Explore Programs
+                </h4>
+              </div>
+              <p className="font-inter text-[14px] text-[#9E9082] leading-relaxed">
+                Career-focused specializations built for real-world outcomes.
+              </p>
+              <a
+                href="/programs"
+                onClick={(e) => { e.preventDefault(); onNavigate('/programs', 'Programs'); }}
+                className="inline-flex items-center gap-1.5 mt-4 font-sora text-[13.5px] font-[700] text-[#FF8A50] hover:text-white transition-colors group"
+              >
+                View All Programs
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+              </a>
+            </div>
+
+            {/* Dynamic keyword links */}
+            <div className="lg:col-span-2">
+              <p className="flex flex-wrap items-center gap-y-3 w-full">
+                {programLinks.map((program, index) => (
+                  <span key={program.id} className="flex items-center min-w-0">
+                    {index > 0 && (
+                      <span className="text-[#3A2E25] mx-3 select-none" aria-hidden="true">
+                        |
+                      </span>
+                    )}
+                    <a
+                      href={`/program/${program.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate(`/program/${program.id}`, program.title);
+                      }}
+                      className="font-inter text-[15px] sm:text-[15.5px] font-[500] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline whitespace-normal break-words leading-snug"
+                    >
+                      {program.title}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom Copyright */}
-        <div className="pt-7 flex flex-col sm:flex-row items-center justify-between font-inter text-[14px] font-[400] text-[#7A6E60] gap-3">
+        <div className="pt-7 flex flex-col sm:flex-row items-start justify-start gap-3 sm:items-center sm:justify-between font-inter text-[14px] font-[400] text-[#7A6E60]">
           <span>© 2026 TEONOX. All rights reserved.</span>
           <span>Powered by A2 Digital.</span>
         </div>

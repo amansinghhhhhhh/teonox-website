@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 import careersGoogleLogo from '../assets/careers/google.svg';
@@ -13,6 +13,36 @@ import careersZomatoLogo from '../assets/careers/zomato.svg';
 import careersSwiggyLogo from '../assets/careers/swiggy.svg';
 import careersRazorpayLogo from '../assets/careers/razorpay.svg';
 import careersPaytmLogo from '../assets/careers/paytm.svg';
+import digitalMarketingExecutiveImg from '../assets/images/job-roles/digital-marketing-executive.webp';
+import seoSpecialistImg from '../assets/images/job-roles/seo-specialist.webp';
+import performanceMarketerImg from '../assets/images/job-roles/performance-marketer.webp';
+import socialMediaSpecialistImg from '../assets/images/job-roles/social-media-specialist.webp';
+import googleAdsSpecialistImg from '../assets/images/job-roles/google-ads-specialist.webp';
+import contentMarketerImg from '../assets/images/job-roles/content-marketer.webp';
+import dataAnalystImg from '../assets/images/job-roles/data-analyst.webp';
+import marketingAnalystImg from '../assets/images/job-roles/marketing-analyst.webp';
+import eCommerceMarketerImg from '../assets/images/job-roles/e-commerce-marketer.webp';
+import aiMarketingSpecialistImg from '../assets/images/job-roles/ai-marketing-specialist.webp';
+import growthMarketerImg from '../assets/images/job-roles/growth-marketer.webp';
+import growthStrategistImg from '../assets/images/job-roles/growth-strategist.webp';
+import portfolioSeoAuditsImg from '../assets/images/portfolio-interview/seo-audits.webp';
+import portfolioCampaignStrategiesImg from '../assets/images/portfolio-interview/campaign-strategies.webp';
+import portfolioWebsitesImg from '../assets/images/portfolio-interview/websites.webp';
+import portfolioContentPlansImg from '../assets/images/portfolio-interview/content-plans.webp';
+import portfolioSocialMediaImg from '../assets/images/portfolio-interview/social-media-strategies.webp';
+import portfolioAdvertisingImg from '../assets/images/portfolio-interview/advertising-campaigns.webp';
+import portfolioAnalyticsImg from '../assets/images/portfolio-interview/analytics-reports.webp';
+import portfolioAiWorkflowsImg from '../assets/images/portfolio-interview/ai-powered-marketing-workflows.webp';
+import interviewPreparationImg from '../assets/images/portfolio-interview/interview-preparation.webp';
+import placementTrainingImg from '../assets/images/placement-process/training.webp';
+import placementProjectsImg from '../assets/images/placement-process/projects.webp';
+import placementPortfolioImg from '../assets/images/placement-process/portfolio.webp';
+import placementResumeImg from '../assets/images/placement-process/resume.webp';
+import placementMockInterviewImg from '../assets/images/placement-process/mock-interview.webp';
+import placementAssistanceImg from '../assets/images/placement-process/placement-assistance.webp';
+import internshipLiveProjectsImg from '../assets/images/internship-process/live-projects-campaign-tools.webp';
+import internshipClientMeetingsImg from '../assets/images/internship-process/client-meetings-strategy.webp';
+import internshipAnalyticsImg from '../assets/images/internship-process/analytics-dashboards.webp';
 import {
   ArrowUpRight,
   Play,
@@ -31,6 +61,7 @@ import {
   Globe,
   Award,
   ChevronRight,
+  ChevronLeft,
   Monitor,
   Building2,
   CheckSquare,
@@ -41,7 +72,7 @@ import {
   GraduationCap
 } from 'lucide-react';
 
-import heroImg from '../assets/images/career_hero_img_1785591513714.webp';
+import heroImg from '../assets/images/career-outcomes/career_outcomes_hero.webp';
 
 interface CareerOutcomesPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -99,6 +130,14 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
   // Active Industry Category Filter for Hiring Companies (Section 07)
   const [activeSector, setActiveSector] = useState<string>('All Industries');
 
+  // Horizontal scroll refs for mobile step/tab rows
+  const placementTabsRef = useRef<HTMLDivElement>(null);
+  const roadmapPillsRef = useRef<HTMLDivElement>(null);
+  const scrollStepRow = (
+    ref: React.RefObject<HTMLDivElement | null>,
+    dir: number
+  ) => ref.current?.scrollBy({ left: dir * 240, behavior: 'smooth' });
+
   // Placement Process Steps
   const placementSteps = [
     {
@@ -107,7 +146,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       focus: "Hands-on execution of core channels, tools & strategy",
       detail: "Deep dive into real-world tools, consumer psychology, data analytics, and generative AI frameworks under expert guidance.",
       icon: GraduationCap,
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+      image: placementTrainingImg
     },
     {
       title: "Projects",
@@ -115,7 +154,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       focus: "Live campaign briefs & real budget handling",
       detail: "Translating concepts into active marketing campaigns with real client constraints, audience personas, and spend allocation.",
       icon: Target,
-      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80"
+      image: placementProjectsImg
     },
     {
       title: "Portfolio",
@@ -123,7 +162,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       focus: "Verified campaign reports & technical audits",
       detail: "Building a bulletproof digital showcase of SEO audits, ROAS reports, content strategies, and AI workflows.",
       icon: Briefcase,
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+      image: placementPortfolioImg
     },
     {
       title: "Resume",
@@ -131,7 +170,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       focus: "ATS-optimized executive profile & metrics formatting",
       detail: "Structuring your experience with quantifiable business outcomes, commercial math, and tool stack highlights.",
       icon: FileText,
-      image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80"
+      image: placementResumeImg
     },
     {
       title: "Mock Interview",
@@ -139,7 +178,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       focus: "1-on-1 strategy defense with industry HR heads",
       detail: "Defending campaign choices, handling stress scenarios, and answering high-stakes commercial growth questions.",
       icon: Users,
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
+      image: placementMockInterviewImg
     },
     {
       title: "Placement Assistance",
@@ -147,7 +186,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       focus: "Direct referral access to top agency & corporate teams",
       detail: "Connecting verified student portfolios with hiring managers across startups, agencies, and global enterprises.",
       icon: Award,
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+      image: placementAssistanceImg
     }
   ];
 
@@ -166,62 +205,62 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
   const jobRolesList = [
     {
       title: "Digital Marketing Executive",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+      image: digitalMarketingExecutiveImg,
       tag: "Execution & Campaigns"
     },
     {
       title: "SEO Specialist",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      image: seoSpecialistImg,
       tag: "Search & Technical Audit"
     },
     {
       title: "Performance Marketer",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      image: performanceMarketerImg,
       tag: "Paid Ads & ROAS"
     },
     {
       title: "Social Media Specialist",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80",
+      image: socialMediaSpecialistImg,
       tag: "Brand & Engagement"
     },
     {
       title: "Google Ads Specialist",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+      image: googleAdsSpecialistImg,
       tag: "PPC & Conversion Funnels"
     },
     {
       title: "Content Marketer",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+      image: contentMarketerImg,
       tag: "Copywriting & Storytelling"
     },
     {
       title: "Data Analyst",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+      image: dataAnalystImg,
       tag: "Traffic & User Behavior"
     },
     {
       title: "Marketing Analyst",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      image: marketingAnalystImg,
       tag: "Attribution & Metrics"
     },
     {
       title: "E-Commerce Marketer",
-      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80",
+      image: eCommerceMarketerImg,
       tag: "Store Sales & Retention"
     },
     {
       title: "AI Marketing Specialist",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      image: aiMarketingSpecialistImg,
       tag: "Generative AI & Automation"
     },
     {
       title: "Growth Marketer",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+      image: growthMarketerImg,
       tag: "A/B Testing & Scaling"
     },
     {
       title: "Growth Strategist",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80",
+      image: growthStrategistImg,
       tag: "Go-To-Market Leadership"
     }
   ];
@@ -248,56 +287,56 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       title: "SEO Audits",
       icon: Search,
       desc: "Comprehensive technical crawler reports, Core Web Vitals diagnostic, keyword positioning & backlink profile indexing.",
-      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioSeoAuditsImg,
       bullets: ["Technical Site Architecture", "On-Page Content Gaps", "Keyword Intent Mapping", "Backlink Risk Audit"]
     },
     {
       title: "Campaign Strategies",
       icon: Target,
       desc: "Omnichannel customer journey maps, audience segmentation personas, offer strategy & full budget allocation plans.",
-      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioCampaignStrategiesImg,
       bullets: ["Funnel Architecture", "Creative Briefs", "CAC & LTV Modeling", "Budget Scaling Matrix"]
     },
     {
       title: "Websites",
       icon: Globe,
       desc: "Responsive conversion-optimized landings, UX wireframes, lead magnet triggers & analytics pixel mapping.",
-      img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioWebsitesImg,
       bullets: ["High-Converting Wireframes", "Custom CTA Placements", "Tag Manager Integration", "Speed & Accessibility"]
     },
     {
       title: "Content Plans",
       icon: FileText,
       desc: "Editorial calendars, viral short-form video hooks, thought leadership pillars & pillar-cluster blog strategies.",
-      img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioContentPlansImg,
       bullets: ["Content Pillars Matrix", "Social Distribution Grid", "Copywriting Frameworks", "SEO Cluster Strategy"]
     },
     {
       title: "Social Media Strategies",
       icon: Users,
       desc: "Brand voice positioning, community growth playbooks, influencer brief templates & organic reach optimization.",
-      img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioSocialMediaImg,
       bullets: ["Audience Growth Playbooks", "Creative Asset Specs", "Engagement Funnel", "Influencer ROI Tracker"]
     },
     {
       title: "Advertising Campaigns",
       icon: Zap,
       desc: "Meta & Google Ad account structures, dynamic ad copy variations, landing page alignment & bid strategy rules.",
-      img: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioAdvertisingImg,
       bullets: ["Account Structure Blueprints", "A/B Creative Test Matrix", "Custom Audience Audiences", "ROAS Benchmark System"]
     },
     {
       title: "Analytics Reports",
       icon: BarChart3,
       desc: "Custom Google Analytics 4 dashboards, multi-touch attribution modeling, funnel drop-off audit & ROAS reports.",
-      img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioAnalyticsImg,
       bullets: ["GA4 Custom Explorations", "Looker Studio Dashboards", "Conversion Drop-Off Audit", "Multi-Touch Attribution"]
     },
     {
       title: "AI-Powered Marketing Workflows",
       icon: Cpu,
       desc: "Custom prompt engineering libraries, automated keyword clustering scripts, generative ad variant engines.",
-      img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+      img: portfolioAiWorkflowsImg,
       bullets: ["Custom AI Prompt Library", "Automated Content Pipeline", "AI Ad Copy Generator", "Workflow Automation"]
     }
   ];
@@ -345,7 +384,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="lg:col-span-7 space-y-6"
+              className="lg:col-span-7 space-y-6 text-center lg:text-left"
             >
               <div className="space-y-3">
                 <h1 className="text-[32px] sm:text-[46px] lg:text-[54px] font-[800] leading-[1.08] tracking-tight text-[#111111]">
@@ -357,12 +396,12 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                 </p>
               </div>
 
-              <p className="font-inter text-base sm:text-lg text-[#444444] leading-relaxed max-w-2xl font-medium">
+              <p className="font-inter text-base sm:text-lg text-[#444444] leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
                 At TEONOX, career preparation goes beyond completing a course. Our approach focuses on building the skills, practical experience, portfolio, confidence and professional readiness needed to pursue opportunities in the Digital Marketing and AI-Driven World.
               </p>
 
               {/* CTAs */}
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
                 <button
                   onClick={() => onEnquireClick("Career Advisory")}
                   className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm sm:text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
@@ -391,7 +430,8 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   src={heroImg}
                   alt="Successful TEONOX graduate in digital marketing career"
                   className="w-full h-[320px] sm:h-[420px] object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </motion.div>
@@ -404,7 +444,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 02: PLACEMENT PROCESS (Dark Interactive Animated Roadmap)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white relative overflow-hidden">
         {/* Background Radial Lights */}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
@@ -424,8 +464,19 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
 
           {/* Step Selector Tabs & Detailed Cards Display */}
           <div className="space-y-12">
-            {/* Interactive Timeline Tabs */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {/* Interactive Timeline Tabs — single scrollable row on mobile */}
+            <div className="flex items-center gap-2 lg:block">
+              <button
+                onClick={() => scrollStepRow(placementTabsRef, -1)}
+                aria-label="Scroll steps left"
+                className="shrink-0 lg:hidden w-9 h-9 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#AAAAAA] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <div
+                ref={placementTabsRef}
+                className="flex min-w-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden gap-2 py-1 pr-4 sm:pr-2 lg:grid lg:grid-cols-6 lg:gap-3 lg:py-0 lg:pr-0"
+              >
               {placementSteps.map((step, idx) => {
                 const isActive = activePlacementStep === idx;
                 const IconComp = step.icon;
@@ -433,7 +484,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   <button
                     key={idx}
                     onClick={() => setActivePlacementStep(idx)}
-                    className={`p-4 sm:p-5 rounded-2xl font-sora text-left transition-all cursor-pointer border flex flex-col justify-between space-y-3 ${
+                    className={`shrink-0 min-w-[170px] lg:min-w-0 p-3 sm:p-5 rounded-2xl font-sora text-left transition-all cursor-pointer border flex flex-col justify-between space-y-3 ${
                       isActive
                         ? 'bg-[#F15A29] text-white border-[#F15A29] shadow-xl scale-[1.03]'
                         : 'bg-[#141414] text-[#AAAAAA] border-[#262626] hover:border-[#F15A29]/50 hover:text-white'
@@ -447,10 +498,18 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                       </span>
                       <IconComp className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#F15A29]'}`} />
                     </div>
-                    <p className="text-base font-extrabold leading-snug">{step.title}</p>
+                    <p className="text-[13px] sm:text-base font-extrabold leading-snug">{step.title}</p>
                   </button>
                 );
               })}
+              </div>
+              <button
+                onClick={() => scrollStepRow(placementTabsRef, 1)}
+                aria-label="Scroll steps right"
+                className="shrink-0 lg:hidden w-9 h-9 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#AAAAAA] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
 
             {/* Active Milestone Card Showcase */}
@@ -468,7 +527,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                     <span>STEP {placementSteps[activePlacementStep].code} OF 06</span>
                   </div>
 
-                  <h3 className="text-3xl sm:text-4xl font-extrabold font-sora text-white">
+                  <h3 className="text-3xl sm:text-4xl font-extrabold font-sora text-white leading-tight">
                     {placementSteps[activePlacementStep].title}
                   </h3>
 
@@ -496,7 +555,9 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                     <img
                       src={placementSteps[activePlacementStep].image}
                       alt={placementSteps[activePlacementStep].title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center transition-opacity duration-300"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -511,7 +572,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 03: INTERNSHIP PROCESS (Curved Visual Cards & Dashboard)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#FAF8F5] border-b border-[#EBE4DC]">
+      <section className="py-12 sm:py-16 bg-[#FAF8F5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
           {/* Section Header */}
@@ -533,17 +594,17 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               {
                 title: "Live Projects & Campaign Tools",
                 tag: "Practical Execution",
-                img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+                img: internshipLiveProjectsImg
               },
               {
                 title: "Real Client Meetings & Strategy",
                 tag: "Business Communication",
-                img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                img: internshipClientMeetingsImg
               },
               {
                 title: "Marketing Analytics & Dashboards",
                 tag: "Data & Performance",
-                img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+                img: internshipAnalyticsImg
               }
             ].map((item, idx) => (
               <motion.div
@@ -554,7 +615,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               >
                 <div className="space-y-4">
                   <div className="h-56 rounded-2xl overflow-hidden border border-[#EBE4DC] relative">
-                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" />
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                   <h3 className="font-sora text-xl font-extrabold text-[#111111] group-hover:text-[#F15A29] transition-colors leading-snug">
                     {item.title}
@@ -571,7 +632,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 04: CAREER ROADMAP (Interactive Node Journey Path)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#0F0F0F] text-white border-b border-white/10 relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-[#0F0F0F] text-white relative overflow-hidden">
         {/* Glow Effects */}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
@@ -591,14 +652,25 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
 
           {/* Interactive Horizontal Node Navigation */}
           <div className="space-y-10">
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="flex items-center gap-2 md:block">
+              <button
+                onClick={() => scrollStepRow(roadmapPillsRef, -1)}
+                aria-label="Scroll stages left"
+                className="shrink-0 md:hidden w-9 h-9 rounded-full bg-[#1C1C1C] border border-[#2A2A2A] text-[#888888] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <div
+                ref={roadmapPillsRef}
+                className="flex min-w-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden items-center justify-start sm:justify-center gap-2 py-1 pr-4 sm:pr-2"
+              >
               {roadmapStages.map((stage, idx) => {
                 const isActive = activeRoadmapIndex === idx;
                 return (
                   <button
                     key={idx}
                     onClick={() => setActiveRoadmapIndex(idx)}
-                    className={`px-5 py-3 rounded-full font-sora text-sm font-extrabold transition-all cursor-pointer flex items-center gap-2.5 ${
+                    className={`shrink-0 whitespace-nowrap px-4 py-2.5 rounded-full font-sora text-[13px] font-extrabold transition-all cursor-pointer flex items-center gap-2 ${
                       isActive
                         ? 'bg-[#F15A29] text-white shadow-xl shadow-[#F15A29]/30 scale-105'
                         : 'bg-[#1C1C1C] text-[#888888] hover:text-white border border-[#2A2A2A]'
@@ -613,6 +685,14 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   </button>
                 );
               })}
+              </div>
+              <button
+                onClick={() => scrollStepRow(roadmapPillsRef, 1)}
+                aria-label="Scroll stages right"
+                className="shrink-0 md:hidden w-9 h-9 rounded-full bg-[#1C1C1C] border border-[#2A2A2A] text-[#888888] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
 
             {/* Stage Detail Highlight Card */}
@@ -629,7 +709,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   <span>STAGE {roadmapStages[activeRoadmapIndex].code} • {roadmapStages[activeRoadmapIndex].highlight}</span>
                 </div>
 
-                <h3 className="text-3xl sm:text-4xl font-extrabold font-sora text-white">
+                <h3 className="text-3xl sm:text-4xl font-extrabold font-sora text-white leading-tight">
                   {roadmapStages[activeRoadmapIndex].name}
                 </h3>
 
@@ -647,7 +727,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 05: JOB ROLES (Floating Professional Showcase)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-white border-b border-[#EBE4DC]">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
           {/* Section Header */}
@@ -672,8 +752,8 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                 whileHover={{ y: -6 }}
                 className="card-premium p-5 rounded-3xl bg-[#FAF8F5] border border-[#EBE4DC] shadow-xs hover:shadow-xl hover:border-[#F15A29]/50 transition-all flex flex-col justify-between space-y-4 group"
               >
-                <div className="h-44 rounded-2xl overflow-hidden border border-[#EBE4DC] relative">
-                  <img src={role.image} alt={role.title} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" />
+                <div className="h-48 sm:h-52 rounded-2xl overflow-hidden border border-[#EBE4DC] relative">
+                  <img src={role.image} alt={role.title} className="w-full h-full object-cover object-top group-hover:scale-108 transition-transform duration-500" loading="lazy" decoding="async" />
                 </div>
                 <div>
                   <h3 className="font-sora text-base sm:text-lg font-extrabold text-[#111111] group-hover:text-[#F15A29] transition-colors">
@@ -691,7 +771,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 06: SALARY & GROWTH POTENTIAL (Business Growth Matrix)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -729,12 +809,12 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                     { tier: "Growth Lead & Consultant", focus: "Commercial strategy & team leadership", growth: "High Impact", bar: 95 }
                   ].map((item, idx) => (
                     <motion.div key={idx} {...fadeUp(0.1 * idx)} className="p-5 rounded-2xl bg-[#1A1A1A] border border-[#2B2B2B] hover:border-[#F15A29]/50 transition-colors">
-                      <div className="flex items-center justify-between gap-4">
-                        <div>
+                      <div className="flex flex-col items-start sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                        <div className="min-w-0">
                           <p className="font-sora text-base font-extrabold text-white">{item.tier}</p>
                           <p className="font-inter text-xs text-[#AAAAAA] mt-0.5">{item.focus}</p>
                         </div>
-                        <span className="px-3 py-1 rounded-full bg-[#F15A29]/15 text-[#F15A29] font-mono text-xs font-bold shrink-0">
+                        <span className="shrink-0 px-2 py-0.5 rounded-full bg-[#F15A29]/15 text-[#F15A29] font-mono text-[10px] font-bold whitespace-nowrap">
                           {item.growth}
                         </span>
                       </div>
@@ -753,8 +833,8 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 07: COMPANIES HIRING (Official Logo Ecosystem)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#FAF8F5] border-b border-[#EBE4DC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-8 sm:py-16 bg-[#FAF8F5] border-b border-[#EBE4DC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
 
           {/* Section Header */}
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto space-y-4">
@@ -767,13 +847,13 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
           </motion.div>
 
           {/* Official Brands Grid with Real Company Logos */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-5 max-w-6xl mx-auto">
             {officialBrands.map((brand, idx) => (
               <motion.div
                 key={idx}
                 {...scaleIn((idx % 6) * 0.06)}
                 whileHover={{ y: -4, scale: 1.03 }}
-                className="p-6 rounded-2xl bg-white border border-[#EBE4DC] shadow-sm hover:border-[#F15A29] hover:shadow-xl transition-all duration-300 flex items-center justify-center h-28 group"
+                className="p-4 sm:p-6 rounded-2xl bg-white border border-[#EBE4DC] shadow-sm hover:border-[#F15A29] hover:shadow-xl transition-all duration-300 flex items-center justify-center h-24 sm:h-28 group"
               >
                 <img
                   src={brand.logo}
@@ -796,7 +876,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 08: PORTFOLIO DEVELOPMENT (Visual Project Showcase Cards)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#0A0A0A] text-white border-b border-white/10 relative overflow-hidden">
+      <section className="pt-14 sm:pt-20 pb-12 sm:pb-16 bg-[#0A0A0A] text-white relative overflow-hidden">
         {/* Ambient Glowing Background */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`, backgroundSize: '28px 28px' }} />
 
@@ -827,7 +907,9 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                     <img
                       src={item.img}
                       alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
@@ -849,7 +931,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 09: RESUME & LINKEDIN SUPPORT (Editorial Layout)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-white border-b border-[#EBE4DC]">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -922,9 +1004,11 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
             <motion.div {...fadeUp(0.15)} className="lg:col-span-6">
               <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl group">
                 <img
-                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80"
+                  src={interviewPreparationImg}
                   alt="Real HR interview scene"
-                  className="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[380px] object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
 
               </div>

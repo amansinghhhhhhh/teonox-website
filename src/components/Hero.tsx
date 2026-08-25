@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { FileText, MessageSquare, Sparkles, Star, Play, ArrowRight, PenTool } from 'lucide-react';
+import { FileText, MessageSquare, Sparkles, Star, Play, ArrowRight, PenTool, Download } from 'lucide-react';
 
 interface HeroProps {
   onExploreClick: () => void;
   onEnquireClick: () => void;
+  onBrochureClick: () => void;
 }
 
 const phrases = [
@@ -17,7 +18,7 @@ const phrases = [
 // to a constant width so typing/erasing never shifts the surrounding layout.
 const LONGEST_PHRASE = phrases.reduce((a, b) => (b.length > a.length ? b : a), phrases[0] || '');
 
-export function Hero({ onExploreClick, onEnquireClick }: HeroProps) {
+export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroProps) {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -104,21 +105,31 @@ export function Hero({ onExploreClick, onEnquireClick }: HeroProps) {
         <div className="flex flex-wrap items-center justify-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <button
             onClick={onExploreClick}
-            className="btn-sassriver-primary px-8 py-4 text-[16px] group cursor-pointer"
+            className="btn-sassriver-primary py-3.5 px-5 sm:px-8 text-sm sm:text-[16px] group cursor-pointer"
           >
-            <Sparkles className="w-5 h-5 fill-white/20 group-hover:rotate-12 transition-transform duration-300" />
-            <span>Explore Programs</span>
-            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1.5 transition-transform duration-300" />
+            <Sparkles className="w-5 h-5 shrink-0 fill-white/20 group-hover:rotate-12 transition-transform duration-300" />
+            <span className="whitespace-nowrap">Explore Programs</span>
+            <ArrowRight className="w-4 h-4 ml-1 shrink-0 group-hover:translate-x-1.5 transition-transform duration-300" />
+          </button>
+
+          <button
+            onClick={onBrochureClick}
+            className="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group"
+          >
+            <div className="w-7 h-7 shrink-0 rounded-full bg-[#FFF0EB] group-hover:bg-[#F15A29] group-hover:text-white flex items-center justify-center text-[#F15A29] transition-all duration-300 shadow-sm">
+              <Download className="w-3.5 h-3.5" />
+            </div>
+            <span className="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Download Brochure</span>
           </button>
 
           <button
             onClick={onEnquireClick}
-            className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group"
+            className="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group"
           >
-            <div className="w-7 h-7 rounded-full bg-[#FFF0EB] group-hover:bg-[#F15A29] group-hover:text-white flex items-center justify-center text-[#F15A29] transition-all duration-300 shadow-sm">
+            <div className="w-7 h-7 shrink-0 rounded-full bg-[#FFF0EB] group-hover:bg-[#F15A29] group-hover:text-white flex items-center justify-center text-[#F15A29] transition-all duration-300 shadow-sm">
               <Play className="w-3 h-3 fill-current ml-0.5" />
             </div>
-            <span className="group-hover:text-[#F15A29] transition-colors duration-300">Talk To Our Team</span>
+            <span className="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Talk To Our Team</span>
           </button>
         </div>
 

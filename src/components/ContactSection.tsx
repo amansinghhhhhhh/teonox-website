@@ -37,7 +37,7 @@ export function ContactSection({
           {/* Subtle grid pattern background */}
           <div className="absolute inset-0 bg-[radial-gradient(#F15A29_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-10 items-center relative z-10">
             
             {/* Left Content Column */}
             <div className="lg:col-span-7 text-left space-y-5">
@@ -73,7 +73,7 @@ export function ContactSection({
 
             {/* Right Side Image Column */}
             <div className="lg:col-span-5 relative flex items-stretch">
-              <div className="relative w-full min-h-[300px] sm:min-h-[360px] lg:min-h-[400px] rounded-[24px] overflow-hidden group/img">
+              <div className="relative w-full min-h-[240px] sm:min-h-[320px] lg:min-h-[400px] rounded-[24px] overflow-hidden group/img">
                 <img
                   src={contactImg}
                   alt="TEONOX Students Collaborating at Campus"

@@ -1,13 +1,11 @@
 ﻿import { LEARNING_EXPERIENCE_DATA } from '../data';
 import { Reveal } from './Reveal';
-
-// Import 3D illustration assets generated for the 6 cards
-import imgLiveBrand from '../assets/images/live_brand_projects_1785232152266.webp';
-import imgAiFuture from '../assets/images/ai_future_labs_1785232175318.webp';
-import imgMentorship from '../assets/images/industry_mentorship_1785232187438.webp';
-import imgSimulations from '../assets/images/business_simulations_1785232203137.webp';
-import imgAgency from '../assets/images/agency_exposure_1785232217114.webp';
-import imgPortfolio from '../assets/images/portfolio_career_1785232229411.webp';
+import imgLiveBrand from '../assets/images/learning-experience/live-brand-projects.webp';
+import imgAiFuture from '../assets/images/learning-experience/ai-future-labs.webp';
+import imgMentorship from '../assets/images/learning-experience/industry-mentorship.webp';
+import imgSimulations from '../assets/images/learning-experience/business-simulations.webp';
+import imgAgency from '../assets/images/learning-experience/agency-industry-exposure.webp';
+import imgPortfolio from '../assets/images/learning-experience/portfolio-career-development.webp';
 
 export function LearningExperienceSection() {
   const cardIllustrations = [

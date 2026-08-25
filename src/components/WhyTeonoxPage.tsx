@@ -22,11 +22,10 @@ import {
   HelpCircle,
   Lightbulb
 } from 'lucide-react';
-
-import heroImg from '../assets/images/whyteonox_hero_img_1785591499511.webp';
-import stage1Img from '../assets/images/regenerated_image_1785500917222.webp';
-import stage2Img from '../assets/images/regenerated_image_1785500919105.webp';
-import stage3Img from '../assets/images/regenerated_image_1785500921424.webp';
+import heroImg from '../assets/images/why-teonox/why_teonox_hero.webp';
+import stage1Img from '../assets/images/learn-updated.webp';
+import stage2Img from '../assets/images/apply.webp';
+import stage3Img from '../assets/images/Lead.webp';
 
 interface WhyTeonoxPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -157,12 +156,13 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-3xl overflow-hidden border border-[#EBE4DC] shadow-xl group">
+              <div className="relative rounded-3xl overflow-hidden border border-[#EBE4DC] shadow-xl group aspect-[16/10]">
                 <img
                   src={heroImg}
                   alt="Young marketer mastering digital strategy & AI execution at TEONOX"
-                  className="w-full h-[320px] sm:h-[400px] object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </motion.div>
@@ -231,8 +231,8 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                   But choosing a Professional Program should not begin with:
                 </p>
               </div>
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#FAF8F5] border border-[#EBE4DC] space-y-2">
-                <p className="text-xl sm:text-2xl font-extrabold font-sora text-[#666666] line-through decoration-[#F15A29] decoration-2">
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#FAF8F5] border border-[#EBE4DC] space-y-2 flex items-center justify-center min-h-[104px]">
+                <p className="text-xl sm:text-2xl font-extrabold font-sora text-[#666666] line-through decoration-[#F15A29] decoration-2 text-center leading-snug m-0">
                   How much does the course cost?
                 </p>
               </div>
@@ -366,7 +366,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 </div>
                 <div className="lg:col-span-5">
                   <div className="rounded-2xl overflow-hidden border border-[#EBE4DC] shadow-md h-[320px] relative group">
-                    <img src={stage1Img} alt="Learn Phase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={stage1Img} alt="Students building strong marketing foundations in a live masterclass at TEONOX" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                 </div>
               </motion.div>
@@ -399,7 +399,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 </div>
                 <div className="lg:col-span-5">
                   <div className="rounded-2xl overflow-hidden border border-[#EBE4DC] shadow-md h-[320px] relative group">
-                    <img src={stage2Img} alt="Apply Phase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={stage2Img} alt="Learners running real-budget ad campaigns on live analytics dashboards" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                 </div>
               </motion.div>
@@ -432,7 +432,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 </div>
                 <div className="lg:col-span-5">
                   <div className="rounded-2xl overflow-hidden border border-[#EBE4DC] shadow-md h-[320px] relative group">
-                    <img src={stage3Img} alt="Lead Phase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={stage3Img} alt="TEONOX student confidently presenting a growth strategy to a team" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   </div>
                 </div>
               </motion.div>
@@ -458,8 +458,8 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               </p>
             </div>
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap gap-2">
+            {/* Filter Pills — single scrollable row on mobile */}
+            <div className="flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden gap-2 py-1 pr-4 md:pr-0 w-full min-w-0 md:w-auto">
               {[
                 { id: 'all', label: 'All Pillars' },
                 { id: 'skills', label: 'Skills & AI' },
@@ -469,7 +469,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 <button
                   key={tab.id}
                   onClick={() => setActivePillarFilter(tab.id as any)}
-                  className={`px-4 py-2.5 rounded-xl font-sora text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  className={`shrink-0 whitespace-nowrap px-4 py-2.5 rounded-xl font-sora text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                     activePillarFilter === tab.id
                       ? 'bg-[#111111] text-white shadow-sm'
                       : 'bg-white border border-[#EBE4DC] text-[#666666] hover:text-[#111111] hover:border-[#111111]'
@@ -498,7 +498,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Brain className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -546,7 +546,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Target className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -603,7 +603,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Briefcase className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -641,7 +641,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Flame className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -697,7 +697,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <MessageSquare className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -738,7 +738,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <TrendingUp className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -787,7 +787,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Rocket className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -828,7 +828,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Users className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -864,7 +864,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Award className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -915,7 +915,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <Zap className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -961,7 +961,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-xs space-y-6 hover:border-[#F15A29]/60 hover:shadow-[0_20px_40px_-15px_rgba(241,90,41,0.12)] transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-5">
-                  <div className="w-13 h-13 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center font-bold group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center shrink-0 group-hover:bg-[#F15A29] group-hover:text-white transition-colors">
                     <GraduationCap className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
@@ -1067,9 +1067,9 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: (idx % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{ scale: 1.01 }}
-                  className={`p-6 rounded-2xl border transition-all cursor-pointer font-sora flex flex-col justify-between ${
-                    openQuestionIdx === idx 
-                      ? 'bg-[#F15A29] border-[#F15A29] text-white shadow-xl' 
+                  className={`p-5 sm:p-6 rounded-2xl border transition-all cursor-pointer font-sora flex flex-col justify-between ${
+                    openQuestionIdx === idx
+                      ? 'bg-white/10 border-[#F15A29]/70 text-white shadow-lg ring-1 ring-[#F15A29]/40'
                       : 'bg-white/5 border-white/10 text-white/90 hover:bg-white/10 hover:border-white/20'
                   }`}
                   onClick={() => setOpenQuestionIdx(openQuestionIdx === idx ? null : idx)}
@@ -1077,7 +1077,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-extrabold uppercase tracking-widest opacity-80">QUESTION 0{idx + 1}</span>
-                      <CheckSquare className={`w-5 h-5 shrink-0 ${openQuestionIdx === idx ? 'text-white' : 'text-[#FF8A50]'}`} />
+                      <CheckSquare className="w-5 h-5 shrink-0 text-[#FF8A50]" />
                     </div>
                     <h4 className="text-base sm:text-lg font-bold leading-snug">{item.q}</h4>
                   </div>
@@ -1151,7 +1151,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 06: THE TEONOX DIFFERENCE (FORMULA & SUMMARY)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-[#111111] text-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-[#111111] text-white relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
         </div>
 
@@ -1198,7 +1198,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
             </div>
           </div>
 
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 pt-2 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => onEnquireClick('Why TEONOX Final CTA')}
               className="px-10 py-5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm sm:text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"

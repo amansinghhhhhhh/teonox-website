@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useInView } from 'motion/react';
-import admissionsHeroImg from '../assets/images/regenerated_image_1785591698934.webp';
+import admissionsHeroImg from '../assets/images/admissions/admissions_hero.webp';
 import {
   CheckCircle2, ArrowUpRight, HelpCircle, Laptop, Globe, MessageSquare,
   Clock, Compass, FileCheck, GraduationCap, Award, Users, BookOpen,
@@ -126,7 +126,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
   ];
 
   return (
-    <div className="pt-20 pb-12 bg-white text-[#201A17] min-h-screen overflow-x-hidden">
+    <div className="pt-20 pb-0 bg-white text-[#201A17] min-h-screen overflow-x-hidden">
 
       {/* ═══════════════════════════════════════
           SECTION 01 - HERO
@@ -142,17 +142,17 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 space-y-6"
+              className="lg:col-span-7 space-y-6 text-center lg:text-left"
             >
               <h1 className="font-sora text-[28px] sm:text-[36px] lg:text-[46px] font-[900] text-[#111111] tracking-tight leading-[1.15]">
                 Your Journey at TEONOX <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6A2B] to-[#D8420F]">Starts Here</span>
               </h1>
 
-              <p className="font-inter text-[15px] sm:text-[17px] text-[#444444] font-[450] leading-relaxed max-w-2xl">
+              <p className="font-inter text-[15px] sm:text-[17px] text-[#444444] font-[450] leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 From your first inquiry to your first class, we make every step clear, simple and focused on your future. Whether you are a student, working professional, or entrepreneur, TEONOX provides a structured admissions pathway to launch your career in the Digital & AI economy.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
                 <button
                   onClick={() => onEnquireClick('Admissions Counselling')}
                   className="group px-7 py-3.5 rounded-full bg-[#FF6A2B] hover:bg-[#D8420F] text-white font-sora text-sm sm:text-base font-semibold shadow-lg shadow-[#FF6A2B]/25 hover:shadow-xl hover:shadow-[#FF6A2B]/35 transition-all flex items-center gap-2 active:scale-95 hover:-translate-y-0.5"
@@ -170,19 +170,19 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               </div>
 
               {/* Value Badges - pop in with stagger + subtle float on hover */}
-              <div className="grid grid-cols-2 gap-3 pt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
                 {valueBadges.map((b, i) => {
                   const Icon = b.icon;
                   return (
                     <motion.div key={b.title} {...scaleIn(0.15 + i * 0.08)}
-                      className="p-3.5 rounded-2xl bg-white border border-[#F0DFCE] shadow-xs hover:border-[#FF6A2B]/50 hover:shadow-md transition-all duration-300 flex items-center gap-3 group"
+                      className="p-4 rounded-2xl bg-white border border-[#F0DFCE] shadow-xs hover:border-[#FF6A2B]/50 hover:shadow-md transition-all duration-300 flex items-center gap-3.5 group"
                     >
                       <div className="w-9 h-9 rounded-xl bg-[#FFF0EB] text-[#FF6A2B] flex items-center justify-center shrink-0 group-hover:-translate-y-0.5 group-hover:rotate-[-6deg] transition-transform duration-300">
                         <Icon className="w-4.5 h-4.5" />
                       </div>
-                      <div>
-                        <span className="font-sora text-xs sm:text-sm font-bold text-[#111111] block">{b.title}</span>
-                        <span className="font-inter text-[11px] sm:text-xs text-[#666666]">{b.sub}</span>
+                      <div className="min-w-0">
+                        <span className="font-sora text-sm font-bold text-[#111111] block leading-snug">{b.title}</span>
+                        <span className="font-inter text-[11px] sm:text-xs text-[#666666] leading-snug">{b.sub}</span>
                       </div>
                     </motion.div>
                   );
@@ -198,24 +198,14 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-[28px] overflow-hidden border-2 border-[#F0DFCE] shadow-2xl group p-2.5 bg-white">
-                <div className="rounded-[20px] overflow-hidden">
-                  <img
-                    src={admissionsHeroImg}
-                    alt="Students receiving admissions counselling at TEONOX"
-                    className="w-full h-[320px] sm:h-[420px] object-cover object-center group-hover:scale-[1.05] transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                {/* Floating orbit badge */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute -top-5 -right-5 w-20 h-20 rounded-2xl bg-white border border-[#F0DFCE] shadow-xl flex flex-col items-center justify-center gap-0.5"
-                >
-                  <span className="font-sora text-[20px] font-[900] text-[#FF6A2B] leading-none">9</span>
-                  <span className="font-inter text-[9px] text-[#888888] text-center leading-tight">Simple<br />Steps</span>
-                </motion.div>
+              <div className="relative rounded-3xl overflow-hidden border-2 border-[#F0DFCE] shadow-2xl aspect-[4/3] max-h-[380px] sm:max-h-[420px]">
+                <img
+                  src={admissionsHeroImg}
+                  alt="Students receiving admissions counselling at TEONOX"
+                  className="w-full h-full object-cover object-[15%_center]"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </motion.div>
           </div>
@@ -229,14 +219,14 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
       <section className="py-8 sm:py-10 bg-[#201A17] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,106,43,0.06)_1px,transparent_1px)] [background-size:26px_26px] pointer-events-none" />
         <div className="w-[88%] max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 divide-x divide-white/10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 divide-x divide-white/10">
             {[
               { value: 12, suffix: '+', label: 'Years of Industry Legacy' },
               { value: 50, suffix: '+', label: 'AI & Business Tools Taught' },
               { value: 9, suffix: '', label: 'Simple Admission Steps' },
               { value: 100, suffix: '%', label: 'Practical, Execution-Led' },
             ].map((stat, i) => (
-              <motion.div key={stat.label} {...fadeUp(i * 0.1)} className={`text-center ${i > 0 ? 'pl-6 sm:pl-10' : ''}`}>
+              <motion.div key={stat.label} {...fadeUp(i * 0.1)} className="text-center py-6 px-3">
                 <div className="font-sora text-[32px] sm:text-[44px] font-[900] text-[#FF6A2B] leading-none mb-2">
                   <CountUp value={stat.value} suffix={stat.suffix} />
                 </div>
@@ -254,7 +244,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="max-w-3xl mb-10 space-y-3">
-            <h2 className="font-sora text-[28px] sm:text-[40px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[28px] sm:text-[40px] font-[900] leading-tight text-[#111111]">
               Course Pre-Requisites <span className="text-[#FF6A2B]">(Eligibility)</span>
             </h2>
             <p className="font-inter text-[15.5px] sm:text-[17px] text-[#444444]">
@@ -268,9 +258,9 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
             <motion.div
               animate={{ scale: [1, 1.08, 1] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-12 h-12 rounded-2xl bg-[#FF6A2B] text-white flex items-center justify-center shrink-0 shadow-lg shadow-[#FF6A2B]/30"
+              className="w-10 h-10 rounded-xl bg-orange-500/10 text-[#FF6A2B] flex items-center justify-center shrink-0 shadow-lg shadow-[#FF6A2B]/20"
             >
-              <CheckCircle2 className="w-6 h-6" />
+              <CheckCircle2 className="w-5 h-5" />
             </motion.div>
             <div className="relative z-10">
               <h3 className="font-sora text-[17px] sm:text-[19px] font-bold text-[#111111]">Zero Technical or Coding Background Required</h3>
@@ -289,7 +279,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
                   {/* animated left accent bar */}
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#FFE2CC] group-hover:bg-[#FF6A2B] transition-colors duration-400" />
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-2xl bg-[#FFF0EB] text-[#FF6A2B] flex items-center justify-center shrink-0 group-hover:bg-[#FF6A2B] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-[#FF6A2B] flex items-center justify-center shrink-0 group-hover:bg-[#FF6A2B] group-hover:text-white group-hover:scale-110 transition-all duration-300">
                       <IconComponent className="w-5 h-5" />
                     </div>
                     <div>
@@ -312,18 +302,18 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
         <div className="w-[88%] max-w-5xl mx-auto">
 
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <h2 className="font-sora text-[28px] sm:text-[40px] font-[900] text-[#111111]">Your Journey at TEONOX Starts Here</h2>
+            <h2 className="font-sora text-[28px] sm:text-[40px] font-[900] leading-tight text-[#111111]">Simple 9-Step Admission Roadmap</h2>
             <p className="font-inter text-[15.5px] sm:text-[17px] text-[#555555]">A transparent, step-by-step roadmap to guide you from your initial inquiry to your first class.</p>
           </motion.div>
 
           {/* Vertical scroll-progress timeline */}
           <div ref={timelineRef} className="relative">
-            {/* Track (background line) */}
-            <div className="absolute left-[27px] sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-[3px] bg-[#EFEBE4] rounded-full" />
+            {/* Track (background line) — aligned to the center axis of the 56px node circles (28px) */}
+            <div className="absolute left-[26.5px] sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-[3px] bg-[#EFEBE4] rounded-full" />
             {/* Animated fill line, grows with scroll */}
             <motion.div
               style={{ height: lineHeight }}
-              className="absolute left-[27px] sm:left-1/2 sm:-translate-x-1/2 top-0 w-[3px] bg-gradient-to-b from-[#FF6A2B] to-[#FFB27A] rounded-full origin-top"
+              className="absolute left-[26.5px] sm:left-1/2 sm:-translate-x-1/2 top-0 w-[3px] bg-gradient-to-b from-[#FF6A2B] to-[#FFB27A] rounded-full origin-top"
             />
 
             <div className="space-y-10 sm:space-y-14">
@@ -416,7 +406,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               </div>
             </div>
 
-            <motion.div {...fadeUp(0.2)} className="lg:col-span-4 flex flex-col gap-3 justify-center relative z-10">
+            <motion.div {...fadeUp(0.2)} className="mt-6 lg:mt-0 lg:col-span-4 flex flex-col gap-3 justify-center relative z-10">
               <button
                 onClick={() => onEnquireClick('Fee Structure Enquiry')}
                 className="group w-full py-4 px-6 rounded-2xl bg-[#FF6A2B] hover:bg-[#D8420F] text-white font-sora font-semibold text-base shadow-lg shadow-[#FF6A2B]/25 hover:shadow-xl transition-all text-center flex items-center justify-center gap-2 active:scale-95 hover:-translate-y-0.5"

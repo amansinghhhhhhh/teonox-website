@@ -1,19 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { 
-  ArrowUpRight, ChevronLeft, ChevronRight, Target, Compass,
+  ArrowUpRight, Target, Compass,
   Lightbulb, CheckCircle2, Zap, GraduationCap, TrendingUp, Users, Briefcase,
   Rocket, Building2, ShieldCheck, Award, Layers, Brain, MessageSquareText,
-  BarChart3, Search, Share2, Bot, UserCheck, Quote, Globe, Cpu, Play
+  BarChart3, Search, Share2, Bot, UserCheck, Quote, Globe, Cpu
 } from 'lucide-react';
 
-import heroImg from '../assets/images/regenerated_image_1785594738988.webp';
-import imgLeader from '../assets/images/about_us.webp';
+import heroImg from '../assets/images/about/about_hero.webp';
+import imgLeader from '../assets/images/about/sir.webp';
 import imgAbstractSphere from '../assets/images/about_abstract_sphere_1785405313900.webp';
-import imgStudentPromise from '../assets/images/about_student_promise_1785405327744.webp';
+import imgStudentPromise from '../assets/images/about/promise.webp';
 import imgGallery1 from '../assets/images/about_gallery_collaboration_1785405341342.webp';
 import imgGallery2 from '../assets/images/about_gallery_workshop_1785405360873.webp';
 import imgGallery3 from '../assets/images/about_gallery_working_1785405378588.webp';
+import { MomentsSection } from './sections/MomentsSection';
 
 interface AboutUsPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -49,22 +50,6 @@ const scaleIn = (delay = 0) => ({
 });
 
 export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
-  const [playingId, setPlayingId] = useState<string | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const scrollSlider = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: direction === 'left' ? -340 : 340, behavior: 'smooth' });
-    }
-  };
-
-  const TEONOX_VIDEOS = [
-    { id: 'v1', title: 'Live AI Campaign Build & Performance Strategy', videoUrl: 'https://www.instagram.com/reel/DV_KQluArs_/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/652674066_17918278113295636_4131405383375062786_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Hr4BNWrI9FoQ7kNvwF2SqvO&_nc_oc=AdoquvazmI32qA3PGvU72_XWj4GdMHmq6bA5M1Tdn29j2lmsnJVS7btqsoEHfKqcFr4&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=6IVeNJ3PBE_6Z1rDOrnIPw&_nc_ss=7b60f&oh=00_AQH5vOl1McgcmSPQzL2FokU2wP8plibgN-HQJOBC4AfofQ&oe=6A75FD1A' },
-    { id: 'v2', title: 'Real Brand Pitch & Student Case Presentation', videoUrl: 'https://www.instagram.com/reel/DWN5rOAjMts/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/656401774_17919298452295636_313729976479143819_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=RlXPUPTkil8Q7kNvwFuxmW4&_nc_oc=Adowcb2M0jnabVq5ZrzUI0r45krIFC7LGu6nYCJ3jddRmjf5EK6AL1DnNzvxGUfWquE&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=zQyVok3ki2Cm0yH_JRALLg&_nc_ss=7b60f&oh=00_AQHwqhdp2kWVzFcA6VHzQ-UjEXu6kFE5FRCIpz9GVkn1gQ&oe=6A761DA9' },
-    { id: 'v3', title: 'Mentorship & 1-on-1 Growth Guidance Session', videoUrl: 'https://www.instagram.com/reel/DWf3dceghLh/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/656637297_17920488102295636_3506271017755900266_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=27JMoHydojgQ7kNvwEpdh4E&_nc_oc=Adqesm2ey5zRdSn7ba7zTTkhNLPsG4gfze67Exx0FmB-Hv0JbLdo7veRwsi2SB9lnWU&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=zndB1nQcmqQqK5kOyeVpIQ&_nc_ss=7b60f&oh=00_AQEMNdIHAdshLc0LDGdo-axqhGGC-fhPyLfzEESJh0UKYg&oe=6A75F3A9' },
-    { id: 'v4', title: 'Analytics Breakdown & Funnel Optimization', videoUrl: 'https://www.instagram.com/reel/DYWhSgig_gL/embed', thumbnail: 'https://scontent.cdninstagram.com/v/t51.82787-15/702500970_17928472422295636_7925865670483555619_n.jpg?stp=cmp1_dst-jpg_e35_s640x640_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=WXkcf5zeIIIQ7kNvwFV4Cdq&_nc_oc=AdpbGJJN9NqwNtw5lu12aklS51p_LSDnfeua-aWpj5SDxwfLh8sgVeGpAa3P9nUKitA&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=-e6WTEPpQgHO_1vRlOq2gA&_nc_ss=7b60f&oh=00_AQGFtH9SCEQ5csQpNi16fdZ1CSM70HxJVtdLimxvh1Mzpg&oe=6A760637' },
-  ];
-
   const stats = [
     { value: '12+', label: 'Years Industry Experience' },
     { value: '50+', label: 'AI & Business Tools' },
@@ -114,7 +99,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
   ];
 
   return (
-    <div className="pt-20 sm:pt-24 pb-16 bg-white min-h-screen text-[#201A17] font-['Sora',sans-serif] overflow-x-hidden">
+    <div className="pt-20 sm:pt-24 pb-0 bg-white min-h-screen text-[#201A17] font-['Sora',sans-serif] overflow-x-hidden">
 
       {/* ═══════════════════════════════════════
           SECTION 01 - HERO
@@ -126,7 +111,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-14">
 
             {/* Left */}
-            <motion.div {...fadeLeft(0)} className="lg:col-span-7 space-y-6">
+            <motion.div {...fadeLeft(0)} className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <motion.h1 {...fadeUp(0.1)} className="font-sora text-[28px] sm:text-[38px] lg:text-[46px] font-[900] text-[#111111] tracking-tight leading-[1.12]">
                 Building Future-Ready Professionals for the{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6A2B] to-[#D8420F]">
@@ -164,6 +149,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                     src={heroImg}
                     alt="TEONOX team"
                     className="w-full h-[320px] sm:h-[420px] object-cover object-center group-hover:scale-[1.05] transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -211,7 +198,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
             <motion.div {...fadeLeft(0)} className="lg:col-span-7 space-y-6">
-              <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] text-[#111111] tracking-tight leading-[1.15]">
+              <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] leading-tight text-[#111111] tracking-tight leading-[1.15]">
                 Built on <span className="text-[#FF6A2B]">12+ Years</span> of Real Agency Experience at A2 Digital
               </h2>
               <div className="space-y-4 font-inter text-[15.5px] sm:text-[16.5px] leading-[1.75] text-[#444444]">
@@ -228,6 +215,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                     src={imgLeader}
                     alt="A2 Digital Founder & Mentors at TEONOX"
                     className="w-full h-[480px] sm:h-[560px] object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -243,7 +232,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-[#FAFAFC] border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="text-center mb-12">
-            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] text-[#111111]">Vision & Mission</h2>
+            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] leading-tight text-[#111111]">Vision & Mission</h2>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[
@@ -278,7 +267,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">
               What Makes TEONOX <span className="text-[#FF6A2B]">Different?</span>
             </h2>
             <p className="font-inter text-[16px] text-[#555555]">At TEONOX, learning extends beyond software and certifications into true business capability.</p>
@@ -289,8 +278,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
               <motion.div key={d.num} {...fadeUp(i * 0.12)}
                 className="relative p-8 sm:p-10 rounded-3xl bg-[#FFF9F5] border border-[#FFE8D6] overflow-hidden group hover:border-[#FF6A2B] hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
               >
-                {/* big number watermark */}
-                <div className="absolute -top-4 -right-2 font-mono text-[80px] font-extrabold text-[#FFD8C0] group-hover:text-[#FF6A2B]/20 transition-colors leading-none select-none pointer-events-none">{d.num}</div>
+                {/* big number watermark — pinned top-right, faded on mobile so it never overlaps copy */}
+                <div className="absolute -top-4 -right-2 font-mono text-[52px] sm:text-[80px] font-extrabold text-[#FFD8C0] opacity-60 sm:opacity-100 group-hover:text-[#FF6A2B]/20 transition-colors leading-none select-none pointer-events-none">{d.num}</div>
                 <p className="font-inter text-[13px] text-[#999999] mb-2 italic relative z-10">{d.contrast}</p>
                 <h3 className="font-sora text-[22px] sm:text-[24px] font-[800] text-[#111111] mb-4 relative z-10 group-hover:text-[#FF6A2B] transition-colors">{d.title}</h3>
                 <div className="border-t border-[#FFE2CC] pt-4 relative z-10">
@@ -320,7 +309,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="w-[88%] max-w-7xl mx-auto relative z-10">
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-white">The TEONOX <span className="text-[#FF6A2B]">Philosophy</span></h2>
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-white">The TEONOX <span className="text-[#FF6A2B]">Philosophy</span></h2>
             <p className="font-inter text-[16px] text-[#A79885]">Education should prepare you not only for your first job, but for an entire career.</p>
           </motion.div>
 
@@ -348,7 +337,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="max-w-3xl mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">
               The TEONOX <span className="text-[#FF6A2B]">Learning Experience</span>
             </h2>
             <p className="font-inter text-[16px] text-[#555555]">Every TEONOX program is designed around experiential learning. Our learners don't just watch demonstrations, they actively participate in solving real business challenges.</p>
@@ -386,14 +375,14 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-[#FAFAFC] border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="max-w-3xl mb-10 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] text-[#111111]">Beyond <span className="text-[#FF6A2B]">Digital Marketing</span></h2>
+            <h2 className="font-sora text-[30px] sm:text-[40px] font-[900] leading-tight text-[#111111]">Beyond <span className="text-[#FF6A2B]">Digital Marketing</span></h2>
             <p className="font-inter text-[16px] text-[#555555]">While Digital Marketing remains one of our core strengths, TEONOX believes that modern professionals require a broader understanding of business. Our curriculum integrates:</p>
           </motion.div>
 
           <div className="flex flex-wrap gap-3">
             {skills.map((skill, index) => (
               <motion.div key={index} {...scaleIn(0.03 * index)}
-                className="px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-xs text-[#201A17] font-sora text-[14.5px] font-semibold hover:border-[#FF6A2B] hover:bg-[#FFF8F5] hover:text-[#D8420F] hover:-translate-y-0.5 transition-all flex items-center gap-2 cursor-default"
+                className="px-3.5 py-2 sm:px-5 sm:py-3 rounded-2xl bg-white border border-slate-200 shadow-xs text-[#201A17] font-sora text-[13px] sm:text-[14.5px] font-semibold hover:border-[#FF6A2B] hover:bg-[#FFF8F5] hover:text-[#D8420F] hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 cursor-default"
               >
                 <div className="w-2 h-2 rounded-full bg-[#FF6A2B]" />
                 {skill}
@@ -414,7 +403,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE]">
         <div className="w-[88%] max-w-7xl mx-auto">
           <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] text-[#111111]">Built for <span className="text-[#FF6A2B]">Every Learner</span></h2>
+            <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">Built for <span className="text-[#FF6A2B]">Every Learner</span></h2>
             <p className="font-inter text-[16px] text-[#555555]">TEONOX provides structured learning pathways designed to support your specific professional goals.</p>
           </motion.div>
 
@@ -456,13 +445,13 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             </motion.div>
 
             <motion.div {...fadeRight(0.15)} className="lg:col-span-4 flex justify-center">
-              <div className="w-full p-8 rounded-3xl bg-[#2B231F] border border-white/10 hover:border-[#FF6A2B]/50 transition-all duration-400 text-center space-y-4 group">
+              <div className="w-full p-8 pb-10 rounded-3xl bg-[#2B231F] border border-white/10 hover:border-[#FF6A2B]/50 transition-all duration-400 text-center space-y-4 group">
                 <div className="w-16 h-16 rounded-2xl bg-[#FF6A2B]/15 flex items-center justify-center mx-auto group-hover:bg-[#FF6A2B] transition-all duration-300">
                   <ShieldCheck className="w-8 h-8 text-[#FF6A2B] group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="font-sora text-xl font-bold text-white">Always Up-To-Date</h3>
                 <p className="font-inter text-[13.5px] text-[#A79885] leading-relaxed">Curriculum refreshed quarterly with real industry input</p>
-                <div className="flex flex-wrap gap-2 justify-center pt-2">
+                <div className="flex flex-wrap gap-2 justify-center pt-4">
                   {['AI', 'Marketing', 'Data', 'Sales'].map(tag => (
                     <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 font-sora text-[11px] font-[600] text-white/80">{tag}</span>
                   ))}
@@ -477,64 +466,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
       {/* ═══════════════════════════════════════
           SECTION 10 - LIFE AT TEONOX (Video Reel)
       ═══════════════════════════════════════ */}
-      <section className="py-12 sm:py-16 bg-white border-t border-[#F0DFCE] relative overflow-hidden">
-        <div className="w-[88%] max-w-7xl mx-auto">
-          <motion.div {...fadeUp(0)} className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-            <div>
-              <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] text-[#111111] tracking-tight mb-2">
-                Moments That <span className="text-[#FF6A2B]">Define Us</span>
-              </h2>
-              <p className="font-inter text-[15px] text-[#555555]">A glimpse into our world: real sessions, real energy, real growth.</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <button onClick={() => scrollSlider('left')} className="w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-[#FFF0EB] hover:border-[#FF6A2B] text-[#111111] hover:text-[#FF6A2B] flex items-center justify-center transition-all shadow-xs">
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button onClick={() => scrollSlider('right')} className="w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-[#FFF0EB] hover:border-[#FF6A2B] text-[#111111] hover:text-[#FF6A2B] flex items-center justify-center transition-all shadow-xs">
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </motion.div>
-
-          <div ref={scrollContainerRef} className="flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {TEONOX_VIDEOS.map((video, vi) => (
-              <motion.div key={video.id} {...scaleIn(vi * 0.1)}
-                className="w-[280px] sm:w-[320px] shrink-0 aspect-[9/16] rounded-3xl overflow-hidden relative group cursor-pointer border border-slate-200 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 snap-start bg-black"
-              >
-                {playingId === video.id ? (
-                  <iframe
-                    src={`${video.videoUrl}?autoplay=1`}
-                    frameBorder="0"
-                    scrolling="no"
-                    allowFullScreen
-                    allow="autoplay; encrypted-media; fullscreen"
-                    title={video.title}
-                    className="absolute inset-0 w-full h-full"
-                  />
-                ) : (
-                  <>
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-300" />
-                    <div onClick={() => setPlayingId(video.id)} className="absolute inset-0 flex items-center justify-center">
-                      <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 shadow-xl flex items-center justify-center text-[#111111] group-hover:bg-[#FF6A2B] group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                        <Play className="w-7 h-7 sm:w-8 sm:h-8 ml-1" fill="currentColor" />
-                      </span>
-                    </div>
-                    <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="font-sora text-[12.5px] sm:text-[13.5px] font-[700] text-white leading-snug">{video.title}</p>
-                    </div>
-                  </>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <MomentsSection />
 
 
       {/* ═══════════════════════════════════════
@@ -546,7 +478,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           {/* More Than Education */}
           <motion.div {...fadeUp(0)} className="bg-white p-9 sm:p-12 rounded-3xl border border-[#FFE8D6] shadow-sm space-y-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF6A2B]/5 rounded-bl-full pointer-events-none" />
-            <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] text-[#111111]">
+            <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] leading-tight text-[#111111]">
               More Than <span className="text-[#FF6A2B]">Education</span>
             </h2>
             <p className="font-inter text-[16px] sm:text-[17px] leading-relaxed text-[#444444]">
@@ -563,7 +495,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           {/* Our Promise */}
           <motion.div {...fadeUp(0.1)} className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-white p-9 sm:p-12 rounded-3xl border border-[#FFE8D6] shadow-sm">
             <div className="lg:col-span-7 space-y-5">
-              <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] text-[#111111]">Our <span className="text-[#FF6A2B]">Promise</span></h2>
+              <h2 className="font-sora text-[28px] sm:text-[38px] font-[900] leading-tight text-[#111111]">Our <span className="text-[#FF6A2B]">Promise</span></h2>
               <div className="space-y-4 font-inter text-[16px] text-[#444444] leading-relaxed">
                 <p className="font-semibold text-rose-600">We cannot promise instant success. We cannot promise shortcuts.</p>
                 <p>What we do promise is an environment where motivated learners can build the skills, mindset and practical experience required to compete confidently in the Digital & AI economy.</p>
@@ -572,7 +504,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             </div>
             <div className="lg:col-span-5">
               <div className="relative rounded-[24px] overflow-hidden border border-[#FFE8D6] shadow-lg group">
-                <img src={imgStudentPromise} alt="TEONOX Student" className="rounded-2xl w-full h-[320px] object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={imgStudentPromise} alt="TEONOX Student" className="rounded-2xl w-full h-auto min-h-[280px] object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
             </div>
           </motion.div>

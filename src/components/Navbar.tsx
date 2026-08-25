@@ -84,7 +84,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
           <div className="flex items-center gap-2.5">
             <button
               onClick={onEnquireClick}
-              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#FF6A2B] text-white hover:bg-[#D8420F] font-sora text-[13.5px] font-[600] transition-all shadow-sm shadow-[#FF6A2B]/20 active:scale-95"
+              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#FF6A2B] text-white hover:bg-[#D8420F] font-sora text-[13.5px] font-[600] transition-all shadow-sm shadow-[#FF6A2B]/20 active:scale-95 cursor-pointer"
             >
               <span>Enquire Now</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -103,8 +103,8 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#F0DFCE] px-6 pt-4 pb-6 shadow-xl animate-fade-in-up">
-          <div className="flex flex-col space-y-2">
+        <div className="lg:hidden bg-white border-b border-[#F0DFCE] px-4 pt-3 pb-5 shadow-xl animate-fade-in-up">
+          <div className="flex flex-col space-y-1">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -113,7 +113,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
                   e.preventDefault();
                   handleNavClick(item.href, item.label);
                 }}
-                className={`px-4 py-3 rounded-xl text-lg font-sora font-semibold transition-colors ${
+                className={`px-4 py-2.5 rounded-xl text-base font-sora font-semibold transition-colors ${
                   activeSection === item.label
                     ? 'bg-[#FFEEDD] text-[#FF6A2B] border-l-4 border-[#FF6A2B]'
                     : 'text-[#736657] hover:bg-[#FFF6EE] hover:text-[#201A17]'
@@ -122,16 +122,16 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
                 {item.label}
               </a>
             ))}
-            <div className="pt-3">
+            <div className="pt-2.5">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onEnquireClick();
                 }}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#FF6A2B] text-white font-sora font-semibold text-lg shadow-md shadow-[#FF6A2B]/20"
+                className="w-full flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FF6A2B] text-white font-sora font-semibold text-base shadow-md shadow-[#FF6A2B]/20 cursor-pointer"
               >
                 <span>Enquire Now</span>
-                <ArrowUpRight className="w-5 h-5" />
+                <ArrowUpRight className="w-4 h-4" />
               </button>
             </div>
           </div>

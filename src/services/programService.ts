@@ -933,3 +933,71 @@ export async function fetchProgramCategories(): Promise<
 
   return [];
 }
+
+/**
+ * Fetch aggregate certification data across all published programs for the
+ * homepage Certifications showcase. Counts every certification row returned
+ * by the WP REST list endpoint (each program's `certifications` ACF repeater),
+ * so the total stays in sync whenever new programs or certifications are added
+ * in WordPress Admin.
+ */
+export async function fetchCertificationStats(): Promise<{
+  total: number;
+  programs: number;
+  isLive: boolean;
+}> {
+  // Never hardcode counts — the numbers always come from the live WP payload so
+  // new programs/certifications reflect automatically. Zero + isLive:false means
+  // "don't render any figures" when the API is unreachable.
+  const fallback = { total: 0, programs: 0, isLive: false };
+  try {
+    const res = await fetch(
+      `${CMS_URL}/program&per_page=100&orderby=date&order=desc&_cb=${Date.now()}`,
+    );
+    if (!res.ok) return fallback;
+    const json = await safeJson(res);
+    const posts = Array.isArray(json) ? json : json?.data;
+    if (!Array.isArray(posts) || posts.length === 0) return fallback;
+
+    let total = 0;
+    for (const p of posts) {
+      const rows = p?.acf?.certifications;
+      if (Array.isArray(rows)) total += rows.length;
+    }
+    return { total, programs: posts.length, isLive: true };
+  } catch {
+    return fallback;
+  }
+}
+
+/**
+ * Fetch lightweight { id, title } program list for the footer SEO program links
+ * (IIDE-style keyword block). Falls back to static program data when the API is
+ * unreachable so the footer never renders empty.
+ */
+export async function fetchFooterPrograms(): Promise<{
+  programs: { id: string; title: string }[];
+  isLive: boolean;
+}> {
+  const fallback = FALLBACK_PROGRAM_CARDS.map((c) => ({ id: c.id, title: c.title }));
+  try {
+    const res = await fetch(
+      `${CMS_URL}/program&per_page=100&orderby=title&order=asc&_cb=${Date.now()}`,
+    );
+    if (!res.ok) return { programs: fallback, isLive: false };
+    const json = await safeJson(res);
+    const posts = Array.isArray(json) ? json : json?.data;
+    if (!Array.isArray(posts) || posts.length === 0) {
+      return { programs: fallback, isLive: false };
+    }
+    const programs = posts
+      .map((p) => ({
+        id: String(p?.slug || p?.id || '').trim(),
+        title: String(p?.title?.rendered || p?.slug || '').trim(),
+      }))
+      .filter((p) => p.id && p.title);
+    return { programs: programs.length ? programs : fallback, isLive: true };
+  } catch {
+    return { programs: fallback, isLive: false };
+  }
+}

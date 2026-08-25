@@ -14,7 +14,7 @@ export function InsightsSection({ onSelectPost, onViewAll }: InsightsSectionProp
       <div className="w-[80%] mx-auto">
         {/* Section Header */}
         <Reveal className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
-          <div className="text-left max-w-2xl">
+          <div className="text-center md:text-left max-w-2xl mx-auto md:mx-0">
             <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18] mb-3">
               {INSIGHTS_DATA.heading}
             </h2>
@@ -26,10 +26,10 @@ export function InsightsSection({ onSelectPost, onViewAll }: InsightsSectionProp
           {onViewAll && (
             <button
               onClick={onViewAll}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora text-[14.5px] font-[700] transition-all shadow-md active:scale-95 shrink-0"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-sm sm:text-[14.5px] font-[700] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer shrink-0"
             >
-              <span>Explore TEONOX Blog</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span className="whitespace-nowrap">Explore TEONOX Blog</span>
+              <ArrowUpRight className="w-4 h-4 shrink-0" />
             </button>
           )}
         </Reveal>

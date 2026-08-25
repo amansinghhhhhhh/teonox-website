@@ -79,22 +79,6 @@ const FALLBACK_BLOGS: BlogPost[] = [
     link: 'https://teonox.com/blog/ai-skills-everyone-should-learn-in-2026-before-they-become-essential'
   },
   {
-    id: '62',
-    slug: 'the-rise-of-full-stack-marketers-why-versatility-wins-2',
-    category: 'Marketing & Growth',
-    categories: ['Marketing & Growth'],
-    title: 'The Rise of Full-Stack Marketers: Why Versatility Wins 11',
-    excerpt: 'Full-stack marketers bridge data analytics, content creation, brand strategy, and conversion rate optimization to drive end-to-end growth across digital channels...',
-    author: 'By TEONOX Team',
-    date: '10/06/2026',
-    readTime: '5 min read',
-    image: 'https://cms.teonox.com/wp-content/uploads/2026/06/asset-004.jpg',
-    content: [
-      'The modern digital ecosystem demands marketers who understand both creative storytelling and quantitative performance metrics. Full-stack marketers operate across paid media, search optimization, automation funnels, and retention modeling.'
-    ],
-    link: 'https://teonox.com/blog/the-rise-of-full-stack-marketers-why-versatility-wins-2'
-  },
-  {
     id: '42',
     slug: 'the-rise-of-full-stack-marketers-why-versatility-wins',
     category: 'Career Growth',
@@ -142,6 +126,54 @@ function calculateReadTime(contentHtml: string = ''): string {
   return `${minutes} min read`;
 }
 
+/* Formats raw CMS author names for display:
+   - drops the "By " prefix and any "TEONOX" tokens
+   - splits camelCase compounds and inserts missing spaces
+   - special-cases concatenated handles like "keshavkumari" → "Keshav Kumari"
+   Always returns the field WITH its "By " prefix (components render it as-is). */
+function formatAuthorName(raw: string = ''): string {
+  let name = raw
+    .replace(/^By\s+/i, '')
+    .replace(/teonox/gi, '')
+    .trim();
+  if (!name) return 'By TEONOX Team';
+  name = name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  if (/^keshav\s*kumari$/i.test(name.replace(/\s+/g, ''))) return 'By Keshav Kumari';
+  return (
+    'By ' +
+    name
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ')
+  );
+}
+
+/* Normalizes a title into a duplicate-detection key (strips punctuation,
+   casing and trailing revision artifacts like "…Wins 11" / "…Wins 2"). */
+function titleDedupeKey(title: string = ''): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+\d{1,2}$/, '');
+}
+
+/* Removes placeholder ("Lorem Ipsum") posts and duplicate titles from a
+   transformed blog list — keeps the first occurrence of each title. */
+function sanitizeBlogList(blogs: BlogPost[]): BlogPost[] {
+  const withoutPlaceholders = blogs.filter(
+    (b) => !/lorem ipsum/i.test(`${b.excerpt} ${b.content.join(' ')}`)
+  );
+  const seen = new Set<string>();
+  return withoutPlaceholders.filter((b) => {
+    const key = titleDedupeKey(b.title);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 function transformWpPost(p: any): BlogPost {
   const title = decodeHtmlEntities(p.title?.rendered || 'Untitled');
   const rawContent = p.content?.rendered || '';
@@ -158,9 +190,7 @@ function transformWpPost(p: any): BlogPost {
     'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80';
 
   const postDate = p.date ? new Date(p.date).toLocaleDateString('en-GB') : '08/07/2026';
-  const authorName = p._embedded?.author?.[0]?.name
-    ? `By ${p._embedded.author[0].name}`
-    : 'By TEONOX Team';
+  const authorName = formatAuthorName(p._embedded?.author?.[0]?.name || '');
 
   const paragraphs = rawContent
     .split(/<\/p>|<br\s*\/?>/i)
@@ -192,7 +222,7 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
       const json = await safeJson(res);
       const posts = Array.isArray(json) ? json : json?.data;
       if (Array.isArray(posts) && posts.length > 0) {
-        return { blogs: posts.map(transformWpPost), isLive: true };
+        return { blogs: sanitizeBlogList(posts.map(transformWpPost)), isLive: true };
       }
     }
   } catch (e) {

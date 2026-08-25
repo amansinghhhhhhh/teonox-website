@@ -184,13 +184,13 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
   const showHeroImage = !!detail.heroImage && !heroImgFailed && !heroLoading;
 
   return (
-    <div className="space-y-16 sm:space-y-24 pt-2">
+    <div className="space-y-16 sm:space-y-24 pt-2 pb-8 sm:pb-12">
       {/* ────────────────────────────────────────
           SECTION 01: COURSE HERO
           ──────────────────────────────────────── */}
       <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             <h1 className="font-sora text-[30px] sm:text-[42px] lg:text-[48px] font-[800] text-[#111111] leading-[1.15] tracking-tight">
               {detail.programTitle}
             </h1>
@@ -203,16 +203,16 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
               {detail.heroIntro}
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
               <div className="p-4 rounded-[16px] bg-[#FAF8F5] border border-[#EFEBE4] flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-full bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center shrink-0">
                   <Calendar className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="block font-inter text-[11px] font-semibold text-[#888888] uppercase tracking-wider">
                     Duration
                   </span>
-                  <span className="font-sora text-[15px] font-bold text-[#111111]">
+                  <span className="font-sora text-sm sm:text-[15px] font-bold text-[#111111] break-words">
                     {detail.duration}
                   </span>
                 </div>
@@ -222,11 +222,11 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                 <div className="w-10 h-10 rounded-full bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="block font-inter text-[11px] font-semibold text-[#888888] uppercase tracking-wider">
                     Mode
                   </span>
-                  <span className="font-sora text-[15px] font-bold text-[#111111]">
+                  <span className="font-sora text-sm sm:text-[15px] font-bold text-[#111111] break-words">
                     {detail.mode}
                   </span>
                 </div>
@@ -236,18 +236,18 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
               <button
                 onClick={() => enquire('Apply Now - ' + detail.programTitle)}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full sm:w-auto py-3.5 px-5 sm:px-8 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-sm sm:text-[15px] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>Apply Now</span>
-                <ArrowRight className="w-4.5 h-4.5" />
+                <span className="whitespace-nowrap">Apply Now</span>
+                <ArrowRight className="w-4.5 h-4.5 shrink-0" />
               </button>
 
               <button
                 onClick={() => enquire('Download Brochure - ' + detail.programTitle)}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-[#FFF0EB] text-[#111111] font-sora font-[700] text-[15px] border border-[#ECECEC] hover:border-[#F8E3D8] transition-all duration-300 shadow-2xs hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full sm:w-auto py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF0EB] text-[#111111] font-sora font-[700] text-sm sm:text-[15px] border border-[#ECECEC] hover:border-[#F8E3D8] transition-all duration-300 shadow-2xs hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
-                <Download className="w-4.5 h-4.5 text-[#F15A29]" />
-                <span>Download Brochure</span>
+                <Download className="w-4.5 h-4.5 shrink-0 text-[#F15A29]" />
+                <span className="whitespace-nowrap">Download Brochure</span>
               </button>
             </div>
           </div>
@@ -276,7 +276,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           SECTION 02: COURSE OVERVIEW
           ──────────────────────────────────────── */}
       <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-6">
-        <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight">
+        <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
           COURSE OVERVIEW
         </h2>
 
@@ -398,8 +398,8 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                       </button>
 
                       {isExpanded && (
-                        <div className="pl-18 pr-4 pb-4 pt-0 animate-in fade-in slide-in-from-top-1 duration-200">
-                          <div className="p-4 rounded-[14px] bg-white border-l-3 border-[#F15A29] shadow-2xs">
+                        <div className="pl-3.5 pr-3.5 pb-3.5 pt-0 sm:pl-16 sm:pr-4 sm:pb-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                          <div className="p-4 rounded-[14px] bg-white border-l-[3px] border-[#F15A29] shadow-2xs">
                             <p className="font-inter text-[14.5px] text-[#444444] leading-[1.7]">
                               {item.text}
                             </p>
@@ -424,7 +424,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           ──────────────────────────────────────── */}
       {detail.keyReasons.length > 0 || detail.keyReasonsFootnote ? (
         <section className="bg-[#111111] text-white rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-xl space-y-8 relative overflow-hidden">
-          <h2 className="font-sora text-[26px] sm:text-[36px] font-[800] text-white tracking-tight relative z-10">
+          <h2 className="font-sora text-[26px] sm:text-[36px] font-[800] leading-tight text-white tracking-tight relative z-10">
             KEY REASONS TO TAKE THIS COURSE
           </h2>
 
@@ -475,7 +475,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
         detail.benefits.corporate.heading ||
         detail.benefits.corporate.bullets.length > 0) && (
       <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-8">
-        <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight">
+        <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
           HOW THIS COURSE WILL BENEFIT YOU
         </h2>
 
@@ -587,7 +587,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
         detail.outcomes.projectsNote) && (
       <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-8">
         <div className="space-y-3">
-          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight">
+          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
             COURSE OUTCOME
           </h2>
           {detail.outcomes.intro && (
@@ -643,7 +643,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
         detail.valueGreyParagraph ||
         detail.valueHighlightOrangeBold) && (
         <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-8">
-          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight">
+          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
             VALUE OF THIS COURSE
           </h2>
 
@@ -797,7 +797,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           ──────────────────────────────────────── */}
       <section className="bg-[#111111] text-white rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-xl space-y-8 relative overflow-hidden">
         <div className="space-y-3 relative z-10">
-          <h2 className="font-sora text-[26px] sm:text-[36px] font-[800] text-white tracking-tight">
+          <h2 className="font-sora text-[26px] sm:text-[36px] font-[800] leading-tight text-white tracking-tight">
             PLACEMENT ASSISTANCE
           </h2>
           <p className="font-inter text-[15.5px] text-gray-300 leading-relaxed">
@@ -843,7 +843,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
         detail.opportunities.freelancing.leadInBold ||
         detail.opportunities.freelancing.items.length > 0) && (
       <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-8">
-        <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight">
+        <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
           INTERNSHIP & FREELANCING OPPORTUNITIES
         </h2>
 
@@ -890,18 +890,18 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
               )}
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
               {oppData.items.map((item, idx) => {
                 const Icon = oppIcon(item.iconName);
                 return (
                   <div
                     key={idx}
-                    className="p-5 rounded-[20px] bg-[#FAF8F5] border border-[#EFEBE4] hover:border-[#F15A29] hover:bg-white transition-all space-y-3 shadow-2xs group flex flex-col justify-between"
+                    className="p-3 sm:p-5 rounded-[20px] bg-[#FAF8F5] border border-[#EFEBE4] hover:border-[#F15A29] hover:bg-white transition-all shadow-2xs group flex flex-row items-center gap-3 sm:flex-col sm:items-stretch sm:justify-between sm:space-y-3"
                   >
                     <div className="w-10 h-10 rounded-2xl bg-[#FFF0EB] border border-[#F8E3D8] group-hover:bg-[#F15A29] group-hover:border-[#F15A29] transition-all duration-300 flex items-center justify-center shrink-0 [&_svg]:group-hover:text-white">
                       <Icon className="w-5 h-5 text-[#F15A29]" />
                     </div>
-                    <h4 className="font-sora text-[14.5px] font-[800] text-[#111111] leading-snug">
+                    <h4 className="font-sora text-sm sm:text-[14.5px] font-[800] text-[#111111] leading-snug">
                       {item.title}
                     </h4>
                   </div>
@@ -935,18 +935,18 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
               )}
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
               {oppData.items.map((item, idx) => {
                 const Icon = oppIcon(item.iconName);
                 return (
                   <div
                     key={idx}
-                    className="p-5 rounded-[20px] bg-[#FAF8F5] border border-[#EFEBE4] hover:border-[#F15A29] hover:bg-white transition-all duration-300 flex items-center gap-3.5 shadow-2xs group"
+                    className="p-3 sm:p-4 rounded-[20px] bg-[#FAF8F5] border border-[#EFEBE4] hover:border-[#F15A29] hover:bg-white transition-all duration-300 flex items-center gap-3.5 shadow-2xs group"
                   >
                     <div className="w-9 h-9 rounded-xl bg-[#FFF0EB] border border-[#F8E3D8] group-hover:bg-[#F15A29] group-hover:border-[#F15A29] transition-all duration-300 flex items-center justify-center shrink-0 [&_svg]:group-hover:text-white">
                       <Icon className="w-4 h-4 text-[#F15A29]" />
                     </div>
-                    <span className="font-sora text-[14px] font-[700] text-[#111111] leading-snug">
+                    <span className="font-sora text-sm sm:text-[14px] font-[700] text-[#111111] leading-snug min-w-0 break-words">
                         {item.title}
                       </span>
                     </div>
@@ -963,7 +963,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           ──────────────────────────────────────── */}
       {detail.faqs.length > 0 && (
         <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-8">
-          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight">
+          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
             FREQUENTLY ASKED QUESTIONS
           </h2>
 
@@ -1000,7 +1000,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
       {/* ────────────────────────────────────────
           FINAL CTA
           ──────────────────────────────────────── */}
-      <section className="bg-gradient-to-br from-[#F15A29] via-[#E04B1A] to-[#C83808] text-white rounded-[32px] p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xl">
+      <section className="bg-gradient-to-br from-[#F15A29] via-[#E04B1A] to-[#C83808] text-white rounded-[32px] p-6 pb-9 sm:p-10 lg:p-12 relative overflow-hidden shadow-xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           <div className="lg:col-span-5 flex justify-center lg:justify-start items-end h-full">
             <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] flex items-end justify-center">
@@ -1021,17 +1021,17 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
             </div>
           </div>
 
-          <div className="lg:col-span-7 text-left space-y-6">
+          <div className="lg:col-span-7 text-center lg:text-left space-y-6">
             <h2 className="font-sora text-[28px] sm:text-[38px] lg:text-[44px] font-[800] text-white tracking-tight leading-[1.15]">
               {detail.cta?.title || 'Ready to Start Your Digital Marketing Journey?'}
             </h2>
 
-            <p className="font-inter text-[15px] sm:text-[16.5px] text-white/90 leading-relaxed max-w-xl">
+            <p className="font-inter text-[15px] sm:text-[16.5px] text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
               {detail.cta?.description ||
                 'Get personalized guidance from our senior career counsellor. We will help you select the ideal specialization, explain the course structure, and plan your career transition.'}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-4 pt-2">
               {detail.cta?.primaryButtonUrl ? (
                 <a
                   href={detail.cta.primaryButtonUrl}

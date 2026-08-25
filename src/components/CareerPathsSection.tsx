@@ -21,7 +21,7 @@ export function CareerPathsSection() {
   ];
 
   return (
-    <section id="careers" className="py-10 sm:py-14 bg-white relative overflow-hidden border-t border-[#F0DFCE]">
+    <section id="careers" className="py-10 sm:py-14 bg-white relative overflow-x-clip border-t border-[#F0DFCE]">
       {/* Background Soft Orange Ambient Glows */}
 
       {/* Dotted Architectural Grid Overlay */}
