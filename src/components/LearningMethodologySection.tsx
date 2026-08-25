@@ -161,11 +161,11 @@ export function LearningMethodologySection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <Reveal className="mb-10 md:mb-12 text-center max-w-4xl mx-auto items-center">
+        <Reveal className="mb-8 sm:mb-10 text-left max-w-3xl">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">
             Learning Methodology for <span className="text-[#F15A29] heading-accent">AI, Digital Marketing & Automation</span>
           </h2>
-          <p className="font-inter text-[15px] sm:text-[16px] text-[#665A4E] leading-relaxed mt-3 max-w-4xl mx-auto">
+          <p className="font-inter text-[15px] sm:text-[16px] text-[#665A4E] leading-relaxed mt-3">
             At Teonox, we believe learning should be practical, interactive, and career-focused. Our Business Digital Marketing Classes in Pune combine industry-driven learning with live projects, real-world case studies, AI-powered tools, and hands-on campaign execution. Whether you're looking for a Digital Marketing Course in Pune, Digital Marketing Classes Online, or Offline Digital Marketing Courses in Pune, our flexible learning options help you build practical, industry-relevant skills with guidance from experienced professionals. If you're searching for a Digital Marketing Course Near Me, Teonox provides a hands-on learning experience designed to help you gain confidence, develop job-ready expertise, and build a successful career in digital marketing.
           </p>
         </Reveal>
