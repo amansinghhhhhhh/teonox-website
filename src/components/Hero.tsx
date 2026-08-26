@@ -69,7 +69,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
               {/* Typewriter pill + pen icon stay on one line */}
               <span className="inline-flex items-center whitespace-nowrap gap-2">
                 {/* Highlighted Rounded Pill Box with Typewriter Animation */}
-                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[42px] sm:min-h-[52px]">
+                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[36px] sm:min-h-[52px] text-[13px] sm:text-[16px]">
                   {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
                   <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
                     {LONGEST_PHRASE}
@@ -78,7 +78,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
                   {/* Visible typewriter text + blinking cursor (overlaid on the same grid cell) */}
                   <span className="flex items-center whitespace-nowrap col-start-1 row-start-1">
                     {displayText}
-                    <span className="w-[3px] h-[0.85em] bg-[#F15A29] ml-1.5 translate-y-[2px] animate-pulse inline-flex" />
+                    <span className="w-[3px] h-[0.85em] bg-[#F15A29] ml-1 sm:ml-1.5 translate-y-[2px] animate-pulse inline-flex" />
                   </span>
                   
                   {/* Decorative Pill Handles Corner Dots */}

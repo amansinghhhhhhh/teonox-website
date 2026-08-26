@@ -32,6 +32,13 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Sora', sans-serif;
   }
+
+  /* Mobile heading cap: max 22px on screens < 640px */
+  @media (max-width: 639px) {
+    h1, h2, h3 {
+      font-size: clamp(18px, 5vw, 22px) !important;
+    }
+  }
 }
 
 @layer utilities {
