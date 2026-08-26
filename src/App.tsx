@@ -12,6 +12,7 @@ import { WorkWithUsSection } from './components/WorkWithUsSection';
 import { HireFromUsSection } from './components/HireFromUsSection';
 import { InsightsSection } from './components/InsightsSection';
 import { ContactSection } from './components/ContactSection';
+import { HomepageFAQ } from './components/HomepageFAQ';
 import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
 import { BrochureModal } from './components/BrochureModal';
@@ -523,6 +524,8 @@ export default function App() {
               onExplorePrograms={() => navigate('/programs')}
               onEnquireClick={(topic) => handleEnquireClick(topic || 'Talk to TEONOX')}
             />
+            {/* FAQ Section */}
+            <HomepageFAQ />
           </>
         )}
         </Suspense>
