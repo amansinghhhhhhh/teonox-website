@@ -87,7 +87,7 @@ export function PartnerLogos() {
             </h2>
           </div>
           <p className="font-sora text-[15px] sm:text-[17px] font-[600] text-[#555555] leading-relaxed max-w-md">
-            TEONOX learners build careers across top performance agencies, global tech platforms, and high-growth consumer brands.
+          TEONOX learners, trained in Pune, build careers across top performance agencies, global tech platforms, and high-growth consumer brands.
           </p>
         </Reveal>
       </div>
