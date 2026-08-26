@@ -100,7 +100,7 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
               {/* Large Heading */}
               <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18] mb-4">
                 Hire Business-Ready Talent in Pune.{' '}
-                <span className="block text-[#F15A29] mt-1 relative">
+                <span className="text-[#F15A29] mt-1 relative">
                   Not Just Certified Candidates.
                   <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#F15A29]/25" viewBox="0 0 100 20" preserveAspectRatio="none">
                     <path d="M0,15 C30,5 70,20 100,8" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
