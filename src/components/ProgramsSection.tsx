@@ -112,7 +112,7 @@ export function ProgramsSection({
             Explore Upskill <span className="text-[#F15A29] heading-accent">Gen AI Programs</span>
           </h2>
           <p className="font-sora text-[15px] sm:text-[17px] font-[600] text-[#555555] leading-relaxed">
-            Digital Marketing Courses in Pune, Designed for Students, Working Professionals, entrepreneurs, and business leaders. School of Digital Marketing Provides Top Digital Marketing Courses in Pune Integrated with AI and GenAI Tools, 100% Placement, Practical and Google Certifications, at Affordable Fees.
+            Digital Marketing Courses in Pune, Designed for Students, Working Professionals, entrepreneurs, and business leaders. School of Digital Marketing Provides Top Digital Marketing Courses in Pune Integrated with AI and GenAI Tools.
           </p>
         </Reveal>
 
