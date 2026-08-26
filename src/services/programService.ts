@@ -513,14 +513,31 @@ function applyResolvedHeroImage(post: any, detail: ProgramDetailData): ProgramDe
 }
 
 /**
- * Map a static card id to the canonical slug of its live WP post. The flagship
- * card is id `business-digital-marketing-ai` but the CMS post is
- * `business-digital-marketing-with-ai-v2`, so a detail request for the static
- * id also tries the canonical slug on the CMS.
+ * Map a static card id to the canonical slug of its live WP post. The WordPress
+ * CMS uses different slugs than the static frontend IDs, so each static ID
+ * must map to the correct CMS slug for the REST API query.
+ *
+ * CMS slugs confirmed from live API:
+ *   business-digital-marketing-ai       -> business-digital-marketing-with-ai
+ *   performance-marketing               -> specialization-in-performance-marketing
+ *   seo-specialization                  -> specialization-in-search-engine-optimization-2
+ *   social-media-marketing              -> specialization-in-social-media-marketing
  */
 const PROGRAM_DETAIL_SLUG_ALIASES: Record<string, string> = {
-  'business-digital-marketing-ai': 'business-digital-marketing-with-ai-v2',
+  'business-digital-marketing-ai': 'business-digital-marketing-with-ai',
+  'performance-marketing': 'specialization-in-performance-marketing',
+  'seo-specialization': 'specialization-in-search-engine-optimization-2',
+  'social-media-marketing': 'specialization-in-social-media-marketing',
 };
+
+/**
+ * Reverse mapping: CMS slug -> static program ID. Used by the router to resolve
+ * a CMS slug extracted from the browser URL back to the static program ID that
+ * PROGRAMS_DATA and PROGRAM_DETAILS_MAP expect.
+ */
+export const CMS_SLUG_TO_STATIC_ID: Record<string, string> = Object.fromEntries(
+  Object.entries(PROGRAM_DETAIL_SLUG_ALIASES).map(([staticId, cmsSlug]) => [cmsSlug, staticId]),
+);
 
 /**
  * Fetch a single program's detail content by id (slug) or numeric WP id.
@@ -533,6 +550,8 @@ export async function fetchLiveProgramDetail(
   const canonical = PROGRAM_DETAIL_SLUG_ALIASES[key] || key;
   const slugs = canonical === key ? [key] : [canonical, key];
 
+  console.log('[fetchLiveProgramDetail] key:', key, '| canonical:', canonical, '| slugs:', slugs);
+
   // Strategy 1: direct WordPress REST API (raw WP post).
   for (const slug of slugs) {
     try {
@@ -541,15 +560,19 @@ export async function fetchLiveProgramDetail(
       const url = isNumeric
         ? `${CMS_URL}/program/${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`
         : `${CMS_URL}/program&slug=${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`;
+      console.log('[fetchLiveProgramDetail] Fetching URL:', url);
       const res = await fetch(url);
+      console.log('[fetchLiveProgramDetail] Response status:', res.status, '| ok:', res.ok);
       if (res.ok) {
         const json = await safeJson(res);
         const raw = isNumeric ? json : Array.isArray(json) ? json[0] : null;
+        console.log('[fetchLiveProgramDetail] CMS raw post:', raw ? { slug: raw.slug, id: raw.id, title: raw.title?.rendered } : null);
         if (raw) {
           // Staging-only programs stay hidden on production even when reached
           // by direct URL (fall through to the static fallback / null).
           if (!isProgramVisible(raw)) return { detail: null, isLive: false };
           const transformed = transformWpProgram(raw);
+          console.log('[fetchLiveProgramDetail] transformWpProgram result:', transformed ? transformed.programTitle : null);
           if (transformed) {
             const detail = applyResolvedHeroImage(raw, transformed);
             return { detail, isLive: true };
@@ -557,13 +580,16 @@ export async function fetchLiveProgramDetail(
         }
       }
     } catch (e) {
+      console.warn('[fetchLiveProgramDetail] Fetch failed for slug:', slug, e);
       // CORS/fetch failed for this slug, try the next candidate
     }
   }
 
   // Strategy 2: static fallback so the detail page never dead-ends when the
   // CMS is unreachable (CORS, DNS, network, proxy down, etc).
-  return { detail: PROGRAM_DETAILS_MAP[key] || null, isLive: false };
+  const staticResult = PROGRAM_DETAILS_MAP[key] || null;
+  console.log('[fetchLiveProgramDetail] Static fallback for key:', key, '| result:', staticResult ? staticResult.programTitle : null);
+  return { detail: staticResult, isLive: false };
 }
 
 /**

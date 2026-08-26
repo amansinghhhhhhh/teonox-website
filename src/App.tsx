@@ -24,6 +24,7 @@ import { Program, BlogPost } from './types';
 import { PROGRAMS_DATA, INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
 import { SEO } from './components/SEO';
+import { CMS_SLUG_TO_STATIC_ID } from './services/programService';
 
 const AboutUsPage = lazy(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
 const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
@@ -117,11 +118,23 @@ function humanizeSlug(slug: string): string {
 }
 
 // Resolve a program route segment to a Program. Known static programs resolve
-// normally; unknown slugs (live-only CMS programs) get a light stub whose id is
-// used to fetch the real content from WordPress.
+// normally; CMS slugs from live WordPress posts are mapped back to their static
+// IDs so PROGRAMS_DATA and PROGRAM_DETAILS_MAP lookups succeed. Unknown slugs
+// (truly live-only CMS programs) get a light stub whose id is used to fetch
+// the real content from WordPress.
 function resolveProgram(slug: string): Program {
+  // 1. Direct static ID match (e.g. "business-digital-marketing-ai")
   const found = PROGRAMS_DATA.programs.find((p) => p.id === slug);
   if (found) return found;
+
+  // 2. CMS slug -> static ID reverse mapping (e.g. "specialization-in-performance-marketing" -> "performance-marketing")
+  const staticId = CMS_SLUG_TO_STATIC_ID[slug];
+  if (staticId) {
+    const mapped = PROGRAMS_DATA.programs.find((p) => p.id === staticId);
+    if (mapped) return mapped;
+  }
+
+  // 3. Unknown slug — create a stub for live CMS content
   const title = humanizeSlug(slug);
   return {
     id: slug,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, WifiOff } from 'lucide-react';
 import { Program } from '../types';
 import { PROGRAM_DETAILS_MAP, ProgramDetailData } from '../data/programDetails';
-import { fetchLiveProgramDetail, stripV2Prefixes } from '../services/programService';
+import { fetchLiveProgramDetail, stripV2Prefixes, CMS_SLUG_TO_STATIC_ID } from '../services/programService';
 import { ProgramV2Layout } from './programV2/ProgramV2Layout';
 import { SEO } from './SEO';
 
@@ -12,8 +12,34 @@ interface ProgramDetailPageProps {
   onEnquire: (programTitle: string) => void;
 }
 
+/**
+ * Extract the program slug directly from the browser URL as the reliable
+ * source of truth. This avoids the race condition where `program` prop is
+ * null during navigation transitions and the old fallback
+ * ('business-digital-marketing-ai') would override the real slug.
+ */
+function extractSlugFromUrl(): string {
+  try {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    // URL pattern: /program/<slug> — slug is the last segment
+    return segments.length >= 2 && segments[0] === 'program' ? segments[1] : '';
+  } catch {
+    return '';
+  }
+}
+
 export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailPageProps) {
-  const programId = program?.id || 'business-digital-marketing-ai';
+  // Priority: program.id from props > URL slug > empty (shows error state)
+  const urlSlug = extractSlugFromUrl();
+  const rawId = program?.id || urlSlug;
+
+  // Resolve CMS slugs back to static IDs so PROGRAM_DETAILS_MAP and
+  // fetchLiveProgramDetail (which uses PROGRAM_DETAIL_SLUG_ALIASES keyed by
+  // static ID) work correctly.
+  const programId = CMS_SLUG_TO_STATIC_ID[rawId] || rawId;
+
+  // Diagnostic logging (temporary — remove after confirming correct behavior)
+  console.log('[ProgramDetailPage] program?.id:', program?.id, '| urlSlug:', urlSlug, '| rawId:', rawId, '| resolved programId:', programId);
 
   // Live CMS program detail (overrides static fallback once fetched)
   const [liveDetail, setLiveDetail] = useState<ProgramDetailData | null>(null);
@@ -22,12 +48,19 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   // Fetch the live CMS detail once the program id/slug is resolved. Works for
   // slugs that exist only in WordPress (not in static PROGRAMS_DATA) too.
   useEffect(() => {
+    if (!programId) {
+      setLoading(false);
+      return;
+    }
+
     let cancelled = false;
     setLoading(true);
     setLiveDetail(null);
+    console.log('[ProgramDetailPage] Fetching CMS detail for programId:', programId);
     fetchLiveProgramDetail(programId).then(
       (res) => {
         if (cancelled) return;
+        console.log('[ProgramDetailPage] CMS response — isLive:', res.isLive, '| detail:', res.detail ? res.detail.programTitle : null);
         setLiveDetail(res.detail);
         setLoading(false);
       },
@@ -41,6 +74,30 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
       cancelled = true;
     };
   }, [programId]);
+
+  // Empty programId means the URL was invalid — show error state immediately
+  if (!programId) {
+    return (
+      <div className="bg-[#FAFAFA] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif]">
+        <div className="w-[88%] max-w-7xl mx-auto pt-16 text-center space-y-4">
+          <div className="w-16 h-16 mx-auto rounded-full bg-[#FFF0EB] flex items-center justify-center">
+            <WifiOff className="w-7 h-7 text-[#F15A29]" />
+          </div>
+          <h1 className="font-sora text-[24px] font-[800] text-[#111111]">Invalid program URL</h1>
+          <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
+            The URL does not contain a valid program identifier.
+          </p>
+          <button
+            onClick={onBack}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Programs
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const isSocialMedia =
     programId === 'social-media-marketing' ||
@@ -67,6 +124,8 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     : isPerformance
     ? PROGRAM_DETAILS_MAP['performance-marketing']
     : (PROGRAM_DETAILS_MAP[programId] || null);
+
+  console.log('[ProgramDetailPage] staticDetail:', staticDetail ? staticDetail.programTitle : null, '| liveDetail:', liveDetail ? liveDetail.programTitle : null);
 
   // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
   const customDetail = liveDetail ?? staticDetail;
