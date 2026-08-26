@@ -69,7 +69,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
               {/* Typewriter pill + pen icon stay on one line */}
               <span className="inline-flex items-center whitespace-nowrap gap-2">
                 {/* Highlighted Rounded Pill Box with Typewriter Animation */}
-                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[36px] sm:min-h-[52px] text-[13px] sm:text-[16px]">
+                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1.5 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[40px] sm:min-h-[52px] text-[16px] sm:text-[16px]">
                   {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
                   <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
                     {LONGEST_PHRASE}
@@ -98,7 +98,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
         </div>
 
         {/* Supporting Paragraph */}
-        <p className="font-inter text-[17.5px] sm:text-[20px] font-[400] text-[#665A4E] leading-relaxed mx-auto mb-10 max-w-4xl animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+        <p className="font-inter text-[16px] sm:text-[20px] font-[400] text-[#665A4E] leading-relaxed mx-auto mb-10 max-w-4xl animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
         Choose the best business digital marketing courses in Pune with assured job placement, affordable fees, and AI & GenAI-integrated learning in online/offline modes. Join Gen AI School of Marketing to build a career in digital marketing with AI-powered, performance-driven, and practical training.
         </p>
 
