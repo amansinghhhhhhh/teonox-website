@@ -107,11 +107,11 @@ export function ProgramsSection({
 
       <div className="w-[88%] max-w-7xl mx-auto relative z-10 space-y-12">
         {/* Section Header */}
-        <Reveal className="text-left space-y-3 max-w-3xl">
+        <Reveal className="text-left space-y-3">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
             Explore Upskill <span className="text-[#F15A29] heading-accent">Gen AI Programs</span>
           </h2>
-          <p className="font-sora text-[15px] sm:text-[17px] font-[600] text-[#555555] leading-relaxed max-w-2xl">
+          <p className="font-sora text-[15px] sm:text-[17px] font-[600] text-[#555555] leading-relaxed">
             Digital Marketing Courses in Pune, Designed for Students, Working Professionals, entrepreneurs, and business leaders. School of Digital Marketing Provides Top Digital Marketing Courses in Pune Integrated with AI and GenAI Tools, 100% Placement, Practical and Google Certifications, at Affordable Fees.
           </p>
         </Reveal>
