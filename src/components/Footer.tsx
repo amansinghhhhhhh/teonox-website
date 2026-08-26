@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Globe, Linkedin, Instagram, Facebook, Youtube, BookOpen, ArrowUpRight } from 'lucide-react';
+import { Linkedin, Instagram, Facebook, Youtube, BookOpen, ArrowUpRight } from 'lucide-react';
 import { TeonoxLogo } from './TeonoxLogo';
 import { Reveal } from './Reveal';
 import { fetchFooterPrograms } from '../services/programService';
@@ -43,16 +43,6 @@ export function Footer({ onNavigate }: FooterProps) {
 
             {/* Social Media Links */}
             <div className="flex items-center gap-3">
-              <a
-                href="https://teonox.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TEONOX Website"
-                title="Official Website"
-                className="w-9 h-9 rounded-full bg-[#282019] hover:bg-[#F15A29] text-[#C9BDB2] hover:text-white flex items-center justify-center transition-all duration-300 border border-[#3A2E25] icon-badge-float hover:scale-105"
-              >
-                <Globe className="w-4 h-4" />
-              </a>
               <a
                 href="https://www.linkedin.com/company/teonox"
                 target="_blank"
