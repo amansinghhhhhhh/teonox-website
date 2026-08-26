@@ -221,9 +221,9 @@ export const WORK_WITH_US_DATA = {
 
 export const HIRE_FROM_US_DATA = {
   sectionTag: "Hire From Us",
-  heading: "Hire Business-Ready Talent.",
+  heading: "Hire Business-Ready Talent in Pune.",
   subheading: "Not Just Certified Candidates.",
-  description: "TEONOX learners are trained through practical projects, industry exposure, AI-powered workflows, and real business challenges, helping them bring confidence, adaptability, and execution-focused thinking to modern workplaces.",
+  description: "TEONOX, Pune's practical Corporate AI automation training institute, prepares learners through hands-on projects, real industry exposure, AI-powered workflows, and live business challenges so you hire execution-ready professionals in Digital Marketing, AI & Automation, Data Analytics, and Sales, right here in Pune.",
   btn1: "Request Talent",
   btn2: "Speak to Our Team",
   whoTag: "Who You Can Hire From TEONOX",

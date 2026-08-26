@@ -99,7 +99,7 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
             >
               {/* Large Heading */}
               <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18] mb-4">
-                Hire Business-Ready Talent.{' '}
+                Hire Business-Ready Talent in Pune.{' '}
                 <span className="block text-[#F15A29] mt-1 relative">
                   Not Just Certified Candidates.
                   <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#F15A29]/25" viewBox="0 0 100 20" preserveAspectRatio="none">
@@ -110,7 +110,7 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
 
               {/* Description */}
               <p className="font-inter text-[17px] sm:text-[18px] font-[400] text-[#555555] leading-[1.7] mb-8 max-w-[580px]">
-                TEONOX learners are trained through practical projects, industry exposure, AI-powered workflows, and real business challenges, bringing execution-focused thinking directly to your teams.
+                TEONOX, Pune's practical Corporate AI automation training institute, prepares learners through hands-on projects, real industry exposure, AI-powered workflows, and live business challenges so you hire execution-ready professionals in Digital Marketing, AI & Automation, Data Analytics, and Sales, right here in Pune.
               </p>
 
               {/* CTAs */}
