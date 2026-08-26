@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, Clock, Calendar, User, Share2, Bookmark, CheckCircle2, ArrowRight, Sparkles, MessageSquare, CornerUpRight } from 'lucide-react';
 import { BlogPost } from '../types';
 import { fetchLiveBlogDetail, fetchLiveBlogs } from '../services/blogService';
+import { SEO } from './SEO';
 
 interface BlogDetailPageProps {
   post: BlogPost;
@@ -57,6 +58,21 @@ export function BlogDetailPage({
 
   return (
     <div className="bg-[#FFFFFF] text-[#201A17] min-h-screen pt-28 sm:pt-32 pb-24 font-['Sora',sans-serif]">
+      <SEO
+        title={post.title}
+        description={post.excerpt || post.title}
+        canonical={`/blog/${post.slug || post.id}`}
+        ogType="article"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: post.title,
+          description: post.excerpt || post.title,
+          url: `https://teonox.com/blog/${post.slug || post.id}`,
+          author: post.author ? { '@type': 'Person', name: post.author } : undefined,
+          datePublished: post.date,
+        }}
+      />
       {/* Top Navigation Bar / Breadcrumb */}
       <div className="border-b border-[#F0DFCE]/70 bg-[#FFF6EE]/60 backdrop-blur-md py-3.5">
         <div className="w-[85%] max-w-5xl mx-auto flex items-center justify-between">

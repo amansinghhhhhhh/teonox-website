@@ -6,6 +6,7 @@ import {
   Clock, Compass, FileCheck, GraduationCap, Award, Users, BookOpen,
   DollarSign, PhoneCall, ShieldCheck, ChevronRight, Lightbulb, Wallet,
 } from 'lucide-react';
+import { SEO } from './SEO';
 
 interface AdmissionsPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -127,6 +128,17 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
 
   return (
     <div className="pt-20 pb-0 bg-white text-[#201A17] min-h-screen overflow-x-hidden">
+      <SEO
+        title="Admissions | TEONOX"
+        description="Apply for TEONOX admissions — AI-integrated digital marketing courses in Pune with assured placement. Learn from 12+ year experience faculty, 50+ tools, and practical training."
+        canonical="/admissions"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Admissions — TEONOX',
+          url: 'https://teonox.com/admissions',
+        }}
+      />
 
       {/* ═══════════════════════════════════════
           SECTION 01 - HERO

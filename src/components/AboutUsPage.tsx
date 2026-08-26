@@ -6,6 +6,7 @@ import {
   Rocket, Building2, ShieldCheck, Award, Layers, Brain, MessageSquareText,
   BarChart3, Search, Share2, Bot, UserCheck, Quote, Globe, Cpu
 } from 'lucide-react';
+import { SEO } from './SEO';
 
 import heroImg from '../assets/images/about/about_hero.webp';
 import imgLeader from '../assets/images/about/sir.webp';
@@ -100,6 +101,17 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
 
   return (
     <div className="pt-20 sm:pt-24 pb-0 bg-white min-h-screen text-[#201A17] font-['Sora',sans-serif] overflow-x-hidden">
+      <SEO
+        title="About TEONOX | Gen AI School of Marketing & Business"
+        description="Learn about TEONOX — a Gen AI School of Marketing & Business in Pune with 12+ years of industry experience, offering practical AI-integrated digital marketing training."
+        canonical="/about"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'About TEONOX',
+          url: 'https://teonox.com/about',
+        }}
+      />
 
       {/* ═══════════════════════════════════════
           SECTION 01 - HERO

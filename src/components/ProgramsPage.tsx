@@ -32,6 +32,7 @@ import {
   LiveProgramCard,
 } from '../services/programService';
 import imgCounsellor from '../assets/images/counsellor_support_1785420263109.webp';
+import { SEO } from './SEO';
 
 interface ProgramsPageProps {
   onSelectProgram: (program: Program) => void;
@@ -168,6 +169,17 @@ mode: progOrTitle.mode || 'On Campus, Pune',
 
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
+      <SEO
+        title="Programs & Courses | TEONOX"
+        description="Explore TEONOX programs — AI-integrated digital marketing courses in Pune with assured placement, 12+ years faculty experience, and 50+ tools training."
+        canonical="/programs"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'TEONOX Programs',
+          url: 'https://teonox.com/programs',
+        }}
+      />
 
       <div className="w-[90%] max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16">
         {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

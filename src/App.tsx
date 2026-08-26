@@ -23,6 +23,7 @@ import { CertificationsSection } from './components/CertificationsSection';
 import { Program, BlogPost } from './types';
 import { PROGRAMS_DATA, INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
+import { SEO } from './components/SEO';
 
 const AboutUsPage = lazy(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
 const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
@@ -449,6 +450,30 @@ export default function App() {
         ) : (
           /* Home Page Layout */
           <>
+            <SEO
+              title="Gen AI Course in Pune with Placement | TEONOX"
+              description="Gen AI Course in Pune with Assured Placement. Master Digital Marketing, AI & Automation with 12+ Year Experience Faculty. 100% Placement Assistance, Practical Training."
+              canonical="/"
+              jsonLd={{
+                '@context': 'https://schema.org',
+                '@type': 'EducationalOrganization',
+                name: 'TEONOX',
+                url: 'https://teonox.com',
+                description: 'Gen AI School of Marketing & Business — AI-integrated digital marketing courses in Pune with assured placement.',
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'Pune',
+                  addressRegion: 'Maharashtra',
+                  addressCountry: 'IN',
+                },
+                sameAs: [
+                  'https://www.instagram.com/teonoxofficial',
+                  'https://www.facebook.com/teonoxofficial',
+                  'https://www.youtube.com/@teonoxofficial',
+                  'https://www.linkedin.com/company/teonox',
+                ],
+              }}
+            />
             {/* Hero Section */}
             <Hero
               onExploreClick={() => navigate('/programs')}

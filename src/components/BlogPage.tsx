@@ -5,6 +5,7 @@ import { BlogPost } from '../types';
 import { fetchLiveBlogs, fetchLiveCategories } from '../services/blogService';
 import { submitForm } from '../services/formService';
 import heroImage from '../assets/images/regenerated_image_1785412705719.avif';
+import { SEO } from './SEO';
 
 interface BlogPageProps {
   onSelectPost: (post: BlogPost) => void;
@@ -132,6 +133,17 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
 
   return (
     <div className="bg-white text-[#111111] pt-20 sm:pt-24 pb-0 min-h-screen overflow-x-hidden">
+      <SEO
+        title="Blog & Insights | TEONOX"
+        description="Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX — Gen AI School of Marketing & Business in Pune."
+        canonical="/blog"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: 'TEONOX Blog',
+          url: 'https://teonox.com/blog',
+        }}
+      />
       
       {/* ────────────────────────────────────────
           SECTION 01 - HERO

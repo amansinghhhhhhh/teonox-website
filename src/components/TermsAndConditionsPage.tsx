@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollText, Phone, Mail, MapPin } from 'lucide-react';
 import { LegalShell, LegalSection, LegalBullets } from './LegalPageShell';
+import { SEO } from './SEO';
 
 const TOC = [
   { id: 'tc-1', title: 'Acceptance of Terms' },
@@ -25,6 +26,18 @@ interface TermsAndConditionsPageProps {
 
 export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPageProps) {
   return (
+    <>
+      <SEO
+        title="Terms & Conditions | TEONOX"
+        description="Read the TEONOX Terms & Conditions — governing your access to and use of our website, programs, and services."
+        canonical="/terms-and-conditions"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Terms & Conditions — TEONOX',
+          url: 'https://teonox.com/terms-and-conditions',
+        }}
+      />
     <LegalShell
       icon={ScrollText}
       label="Legal"
@@ -264,5 +277,6 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
         </div>
       </LegalSection>
     </LegalShell>
+    </>
   );
 }

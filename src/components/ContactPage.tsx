@@ -19,6 +19,7 @@ import { submitForm } from '../services/formService';
 import { validateEmail, validatePhone, validateRequired } from '../utils/validation';
 import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
 import campusImg from '../assets/images/contact/campus.webp';
+import { SEO } from './SEO';
 
 interface ContactPageProps {
   onEnquireClick?: (topic?: string) => void;
@@ -125,6 +126,17 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
   return (
     <div className="bg-white text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
+      <SEO
+        title="Contact TEONOX | Get in Touch"
+        description="Contact TEONOX for admissions, course details, campus visits, and enquiries. Gen AI School of Marketing & Business in Pune."
+        canonical="/contact"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          name: 'Contact TEONOX',
+          url: 'https://teonox.com/contact',
+        }}
+      />
       {/* Subtle Background Orange Glow */}
 
       <div className="w-[85%] max-w-7xl mx-auto relative z-10 space-y-16 sm:space-y-24">

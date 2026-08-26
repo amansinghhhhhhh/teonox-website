@@ -26,6 +26,7 @@ import heroImg from '../assets/images/why-teonox/why_teonox_hero.webp';
 import stage1Img from '../assets/images/learn-updated.webp';
 import stage2Img from '../assets/images/apply.webp';
 import stage3Img from '../assets/images/Lead.webp';
+import { SEO } from './SEO';
 
 interface WhyTeonoxPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -90,6 +91,17 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
 
   return (
     <div className="w-full bg-[#FAF8F5] text-[#111111] font-['Sora',sans-serif] selection:bg-[#F15A29] selection:text-white pt-20 sm:pt-24 overflow-x-hidden">
+      <SEO
+        title="Why TEONOX | What Makes Us Different"
+        description="Discover why TEONOX is different — 12+ years industry experience, Gen AI integrated curriculum, practical training, and assured placement assistance in Pune."
+        canonical="/why-teonox"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Why TEONOX',
+          url: 'https://teonox.com/why-teonox',
+        }}
+      />
       <ReadingProgressBar />
       
       {/* ─────────────────────────────────────────────────────────────────

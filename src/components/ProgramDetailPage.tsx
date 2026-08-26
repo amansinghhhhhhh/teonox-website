@@ -4,6 +4,7 @@ import { Program } from '../types';
 import { PROGRAM_DETAILS_MAP, ProgramDetailData } from '../data/programDetails';
 import { fetchLiveProgramDetail, stripV2Prefixes } from '../services/programService';
 import { ProgramV2Layout } from './programV2/ProgramV2Layout';
+import { SEO } from './SEO';
 
 interface ProgramDetailPageProps {
   program?: Program | null;
@@ -117,6 +118,18 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
 
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
+      <SEO
+        title={displayDetail?.programTitle || program?.title || 'Program'}
+        description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
+        canonical={`/programs/${programId}`}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Course',
+          name: displayDetail?.programTitle || program?.title,
+          description: displayDetail?.heroIntro,
+          provider: { '@type': 'EducationalOrganization', name: 'TEONOX' },
+        }}
+      />
       <div className="w-[88%] max-w-7xl mx-auto relative z-10">
         <ProgramV2Layout detail={displayDetail} heroLoading={loading} onEnquire={(label) => onEnquire(label)} />
       </div>

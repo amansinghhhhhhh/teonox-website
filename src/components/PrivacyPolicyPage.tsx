@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { LegalShell, LegalSection, LegalBullets } from './LegalPageShell';
+import { SEO } from './SEO';
 
 const TOC = [
   { id: 'pp-1', title: 'Information We Collect' },
@@ -22,6 +23,18 @@ interface PrivacyPolicyPageProps {
 
 export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
   return (
+    <>
+      <SEO
+        title="Privacy Policy | TEONOX"
+        description="Read the TEONOX Privacy Policy — how we collect, use, store, and protect your personal information."
+        canonical="/privacy-policy"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Privacy Policy — TEONOX',
+          url: 'https://teonox.com/privacy-policy',
+        }}
+      />
     <LegalShell
       icon={ShieldCheck}
       label="Legal"
@@ -246,5 +259,6 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
         </div>
       </LegalSection>
     </LegalShell>
+    </>
   );
 }
