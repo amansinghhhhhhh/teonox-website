@@ -550,8 +550,6 @@ export async function fetchLiveProgramDetail(
   const canonical = PROGRAM_DETAIL_SLUG_ALIASES[key] || key;
   const slugs = canonical === key ? [key] : [canonical, key];
 
-  console.log('[fetchLiveProgramDetail] key:', key, '| canonical:', canonical, '| slugs:', slugs);
-
   // Strategy 1: direct WordPress REST API (raw WP post).
   for (const slug of slugs) {
     try {
@@ -560,19 +558,15 @@ export async function fetchLiveProgramDetail(
       const url = isNumeric
         ? `${CMS_URL}/program/${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`
         : `${CMS_URL}/program&slug=${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`;
-      console.log('[fetchLiveProgramDetail] Fetching URL:', url);
       const res = await fetch(url);
-      console.log('[fetchLiveProgramDetail] Response status:', res.status, '| ok:', res.ok);
       if (res.ok) {
         const json = await safeJson(res);
         const raw = isNumeric ? json : Array.isArray(json) ? json[0] : null;
-        console.log('[fetchLiveProgramDetail] CMS raw post:', raw ? { slug: raw.slug, id: raw.id, title: raw.title?.rendered } : null);
         if (raw) {
           // Staging-only programs stay hidden on production even when reached
           // by direct URL (fall through to the static fallback / null).
           if (!isProgramVisible(raw)) return { detail: null, isLive: false };
           const transformed = transformWpProgram(raw);
-          console.log('[fetchLiveProgramDetail] transformWpProgram result:', transformed ? transformed.programTitle : null);
           if (transformed) {
             const detail = applyResolvedHeroImage(raw, transformed);
             return { detail, isLive: true };
@@ -588,7 +582,6 @@ export async function fetchLiveProgramDetail(
   // Strategy 2: static fallback so the detail page never dead-ends when the
   // CMS is unreachable (CORS, DNS, network, proxy down, etc).
   const staticResult = PROGRAM_DETAILS_MAP[key] || null;
-  console.log('[fetchLiveProgramDetail] Static fallback for key:', key, '| result:', staticResult ? staticResult.programTitle : null);
   return { detail: staticResult, isLive: false };
 }
 
@@ -874,7 +867,6 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
       console.error('[Programs API Failed]: Status', res.status);
     }
 
-    // TEMP verification logs — remove after confirming the live payload on teonox.com.
     const rawText = await res.text();
     let rawJson: any = null;
     try {
@@ -886,7 +878,6 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
         rawText.slice(0, 200),
       );
     }
-    console.log('[API Live Programs Payload]:', rawJson);
 
     // Extract the array safely from any common wrapper shape.
     let posts: any[] = [];
@@ -899,7 +890,6 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
     } else if (Array.isArray(rawJson?.items)) {
       posts = rawJson.items;
     }
-    console.log('[Extracted Live Programs Count]:', posts.length);
 
     // A valid WP response is any JSON whose top level IS an array or wraps one
     // (raw WP array / { data } / { posts } / { items }). Empty arrays still

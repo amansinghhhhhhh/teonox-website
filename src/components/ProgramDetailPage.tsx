@@ -38,9 +38,6 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   // static ID) work correctly.
   const programId = CMS_SLUG_TO_STATIC_ID[rawId] || rawId;
 
-  // Diagnostic logging (temporary — remove after confirming correct behavior)
-  console.log('[ProgramDetailPage] program?.id:', program?.id, '| urlSlug:', urlSlug, '| rawId:', rawId, '| resolved programId:', programId);
-
   // Live CMS program detail (overrides static fallback once fetched)
   const [liveDetail, setLiveDetail] = useState<ProgramDetailData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -56,11 +53,9 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     let cancelled = false;
     setLoading(true);
     setLiveDetail(null);
-    console.log('[ProgramDetailPage] Fetching CMS detail for programId:', programId);
     fetchLiveProgramDetail(programId).then(
       (res) => {
         if (cancelled) return;
-        console.log('[ProgramDetailPage] CMS response — isLive:', res.isLive, '| detail:', res.detail ? res.detail.programTitle : null);
         setLiveDetail(res.detail);
         setLoading(false);
       },
@@ -124,8 +119,6 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     : isPerformance
     ? PROGRAM_DETAILS_MAP['performance-marketing']
     : (PROGRAM_DETAILS_MAP[programId] || null);
-
-  console.log('[ProgramDetailPage] staticDetail:', staticDetail ? staticDetail.programTitle : null, '| liveDetail:', liveDetail ? liveDetail.programTitle : null);
 
   // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
   const customDetail = liveDetail ?? staticDetail;
