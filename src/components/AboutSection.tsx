@@ -83,7 +83,7 @@ export function AboutSection({ onConnect }: AboutSectionProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.35 }}
               >
-                A learning ecosystem designed by practitioners who have spent years building businesses, solving growth problems, and developing teams.
+                We believe skill-building needs both practical training and real execution. Based in Pune, we train students, fresh graduates, working professionals, career switchers, and business/corporate clients, practically, not just theoretically.
               </motion.p>
 
             </div>
