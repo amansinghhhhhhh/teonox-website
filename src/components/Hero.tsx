@@ -66,29 +66,32 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
             <span className="inline-flex flex-wrap items-center justify-center gap-2 mt-2">
               <span>with Assured Placement</span>
               
-              {/* Highlighted Rounded Pill Box with Typewriter Animation */}
-              <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[42px] sm:min-h-[52px]">
-                {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
-                <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
-                  {LONGEST_PHRASE}
-                  <span className="inline-block w-[3px]" />
+              {/* Typewriter pill + pen icon stay on one line */}
+              <span className="inline-flex items-center whitespace-nowrap gap-2">
+                {/* Highlighted Rounded Pill Box with Typewriter Animation */}
+                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-1 sm:px-6 sm:py-2 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[42px] sm:min-h-[52px]">
+                  {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
+                  <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
+                    {LONGEST_PHRASE}
+                    <span className="inline-block w-[3px]" />
+                  </span>
+                  {/* Visible typewriter text + blinking cursor (overlaid on the same grid cell) */}
+                  <span className="flex items-center whitespace-nowrap col-start-1 row-start-1">
+                    {displayText}
+                    <span className="w-[3px] h-[0.85em] bg-[#F15A29] ml-1.5 translate-y-[2px] animate-pulse inline-flex" />
+                  </span>
+                  
+                  {/* Decorative Pill Handles Corner Dots */}
+                  <span className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
+                  <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
+                  <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
                 </span>
-                {/* Visible typewriter text + blinking cursor (overlaid on the same grid cell) */}
-                <span className="flex items-center whitespace-nowrap col-start-1 row-start-1">
-                  {displayText}
-                  <span className="w-[3px] h-[0.85em] bg-[#F15A29] ml-1.5 translate-y-[2px] animate-pulse inline-flex" />
-                </span>
-                
-                {/* Decorative Pill Handles Corner Dots */}
-                <span className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-                <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-                <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-              </span>
 
-              {/* Vector Scribble / Pen Icon on Right */}
-              <span className="text-[#201A17] -rotate-12 translate-y-1 inline-block animate-float-slow">
-                <PenTool className="w-5 h-5 sm:w-7 sm:h-7 text-[#201A17]" />
+                {/* Vector Scribble / Pen Icon on Right */}
+                <span className="text-[#201A17] -rotate-12 translate-y-1 inline-block animate-float-slow shrink-0">
+                  <PenTool className="w-5 h-5 sm:w-7 sm:h-7 text-[#201A17]" />
+                </span>
               </span>
             </span>
           </h1>
