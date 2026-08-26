@@ -1,0 +1,5 @@
+# robots.txt for TEONOX — https://teonox.com
+User-agent: *
+Allow: /
+
+Sitemap: https://teonox.com/sitemap.xml
