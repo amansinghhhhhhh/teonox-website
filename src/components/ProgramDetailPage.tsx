@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowLeft, WifiOff } from 'lucide-react';
 import { Program } from '../types';
 import { PROGRAM_DETAILS_MAP, ProgramDetailData } from '../data/programDetails';
-import { stripV2Prefixes, CMS_SLUG_TO_STATIC_ID } from '../services/programService';
+import { fetchLiveProgramDetail, stripV2Prefixes, resolveStaticProgramId } from '../services/programService';
 import { ProgramV2Layout } from './programV2/ProgramV2Layout';
 import { SEO } from './SEO';
 
@@ -33,15 +33,50 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   const urlSlug = extractSlugFromUrl();
   const rawId = program?.id || urlSlug;
 
-  // Resolve CMS slugs back to static IDs so PROGRAM_DETAILS_MAP and
-  // fetchLiveProgramDetail (which uses PROGRAM_DETAIL_SLUG_ALIASES keyed by
-  // static ID) work correctly.
-  const programId = CMS_SLUG_TO_STATIC_ID[rawId] || rawId;
+  // Resolve CMS slugs / WP Post IDs back to static IDs so PROGRAM_DETAILS_MAP
+  // and fetchLiveProgramDetail (which uses PROGRAM_POST_IDS keyed by static ID)
+  // work correctly.
+  const programId = resolveStaticProgramId(rawId);
 
-  // Live CMS fetch disabled — CMS JSON returns incorrect/SEO data across all
-  // program queries. Static PROGRAM_DETAILS_MAP data is authoritative.
-  // To re-enable, restore the fetchLiveProgramDetail useEffect and wire liveDetail.
-  const [loading] = useState(false);
+  // Live CMS program detail (overrides static fallback once fetched)
+  const [liveDetail, setLiveDetail] = useState<ProgramDetailData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch the live CMS detail by permanent WordPress Post ID. Falls back to
+  // static data if the CMS is unreachable or the Post ID is unknown.
+  useEffect(() => {
+    if (!programId) {
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    const requestedId = programId;
+    setLoading(true);
+    setLiveDetail(null);
+    fetchLiveProgramDetail(requestedId).then(
+      (res) => {
+        if (cancelled) return;
+        // Only accept if still on the same program and CMS returned valid data
+        if (requestedId === programId && res.detail?.programTitle) {
+          // Strict guard: verify the returned detail actually belongs to this program.
+          // detail.id is the CMS slug from transformWpProgram.
+          const detailSlug = res.detail.id || '';
+          const detailStaticId = resolveStaticProgramId(detailSlug);
+          if (detailStaticId === programId) {
+            setLiveDetail(res.detail);
+          }
+        }
+        setLoading(false);
+      },
+      () => {
+        if (!cancelled) setLoading(false);
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [programId]);
 
   // Empty programId means the URL was invalid — show error state immediately
   if (!programId) {
@@ -93,8 +128,9 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     ? PROGRAM_DETAILS_MAP['performance-marketing']
     : (PROGRAM_DETAILS_MAP[programId] || null);
 
-  // CMS fetch disabled — static data is authoritative.
-  const displayDetail = staticDetail ? stripV2Prefixes(staticDetail) : null;
+  // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
+  const customDetail = liveDetail ?? staticDetail;
+  const displayDetail = customDetail ? stripV2Prefixes(customDetail) : null;
 
   // Skeleton while resolving a slug that has no static fallback yet.
   if (loading && !displayDetail) {
@@ -141,7 +177,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   }
 
   return (
-    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden" data-source="static">
+    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden" data-source={liveDetail ? 'cms' : 'static'}>
       <SEO
         title={displayDetail?.programTitle || program?.title || 'Program'}
         description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}

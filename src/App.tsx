@@ -24,7 +24,7 @@ import { Program, BlogPost } from './types';
 import { PROGRAMS_DATA, INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
 import { SEO } from './components/SEO';
-import { CMS_SLUG_TO_STATIC_ID } from './services/programService';
+import { resolveStaticProgramId } from './services/programService';
 
 const AboutUsPage = lazy(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
 const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
@@ -127,8 +127,8 @@ function resolveProgram(slug: string): Program {
   const found = PROGRAMS_DATA.programs.find((p) => p.id === slug);
   if (found) return found;
 
-  // 2. CMS slug -> static ID reverse mapping (e.g. "specialization-in-performance-marketing" -> "performance-marketing")
-  const staticId = CMS_SLUG_TO_STATIC_ID[slug];
+  // 2. CMS slug / WP Post ID -> static ID reverse mapping
+  const staticId = resolveStaticProgramId(slug);
   if (staticId) {
     const mapped = PROGRAMS_DATA.programs.find((p) => p.id === staticId);
     if (mapped) return mapped;
