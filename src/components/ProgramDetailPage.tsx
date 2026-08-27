@@ -33,17 +33,16 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   const urlSlug = extractSlugFromUrl();
   const rawId = program?.id || urlSlug;
 
-  // Resolve CMS slugs / WP Post IDs back to static IDs so PROGRAM_DETAILS_MAP
-  // and fetchLiveProgramDetail (which uses PROGRAM_POST_IDS keyed by static ID)
-  // work correctly.
+  // Pass the raw URL slug directly to fetchLiveProgramDetail for dynamic
+  // auto-discovery. resolveStaticProgramId is a pass-through in dynamic mode.
   const programId = resolveStaticProgramId(rawId);
 
   // Live CMS program detail (overrides static fallback once fetched)
   const [liveDetail, setLiveDetail] = useState<ProgramDetailData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch the live CMS detail by permanent WordPress Post ID. Falls back to
-  // static data if the CMS is unreachable or the Post ID is unknown.
+  // Fetch the live CMS detail dynamically by URL slug. Falls back to static
+  // data if the CMS is unreachable or the slug has no matching CMS post.
   useEffect(() => {
     if (!programId) {
       setLoading(false);

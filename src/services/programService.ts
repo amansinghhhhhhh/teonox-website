@@ -513,75 +513,45 @@ function applyResolvedHeroImage(post: any, detail: ProgramDetailData): ProgramDe
 }
 
 /**
- * Permanent WordPress Post IDs for each program. These never change even if
- * slugs/permalinks are updated by the SEO team. If a new program is added to
- * WordPress, add its Post ID here.
- *
- * Live Post IDs confirmed from CMS API (https://cms.teonox.com/wp-json/wp/v2/program):
- *   410 = Business Digital Marketing With AI
- *   458 = Specialization in Performance Marketing
- *   460 = Specialization in Search Engine Optimization
- *   461 = Specialization in Social Media Marketing
- */
-export const PROGRAM_POST_IDS: Record<string, number> = {
-  'business-digital-marketing-ai': 410,
-  'business-digital-marketing-with-ai': 410,
-  'performance-marketing': 458,
-  'seo-specialization': 460,
-  'social-media-marketing': 461,
-};
-
-/**
- * Reverse mapping: WP Post ID (as string) -> static program ID. Used by the
- * router and ProgramDetailPage to resolve a WordPress Post ID extracted from
- * the browser URL or API response back to the static program ID that
- * PROGRAMS_DATA and PROGRAM_DETAILS_MAP expect.
- */
-export const POST_ID_TO_STATIC: Record<string, string> = Object.fromEntries(
-  Object.entries(PROGRAM_POST_IDS).map(([staticId, wpId]) => [String(wpId), staticId]),
-);
-
-/**
- * URL slug aliases: WordPress slugs that differ from the static program ID.
- * When a user navigates via a WordPress slug (e.g. from a card link), this map
- * resolves it back to the canonical static ID used by PROGRAMS_DATA and
- * PROGRAM_DETAILS_MAP.
- */
-const SLUG_ALIASES: Record<string, string> = {
-  'business-digital-marketing-with-ai': 'business-digital-marketing-ai',
-};
-
-/**
  * Resolve any raw identifier (URL slug, WP Post ID, or static program ID)
  * back to the canonical static program ID used by PROGRAMS_DATA and
  * PROGRAM_DETAILS_MAP.
+ *
+ * In fully dynamic mode (no hardcoded maps), this is a pass-through that
+ * returns the raw identifier unchanged. The slug is used directly for both
+ * the CMS query and the static data lookup.
  */
 export function resolveStaticProgramId(rawId: string): string {
-  return SLUG_ALIASES[rawId] || POST_ID_TO_STATIC[rawId] || rawId;
+  return rawId;
 }
 
 /**
- * Fetch a single program's detail content by its permanent WordPress Post ID.
- * Returns static PROGRAM_DETAILS_MAP data when the CMS is unreachable.
+ * Fetch a single program's detail content by its URL slug via the WordPress
+ * REST API. The slug is queried dynamically — no hardcoded Post IDs required.
+ *
+ * Returns static PROGRAM_DETAILS_MAP data when the CMS is unreachable or the
+ * slug has no matching CMS post.
  */
 export async function fetchLiveProgramDetail(
-  idOrSlug: string,
+  requestedSlug: string,
 ): Promise<{ detail: ProgramDetailData | null; isLive: boolean }> {
-  const key = idOrSlug || '';
-  const wpPostId = PROGRAM_POST_IDS[key];
+  const slug = requestedSlug || '';
 
-  if (!wpPostId) {
-    // Unknown program — return static fallback immediately.
-    const staticResult = PROGRAM_DETAILS_MAP[key] || null;
-    return { detail: staticResult, isLive: false };
+  if (!slug) {
+    return { detail: null, isLive: false };
   }
 
-  // Fetch by permanent Post ID — slug-independent, immune to permalink changes.
+  // Dynamic slug-based query — fully decoupled from Post IDs.
+  // Uses & (not ?) because CMS_URL already contains rest_route=...
   try {
-    const url = `${CMS_URL}/program/${wpPostId}?_embed&_cb=${Date.now()}`;
+    const url = `${CMS_URL}/program&slug=${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`;
     const res = await fetch(url);
     if (res.ok) {
-      const raw = await safeJson(res);
+      const json = await safeJson(res);
+      // WordPress may return an array (even for ?slug=) or a single object.
+      const posts = Array.isArray(json) ? json : json ? [json] : [];
+      // Find the post whose slug exactly matches the requested slug.
+      const raw = posts.find((item: any) => String(item?.slug || '') === slug) || null;
       if (raw && isProgramVisible(raw)) {
         const transformed = transformWpProgram(raw);
         if (transformed) {
@@ -591,11 +561,11 @@ export async function fetchLiveProgramDetail(
       }
     }
   } catch (e) {
-    console.warn('[fetchLiveProgramDetail] Fetch failed for Post ID:', wpPostId, e);
+    console.warn('[fetchLiveProgramDetail] Fetch failed for slug:', slug, e);
   }
 
-  // Static fallback when CMS is unreachable.
-  const staticResult = PROGRAM_DETAILS_MAP[key] || null;
+  // Static fallback when CMS is unreachable or slug has no CMS match.
+  const staticResult = PROGRAM_DETAILS_MAP[slug] || null;
   return { detail: staticResult, isLive: false };
 }
 
