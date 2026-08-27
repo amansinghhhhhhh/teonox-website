@@ -69,7 +69,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
               {/* Typewriter pill + pen icon stay on one line */}
               <span className="inline-flex items-center whitespace-nowrap gap-2">
                 {/* Highlighted Rounded Pill Box with Typewriter Animation */}
-                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-3 py-2.5 sm:px-6 sm:py-3 rounded-2xl bg-white border-2 border-[#EADAD0] text-[#F15A29] shadow-[0_8px_30px_rgba(241,90,41,0.12)] min-h-[48px] sm:min-h-[60px] text-[16px] sm:text-[16px] leading-snug">
+                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-6 py-3 sm:px-10 sm:py-5 rounded-full bg-white shadow-lg shadow-orange-500/10 border border-orange-100 text-[#FF5722] text-2xl sm:text-4xl lg:text-5xl font-bold leading-none">
                   {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
                   <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
                     {LONGEST_PHRASE}
@@ -78,14 +78,14 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
                   {/* Visible typewriter text + blinking cursor (overlaid on the same grid cell) */}
                   <span className="flex items-center whitespace-nowrap col-start-1 row-start-1">
                     {displayText}
-                    <span className="w-[3px] h-[0.85em] bg-[#F15A29] ml-1 sm:ml-1.5 translate-y-[2px] animate-pulse inline-flex" />
+                    <span className="w-[3px] h-[0.75em] bg-[#FF5722] ml-1.5 sm:ml-2 animate-pulse inline-flex" />
                   </span>
                   
                   {/* Decorative Pill Handles Corner Dots */}
-                  <span className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-                  <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
-                  <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-[#F15A29] rounded-full" />
+                  <span className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-[#FF5722] rounded-full" />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#FF5722] rounded-full" />
+                  <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#FF5722] rounded-full" />
+                  <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-[#FF5722] rounded-full" />
                 </span>
 
                 {/* Vector Scribble / Pen Icon on Right */}
