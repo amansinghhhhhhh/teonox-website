@@ -123,7 +123,9 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     : (PROGRAM_DETAILS_MAP[programId] || null);
 
   // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
-  const customDetail = liveDetail ?? staticDetail;
+  // ?static=1 query param forces local static data for QA testing.
+  const forceStatic = new URLSearchParams(window.location.search).get('static') === '1';
+  const customDetail = forceStatic ? staticDetail : (liveDetail ?? staticDetail);
   const displayDetail = customDetail ? stripV2Prefixes(customDetail) : null;
 
   // Skeleton while resolving a slug that has no static fallback yet.
@@ -171,7 +173,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   }
 
   return (
-    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
+    <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden" data-source={liveDetail ? 'cms' : 'static'}>
       <SEO
         title={displayDetail?.programTitle || program?.title || 'Program'}
         description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
