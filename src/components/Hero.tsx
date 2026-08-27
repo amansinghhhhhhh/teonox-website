@@ -69,7 +69,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
               {/* Typewriter pill + pen icon stay on one line */}
               <span className="inline-flex items-center whitespace-nowrap gap-2">
                 {/* Highlighted Rounded Pill Box with Typewriter Animation */}
-                <span className="relative inline-grid max-w-[90vw] w-auto items-center justify-items-center px-6 py-3 sm:px-10 sm:py-5 rounded-full bg-white shadow-lg shadow-orange-500/10 border border-orange-100 text-[#FF5722] text-2xl sm:text-4xl lg:text-5xl font-bold leading-none">
+                <span className="relative inline-grid max-w-[85vw] sm:max-w-none w-auto items-center justify-items-center px-3 sm:px-10 py-3 sm:py-5 rounded-full bg-white shadow-lg shadow-orange-500/10 border border-orange-100 text-[#FF5722] text-[14px] sm:text-2xl lg:text-4xl font-bold leading-none">
                   {/* Invisible placeholder pins the pill width to the longest phrase so typing never resizes the container */}
                   <span aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
                     {LONGEST_PHRASE}
