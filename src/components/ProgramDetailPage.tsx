@@ -51,17 +51,19 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     }
 
     let cancelled = false;
+    const requestedId = programId;
     setLoading(true);
     setLiveDetail(null);
-    fetchLiveProgramDetail(programId).then(
+    fetchLiveProgramDetail(requestedId).then(
       (res) => {
         if (cancelled) return;
-        setLiveDetail(res.detail);
+        // Only accept if still on the same program and CMS returned valid data
+        if (requestedId === programId && res.detail?.programTitle) {
+          setLiveDetail(res.detail);
+        }
         setLoading(false);
       },
       () => {
-        // Defensive: never reject (service always resolves), but guard against
-        // unhandled promise rejections / infinite skeleton if the chain changes.
         if (!cancelled) setLoading(false);
       },
     );

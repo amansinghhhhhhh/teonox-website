@@ -563,9 +563,18 @@ export async function fetchLiveProgramDetail(
         const json = await safeJson(res);
         const raw = isNumeric ? json : Array.isArray(json) ? json[0] : null;
         if (raw) {
+          // Validate the returned post matches the slug we queried for.
+          // WordPress ?slug= filter may return all posts if broken/misconfigured.
+          const rawSlug = String(raw.slug || '');
+          const rawId = raw.id;
+          const matches = isNumeric
+            ? rawId === Number(slug)
+            : rawSlug === slug;
+          if (!matches) continue;
+
           // Staging-only programs stay hidden on production even when reached
-          // by direct URL (fall through to the static fallback / null).
-          if (!isProgramVisible(raw)) return { detail: null, isLive: false };
+          // by direct URL (skip to next slug candidate instead of aborting).
+          if (!isProgramVisible(raw)) continue;
           const transformed = transformWpProgram(raw);
           if (transformed) {
             const detail = applyResolvedHeroImage(raw, transformed);
