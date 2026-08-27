@@ -561,7 +561,16 @@ export async function fetchLiveProgramDetail(
       const res = await fetch(url);
       if (res.ok) {
         const json = await safeJson(res);
-        const raw = isNumeric ? json : Array.isArray(json) ? json[0] : null;
+        const raw = isNumeric
+          ? json
+          : Array.isArray(json)
+            ? json.find((item: any) => {
+                const itemSlug = String(item?.slug || '');
+                if (itemSlug === slug) return true;
+                const aliasFor = CMS_SLUG_TO_STATIC_ID[itemSlug];
+                return aliasFor === key;
+              }) || null
+            : null;
         if (raw) {
           // Validate the returned post matches the slug we queried for.
           // WordPress ?slug= filter may return all posts if broken/misconfigured.
@@ -575,6 +584,13 @@ export async function fetchLiveProgramDetail(
           // Staging-only programs stay hidden on production even when reached
           // by direct URL (skip to next slug candidate instead of aborting).
           if (!isProgramVisible(raw)) continue;
+
+          // Strict reverse-slug gate: verify the returned post actually belongs
+          // to this programId. If its slug maps to a different static ID via
+          // CMS_SLUG_TO_STATIC_ID, reject it to prevent cross-program overwrites.
+          const reverseId = CMS_SLUG_TO_STATIC_ID[rawSlug];
+          if (reverseId && reverseId !== key) continue;
+
           const transformed = transformWpProgram(raw);
           if (transformed) {
             const detail = applyResolvedHeroImage(raw, transformed);

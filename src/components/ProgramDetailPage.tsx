@@ -59,7 +59,19 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
         if (cancelled) return;
         // Only accept if still on the same program and CMS returned valid data
         if (requestedId === programId && res.detail?.programTitle) {
-          setLiveDetail(res.detail);
+          // Strict guard: verify the returned detail actually belongs to this program.
+          // detail.id is the CMS slug from transformWpProgram.
+          const detailSlug = res.detail.id || '';
+          const detailStaticId = CMS_SLUG_TO_STATIC_ID[detailSlug] || detailSlug;
+          if (detailStaticId === programId) {
+            setLiveDetail(res.detail);
+          } else {
+            console.warn('[ProgramDetail] Rejected CMS data — slug mismatch:', {
+              detailSlug,
+              detailStaticId,
+              expectedProgramId: programId,
+            });
+          }
         }
         setLoading(false);
       },
