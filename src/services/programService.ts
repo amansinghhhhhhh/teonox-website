@@ -525,6 +525,7 @@ function applyResolvedHeroImage(post: any, detail: ProgramDetailData): ProgramDe
  */
 export const PROGRAM_POST_IDS: Record<string, number> = {
   'business-digital-marketing-ai': 410,
+  'business-digital-marketing-with-ai': 410,
   'performance-marketing': 458,
   'seo-specialization': 460,
   'social-media-marketing': 461,
@@ -541,12 +542,22 @@ export const POST_ID_TO_STATIC: Record<string, string> = Object.fromEntries(
 );
 
 /**
+ * URL slug aliases: WordPress slugs that differ from the static program ID.
+ * When a user navigates via a WordPress slug (e.g. from a card link), this map
+ * resolves it back to the canonical static ID used by PROGRAMS_DATA and
+ * PROGRAM_DETAILS_MAP.
+ */
+const SLUG_ALIASES: Record<string, string> = {
+  'business-digital-marketing-with-ai': 'business-digital-marketing-ai',
+};
+
+/**
  * Resolve any raw identifier (URL slug, WP Post ID, or static program ID)
  * back to the canonical static program ID used by PROGRAMS_DATA and
  * PROGRAM_DETAILS_MAP.
  */
 export function resolveStaticProgramId(rawId: string): string {
-  return POST_ID_TO_STATIC[rawId] || rawId;
+  return SLUG_ALIASES[rawId] || POST_ID_TO_STATIC[rawId] || rawId;
 }
 
 /**
