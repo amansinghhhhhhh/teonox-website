@@ -7,6 +7,119 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// ─── Dynamic Sitemap ───────────────────────────────────────────────
+// Generates sitemap.xml on-the-fly from live WordPress data.
+// No build/push needed — updates automatically when blogs are added/removed.
+const BASE_URL = 'https://teonox.com';
+const CMS_BASE = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
+const PROGRAM_IDS = [
+  'business-digital-marketing-ai',
+  'performance-marketing',
+  'seo-specialization',
+  'social-media-marketing',
+];
+const STATIC_PAGES: Array<{ path: string; priority: string; changefreq: string }> = [
+  { path: '/',                      priority: '1.0', changefreq: 'weekly'  },
+  { path: '/about',                 priority: '0.8', changefreq: 'monthly' },
+  { path: '/programs',              priority: '0.9', changefreq: 'weekly'  },
+  { path: '/blog',                  priority: '0.8', changefreq: 'weekly'  },
+  { path: '/contact',               priority: '0.7', changefreq: 'monthly' },
+  { path: '/admissions',            priority: '0.8', changefreq: 'monthly' },
+  { path: '/career-outcomes',       priority: '0.7', changefreq: 'monthly' },
+  { path: '/why-teonox',            priority: '0.7', changefreq: 'monthly' },
+  { path: '/privacy-policy',        priority: '0.3', changefreq: 'yearly'  },
+  { path: '/terms-and-conditions',  priority: '0.3', changefreq: 'yearly'  },
+];
+
+async function fetchLiveBlogSlugs(): Promise<Array<{ slug: string; lastmod: string }>> {
+  try {
+    const res = await fetch(`${CMS_BASE}/posts&_fields=slug,date&per_page=100&_cb=${Date.now()}`);
+    if (!res.ok) return [];
+    const type = (res.headers.get('content-type') || '').toLowerCase();
+    if (!type.includes('application/json')) return [];
+    const posts = await res.json();
+    if (!Array.isArray(posts)) return [];
+    return posts
+      .map((p: any) => ({
+        slug: String(p.slug || ''),
+        lastmod: p.date ? p.date.split('T')[0] : new Date().toISOString().split('T')[0],
+      }))
+      .filter((p) => p.slug);
+  } catch {
+    return [];
+  }
+}
+
+function buildSitemapUrl(loc: string, lastmod: string, changefreq: string, priority: string): string {
+  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+}
+
+// Register BEFORE static middleware so it takes priority over dist/sitemap.xml
+app.get('/sitemap.xml', async (_req, res) => {
+  const today = new Date().toISOString().split('T')[0];
+  const urls: string[] = [];
+
+  // Static pages
+  for (const page of STATIC_PAGES) {
+    urls.push(buildSitemapUrl(`${BASE_URL}${page.path}`, today, page.changefreq, page.priority));
+  }
+
+  // Programs
+  for (const id of PROGRAM_IDS) {
+    urls.push(buildSitemapUrl(`${BASE_URL}/program/${id}`, today, 'monthly', '0.8'));
+  }
+
+  // Live blog posts from WordPress
+  const blogs = await fetchLiveBlogSlugs();
+  for (const post of blogs) {
+    urls.push(buildSitemapUrl(`${BASE_URL}/blog/${post.slug}`, post.lastmod, 'monthly', '0.7'));
+  }
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
+
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour cache
+  res.send(xml);
+});
+
+// ─── Dynamic Sitemap HTML ──────────────────────────────────────────
+app.get('/sitemap.html', async (_req, res) => {
+  const blogs = await fetchLiveBlogSlugs();
+  const blogLinks = blogs.map((p) => `<li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`).join('\n');
+  const programLinks = PROGRAM_IDS.map((id) => `<li><a href="${BASE_URL}/program/${id}">${BASE_URL}/program/${id}</a></li>`).join('\n');
+  const pageLinks = STATIC_PAGES.map((p) => `<li><a href="${BASE_URL}${p.path}">${BASE_URL}${p.path}</a></li>`).join('\n');
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEONOX Sitemap</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #111; }
+    h1 { border-bottom: 2px solid #F15A29; padding-bottom: 0.5rem; }
+    .section { margin: 1.5rem 0; }
+    h2 { color: #F15A29; margin-bottom: 0.5rem; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 0.3rem 0; }
+    a { color: #111; text-decoration: none; }
+    a:hover { text-decoration: underline; color: #F15A29; }
+  </style>
+</head>
+<body>
+  <h1>TEONOX Sitemap</h1>
+  <p>Auto-generated from live WordPress data — no rebuild needed.</p>
+  <p><a href="${BASE_URL}/sitemap.xml">Download XML Sitemap</a></p>
+  <div class="section"><h2>Main Pages</h2><ul>${pageLinks}</ul></div>
+  <div class="section"><h2>Programs</h2><ul>${programLinks}</ul></div>
+  <div class="section"><h2>Blog Posts (${blogs.length} live)</h2><ul>${blogLinks.length > 0 ? blogLinks : '<li>No blog posts found</li>'}</ul></div>
+</body>
+</html>`;
+
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(html);
+});
+
 // Helper function to decode HTML entities
 function decodeHtmlEntities(str: string = ""): string {
   return str
