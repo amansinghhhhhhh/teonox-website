@@ -19,7 +19,6 @@ const STATIC_PAGES = [
   { path: '/terms-and-conditions',    priority: '0.3', changefreq: 'yearly'  },
 ];
 
-// Program IDs (from src/data.ts and src/data/programDetails.ts)
 const PROGRAM_IDS = [
   'business-digital-marketing-ai',
   'performance-marketing',
@@ -27,19 +26,12 @@ const PROGRAM_IDS = [
   'social-media-marketing',
 ];
 
-// Fetch live blog posts from WordPress REST API — returns { slug, lastmod }[]
 async function fetchBlogPosts() {
   try {
     const res = await fetch(`${CMS_URL}/posts&_fields=slug,date&per_page=100&_cb=${Date.now()}`);
-    if (!res.ok) {
-      console.warn('[Sitemap] WordPress posts API returned', res.status);
-      return [];
-    }
+    if (!res.ok) return [];
     const type = (res.headers.get('content-type') || '').toLowerCase();
-    if (!type.includes('application/json')) {
-      console.warn('[Sitemap] WordPress returned non-JSON, skipping live blogs');
-      return [];
-    }
+    if (!type.includes('application/json')) return [];
     const posts = await res.json();
     if (!Array.isArray(posts) || posts.length === 0) return [];
     return posts.map((p) => ({
@@ -52,85 +44,31 @@ async function fetchBlogPosts() {
   }
 }
 
-function buildUrl(pagePath, priority, changefreq, lastmod) {
-  return `  <url>
-    <loc>${BASE_URL}${pagePath}</loc>
-    <lastmod>${lastmod || TODAY}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
-  </url>`;
-}
+async function main() {
+  const distDir = path.resolve(__dirname, '..', 'dist');
 
-async function generateSitemapXml(blogPosts) {
-  const urls = [];
-
-  // Static pages
-  for (const page of STATIC_PAGES) {
-    urls.push(buildUrl(page.path, page.priority, page.changefreq));
+  if (!fs.existsSync(distDir)) {
+    fs.mkdirSync(distDir, { recursive: true });
   }
 
-  // Program pages (singular /program/ route)
-  for (const id of PROGRAM_IDS) {
-    urls.push(buildUrl(`/program/${id}`, '0.8', 'monthly'));
-  }
+  console.log('[Sitemap] Fetching blog posts from WordPress...');
+  const blogPosts = await fetchBlogPosts();
+  console.log(`[Sitemap] Found ${blogPosts.length} live blog post(s)`);
 
-  // Blog posts — live from WordPress
-  for (const post of blogPosts) {
-    urls.push(buildUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.lastmod));
-  }
+  // NOTE: sitemap.xml is served dynamically by server.ts (no static file in dist/).
+  // This script only generates sitemap.html as a human-readable fallback.
 
-  // Fallback: if no live blogs fetched, show a message in console
-  if (blogPosts.length === 0) {
-    console.warn('[Sitemap] No live blog posts found — sitemap will not include any blog URLs');
-  }
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join('\n')}
-</urlset>`;
-}
-
-async function generateSitemapHtml(blogPosts) {
-  const sections = [
-    { title: 'Main Pages', pages: STATIC_PAGES },
-    {
-      title: 'Programs',
-      pages: PROGRAM_IDS.map(id => ({
-        path: `/program/${id}`,
-        priority: '0.8',
-        changefreq: 'monthly',
-      })),
-    },
-    {
-      title: 'Blog Posts',
-      pages: blogPosts.length > 0
-        ? blogPosts.map(post => ({
-            path: `/blog/${post.slug}`,
-            priority: '0.7',
-            changefreq: 'monthly',
-          }))
-        : [],
-    },
-  ];
-
-  const linksHtml = sections
-    .map(
-      (section) => `
-    <div class="section">
-      <h2>${section.title}</h2>
-      <ul>
-        ${section.pages
-          .map(
-            (page) =>
-              `<li><a href="${BASE_URL}${page.path}">${BASE_URL}${page.path}</a></li>`,
-          )
-          .join('\n        ')}
-      </ul>
-    </div>`,
-    )
+  const blogLinks = blogPosts
+    .map((p) => `      <li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`)
+    .join('\n');
+  const programLinks = PROGRAM_IDS
+    .map((id) => `      <li><a href="${BASE_URL}/program/${id}">${BASE_URL}/program/${id}</a></li>`)
+    .join('\n');
+  const pageLinks = STATIC_PAGES
+    .map((p) => `      <li><a href="${BASE_URL}${p.path}">${BASE_URL}${p.path}</a></li>`)
     .join('\n');
 
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -151,31 +89,28 @@ async function generateSitemapHtml(blogPosts) {
   <h1>TEONOX Sitemap</h1>
   <p>Generated on ${TODAY}</p>
   <p><a href="${BASE_URL}/sitemap.xml">Download XML Sitemap</a></p>
-${linksHtml}
+  <div class="section">
+    <h2>Main Pages</h2>
+    <ul>
+${pageLinks}
+    </ul>
+  </div>
+  <div class="section">
+    <h2>Programs</h2>
+    <ul>
+${programLinks}
+    </ul>
+  </div>
+  <div class="section">
+    <h2>Blog Posts (${blogPosts.length} live)</h2>
+    <ul>
+${blogLinks || '      <li>No blog posts found</li>'}
+    </ul>
+  </div>
 </body>
 </html>`;
-}
 
-// Write files
-async function main() {
-  const distDir = path.resolve(__dirname, '..', 'dist');
-
-  if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
-  }
-
-  // Fetch live blog posts from WordPress before generating sitemap
-  console.log('[Sitemap] Fetching blog posts from WordPress...');
-  const blogPosts = await fetchBlogPosts();
-  console.log(`[Sitemap] Found ${blogPosts.length} live blog post(s)`);
-
-  const sitemapXml = await generateSitemapXml(blogPosts);
-  const sitemapHtml = await generateSitemapHtml(blogPosts);
-
-  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapXml, 'utf-8');
-  fs.writeFileSync(path.join(distDir, 'sitemap.html'), sitemapHtml, 'utf-8');
-
-  console.log('✓ Generated dist/sitemap.xml');
+  fs.writeFileSync(path.join(distDir, 'sitemap.html'), html, 'utf-8');
   console.log('✓ Generated dist/sitemap.html');
 }
 
