@@ -110,21 +110,9 @@ function normalizePath(path: string): string {
   return withSlash.length > 1 ? withSlash.replace(/\/+$/, '') : '/';
 }
 
-// Humanize a URL slug into a fallback title for live-only programs.
-function humanizeSlug(slug: string): string {
-  return slug
-    .split('-')
-    .filter(Boolean)
-    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(' ');
-}
-
-// Resolve a program route segment to a Program. Known static programs resolve
-// normally; CMS slugs from live WordPress posts are mapped back to their static
-// IDs so PROGRAMS_DATA and PROGRAM_DETAILS_MAP lookups succeed. Unknown slugs
-// (truly live-only CMS programs) get a light stub whose id is used to fetch
-// the real content from WordPress.
-function resolveProgram(slug: string): Program {
+// Resolve a program route segment to a Program. Returns null for truly
+// invalid/unknown slugs so the caller can render a 404.
+function resolveProgram(slug: string): Program | null {
   // 1. Direct static ID match (e.g. "business-digital-marketing-ai")
   const found = PROGRAMS_DATA.programs.find((p) => p.id === slug);
   if (found) return found;
@@ -136,21 +124,8 @@ function resolveProgram(slug: string): Program {
     if (mapped) return mapped;
   }
 
-  // 3. Unknown slug — create a stub for live CMS content
-  const title = humanizeSlug(slug);
-  return {
-    id: slug,
-    title,
-    repeatedTitle: title,
-    description: '',
-    duration: '',
-    durationLabel: 'Duration',
-    eligibility: '',
-    eligibilityLabel: 'Eligibility',
-    mode: '',
-    modeLabel: 'Mode',
-    buttonText: 'View Program',
-  };
+  // 3. Unknown slug — no static match means invalid program URL
+  return null;
 }
 
 // Resolve the full route state synchronously from the URL on first render.
@@ -165,7 +140,11 @@ function getInitialRouteState(): {
   const route = parsePath(window.location.pathname);
 
   if (route.programId) {
-    return { page: 'programs', program: resolveProgram(route.programId), post: null, blogLoading: false };
+    const prog = resolveProgram(route.programId);
+    if (prog) {
+      return { page: 'programs', program: prog, post: null, blogLoading: false };
+    }
+    return { page: 'not-found', program: null, post: null, blogLoading: false };
   }
 
   if (route.postId) {
@@ -241,11 +220,11 @@ export default function App() {
     setBlogLoading(true);
     try {
       const post = await fetchLiveBlogDetail(idOrSlug);
-      if (requestedPostIdRef.current === idOrSlug) {
+        if (requestedPostIdRef.current === idOrSlug) {
         if (post) {
           setSelectedPost(post);
         } else {
-          setCurrentPage('blog');
+          setCurrentPage('not-found');
         }
       }
     } finally {
@@ -271,7 +250,12 @@ export default function App() {
       setCurrentPage(route.page);
 
       if (route.programId) {
-        setSelectedProgram(resolveProgram(route.programId));
+        const prog = resolveProgram(route.programId);
+        if (prog) {
+          setSelectedProgram(prog);
+        } else {
+          setCurrentPage('not-found');
+        }
       } else if (route.postId) {
         loadBlogPost(route.postId);
       }
@@ -317,7 +301,12 @@ export default function App() {
       setCurrentPage(route.page);
 
       if (route.programId) {
-        setSelectedProgram(resolveProgram(route.programId));
+        const prog = resolveProgram(route.programId);
+        if (prog) {
+          setSelectedProgram(prog);
+        } else {
+          setCurrentPage('not-found');
+        }
       } else if (route.postId) {
         loadBlogPost(route.postId);
       }
