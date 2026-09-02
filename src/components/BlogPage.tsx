@@ -214,11 +214,21 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           SECTION 02 - CATEGORY FILTER
           ──────────────────────────────────────── */}
       <section className="bg-white border-y border-[#F0DFCE]/80 py-4 shadow-xs transition-all">
-        <div className="w-[85%] max-w-7xl mx-auto relative">
+        <div className="w-full max-w-7xl mx-auto relative">
           
-          {/* Scroll Gradient Mask Container */}
+          {/* Edge Fade Gradient Mask */}
           <div className="relative group">
-            <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-1 pl-1 pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div
+              className="absolute inset-y-0 left-0 w-6 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ maskImage: 'linear-gradient(to right, black, transparent)' }}
+            />
+            <div
+              className="absolute inset-y-0 right-0 w-6 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ maskImage: 'linear-gradient(to left, black, transparent)' }}
+            />
+
+            {/* Scrollable Pills Container */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-2 px-4 md:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {categoryTabs.map((cat, ci) => {
                 const isActive = selectedCategory === cat;
                 return (
@@ -228,10 +238,10 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: ci * 0.05, ease: [0.16, 1, 0.3, 1] }}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`shrink-0 px-4 sm:px-5 py-2.5 rounded-full font-sora text-[13px] font-[600] transition-all duration-250 ease-out select-none cursor-pointer flex items-center gap-2 ${
+                    className={`shrink-0 whitespace-nowrap px-4 md:px-5 py-2.5 rounded-full font-sora text-xs md:text-sm font-[600] transition-colors duration-200 ease-out select-none cursor-pointer flex items-center gap-2 ${
                       isActive
                         ? 'bg-[#F15A29] text-white shadow-md shadow-[#F15A29]/25 font-[700] scale-[1.02] ring-2 ring-[#F15A29]/20'
-                        : 'bg-white hover:bg-[#FFF5F1] text-[#4A4A4A] border border-[#E2E8F0] hover:border-[#F15A29]/60 hover:text-[#111111] active:scale-95'
+                        : 'bg-white hover:bg-primary-50 text-[#4A4A4A] border border-[#E2E8F0] hover:border-[#F15A29]/60 hover:text-[#111111] active:scale-95'
                     }`}
                   >
                     {isActive && (
