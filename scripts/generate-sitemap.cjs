@@ -55,9 +55,25 @@ async function main() {
   const blogPosts = await fetchBlogPosts();
   console.log(`[Sitemap] Found ${blogPosts.length} live blog post(s)`);
 
-  // NOTE: sitemap.xml is served dynamically by server.ts (no static file in dist/).
-  // This script only generates sitemap.html as a human-readable fallback.
+  // Generate sitemap.xml (static fallback for Vercel/Netlify deployments)
+  const xmlUrls = [
+    ...STATIC_PAGES.map((p) =>
+      `  <url>\n    <loc>${BASE_URL}${p.path}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+    ),
+    ...PROGRAM_IDS.map((id) =>
+      `  <url>\n    <loc>${BASE_URL}/program/${id}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+    ),
+    ...blogPosts.map((p) =>
+      `  <url>\n    <loc>${BASE_URL}/blog/${p.slug}</loc>\n    <lastmod>${p.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`
+    ),
+  ];
 
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${xmlUrls.join('\n')}\n</urlset>`;
+
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), xml, 'utf-8');
+  console.log(`✓ Generated dist/sitemap.xml (${xmlUrls.length} URLs)`);
+
+  // Generate sitemap.html as a human-readable fallback
   const blogLinks = blogPosts
     .map((p) => `      <li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`)
     .join('\n');
