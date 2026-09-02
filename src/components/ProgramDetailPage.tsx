@@ -63,6 +63,22 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
         }
         if (requestedId === identifier && res.detail?.programTitle) {
           setLiveDetail(res.detail);
+
+          // Canonical URL sync: if the user arrived via an ID, old slug, or
+          // alias, quietly update the address bar to the official WP slug
+          // without triggering a full navigation / re-render.
+          const canonicalSlug = res.detail.id || '';
+          if (canonicalSlug && canonicalSlug !== identifier) {
+            try {
+              window.history.replaceState(
+                { type: 'page', page: 'programs' },
+                '',
+                `/program/${canonicalSlug}`,
+              );
+            } catch {
+              // Ignore security errors in sandboxed iframes
+            }
+          }
         }
         setLoading(false);
       },
@@ -149,12 +165,17 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     );
   }
 
+  // Use the official slug from the API when available, otherwise fall back to
+  // the identifier the user typed/clicked. This ensures the canonical URL
+  // always matches the slug in the address bar (which was just synced above).
+  const canonicalSlug = liveDetail?.id || identifier;
+
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden" data-source={liveDetail ? 'cms' : 'static'}>
       <SEO
         title={displayDetail?.programTitle || program?.title || 'Program'}
         description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
-        canonical={`/programs/${identifier}`}
+        canonical={`/programs/${canonicalSlug}`}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Course',
