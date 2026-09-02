@@ -527,8 +527,11 @@ export const PROGRAM_POST_IDS: Record<string, number> = {
   'business-digital-marketing-ai': 410,
   'business-digital-marketing-with-ai': 410,
   'performance-marketing': 458,
+  'specialization-in-performance-marketing': 458,
   'seo-specialization': 460,
+  'specialization-in-search-engine-optimization': 460,
   'social-media-marketing': 461,
+  'specialization-in-social-media-marketing': 461,
 };
 
 /**
@@ -549,6 +552,9 @@ export const POST_ID_TO_STATIC: Record<string, string> = Object.fromEntries(
  */
 const SLUG_ALIASES: Record<string, string> = {
   'business-digital-marketing-with-ai': 'business-digital-marketing-ai',
+  'specialization-in-performance-marketing': 'performance-marketing',
+  'specialization-in-search-engine-optimization': 'seo-specialization',
+  'specialization-in-social-media-marketing': 'social-media-marketing',
 };
 
 /**
