@@ -245,70 +245,59 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           SECTION 02 - CATEGORY FILTER
           ──────────────────────────────────────── */}
       <section className="bg-white border-y border-[#F0DFCE]/80 py-4 shadow-xs transition-all">
-        <div className="w-full max-w-7xl mx-auto relative">
-          <div className="flex items-center gap-3 w-full">
+        <div className="flex items-center gap-2 w-full max-w-7xl mx-auto px-4">
 
-            {/* Left Arrow */}
-            <button
-              onClick={scrollLeft}
-              disabled={!canScrollLeft}
-              className="shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Scroll categories left"
-            >
-              <ChevronLeft className="w-4 h-4 text-[#4A4A4A]" />
-            </button>
+          {/* Left Arrow */}
+          <button
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+            className="shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Scroll categories left"
+          >
+            <ChevronLeft className="w-4 h-4 text-[#4A4A4A]" />
+          </button>
 
-            {/* Edge Fade Gradient Mask + Scroll Container */}
-            <div className="relative group flex-1 min-w-0">
-              <div
-                className="absolute inset-y-0 left-0 w-6 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ maskImage: 'linear-gradient(to right, black, transparent)' }}
-              />
-              <div
-                className="absolute inset-y-0 right-0 w-6 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ maskImage: 'linear-gradient(to left, black, transparent)' }}
-              />
-
-              <div
-                ref={categoryScrollRef}
-                className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-              >
-                {categoryTabs.map((cat, ci) => {
-                  const isActive = selectedCategory === cat;
-                  return (
-                    <motion.button
-                      key={cat}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: ci * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`shrink-0 whitespace-nowrap px-4 md:px-5 py-2.5 rounded-full font-sora text-xs md:text-sm font-[600] transition-colors duration-200 ease-out select-none cursor-pointer flex items-center gap-2 ${
-                        isActive
-                          ? 'bg-[#F15A29] text-white shadow-md shadow-[#F15A29]/25 font-[700] scale-[1.02] ring-2 ring-[#F15A29]/20'
-                          : 'bg-white hover:bg-primary-50 text-[#4A4A4A] border border-[#E2E8F0] hover:border-[#F15A29]/60 hover:text-[#111111] active:scale-95'
-                      }`}
-                    >
-                      {isActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                      )}
-                      <span>{cat}</span>
-                    </motion.button>
-                  );
-                })}
-              </div>
+          {/* Scrollable Track */}
+          <div
+            ref={categoryScrollRef}
+            className="flex-1 overflow-x-auto no-scrollbar scroll-smooth py-2 px-2 scroll-px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <div className="flex items-center gap-2">
+              {categoryTabs.map((cat, ci) => {
+                const isActive = selectedCategory === cat;
+                return (
+                  <motion.button
+                    key={cat}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: ci * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`inline-flex items-center justify-center whitespace-nowrap shrink-0 w-auto px-4 py-2 text-sm rounded-full font-sora font-[600] transition-colors duration-200 ease-out select-none cursor-pointer ${
+                      isActive
+                        ? 'bg-[#F15A29] text-white shadow-md shadow-[#F15A29]/25 font-[700] scale-[1.02] ring-2 ring-[#F15A29]/20'
+                        : 'bg-white hover:bg-primary-50 text-[#4A4A4A] border border-[#E2E8F0] hover:border-[#F15A29]/60 hover:text-[#111111] active:scale-95'
+                    }`}
+                  >
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse mr-2" />
+                    )}
+                    {cat}
+                  </motion.button>
+                );
+              })}
             </div>
-
-            {/* Right Arrow */}
-            <button
-              onClick={scrollRight}
-              disabled={!canScrollRight}
-              className="shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Scroll categories right"
-            >
-              <ChevronRight className="w-4 h-4 text-[#4A4A4A]" />
-            </button>
-
           </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+            className="shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Scroll categories right"
+          >
+            <ChevronRight className="w-4 h-4 text-[#4A4A4A]" />
+          </button>
+
         </div>
       </section>
 
