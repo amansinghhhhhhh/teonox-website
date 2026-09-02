@@ -41,12 +41,15 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   // Live CMS program detail (overrides static fallback once fetched)
   const [liveDetail, setLiveDetail] = useState<ProgramDetailData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-  // Fetch the live CMS detail by permanent WordPress Post ID. Falls back to
-  // static data if the CMS is unreachable or the Post ID is unknown.
+  // Fetch the live CMS detail via dynamic slug discovery. Falls back to
+  // static data if the CMS is unreachable. Sets notFound=true when the CMS
+  // is online but the slug doesn't match any published program.
   useEffect(() => {
     if (!programId) {
       setLoading(false);
+      setNotFound(true);
       return;
     }
 
@@ -54,13 +57,18 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     const requestedId = programId;
     setLoading(true);
     setLiveDetail(null);
+    setNotFound(false);
     fetchLiveProgramDetail(requestedId).then(
       (res) => {
         if (cancelled) return;
+        // CMS is online and slug doesn't exist → true 404
+        if (res.notFound) {
+          setNotFound(true);
+          setLoading(false);
+          return;
+        }
         // Only accept if still on the same program and CMS returned valid data
         if (requestedId === programId && res.detail?.programTitle) {
-          // Strict guard: verify the returned detail actually belongs to this program.
-          // detail.id is the CMS slug from transformWpProgram.
           const detailSlug = res.detail.id || '';
           const detailStaticId = resolveStaticProgramId(detailSlug);
           if (detailStaticId === programId) {
@@ -79,16 +87,20 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   }, [programId]);
 
   // Empty programId means the URL was invalid — show error state immediately
-  if (!programId) {
+  if (!programId || notFound) {
     return (
       <div className="bg-[#FAFAFA] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif]">
         <div className="w-[88%] max-w-7xl mx-auto pt-16 text-center space-y-4">
           <div className="w-16 h-16 mx-auto rounded-full bg-[#FFF0EB] flex items-center justify-center">
             <WifiOff className="w-7 h-7 text-[#F15A29]" />
           </div>
-          <h1 className="font-sora text-[24px] font-[800] text-[#111111]">Invalid program URL</h1>
+          <h1 className="font-sora text-[24px] font-[800] text-[#111111]">
+            {!programId ? 'Invalid program URL' : 'Program not found'}
+          </h1>
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
-            The URL does not contain a valid program identifier.
+            {!programId
+              ? 'The URL does not contain a valid program identifier.'
+              : <>The program <code className="text-[#111111] font-mono">{programId}</code> does not exist or is no longer available.</>}
           </p>
           <button
             onClick={onBack}
@@ -151,7 +163,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     );
   }
 
-  // No live content and no static fallback for this slug.
+  // No live content and no static fallback for this slug (CMS unreachable).
   if (!displayDetail) {
     return (
       <div className="bg-[#FAFAFA] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif]">
@@ -161,8 +173,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
           </div>
           <h1 className="font-sora text-[24px] font-[800] text-[#111111]">Program content unavailable</h1>
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
-            We could not resolve content for <code className="text-[#111111] font-mono">{programId}</code>. It may not
-            be published in the CMS yet.
+            We could not load content for <code className="text-[#111111] font-mono">{programId}</code>. The CMS may be temporarily unreachable. Please try again later.
           </p>
           <button
             onClick={onBack}

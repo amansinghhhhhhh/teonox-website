@@ -164,7 +164,22 @@ function getInitialRouteState(): {
     if (prog) {
       return { page: 'programs', program: prog, post: null, blogLoading: false };
     }
-    return { page: 'not-found', program: null, post: null, blogLoading: false };
+    // Unknown slug — pass a stub so ProgramDetailPage can try CMS dynamic fetch
+    // before rendering a 404.
+    const stub: Program = {
+      id: route.programId,
+      title: route.programId,
+      repeatedTitle: route.programId,
+      description: '',
+      duration: '',
+      durationLabel: 'Duration',
+      eligibility: '',
+      eligibilityLabel: 'Eligibility',
+      mode: '',
+      modeLabel: 'Mode',
+      buttonText: 'View Program',
+    };
+    return { page: 'programs', program: stub, post: null, blogLoading: false };
   }
 
   if (route.postId) {
@@ -274,7 +289,20 @@ export default function App() {
         if (prog) {
           setSelectedProgram(prog);
         } else {
-          setCurrentPage('not-found');
+          // Unknown slug — pass a stub so ProgramDetailPage can try CMS dynamic fetch
+          setSelectedProgram({
+            id: route.programId,
+            title: route.programId,
+            repeatedTitle: route.programId,
+            description: '',
+            duration: '',
+            durationLabel: 'Duration',
+            eligibility: '',
+            eligibilityLabel: 'Eligibility',
+            mode: '',
+            modeLabel: 'Mode',
+            buttonText: 'View Program',
+          });
         }
       } else if (route.postId) {
         loadBlogPost(route.postId);
@@ -325,7 +353,20 @@ export default function App() {
         if (prog) {
           setSelectedProgram(prog);
         } else {
-          setCurrentPage('not-found');
+          // Unknown slug — pass a stub so ProgramDetailPage can try CMS dynamic fetch
+          setSelectedProgram({
+            id: route.programId,
+            title: route.programId,
+            repeatedTitle: route.programId,
+            description: '',
+            duration: '',
+            durationLabel: 'Duration',
+            eligibility: '',
+            eligibilityLabel: 'Eligibility',
+            mode: '',
+            modeLabel: 'Mode',
+            buttonText: 'View Program',
+          });
         }
       } else if (route.postId) {
         loadBlogPost(route.postId);
