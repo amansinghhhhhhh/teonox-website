@@ -22,6 +22,7 @@ import { LifeAtTeonoxSection } from './components/sections/LifeAtTeonoxSection';
 import { CertificationsSection } from './components/CertificationsSection';
 import { Program, BlogPost } from './types';
 import { PROGRAMS_DATA, INSIGHTS_DATA } from './data';
+import { PROGRAM_DETAILS_MAP } from './data/programDetails';
 import { fetchLiveBlogDetail } from './services/blogService';
 import { SEO } from './components/SEO';
 import { resolveStaticProgramId } from './services/programService';
@@ -124,7 +125,26 @@ function resolveProgram(slug: string): Program | null {
     if (mapped) return mapped;
   }
 
-  // 3. Unknown slug — no static match means invalid program URL
+  // 3. Check PROGRAM_DETAILS_MAP (covers programs defined in detail but
+  //    not in PROGRAMS_DATA — e.g. social-media-marketing)
+  const detailKey = staticId || slug;
+  if (PROGRAM_DETAILS_MAP[detailKey]) {
+    return {
+      id: detailKey,
+      title: PROGRAM_DETAILS_MAP[detailKey].programTitle || detailKey,
+      repeatedTitle: PROGRAM_DETAILS_MAP[detailKey].programTitle || detailKey,
+      description: '',
+      duration: '',
+      durationLabel: 'Duration',
+      eligibility: '',
+      eligibilityLabel: 'Eligibility',
+      mode: '',
+      modeLabel: 'Mode',
+      buttonText: 'View Program',
+    };
+  }
+
+  // 4. Unknown slug — no static match means invalid program URL
   return null;
 }
 

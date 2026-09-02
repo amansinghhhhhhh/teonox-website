@@ -65,6 +65,22 @@ export const PROGRAMS_DATA = {
       mode: "On Campus, Pune",
       modeLabel: "Mode",
       buttonText: "View Program"
+    },
+    {
+      id: "social-media-marketing",
+      title: "Specialization in Social Media Marketing",
+      repeatedTitle: "Specialization in Social Media Marketing",
+      description: "Social Media Strategy, Content Creation, Community Management, Analytics & Paid Social.",
+      duration: "45 Days",
+      durationText: "45 Days | 2 Live Campaigns",
+      certText: "Meta & TEONOX Social Media Certification",
+      targetText: "Designed for Content Creators & Marketers",
+      durationLabel: "Duration",
+      eligibility: "12th Passed, Graduates & Working Professionals",
+      eligibilityLabel: "Eligibility",
+      mode: "On Campus, Pune",
+      modeLabel: "Mode",
+      buttonText: "View Program"
     }
   ] as Program[],
   viewAllText: "View All Programs →"
