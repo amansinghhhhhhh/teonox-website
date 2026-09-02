@@ -391,10 +391,10 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             <p className="font-inter text-[16px] text-[#555555]">While Digital Marketing remains one of our core strengths, TEONOX believes that modern professionals require a broader understanding of business. Our curriculum integrates:</p>
           </motion.div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap w-full gap-2.5">
             {skills.map((skill, index) => (
               <motion.div key={index} {...scaleIn(0.03 * index)}
-                className="px-3.5 py-2 sm:px-5 sm:py-3 rounded-2xl bg-white border border-slate-200 shadow-xs text-[#201A17] font-sora text-[13px] sm:text-[14.5px] font-semibold hover:border-[#FF6A2B] hover:bg-[#FFF8F5] hover:text-[#D8420F] hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 cursor-default"
+                className="w-full sm:w-auto self-start px-3.5 py-2 sm:px-5 sm:py-3 rounded-2xl bg-white border border-slate-200 shadow-xs text-[#201A17] font-sora text-[13px] sm:text-[14.5px] font-semibold hover:border-[#FF6A2B] hover:bg-[#FFF8F5] hover:text-[#D8420F] hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 cursor-default whitespace-nowrap"
               >
                 <div className="w-2 h-2 rounded-full bg-[#FF6A2B]" />
                 {skill}
