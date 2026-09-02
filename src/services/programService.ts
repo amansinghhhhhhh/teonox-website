@@ -562,7 +562,8 @@ export function resolveStaticProgramId(rawId: string): string {
 
 /**
  * Fetch a single program's detail content by its permanent WordPress Post ID.
- * Returns static PROGRAM_DETAILS_MAP data when the CMS is unreachable.
+ * Falls back to slug-based query if the ID-based fetch returns 404.
+ * Returns static PROGRAM_DETAILS_MAP data only when both approaches fail.
  */
 export async function fetchLiveProgramDetail(
   idOrSlug: string,
@@ -570,32 +571,52 @@ export async function fetchLiveProgramDetail(
   const key = idOrSlug || '';
   const wpPostId = PROGRAM_POST_IDS[key];
 
-  if (!wpPostId) {
-    // Unknown program — return static fallback immediately.
-    const staticResult = PROGRAM_DETAILS_MAP[key] || null;
-    return { detail: staticResult, isLive: false };
+  // Attempt 1: Fetch by permanent Post ID (slug-independent).
+  if (wpPostId) {
+    try {
+      const url = `${CMS_URL}/program/${wpPostId}&_embed&_cb=${Date.now()}`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const raw = await safeJson(res);
+        if (raw && isProgramVisible(raw)) {
+          const transformed = transformWpProgram(raw);
+          if (transformed) {
+            const detail = applyResolvedHeroImage(raw, transformed);
+            return { detail, isLive: true };
+          }
+        }
+      }
+      if (res.status === 404) {
+        console.warn(`[fetchLiveProgramDetail] Post ID ${wpPostId} returned 404, trying slug fallback`);
+      }
+    } catch (e) {
+      console.warn('[fetchLiveProgramDetail] ID fetch failed for Post ID:', wpPostId, e);
+    }
   }
 
-  // Fetch by permanent Post ID — slug-independent, immune to permalink changes.
+  // Attempt 2: Fallback — fetch by slug directly from WP REST API.
   try {
-    const url = `${CMS_URL}/program/${wpPostId}?_embed&_cb=${Date.now()}`;
+    const slug = key;
+    const url = `${CMS_URL}/program&slug=${encodeURIComponent(slug)}&_embed&_cb=${Date.now()}`;
     const res = await fetch(url);
     if (res.ok) {
       const raw = await safeJson(res);
-      if (raw && isProgramVisible(raw)) {
-        const transformed = transformWpProgram(raw);
+      const post = Array.isArray(raw) ? raw[0] : raw;
+      if (post && isProgramVisible(post)) {
+        const transformed = transformWpProgram(post);
         if (transformed) {
-          const detail = applyResolvedHeroImage(raw, transformed);
+          const detail = applyResolvedHeroImage(post, transformed);
           return { detail, isLive: true };
         }
       }
     }
   } catch (e) {
-    console.warn('[fetchLiveProgramDetail] Fetch failed for Post ID:', wpPostId, e);
+    console.warn('[fetchLiveProgramDetail] Slug fallback failed for:', key, e);
   }
 
-  // Static fallback when CMS is unreachable.
+  // Static fallback when CMS is unreachable or program not found.
   const staticResult = PROGRAM_DETAILS_MAP[key] || null;
+  console.warn(`[fetchLiveProgramDetail] Using static fallback for "${key}" — CMS content unavailable`);
   return { detail: staticResult, isLive: false };
 }
 
