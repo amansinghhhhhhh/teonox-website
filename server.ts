@@ -25,7 +25,7 @@ const STATIC_PAGES: Array<{ path: string; priority: string; changefreq: string }
   { path: '/blog', priority: '0.8', changefreq: 'weekly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
   { path: '/admissions', priority: '0.8', changefreq: 'monthly' },
-  { path: '/career-outcomes', priority: '0.7', changefreq: 'monthly' },
+  { path: '/careers', priority: '0.7', changefreq: 'monthly' },
   { path: '/why-teonox', priority: '0.7', changefreq: 'monthly' },
   { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
   { path: '/terms-and-conditions', priority: '0.3', changefreq: 'yearly' },
@@ -203,8 +203,6 @@ app.get("/api/blogs", async (req, res) => {
   try {
     const response = await fetch("https://cms.teonox.com/index.php?rest_route=/wp/v2/posts&_embed&per_page=20");
     if (!response.ok) {
-      opencode
-
       throw new Error(`WordPress API returned ${response.status}`);
     }
     const postsData = await response.json();

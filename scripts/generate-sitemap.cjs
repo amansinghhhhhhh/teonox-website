@@ -13,7 +13,7 @@ const STATIC_PAGES = [
   { path: '/blog',                    priority: '0.8', changefreq: 'weekly'  },
   { path: '/contact',                 priority: '0.7', changefreq: 'monthly' },
   { path: '/admissions',              priority: '0.8', changefreq: 'monthly' },
-  { path: '/career-outcomes',         priority: '0.7', changefreq: 'monthly' },
+  { path: '/careers',                priority: '0.7', changefreq: 'monthly' },
   { path: '/why-teonox',              priority: '0.7', changefreq: 'monthly' },
   { path: '/privacy-policy',          priority: '0.3', changefreq: 'yearly'  },
   { path: '/terms-and-conditions',    priority: '0.3', changefreq: 'yearly'  },
