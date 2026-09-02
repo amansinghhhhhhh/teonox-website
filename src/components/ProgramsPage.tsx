@@ -227,24 +227,34 @@ mode: progOrTitle.mode || 'On Campus, Pune',
             
             {/* LEFT SIDEBAR: Program Category Selector */}
             <div className="lg:col-span-4 xl:col-span-3 space-y-2.5 bg-white p-3 sm:p-4 rounded-[24px] border border-[#ECECEC] shadow-xs sticky top-28 z-20">
-              <div className="px-3 py-2 text-xs font-mono font-bold text-[#888888] uppercase tracking-wider">
-                Select Category
+              {/* Header with label + scroll arrows */}
+              <div className="flex items-center justify-between px-1">
+                <span className="px-3 py-2 text-xs font-mono font-bold text-[#888888] uppercase tracking-wider">
+                  Select Category
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => scrollCategoryBar('left')}
+                    className="flex w-7 h-7 rounded-full bg-white border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
+                    aria-label="Scroll categories left"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => scrollCategoryBar('right')}
+                    className="flex w-7 h-7 rounded-full bg-white border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
+                    aria-label="Scroll categories right"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
+              {/* Scrollable category track */}
               <div className="relative">
-                {/* Left scroll arrow */}
-                <button
-                  onClick={() => scrollCategoryBar('left')}
-                  className="flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
-                  aria-label="Scroll categories left"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-
-                {/* Scrollable category track */}
                 <div
                   ref={categoryScrollRef}
-                  className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 py-1 px-1 lg:px-0 scroll-px-4 snap-x snap-mandatory scrollbar-none"
+                  className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 py-1 px-2 lg:px-0 scroll-px-4 snap-x snap-mandatory scrollbar-none"
                 >
                   {categories.map((cat) => {
                     const Icon = cat.icon;
@@ -295,15 +305,6 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     );
                   })}
                 </div>
-
-                {/* Right scroll arrow */}
-                <button
-                  onClick={() => scrollCategoryBar('right')}
-                  className="flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
-                  aria-label="Scroll categories right"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
 
                 {/* Mobile right-side fade gradient */}
                 <div className="md:hidden pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
