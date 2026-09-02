@@ -245,13 +245,13 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           SECTION 02 - CATEGORY FILTER
           ──────────────────────────────────────── */}
       <section className="bg-white border-y border-[#F0DFCE]/80 py-4 shadow-xs transition-all">
-        <div className="flex items-center gap-2 w-full max-w-7xl mx-auto px-4">
+        <div className="flex items-center w-full max-w-7xl mx-auto px-4">
 
-          {/* Left Arrow */}
+          {/* Left Arrow - Desktop Only */}
           <button
             onClick={scrollLeft}
             disabled={!canScrollLeft}
-            className="shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            className="hidden md:flex shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed mr-2"
             aria-label="Scroll categories left"
           >
             <ChevronLeft className="w-4 h-4 text-[#4A4A4A]" />
@@ -260,9 +260,9 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           {/* Scrollable Track */}
           <div
             ref={categoryScrollRef}
-            className="flex-1 overflow-x-auto no-scrollbar scroll-smooth py-2 px-2 scroll-px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="w-full flex-1 overflow-x-auto no-scrollbar scroll-smooth py-2 px-1 scroll-px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-max">
               {categoryTabs.map((cat, ci) => {
                 const isActive = selectedCategory === cat;
                 return (
@@ -288,11 +288,11 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
             </div>
           </div>
 
-          {/* Right Arrow */}
+          {/* Right Arrow - Desktop Only */}
           <button
             onClick={scrollRight}
             disabled={!canScrollRight}
-            className="shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            className="hidden md:flex shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed ml-2"
             aria-label="Scroll categories right"
           >
             <ChevronRight className="w-4 h-4 text-[#4A4A4A]" />
