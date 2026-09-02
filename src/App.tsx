@@ -21,11 +21,9 @@ import { TeonoxCultureSection } from './components/sections/TeonoxCultureSection
 import { LifeAtTeonoxSection } from './components/sections/LifeAtTeonoxSection';
 import { CertificationsSection } from './components/CertificationsSection';
 import { Program, BlogPost } from './types';
-import { PROGRAMS_DATA, INSIGHTS_DATA } from './data';
-import { PROGRAM_DETAILS_MAP } from './data/programDetails';
+import { INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
 import { SEO } from './components/SEO';
-import { resolveStaticProgramId } from './services/programService';
 
 const AboutUsPage = lazy(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
 const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
@@ -111,41 +109,26 @@ function normalizePath(path: string): string {
   return withSlash.length > 1 ? withSlash.replace(/\/+$/, '') : '/';
 }
 
-// Resolve a program route segment to a Program. Returns null for truly
-// invalid/unknown slugs so the caller can render a 404.
-function resolveProgram(slug: string): Program | null {
-  // 1. Direct static ID match (e.g. "business-digital-marketing-ai")
-  const found = PROGRAMS_DATA.programs.find((p) => p.id === slug);
-  if (found) return found;
-
-  // 2. CMS slug / WP Post ID -> static ID reverse mapping
-  const staticId = resolveStaticProgramId(slug);
-  if (staticId) {
-    const mapped = PROGRAMS_DATA.programs.find((p) => p.id === staticId);
-    if (mapped) return mapped;
-  }
-
-  // 3. Check PROGRAM_DETAILS_MAP (covers programs defined in detail but
-  //    not in PROGRAMS_DATA — e.g. social-media-marketing)
-  const detailKey = staticId || slug;
-  if (PROGRAM_DETAILS_MAP[detailKey]) {
-    return {
-      id: detailKey,
-      title: PROGRAM_DETAILS_MAP[detailKey].programTitle || detailKey,
-      repeatedTitle: PROGRAM_DETAILS_MAP[detailKey].programTitle || detailKey,
-      description: '',
-      duration: '',
-      durationLabel: 'Duration',
-      eligibility: '',
-      eligibilityLabel: 'Eligibility',
-      mode: '',
-      modeLabel: 'Mode',
-      buttonText: 'View Program',
-    };
-  }
-
-  // 4. Unknown slug — no static match means invalid program URL
-  return null;
+/**
+ * Create a minimal Program stub for any route segment. The actual content is
+ * resolved dynamically by ProgramDetailPage via the WP REST API — no static
+ * maps needed here. Returns null for empty slugs.
+ */
+function stubProgram(slug: string): Program | null {
+  if (!slug) return null;
+  return {
+    id: slug,
+    title: slug,
+    repeatedTitle: slug,
+    description: '',
+    duration: '',
+    durationLabel: 'Duration',
+    eligibility: '',
+    eligibilityLabel: 'Eligibility',
+    mode: '',
+    modeLabel: 'Mode',
+    buttonText: 'View Program',
+  };
 }
 
 // Resolve the full route state synchronously from the URL on first render.
@@ -160,26 +143,8 @@ function getInitialRouteState(): {
   const route = parsePath(window.location.pathname);
 
   if (route.programId) {
-    const prog = resolveProgram(route.programId);
-    if (prog) {
-      return { page: 'programs', program: prog, post: null, blogLoading: false };
-    }
-    // Unknown slug — pass a stub so ProgramDetailPage can try CMS dynamic fetch
-    // before rendering a 404.
-    const stub: Program = {
-      id: route.programId,
-      title: route.programId,
-      repeatedTitle: route.programId,
-      description: '',
-      duration: '',
-      durationLabel: 'Duration',
-      eligibility: '',
-      eligibilityLabel: 'Eligibility',
-      mode: '',
-      modeLabel: 'Mode',
-      buttonText: 'View Program',
-    };
-    return { page: 'programs', program: stub, post: null, blogLoading: false };
+    const prog = stubProgram(route.programId);
+    return { page: 'programs', program: prog, post: null, blogLoading: false };
   }
 
   if (route.postId) {
@@ -285,25 +250,7 @@ export default function App() {
       setCurrentPage(route.page);
 
       if (route.programId) {
-        const prog = resolveProgram(route.programId);
-        if (prog) {
-          setSelectedProgram(prog);
-        } else {
-          // Unknown slug — pass a stub so ProgramDetailPage can try CMS dynamic fetch
-          setSelectedProgram({
-            id: route.programId,
-            title: route.programId,
-            repeatedTitle: route.programId,
-            description: '',
-            duration: '',
-            durationLabel: 'Duration',
-            eligibility: '',
-            eligibilityLabel: 'Eligibility',
-            mode: '',
-            modeLabel: 'Mode',
-            buttonText: 'View Program',
-          });
-        }
+        setSelectedProgram(stubProgram(route.programId));
       } else if (route.postId) {
         loadBlogPost(route.postId);
       }
@@ -349,25 +296,7 @@ export default function App() {
       setCurrentPage(route.page);
 
       if (route.programId) {
-        const prog = resolveProgram(route.programId);
-        if (prog) {
-          setSelectedProgram(prog);
-        } else {
-          // Unknown slug — pass a stub so ProgramDetailPage can try CMS dynamic fetch
-          setSelectedProgram({
-            id: route.programId,
-            title: route.programId,
-            repeatedTitle: route.programId,
-            description: '',
-            duration: '',
-            durationLabel: 'Duration',
-            eligibility: '',
-            eligibilityLabel: 'Eligibility',
-            mode: '',
-            modeLabel: 'Mode',
-            buttonText: 'View Program',
-          });
-        }
+        setSelectedProgram(stubProgram(route.programId));
       } else if (route.postId) {
         loadBlogPost(route.postId);
       }

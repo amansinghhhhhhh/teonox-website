@@ -513,8 +513,9 @@ function applyResolvedHeroImage(post: any, detail: ProgramDetailData): ProgramDe
 }
 
 // ---- Dynamic program list cache ----
-// Stores the raw WP post array from a single fetchAllProgramPosts() call so
-// multiple fetchLiveProgramDetail() invocations share one network round-trip.
+// Single source of truth: all published V2 program posts from WP REST API.
+// Both fetchLivePrograms() and fetchLiveProgramDetail() share this cache so
+// the entire app uses one network round-trip for program data.
 let _allProgramsCache: any[] | null = null;
 let _allProgramsCachePromise: Promise<any[]> | null = null;
 
@@ -535,7 +536,6 @@ async function fetchAllProgramPosts(): Promise<any[]> {
       if (!res.ok) return [];
       const raw = await safeJson(res);
       const posts = Array.isArray(raw) ? raw : [];
-      // Only keep V2 programs (same guard as fetchLivePrograms).
       const v2Posts = posts.filter((p: any) => isV2Program(p) && isProgramVisible(p));
       _allProgramsCache = v2Posts;
       return v2Posts;
@@ -548,79 +548,45 @@ async function fetchAllProgramPosts(): Promise<any[]> {
 }
 
 /**
- * Permanent WordPress Post IDs for each program. These never change even if
- * slugs/permalinks are updated by the SEO team. Kept as a secondary fallback
- * for slugs that predate the dynamic discovery mechanism.
- *
- * Live Post IDs confirmed from CMS API (https://cms.teonox.com/wp-json/wp/v2/program):
- *   410 = Business Digital Marketing With AI
- *   458 = Specialization in Performance Marketing
- *   460 = Specialization in Search Engine Optimization
- *   461 = Specialization in Social Media Marketing
+ * Normalize a program identifier for flexible matching: lowercase, trim,
+ * strip trailing slashes. Handles casing differences and minor URL variations.
  */
-export const PROGRAM_POST_IDS: Record<string, number> = {
-  'business-digital-marketing-ai': 410,
-  'business-digital-marketing-with-ai': 410,
-  'performance-marketing': 458,
-  'specialization-in-performance-marketing': 458,
-  'seo-specialization': 460,
-  'specialization-in-search-engine-optimization': 460,
-  'social-media-marketing': 461,
-  'specialization-in-social-media-marketing': 461,
-};
-
-/**
- * Reverse mapping: WP Post ID (as string) -> static program ID. Used by the
- * router and ProgramDetailPage to resolve a WordPress Post ID extracted from
- * the browser URL or API response back to the static program ID that
- * PROGRAMS_DATA and PROGRAM_DETAILS_MAP expect.
- */
-export const POST_ID_TO_STATIC: Record<string, string> = Object.fromEntries(
-  Object.entries(PROGRAM_POST_IDS).map(([staticId, wpId]) => [String(wpId), staticId]),
-);
-
-/**
- * URL slug aliases: WordPress slugs that differ from the static program ID.
- * When a user navigates via a WordPress slug (e.g. from a card link), this map
- * resolves it back to the canonical static ID used by PROGRAMS_DATA and
- * PROGRAM_DETAILS_MAP.
- */
-const SLUG_ALIASES: Record<string, string> = {
-  'business-digital-marketing-with-ai': 'business-digital-marketing-ai',
-  'specialization-in-performance-marketing': 'performance-marketing',
-  'specialization-in-search-engine-optimization': 'seo-specialization',
-  'specialization-in-social-media-marketing': 'social-media-marketing',
-};
-
-/**
- * Resolve any raw identifier (URL slug, WP Post ID, or static program ID)
- * back to the canonical static program ID used by PROGRAMS_DATA and
- * PROGRAM_DETAILS_MAP.
- */
-export function resolveStaticProgramId(rawId: string): string {
-  return SLUG_ALIASES[rawId] || POST_ID_TO_STATIC[rawId] || rawId;
+function normalizeSlug(s: string): string {
+  return s.toLowerCase().trim().replace(/\/+$/, '');
 }
 
 /**
- * Fetch a single program's detail content using a 3-tier strategy:
- *   1. Dynamic slug match against all published WP posts (auto-discovers new programs)
- *   2. Hardcoded WP Post ID lookup (legacy fallback for pre-existing programs)
- *   3. Static PROGRAM_DETAILS_MAP (offline / unpublished content)
+ * Fetch a single program's detail content by matching against the cached WP
+ * program list. Matching is flexible:
+ *   1. Numeric WP post ID match (post.id === Number(identifier))
+ *   2. Exact slug match (post.slug === identifier)
+ *   3. Normalized slug match (ignoring casing / trailing slashes)
  *
- * Returns `notFound: true` when the CMS is reachable but the slug does not
- * match any published post — signals ProgramDetailPage to render a 404.
+ * Falls back to static PROGRAM_DETAILS_MAP only when the CMS is unreachable.
+ * Returns notFound=true when the CMS is online but no post matches.
  */
 export async function fetchLiveProgramDetail(
-  idOrSlug: string,
+  identifier: string,
 ): Promise<{ detail: ProgramDetailData | null; isLive: boolean; notFound: boolean }> {
-  const key = idOrSlug || '';
+  const key = identifier || '';
   if (!key) return { detail: null, isLive: false, notFound: true };
 
-  // --- Tier 1: Dynamic discovery via cached full-program fetch ---
+  // --- Dynamic matching against all published WP posts ---
   try {
     const allPosts = await fetchAllProgramPosts();
-    // CMS is online (we got a response) — search the list by slug.
-    const match = allPosts.find((p: any) => p.slug === key);
+    // CMS responded — search the list with flexible matching.
+    const normalized = normalizeSlug(key);
+    const asNumber = Number(key);
+    const match = allPosts.find((p: any) => {
+      // 1. Numeric WP ID match
+      if (!isNaN(asNumber) && p.id === asNumber) return true;
+      // 2. Exact slug match
+      if (p.slug === key) return true;
+      // 3. Normalized slug match
+      if (normalizeSlug(p.slug || '') === normalized) return true;
+      return false;
+    });
+
     if (match) {
       const transformed = transformWpProgram(match);
       if (transformed) {
@@ -628,45 +594,24 @@ export async function fetchLiveProgramDetail(
         return { detail, isLive: true, notFound: false };
       }
     }
-    // CMS responded with a valid array but no slug match → true 404.
-    if (allPosts.length > 0 && !match) {
-      console.warn(`[fetchLiveProgramDetail] Slug "${key}" not found in ${allPosts.length} published programs — returning 404`);
+
+    // CMS responded with posts but no match → true 404
+    if (allPosts.length > 0) {
+      console.warn(`[fetchLiveProgramDetail] "${key}" not found in ${allPosts.length} published programs`);
       return { detail: null, isLive: true, notFound: true };
     }
   } catch (e) {
-    console.warn('[fetchLiveProgramDetail] Dynamic discovery failed for:', key, e);
+    console.warn('[fetchLiveProgramDetail] Dynamic fetch failed for:', key, e);
   }
 
-  // --- Tier 2: Hardcoded WP Post ID fallback (legacy pre-existing programs) ---
-  const wpPostId = PROGRAM_POST_IDS[key];
-  if (wpPostId) {
-    try {
-      const url = `${CMS_URL}/program/${wpPostId}&_embed&_cb=${Date.now()}`;
-      const res = await fetch(url);
-      if (res.ok) {
-        const raw = await safeJson(res);
-        if (raw && isProgramVisible(raw)) {
-          const transformed = transformWpProgram(raw);
-          if (transformed) {
-            const detail = applyResolvedHeroImage(raw, transformed);
-            return { detail, isLive: true, notFound: false };
-          }
-        }
-      }
-    } catch (e) {
-      console.warn('[fetchLiveProgramDetail] ID fetch failed for Post ID:', wpPostId, e);
-    }
-  }
-
-  // --- Tier 3: Static fallback (CMS unreachable or program unpublished) ---
+  // --- Static fallback (CMS unreachable) ---
   const staticResult = PROGRAM_DETAILS_MAP[key] || null;
   if (staticResult) {
     return { detail: staticResult, isLive: false, notFound: false };
   }
 
-  // Nothing found anywhere — CMS offline (no dynamic data) + no static entry.
-  // Return notFound so ProgramDetailPage can render the 404 page.
-  console.warn(`[fetchLiveProgramDetail] No content found for "${key}" — returning 404`);
+  // CMS offline + no static entry — no content available
+  console.warn(`[fetchLiveProgramDetail] No content found for "${key}" — CMS unreachable and no static fallback`);
   return { detail: null, isLive: false, notFound: true };
 }
 
@@ -922,82 +867,33 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
  * LiveProgramCard. Falls back to FALLBACK_PROGRAM_CARDS (isLive: false) when
  * the CMS is unreachable, so programs never disappear from the UI.
  *
+ * Uses the shared fetchAllProgramPosts() cache — no duplicate network requests.
  * Every published V2 program returned by the WordPress REST API is rendered —
  * no hardcoded ordering or exclusion of specific programs. Card order is the
  * API order (`orderby=date&order=desc`, newest first) — never sorted client-side.
  */
 export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
   const fromPosts = (posts: any[]): LiveProgramCard[] => {
-    // Strict V2-only guard applied in EVERY environment (dev, staging, prod):
-    // legacy V1 posts never become cards on this site. Staging-only programs
-    // (ACF staging_only flag) are additionally hidden here so unreleased V2
-    // bets never surface on the live production site.
     const eligible = posts.filter((p) => isV2Program(p) && isProgramVisible(p));
     const cards: LiveProgramCard[] = [];
     for (const post of eligible) {
-      // Image extracted synchronously from embedded featured media / ACF fields
-      // (NO /wp/v2/media fetch — those 401 on the CMS).
       const card = mapWpProgramCard(post, getProgramImage(post));
       if (card) cards.push(card);
     }
     return cards;
   };
 
-  // Strategy 1: direct WordPress REST API (raw WP array).
+  // Reuse the shared cache — single network round-trip for the entire app.
   try {
-    const res = await fetch(`${CMS_URL}/program&_embed&per_page=50&orderby=date&order=desc&_cb=${Date.now()}`);
-    if (!res.ok) {
-      // The REST URL itself is breaking (404/500 etc.) — surface it before
-      // falling through to the static cards so it is visible in DevTools.
-      console.error('[Programs API Failed]: Status', res.status);
-    }
-
-    const rawText = await res.text();
-    let rawJson: any = null;
-    try {
-      rawJson = rawText ? JSON.parse(rawText) : null;
-    } catch (e) {
-      // Not JSON — CMS returned HTML (error page / redirect).
-      console.error(
-        '[Programs API Failed]: non-JSON response (HTML fallback or error page)',
-        rawText.slice(0, 200),
-      );
-    }
-
-    // Extract the array safely from any common wrapper shape.
-    let posts: any[] = [];
-    if (Array.isArray(rawJson)) {
-      posts = rawJson;
-    } else if (Array.isArray(rawJson?.data)) {
-      posts = rawJson.data;
-    } else if (Array.isArray(rawJson?.posts)) {
-      posts = rawJson.posts;
-    } else if (Array.isArray(rawJson?.items)) {
-      posts = rawJson.items;
-    }
-
-    // A valid WP response is any JSON whose top level IS an array or wraps one
-    // (raw WP array / { data } / { posts } / { items }). Empty arrays still
-    // count as live (drives the "coming soon" state); only HTML/garbage
-    // responses fall through to the static cards.
-    const isLiveResponse =
-      Array.isArray(rawJson) ||
-      Array.isArray(rawJson?.data) ||
-      Array.isArray(rawJson?.posts) ||
-      Array.isArray(rawJson?.items);
-
-    if (isLiveResponse) {
-      const programs = fromPosts(posts);
-      // Live CMS even when zero V2 programs exist (drives "coming soon").
-      // Programs render in the order WordPress returns them.
-      return { programs, isLive: true };
+    const allPosts = await fetchAllProgramPosts();
+    if (allPosts.length > 0 || _allProgramsCache !== null) {
+      return { programs: fromPosts(allPosts), isLive: true };
     }
   } catch (e) {
     console.warn('Programs list fetch failed, using static fallback', e);
   }
 
-  // Strategy 2: static fallback so programs never disappear when the CMS is
-  // unreachable (CORS, DNS, network, proxy down, etc).
+  // Static fallback so programs never disappear when the CMS is unreachable.
   return { programs: FALLBACK_PROGRAM_CARDS, isLive: false };
 }
 

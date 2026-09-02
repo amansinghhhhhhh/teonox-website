@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, WifiOff } from 'lucide-react';
 import { Program } from '../types';
-import { PROGRAM_DETAILS_MAP, ProgramDetailData } from '../data/programDetails';
-import { fetchLiveProgramDetail, stripV2Prefixes, resolveStaticProgramId } from '../services/programService';
+import { ProgramDetailData } from '../data/programDetails';
+import { fetchLiveProgramDetail, stripV2Prefixes } from '../services/programService';
 import { ProgramV2Layout } from './programV2/ProgramV2Layout';
 import { SEO } from './SEO';
 
@@ -29,51 +29,40 @@ function extractSlugFromUrl(): string {
 }
 
 export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailPageProps) {
-  // Priority: program.id from props > URL slug > empty (shows error state)
+  // Priority: URL slug > program.id from props > empty (shows error state)
   const urlSlug = extractSlugFromUrl();
-  const rawId = program?.id || urlSlug;
-
-  // Resolve CMS slugs / WP Post IDs back to static IDs so PROGRAM_DETAILS_MAP
-  // and fetchLiveProgramDetail (which uses PROGRAM_POST_IDS keyed by static ID)
-  // work correctly.
-  const programId = resolveStaticProgramId(rawId);
+  const identifier = urlSlug || program?.id || '';
 
   // Live CMS program detail (overrides static fallback once fetched)
   const [liveDetail, setLiveDetail] = useState<ProgramDetailData | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
-  // Fetch the live CMS detail via dynamic slug discovery. Falls back to
-  // static data if the CMS is unreachable. Sets notFound=true when the CMS
-  // is online but the slug doesn't match any published program.
+  // Fetch the live CMS detail via dynamic API matching (ID or slug).
+  // Falls back to static data if the CMS is unreachable. Sets notFound=true
+  // when the CMS is online but the identifier doesn't match any published program.
   useEffect(() => {
-    if (!programId) {
+    if (!identifier) {
       setLoading(false);
       setNotFound(true);
       return;
     }
 
     let cancelled = false;
-    const requestedId = programId;
+    const requestedId = identifier;
     setLoading(true);
     setLiveDetail(null);
     setNotFound(false);
     fetchLiveProgramDetail(requestedId).then(
       (res) => {
         if (cancelled) return;
-        // CMS is online and slug doesn't exist → true 404
         if (res.notFound) {
           setNotFound(true);
           setLoading(false);
           return;
         }
-        // Only accept if still on the same program and CMS returned valid data
-        if (requestedId === programId && res.detail?.programTitle) {
-          const detailSlug = res.detail.id || '';
-          const detailStaticId = resolveStaticProgramId(detailSlug);
-          if (detailStaticId === programId) {
-            setLiveDetail(res.detail);
-          }
+        if (requestedId === identifier && res.detail?.programTitle) {
+          setLiveDetail(res.detail);
         }
         setLoading(false);
       },
@@ -84,10 +73,10 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     return () => {
       cancelled = true;
     };
-  }, [programId]);
+  }, [identifier]);
 
-  // Empty programId means the URL was invalid — show error state immediately
-  if (!programId || notFound) {
+  // Empty identifier means the URL was invalid — show error state immediately
+  if (!identifier || notFound) {
     return (
       <div className="bg-[#FAFAFA] min-h-screen pt-20 sm:pt-24 pb-20 font-['Sora',sans-serif]">
         <div className="w-[88%] max-w-7xl mx-auto pt-16 text-center space-y-4">
@@ -95,12 +84,12 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
             <WifiOff className="w-7 h-7 text-[#F15A29]" />
           </div>
           <h1 className="font-sora text-[24px] font-[800] text-[#111111]">
-            {!programId ? 'Invalid program URL' : 'Program not found'}
+            {!identifier ? 'Invalid program URL' : 'Program not found'}
           </h1>
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
-            {!programId
+            {!identifier
               ? 'The URL does not contain a valid program identifier.'
-              : <>The program <code className="text-[#111111] font-mono">{programId}</code> does not exist or is no longer available.</>}
+              : <>The program <code className="text-[#111111] font-mono">{identifier}</code> does not exist or is no longer available.</>}
           </p>
           <button
             onClick={onBack}
@@ -114,35 +103,8 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
     );
   }
 
-  const isSocialMedia =
-    programId === 'social-media-marketing' ||
-    (program?.title &&
-      (program.title.toLowerCase().includes('social media') ||
-       program.title.toLowerCase().includes('growth engineering')));
-
-  const isSeo =
-    programId === 'seo-specialization' ||
-    (program?.title &&
-      (program.title.toLowerCase().includes('seo') ||
-       program.title.toLowerCase().includes('search')));
-
-  const isPerformance =
-    programId === 'performance-marketing' ||
-    (program?.title &&
-      (program.title.toLowerCase().includes('performance') ||
-       program.title.toLowerCase().includes('media buying')));
-
-  const staticDetail = isSocialMedia
-    ? PROGRAM_DETAILS_MAP['social-media-marketing']
-    : isSeo
-    ? PROGRAM_DETAILS_MAP['seo-specialization']
-    : isPerformance
-    ? PROGRAM_DETAILS_MAP['performance-marketing']
-    : (PROGRAM_DETAILS_MAP[programId] || null);
-
   // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
-  const customDetail = liveDetail ?? staticDetail;
-  const displayDetail = customDetail ? stripV2Prefixes(customDetail) : null;
+  const displayDetail = liveDetail ? stripV2Prefixes(liveDetail) : null;
 
   // Skeleton while resolving a slug that has no static fallback yet.
   if (loading && !displayDetail) {
@@ -173,7 +135,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
           </div>
           <h1 className="font-sora text-[24px] font-[800] text-[#111111]">Program content unavailable</h1>
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
-            We could not load content for <code className="text-[#111111] font-mono">{programId}</code>. The CMS may be temporarily unreachable. Please try again later.
+            We could not load content for <code className="text-[#111111] font-mono">{identifier}</code>. The CMS may be temporarily unreachable. Please try again later.
           </p>
           <button
             onClick={onBack}
@@ -192,7 +154,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
       <SEO
         title={displayDetail?.programTitle || program?.title || 'Program'}
         description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
-        canonical={`/programs/${programId}`}
+        canonical={`/programs/${identifier}`}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Course',
