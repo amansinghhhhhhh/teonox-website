@@ -37,8 +37,9 @@ const AdmissionsPage = lazy(() => import('./components/AdmissionsPage').then((m)
 const ProgramDetailPage = lazy(() => import('./components/ProgramDetailPage').then((m) => ({ default: m.ProgramDetailPage })));
 const PrivacyPolicyPage = lazy(() => import('./components/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
 const TermsAndConditionsPage = lazy(() => import('./components/TermsAndConditionsPage').then((m) => ({ default: m.TermsAndConditionsPage })));
+const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
-export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions';
+export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'not-found';
 
 interface Route {
   page: Page;
@@ -58,6 +59,7 @@ const PAGE_PATHS: Record<Page, string> = {
   admissions: '/admissions',
   'privacy-policy': '/privacy-policy',
   'terms-and-conditions': '/terms-and-conditions',
+  'not-found': '/404',
 };
 
 // Parse a window.location.pathname into a Route
@@ -91,7 +93,7 @@ function parsePath(pathname: string): Route {
     case 'blog':
       return second ? { page: 'blog', postId: second } : { page: 'blog' };
     default:
-      return { page: 'home' };
+      return { page: 'not-found' };
   }
 }
 
@@ -460,6 +462,9 @@ export default function App() {
             onEnquireClick={(topic) => handleEnquireClick(topic || 'Blog Subscription')}
             onExplorePrograms={() => navigate('/programs')}
           />
+        ) : currentPage === 'not-found' ? (
+          /* 404 Page */
+          <NotFoundPage onNavigate={(href, label) => handleNavClick(href, label || '')} />
         ) : (
           /* Home Page Layout */
           <>
