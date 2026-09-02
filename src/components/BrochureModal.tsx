@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Download, CheckCircle2, FileText, Loader2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
+import brochurePdf from '../assets/teonox_brochure.pdf';
 
 interface BrochureModalProps {
   isOpen: boolean;
@@ -10,25 +11,24 @@ interface BrochureModalProps {
   defaultCourse?: string;
 }
 
-/**
- * Brochure download file. Defaults to a static file shipped with the site at
- * public/brochure/teonox-brochure.pdf, or a hosted PDF via VITE_BROCHURE_URL.
- * When unset the form still captures the lead and shows the success state.
- */
-const BROCHURE_DOWNLOAD_URL =
-  import.meta.env.VITE_BROCHURE_URL || '/brochure/teonox-brochure.pdf';
+/** Trigger the brochure download as a memory blob — no direct URL exposed. */
+async function triggerBrochureDownload() {
+  try {
+    const response = await fetch(brochurePdf);
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
 
-/** Trigger the brochure download without leaving the page. */
-function triggerBrochureDownload() {
-  if (!BROCHURE_DOWNLOAD_URL) return;
-  const a = document.createElement('a');
-  a.href = BROCHURE_DOWNLOAD_URL;
-  a.download = 'TEONOX-Program-Brochure.pdf';
-  a.target = '_blank';
-  a.rel = 'noopener noreferrer';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = 'TEONOX_Program_Brochure.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    window.URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error('Failed to download brochure:', error);
+  }
 }
 
 export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureModalProps) {
@@ -216,21 +216,19 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h3 className="font-sora text-[24px] font-[800] text-[#111111] mb-2">
-                Brochure on its way!
+                Thank you! Your brochure download has started.
               </h3>
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
                 Thanks <span className="font-bold text-[#111111]">{fullName}</span>! Your
-                download is starting now. Our team will also reach out shortly on WhatsApp.
+                brochure is downloading now. Our team will also reach out shortly on WhatsApp.
               </p>
-              {BROCHURE_DOWNLOAD_URL && (
-                <button
-                  onClick={triggerBrochureDownload}
-                  className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
-                >
-                  <Download className="w-4 h-4 shrink-0" />
-                  Download Brochure
-                </button>
-              )}
+              <button
+                onClick={triggerBrochureDownload}
+                className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+              >
+                <Download className="w-4 h-4 shrink-0" />
+                Download Brochure Again
+              </button>
               <button
                 onClick={handleReset}
                 className="bg-[#111111] hover:bg-black text-white font-sora font-bold text-[14px] px-8 py-3 rounded-xl transition-all cursor-pointer"
