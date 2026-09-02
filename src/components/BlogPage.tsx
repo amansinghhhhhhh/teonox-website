@@ -244,8 +244,8 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
       {/* ────────────────────────────────────────
           SECTION 02 - CATEGORY FILTER
           ──────────────────────────────────────── */}
-      <section className="bg-white border-y border-[#F0DFCE]/80 py-4 shadow-xs transition-all">
-        <div className="flex items-center w-full max-w-7xl mx-auto px-4">
+      <section className="bg-white border-y border-[#F0DFCE]/80 py-4 shadow-xs transition-all relative overflow-hidden">
+        <div className="flex items-center w-full max-w-7xl mx-auto px-4 relative">
 
           {/* Left Arrow - Desktop Only */}
           <button
@@ -297,6 +297,9 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           >
             <ChevronRight className="w-4 h-4 text-[#4A4A4A]" />
           </button>
+
+          {/* Mobile edge fade overlay */}
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent md:hidden z-10" />
 
         </div>
       </section>
