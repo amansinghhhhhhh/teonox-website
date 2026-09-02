@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Calendar,
   Clock,
@@ -10,6 +10,7 @@ import {
   Search,
   Share2,
   Award,
+  ChevronLeft,
   ChevronRight,
   Download,
   Flame,
@@ -81,6 +82,13 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPage
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [liveCards, setLiveCards] = useState<LiveProgramCard[] | null>(null);
   const [categories, setCategories] = useState<ProgramCategory[]>(FALLBACK_CATEGORIES);
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollCategoryBar = (direction: 'left' | 'right') => {
+    const el = categoryScrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction === 'left' ? -150 : 150, behavior: 'smooth' });
+  };
 
   // Build the sidebar tabs live from the WP `program-category` taxonomy (fully
   // dynamic — names come from WordPress, not hardcoded). "All Programs" always
@@ -223,55 +231,82 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                 Select Category
               </div>
 
-              <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 py-1 pr-4 lg:pr-0 scrollbar-none">
-                {categories.map((cat) => {
-                  const Icon = cat.icon;
-                  const isActive = activeCategory === cat.id;
+              <div className="relative">
+                {/* Left scroll arrow */}
+                <button
+                  onClick={() => scrollCategoryBar('left')}
+                  className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
+                  aria-label="Scroll categories left"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
 
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveCategory(cat.id)}
-                      className={`flex items-center justify-between px-4 py-3.5 rounded-[16px] font-sora text-[14px] font-[700] transition-all duration-300 text-left shrink-0 cursor-pointer min-w-[220px] lg:min-w-0 ${
-                        isActive
-                          ? 'bg-[#111111] text-white shadow-md border border-[#111111]'
-                          : 'bg-white text-[#333333] hover:bg-[#FFF0EB] hover:text-[#F15A29] border border-transparent hover:border-[#F8E3D8]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                            isActive
-                              ? 'bg-white/15 text-[#F15A29]'
-                              : 'bg-[#FAF8F5] text-[#F15A29]'
-                          }`}
-                        >
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <span className="truncate">{cat.name}</span>
-                      </div>
+                {/* Scrollable category track */}
+                <div
+                  ref={categoryScrollRef}
+                  className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 py-1 px-1 lg:px-0 scroll-px-4 snap-x snap-mandatory scrollbar-none"
+                >
+                  {categories.map((cat) => {
+                    const Icon = cat.icon;
+                    const isActive = activeCategory === cat.id;
 
-                      <div className="flex items-center gap-2">
-                        {cat.isNew && (
-                          <span
-                            className={`font-mono text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
+                    return (
+                      <button
+                        key={cat.id}
+                        onClick={() => setActiveCategory(cat.id)}
+                        className={`flex items-center justify-between px-4 py-3.5 rounded-[16px] font-sora text-[14px] font-[700] transition-all duration-300 text-left shrink-0 snap-start cursor-pointer min-w-[220px] lg:min-w-0 whitespace-nowrap ${
+                          isActive
+                            ? 'bg-[#111111] text-white shadow-md border border-[#111111]'
+                            : 'bg-white text-[#333333] hover:bg-[#FFF0EB] hover:text-[#F15A29] border border-transparent hover:border-[#F8E3D8]'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                               isActive
-                                ? 'bg-[#F15A29] text-white'
-                                : 'bg-[#F15A29] text-white'
+                                ? 'bg-white/15 text-[#F15A29]'
+                                : 'bg-[#FAF8F5] text-[#F15A29]'
                             }`}
                           >
-                            NEW
-                          </span>
-                        )}
-                        <ChevronRight
-                          className={`w-4 h-4 transition-transform ${
-                            isActive ? 'text-[#F15A29] translate-x-0.5' : 'text-[#CCCCCC]'
-                          }`}
-                        />
-                      </div>
-                    </button>
-                  );
-                })}
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <span>{cat.name}</span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          {cat.isNew && (
+                            <span
+                              className={`font-mono text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
+                                isActive
+                                  ? 'bg-[#F15A29] text-white'
+                                  : 'bg-[#F15A29] text-white'
+                              }`}
+                            >
+                              NEW
+                            </span>
+                          )}
+                          <ChevronRight
+                            className={`w-4 h-4 transition-transform ${
+                              isActive ? 'text-[#F15A29] translate-x-0.5' : 'text-[#CCCCCC]'
+                            }`}
+                          />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Right scroll arrow */}
+                <button
+                  onClick={() => scrollCategoryBar('right')}
+                  className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
+                  aria-label="Scroll categories right"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                {/* Mobile right-side fade gradient */}
+                <div className="md:hidden pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
               </div>
             </div>
 
