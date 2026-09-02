@@ -235,7 +235,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                 {/* Left scroll arrow */}
                 <button
                   onClick={() => scrollCategoryBar('left')}
-                  className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
+                  className="flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
                   aria-label="Scroll categories left"
                 >
                   <ChevronLeft className="w-4 h-4" />
@@ -299,7 +299,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                 {/* Right scroll arrow */}
                 <button
                   onClick={() => scrollCategoryBar('right')}
-                  className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
+                  className="flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
                   aria-label="Scroll categories right"
                 >
                   <ChevronRight className="w-4 h-4" />
