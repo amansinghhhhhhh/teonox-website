@@ -16,6 +16,7 @@ import { HomepageFAQ } from './components/HomepageFAQ';
 import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
 import { BrochureModal } from './components/BrochureModal';
+import { FloatingControls } from './components/FloatingControls';
 import { BrochureCTABanner } from './components/BrochureCTABanner';
 import { TeonoxCultureSection } from './components/sections/TeonoxCultureSection';
 import { LifeAtTeonoxSection } from './components/sections/LifeAtTeonoxSection';
@@ -572,6 +573,8 @@ export default function App() {
         onClose={() => setIsBrochureModalOpen(false)}
         defaultCourse={brochureDefaultCourse}
       />
+
+      <FloatingControls />
     </div>
   );
 }
