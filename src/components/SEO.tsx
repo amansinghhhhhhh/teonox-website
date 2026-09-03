@@ -21,7 +21,7 @@ export function SEO({
   ogType = 'website',
   jsonLd,
 }: SEOProps) {
-  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  const fullTitle = title.toLowerCase().includes(SITE_NAME.toLowerCase()) ? title : `${title} | ${SITE_NAME}`;
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
   const image = ogImage || DEFAULT_OG_IMAGE;
 
