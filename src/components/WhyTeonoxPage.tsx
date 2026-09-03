@@ -92,8 +92,8 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
   return (
     <div className="w-full bg-[#FAF8F5] text-[#111111] font-['Sora',sans-serif] selection:bg-[#F15A29] selection:text-white pt-20 sm:pt-24 overflow-x-hidden">
       <SEO
-        title="Why TEONOX | What Makes Us Different"
-        description="Discover why TEONOX is different — 12+ years industry experience, Gen AI integrated curriculum, practical training, and assured placement assistance in Pune."
+        title="Why Teonox? AI-Digital Marketing School in Pune"
+        description="Discover why Teonox is Pune's leading AI marketing school. Learn business digital marketing with AI-driven, industry-relevant training. Know more."
         canonical="/why-teonox"
         jsonLd={{
           '@context': 'https://schema.org',

@@ -448,8 +448,8 @@ export default function App() {
           /* Home Page Layout */
           <>
             <SEO
-              title="Gen AI Course in Pune with Placement | TEONOX"
-              description="Gen AI Course in Pune with Assured Placement. Master Digital Marketing, AI & Automation with 12+ Year Experience Faculty. 100% Placement Assistance, Practical Training."
+              title="AI Automation & Digital Marketing Courses in Pune | Teonox"
+              description="Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enroll today!"
               canonical="/"
               jsonLd={{
                 '@context': 'https://schema.org',

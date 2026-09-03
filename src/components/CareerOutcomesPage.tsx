@@ -370,14 +370,14 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
   return (
     <div className="w-full bg-[#FAF8F5] text-[#111111] font-['Sora',sans-serif] selection:bg-[#F15A29] selection:text-white overflow-x-hidden pt-20 sm:pt-24">
       <SEO
-        title="Career Outcomes | TEONOX"
-        description="Discover career outcomes from TEONOX — assured placement assistance, industry connections, portfolio building, and career support for AI & digital marketing professionals."
-        canonical="/career-outcomes"
+        title="Job Guarantee Digital Marketing Course in Pune | Teonox"
+        description="Career-oriented digital marketing course in Pune with 100% job guarantee. Placement-focused training for freshers, graduates & career switchers."
+        canonical="/careers"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Career Outcomes — TEONOX',
-          url: 'https://teonox.com/career-outcomes',
+          url: 'https://teonox.com/careers',
         }}
       />
 

@@ -102,8 +102,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
   return (
     <div className="pt-20 sm:pt-24 pb-0 bg-white min-h-screen text-[#201A17] font-['Sora',sans-serif] overflow-x-hidden">
       <SEO
-        title="About TEONOX | Gen AI School of Marketing & Business"
-        description="Learn about TEONOX — a Gen AI School of Marketing & Business in Pune with 12+ years of industry experience, offering practical AI-integrated digital marketing training."
+        title="Business Digital Marketing Classes in Pune | Teonox"
+        description="Learn business digital marketing classes in Pune at Teonox, a trusted digital marketing training institute with practical, placement-focused courses."
         canonical="/about"
         jsonLd={{
           '@context': 'https://schema.org',

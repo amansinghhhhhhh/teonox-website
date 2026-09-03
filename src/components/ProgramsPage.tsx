@@ -178,8 +178,8 @@ mode: progOrTitle.mode || 'On Campus, Pune',
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
       <SEO
-        title="Programs & Courses | TEONOX"
-        description="Explore TEONOX programs — AI-integrated digital marketing courses in Pune with assured placement, 12+ years faculty experience, and 50+ tools training."
+        title="Best Digital Marketing Course in Pune Near You | Teonox"
+        description="Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enroll now."
         canonical="/programs"
         jsonLd={{
           '@context': 'https://schema.org',

@@ -127,8 +127,8 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
   return (
     <div className="bg-white text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden">
       <SEO
-        title="Contact TEONOX | Get in Touch"
-        description="Contact TEONOX for admissions, course details, campus visits, and enquiries. Gen AI School of Marketing & Business in Pune."
+        title="Digital Marketing Course Institute in Kothrud, Pune | Teonox"
+        description="Looking for a digital marketing course institute near you in Pune? Teonox offers offline & online digital marketing courses in Kothrud & across Pune."
         canonical="/contact"
         jsonLd={{
           '@context': 'https://schema.org',
