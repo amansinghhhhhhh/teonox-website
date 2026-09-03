@@ -234,18 +234,22 @@ export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boo
 }
 
 export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | null> {
-  // Try direct WP API by numeric id first.
-  try {
-    const res = await fetch(
-      `${CMS_URL}/posts/${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
-    );
-    if (res.ok) {
-      const post = await safeJson(res);
-      if (post) return transformWpPost(post);
-    }
-  } catch (e) {}
+  const isNumeric = /^\d+$/.test(idOrSlug);
 
-  // Then by slug.
+  // Numeric ID: use path-based endpoint.
+  if (isNumeric) {
+    try {
+      const res = await fetch(
+        `${CMS_URL}/posts/${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
+      );
+      if (res.ok) {
+        const post = await safeJson(res);
+        if (post) return transformWpPost(post);
+      }
+    } catch (e) {}
+  }
+
+  // Slug: query by slug parameter.
   try {
     const res = await fetch(
       `${CMS_URL}/posts&slug=${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,

@@ -168,13 +168,6 @@ export function BlogDetailPage({
           </div>
         )}
 
-        {/* Excerpt Lead Box */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFF6EE] border-l-4 border-[#FF6A2B] border-y border-r border-[#F0DFCE] mb-10 shadow-xs">
-          <p className="font-sora text-[17px] sm:text-[19px] font-[600] text-[#201A17] leading-relaxed">
-            "{post.excerpt}"
-          </p>
-        </div>
-
         {/* Main Article Content Body */}
         <div className="prose-container max-w-none">
           {post.contentHtml ? (
