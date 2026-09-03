@@ -34,6 +34,8 @@ import {
 } from '../services/programService';
 import imgCounsellor from '../assets/images/counsellor_support_1785420263109.webp';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { BASE_URL, ORG, WEBSITE } from '../utils/schema';
 
 interface ProgramsPageProps {
   onSelectProgram: (program: Program) => void;
@@ -183,16 +185,37 @@ mode: progOrTitle.mode || 'On Campus, Pune',
         canonical="/programs"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'CollectionPage',
-          name: 'TEONOX Programs',
-          url: 'https://teonox.com/programs',
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              '@id': `${BASE_URL}/programs/#webpage`,
+              url: `${BASE_URL}/programs/`,
+              name: 'AI & Digital Marketing Programs | TEONOX',
+              description: 'Explore AI, digital marketing, performance marketing, SEO and social media programmes offered by TEONOX in Pune.',
+              isPartOf: { '@id': `${BASE_URL}/#website` },
+              about: { '@id': ORG['@id'] },
+            },
+            {
+              '@type': 'ItemList',
+              '@id': `${BASE_URL}/programs/#program-list`,
+              name: 'TEONOX Programs',
+              numberOfItems: 4,
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programs/business-digital-marketing-with-ai/` },
+                { '@type': 'ListItem', position: 2, name: 'Specialisation in Performance Marketing', url: `${BASE_URL}/programs/performance-marketing/` },
+                { '@type': 'ListItem', position: 3, name: 'Specialisation in Search Engine Optimisation', url: `${BASE_URL}/programs/search-engine-optimization/` },
+                { '@type': 'ListItem', position: 4, name: 'Specialising in Social Media Marketing', url: `${BASE_URL}/programs/specialization-in-social-media-marketing/` },
+              ],
+            },
+          ],
         }}
       />
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Programs', path: '/programs' },
+      ]} />
 
       <div className="w-[90%] max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16">
-        {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-            SECTION HEADER
-            â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section id="programs-grid-section" className="space-y-8">
           <div className="text-center max-w-4xl mx-auto space-y-4">
             <h1 className="font-sora text-[32px] sm:text-[44px] md:text-[50px] font-[800] text-[#111111] tracking-tight leading-[1.15]">

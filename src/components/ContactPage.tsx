@@ -20,6 +20,8 @@ import { validateEmail, validatePhone, validateRequired } from '../utils/validat
 import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
 import campusImg from '../assets/images/contact/campus.webp';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { ORG, BASE_URL } from '../utils/schema';
 
 interface ContactPageProps {
   onEnquireClick?: (topic?: string) => void;
@@ -132,12 +134,24 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
         canonical="/contact"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'ContactPage',
-          name: 'Contact TEONOX',
-          url: 'https://teonox.com/contact',
+          '@graph': [
+            {
+              '@type': 'ContactPage',
+              '@id': `${BASE_URL}/contact/#webpage`,
+              url: `${BASE_URL}/contact/`,
+              name: 'Contact TEONOX',
+              description: 'Contact TEONOX in Kothrud, Pune for information about AI, digital marketing, business and automation programs.',
+              isPartOf: { '@id': `${BASE_URL}/#website` },
+              about: { '@id': ORG['@id'] },
+            },
+            ORG,
+          ],
         }}
       />
-      {/* Subtle Background Orange Glow */}
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Contact', path: '/contact' },
+      ]} />
 
       <div className="w-[85%] max-w-7xl mx-auto relative z-10 space-y-16 sm:space-y-24">
         {/* ────────────────────────────────────────

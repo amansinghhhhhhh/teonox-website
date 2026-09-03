@@ -7,6 +7,7 @@ import {
   DollarSign, PhoneCall, ShieldCheck, ChevronRight, Lightbulb, Wallet,
 } from 'lucide-react';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
 interface AdmissionsPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -139,10 +140,10 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
           url: 'https://teonox.com/admissions',
         }}
       />
-
-      {/* ═══════════════════════════════════════
-          SECTION 01 - HERO
-      ═══════════════════════════════════════ */}
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Admissions', path: '/admissions' },
+      ]} />
       <section className="py-12 sm:py-16 bg-gradient-to-b from-[#FFF8F5] via-white to-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#F15A29_0.7px,transparent_0.7px)] [background-size:30px_30px] opacity-[0.03] pointer-events-none" />
 

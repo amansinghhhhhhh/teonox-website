@@ -3,6 +3,7 @@ import { ArrowLeft, Clock, Calendar, User, Share2, Bookmark, CheckCircle2, Arrow
 import { BlogPost } from '../types';
 import { fetchLiveBlogDetail, fetchLiveBlogs } from '../services/blogService';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
 interface BlogDetailPageProps {
   post: BlogPost;
@@ -73,7 +74,11 @@ export function BlogDetailPage({
           datePublished: post.date,
         }}
       />
-      {/* Top Navigation Bar / Breadcrumb */}
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Blog', path: '/blog' },
+        { name: post.title, path: `/blog/${post.slug || post.id}` },
+      ]} />
       <div className="border-b border-[#F0DFCE]/70 bg-[#FFF6EE]/60 backdrop-blur-md py-3.5">
         <div className="w-[85%] max-w-5xl mx-auto flex items-center justify-between">
           <button

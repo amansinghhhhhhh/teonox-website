@@ -74,6 +74,7 @@ import {
 
 import heroImg from '../assets/images/career-outcomes/career_outcomes_hero.webp';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
 interface CareerOutcomesPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -380,10 +381,10 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
           url: 'https://teonox.com/careers',
         }}
       />
-
-      {/* ─────────────────────────────────────────────────────────────────
-          SECTION 01: HERO (Editorial White & High Contrast Luxury Layout)
-          ───────────────────────────────────────────────────────────────── */}
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Careers', path: '/careers' },
+      ]} />
       <section className="relative w-full bg-white py-12 sm:py-16 border-b border-[#EBE4DC] overflow-hidden">
         {/* Subtle Ambient Glow */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#111111 1.2px, transparent 1.2px)`, backgroundSize: '24px 24px' }} />

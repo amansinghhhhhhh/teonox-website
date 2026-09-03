@@ -24,6 +24,7 @@ import { Program, BlogPost } from './types';
 import { INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
 import { SEO } from './components/SEO';
+import { ORG, WEBSITE, BASE_URL } from './utils/schema';
 
 const AboutUsPage = lazy(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
 const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
@@ -83,12 +84,13 @@ function parsePath(pathname: string): Route {
       return { page: 'privacy-policy' };
     case 'terms-and-conditions':
       return { page: 'terms-and-conditions' };
-    // /program/<slug> -> single program detail page (singular)
+    // /programs/<slug> -> single program detail page (primary route)
+    // /programs -> program listing page
+    case 'programs':
+      return second ? { page: 'programs', programId: second } : { page: 'programs' };
+    // /program/<slug> -> backward compat redirect (kept for existing links)
     case 'program':
       return { page: 'programs', programId: second };
-    // /programs (plural) -> strictly the program list page
-    case 'programs':
-      return { page: 'programs' };
     case 'blog':
       return second ? { page: 'blog', postId: second } : { page: 'blog' };
     default:
@@ -321,7 +323,7 @@ export default function App() {
   }, [syncFromUrl]);
 
   const handleSelectProgram = (program: Program) => {
-    navigate(`/program/${program.id}`);
+    navigate(`/programs/${program.id}`);
   };
 
   const handleSelectPost = (post: BlogPost) => {
@@ -453,21 +455,18 @@ export default function App() {
               canonical="/"
               jsonLd={{
                 '@context': 'https://schema.org',
-                '@type': 'EducationalOrganization',
-                name: 'TEONOX',
-                url: 'https://teonox.com',
-                description: 'Gen AI School of Marketing & Business — AI-integrated digital marketing courses in Pune with assured placement.',
-                address: {
-                  '@type': 'PostalAddress',
-                  addressLocality: 'Pune',
-                  addressRegion: 'Maharashtra',
-                  addressCountry: 'IN',
-                },
-                sameAs: [
-                  'https://www.instagram.com/teonoxofficial',
-                  'https://www.facebook.com/teonoxofficial',
-                  'https://www.youtube.com/@teonoxofficial',
-                  'https://www.linkedin.com/company/teonox',
+                '@graph': [
+                  ORG,
+                  WEBSITE,
+                  {
+                    '@type': 'WebPage',
+                    '@id': `${BASE_URL}/#webpage`,
+                    url: `${BASE_URL}/`,
+                    name: 'AI Automation & Digital Marketing Courses in Pune | TEONOX',
+                    isPartOf: { '@id': `${BASE_URL}/#website` },
+                    about: { '@id': `${BASE_URL}/#organization` },
+                    inLanguage: 'en-IN',
+                  },
                 ],
               }}
             />

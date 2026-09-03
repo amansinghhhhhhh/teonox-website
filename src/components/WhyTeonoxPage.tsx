@@ -27,6 +27,7 @@ import stage1Img from '../assets/images/learn-updated.webp';
 import stage2Img from '../assets/images/apply.webp';
 import stage3Img from '../assets/images/Lead.webp';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
 interface WhyTeonoxPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -102,7 +103,10 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
           url: 'https://teonox.com/why-teonox',
         }}
       />
-      <ReadingProgressBar />
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Why Teonox', path: '/why-teonox' },
+      ]} />
       
       {/* ─────────────────────────────────────────────────────────────────
           SECTION 01: HERO HEADER

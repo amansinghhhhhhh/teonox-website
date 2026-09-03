@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Reveal } from './Reveal';
+import { FAQSchema } from './schema/FAQSchema';
 
 interface FAQItem {
   q: string;
@@ -95,6 +96,7 @@ export function HomepageFAQ() {
 
   return (
     <section className="py-10 sm:py-14 bg-[#FAF8F5] text-[#111111] relative overflow-hidden border-b border-[#EFEBE4]">
+      <FAQSchema faqs={FAQ_DATA.map((f) => ({ question: f.q, answer: f.a }))} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Reveal className="mb-8 sm:mb-10 text-left">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">

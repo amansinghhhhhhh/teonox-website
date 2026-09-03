@@ -5,6 +5,7 @@ import { ProgramDetailData } from '../data/programDetails';
 import { fetchLiveProgramDetail, stripV2Prefixes } from '../services/programService';
 import { ProgramV2Layout } from './programV2/ProgramV2Layout';
 import { SEO } from './SEO';
+import { CourseSchema } from './schema/CourseSchema';
 
 interface ProgramDetailPageProps {
   program?: Program | null;
@@ -21,8 +22,11 @@ interface ProgramDetailPageProps {
 function extractSlugFromUrl(): string {
   try {
     const segments = window.location.pathname.split('/').filter(Boolean);
-    // URL pattern: /program/<slug> — slug is the last segment
-    return segments.length >= 2 && segments[0] === 'program' ? segments[1] : '';
+    // URL patterns: /programs/<slug> (primary) or /program/<slug> (backward compat)
+    if (segments.length >= 2 && (segments[0] === 'programs' || segments[0] === 'program')) {
+      return segments[1];
+    }
+    return '';
   } catch {
     return '';
   }
@@ -73,7 +77,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
               window.history.replaceState(
                 { type: 'page', page: 'programs' },
                 '',
-                `/program/${canonicalSlug}`,
+                `/programs/${canonicalSlug}`,
               );
             } catch {
               // Ignore security errors in sandboxed iframes
@@ -176,13 +180,11 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
         title={displayDetail?.programTitle || program?.title || 'Program'}
         description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
         canonical={`/programs/${canonicalSlug}`}
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'Course',
-          name: displayDetail?.programTitle || program?.title,
-          description: displayDetail?.heroIntro,
-          provider: { '@type': 'EducationalOrganization', name: 'TEONOX' },
-        }}
+      />
+      <CourseSchema
+        name={displayDetail?.programTitle || program?.title || ''}
+        description={displayDetail?.heroIntro || ''}
+        slug={canonicalSlug}
       />
       <div className="w-[88%] max-w-7xl mx-auto relative z-10">
         <ProgramV2Layout detail={displayDetail} heroLoading={loading} onEnquire={(label) => onEnquire(label)} />

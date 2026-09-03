@@ -6,6 +6,7 @@ import { fetchLiveBlogs, fetchLiveCategories } from '../services/blogService';
 import { submitForm } from '../services/formService';
 import heroImage from '../assets/images/regenerated_image_1785412705719.avif';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
 interface BlogPageProps {
   onSelectPost: (post: BlogPost) => void;
@@ -175,10 +176,10 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           url: 'https://teonox.com/blog',
         }}
       />
-      
-      {/* ────────────────────────────────────────
-          SECTION 01 - HERO
-          ──────────────────────────────────────── */}
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'Blog', path: '/blog' },
+      ]} />
       <section className="py-12 sm:py-16 border-b border-[#F0DFCE]/60">
         <div className="w-[85%] max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">

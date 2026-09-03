@@ -7,6 +7,7 @@ import {
   BarChart3, Search, Share2, Bot, UserCheck, Quote, Globe, Cpu
 } from 'lucide-react';
 import { SEO } from './SEO';
+import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
 import heroImg from '../assets/images/about/about_hero.webp';
 import imgLeader from '../assets/images/about/sir.webp';
@@ -112,10 +113,11 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           url: 'https://teonox.com/about',
         }}
       />
+      <BreadcrumbSchema items={[
+        { name: 'Home', path: '/' },
+        { name: 'About', path: '/about' },
+      ]} />
 
-      {/* ═══════════════════════════════════════
-          SECTION 01 - HERO
-      ═══════════════════════════════════════ */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-[#FFF8F5] via-white to-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#F15A29_0.7px,transparent_0.7px)] [background-size:28px_28px] opacity-[0.03] pointer-events-none" />
 

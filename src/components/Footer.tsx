@@ -215,10 +215,10 @@ export function Footer({ onNavigate }: FooterProps) {
                       </span>
                     )}
                     <a
-                      href={`/program/${program.id}`}
+                      href={`/programs/${program.id}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        onNavigate(`/program/${program.id}`, program.title);
+                        onNavigate(`/programs/${program.id}`, program.title);
                       }}
                       className="font-inter text-[15px] sm:text-[15.5px] font-[500] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline whitespace-normal break-words leading-snug"
                     >
