@@ -41,14 +41,6 @@ export const COURSE_DEFAULTS = {
   educationalLevel: 'Professional',
   inLanguage: 'en-IN',
   courseMode: 'onsite',
-  offers: {
-    '@type': 'Offer' as const,
-    price: '125000',
-    priceCurrency: 'INR',
-    description: 'Course fee (18% GST applicable additionally)',
-    availability: 'https://schema.org/InStock' as const,
-    validFrom: '2025-01-01',
-  },
   courseWorkload: 'P6M',
 };
 

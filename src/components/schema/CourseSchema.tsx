@@ -32,7 +32,6 @@ export function CourseSchema({ name, description, slug, courseWorkload }: Course
         },
         educationalLevel: COURSE_DEFAULTS.educationalLevel,
         inLanguage: COURSE_DEFAULTS.inLanguage,
-        offers: COURSE_DEFAULTS.offers,
         hasCourseInstance: { '@id': instanceId },
       },
       {
