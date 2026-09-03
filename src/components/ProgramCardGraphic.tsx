@@ -25,7 +25,7 @@ export const ProgramCardGraphic: React.FC<ProgramCardGraphicProps> = ({
   const getDefaultImage = (id: string) => {
     switch (id) {
       case 'digital-marketing-ai':
-      case 'business-digital-marketing-ai':
+      case 'business-digital-marketing-with-ai':
         return dmAiImg;
       case 'performance-marketing':
         return perfImg;

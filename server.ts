@@ -13,7 +13,7 @@ app.use(express.json());
 const BASE_URL = 'https://teonox.com';
 const CMS_BASE = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
 const PROGRAM_IDS = [
-  'business-digital-marketing-ai',
+  'business-digital-marketing-with-ai',
   'performance-marketing',
   'seo-specialization',
   'social-media-marketing',
@@ -66,7 +66,7 @@ app.get('/sitemap.xml', async (_req, res) => {
 
   // Programs
   for (const id of PROGRAM_IDS) {
-    urls.push(buildSitemapUrl(`${BASE_URL}/program/${id}`, today, 'monthly', '0.8'));
+    urls.push(buildSitemapUrl(`${BASE_URL}/programs/${id}`, today, 'monthly', '0.8'));
   }
 
   // Live blog posts from WordPress
@@ -86,7 +86,7 @@ app.get('/sitemap.xml', async (_req, res) => {
 app.get('/sitemap.html', async (_req, res) => {
   const blogs = await fetchLiveBlogSlugs();
   const blogLinks = blogs.map((p) => `<li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`).join('\n');
-  const programLinks = PROGRAM_IDS.map((id) => `<li><a href="${BASE_URL}/program/${id}">${BASE_URL}/program/${id}</a></li>`).join('\n');
+  const programLinks = PROGRAM_IDS.map((id) => `<li><a href="${BASE_URL}/programs/${id}">${BASE_URL}/programs/${id}</a></li>`).join('\n');
   const pageLinks = STATIC_PAGES.map((p) => `<li><a href="${BASE_URL}${p.path}">${BASE_URL}${p.path}</a></li>`).join('\n');
 
   const html = `<!DOCTYPE html>

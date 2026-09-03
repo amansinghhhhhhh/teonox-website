@@ -536,9 +536,9 @@ async function fetchAllProgramPosts(): Promise<any[]> {
       if (!res.ok) return [];
       const raw = await safeJson(res);
       const posts = Array.isArray(raw) ? raw : [];
-      const v2Posts = posts.filter((p: any) => isV2Program(p) && isProgramVisible(p));
-      _allProgramsCache = v2Posts;
-      return v2Posts;
+      const visiblePosts = posts.filter((p: any) => isProgramVisible(p));
+      _allProgramsCache = visiblePosts;
+      return visiblePosts;
     } catch {
       return [];
     }
@@ -618,17 +618,13 @@ export async function fetchLiveProgramDetail(
 /**
  * Convert a raw WordPress post (with ACF V2 "Card Information" fields) into a
  * LiveProgramCard for the /programs listing page. Card-specific ACF fields win;
- * detail-tab / post fields are used as fallbacks so cards render fully even
- * before the new card fields are populated on the CMS.
+ * WP core fields are used as fallbacks so cards render fully even before the
+ * new card fields are populated on the CMS.
  */
 export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCard | null {
   if (!p || typeof p !== 'object') return null;
 
-  // Strict V2 ACF guard: legacy V1 posts must never become cards here.
-  if (!isV2Program(p)) return null;
-
   const fields = postFields(p);
-  // Title: post.acf.program_title, falling back to the post's own WP title.
   const title = str(acfField(p, 'program_title') || p.title?.rendered);
   if (!title) return null;
 
@@ -676,22 +672,26 @@ export function mapWpProgramCard(p: any, resolvedImage?: string): LiveProgramCar
     }
   }
 
-  // Pure ACF mapping: card content is taken 1:1 from the WordPress ACF fields
-  // (post.acf.card_duration / card_certifications / card_designed_for). No
-  // hardcoded defaults or static string overrides — an empty field stays empty
-  // so the CMS is the single source of truth.
-  const cardDuration = str(acfField(p, 'card_duration'));
-  const cardCertifications = str(acfField(p, 'card_certifications'));
-  const cardDesignedFor = str(acfField(p, 'card_designed_for'));
+  const isV2 = isV2Program(p);
+  const excerpt = stripHtml(p.excerpt?.rendered || p.content?.rendered || '').slice(0, 160);
+
+  const cardDuration = isV2
+    ? str(acfField(p, 'card_duration'))
+    : str(acfField(p, 'card_duration') || acfField(p, 'program_duration'));
+  const cardCertifications = isV2
+    ? str(acfField(p, 'card_certifications'))
+    : str(acfField(p, 'card_certifications')) || 'Official Certification';
+  const cardDesignedFor = isV2
+    ? str(acfField(p, 'card_designed_for'))
+    : str(acfField(p, 'card_designed_for')) || 'Designed for Graduates & Working Professionals';
 
   return {
     id: str(p.slug || p.id),
     title,
-    brandBadge: str(fields.program_badge),
+    brandBadge: str(fields.program_badge) || 'PROGRAM',
     description:
-      str(fields.program_subheading) ||
-      stripHtml(p.excerpt?.rendered || p.content?.rendered || '').slice(0, 160),
-    durationText: cardDuration,
+      str(fields.program_subheading) || excerpt,
+    durationText: cardDuration || 'Custom Duration',
     certText: cardCertifications,
     targetText: cardDesignedFor,
     mode: str(fields.program_mode) || 'On Campus, Pune',
@@ -819,7 +819,7 @@ function isProgramVisible(post: any): boolean {
  * render a blank card banner.
  */
 const FALLBACK_CARD_IMAGES: Record<string, string> = {
-  'business-digital-marketing-ai': dmAiImg,
+  'business-digital-marketing-with-ai': dmAiImg,
   'seo-specialization': seoImg,
   'social-media-marketing': socialImg,
   'performance-marketing': perfImg,
@@ -874,7 +874,7 @@ const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p)
  */
 export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]; isLive: boolean }> {
   const fromPosts = (posts: any[]): LiveProgramCard[] => {
-    const eligible = posts.filter((p) => isV2Program(p) && isProgramVisible(p));
+    const eligible = posts.filter((p) => isProgramVisible(p));
     const cards: LiveProgramCard[] = [];
     for (const post of eligible) {
       const card = mapWpProgramCard(post, getProgramImage(post));

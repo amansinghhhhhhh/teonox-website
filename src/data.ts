@@ -19,7 +19,7 @@ export const PROGRAMS_DATA = {
   sectionDescription: "Practical, immersive programs designed to help you build skills that businesses actually hire for.",
   programs: [
     {
-      id: "business-digital-marketing-ai",
+      id: "business-digital-marketing-with-ai",
       title: "Business Digital Marketing With AI",
       repeatedTitle: "Business Digital Marketing With AI",
       description: "Become a complete digital marketer, trained across AI, SEO, paid ads, analytics, and business growth.",

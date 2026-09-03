@@ -149,8 +149,8 @@ export interface ProgramDetailData {
 }
 
 export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
-  'business-digital-marketing-ai': {
-    id: 'business-digital-marketing-ai',
+  'business-digital-marketing-with-ai': {
+    id: 'business-digital-marketing-with-ai',
     programTitle: 'BUSINESS DIGITAL MARKETING WITH AI',
     badge: 'FLAGSHIP CERTIFICATION PROGRAM',
     subHeading: 'Complete Digital Marketing Mastery Across AI, SEO, Paid Ads, Analytics & Business Growth',

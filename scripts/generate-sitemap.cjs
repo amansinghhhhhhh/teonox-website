@@ -20,7 +20,7 @@ const STATIC_PAGES = [
 ];
 
 const PROGRAM_IDS = [
-  'business-digital-marketing-ai',
+  'business-digital-marketing-with-ai',
   'performance-marketing',
   'seo-specialization',
   'social-media-marketing',
@@ -61,7 +61,7 @@ async function main() {
       `  <url>\n    <loc>${BASE_URL}${p.path}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
     ),
     ...PROGRAM_IDS.map((id) =>
-      `  <url>\n    <loc>${BASE_URL}/program/${id}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+      `  <url>\n    <loc>${BASE_URL}/programs/${id}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
     ),
     ...blogPosts.map((p) =>
       `  <url>\n    <loc>${BASE_URL}/blog/${p.slug}</loc>\n    <lastmod>${p.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`
@@ -78,7 +78,7 @@ async function main() {
     .map((p) => `      <li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`)
     .join('\n');
   const programLinks = PROGRAM_IDS
-    .map((id) => `      <li><a href="${BASE_URL}/program/${id}">${BASE_URL}/program/${id}</a></li>`)
+    .map((id) => `      <li><a href="${BASE_URL}/programs/${id}">${BASE_URL}/programs/${id}</a></li>`)
     .join('\n');
   const pageLinks = STATIC_PAGES
     .map((p) => `      <li><a href="${BASE_URL}${p.path}">${BASE_URL}${p.path}</a></li>`)
