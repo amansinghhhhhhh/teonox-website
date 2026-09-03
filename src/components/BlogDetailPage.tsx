@@ -51,7 +51,7 @@ export function BlogDetailPage({
   }, [initialPost]);
 
   const handleCopyLink = () => {
-    const url = post.link || window.location.href;
+    const url = `https://teonox.com/blog/${post.slug || post.id}`;
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
