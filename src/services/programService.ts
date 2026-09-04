@@ -512,6 +512,55 @@ function applyResolvedHeroImage(post: any, detail: ProgramDetailData): ProgramDe
   return next;
 }
 
+/**
+ * Resolve a numeric WordPress attachment ID to a media URL via the REST API.
+ * Returns the source_url on success, or '' on failure (network error, 404,
+ * 401, etc.). Results are cached in-memory to avoid repeated fetches for
+ * the same attachment.
+ */
+const _mediaUrlCache: Record<string, string> = {};
+async function resolveMediaUrl(idOrUrl: string): Promise<string> {
+  if (!idOrUrl) return '';
+  const trimmed = idOrUrl.trim();
+  if (!/^\d+$/.test(trimmed)) return trimmed;
+  if (_mediaUrlCache[trimmed]) return _mediaUrlCache[trimmed];
+  try {
+    const res = await fetch(
+      `${CMS_URL}/media/${trimmed}?_fields=source_url`,
+    );
+    if (!res.ok) return '';
+    const data = await res.json();
+    const url = data?.source_url || '';
+    if (url) _mediaUrlCache[trimmed] = url;
+    return url;
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Given a raw ACF image field (URL string, numeric ID, array, or object),
+ * return a usable URL. Numeric IDs are resolved via the WP media endpoint.
+ */
+async function resolveDesignedForImage(raw: any): Promise<string> {
+  if (!raw) return '';
+  if (Array.isArray(raw)) return resolveDesignedForImage(raw[0]);
+  if (typeof raw === 'number') return resolveMediaUrl(String(raw));
+  if (typeof raw === 'string') {
+    const trimmed = raw.trim();
+    if (/^\d+$/.test(trimmed)) return resolveMediaUrl(trimmed);
+    if (trimmed) return trimmed;
+    return '';
+  }
+  if (typeof raw === 'object') {
+    const url = raw.url || raw.source_url || raw.full_url || raw.guid?.rendered || '';
+    if (url) return url;
+    const sizes = group(raw.sizes);
+    return sizes.full || sizes['1536x1536'] || sizes.large || sizes.medium_large || sizes.medium || sizes.thumbnail || '';
+  }
+  return '';
+}
+
 // ---- Dynamic program list cache ----
 // Single source of truth: all published V2 program posts from WP REST API.
 // Both fetchLivePrograms() and fetchLiveProgramDetail() share this cache so
@@ -590,7 +639,15 @@ export async function fetchLiveProgramDetail(
     if (match) {
       const transformed = transformWpProgram(match);
       if (transformed) {
-        const detail = applyResolvedHeroImage(match, transformed);
+        let detail = applyResolvedHeroImage(match, transformed);
+        // Resolve numeric designed_for_image IDs (e.g. 412) to actual media URLs.
+        const rawDesigned = postFields(match).designed_for_image;
+        if (rawDesigned && !detail.designedForImage) {
+          const resolvedUrl = await resolveDesignedForImage(rawDesigned);
+          if (resolvedUrl) {
+            detail = { ...detail, designedForImage: resolvedUrl };
+          }
+        }
         return { detail, isLive: true, notFound: false };
       }
     }
