@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   Award,
@@ -160,6 +160,8 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
   const [heroImgFailed, setHeroImgFailed] = useState(false);
   const [designedImgFailed, setDesignedImgFailed] = useState(false);
   const [isCourseContentExpanded, setIsCourseContentExpanded] = useState(false);
+  const courseContentRef = useRef<HTMLDivElement>(null);
+  const [courseContentHeight, setCourseContentHeight] = useState<number>(220);
 
   const enquire = (label: string) => onEnquire?.(label);
 
@@ -172,6 +174,14 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
     setHeroImgFailed(false);
     setDesignedImgFailed(false);
   }, [heroImageKey, designedImageKey]);
+
+  // Measure the full scrollHeight of the course content for smooth collapse animation.
+  useEffect(() => {
+    if (courseContentRef.current) {
+      const full = courseContentRef.current.scrollHeight;
+      if (full > 220) setCourseContentHeight(full);
+    }
+  }, [detail.courseContentParagraph]);
 
   const benefitTabs = detail.benefits;
   const oppData = detail.opportunities[activeOppTab];
@@ -469,35 +479,39 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           SECTION 04B: COURSE CONTENT (COLLAPSIBLE)
           ──────────────────────────────────────── */}
       {detail.courseContentParagraph && (
-        <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-6">
-          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight">
+        <div className="space-y-6">
+          <h2 className="font-sora text-[26px] sm:text-[34px] font-[800] leading-tight text-[#111111] tracking-tight text-center">
             {detail.courseContentHeading || 'Course Content'}
           </h2>
 
-          <div className="relative">
-            <div
-              className={`relative overflow-hidden transition-[max-height] duration-500 ease-in-out ${isCourseContentExpanded ? 'max-h-[5000px]' : 'max-h-[220px]'}`}
-            >
+          <section className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm space-y-6">
+            <div className="relative">
               <div
-                className="course-content font-inter text-[15.5px] text-[#444444] leading-[1.8]"
-                dangerouslySetInnerHTML={{ __html: detail.courseContentParagraph }}
-              />
+                ref={courseContentRef}
+                className="relative overflow-hidden transition-[max-height] duration-500 ease-in-out"
+                style={{ maxHeight: isCourseContentExpanded ? `${courseContentHeight}px` : '220px' }}
+              >
+                <div
+                  className="course-content font-inter text-[15.5px] text-[#444444] leading-[1.8]"
+                  dangerouslySetInnerHTML={{ __html: detail.courseContentParagraph }}
+                />
+              </div>
+
+              {!isCourseContentExpanded && (
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none" />
+              )}
             </div>
 
-            {!isCourseContentExpanded && (
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none" />
-            )}
-          </div>
-
-          <div className="flex justify-center pt-1">
-            <button
-              onClick={() => setIsCourseContentExpanded((prev) => !prev)}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#F15A29] text-[#F15A29] font-sora text-[13.5px] font-[700] hover:bg-[#F15A29] hover:text-white transition-all duration-300 cursor-pointer"
-            >
-              {isCourseContentExpanded ? 'Read Less' : 'Read More...'}
-            </button>
-          </div>
-        </section>
+            <div className="flex justify-center pt-1">
+              <button
+                onClick={() => setIsCourseContentExpanded((prev) => !prev)}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#F15A29] text-[#F15A29] font-sora text-[13.5px] font-[700] hover:bg-[#F15A29] hover:text-white transition-all duration-300 cursor-pointer"
+              >
+                {isCourseContentExpanded ? 'Read Less' : 'Read More...'}
+              </button>
+            </div>
+          </section>
+        </div>
       )}
 
       {/* ────────────────────────────────────────
