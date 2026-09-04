@@ -62,6 +62,7 @@ export interface ProgramDetailData {
     text: string;
   }[];
   keyReasons: Array<{ title: string; text: string } | string>;
+  keyReasonsSectionTitle?: string;
   keyReasonsFootnote?: string;
   benefits: {
     students: {

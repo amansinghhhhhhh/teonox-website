@@ -430,7 +430,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
       {detail.keyReasons.length > 0 || detail.keyReasonsFootnote ? (
         <section className="bg-[#111111] text-white rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-xl space-y-8 relative overflow-hidden">
           <h2 className="font-sora text-[26px] sm:text-[36px] font-[800] leading-tight text-white tracking-tight relative z-10">
-            KEY REASONS TO TAKE THIS COURSE
+            {detail.keyReasonsSectionTitle || 'KEY REASONS TO TAKE THIS COURSE'}
           </h2>
 
           {detail.keyReasons.length > 0 && (

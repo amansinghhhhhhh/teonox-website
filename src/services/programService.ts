@@ -389,6 +389,7 @@ export function transformWpProgram(p: any): ProgramDetailData | null {
       title: str(r.reason_title_bold),
       text: str(r.reason_text),
     })),
+    keyReasonsSectionTitle: str(fields.key_reasons_section_title) || undefined,
     keyReasonsFootnote: str(fields.key_reasons_footnote) || undefined,
     benefits: {
       students: mapBenefitGroup(benefitRoot.benefits_students, 'benefits_students'),
