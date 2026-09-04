@@ -52,6 +52,7 @@ import type { LucideIcon } from 'lucide-react';
 import { ProgramDetailData } from '../../data/programDetails';
 import { TeonoxLogo } from '../TeonoxLogo';
 import imgCounsellor from '../../assets/images/counsellor_modal_img_1785398242839.webp';
+import designedForFallback from '../../assets/images/apply.webp';
 import certGoogleLogo from '../../assets/tools/google.svg';
 import certGoogleAnalyticsLogo from '../../assets/tools/googleanalytics.svg';
 import certHubspotLogo from '../../assets/tools/hubspot.svg';
@@ -329,7 +330,11 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                   ) : (
-                    <div className="w-full h-full" />
+                    <img
+                      src={designedForFallback}
+                      alt="This Course Is Designed For"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
                 </div>
