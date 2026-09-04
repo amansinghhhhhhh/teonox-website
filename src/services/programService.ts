@@ -391,6 +391,8 @@ export function transformWpProgram(p: any): ProgramDetailData | null {
     })),
     keyReasonsSectionTitle: str(fields.key_reasons_section_title) || undefined,
     keyReasonsFootnote: str(fields.key_reasons_footnote) || undefined,
+    courseContentHeading: str(fields.course_content_heading) || undefined,
+    courseContentParagraph: str(fields.course_content_paragraph) || undefined,
     benefits: {
       students: mapBenefitGroup(benefitRoot.benefits_students, 'benefits_students'),
       business: mapBenefitGroup(benefitRoot.benefits_business, 'benefits_business'),

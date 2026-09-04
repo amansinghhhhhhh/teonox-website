@@ -64,6 +64,8 @@ export interface ProgramDetailData {
   keyReasons: Array<{ title: string; text: string } | string>;
   keyReasonsSectionTitle?: string;
   keyReasonsFootnote?: string;
+  courseContentHeading?: string;
+  courseContentParagraph?: string;
   benefits: {
     students: {
       title: string;

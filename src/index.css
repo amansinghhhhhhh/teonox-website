@@ -399,3 +399,37 @@ html {
   }
 }
 
+/* Course content WYSIWYG styles */
+.course-content h1,
+.course-content h2,
+.course-content h3,
+.course-content h4 {
+  font-family: 'Sora', sans-serif;
+  color: #111111;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+}
+.course-content h1 { font-size: 1.5em; }
+.course-content h2 { font-size: 1.3em; }
+.course-content h3 { font-size: 1.15em; }
+.course-content h4 { font-size: 1.05em; }
+.course-content p { margin: 0.75em 0; }
+.course-content ul,
+.course-content ol { margin: 0.75em 0; padding-left: 1.5em; }
+.course-content ul { list-style: disc; }
+.course-content ol { list-style: decimal; }
+.course-content li { margin: 0.35em 0; }
+.course-content a { color: #F15A29; text-decoration: none; }
+.course-content a:hover { text-decoration: underline; }
+.course-content strong { font-weight: 700; color: #111111; }
+.course-content em { font-style: italic; }
+.course-content blockquote {
+  border-left: 3px solid #F15A29;
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #666666;
+  font-style: italic;
+}
+
