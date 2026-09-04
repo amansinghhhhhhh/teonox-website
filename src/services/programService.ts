@@ -526,7 +526,7 @@ async function resolveMediaUrl(idOrUrl: string): Promise<string> {
   if (_mediaUrlCache[trimmed]) return _mediaUrlCache[trimmed];
   try {
     const res = await fetch(
-      `${CMS_URL}/media/${trimmed}?_fields=source_url`,
+      `${CMS_URL}/media/${trimmed}&_fields=source_url`,
     );
     if (!res.ok) return '';
     const data = await res.json();
