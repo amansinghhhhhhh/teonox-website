@@ -138,7 +138,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                   The world of business is changing faster than ever. Artificial Intelligence is transforming industries. Digital technologies are redefining customer behavior. Companies are no longer looking for people who simply hold degrees, they are looking for professionals who can think strategically, solve business problems, embrace technology, and create measurable impact.
                 </p>
                 <p className="font-semibold text-[#111111]">
-                  TEONOX was created to bridge that gap. We are a School of Marketing, AI and Business dedicated to preparing students, professionals, entrepreneurs, and business leaders for the opportunities of the Digital & AI era.
+                  TEONOX was created to bridge that gap. We are a school of marketing, AI and business and a leading digital marketing training institute in Pune, dedicated to preparing students, professionals, entrepreneurs, and business leaders for the opportunities of the digital & AI era. As an Institute of Digital Marketing Pune, we focus on practical learning, industry-relevant skills, and real-world applications to help learners build future-ready careers and businesses.
                 </p>
               </motion.div>
 
@@ -250,7 +250,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[
-              { icon: Compass, label: 'OUR VISION', title: "India's Most Trusted Digital Marketing Business School", texts: ["To become India's most trusted Digital Marketing Business School by developing professionals who can create value through Marketing, Business, Technology and Artificial Intelligence.", "We envision a future where education is measured not by classroom hours or certificates, but by the ability to solve problems, create opportunities and drive business growth."] },
+              { icon: Compass, label: 'OUR VISION', title: "India's Most Trusted Digital Marketing Business School", texts: ["To become India's most trusted digital marketing business school, offering practical business digital marketing classes in Pune and developing professionals who can create meaningful value through marketing, business, technology, and artificial intelligence.", "We envision a future where education is measured not by classroom hours or certificates, but by the ability to solve problems, create opportunities and drive business growth."] },
               { icon: Target, label: 'OUR MISSION', title: 'Bridging Education & Industry Execution', texts: ['Our mission is to bridge the gap between education and industry by delivering practical, business-first learning that combines Digital Marketing, Artificial Intelligence, Business Strategy and real-world execution.', 'We strive to empower every learner with the confidence to think independently, execute professionally and lead responsibly.'] },
             ].map((card, i) => {
               const Icon = card.icon;
@@ -309,7 +309,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           >
             <Quote className="w-10 h-10 text-[#FF6A2B]/40 mx-auto mb-4 fill-[#FF6A2B]/10" />
             <p className="font-sora text-[17px] sm:text-[21px] font-semibold text-amber-100 max-w-4xl mx-auto leading-relaxed relative z-10">
-              "At TEONOX, learning extends beyond software and certifications. We develop professionals who understand customers, marketing, communication, technology, analytics, AI and business growth as an interconnected system."
+              "At TEONOX, learning extends beyond software and certifications. Our business digital marketing classes in Pune develop professionals who understand customers, marketing, communication, technology, analytics, AI, and business growth as an interconnected system. As a digital marketing training institute in Pune and an Institute of Digital Marketing in Pune, we focus on practical, industry-relevant learning that helps professionals apply these skills to real-world business challenges."
             </p>
           </motion.div>
         </div>
