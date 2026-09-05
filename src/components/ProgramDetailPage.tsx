@@ -111,7 +111,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
               ? 'The URL does not contain a valid program identifier.'
               : <>The program <code className="text-[#111111] font-mono">{identifier}</code> does not exist or is no longer available.</>}
           </p>
-          <button
+          <button type="button"
             onClick={onBack}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-colors cursor-pointer"
           >
@@ -157,7 +157,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
             We could not load content for <code className="text-[#111111] font-mono">{identifier}</code>. The CMS may be temporarily unreachable. Please try again later.
           </p>
-          <button
+          <button type="button"
             onClick={onBack}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-colors cursor-pointer"
           >

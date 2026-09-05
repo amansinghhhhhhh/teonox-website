@@ -372,6 +372,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-[#201A17] flex flex-col font-['Sora',sans-serif]">
+      {/* Skip to main content (keyboard accessibility) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[#FF6A2B] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-sora focus:font-semibold focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Navigation */}
       <Navbar
         onEnquireClick={() => handleEnquireClick()}
@@ -380,7 +388,7 @@ export default function App() {
       />
 
       {/* Main Page Layout */}
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
           <Suspense fallback={<PageSkeleton />}>
           {selectedProgram ? (
           /* Dedicated Course Details Page */

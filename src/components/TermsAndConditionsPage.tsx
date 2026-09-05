@@ -148,7 +148,7 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
       <LegalSection id="tc-7" number={7} title="Privacy">
         <p>
           Your use of the website is also governed by our{' '}
-          <button
+          <button type="button"
             onClick={() => onNavigate?.('/privacy-policy', 'Privacy Policy')}
             className="text-[#F15A29] hover:underline font-medium cursor-pointer"
           >
@@ -267,7 +267,7 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
             <p className="font-inter text-[14px] leading-relaxed text-[#555555]">
               Our support team is available to answer any questions about your enquiry or our programs.
             </p>
-            <button
+            <button type="button"
               onClick={() => onNavigate?.('/contact', 'Contact')}
               className="inline-flex items-center justify-center gap-2 self-start px-5 py-2.5 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-all duration-300 cursor-pointer"
             >

@@ -66,7 +66,7 @@ function onPillarsScroll(ref: React.RefObject<HTMLDivElement | null>) {
 
 function ScrollArrow({ dir, onClick }: { dir: 'left' | 'right'; onClick: () => void }) {
   return (
-    <button
+    <button type="button"
       onClick={onClick}
       aria-label={dir === 'left' ? 'Scroll left' : 'Scroll right'}
       className="flex w-8 h-8 md:w-10 md:h-10 shrink-0 items-center justify-center rounded-full bg-white border border-[#E5E0D8] text-[#111111] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-colors cursor-pointer shadow-sm"
@@ -184,7 +184,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
                     </p>
 
                     {/* Expandable initiatives drawer */}
-                    <button
+                    <button type="button"
                       onClick={() => togglePillar(i)}
                       className="mt-4 w-full inline-flex items-center justify-between gap-2 font-sora text-[12.5px] font-[700] uppercase tracking-wider text-[#111111] hover:text-[#F15A29] transition-colors cursor-pointer"
                     >
@@ -277,7 +277,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
                   Kothrud, Pune
                 </span>
               </div>
-              <button
+              <button type="button"
                 onClick={onVisitCampus}
                 className="relative mt-6 inline-flex items-center justify-center gap-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[13.5px] font-[700] uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_10px_25px_-8px_rgba(241,90,41,0.5)] transition-all active:scale-95 cursor-pointer w-full whitespace-nowrap"
               >

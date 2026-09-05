@@ -249,7 +249,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
             <p className="font-inter text-[14px] leading-relaxed text-[#555555]">
               Our team is ready to answer any questions, no matter how small.
             </p>
-            <button
+            <button type="button"
               onClick={() => onNavigate?.('/contact', 'Contact')}
               className="inline-flex items-center justify-center gap-2 self-start px-5 py-2.5 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-all duration-300 cursor-pointer"
             >

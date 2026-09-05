@@ -46,14 +46,14 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
             transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button
+            <button type="button"
               onClick={() => onNavigate('/', 'Home')}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#F15A29] text-white rounded-full font-semibold text-sm hover:bg-[#d94e22] transition-colors cursor-pointer"
             >
               <Home size={18} />
               Go to Homepage
             </button>
-            <button
+            <button type="button"
               onClick={() => window.history.back()}
               className="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-[#E5DDD5] text-[#201A17] rounded-full font-semibold text-sm hover:border-[#F15A29] hover:text-[#F15A29] transition-colors cursor-pointer"
             >
@@ -77,7 +77,7 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
                 { label: 'Contact', href: '/contact' },
                 { label: 'Admissions', href: '/admissions' },
               ].map((link) => (
-                <button
+                <button type="button"
                   key={link.href}
                   onClick={() => onNavigate(link.href, link.label)}
                   className="px-5 py-2 rounded-full bg-[#F3EDE6] text-[#201A17] text-sm font-medium hover:bg-[#F15A29] hover:text-white transition-colors cursor-pointer"

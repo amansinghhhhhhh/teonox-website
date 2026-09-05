@@ -86,6 +86,7 @@ const ToolCard: React.FC<{ tool: ToolItem }> = ({ tool }) => {
             onError={() => setImgError(true)}
             className="w-full h-full object-contain max-h-10 sm:max-h-12 drop-shadow-xs"
             loading="lazy"
+            decoding="async"
           />
         ) : (
           <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center font-sora font-extrabold text-[13px] ${tool.fallbackBg || 'bg-[#F15A29] text-white'} shadow-xs`}>

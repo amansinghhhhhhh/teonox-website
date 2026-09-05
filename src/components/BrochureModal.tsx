@@ -96,7 +96,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       {/* Main Modal Card */}
       <div className="relative w-full max-w-[920px] bg-white rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row border border-slate-100 max-h-[92vh] overflow-y-auto md:overflow-y-visible">
         {/* Close Button */}
-        <button
+        <button type="button"
           onClick={onClose}
           className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/80 md:bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-all shadow-xs"
           aria-label="Close dialog"
@@ -143,10 +143,11 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Name Input */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="brochure-name" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Full Name *
                   </label>
                   <input
+                    id="brochure-name"
                     type="text"
                     placeholder="Enter your full name"
                     value={fullName}
@@ -157,10 +158,11 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
 
                 {/* Email Input */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="brochure-email" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Email Address *
                   </label>
                   <input
+                    id="brochure-email"
                     type="email"
                     placeholder="Enter your email address"
                     value={email}
@@ -171,7 +173,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
 
                 {/* Phone Input */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="brochure-phone" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Phone Number *
                   </label>
                   <div className="flex rounded-xl border border-gray-300 focus-within:border-[#F15A29] overflow-hidden bg-white transition-colors">
@@ -180,6 +182,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                       <span>+91</span>
                     </div>
                     <input
+                      id="brochure-phone"
                       type="tel"
                       placeholder="Enter mobile number"
                       value={phone}
@@ -222,14 +225,14 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 Thanks <span className="font-bold text-[#111111]">{fullName}</span>! Your
                 brochure is downloading now. Our team will also reach out shortly on WhatsApp.
               </p>
-              <button
+              <button type="button"
                 onClick={triggerBrochureDownload}
                 className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
               >
                 <Download className="w-4 h-4 shrink-0" />
                 Download Brochure Again
               </button>
-              <button
+              <button type="button"
                 onClick={handleReset}
                 className="bg-[#111111] hover:bg-black text-white font-sora font-bold text-[14px] px-8 py-3 rounded-xl transition-all cursor-pointer"
               >

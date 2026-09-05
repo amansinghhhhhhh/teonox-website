@@ -176,14 +176,14 @@ export function LegalShell({
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                <button
+                <button type="button"
                   onClick={() => onNavigate?.('/contact', 'Contact')}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[14px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 cursor-pointer"
                 >
                   Contact Us
                   <ArrowRight className="w-4 h-4" />
                 </button>
-                <button
+                <button type="button"
                   onClick={() => onNavigate?.('/', 'Home')}
                   className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-sora font-[600] text-[14px] transition-all duration-300 border border-white/15 cursor-pointer"
                 >

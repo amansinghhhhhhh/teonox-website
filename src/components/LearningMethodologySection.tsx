@@ -175,7 +175,7 @@ export function LearningMethodologySection() {
           {PHASES.map((phase) => {
             const active = activePhase.id === phase.id;
             return (
-              <button
+              <button type="button"
                 key={phase.id}
                 onClick={() => setActivePhase(phase)}
                 aria-pressed={active}

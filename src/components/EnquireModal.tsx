@@ -99,7 +99,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
       <div className="relative w-full max-w-[920px] bg-white rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row border border-slate-100 max-h-[92vh] overflow-y-auto md:overflow-y-visible">
         
         {/* Close Button */}
-        <button
+        <button type="button"
           onClick={onClose}
           className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/80 md:bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-all shadow-xs"
           aria-label="Close dialog"
@@ -147,11 +147,12 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Course Select Dropdown */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="enquire-course" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Select Course *
                   </label>
                   <div className="relative">
                     <select
+                      id="enquire-course"
                       value={selectedCourse}
                       onChange={(e) => setSelectedCourse(e.target.value)}
                       className="w-full appearance-none bg-white border-2 border-[#0066FF] focus:border-[#F15A29] text-[#111111] font-sora text-[14px] sm:text-[15px] font-[600] rounded-xl px-4 py-3.5 pr-10 outline-none transition-colors cursor-pointer"
@@ -169,10 +170,11 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
 
                 {/* Name Input */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="enquire-name" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Full Name *
                   </label>
                   <input
+                    id="enquire-name"
                     type="text"
                     placeholder="Enter your full name"
                     value={fullName}
@@ -183,10 +185,11 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
 
                 {/* Email Address Input */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="enquire-email" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Email Address *
                   </label>
                   <input
+                    id="enquire-email"
                     type="email"
                     placeholder="Enter your email address"
                     value={email}
@@ -197,7 +200,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
 
                 {/* Phone Input with +91 Flag Badge */}
                 <div>
-                  <label className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
+                  <label htmlFor="enquire-phone" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Phone Number *
                   </label>
                   <div className="flex rounded-xl border border-gray-300 focus-within:border-[#F15A29] overflow-hidden bg-white transition-colors">
@@ -207,6 +210,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
                       <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                     </div>
                     <input
+                      id="enquire-phone"
                       type="tel"
                       placeholder="Enter mobile number"
                       value={phone}
@@ -256,7 +260,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
                 Thank you <span className="font-bold text-[#111111]">{fullName}</span>! Our senior career counsellor will call you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> regarding <span className="font-bold text-[#111111]">{selectedCourse}</span>.
               </p>
-              <button
+              <button type="button"
                 onClick={handleReset}
                 className="bg-[#111111] hover:bg-black text-white font-sora font-bold text-[14px] px-8 py-3 rounded-xl transition-all"
               >

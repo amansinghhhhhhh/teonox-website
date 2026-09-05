@@ -246,7 +246,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-              <button
+              <button type="button"
                 onClick={() => enquire('Apply Now - ' + detail.programTitle)}
                 className="w-full sm:w-auto py-3.5 px-5 sm:px-8 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-sm sm:text-[15px] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
@@ -254,7 +254,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                 <ArrowRight className="w-4.5 h-4.5 shrink-0" />
               </button>
 
-              <button
+              <button type="button"
                 onClick={() => enquire('Download Brochure - ' + detail.programTitle)}
                 className="w-full sm:w-auto py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF0EB] text-[#111111] font-sora font-[700] text-sm sm:text-[15px] border border-[#ECECEC] hover:border-[#F8E3D8] transition-all duration-300 shadow-2xs hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
@@ -273,6 +273,8 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                   src={detail.heroImage}
                   alt={detail.programTitle}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                   onError={() => setHeroImgFailed(true)}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
@@ -311,7 +313,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
 
           {detail.overview.expanded.length > 0 && (
             <div>
-              <button
+              <button type="button"
                 onClick={() => setIsOverviewExpanded(!isOverviewExpanded)}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#FAF8F5] hover:bg-[#FFF0EB] text-[#F15A29] font-sora font-[700] text-[13.5px] border border-[#ECECEC] hover:border-[#F8E3D8] transition-all cursor-pointer shadow-2xs"
               >
@@ -337,6 +339,8 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                       src={detail.designedForImage}
                       alt="This Course Is Designed For"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
+                      decoding="async"
                       onError={() => setDesignedImgFailed(true)}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
@@ -344,6 +348,8 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                     <img
                       src={designedForFallback}
                       alt="This Course Is Designed For"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                   )}
@@ -380,7 +386,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                           : 'bg-white border-transparent hover:border-[#F0DFCE] hover:bg-[#FFF6EE]/60'
                       }`}
                     >
-                      <button
+                      <button type="button"
                         onClick={() => setActiveDesignedIndex(isExpanded ? -1 : idx)}
                         className="w-full text-left p-3.5 sm:p-4 flex items-center gap-4 cursor-pointer group"
                       >
@@ -503,7 +509,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
             </div>
 
             <div className="flex justify-center pt-1">
-              <button
+              <button type="button"
                 onClick={() => setIsCourseContentExpanded((prev) => !prev)}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#F15A29] text-[#F15A29] font-sora text-[13.5px] font-[700] hover:bg-[#F15A29] hover:text-white transition-all duration-300 cursor-pointer"
               >
@@ -538,7 +544,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           {(['students', 'business', 'corporate'] as BenefitKey[]).map((key) => {
             const isActive = activeBenefitTab === key;
             return (
-              <button
+              <button type="button"
                 key={key}
                 onClick={() => setActiveBenefitTab(key)}
                 className={`flex-1 py-3.5 px-6 rounded-[16px] font-sora text-[14.5px] font-[800] transition-all duration-300 cursor-pointer ${
@@ -903,7 +909,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
         </h2>
 
         <div className="flex flex-col sm:flex-row gap-3 p-1.5 bg-[#FAF8F5] rounded-[20px] border border-[#EFEBE4]">
-          <button
+          <button type="button"
             onClick={() => setActiveOppTab('internships')}
             className={`flex-1 py-3.5 px-6 rounded-[16px] font-sora text-[14.5px] font-[800] transition-all duration-300 cursor-pointer ${
               activeOppTab === 'internships'
@@ -913,7 +919,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
           >
             Internship Opportunities
           </button>
-          <button
+          <button type="button"
             onClick={() => setActiveOppTab('freelancing')}
             className={`flex-1 py-3.5 px-6 rounded-[16px] font-sora text-[14.5px] font-[800] transition-all duration-300 cursor-pointer ${
               activeOppTab === 'freelancing'
@@ -1030,7 +1036,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                   key={idx}
                   className="rounded-[20px] border border-[#ECECEC] bg-[#FAFAFA] overflow-hidden transition-all duration-300"
                 >
-                  <button
+                  <button type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                     className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FFF0EB]/40 transition-colors"
                   >
@@ -1063,6 +1069,8 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                 src={detail.cta?.image || imgCounsellor}
                 alt="Career Counsellor & Support Advisor"
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   const t = e.target as HTMLImageElement;
                   if (t.src !== imgCounsellor) {
@@ -1096,7 +1104,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                   <ArrowRight className="w-4.5 h-4.5 text-[#F15A29]" />
                 </a>
               ) : (
-                <button
+                <button type="button"
                   onClick={() => enquire('Apply Now - Final CTA ' + detail.programTitle)}
                   className="px-8 py-4 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora font-[700] text-[15px] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
                 >
@@ -1113,7 +1121,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
                   <span>{detail.cta?.secondaryButtonText || 'Talk to Career Advisor'}</span>
                 </a>
               ) : (
-                <button
+                <button type="button"
                   onClick={() => enquire('Talk to Career Advisor - Final CTA ' + detail.programTitle)}
                   className="px-8 py-4 rounded-full bg-black/20 hover:bg-black/35 text-white font-sora font-[700] text-[15px] border border-white/35 hover:border-white/60 transition-all duration-300 shadow-2xs hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
                 >

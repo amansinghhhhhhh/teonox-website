@@ -177,7 +177,7 @@ export function WhyTeonoxSection({ onExplorePrograms }: WhyTeonoxSectionProps) {
               </div>
             </div>
             <div className="relative">
-              <button
+              <button type="button"
                 onClick={onExplorePrograms}
                 className="inline-flex items-center justify-center gap-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[14.5px] font-[700] px-7 py-3.5 rounded-xl transition-all active:scale-95 cursor-pointer w-full sm:w-auto"
               >

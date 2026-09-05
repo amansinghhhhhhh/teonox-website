@@ -64,10 +64,10 @@ export function MomentsSection() {
             <p className="font-inter text-[15px] text-[#555555]">A glimpse into our world: real sessions, real energy, real growth.</p>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => scrollSlider('left')} className="w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-[#FFF0EB] hover:border-[#FF6A2B] text-[#111111] hover:text-[#FF6A2B] flex items-center justify-center transition-all shadow-xs" aria-label="Scroll left">
+            <button type="button" onClick={() => scrollSlider('left')} className="w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-[#FFF0EB] hover:border-[#FF6A2B] text-[#111111] hover:text-[#FF6A2B] flex items-center justify-center transition-all shadow-xs" aria-label="Scroll left">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={() => scrollSlider('right')} className="w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-[#FFF0EB] hover:border-[#FF6A2B] text-[#111111] hover:text-[#FF6A2B] flex items-center justify-center transition-all shadow-xs" aria-label="Scroll right">
+            <button type="button" onClick={() => scrollSlider('right')} className="w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-[#FFF0EB] hover:border-[#FF6A2B] text-[#111111] hover:text-[#FF6A2B] flex items-center justify-center transition-all shadow-xs" aria-label="Scroll right">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>

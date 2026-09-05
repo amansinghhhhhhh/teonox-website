@@ -196,7 +196,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
 
               {/* Primary & Secondary Buttons */}
               <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center gap-4 pt-2">
-                <button
+                <button type="button"
                   onClick={() => {
                     if (onExplorePrograms) onExplorePrograms();
                     else {
@@ -210,7 +210,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <button
+                <button type="button"
                   onClick={scrollToNewsletter}
                   className="px-7 py-3.5 rounded-full bg-white hover:bg-[#F8F9FA] text-[#111111] border border-[#E2E8F0] hover:border-[#111111] font-sora text-[14.5px] font-[600] transition-all active:scale-95"
                 >
@@ -232,6 +232,9 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                       (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80';
                     }}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
 
                 </div>
@@ -249,7 +252,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
         <div className="flex items-center w-full max-w-7xl mx-auto px-4 relative">
 
           {/* Left Arrow - Desktop Only */}
-          <button
+          <button type="button"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
             className="hidden md:flex shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed mr-2"
@@ -267,7 +270,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
               {categoryTabs.map((cat, ci) => {
                 const isActive = selectedCategory === cat;
                 return (
-                  <motion.button
+                  <motion.button type="button"
                     key={cat}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -290,7 +293,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           </div>
 
           {/* Right Arrow - Desktop Only */}
-          <button
+          <button type="button"
             onClick={scrollRight}
             disabled={!canScrollRight}
             className="hidden md:flex shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm items-center justify-center hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed ml-2"
@@ -335,6 +338,8 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                     (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80';
                   }}
                   className="w-full h-full object-fill object-center transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute top-4 left-4">
                   <span className="font-mono text-[11px] font-[700] uppercase tracking-wider text-white px-3 py-1 rounded-full bg-[#111111]/85 backdrop-blur-md border border-white/20 shadow-xs">
@@ -405,6 +410,8 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';
                         }}
                         className="w-full h-full object-fill object-center transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute top-3 left-3">
                         <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-white px-2.5 py-0.5 rounded-full bg-[#111111]/85 backdrop-blur-md border border-white/20 shadow-xs">
@@ -438,7 +445,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
               <p className="font-sora text-[16px] font-bold text-[#111111] mb-2">
                 No articles found under "{selectedCategory}"
               </p>
-              <button
+              <button type="button"
                 onClick={() => setSelectedCategory('All')}
                 className="mt-2 px-5 py-2 rounded-full bg-[#F15A29] text-white font-sora text-[13px] font-semibold"
               >
@@ -465,7 +472,9 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
 
           {!isSubscribed ? (
             <motion.form {...fadeUp(0.12)} onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col sm:flex-row items-center gap-3">
+              <label htmlFor="blog-email" className="sr-only">Email address</label>
               <input
+                id="blog-email"
                 type="email"
                 required
                 placeholder="Enter your email"

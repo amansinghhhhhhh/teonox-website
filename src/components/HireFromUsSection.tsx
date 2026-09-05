@@ -116,7 +116,7 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
               {/* CTAs */}
               <div className="flex flex-wrap items-center gap-4 mb-6">
                 {/* Primary CTA */}
-                <button
+                <button type="button"
                   onClick={onEnquireHire}
                   className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#F15A29] hover:bg-[#D9491B] text-white font-sora text-[15px] font-[700] shadow-[0_12px_28px_rgba(241,90,41,0.28)] hover:shadow-[0_18px_38px_rgba(241,90,41,0.4)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer overflow-hidden"
                 >
@@ -127,7 +127,7 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
                 </button>
 
                 {/* Secondary CTA */}
-                <button
+                <button type="button"
                   onClick={onEnquireHire}
                   className="inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-white hover:bg-[#FAF6F2] text-[#111111] font-sora text-[15px] font-[600] border border-[#E0D5C8] hover:border-[#F15A29] shadow-xs transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                 >

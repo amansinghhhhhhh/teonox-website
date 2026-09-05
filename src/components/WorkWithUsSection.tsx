@@ -1,4 +1,4 @@
-﻿import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { CheckCircle2, Users, Star, Lightbulb, Globe } from 'lucide-react';
 
 interface WorkWithUsSectionProps {
@@ -66,7 +66,7 @@ export function WorkWithUsSection({ onEnquire }: WorkWithUsSectionProps) {
             <p className="font-sora text-[16px] font-[400] text-[#B8ADA2] leading-relaxed">
               We collaborate with industry professionals who believe education should create impact, not just certificates.
             </p>
-            <button
+            <button type="button"
               onClick={() => onEnquire?.('Partner as Trainer / Mentor')}
               className="group self-start inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D9491B] text-white font-sora text-[15px] font-[700] shadow-[0_10px_28px_rgba(241,90,41,0.3)] hover:shadow-[0_16px_36px_rgba(241,90,41,0.45)] transition-all duration-300 hover:-translate-y-0.5"
             >

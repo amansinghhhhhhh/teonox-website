@@ -104,7 +104,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-          <button
+          <button type="button"
             onClick={onExploreClick}
             className="btn-sassriver-primary py-3.5 px-5 sm:px-8 text-sm sm:text-[16px] group cursor-pointer"
           >
@@ -113,7 +113,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
             <ArrowRight className="w-4 h-4 ml-1 shrink-0 group-hover:translate-x-1.5 transition-transform duration-300" />
           </button>
 
-          <button
+          <button type="button"
             onClick={onBrochureClick}
             className="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group"
           >
@@ -123,7 +123,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
             <span className="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Download Brochure</span>
           </button>
 
-          <button
+          <button type="button"
             onClick={onEnquireClick}
             className="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group"
           >

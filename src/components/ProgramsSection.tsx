@@ -1,4 +1,4 @@
-ï»¿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Program } from '../types';
 import {
   Calendar,
@@ -66,7 +66,7 @@ export function ProgramsSection({
     { id: 'social', name: 'Social Media', icon: Share2 },
   ];
 
-  // Strictly live V2 programs from WordPress â€” no static fallback cards. When the
+  // Strictly live V2 programs from WordPress — no static fallback cards. When the
   // CMS has no published V2 content yet, this renders the "coming soon" state.
   const displayedPrograms: ProgramCardData[] = (liveCards ?? [])
     .map((c) => ({
@@ -123,7 +123,7 @@ export function ProgramsSection({
             const isActive = activeTab === cat.id;
 
             return (
-              <button
+              <button type="button"
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
                 className={`flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full font-sora text-[13.5px] font-[700] transition-all duration-300 shrink-0 cursor-pointer ${
@@ -158,7 +158,7 @@ export function ProgramsSection({
               className="card-premium bg-white rounded-[24px] border border-[#ECECEC] shadow-2xs hover:border-[#F15A29] flex flex-col justify-between overflow-hidden cursor-pointer group relative h-full"
             >
               <div>
-                {/* Header Image â€” strictly WP hero image; local placeholder when missing/failed */}
+                {/* Header Image — strictly WP hero image; local placeholder when missing/failed */}
                 <div className="aspect-[16/10] w-full overflow-hidden relative bg-[#FAF8F5] rounded-t-[24px]">
                   <div className="img-zoom w-full h-full">
                     <ProgramImage
@@ -211,7 +211,7 @@ export function ProgramsSection({
 
               {/* Action Buttons */}
               <div className="p-5 sm:p-6 pt-0 flex items-center gap-2.5">
-                <button
+                <button type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     onEnquireProgram(prog.title);
@@ -222,7 +222,7 @@ export function ProgramsSection({
                   <span>Brochure</span>
                 </button>
 
-                <button
+                <button type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleProgramSelect(prog);
@@ -248,7 +248,7 @@ export function ProgramsSection({
             <p className="mt-2.5 font-inter text-[14.5px] text-[#6B625A] max-w-md mx-auto leading-relaxed">
               We&apos;re preparing new course content. Register your interest and our counsellor will notify you the moment it goes live.
             </p>
-            <button
+            <button type="button"
               onClick={() => onEnquireProgram('Program coming soon enquiry')}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#F15A29] hover:bg-[#D94A1F] text-white font-sora font-[700] text-[13px] px-6 py-3 transition-all duration-300 shadow-2xs cursor-pointer"
             >

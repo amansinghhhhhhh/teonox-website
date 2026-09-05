@@ -113,7 +113,7 @@ export function HomepageFAQ() {
                 key={idx}
                 className="rounded-[20px] border border-[#ECECEC] bg-white overflow-hidden transition-all duration-300"
               >
-                <button
+                <button type="button"
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
                   className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FFF0EB]/40 transition-colors"
                 >

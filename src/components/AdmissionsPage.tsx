@@ -77,7 +77,7 @@ function MagneticButton({ children, className, onClick }: { children: React.Reac
   };
 
   return (
-    <motion.button
+    <motion.button type="button"
       ref={ref}
       onClick={onClick}
       onMouseMove={handleMouseMove}
@@ -166,14 +166,14 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                <button
+                <button type="button"
                   onClick={() => onEnquireClick('Admissions Counselling')}
                   className="group px-7 py-3.5 rounded-full bg-[#FF6A2B] hover:bg-[#D8420F] text-white font-sora text-sm sm:text-base font-semibold shadow-lg shadow-[#FF6A2B]/25 hover:shadow-xl hover:shadow-[#FF6A2B]/35 transition-all flex items-center gap-2 active:scale-95 hover:-translate-y-0.5"
                 >
                   <span>Talk to TEONOX</span>
                   <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </button>
-                <button
+                <button type="button"
                   onClick={onExplorePrograms}
                   className="px-7 py-3.5 rounded-full bg-white border border-[#F0DFCE] text-[#201A17] hover:border-[#FF6A2B] hover:bg-[#FFF6EE] font-sora text-sm sm:text-base font-semibold transition-all flex items-center gap-2 shadow-xs hover:-translate-y-0.5"
                 >
@@ -216,7 +216,8 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
                   src={admissionsHeroImg}
                   alt="Students receiving admissions counselling at TEONOX"
                   className="w-full h-full object-cover object-[15%_center]"
-                  loading="lazy"
+                  loading="eager"
+                  fetchPriority="high"
                   decoding="async"
                 />
               </div>
@@ -420,14 +421,14 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
             </div>
 
             <motion.div {...fadeUp(0.2)} className="mt-6 lg:mt-0 lg:col-span-4 flex flex-col gap-3 justify-center relative z-10">
-              <button
+              <button type="button"
                 onClick={() => onEnquireClick('Fee Structure Enquiry')}
                 className="group w-full py-4 px-6 rounded-2xl bg-[#FF6A2B] hover:bg-[#D8420F] text-white font-sora font-semibold text-base shadow-lg shadow-[#FF6A2B]/25 hover:shadow-xl transition-all text-center flex items-center justify-center gap-2 active:scale-95 hover:-translate-y-0.5"
               >
                 <span>Request Fee Details</span>
                 <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
-              <button
+              <button type="button"
                 onClick={() => onEnquireClick('Scholarship Enquiry')}
                 className="w-full py-3.5 px-6 rounded-2xl bg-white border border-[#F0DFCE] hover:border-[#FF6A2B] hover:bg-[#FFF6EE] text-[#201A17] font-sora font-semibold text-sm transition-all text-center shadow-xs hover:-translate-y-0.5"
               >

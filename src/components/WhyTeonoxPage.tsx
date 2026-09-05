@@ -149,14 +149,14 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 transition={{ duration: 0.6, delay: 0.25 }}
                 className="flex flex-wrap items-center gap-4 pt-2"
               >
-                <button
+                <button type="button"
                   onClick={() => onEnquireClick('Why TEONOX Admissions')}
                   className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm font-extrabold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
                 >
                   <span>Enquire For Program</span>
                   <ArrowRight className="w-4.5 h-4.5" />
                 </button>
-                <button
+                <button type="button"
                   onClick={onExplorePrograms}
                   className="px-7 py-3.5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm font-bold border border-[#EBE4DC] hover:border-[#111111] transition-all cursor-pointer shadow-xs"
                 >
@@ -177,7 +177,8 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                   src={heroImg}
                   alt="Young marketer mastering digital strategy & AI execution at TEONOX"
                   className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
+                  loading="eager"
+                  fetchPriority="high"
                   decoding="async"
                 />
               </div>
@@ -336,7 +337,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
           <div className="flex justify-center">
             <div className="inline-flex p-1.5 rounded-2xl bg-[#FAF8F5] border border-[#EBE4DC] shadow-xs gap-1.5">
               {(['learn', 'apply', 'lead'] as const).map((tab, idx) => (
-                <button
+                <button type="button"
                   key={tab}
                   onClick={() => setActivePhilosophy(tab)}
                   className={`px-6 py-3.5 rounded-xl font-sora text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2.5 ${
@@ -482,7 +483,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 { id: 'career', label: 'Career & Mindset' },
                 { id: 'network', label: 'Network & Mentors' }
               ].map(tab => (
-                <button
+                <button type="button"
                   key={tab.id}
                   onClick={() => setActivePillarFilter(tab.id as any)}
                   className={`shrink-0 whitespace-nowrap px-4 py-2.5 rounded-xl font-sora text-xs sm:text-sm font-bold transition-all cursor-pointer ${
@@ -1215,14 +1216,14 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
           </div>
 
           <div className="mt-8 pt-2 flex flex-wrap items-center justify-center gap-4">
-            <button
+            <button type="button"
               onClick={() => onEnquireClick('Why TEONOX Final CTA')}
               className="px-10 py-5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm sm:text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
             >
               <span>Enquire For Admissions</span>
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button
+            <button type="button"
               onClick={onExplorePrograms}
               className="px-9 py-5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm sm:text-base font-bold border border-white/20 transition-all cursor-pointer shadow-md"
             >

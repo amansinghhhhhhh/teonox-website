@@ -63,7 +63,7 @@ export function LifeAtTeonoxSection() {
                 Campus life, team collaborations and events — in pictures.
               </p>
             </div>
-            <button
+            <button type="button"
               onClick={() => openGallery(0)}
               className="inline-flex items-center justify-center gap-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[13.5px] font-[700] uppercase tracking-wider px-6 py-3 rounded-full shadow-[0_10px_25px_-8px_rgba(241,90,41,0.5)] transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
             >
@@ -113,14 +113,14 @@ export function LifeAtTeonoxSection() {
             </span>
 
             {/* Arrows: polished backdrop-blur overlay controls */}
-            <button
+            <button type="button"
               onClick={() => slideGo(-1)}
               aria-label="Previous photo"
               className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white hover:bg-[#F15A29] hover:border-[#F15A29] flex items-center justify-center shadow-lg transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button
+            <button type="button"
               onClick={() => slideGo(1)}
               aria-label="Next photo"
               className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white hover:bg-[#F15A29] hover:border-[#F15A29] flex items-center justify-center shadow-lg transition-colors cursor-pointer"
@@ -132,7 +132,7 @@ export function LifeAtTeonoxSection() {
           {/* Dots — separate inline-flow block directly under the slider card */}
           <div className="flex items-center justify-center gap-2 mt-5">
             {CULTURE_GALLERY.map((img, i) => (
-              <button
+              <button type="button"
                 key={img.alt}
                 onClick={() => setSlide(i)}
                 aria-label={`Go to photo ${i + 1}`}
@@ -153,7 +153,7 @@ export function LifeAtTeonoxSection() {
           onTouchEnd={onLightboxTouchEnd}
         >
           {/* Close */}
-          <button
+          <button type="button"
             onClick={() => setGalleryOpen(false)}
             aria-label="Close gallery"
             className="fixed top-5 right-5 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-[#F15A29] text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -168,14 +168,14 @@ export function LifeAtTeonoxSection() {
           </span>
 
           {/* Prev / Next */}
-          <button
+          <button type="button"
             onClick={() => galleryGo(-1)}
             aria-label="Previous image"
             className="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-[#F15A29] border border-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <button
+          <button type="button"
             onClick={() => galleryGo(1)}
             aria-label="Next image"
             className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-[#F15A29] border border-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -208,7 +208,7 @@ export function LifeAtTeonoxSection() {
             {/* Dots */}
             <div className="flex items-center justify-center gap-2 mt-5">
               {CULTURE_GALLERY.map((img, i) => (
-                <button
+                <button type="button"
                   key={img.alt}
                   onClick={() => setGalleryIndex(i)}
                   aria-label={`Go to image ${i + 1}`}

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Calendar,
   Clock,
@@ -51,7 +51,7 @@ interface ProgramCategory {
 
 /**
  * Fallback tabs shown only when the WP `program-category` taxonomy fetch fails.
- * When the CMS is reachable, tabs are built live from the taxonomy terms — the
+ * When the CMS is reachable, tabs are built live from the taxonomy terms � the
  * names/icons come straight from WordPress, not from hardcoded strings.
  */
 const FALLBACK_CATEGORIES: ProgramCategory[] = [
@@ -93,7 +93,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPage
   };
 
   // Build the sidebar tabs live from the WP `program-category` taxonomy (fully
-  // dynamic — names come from WordPress, not hardcoded). "All Programs" always
+  // dynamic � names come from WordPress, not hardcoded). "All Programs" always
   // comes first, then categories with programs before the empties.
   useEffect(() => {
     let cancelled = false;
@@ -243,9 +243,9 @@ mode: progOrTitle.mode || 'On Campus, Pune',
             </div>
           </div>
 
-          {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          {/* ────────────────────────────────────────
               TWO-COLUMN LAYOUT: CATEGORY SIDEBAR + PROGRAMS GRID
-              â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+              ──────────────────────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* LEFT SIDEBAR: Program Category Selector */}
@@ -256,14 +256,14 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                   Select Category
                 </span>
                 <div className="flex items-center gap-2">
-                  <button
+                  <button type="button"
                     onClick={() => scrollCategoryBar('left')}
                     className="flex w-7 h-7 rounded-full bg-white border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
                     aria-label="Scroll categories left"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <button
+                  <button type="button"
                     onClick={() => scrollCategoryBar('right')}
                     className="flex w-7 h-7 rounded-full bg-white border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
                     aria-label="Scroll categories right"
@@ -284,7 +284,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     const isActive = activeCategory === cat.id;
 
                     return (
-                      <button
+                      <button type="button"
                         key={cat.id}
                         onClick={() => setActiveCategory(cat.id)}
                         className={`flex items-center justify-between px-4 py-3.5 rounded-[16px] font-sora text-[14px] font-[700] transition-all duration-300 text-left shrink-0 snap-start cursor-pointer min-w-[220px] lg:min-w-0 whitespace-nowrap ${
@@ -349,7 +349,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     className="bg-white rounded-[24px] border border-[#ECECEC] shadow-2xs hover:shadow-xl hover:border-[#F15A29] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between overflow-hidden cursor-pointer group relative"
                   >
                     <div>
-                      {/* Top Image Frame — strictly WP hero image; local placeholder when missing/failed */}
+                      {/* Top Image Frame � strictly WP hero image; local placeholder when missing/failed */}
                       <div className="aspect-[16/10] w-full overflow-hidden relative bg-[#FAF8F5] rounded-t-[24px]">
                         <ProgramImage
                           src={prog.image}
@@ -405,7 +405,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
 
                     {/* Bottom Action Buttons (Brochure / Enquire + View Details) */}
                     <div className="p-4 sm:p-6 pt-0 flex flex-row items-center justify-between gap-2">
-                      <button
+                      <button type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           if (prog.brochureUrl) {
@@ -420,7 +420,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                         <span>Brochure</span>
                       </button>
 
-                      <button
+                      <button type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleProgramClick(prog);
@@ -445,7 +445,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                   <p className="mt-2.5 font-inter text-[14.5px] text-[#6B625A] max-w-md mx-auto leading-relaxed">
                     We&apos;re preparing new course content in this category. Register your interest and our counsellor will notify you the moment it goes live.
                   </p>
-                  <button
+                  <button type="button"
                     onClick={() => onEnquireProgram('Program coming soon enquiry')}
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#F15A29] hover:bg-[#D94A1F] text-white font-sora font-[700] text-[13px] px-6 py-3 transition-all duration-300 shadow-2xs cursor-pointer"
                   >
@@ -461,9 +461,9 @@ mode: progOrTitle.mode || 'On Campus, Pune',
 
 
 
-        {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        {/* ────────────────────────────────────────
             SECTION 04: Talk To Our Team CTA (TEONOX UI Theme Redesign)
-            â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+            ──────────────────────────────────────── */}
         </div>
 
       <section className="mt-8 sm:mt-16 relative w-full bg-[#111111] text-white overflow-hidden py-8 sm:py-10 lg:py-14">
@@ -493,7 +493,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
 
               {/* Action Buttons styled with Sassriver Theme Animations */}
               <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
-                <button
+                <button type="button"
                   onClick={() => onEnquireProgram('Academic Counsellor Callback')}
                   className="btn-sassriver-primary py-3.5 px-5 sm:px-7 text-[13.5px] sm:text-[14.5px] uppercase tracking-wider group cursor-pointer"
                 >
@@ -536,6 +536,8 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                   src={imgCounsellor}
                   alt="Academic Counsellor Support"
                   className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
               </div>

@@ -173,7 +173,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
           {/* 3 CTA Buttons Row */}
           <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center justify-center gap-4 relative z-10">
             {/* Primary Button */}
-            <button
+            <button type="button"
               onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
               className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
@@ -181,7 +181,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
             </button>
 
             {/* Secondary Button */}
-            <button
+            <button type="button"
               onClick={scrollToMap}
               className="px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#201A17] text-white font-sora font-[600] text-[15px] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
@@ -189,7 +189,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
             </button>
 
             {/* Outline Button */}
-            <button
+            <button type="button"
               onClick={scrollToForm}
               className="px-7 py-3.5 rounded-full bg-white hover:bg-[#FFF0EB] text-[#111111] font-sora font-[600] text-[15px] border border-[#EFEFEF] hover:border-[#F8E3D8] transition-all duration-300 shadow-xs hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
@@ -219,7 +219,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   Office No. 13, 4th Floor, Revolution Mall, Near City Pride Multiplex, Kothrud, Pune – 411038.
                 </p>
               </div>
-              <button
+              <button type="button"
                 onClick={handleOpenGoogleMaps}
                 className="w-full sm:w-auto self-start px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[600] text-[14px] transition-all duration-300 shadow-xs flex items-center justify-center gap-2 cursor-pointer"
               >
@@ -244,7 +244,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   Chat with our admissions team for instant assistance.
                 </p>
               </div>
-              <button
+              <button type="button"
                 onClick={handleOpenWhatsApp}
                 className="w-full sm:w-auto self-start px-6 py-3 rounded-full bg-[#10B981] hover:bg-[#059669] text-white font-sora font-[600] text-[14px] transition-all duration-300 shadow-xs flex items-center justify-center gap-2 cursor-pointer"
               >
@@ -296,7 +296,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
               </p>
 
               <div className="pt-2">
-                <button
+                <button type="button"
                   onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
                   className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
                 >
@@ -375,7 +375,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
               </div>
 
               <div className="pt-4">
-                <button
+                <button type="button"
                   onClick={() => (onEnquireClick ? onEnquireClick('Book Campus Visit') : scrollToForm())}
                   className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
                 >
@@ -418,7 +418,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                 <p className="font-inter text-[16px] text-[#666666] max-w-md mx-auto leading-relaxed">
                   Thank you for reaching out to TEONOX. Our admissions team will get back to you shortly.
                 </p>
-                <button
+                <button type="button"
                   onClick={() => {
                     setSubmitted(false);
                     setError('');
@@ -440,12 +440,13 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Field 1: Full Name */}
                 <div className="space-y-1.5">
-                  <label className="block font-sora text-[13px] font-[600] text-[#111111]">
+                  <label htmlFor="contact-name" className="block font-sora text-[13px] font-[600] text-[#111111]">
                     Full Name <span className="text-[#F15A29]">*</span>
                   </label>
                   <div className="relative">
                     <User className="w-4 h-4 text-[#A0A0A0] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="e.g. Rahul Sharma"
@@ -460,12 +461,13 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {/* Field 2: Email Address */}
                   <div className="space-y-1.5">
-                    <label className="block font-sora text-[13px] font-[600] text-[#111111]">
+                    <label htmlFor="contact-email" className="block font-sora text-[13px] font-[600] text-[#111111]">
                       Email Address <span className="text-[#F15A29]">*</span>
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-[#A0A0A0] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
+                        id="contact-email"
                         type="email"
                         required
                         placeholder="rahul@example.com"
@@ -478,12 +480,13 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
                   {/* Field 3: Phone Number */}
                   <div className="space-y-1.5">
-                    <label className="block font-sora text-[13px] font-[600] text-[#111111]">
+                    <label htmlFor="contact-phone" className="block font-sora text-[13px] font-[600] text-[#111111]">
                       Phone Number <span className="text-[#F15A29]">*</span>
                     </label>
                     <div className="relative">
                       <Smartphone className="w-4 h-4 text-[#A0A0A0] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
+                        id="contact-phone"
                         type="tel"
                         required
                         placeholder="+91 98765 43210"
@@ -497,12 +500,13 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
                 {/* Field 4: City */}
                 <div className="space-y-1.5">
-                  <label className="block font-sora text-[13px] font-[600] text-[#111111]">
+                  <label htmlFor="contact-city" className="block font-sora text-[13px] font-[600] text-[#111111]">
                     City
                   </label>
                   <div className="relative">
                     <Building className="w-4 h-4 text-[#A0A0A0] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
+                      id="contact-city"
                       type="text"
                       placeholder="e.g. Pune, Mumbai, Bangalore"
                       value={formData.city}
@@ -514,10 +518,11 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
                 {/* Field 5: Program Interested In (Dropdown) */}
                 <div className="space-y-1.5">
-                  <label className="block font-sora text-[13px] font-[600] text-[#111111]">
+                  <label htmlFor="contact-program" className="block font-sora text-[13px] font-[600] text-[#111111]">
                     Program Interested In
                   </label>
                   <select
+                    id="contact-program"
                     value={formData.program}
                     onChange={(e) => setFormData({ ...formData, program: e.target.value })}
                     className="w-full px-4 py-3.5 rounded-2xl border border-[#EFEFEF] font-inter text-[15px] text-[#111111] focus:outline-none focus:border-[#F15A29] focus:ring-4 focus:ring-[#F15A29]/10 transition-all bg-[#FAF8F5]/40 focus:bg-white cursor-pointer"
@@ -532,12 +537,13 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
                 {/* Field 6: Message (Textarea) */}
                 <div className="space-y-1.5">
-                  <label className="block font-sora text-[13px] font-[600] text-[#111111]">
+                  <label htmlFor="contact-message" className="block font-sora text-[13px] font-[600] text-[#111111]">
                     Message
                   </label>
                   <div className="relative">
                     <MessageSquare className="w-4 h-4 text-[#A0A0A0] absolute left-4 top-4 pointer-events-none" />
                     <textarea
+                      id="contact-message"
                       rows={4}
                       placeholder="How can we help you?"
                       value={formData.message}
@@ -706,14 +712,14 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <button
+            <button type="button"
               onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
               className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-lg shadow-[#F15A29]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
               Book Counselling
             </button>
 
-            <button
+            <button type="button"
               onClick={handleOpenWhatsApp}
               className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-sora font-[600] text-[15px] border border-white/20 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
             >

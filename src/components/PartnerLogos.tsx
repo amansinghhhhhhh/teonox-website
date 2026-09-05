@@ -70,6 +70,7 @@ export function PartnerLogos() {
             src={partner.image}
             alt={partner.name}
             loading="lazy"
+            decoding="async"
             className="h-[80%] w-[90%] object-contain mx-auto shrink-0"
           />
         </div>

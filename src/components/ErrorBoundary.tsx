@@ -1,4 +1,4 @@
-﻿import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -51,7 +51,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 {this.state.error.toString()}
               </div>
             )}
-            <button
+            <button type="button"
               onClick={this.handleReset}
               className="w-full py-3.5 px-6 bg-[#F15A29] hover:bg-[#D9491D] text-white font-bold rounded-xl transition-colors shadow-md active:scale-95 cursor-pointer"
             >

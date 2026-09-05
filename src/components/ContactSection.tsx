@@ -53,7 +53,7 @@ export function ContactSection({
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-3.5 pt-2">
-                <button
+                <button type="button"
                   onClick={handleExplore}
                   className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-[14.5px] font-[700] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2 group/btn"
                 >
@@ -61,7 +61,7 @@ export function ContactSection({
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
 
-                <button
+                <button type="button"
                   onClick={handleTalk}
                   className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora text-[14.5px] font-[700] border border-[#111111] hover:border-[#F15A29] transition-all duration-300 shadow-sm hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
                 >

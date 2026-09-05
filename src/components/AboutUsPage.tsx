@@ -163,7 +163,8 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
                     src={heroImg}
                     alt="TEONOX team"
                     className="w-full h-[320px] sm:h-[420px] object-cover object-center group-hover:scale-[1.05] transition-transform duration-700"
-                    loading="lazy"
+                    loading="eager"
+                    fetchPriority="high"
                     decoding="async"
                   />
                 </div>
@@ -518,7 +519,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             </div>
             <div className="lg:col-span-5">
               <div className="relative rounded-[24px] overflow-hidden border border-[#FFE8D6] shadow-lg group">
-                <img src={imgStudentPromise} alt="TEONOX Student" className="rounded-2xl w-full h-auto min-h-[280px] object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={imgStudentPromise} alt="TEONOX Student" loading="lazy" decoding="async" className="rounded-2xl w-full h-auto min-h-[280px] object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
             </div>
           </motion.div>
@@ -542,7 +543,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
           </motion.p>
 
           <motion.div {...fadeUp(0.22)} className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <button
+            <button type="button"
               onClick={() => onEnquireClick('About Us CTA - Join Movement')}
               className="group inline-flex items-center gap-2.5 px-9 py-4.5 rounded-full bg-[#FF6A2B] text-white hover:bg-[#D8420F] font-sora text-[15px] font-[700] transition-all shadow-[0_14px_32px_rgba(255,106,43,0.35)] hover:shadow-[0_20px_44px_rgba(255,106,43,0.5)] hover:-translate-y-0.5 active:scale-95"
             >

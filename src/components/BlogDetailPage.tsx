@@ -81,7 +81,7 @@ export function BlogDetailPage({
       ]} />
       <div className="border-b border-[#F0DFCE]/70 bg-[#FFF6EE]/60 backdrop-blur-md py-3.5">
         <div className="w-[85%] max-w-5xl mx-auto flex items-center justify-between">
-          <button
+          <button type="button"
             onClick={onBack}
             className="group flex items-center gap-2 text-[14px] font-[700] text-[#736657] hover:text-[#FF6A2B] transition-colors py-1 px-3 rounded-full hover:bg-white/80 border border-transparent hover:border-[#F0DFCE]"
           >
@@ -142,7 +142,7 @@ export function BlogDetailPage({
           </div>
 
           <div className="flex items-center gap-2">
-            <button
+            <button type="button"
               onClick={handleCopyLink}
               className="flex items-center gap-1.5 text-[13px] font-sora font-semibold text-[#736657] hover:text-[#201A17] bg-[#FFF6EE] hover:bg-[#FFE4CF] px-3.5 py-2 rounded-full border border-[#F0DFCE] transition-all"
             >
@@ -160,6 +160,8 @@ export function BlogDetailPage({
               alt={post.title}
               referrerPolicy="no-referrer"
               className="w-full max-h-[520px] object-fill transition-transform duration-700 group-hover:scale-102"
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80';
@@ -198,14 +200,14 @@ export function BlogDetailPage({
               TEONOX offers practitioner-led cohort programs in Digital Marketing, AI Automation, Analytics, and Performance Growth.
             </p>
             <div className="pt-3 flex flex-wrap items-center gap-4">
-              <button
+              <button type="button"
                 onClick={() => onEnquireClick(post.title)}
                 className="px-6 py-3.5 rounded-full bg-[#FF6A2B] text-white font-sora font-[700] text-[15px] hover:bg-[#D8420F] transition-all shadow-lg shadow-[#FF6A2B]/30 flex items-center gap-2"
               >
                 <span>Talk to a Counsellor</span>
                 <CornerUpRight className="w-4 h-4" />
               </button>
-              <button
+              <button type="button"
                 onClick={onExplorePrograms}
                 className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-sora font-[600] text-[15px] border border-white/15 transition-all"
               >
@@ -222,7 +224,7 @@ export function BlogDetailPage({
               <h3 className="font-sora text-[22px] sm:text-[26px] font-[800] text-[#201A17]">
                 More Articles You Might Like
               </h3>
-              <button
+              <button type="button"
                 onClick={onBack}
                 className="text-[#FF6A2B] font-sora font-bold text-[14px] hover:underline flex items-center gap-1"
               >
@@ -246,6 +248,8 @@ export function BlogDetailPage({
                           alt={rel.title}
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     )}

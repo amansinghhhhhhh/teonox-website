@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { TeonoxLogo } from './TeonoxLogo';
 
@@ -82,7 +82,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
 
           {/* CTA & Mobile Menu Button */}
           <div className="flex items-center gap-2.5">
-            <button
+            <button type="button"
               onClick={onEnquireClick}
               className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#FF6A2B] text-white hover:bg-[#D8420F] font-sora text-[13.5px] font-[600] transition-all shadow-sm shadow-[#FF6A2B]/20 active:scale-95 cursor-pointer"
             >
@@ -90,7 +90,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
               <ArrowUpRight className="w-4 h-4" />
             </button>
 
-            <button
+            <button type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-xl bg-white border border-[#F0DFCE] text-[#201A17] hover:text-[#FF6A2B] shadow-sm"
               aria-label="Toggle navigation"
@@ -123,7 +123,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
               </a>
             ))}
             <div className="pt-2.5">
-              <button
+              <button type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onEnquireClick();

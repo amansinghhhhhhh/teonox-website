@@ -68,7 +68,7 @@ export function BrochureCTABanner({
 
           {/* CTA button */}
           <div className="lg:col-span-4 flex lg:justify-end">
-            <button
+            <button type="button"
               onClick={onBrochureClick}
               className={`${
                 yellow

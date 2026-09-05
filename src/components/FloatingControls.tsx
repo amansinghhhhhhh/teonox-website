@@ -29,7 +29,7 @@ export function FloatingControls() {
 
       {/* Scroll to Top Button */}
       {showTop && (
-        <button
+        <button type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Scroll to top"
           className="w-12 h-12 rounded-full bg-[#FF6A2B] hover:bg-[#D8420F] text-white flex items-center justify-center shadow-lg shadow-[#FF6A2B]/30 transition-all hover:scale-110"

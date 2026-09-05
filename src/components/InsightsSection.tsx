@@ -1,4 +1,4 @@
-﻿import { ArrowUpRight, BookOpen } from 'lucide-react';
+import { ArrowUpRight, BookOpen } from 'lucide-react';
 import { INSIGHTS_DATA } from '../data';
 import { BlogPost } from '../types';
 import { Reveal } from './Reveal';
@@ -24,7 +24,7 @@ export function InsightsSection({ onSelectPost, onViewAll }: InsightsSectionProp
           </div>
 
           {onViewAll && (
-            <button
+            <button type="button"
               onClick={onViewAll}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-sm sm:text-[14.5px] font-[700] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer shrink-0"
             >

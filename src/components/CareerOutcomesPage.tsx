@@ -415,14 +415,14 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
 
               {/* CTAs */}
               <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                <button
+                <button type="button"
                   onClick={() => onEnquireClick("Career Advisory")}
                   className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm sm:text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
                 >
                   <span>Talk to a Career Advisor</span>
                   <ArrowUpRight className="w-5 h-5" />
                 </button>
-                <button
+                <button type="button"
                   onClick={onExplorePrograms}
                   className="px-7 py-3.5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm sm:text-base font-bold border border-[#EBE4DC] hover:border-[#111111] transition-all cursor-pointer shadow-xs"
                 >
@@ -443,7 +443,8 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   src={heroImg}
                   alt="Successful TEONOX graduate in digital marketing career"
                   className="w-full h-[320px] sm:h-[420px] object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
+                  loading="eager"
+                  fetchPriority="high"
                   decoding="async"
                 />
               </div>
@@ -479,7 +480,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
           <div className="space-y-12">
             {/* Interactive Timeline Tabs — single scrollable row on mobile */}
             <div className="flex items-center gap-2 lg:block">
-              <button
+              <button type="button"
                 onClick={() => scrollStepRow(placementTabsRef, -1)}
                 aria-label="Scroll steps left"
                 className="shrink-0 lg:hidden w-9 h-9 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#AAAAAA] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
@@ -494,7 +495,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                 const isActive = activePlacementStep === idx;
                 const IconComp = step.icon;
                 return (
-                  <button
+                  <button type="button"
                     key={idx}
                     onClick={() => setActivePlacementStep(idx)}
                     className={`shrink-0 min-w-[170px] lg:min-w-0 p-3 sm:p-5 rounded-2xl font-sora text-left transition-all cursor-pointer border flex flex-col justify-between space-y-3 ${
@@ -516,7 +517,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                 );
               })}
               </div>
-              <button
+              <button type="button"
                 onClick={() => scrollStepRow(placementTabsRef, 1)}
                 aria-label="Scroll steps right"
                 className="shrink-0 lg:hidden w-9 h-9 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#AAAAAA] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
@@ -553,7 +554,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   </p>
 
                   <div className="pt-2 flex items-center gap-3">
-                    <button
+                    <button type="button"
                       onClick={() => setActivePlacementStep((prev) => (prev + 1) % placementSteps.length)}
                       className="px-6 py-3 rounded-full bg-white text-[#111111] font-sora text-sm font-extrabold flex items-center gap-2 hover:bg-[#F15A29] hover:text-white transition-all cursor-pointer"
                     >
@@ -666,7 +667,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
           {/* Interactive Horizontal Node Navigation */}
           <div className="space-y-10">
             <div className="flex items-center gap-2 md:block">
-              <button
+              <button type="button"
                 onClick={() => scrollStepRow(roadmapPillsRef, -1)}
                 aria-label="Scroll stages left"
                 className="shrink-0 md:hidden w-9 h-9 rounded-full bg-[#1C1C1C] border border-[#2A2A2A] text-[#888888] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
@@ -680,7 +681,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               {roadmapStages.map((stage, idx) => {
                 const isActive = activeRoadmapIndex === idx;
                 return (
-                  <button
+                  <button type="button"
                     key={idx}
                     onClick={() => setActiveRoadmapIndex(idx)}
                     className={`shrink-0 whitespace-nowrap px-4 py-2.5 rounded-full font-sora text-[13px] font-extrabold transition-all cursor-pointer flex items-center gap-2 ${
@@ -699,7 +700,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                 );
               })}
               </div>
-              <button
+              <button type="button"
                 onClick={() => scrollStepRow(roadmapPillsRef, 1)}
                 aria-label="Scroll stages right"
                 className="shrink-0 md:hidden w-9 h-9 rounded-full bg-[#1C1C1C] border border-[#2A2A2A] text-[#888888] hover:text-white hover:border-[#F15A29] flex items-center justify-center transition-colors cursor-pointer"
@@ -873,6 +874,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   alt={brand.name}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                   }}
@@ -1045,14 +1047,14 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
           </motion.p>
 
           <motion.div {...fadeUp(0.15)} className="pt-4 flex flex-wrap items-center justify-center gap-5">
-            <button
+            <button type="button"
               onClick={onExplorePrograms}
               className="px-9 py-5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
             >
               <span>Explore Programs</span>
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button
+            <button type="button"
               onClick={() => onEnquireClick('Career Advisory')}
               className="px-9 py-5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#111111] font-sora text-base font-bold border border-white/20 transition-all cursor-pointer backdrop-blur-md"
             >
@@ -1078,7 +1080,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   <h4 className="font-sora font-extrabold text-base">{activeVideo.name}</h4>
                   <p className="font-mono text-xs text-[#F15A29]">{activeVideo.role}</p>
                 </div>
-                <button
+                <button type="button"
                   onClick={() => setActiveVideo(null)}
                   className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                 >
