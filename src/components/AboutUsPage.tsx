@@ -308,7 +308,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             className="p-8 sm:p-10 rounded-3xl bg-[#201A17] text-white text-center relative overflow-hidden"
           >
             <Quote className="w-10 h-10 text-[#FF6A2B]/40 mx-auto mb-4 fill-[#FF6A2B]/10" />
-            <p className="font-sora text-[17px] sm:text-[21px] font-semibold text-amber-100 max-w-4xl mx-auto leading-relaxed relative z-10">
+            <p className="font-sora text-[17px] sm:text-[21px] font-semibold text-amber-100 mx-auto leading-relaxed relative z-10">
               "At TEONOX, learning extends beyond software and certifications. Our business digital marketing classes in Pune develop professionals who understand customers, marketing, communication, technology, analytics, AI, and business growth as an interconnected system. As a digital marketing training institute in Pune and an Institute of Digital Marketing in Pune, we focus on practical, industry-relevant learning that helps professionals apply these skills to real-world business challenges."
             </p>
           </motion.div>
