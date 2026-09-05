@@ -519,7 +519,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             </div>
             <div className="lg:col-span-5">
               <div className="relative rounded-[24px] overflow-hidden border border-[#FFE8D6] shadow-lg group">
-                <img src={imgStudentPromise} alt="TEONOX Student" loading="lazy" decoding="async" className="rounded-2xl w-full h-auto min-h-[280px] object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={imgStudentPromise} alt="TEONOX student building skills for the digital and AI economy" loading="lazy" decoding="async" className="rounded-2xl w-full h-auto min-h-[280px] object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
             </div>
           </motion.div>
