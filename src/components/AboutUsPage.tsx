@@ -1,10 +1,9 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { 
   ArrowUpRight, Target, Compass,
   Lightbulb, CheckCircle2, Zap, GraduationCap, TrendingUp, Users, Briefcase,
   Rocket, Building2, ShieldCheck, Award, Layers, Brain, MessageSquareText,
-  BarChart3, Search, Share2, Bot, UserCheck, Quote, Globe, Cpu
+  Bot, UserCheck, Quote, Globe, Cpu
 } from 'lucide-react';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
@@ -17,6 +16,7 @@ import imgGallery1 from '../assets/images/about_gallery_collaboration_1785405341
 import imgGallery2 from '../assets/images/about_gallery_workshop_1785405360873.webp';
 import imgGallery3 from '../assets/images/about_gallery_working_1785405378588.webp';
 import { MomentsSection } from './sections/MomentsSection';
+import { EASE_OUT } from '../utils/easing';
 
 interface AboutUsPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -27,28 +27,28 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.65, delay, ease: EASE_OUT },
 });
 
 const fadeLeft = (delay = 0) => ({
   initial: { opacity: 0, x: -36 },
   whileInView: { opacity: 1, x: 0 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.7, delay, ease: EASE_OUT },
 });
 
 const fadeRight = (delay = 0) => ({
   initial: { opacity: 0, x: 36 },
   whileInView: { opacity: 1, x: 0 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.7, delay, ease: EASE_OUT },
 });
 
 const scaleIn = (delay = 0) => ({
   initial: { opacity: 0, scale: 0.9 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {

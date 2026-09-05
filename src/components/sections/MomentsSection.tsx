@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
+import { EASE_OUT } from '../../utils/easing';
 import momentThumb1 from '../../assets/images/about/moments/moment-1.webp';
 import momentThumb2 from '../../assets/images/about/moments/moment-2.webp';
 import momentThumb3 from '../../assets/images/about/moments/moment-3.webp';
@@ -12,14 +13,14 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.65, delay, ease: EASE_OUT },
 });
 
 const scaleIn = (delay = 0) => ({
   initial: { opacity: 0, scale: 0.9 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 const TEONOX_VIDEOS: MomentVideo[] = [

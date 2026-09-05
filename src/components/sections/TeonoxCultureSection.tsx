@@ -186,6 +186,7 @@ export function TeonoxCultureSection({ onVisitCampus }: TeonoxCultureSectionProp
                     {/* Expandable initiatives drawer */}
                     <button type="button"
                       onClick={() => togglePillar(i)}
+                      aria-expanded={expanded}
                       className="mt-4 w-full inline-flex items-center justify-between gap-2 font-sora text-[12.5px] font-[700] uppercase tracking-wider text-[#111111] hover:text-[#F15A29] transition-colors cursor-pointer"
                     >
                       <span>Initiatives</span>

@@ -115,6 +115,7 @@ export function HomepageFAQ() {
               >
                 <button type="button"
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  aria-expanded={isOpen}
                   className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FFF0EB]/40 transition-colors"
                 >
                   <span className="font-sora text-[15.5px] font-[700] text-[#111111]">

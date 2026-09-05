@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { EASE_OUT } from '../utils/easing';
 
 interface AdmissionsPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -18,14 +19,14 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 const scaleIn = (delay = 0) => ({
   initial: { opacity: 0, scale: 0.88 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.55, delay, ease: EASE_OUT },
 });
 
 /* Count-up number that animates when scrolled into view - used for the stats strip */

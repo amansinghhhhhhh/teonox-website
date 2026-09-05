@@ -25,7 +25,7 @@
   --text2: #8a96b0;
   --text3: #5a6478;
   --text4: #3a4458;
-  --font-head: 'DM Sans', sans-serif;
+  --font-head: 'Sora', sans-serif;
   --font-body: 'Inter', sans-serif;
   --r: 12px;
   --r2: 20px;
@@ -3121,8 +3121,8 @@ button {
   --text: #f0f4ff;
   --text2: #8a96b0;
   --text3: #5a6478;
-  --font-head: 'DM Sans', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-head: 'Sora', sans-serif;
+  --font-body: 'Sora', sans-serif;
   --r: 16px;
   --r2: 24px;
   --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);

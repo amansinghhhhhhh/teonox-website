@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Download, CheckCircle2, FileText, Loader2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
@@ -38,12 +38,34 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
     setError('');
     setIsSubmitted(false);
   }, [isOpen, defaultCourse]);
+
+  // Focus trap + Escape key + focus on open
+  useEffect(() => {
+    if (!isOpen) return;
+    const el = modalRef.current;
+    if (el) el.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { onClose(); return; }
+      if (e.key === 'Tab' && el) {
+        const focusable = el.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -89,12 +111,17 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
   };
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="brochure-modal-title"
+    >
       {/* Click outside backdrop */}
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Main Modal Card */}
-      <div className="relative w-full max-w-[920px] bg-white rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row border border-slate-100 max-h-[92vh] overflow-y-auto md:overflow-y-visible">
+      <div ref={modalRef} tabIndex={-1} className="relative w-full max-w-[920px] bg-white rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row border border-slate-100 max-h-[92vh] overflow-y-auto md:overflow-y-visible outline-none">
         {/* Close Button */}
         <button type="button"
           onClick={onClose}
@@ -126,7 +153,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 <div className="w-12 h-12 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center mb-4">
                   <FileText className="w-6 h-6" />
                 </div>
-                <h3 className="font-sora text-[24px] sm:text-[28px] font-[800] text-[#111111] tracking-tight leading-tight">
+                <h3 id="brochure-modal-title" className="font-sora text-[24px] sm:text-[28px] font-[800] text-[#111111] tracking-tight leading-tight">
                   Download the Brochure
                 </h3>
                 <p className="font-inter text-[14px] sm:text-[15px] font-[500] text-[#666666] mt-1.5">

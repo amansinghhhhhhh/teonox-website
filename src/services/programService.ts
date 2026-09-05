@@ -4,6 +4,7 @@ import dmAiImg from '../assets/images/uploaded_digital_marketing_ai.webp';
 import perfImg from '../assets/images/uploaded_performance.webp';
 import seoImg from '../assets/images/uploaded_seo.webp';
 import socialImg from '../assets/images/uploaded_social_media.webp';
+import { CMS_URL, decodeHtmlEntities, stripHtml, safeJson } from '../utils/html';
 
 /**
  * Normalised data for a single program card on the /programs listing page.
@@ -102,7 +103,7 @@ function termTaxonomySlug(t: any): string {
  */
 
 /** Direct WordPress REST API base (ACF fields live under `post.acf`). */
-const CMS_URL = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
+// CMS_URL imported from ../utils/html
 
 // ---- Certification card styles ----
 // WordPress editors only pick a Certification Type (cert_type) from a dropdown.
@@ -122,26 +123,8 @@ const CERT_STYLES: Record<string, { gradient: string; border: string }> = {
   default: { gradient: 'from-gray-50 to-slate-50', border: '#E2E8F0' },
 };
 
-// ---- HTML entity decoding helpers (kept local, consistent with blogService) ----
-function decodeHtmlEntities(str: string = ''): string {
-  return str
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&#8211;/g, '-')
-    .replace(/&#8212;/g, '—')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&nbsp;/g, ' ');
-}
-
-function stripHtml(html: string = ''): string {
-  return decodeHtmlEntities(html.replace(/<[^>]*>/g, '')).trim();
-}
+// ---- HTML entity decoding helpers ----
+// decodeHtmlEntities and stripHtml imported from ../utils/html
 
 // ---- Small type helpers for defensive ACF payload access ----
 function str(v: any): string {
@@ -258,22 +241,7 @@ function getProgramImage(post: any): string {
   return DEFAULT_CARD_IMAGE;
 }
 
-/**
- * Parse a fetch Response as JSON, but ONLY when it is actually JSON. When the
- * CMS answers with HTML (e.g. a redirect or a stale LiteSpeed error page),
- * `res.json()` would throw. Returns null for HTML / 404 / network failure so
- * callers can cleanly fall through to the static fallback.
- */
-async function safeJson(res: Response): Promise<any> {
-  if (!res) return null;
-  const type = (res.headers.get('content-type') || '').toLowerCase();
-  if (type && !type.includes('application/json')) return null;
-  try {
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
+// safeJson imported from ../utils/html
 
 // ACF V2 benefits tab groups (students / business / corporate) share the same
 // sub-field shape, just with a different name prefix.

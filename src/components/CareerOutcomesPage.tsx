@@ -75,6 +75,7 @@ import {
 import heroImg from '../assets/images/career-outcomes/career_outcomes_hero.webp';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { EASE_OUT } from '../utils/easing';
 
 interface CareerOutcomesPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -85,14 +86,14 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 const scaleIn = (delay = 0) => ({
   initial: { opacity: 0, scale: 0.9 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.5, delay, ease: EASE_OUT },
 });
 
 /* Animated horizontal capability bar for the Salary & Growth section */

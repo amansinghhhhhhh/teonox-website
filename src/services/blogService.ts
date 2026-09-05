@@ -1,4 +1,5 @@
 import { BlogPost } from '../types';
+import { CMS_URL, decodeHtmlEntities, stripHtml, safeJson } from '../utils/html';
 
 /**
  * Blog CMS traffic hits the WordPress REST API directly
@@ -10,19 +11,9 @@ import { BlogPost } from '../types';
  */
 
 /** Direct WordPress REST API base. */
-const CMS_URL = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
+// CMS_URL imported from ../utils/html
 
-/** JSON-only response reader; returns null for HTML/404 static-host fallbacks. */
-async function safeJson(res: Response): Promise<any> {
-  if (!res) return null;
-  const type = (res.headers.get('content-type') || '').toLowerCase();
-  if (type && !type.includes('application/json')) return null;
-  try {
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
+// safeJson imported from ../utils/html
 
 // Fallback articles in case of offline / network unavailability
 const FALLBACK_BLOGS: BlogPost[] = [
@@ -100,25 +91,7 @@ const FALLBACK_BLOGS: BlogPost[] = [
 const FALLBACK_CATEGORIES = ['Marketing', 'AI', 'Business', 'Career', 'Digital Marketing', 'SEO'];
 
 // Decode HTML Entities helper
-function decodeHtmlEntities(str: string = ''): string {
-  return str
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&#8211;/g, '-')
-    .replace(/&#8212;/g, '—')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&nbsp;/g, ' ');
-}
-
-function stripHtml(html: string = ''): string {
-  return decodeHtmlEntities(html.replace(/<[^>]*>/g, '')).trim();
-}
+// decodeHtmlEntities and stripHtml imported from ../utils/html
 
 function calculateReadTime(contentHtml: string = ''): string {
   const words = stripHtml(contentHtml).split(/\s+/).filter(Boolean).length;
@@ -246,7 +219,9 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
         const post = await safeJson(res);
         if (post) return transformWpPost(post);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Blog post fetch by ID failed:', e);
+    }
   }
 
   // Slug: query by slug parameter.
@@ -258,7 +233,9 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
       const posts = await safeJson(res);
       if (Array.isArray(posts) && posts.length > 0) return transformWpPost(posts[0]);
     }
-  } catch (e) {}
+  } catch (e) {
+    console.warn('Blog post fetch by slug failed:', e);
+  }
 
   // Find in fallback
   const found = FALLBACK_BLOGS.find((b) => b.id === idOrSlug || b.slug === idOrSlug);

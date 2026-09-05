@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import { useState } from 'react';
 import { Sparkles, Wrench } from 'lucide-react';
 import { Reveal } from './Reveal';
 
@@ -63,8 +63,8 @@ const ROW_2: ToolItem[] = [
   { name: 'DaVinci Resolve', image: davinciresolveLogo, isAi: false, category: 'creation', fallbackText: 'DVR', fallbackBg: 'bg-rose-700 text-white' },
 ];
 
-const ToolCard: React.FC<{ tool: ToolItem }> = ({ tool }) => {
-  const [imgError, setImgError] = React.useState(false);
+const ToolCard = ({ tool }: { tool: ToolItem }) => {
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="card-premium group relative shrink-0 w-[160px] sm:w-[180px] bg-[#F4F5F7] hover:bg-white border border-slate-200 hover:border-[#F15A29]/50 rounded-2xl p-4 flex flex-col items-center justify-center min-h-[110px] sm:min-h-[120px] cursor-pointer">

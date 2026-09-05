@@ -7,6 +7,7 @@ import { submitForm } from '../services/formService';
 import heroImage from '../assets/images/regenerated_image_1785412705719.avif';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { EASE_OUT } from '../utils/easing';
 
 interface BlogPageProps {
   onSelectPost: (post: BlogPost) => void;
@@ -18,7 +19,7 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 // Category filter definitions

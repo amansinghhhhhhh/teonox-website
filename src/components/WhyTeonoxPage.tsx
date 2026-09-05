@@ -28,6 +28,7 @@ import stage2Img from '../assets/images/apply.webp';
 import stage3Img from '../assets/images/Lead.webp';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { EASE_OUT } from '../utils/easing';
 
 interface WhyTeonoxPageProps {
   onEnquireClick: (topic?: string) => void;
@@ -38,21 +39,21 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 const fadeLeft = (delay = 0) => ({
   initial: { opacity: 0, x: -34 },
   whileInView: { opacity: 1, x: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.65, delay, ease: EASE_OUT },
 });
 
 const fadeRight = (delay = 0) => ({
   initial: { opacity: 0, x: 34 },
   whileInView: { opacity: 1, x: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.65, delay, ease: EASE_OUT },
 });
 
 /* Thin reading-progress bar fixed to the top of the viewport - unique to this page */

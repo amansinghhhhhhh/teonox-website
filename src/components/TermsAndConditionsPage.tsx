@@ -1,4 +1,3 @@
-import React from 'react';
 import { ScrollText, Phone, Mail, MapPin } from 'lucide-react';
 import { LegalShell, LegalSection, LegalBullets } from './LegalPageShell';
 import { SEO } from './SEO';

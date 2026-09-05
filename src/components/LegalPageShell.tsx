@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Calendar, Globe, ArrowRight, Check, ShieldCheck } from 'lucide-react';
+import { EASE_OUT } from '../utils/easing';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
+  transition: { duration: 0.6, delay, ease: EASE_OUT },
 });
 
 export interface LegalTocItem {
