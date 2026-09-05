@@ -12,7 +12,7 @@ import { WorkWithUsSection } from './components/WorkWithUsSection';
 import { HireFromUsSection } from './components/HireFromUsSection';
 import { InsightsSection } from './components/InsightsSection';
 import { ContactSection } from './components/ContactSection';
-import { HomepageFAQ } from './components/HomepageFAQ';
+import { HomepageFAQ, FAQ_DATA } from './components/HomepageFAQ';
 import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
 import { BrochureModal } from './components/BrochureModal';
@@ -467,6 +467,17 @@ export default function App() {
                     isPartOf: { '@id': `${BASE_URL}/#website` },
                     about: { '@id': `${BASE_URL}/#organization` },
                     inLanguage: 'en-IN',
+                  },
+                  {
+                    '@type': 'FAQPage',
+                    mainEntity: FAQ_DATA.map((faq) => ({
+                      '@type': 'Question',
+                      name: faq.q,
+                      acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: faq.a,
+                      },
+                    })),
                   },
                 ],
               }}

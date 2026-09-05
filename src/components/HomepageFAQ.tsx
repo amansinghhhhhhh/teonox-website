@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Reveal } from './Reveal';
-import { FAQSchema } from './schema/FAQSchema';
 
-interface FAQItem {
+export interface FAQItem {
   q: string;
   a: string;
 }
 
-const FAQ_DATA: FAQItem[] = [
+export const FAQ_DATA: FAQItem[] = [
   {
     q: 'Which AI course in Pune offers placement assistance?',
     a: "Teonox in Pune offers an AI & Automation training program with placement support, covering practical AI tools, automation workflows, and job-readiness training. The course is designed for freshers and working professionals looking to enter AI-driven roles.",
@@ -96,7 +95,6 @@ export function HomepageFAQ() {
 
   return (
     <section className="py-10 sm:py-14 bg-[#FAF8F5] text-[#111111] relative overflow-hidden border-b border-[#EFEBE4]">
-      <FAQSchema faqs={FAQ_DATA.map((f) => ({ question: f.q, answer: f.a }))} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Reveal className="mb-8 sm:mb-10 text-left">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">
