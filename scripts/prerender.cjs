@@ -179,6 +179,34 @@ async function fetchProgramSlugs() {
   }
 }
 
+// Scrape Rank Math SEO title + description from the live WP front-end page.
+// Rank Math stores its metadata in <title> and <meta name="description"> in
+// the rendered HTML, which is the most reliable source since the WP REST API
+// does not expose Rank Math meta fields by default.
+async function scrapeRankMathMeta(slug) {
+  const wpUrl = `https://cms.teonox.com/program/${slug}/`;
+  try {
+    const res = await fetch(wpUrl, { redirect: 'follow' });
+    if (!res.ok) return null;
+    const html = await res.text();
+
+    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    const descMatch = html.match(/<meta\s+name=['"]description['"]\s+content=['"]([^'"]+)['"]/i)
+      || html.match(/<meta\s+content=['"]([^'"]+)['"]\s+name=['"]description['"]/i);
+
+    const seoTitle = titleMatch ? decodeHtmlEntities(titleMatch[1]).trim() : null;
+    const seoDescription = descMatch ? decodeHtmlEntities(descMatch[1]).trim() : null;
+
+    if (seoTitle || seoDescription) {
+      return { seoTitle, seoDescription };
+    }
+    return null;
+  } catch (e) {
+    console.warn(`[Prerender] Failed to scrape Rank Math meta for ${slug}:`, e.message);
+    return null;
+  }
+}
+
 // ─── Main ──────────────────────────────────────────────────────────
 async function main() {
   const distDir = path.resolve(__dirname, '..', 'dist');
@@ -217,20 +245,30 @@ async function main() {
     console.log(`  /blog/${post.slug} -> ${path.relative(process.cwd(), outPath)}`);
   }
 
-  // 3. Dynamic: program detail pages
+  // 3. Dynamic: program detail pages (with Rank Math SEO scraping)
   console.log('[Prerender] Fetching programs from WordPress...');
   const programs = await fetchProgramSlugs();
   console.log(`[Prerender] Found ${programs.length} program(s)`);
 
   for (const prog of programs) {
+    // Scrape Rank Math SEO title + description from WP front-end
+    console.log(`[Prerender] Scraping Rank Math meta for /programs/${prog.slug}...`);
+    const rankMath = await scrapeRankMathMeta(prog.slug);
+
+    const title = (rankMath && rankMath.seoTitle) || `${prog.title} | TEONOX`;
+    const description = (rankMath && rankMath.seoDescription)
+      || prog.heroIntro
+      || `Explore ${prog.title} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`;
+
     const meta = {
-      title: `${prog.title} | TEONOX`,
-      description: prog.heroIntro || `Explore ${prog.title} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`,
+      title,
+      description,
       canonical: `/programs/${prog.slug}`,
     };
     const outPath = writePage(distDir, `/programs/${prog.slug}`, injectMeta(htmlTemplate, meta));
     count++;
-    console.log(`  /programs/${prog.slug} -> ${path.relative(process.cwd(), outPath)}`);
+    const source = (rankMath && rankMath.seoTitle) ? 'Rank Math' : 'fallback';
+    console.log(`  /programs/${prog.slug} [${source}] -> ${path.relative(process.cwd(), outPath)}`);
   }
 
   console.log(`\n[Prerender] Done! Generated ${count} prerendered page(s) in dist/`);

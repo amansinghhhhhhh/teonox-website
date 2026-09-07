@@ -49,6 +49,10 @@ export interface ProgramDetailData {
   mode: string;
   heroIntro: string;
   heroImage: string;
+  /** Rank Math SEO title — scraped from the live WP front-end at build time or client-side fetch. */
+  seoTitle?: string;
+  /** Rank Math SEO description — scraped from the live WP front-end at build time or client-side fetch. */
+  seoDescription?: string;
   designedForImage?: string;
   designedForIntro?: string;
   overview: {

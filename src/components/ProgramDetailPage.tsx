@@ -177,13 +177,13 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden" data-source={liveDetail ? 'cms' : 'static'}>
       <SEO
-        title={displayDetail?.programTitle || program?.title || 'Program'}
-        description={displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
+        title={displayDetail?.seoTitle || displayDetail?.programTitle || program?.title || 'Program'}
+        description={displayDetail?.seoDescription || displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
         canonical={`/programs/${canonicalSlug}`}
       />
       <CourseSchema
         name={displayDetail?.programTitle || program?.title || ''}
-        description={displayDetail?.heroIntro || ''}
+        description={displayDetail?.seoDescription || displayDetail?.heroIntro || ''}
         slug={canonicalSlug}
       />
       <div className="w-[88%] max-w-7xl mx-auto relative z-10">

@@ -294,6 +294,38 @@ export function stripV2Prefixes<T>(value: T): T {
   return value;
 }
 
+// ─── Rank Math SEO scraping ─────────────────────────────────────────
+// The WP REST API does not expose Rank Math meta fields by default.
+// Instead we scrape the live WP front-end page and extract <title> and
+// <meta name="description"> which Rank Math injects into the HTML.
+const _rankMathCache: Record<string, { seoTitle?: string; seoDescription?: string }> = {};
+
+async function scrapeRankMathMeta(slug: string): Promise<{ seoTitle?: string; seoDescription?: string }> {
+  if (_rankMathCache[slug]) return _rankMathCache[slug];
+
+  const wpUrl = `https://cms.teonox.com/program/${slug}/`;
+  try {
+    const res = await fetch(wpUrl, { redirect: 'follow' });
+    if (!res.ok) return {};
+    const html = await res.text();
+
+    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    const descMatch =
+      html.match(/<meta\s+name=['"]description['"]\s+content=['"]([^'"]+)['"]/i) ||
+      html.match(/<meta\s+content=['"]([^'"]+)['"]\s+name=['"]description['"]/i);
+
+    const result: { seoTitle?: string; seoDescription?: string } = {};
+    if (titleMatch) result.seoTitle = decodeHtmlEntities(titleMatch[1]).trim();
+    if (descMatch) result.seoDescription = decodeHtmlEntities(descMatch[1]).trim();
+
+    _rankMathCache[slug] = result;
+    return result;
+  } catch (e) {
+    console.warn('[programService] Failed to scrape Rank Math meta for', slug, e);
+    return {};
+  }
+}
+
 /**
  * Convert a raw WordPress post (with ACF V2 fields) into ProgramDetailData.
  * Returns null when the payload carries no program-specific content.
@@ -618,6 +650,11 @@ export async function fetchLiveProgramDetail(
           if (resolvedUrl) {
             detail = { ...detail, designedForImage: resolvedUrl };
           }
+        }
+        // Scrape Rank Math SEO title + description from the WP front-end page.
+        const rankMath = await scrapeRankMathMeta(match.slug);
+        if (rankMath.seoTitle || rankMath.seoDescription) {
+          detail = { ...detail, ...rankMath };
         }
         return { detail, isLive: true, notFound: false };
       }
