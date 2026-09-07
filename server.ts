@@ -311,26 +311,19 @@ async function resolveRouteMeta(pathname: string): Promise<RouteMeta | null> {
 // Serve index.html with injected route-specific meta tags
 function serveWithMeta(html: string) {
   return async (req: express.Request, res: express.Response) => {
-    // Only inject for HTML page requests (skip assets, API, sitemap, etc.)
-    const accept = req.headers.accept || '';
-    if (!accept.includes('text/html') && !req.path.match(/^\/($|about|programs?|blog|contact|careers|admissions|why-teonox|privacy-policy|terms-and-conditions)/)) {
-      return res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
-    }
-
     const meta = await resolveRouteMeta(req.path);
     if (!meta) {
       return res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
     }
 
     const metaHtml = buildMetaTags(meta);
-    // Inject route-specific meta tags after <meta charset="UTF-8" />.
-    // This gives crawlers the correct <title>, <meta description>, <link rel="canonical">,
-    // and Open Graph tags in the raw HTML before React hydrates client-side.
-    const modified = html
-      .replace(
-        '<meta charset="UTF-8" />',
-        `<meta charset="UTF-8" />\n    ${metaHtml}`
-      );
+    // Replace the fallback <title>...</title> with the full route-specific
+    // meta block (which includes <title>, <meta description>, canonical, OG).
+    // Then also strip the original <meta name="description"> line.
+    // Remove the old <meta name="description"> line BEFORE inserting new meta block,
+    // because replace() without /g flag removes the FIRST match.
+    const withoutOldDesc = html.replace(/\r?\n\s*<meta name="description" content="[^"]*"\s*\/?>/, '');
+    const modified = withoutOldDesc.replace(/<title>[^<]*<\/title>/, metaHtml);
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(modified);
@@ -548,7 +541,15 @@ async function startServer() {
     const indexPath = path.join(distPath, "index.html");
     const indexHtml = fs.readFileSync(indexPath, 'utf-8');
 
-    app.use(express.static(distPath));
+    // Health-check endpoint so we can confirm Node is alive (bypasses Nginx)
+    app.get('/__health', (_req, res) => {
+      res.json({ ok: true, metaMiddleware: true, ts: new Date().toISOString() });
+    });
+
+    // Serve real static assets (JS, CSS, images, PDFs) — but NOT index.html
+    app.use(express.static(distPath, { index: false }));
+
+    // All remaining GET requests → serve index.html with injected meta tags
     app.get('*', serveWithMeta(indexHtml));
   }
 
