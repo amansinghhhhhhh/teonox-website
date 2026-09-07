@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 
@@ -120,7 +121,221 @@ app.get('/sitemap.html', async (_req, res) => {
   res.send(html);
 });
 
-// Helper function to decode HTML entities
+const SITE_NAME = 'TEONOX';
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.webp`;
+
+// ─── Server-Side Meta Injection ────────────────────────────────────
+// Every route returns a unique <title>, <meta description>, <link rel="canonical">,
+// and Open Graph tags in the initial HTML so crawlers see them without JS.
+interface RouteMeta {
+  title: string;
+  description: string;
+  canonical: string;
+  ogType?: string;
+}
+
+const META_MAP: Record<string, RouteMeta> = {
+  '/': {
+    title: 'AI Automation & Digital Marketing Courses in Pune | Teonox',
+    description: "Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enroll today!",
+    canonical: '/',
+  },
+  '/about': {
+    title: 'Business Digital Marketing Classes in Pune | Teonox',
+    description: 'Learn business digital marketing classes in Pune at Teonox, a trusted digital marketing training institute with practical, placement-focused courses.',
+    canonical: '/about',
+  },
+  '/programs': {
+    title: 'Best Digital Marketing Course in Pune Near You | Teonox',
+    description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enroll now.",
+    canonical: '/programs',
+  },
+  '/blog': {
+    title: 'Blog & Insights | TEONOX',
+    description: 'Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX \u2014 Gen AI School of Marketing & Business in Pune.',
+    canonical: '/blog',
+  },
+  '/contact': {
+    title: 'Digital Marketing Course Institute in Kothrud, Pune | Teonox',
+    description: 'Looking for a digital marketing course institute near you in Pune? Teonox offers offline & online digital marketing courses in Kothrud & across Pune.',
+    canonical: '/contact',
+  },
+  '/admissions': {
+    title: 'Admissions | TEONOX',
+    description: 'Apply for TEONOX admissions \u2014 AI-integrated digital marketing courses in Pune with assured placement. Learn from 12+ year experience faculty, 50+ tools, and practical training.',
+    canonical: '/admissions',
+  },
+  '/careers': {
+    title: 'Job Guarantee Digital Marketing Course in Pune | Teonox',
+    description: 'Career-oriented digital marketing course in Pune with 100% job guarantee. Placement-focused training for freshers, graduates & career switchers.',
+    canonical: '/careers',
+  },
+  '/why-teonox': {
+    title: 'Why Teonox? AI-Digital Marketing School in Pune',
+    description: "Discover why Teonox is Pune's leading AI marketing school. Learn business digital marketing with AI-driven, industry-relevant training. Know more.",
+    canonical: '/why-teonox',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | TEONOX',
+    description: 'Read the TEONOX Privacy Policy \u2014 how we collect, use, store, and protect your personal information.',
+    canonical: '/privacy-policy',
+  },
+  '/terms-and-conditions': {
+    title: 'Terms & Conditions | TEONOX',
+    description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programs, and services.',
+    canonical: '/terms-and-conditions',
+  },
+};
+
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function buildMetaTags(meta: RouteMeta): string {
+  const title = escapeHtml(meta.title);
+  const desc = escapeHtml(meta.description);
+  const canonicalUrl = `${BASE_URL}${meta.canonical}`;
+  const ogType = meta.ogType || 'website';
+
+  return `<title>${title}</title>
+    <meta name="description" content="${desc}">
+    <link rel="canonical" href="${canonicalUrl}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${desc}">
+    <meta property="og:image" content="${DEFAULT_OG_IMAGE}">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:type" content="${ogType}">
+    <meta property="og:site_name" content="${SITE_NAME}">`;
+}
+
+// Simple in-memory cache for dynamic route metadata (avoid repeated WP API calls)
+const dynamicMetaCache = new Map<string, { meta: RouteMeta; ts: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+function getCachedDynamicMeta(key: string): RouteMeta | null {
+  const entry = dynamicMetaCache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.ts > CACHE_TTL) {
+    dynamicMetaCache.delete(key);
+    return null;
+  }
+  return entry.meta;
+}
+
+function setCachedDynamicMeta(key: string, meta: RouteMeta): void {
+  dynamicMetaCache.set(key, { meta, ts: Date.now() });
+}
+
+async function fetchBlogMeta(slug: string): Promise<RouteMeta | null> {
+  const cacheKey = `blog:${slug}`;
+  const cached = getCachedDynamicMeta(cacheKey);
+  if (cached) return cached;
+
+  try {
+    const res = await fetch(
+      `${CMS_BASE}/posts&slug=${encodeURIComponent(slug)}&_fields=title,excerpt&per_page=1&_cb=${Date.now()}`
+    );
+    if (!res.ok) return null;
+    const posts = await res.json();
+    if (!Array.isArray(posts) || posts.length === 0) return null;
+
+    const post = posts[0];
+    const title = decodeHtmlEntities(post.title?.rendered || '').replace(/<[^>]*>/g, '');
+    const excerpt = decodeHtmlEntities(post.excerpt?.rendered || '').replace(/<[^>]*>/g, '').slice(0, 160);
+
+    const meta: RouteMeta = {
+      title: `${title} | TEONOX Blog`,
+      description: excerpt || `Read about ${title} on the TEONOX blog.`,
+      canonical: `/blog/${slug}`,
+      ogType: 'article',
+    };
+    setCachedDynamicMeta(cacheKey, meta);
+    return meta;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchProgramMeta(slug: string): Promise<RouteMeta | null> {
+  const cacheKey = `program:${slug}`;
+  const cached = getCachedDynamicMeta(cacheKey);
+  if (cached) return cached;
+
+  try {
+    const isNumeric = /^\d+$/.test(slug);
+    const url = isNumeric
+      ? `${WP_PROGRAM_BASE}/${slug}&_fields=title,acf`
+      : `${WP_PROGRAM_BASE}&slug=${encodeURIComponent(slug)}&_fields=title,acf&per_page=1`;
+    const res = await fetch(`${url}&_cb=${Date.now()}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const post = isNumeric ? data : (Array.isArray(data) ? data[0] : null);
+    if (!post) return null;
+
+    const title = decodeHtmlEntities(post.title?.rendered || '').replace(/<[^>]*>/g, '');
+    const heroIntro = decodeHtmlEntities(post.acf?.hero_intro || '').replace(/<[^>]*>/g, '').slice(0, 160);
+
+    const meta: RouteMeta = {
+      title: `${title} | TEONOX`,
+      description: heroIntro || `Explore ${title} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`,
+      canonical: `/programs/${slug}`,
+    };
+    setCachedDynamicMeta(cacheKey, meta);
+    return meta;
+  } catch {
+    return null;
+  }
+}
+
+// Resolve metadata for any SPA path (static or dynamic)
+async function resolveRouteMeta(pathname: string): Promise<RouteMeta | null> {
+  const clean = pathname.replace(/\/+$/, '') || '/';
+
+  // Exact static match
+  if (META_MAP[clean]) return META_MAP[clean];
+
+  // Dynamic: /blog/:slug
+  const segments = clean.split('/').filter(Boolean);
+  if (segments.length === 2 && segments[0] === 'blog') {
+    return fetchBlogMeta(segments[1]);
+  }
+
+  // Dynamic: /programs/:slug or /program/:slug
+  if (segments.length === 2 && (segments[0] === 'programs' || segments[0] === 'program')) {
+    return fetchProgramMeta(segments[1]);
+  }
+
+  return null;
+}
+
+// Serve index.html with injected route-specific meta tags
+function serveWithMeta(html: string) {
+  return async (req: express.Request, res: express.Response) => {
+    // Only inject for HTML page requests (skip assets, API, sitemap, etc.)
+    const accept = req.headers.accept || '';
+    if (!accept.includes('text/html') && !req.path.match(/^\/($|about|programs?|blog|contact|careers|admissions|why-teonox|privacy-policy|terms-and-conditions)/)) {
+      return res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+    }
+
+    const meta = await resolveRouteMeta(req.path);
+    if (!meta) {
+      return res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+    }
+
+    const metaHtml = buildMetaTags(meta);
+    // Inject route-specific meta tags after <meta charset="UTF-8" />.
+    // This gives crawlers the correct <title>, <meta description>, <link rel="canonical">,
+    // and Open Graph tags in the raw HTML before React hydrates client-side.
+    const modified = html
+      .replace(
+        '<meta charset="UTF-8" />',
+        `<meta charset="UTF-8" />\n    ${metaHtml}`
+      );
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(modified);
+  };
+}
 function decodeHtmlEntities(str: string = ""): string {
   return str
     .replace(/&#8217;/g, "'")
@@ -322,7 +537,6 @@ app.get("/api/programs/:id", async (req, res) => {
 });
 
 async function startServer() {
-  // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -331,10 +545,11 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
+    const indexPath = path.join(distPath, "index.html");
+    const indexHtml = fs.readFileSync(indexPath, 'utf-8');
+
     app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
+    app.get('*', serveWithMeta(indexHtml));
   }
 
   app.listen(PORT, "0.0.0.0", () => {
