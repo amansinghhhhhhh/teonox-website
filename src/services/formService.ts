@@ -33,10 +33,10 @@ const fileToBase64 = (file: File): Promise<string> =>
  * Pushes form data to the Google Apps Script webhook, which saves text to
  * the Sheet, stores files in Drive, and sends the email notification.
  *
- * Apps Script doesn't return CORS headers, so we use mode "no-cors": the
- * request still reaches the server and runs, but the response is "opaque"
- * (unreadable). A network failure still rejects this fetch, which the caller
- * catches; an HTTP error cannot be detected here.
+ * Uses standard CORS so we can read the response and detect failures.
+ * Falls back to no-cors only if the server rejects the preflight (legacy
+ * Apps Script deployments without doOptions), in which case we assume
+ * success on network-level completion since the response is opaque.
  */
 export const submitForm = async (
   formName: string,
@@ -59,17 +59,51 @@ export const submitForm = async (
     }
   }
 
+  const body = JSON.stringify({ formName, fields: textFields, files });
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
 
   try {
-    await fetch(WEBHOOK, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ formName, fields: textFields, files }),
-      signal: controller.signal,
-    });
+    // Attempt CORS first — allows us to read the response status/body.
+    let res: Response;
+    try {
+      res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body,
+        signal: controller.signal,
+      });
+    } catch {
+      // CORS preflight rejected — try no-cors (opaque response).
+      // This happens with legacy Apps Script deployments.
+      console.warn("[formService] CORS rejected, retrying with no-cors mode");
+      res = await fetch(WEBHOOK, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body,
+        signal: controller.signal,
+      });
+    }
+
+    // If we got a readable response (CORS mode), validate it.
+    if (res.type === "basic" || res.type === "cors") {
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        console.error(`[formService] Webhook returned ${res.status}:`, text);
+        throw new Error(`Webhook failed with status ${res.status}`);
+      }
+
+      // Some Apps Script deployments return { success: true/false }.
+      const json = await res.json().catch(() => null);
+      if (json && json.success === false) {
+        console.error("[formService] Webhook reported failure:", json);
+        throw new Error(json.message || "Webhook reported failure");
+      }
+    }
+    // If res.type is "opaque" (no-cors), we can't read the body — assume
+    // the request reached the server. Network errors still throw.
   } finally {
     clearTimeout(timeout);
   }

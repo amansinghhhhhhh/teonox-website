@@ -76,7 +76,8 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
-    } catch {
+    } catch (err) {
+      console.error('[BrochureModal] Form submission failed:', err);
       setIsSubmitting(false);
       setError('Something went wrong. Please try again.');
     }
