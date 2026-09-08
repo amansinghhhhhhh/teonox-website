@@ -91,8 +91,6 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
-      // Auto-open brochure PDF in a new tab
-      window.open(BROCHURE_PDF_URL, '_blank');
     } catch (err) {
       console.error('[BrochureModal] Form submission failed:', err);
       setIsSubmitting(false);
