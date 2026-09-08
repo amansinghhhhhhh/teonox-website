@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Download, CheckCircle2, FileText, Loader2 } from 'lucide-react';
+import { X, MessageCircle, CheckCircle2, FileText, Loader2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
-import brochurePdf from '../assets/teonox_brochure.pdf';
+
+const WHATSAPP_NUMBER = '919890004828';
 
 interface BrochureModalProps {
   isOpen: boolean;
@@ -11,24 +12,10 @@ interface BrochureModalProps {
   defaultCourse?: string;
 }
 
-/** Trigger the brochure download as a memory blob — no direct URL exposed. */
-async function triggerBrochureDownload() {
-  try {
-    const response = await fetch(brochurePdf);
-    const blob = await response.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = blobUrl;
-    link.download = 'TEONOX_Program_Brochure.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    window.URL.revokeObjectURL(blobUrl);
-  } catch (error) {
-    console.error('Failed to download brochure:', error);
-  }
+/** Build a pre-filled WhatsApp chat link for the brochure request. */
+function buildWhatsAppUrl(name: string, email: string) {
+  const msg = `Hi TEONOX, I just requested the brochure for ${name} (${email}). Please send it to my WhatsApp!`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
 export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureModalProps) {
@@ -80,7 +67,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       return;
     }
     if (!phone.trim() || phone.trim().length < 10) {
-      setError('Please enter a valid 10-digit mobile number');
+      setError('Please enter a valid 10-digit WhatsApp number');
       return;
     }
 
@@ -90,12 +77,13 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       await submitForm('Brochure Download', {
         'Full Name': fullName,
         'Email Address': email,
-        'Phone Number': phone,
+        'WhatsApp Number': phone,
         'Interested In': defaultCourse || 'General Enquiry',
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
-      triggerBrochureDownload();
+      // Open pre-filled WhatsApp chat in a new tab
+      window.open(buildWhatsAppUrl(fullName, email), '_blank');
     } catch {
       setIsSubmitting(false);
       setError('Something went wrong. Please try again.');
@@ -154,10 +142,10 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                   <FileText className="w-6 h-6" />
                 </div>
                 <h3 id="brochure-modal-title" className="font-sora text-[24px] sm:text-[28px] font-[800] text-[#111111] tracking-tight leading-tight">
-                  Download the Brochure
+                  Get the Brochure
                 </h3>
                 <p className="font-inter text-[14px] sm:text-[15px] font-[500] text-[#666666] mt-1.5">
-                  Get the full program brochure — fill in your details and we'll send it right over.
+                  Fill in your details and we'll send the brochure to your Email & WhatsApp instantly.
                 </p>
               </div>
 
@@ -201,7 +189,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 {/* Phone Input */}
                 <div>
                   <label htmlFor="brochure-phone" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
-                    Phone Number *
+                    WhatsApp Number *
                   </label>
                   <div className="flex rounded-xl border border-gray-300 focus-within:border-[#F15A29] overflow-hidden bg-white transition-colors">
                     <div className="flex items-center gap-1.5 px-3 bg-gray-50 border-r border-gray-200 text-gray-700 font-sora text-[14px] font-bold shrink-0">
@@ -211,12 +199,15 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                     <input
                       id="brochure-phone"
                       type="tel"
-                      placeholder="Enter mobile number"
+                      placeholder="Enter WhatsApp number"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                       className="w-full px-3.5 py-3 text-[#111111] font-sora text-[14px] sm:text-[15px] font-[500] outline-none"
                     />
                   </div>
+                  <p className="mt-1.5 text-[12px] text-[#888888] font-inter">
+                    Please enter your active WhatsApp number to receive the brochure directly on WhatsApp.
+                  </p>
                 </div>
 
                 {/* Submit Button */}
@@ -232,8 +223,8 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                     </>
                   ) : (
                     <>
-                      <Download className="w-4 h-4" />
-                      <span>Get Brochure</span>
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Get Brochure on WhatsApp</span>
                     </>
                   )}
                 </button>
@@ -245,20 +236,21 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
               <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h3 className="font-sora text-[24px] font-[800] text-[#111111] mb-2">
-                Thank you! Your brochure download has started.
+              <h3 className="font-sora text-[22px] sm:text-[24px] font-[800] text-[#111111] mb-2 leading-tight">
+                Thank you! We've sent the TEONOX brochure to your Email and WhatsApp number.
               </h3>
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
-                Thanks <span className="font-bold text-[#111111]">{fullName}</span>! Your
-                brochure is downloading now. Our team will also reach out shortly on WhatsApp.
+                Thanks <span className="font-bold text-[#111111]">{fullName}</span>! Check your WhatsApp and email for the brochure. Our team will also reach out shortly.
               </p>
-              <button type="button"
-                onClick={triggerBrochureDownload}
-                className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+              <a
+                href={buildWhatsAppUrl(fullName, email)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-3 bg-[#25D366] hover:bg-[#1DA851] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
               >
-                <Download className="w-4 h-4 shrink-0" />
-                Download Brochure Again
-              </button>
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                Open WhatsApp Chat
+              </a>
               <button type="button"
                 onClick={handleReset}
                 className="bg-[#111111] hover:bg-black text-white font-sora font-bold text-[14px] px-8 py-3 rounded-xl transition-all cursor-pointer"
