@@ -1,9 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Download, CheckCircle2, FileText, Loader2 } from 'lucide-react';
+import { X, Download, CheckCircle2, FileText, Loader2, MessageCircle } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
-const BROCHURE_PDF_URL = '/brochure/teonox-brochure.pdf';
+const BROCHURE_PDF_URL = 'https://teonox.com/brochure/teonox-brochure.pdf';
+
+/** Clean phone to digits-only and ensure country code 91 prefix. */
+function cleanWhatsAppPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, '');
+  if (digits.startsWith('91') && digits.length >= 12) return digits;
+  if (digits.length === 10) return `91${digits}`;
+  return digits;
+}
+
+/** Build a pre-filled WhatsApp wa.me link with brochure message. */
+function buildWhatsAppUrl(name: string, phone: string): string {
+  const clean = cleanWhatsAppPhone(phone);
+  const msg = `Hi ${name}, here is your TEONOX Brochure: ${BROCHURE_PDF_URL}`;
+  return `https://wa.me/${clean}?text=${encodeURIComponent(msg)}`;
+}
 
 interface BrochureModalProps {
   isOpen: boolean;
@@ -230,20 +245,31 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h3 className="font-sora text-[22px] sm:text-[24px] font-[800] text-[#111111] mb-2 leading-tight">
-                Thank you, {fullName}! The TEONOX Brochure has been sent directly to your Email and WhatsApp.
+                Thank you, {fullName}!
               </h3>
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
-                Check your inbox and WhatsApp for the brochure. Our team will also reach out shortly.
+                We've emailed your brochure! You can also receive it directly on WhatsApp or download it below.
               </p>
-              <a
-                href={BROCHURE_PDF_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
-              >
-                <Download className="w-4 h-4 shrink-0" />
-                View / Download Brochure PDF
-              </a>
+              <div className="flex flex-col sm:flex-row items-center gap-3 mb-4">
+                <a
+                  href={BROCHURE_PDF_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                >
+                  <Download className="w-4 h-4 shrink-0" />
+                  View / Download Brochure PDF
+                </a>
+                <a
+                  href={buildWhatsAppUrl(fullName, phone)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#25D366] hover:bg-[#1DA851] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                >
+                  <MessageCircle className="w-4 h-4 shrink-0" />
+                  Get Brochure on WhatsApp
+                </a>
+              </div>
               <button type="button"
                 onClick={handleReset}
                 className="bg-[#111111] hover:bg-black text-white font-sora font-bold text-[14px] px-8 py-3 rounded-xl transition-all cursor-pointer"
