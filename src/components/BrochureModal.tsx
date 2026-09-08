@@ -91,6 +91,8 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
+      // Auto-open brochure PDF in a new tab
+      window.open(BROCHURE_PDF_URL, '_blank');
     } catch (err) {
       console.error('[BrochureModal] Form submission failed:', err);
       setIsSubmitting(false);
@@ -250,24 +252,24 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
                 We've emailed your brochure! You can also receive it directly on WhatsApp or download it below.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-3 mb-4">
+              <div className="flex flex-col gap-3 w-full max-w-sm mx-auto mb-4">
                 <a
                   href={BROCHURE_PDF_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                  className="w-full bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] py-3 px-6 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Download className="w-4 h-4 shrink-0" />
                   View / Download Brochure PDF
                 </a>
                 <a
-                  href={buildWhatsAppUrl(fullName, phone)}
+                  href="https://wa.me/919890004828?text=Hi%20TEONOX%2C%20I%20just%20requested%20the%20brochure"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] hover:bg-[#1DA851] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                  className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white font-sora font-[700] text-[14px] py-3 px-6 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 shrink-0" />
-                  Get Brochure on WhatsApp
+                  Chat with Us on WhatsApp
                 </a>
               </div>
               <button type="button"
