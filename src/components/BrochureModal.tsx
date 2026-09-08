@@ -1,21 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, MessageCircle, CheckCircle2, FileText, Loader2 } from 'lucide-react';
+import { X, Download, CheckCircle2, FileText, Loader2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
-const WHATSAPP_NUMBER = '919890004828';
+const BROCHURE_PDF_URL = '/brochure/teonox-brochure.pdf';
 
 interface BrochureModalProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate?: (href: string, label: string) => void;
   defaultCourse?: string;
-}
-
-/** Build a pre-filled WhatsApp chat link for the brochure request. */
-function buildWhatsAppUrl(name: string, email: string) {
-  const msg = `Hi TEONOX, I just requested the brochure for ${name} (${email}). Please send it to my WhatsApp!`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
 export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureModalProps) {
@@ -82,8 +76,6 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
-      // Open pre-filled WhatsApp chat in a new tab
-      window.open(buildWhatsAppUrl(fullName, email), '_blank');
     } catch {
       setIsSubmitting(false);
       setError('Something went wrong. Please try again.');
@@ -219,12 +211,12 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Submitting...</span>
+                      <span>Sending...</span>
                     </>
                   ) : (
                     <>
-                      <MessageCircle className="w-4 h-4" />
-                      <span>Get Brochure on WhatsApp</span>
+                      <Download className="w-4 h-4" />
+                      <span>Get Brochure</span>
                     </>
                   )}
                 </button>
@@ -237,19 +229,19 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h3 className="font-sora text-[22px] sm:text-[24px] font-[800] text-[#111111] mb-2 leading-tight">
-                Thank you! We've sent the TEONOX brochure to your Email and WhatsApp number.
+                Thank you, {fullName}! The TEONOX Brochure has been sent directly to your Email and WhatsApp.
               </h3>
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
-                Thanks <span className="font-bold text-[#111111]">{fullName}</span>! Check your WhatsApp and email for the brochure. Our team will also reach out shortly.
+                Check your inbox and WhatsApp for the brochure. Our team will also reach out shortly.
               </p>
               <a
-                href={buildWhatsAppUrl(fullName, email)}
+                href={BROCHURE_PDF_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mb-3 bg-[#25D366] hover:bg-[#1DA851] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                className="mb-3 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] px-8 py-3 rounded-xl transition-all inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
               >
-                <MessageCircle className="w-4 h-4 shrink-0" />
-                Open WhatsApp Chat
+                <Download className="w-4 h-4 shrink-0" />
+                View / Download Brochure PDF
               </a>
               <button type="button"
                 onClick={handleReset}
