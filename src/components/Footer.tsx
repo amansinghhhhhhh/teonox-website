@@ -90,7 +90,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 rel="noopener noreferrer"
                 aria-label="Follow TEONOX on LinkedIn"
                 title="LinkedIn"
-                className="w-9 h-9 rounded-full bg-[#282019] hover:bg-[#F15A29] text-[#C9BDB2] hover:text-white flex items-center justify-center transition-all duration-300 border border-[#3A2E25] icon-badge-float hover:scale-105"
+                className="w-9 h-9 rounded-full bg-[#0A66C2] text-white flex items-center justify-center transition-all duration-300 hover:brightness-110 hover:scale-110 hover:shadow-[0_0_12px_rgba(10,102,194,0.5)]"
               >
                 <LinkedInIcon className="w-4 h-4" />
               </a>
@@ -100,7 +100,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 rel="noopener noreferrer"
                 aria-label="Follow TEONOX on Instagram"
                 title="Instagram"
-                className="w-9 h-9 rounded-full bg-[#282019] hover:bg-[#F15A29] text-[#C9BDB2] hover:text-white flex items-center justify-center transition-all duration-300 border border-[#3A2E25] icon-badge-float hover:scale-105"
+                className="w-9 h-9 rounded-full bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center transition-all duration-300 hover:brightness-110 hover:scale-110 hover:shadow-[0_0_12px_rgba(220,39,67,0.5)]"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -110,7 +110,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 rel="noopener noreferrer"
                 aria-label="Follow TEONOX on Facebook"
                 title="Facebook"
-                className="w-9 h-9 rounded-full bg-[#282019] hover:bg-[#F15A29] text-[#C9BDB2] hover:text-white flex items-center justify-center transition-all duration-300 border border-[#3A2E25] icon-badge-float hover:scale-105"
+                className="w-9 h-9 rounded-full bg-[#1877F2] text-white flex items-center justify-center transition-all duration-300 hover:brightness-110 hover:scale-110 hover:shadow-[0_0_12px_rgba(24,119,242,0.5)]"
               >
                 <FacebookIcon className="w-4 h-4" />
               </a>
@@ -120,7 +120,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 rel="noopener noreferrer"
                 aria-label="Subscribe to TEONOX on YouTube"
                 title="YouTube"
-                className="w-9 h-9 rounded-full bg-[#282019] hover:bg-[#F15A29] text-[#C9BDB2] hover:text-white flex items-center justify-center transition-all duration-300 border border-[#3A2E25] icon-badge-float hover:scale-105"
+                className="w-9 h-9 rounded-full bg-[#FF0000] text-white flex items-center justify-center transition-all duration-300 hover:brightness-110 hover:scale-110 hover:shadow-[0_0_12px_rgba(255,0,0,0.5)]"
               >
                 <YouTubeIcon className="w-4 h-4" />
               </a>
@@ -130,7 +130,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 rel="noopener noreferrer"
                 aria-label="Follow TEONOX on X"
                 title="X (Twitter)"
-                className="w-9 h-9 rounded-full bg-[#282019] hover:bg-[#F15A29] text-[#C9BDB2] hover:text-white flex items-center justify-center transition-all duration-300 border border-[#3A2E25] icon-badge-float hover:scale-105"
+                className="w-9 h-9 rounded-full bg-[#000000] text-white flex items-center justify-center transition-all duration-300 hover:brightness-110 hover:scale-110 hover:shadow-[0_0_12px_rgba(255,255,255,0.15)]"
               >
                 <XIcon className="w-4 h-4" />
               </a>
