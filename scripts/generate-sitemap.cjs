@@ -19,12 +19,22 @@ const STATIC_PAGES = [
   { path: '/terms-and-conditions',    priority: '0.3', changefreq: 'yearly'  },
 ];
 
-const PROGRAM_IDS = [
-  'business-digital-marketing-with-ai',
-  'performance-marketing',
-  'seo-specialization',
-  'social-media-marketing',
-];
+async function fetchProgramSlugs() {
+  try {
+    const res = await fetch(`${CMS_URL}/program&_fields=slug&per_page=100&_cb=${Date.now()}`);
+    if (!res.ok) return [];
+    const type = (res.headers.get('content-type') || '').toLowerCase();
+    if (!type.includes('application/json')) return [];
+    const programs = await res.json();
+    if (!Array.isArray(programs)) return [];
+    return programs
+      .map((p) => String(p.slug || ''))
+      .filter(Boolean);
+  } catch (e) {
+    console.warn('[Sitemap] Failed to fetch program slugs from WordPress:', e.message);
+    return [];
+  }
+}
 
 async function fetchBlogPosts() {
   try {
@@ -55,13 +65,17 @@ async function main() {
   const blogPosts = await fetchBlogPosts();
   console.log(`[Sitemap] Found ${blogPosts.length} live blog post(s)`);
 
+  console.log('[Sitemap] Fetching programs from WordPress...');
+  const programSlugs = await fetchProgramSlugs();
+  console.log(`[Sitemap] Found ${programSlugs.length} live program(s)`);
+
   // Generate sitemap.xml (static fallback for Vercel/Netlify deployments)
   const xmlUrls = [
     ...STATIC_PAGES.map((p) =>
       `  <url>\n    <loc>${BASE_URL}${p.path}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
     ),
-    ...PROGRAM_IDS.map((id) =>
-      `  <url>\n    <loc>${BASE_URL}/programs/${id}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+    ...programSlugs.map((slug) =>
+      `  <url>\n    <loc>${BASE_URL}/programs/${slug}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
     ),
     ...blogPosts.map((p) =>
       `  <url>\n    <loc>${BASE_URL}/blog/${p.slug}</loc>\n    <lastmod>${p.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`
@@ -77,8 +91,8 @@ async function main() {
   const blogLinks = blogPosts
     .map((p) => `      <li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`)
     .join('\n');
-  const programLinks = PROGRAM_IDS
-    .map((id) => `      <li><a href="${BASE_URL}/programs/${id}">${BASE_URL}/programs/${id}</a></li>`)
+  const programLinks = programSlugs
+    .map((slug) => `      <li><a href="${BASE_URL}/programs/${slug}">${BASE_URL}/programs/${slug}</a></li>`)
     .join('\n');
   const pageLinks = STATIC_PAGES
     .map((p) => `      <li><a href="${BASE_URL}${p.path}">${BASE_URL}${p.path}</a></li>`)
