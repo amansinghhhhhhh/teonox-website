@@ -17,6 +17,7 @@ const STATIC_PAGES = [
   { path: '/why-teonox',              priority: '0.7', changefreq: 'monthly' },
   { path: '/privacy-policy',          priority: '0.3', changefreq: 'yearly'  },
   { path: '/terms-and-conditions',    priority: '0.3', changefreq: 'yearly'  },
+  { path: '/webinar',                 priority: '0.8', changefreq: 'weekly'  },
 ];
 
 async function fetchProgramSlugs() {
