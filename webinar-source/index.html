@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEONOX | Business AI + Digital Marketing Workshop</title>
+    <meta name="description" content="Join TEONOX free Business AI + Digital Marketing workshop in Pune. Learn AI tools, marketing strategy, and build your portfolio in 90 minutes. Register now!">
+    <meta property="og:title" content="TEONOX | Business AI + Digital Marketing Workshop">
+    <meta property="og:description" content="Free 90-minute workshop covering AI fundamentals, digital marketing, and portfolio building. Pune, 16 Sep 2026.">
+    <meta property="og:image" content="https://teonox.com/og-default.webp">
+    <meta property="og:url" content="https://teonox.com/webinar">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TEONOX">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://teonox.com/webinar">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-logo">
+                <img src="teonox-Logo-with-Tagline-2.png" alt="Teonox">
+            </div>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="hero-badge-event">⚡ LIVE 90-MINUTE INTERACTIVE WORKSHOP</span>
+                    <div class="hero-badge">
+                        <i class="fas fa-bolt"></i>
+                        100% Free Workshop • Limited Seats Available
+                    </div>
+                    <h1>AI & Digital Marketing Workshop <span class="highlight-text">You Can't Miss</span></h1>
+                    <p class="hero-subtitle">Join this free live hands-on workshop to learn AI tools, create real marketing content, and map out your career direction in real time.</p>
+                    
+                    <div class="hero-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>16th September 2026</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>90 Minutes Live Class</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kothrud, Pune</span>
+                        </div>
+                        <div class="meta-item meta-free">
+                            <i class="fas fa-gift"></i>
+                            <span>100% FREE</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-slots-wrapper">
+                        <p class="hero-slots-label">Select Your Preferred Batch:</p>
+                        <div class="hero-slots">
+                            <div class="hero-slot">
+                                <i class="fas fa-sun"></i>
+                                <span>Morning: 10 AM – 12 PM</span>
+                            </div>
+                            <div class="hero-slot">
+                                <i class="fas fa-moon"></i>
+                                <span>Evening: 5 PM – 7 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-cta">
+                        <a href="#register" class="btn btn-primary btn-lg">
+                            <i class="fas fa-rocket"></i>
+                            Reserve Your FREE Seat
+                        </a>
+                    </div>
+
+                    <div class="hero-urgency">
+                        <i class="fas fa-fire"></i>
+                        <span><strong id="registeredCount">19</strong> people already registered. Only <strong id="seatsLeft">6</strong> seats left!</span>
+                    </div>
+
+                    <div class="hero-social-proof">
+                        <div class="hero-avatars">
+                            <div class="hero-avatar">
+                                <img src="assets/images/129387.webp" alt="Student">
+                            </div>
+                            <div class="hero-avatar">
+                                <img src="assets/images/410.webp" alt="Student">
+                            </div>
+                            <div class="hero-avatar">
+                                <img src="assets/images/78916.webp" alt="Student">
+                            </div>
+                            <div class="hero-avatar">
+                                <img src="assets/images/80211.webp" alt="Student">
+                            </div>
+                            <div class="hero-avatar">
+                                <img src="assets/images/93868.webp" alt="Student">
+                            </div>
+                            <div class="hero-avatar hero-avatar-more">+14</div>
+                        </div>
+                        <span>Join 19+ students already registered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Limited Time Offer Countdown -->
+    <section class="offer-timer-section">
+        <div class="offer-timer-bg"></div>
+        <div class="container">
+            <div class="offer-timer-wrapper">
+                <div class="offer-content">
+                    <div class="offer-badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>LIMITED TIME OFFER</span>
+                    </div>
+                    <h2 class="offer-title">Free Workshop Spot Closing Soon!</h2>
+                    <p class="offer-subtitle">Register before the timer ends to secure your FREE seat</p>
+                </div>
+                
+                <div class="countdown-container">
+                    <div class="countdown-box">
+                        <div class="countdown-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="countdown-ring-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="countdown-ring" cx="50" cy="50" r="45" id="countdownRing"></circle>
+                            </svg>
+                            <div class="countdown-value">
+                                <span class="countdown-number" id="offerDays">06</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown-box">
+                        <div class="countdown-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="countdown-ring-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="countdown-ring" cx="50" cy="50" r="45" id="countdownRingHours"></circle>
+                            </svg>
+                            <div class="countdown-value">
+                                <span class="countdown-number" id="offerHours">14</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown-box">
+                        <div class="countdown-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="countdown-ring-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="countdown-ring" cx="50" cy="50" r="45" id="countdownRingMins"></circle>
+                            </svg>
+                            <div class="countdown-value">
+                                <span class="countdown-number" id="offerMinutes">32</span>
+                                <span class="countdown-label">Mins</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown-box">
+                        <div class="countdown-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="countdown-ring-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="countdown-ring" cx="50" cy="50" r="45" id="countdownRingSecs"></circle>
+                            </svg>
+                            <div class="countdown-value">
+                                <span class="countdown-number" id="offerSeconds">45</span>
+                                <span class="countdown-label">Secs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offer-cta">
+                    <a href="#register" class="btn btn-primary btn-lg offer-btn">
+                        <i class="fas fa-rocket"></i>
+                        CLAIM YOUR FREE SPOT NOW
+                    </a>
+                    <div class="offer-guarantee">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% Free • No Credit Card Required</span>
+                    </div>
+                </div>
+
+                <div class="offer-seats">
+                    <div class="seats-progress">
+                        <div class="seats-progress-bar"></div>
+                    </div>
+                    <div class="seats-text">
+                        <i class="fas fa-fire"></i>
+                        <span><strong>85%</strong> seats already filled! Only <strong>6 seats</strong> remaining</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools You'll Learn -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="tools-content">
+                <div class="tools-badge">
+                    <i class="fas fa-tools"></i>
+                    TOOLS YOU'LL MASTER
+                </div>
+                <h2 class="tools-heading">Power Your Skills with <span class="gradient-text">Industry Tools</span></h2>
+                <div class="tools-logos">
+                    <div class="tool-logo-card">
+                        <div class="tool-logo-img">
+                            <img src="Tool logo/chatgpt.webp" alt="ChatGPT">
+                        </div>
+                        <span class="tool-logo-name">ChatGPT</span>
+                    </div>
+                    <div class="tool-logo-card">
+                        <div class="tool-logo-img">
+                            <img src="Tool logo/canva.png" alt="Canva">
+                        </div>
+                        <span class="tool-logo-name">Canva</span>
+                    </div>
+                    <div class="tool-logo-card">
+                        <div class="tool-logo-img">
+                            <img src="Tool logo/google ads.jpeg" alt="Google Ads">
+                        </div>
+                        <span class="tool-logo-name">Google Ads</span>
+                    </div>
+                    <div class="tool-logo-card">
+                        <div class="tool-logo-img">
+                            <img src="Tool logo/google analytics.png" alt="Google Analytics">
+                        </div>
+                        <span class="tool-logo-name">Analytics</span>
+                    </div>
+                    <div class="tool-logo-card">
+                        <div class="tool-logo-img">
+                            <img src="Tool logo/meta.webp" alt="Meta Ads">
+                        </div>
+                        <span class="tool-logo-name">Meta Ads</span>
+                    </div>
+                    <div class="tool-logo-card">
+                        <div class="tool-logo-img">
+                            <img src="Tool logo/WordPress_blue_logo.svg.webp" alt="WordPress">
+                        </div>
+                        <span class="tool-logo-name">WordPress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="container">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2>Is Marketing For You?</h2>
+                    <p>Answer these quick questions to discover if you have a marketer's mindset.</p>
+                </div>
+                
+                <div class="quiz-progress">
+                    <div class="quiz-dot active" data-step="1"></div>
+                    <div class="quiz-dot" data-step="2"></div>
+                    <div class="quiz-dot" data-step="3"></div>
+                    <div class="quiz-dot" data-step="4"></div>
+                    <div class="quiz-dot" data-step="5"></div>
+                </div>
+
+                <div class="quiz-card" id="quizCard">
+                    <div class="quiz-question" id="quizQuestion">Do you enjoy creating content?</div>
+                    <div class="quiz-options" id="quizOptions">
+                        <button class="quiz-option" onclick="selectAnswer(0)">Yes, I love it!</button>
+                        <button class="quiz-option" onclick="selectAnswer(1)">Sometimes, it depends</button>
+                        <button class="quiz-option" onclick="selectAnswer(2)">Not really</button>
+                    </div>
+                    <div class="quiz-result" id="quizResult">
+                        <h3>You might have a marketer's mindset!</h3>
+                        <p>Marketing is about understanding people, creating compelling content, and solving business problems. Sound like you?</p>
+                        <a href="#register" class="btn btn-primary">Find Out at Teonox</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop Agenda -->
+    <section class="agenda-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-list-check"></i>
+                    Workshop Agenda
+                </div>
+                <h2>What Happens in <span class="gradient-text">90 Minutes</span></h2>
+                <p>A structured, action-packed session designed to give you maximum value in minimum time.</p>
+            </div>
+            <div class="agenda-timeline">
+                <div class="agenda-item">
+                    <div class="agenda-time">0-15 min</div>
+                    <div class="agenda-content">
+                        <div class="agenda-dot"></div>
+                        <h4>Welcome & Introduction</h4>
+                        <p>Meet your mentors, understand the roadmap, and set expectations for the session.</p>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">15-35 min</div>
+                    <div class="agenda-content">
+                        <div class="agenda-dot"></div>
+                        <h4>AI Tools Live Demo</h4>
+                        <p>Watch us use ChatGPT, Canva AI, and other tools to create marketing content in real-time.</p>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">35-55 min</div>
+                    <div class="agenda-content">
+                        <div class="agenda-dot"></div>
+                        <h4>Hands-On Exercise</h4>
+                        <p>Create your first marketing campaign using the tools and frameworks we teach.</p>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">55-75 min</div>
+                    <div class="agenda-content">
+                        <div class="agenda-dot"></div>
+                        <h4>Career Roadmap</h4>
+                        <p>Discover career paths, freelancing opportunities, and how to get started.</p>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">75-90 min</div>
+                    <div class="agenda-content">
+                        <div class="agenda-dot"></div>
+                        <h4>Q&A + Reel Competition</h4>
+                        <p>Ask anything, participate in our reel competition, and win prizes!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Strip - Partners & Features -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="trust-badge-text">
+                        <span class="trust-badge-title">Certificate</span>
+                        <span class="trust-badge-sub">Official Participation</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <div class="trust-badge-text">
+                        <span class="trust-badge-title">Hands-on Workshop</span>
+                        <span class="trust-badge-sub">Practical Learning</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="trust-badge-text">
+                        <span class="trust-badge-title">Reel Competition</span>
+                        <span class="trust-badge-sub">Create & Compete</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="trust-badge-text">
+                        <span class="trust-badge-title">Portfolio Project</span>
+                        <span class="trust-badge-sub">Build Real Proof</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Section -->
+    <section class="topics-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="curriculum-badge">
+                    <span>8 MODULES</span>
+                </div>
+                <h2>What You'll Learn about in This Workshop</h2>
+                <p>A comprehensive curriculum designed to give you practical skills in just 90 minutes.</p>
+            </div>
+            <div class="topics-grid">
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/AI Fundamentals.png" alt="AI Fundamentals">
+                    </div>
+                    <h3>AI Fundamentals</h3>
+                    <p>Understand the basics of artificial intelligence and how it's transforming business.</p>
+                    <div class="topic-card-expand">
+                        <p>Learn what AI really is, how it works, and why it matters for modern businesses. No technical background required.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/Digital Marketing Fundamentals.png" alt="Digital Marketing">
+                    </div>
+                    <h3>Digital Marketing Fundamentals</h3>
+                    <p>Master the core concepts of digital marketing and online business growth.</p>
+                    <div class="topic-card-expand">
+                        <p>From social media to SEO, learn the essential frameworks that drive online success.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/AI-Powered Marketing.png" alt="AI Marketing">
+                    </div>
+                    <h3>AI-Powered Marketing</h3>
+                    <p>Discover how AI is revolutionizing marketing strategies and campaigns.</p>
+                    <div class="topic-card-expand">
+                        <p>Explore AI tools for automation, personalization, and data-driven marketing decisions.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/AI Content Creation.png" alt="Content Creation">
+                    </div>
+                    <h3>AI Content Creation</h3>
+                    <p>Create compelling content using AI tools and techniques.</p>
+                    <div class="topic-card-expand">
+                        <p>Learn to use AI for writing, designing, and producing content at scale.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/Marketing Strategy.png" alt="Strategy">
+                    </div>
+                    <h3>Marketing Strategy</h3>
+                    <p>Build effective marketing strategies that deliver results.</p>
+                    <div class="topic-card-expand">
+                        <p>From positioning to execution, learn the strategic thinking behind successful campaigns.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/Customer & Audience Research.png" alt="Audience">
+                    </div>
+                    <h3>Customer & Audience Research</h3>
+                    <p>Understand your target audience and their needs.</p>
+                    <div class="topic-card-expand">
+                        <p>Master research techniques to identify, understand, and connect with your ideal customers.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="What You'll Learn in This Workshop/AI Tools.png" alt="AI Tools">
+                    </div>
+                    <h3>AI Tools</h3>
+                    <p>Get hands-on with the latest AI marketing tools.</p>
+                    <div class="topic-card-expand">
+                        <p>Explore ChatGPT, Midjourney, and other tools that are changing the marketing landscape.</p>
+                    </div>
+                </div>
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-card-img">
+                        <img src="teonox-strip-3.jpg" alt="Practical">
+                    </div>
+                    <h3>Practical Application</h3>
+                    <p>Apply everything you learn to real-world projects.</p>
+                    <div class="topic-card-expand">
+                        <p>Build a portfolio project that demonstrates your new skills to potential employers or clients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="experience-section" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Teonox Experience</h2>
+                <p>A carefully designed journey from learning to leadership.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-step">Step 1</span>
+                        <h3>LEARN</h3>
+                        <p>Master AI fundamentals, marketing principles, and content creation techniques from industry practitioners.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-step">Step 2</span>
+                        <h3>APPLY</h3>
+                        <p>Put your knowledge into practice through hands-on exercises and the exciting Reel Competition.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-step">Step 3</span>
+                        <h3>LEAD</h3>
+                        <p>Walk away with a portfolio project, career direction, and the confidence to pursue your path.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reel Competition -->
+    <section class="reel-section" id="competition">
+        <div class="container">
+            <div class="reel-grid">
+                <div class="reel-content">
+                    <h2>"Can You Make People <span>Stop Scrolling</span>?"</h2>
+                    <p>Test your creativity and marketing skills in our exciting Reel Competition. Create compelling content that captures attention.</p>
+                    
+                    <div class="reel-flow">
+                        <div class="reel-flow-step"><i class="fas fa-file-alt"></i>BRIEF</div>
+                        <div class="reel-flow-step"><i class="fas fa-lightbulb"></i>IDEATE</div>
+                        <div class="reel-flow-step"><i class="fas fa-paint-brush"></i>CREATE</div>
+                        <div class="reel-flow-step"><i class="fas fa-film"></i>EDIT</div>
+                        <div class="reel-flow-step"><i class="fas fa-upload"></i>SUBMIT</div>
+                        <div class="reel-flow-step"><i class="fas fa-star"></i>JUDGING</div>
+                        <div class="reel-flow-step"><i class="fas fa-trophy"></i>LEADERBOARD</div>
+                    </div>
+
+                    <div class="reel-details">
+                        <div class="reel-detail-card">
+                            <h4>Sample Brief</h4>
+                            <p>Create a 30-second reel promoting a product or service using AI tools.</p>
+                        </div>
+                        <div class="reel-detail-card">
+                            <h4>Target Audience</h4>
+                            <p>Gen Z and young millennials interested in tech and lifestyle.</p>
+                        </div>
+                        <div class="reel-detail-card">
+                            <h4>Time Limit</h4>
+                            <p>30-60 seconds maximum duration.</p>
+                        </div>
+                        <div class="reel-detail-card">
+                            <h4>AI Tools</h4>
+                            <p>Use any AI tools for scripting, visuals, or editing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <video class="phone-video" poster="teonox-workshop-1.jpg" loop muted playsinline>
+                            </video>
+                            <div class="phone-video-overlay" onclick="togglePhoneVideo(this)">
+                                <button class="phone-play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <div class="phone-video-actions">
+                                <div class="phone-action"><i class="fas fa-heart"></i><span>12.5K</span></div>
+                                <div class="phone-action"><i class="fas fa-comment"></i><span>234</span></div>
+                                <div class="phone-action"><i class="fas fa-share"></i><span>Share</span></div>
+                                <div class="phone-action"><i class="fas fa-bookmark"></i></div>
+                            </div>
+                            <div class="phone-video-info">
+                                <span class="phone-username">@teonox</span>
+                                <span class="phone-caption">AI + Digital Marketing Workshop</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get -->
+    <section class="get-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What You Get</h2>
+                <p>Everything included in this comprehensive workshop experience.</p>
+            </div>
+            <div class="get-grid">
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/certificate.png" alt="Certificate">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Workshop Certificate</h3>
+                    </div>
+                    <p>Official Certificate of Participation recognizing your completion of the Teonox AI Workshop.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>Official certificate of completion</li>
+                            <li>Add to your professional portfolio</li>
+                            <li>Recognized by industry professionals</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/Business AI + Digital Marketing.png" alt="AI Learning">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Business AI + Digital Marketing</h3>
+                    </div>
+                    <p>Free access to the complete learning experience covering AI and marketing fundamentals.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>AI fundamentals for business</li>
+                            <li>Digital marketing fundamentals</li>
+                            <li>AI-powered marketing</li>
+                            <li>Content creation using AI</li>
+                            <li>Marketing strategy</li>
+                            <li>Customer & audience research</li>
+                            <li>AI tools for business</li>
+                            <li>Practical application</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/30-Day Creator Guide.png" alt="Creator Guide">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>30-Day Creator Guide</h3>
+                    </div>
+                    <p>A practical roadmap to continue your journey after the workshop.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>Finding your niche</li>
+                            <li>Personal branding</li>
+                            <li>Content pillars</li>
+                            <li>Reels/short-form strategy</li>
+                            <li>AI-assisted content creation</li>
+                            <li>Audience building</li>
+                            <li>30-day execution calendar</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/Online Business Growth Strategy.png" alt="Growth Strategy">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Online Business Growth Strategy</h3>
+                    </div>
+                    <p>Learn to grow businesses online with proven strategies.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>Define target audience</li>
+                            <li>Positioning & branding</li>
+                            <li>Social media strategy</li>
+                            <li>Content strategy</li>
+                            <li>Lead generation</li>
+                            <li>Digital marketing funnel</li>
+                            <li>Growth roadmap</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/Reel Competition.png" alt="Competition">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Reel Competition</h3>
+                    </div>
+                    <p>Compete with fellow participants in an exciting content creation challenge.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>Real-world challenge</li>
+                            <li>Fixed brief & time-bound execution</li>
+                            <li>Use AI tools</li>
+                            <li>Leaderboard & winner recognition</li>
+                            <li>Prizes for top performers</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/Surprise Gift.png" alt="Surprise Gift">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Surprise Gift</h3>
+                    </div>
+                    <p>Every participant receives a special Teonox surprise gift.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>Exclusive participant gift</li>
+                            <li>Teonox branded merchandise</li>
+                            <li>Special surprise reveal at workshop</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/Career & Skill Direction.png" alt="Career Direction">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Career & Skill Direction</h3>
+                    </div>
+                    <p>Discover potential career paths in AI and digital marketing.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>AI-related career opportunities</li>
+                            <li>Digital marketing careers</li>
+                            <li>Creator economy paths</li>
+                            <li>Freelancing opportunities</li>
+                            <li>Skills companies are looking for</li>
+                            <li>What to learn next</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get-card" onclick="toggleGet(this)">
+                    <div class="get-card-img">
+                        <img src="What You Get/Portfolio.png" alt="Portfolio Project">
+                    </div>
+                    <div class="get-card-header">
+                        <h3>Portfolio Project</h3>
+                    </div>
+                    <p>Leave with a real project you can showcase to employers or clients.</p>
+                    <div class="get-card-details">
+                        <ul>
+                            <li>AI website/business/marketing project</li>
+                            <li>Resume-ready portfolio piece</li>
+                            <li>LinkedIn showcase project</li>
+                            <li>Freelancing profile content</li>
+                            <li>Internship application asset</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creator Journey - Ultra Premium Design -->
+    <section class="journey-section">
+        <div class="journey-bg-pattern"></div>
+        <div class="container">
+            <div class="journey-header">
+                <div class="journey-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>YOUR ROADMAP</span>
+                </div>
+                <h2 class="journey-title">The 30-Day Creator Journey</h2>
+                <p class="journey-subtitle">"The workshop ends. Your journey doesn't."</p>
+                <p class="journey-desc">Follow this step-by-step roadmap to build your online presence, create content, and grow your audience.</p>
+            </div>
+
+            <div class="journey-cards-wrapper">
+                <div class="journey-card">
+                    <div class="journey-card-img">
+                        <img src="The 30-Day Creator Journey/Find Your Niche.png" alt="Find Your Niche">
+                        <div class="journey-card-day">Day 01</div>
+                    </div>
+                    <div class="journey-card-content">
+                        <div class="journey-card-tag">Getting Started</div>
+                        <h4>Find Your Niche</h4>
+                        <p>Discover what topics resonate with you and align with your passions. Identify your unique angle.</p>
+                        <div class="journey-card-tasks">
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Self-assessment quiz</div>
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Market research</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-card-img">
+                        <img src="The 30-Day Creator Journey/Build Personal Brand.png" alt="Personal Brand">
+                        <div class="journey-card-day">Day 05</div>
+                    </div>
+                    <div class="journey-card-content">
+                        <div class="journey-card-tag">Branding</div>
+                        <h4>Build Personal Brand</h4>
+                        <p>Start building your online presence. Create a consistent identity across all platforms.</p>
+                        <div class="journey-card-tasks">
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Profile optimization</div>
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Bio & portfolio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-card-img">
+                        <img src="The 30-Day Creator Journey/Define Content Pillars.png" alt="Content Pillars">
+                        <div class="journey-card-day">Day 10</div>
+                    </div>
+                    <div class="journey-card-content">
+                        <div class="journey-card-tag">Content Strategy</div>
+                        <h4>Define Content Pillars</h4>
+                        <p>Define your core content themes. Create a content calendar for consistent posting.</p>
+                        <div class="journey-card-tasks">
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Theme selection</div>
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Calendar planning</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-card-img">
+                        <img src="The 30-Day Creator Journey/AI-Assisted Content.png" alt="AI Content">
+                        <div class="journey-card-day">Day 15</div>
+                    </div>
+                    <div class="journey-card-content">
+                        <div class="journey-card-tag">AI Power</div>
+                        <h4>AI-Assisted Content</h4>
+                        <p>Use AI to scale your creation. Automate ideas, captions, and editing workflows.</p>
+                        <div class="journey-card-tasks">
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> ChatGPT prompts</div>
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> AI tools setup</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-card-img">
+                        <img src="The 30-Day Creator Journey/Audience Building.png" alt="Audience Building">
+                        <div class="journey-card-day">Day 20</div>
+                    </div>
+                    <div class="journey-card-content">
+                        <div class="journey-card-tag">Growth</div>
+                        <h4>Audience Building</h4>
+                        <p>Grow your following strategically. Engage with your community and build relationships.</p>
+                        <div class="journey-card-tasks">
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Engagement tactics</div>
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Community building</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-card journey-card-final">
+                    <div class="journey-card-img">
+                        <img src="The 30-Day Creator Journey/Execute.png" alt="Execute">
+                        <div class="journey-card-day">Day 30</div>
+                    </div>
+                    <div class="journey-card-content">
+                        <div class="journey-card-tag">Launch</div>
+                        <h4>Execute & Launch</h4>
+                        <p>Launch your creator journey! Publish your first content and start building your empire.</p>
+                        <div class="journey-card-tasks">
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> First post live</div>
+                            <div class="journey-task"><i class="fas fa-check-circle"></i> Analytics setup</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-nav">
+                <button class="journey-nav-btn" id="journeyPrev" onclick="document.querySelector('.journey-cards-wrapper').scrollLeft -= 344">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="journey-nav-btn" id="journeyNext" onclick="document.querySelector('.journey-cards-wrapper').scrollLeft += 344">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="journey-cta">
+                <a href="#register" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i>
+                    Reserve Your Seats
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Paths -->
+    <section class="career-section" id="careers">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-briefcase"></i>
+                    CAREER PATHS
+                </div>
+                <h2>Where Can These Skills Take You?</h2>
+                <p>Explore exciting career opportunities with AI and digital marketing skills.</p>
+            </div>
+            
+            <div class="career-grid">
+                <div class="career-card-new">
+                    <div class="career-card-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="career-card-content">
+                        <h3>AI Marketing Specialist</h3>
+                        <p class="career-salary">₹4-12 LPA</p>
+                        <p class="career-desc">Use AI tools to automate campaigns, analyze data, and drive marketing ROI.</p>
+                        <div class="career-skills">
+                            <span>ChatGPT</span>
+                            <span>Automation</span>
+                            <span>Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="career-card-new">
+                    <div class="career-card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="career-card-content">
+                        <h3>Digital Marketing Manager</h3>
+                        <p class="career-salary">₹5-15 LPA</p>
+                        <p class="career-desc">Lead digital strategies across SEO, SEM, social media, and paid campaigns.</p>
+                        <div class="career-skills">
+                            <span>SEO</span>
+                            <span>Google Ads</span>
+                            <span>Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="career-card-new">
+                    <div class="career-card-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="career-card-content">
+                        <h3>Content Creator</h3>
+                        <p class="career-salary">₹3-20 LPA</p>
+                        <p class="career-desc">Create engaging content for brands, build audiences, and monetize creativity.</p>
+                        <div class="career-skills">
+                            <span>Reels</span>
+                            <span>YouTube</span>
+                            <span>Storytelling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="career-card-new">
+                    <div class="career-card-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="career-card-content">
+                        <h3>Social Media Strategist</h3>
+                        <p class="career-salary">₹4-10 LPA</p>
+                        <p class="career-desc">Build brand presence across Instagram, LinkedIn, and Facebook.</p>
+                        <div class="career-skills">
+                            <span>Instagram</span>
+                            <span>LinkedIn</span>
+                            <span>Community</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="career-card-new">
+                    <div class="career-card-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="career-card-content">
+                        <h3>Freelance Marketer</h3>
+                        <p class="career-salary">₹5-25 LPA</p>
+                        <p class="career-desc">Work with multiple clients, set your own hours, and build a flexible career.</p>
+                        <div class="career-skills">
+                            <span>Client Mgmt</span>
+                            <span>Strategy</span>
+                            <span>Delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="career-card-new">
+                    <div class="career-card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="career-card-content">
+                        <h3>Startup Founder</h3>
+                        <p class="career-salary">Unlimited</p>
+                        <p class="career-desc">Launch your own venture using AI-powered tools and digital marketing.</p>
+                        <div class="career-skills">
+                            <span>Product</span>
+                            <span>Growth</span>
+                            <span>Leadership</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="career-cta">
+                <p>Ready to start your career in digital marketing?</p>
+                <a href="#register" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i>
+                    RESERVE YOUR FREE SEAT
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry & Placement Partners -->
+    <section class="partners-section">
+        <div class="container">
+            <div class="partners-header">
+                <div class="partners-badge">
+                    <i class="fas fa-handshake"></i>
+                    OUR PARTNERS
+                </div>
+                <h2 class="partners-title">Industry & Placement Partners</h2>
+            </div>
+        </div>
+        <div class="partners-slider-wrapper">
+            <div class="partners-slider" id="partnersSlider">
+                <img src="placement logo/a2-digital.jpg" alt="A2 Digital" class="partner-logo">
+                <img src="placement logo/aw.jpg" alt="AW" class="partner-logo">
+                <img src="placement logo/bni.jpg" alt="BNI" class="partner-logo">
+                <img src="placement logo/damac.jpg" alt="Damac" class="partner-logo">
+                <img src="placement logo/flipkart.jpg" alt="Flipkart" class="partner-logo">
+                <img src="placement logo/Gera.jpg" alt="Gera" class="partner-logo">
+                <img src="placement logo/kohinoor.jpg" alt="Kohinoor" class="partner-logo">
+                <img src="placement logo/Kumar.jpg" alt="Kumar" class="partner-logo">
+                <img src="placement logo/maccia.jpg" alt="Maccia" class="partner-logo">
+                <img src="placement logo/mantra.jpg" alt="Mantra" class="partner-logo">
+                <img src="placement logo/reliace.jpg" alt="Reliance" class="partner-logo">
+                <img src="placement logo/vilas.jpg" alt="Vilas" class="partner-logo">
+                <img src="placement logo/vtp.jpg" alt="VTP" class="partner-logo">
+                <!-- Duplicate for seamless loop -->
+                <img src="placement logo/a2-digital.jpg" alt="A2 Digital" class="partner-logo">
+                <img src="placement logo/aw.jpg" alt="AW" class="partner-logo">
+                <img src="placement logo/bni.jpg" alt="BNI" class="partner-logo">
+                <img src="placement logo/damac.jpg" alt="Damac" class="partner-logo">
+                <img src="placement logo/flipkart.jpg" alt="Flipkart" class="partner-logo">
+                <img src="placement logo/Gera.jpg" alt="Gera" class="partner-logo">
+                <img src="placement logo/kohinoor.jpg" alt="Kohinoor" class="partner-logo">
+                <img src="placement logo/Kumar.jpg" alt="Kumar" class="partner-logo">
+                <img src="placement logo/maccia.jpg" alt="Maccia" class="partner-logo">
+                <img src="placement logo/mantra.jpg" alt="Mantra" class="partner-logo">
+                <img src="placement logo/reliace.jpg" alt="Reliance" class="partner-logo">
+                <img src="placement logo/vilas.jpg" alt="Vilas" class="partner-logo">
+                <img src="placement logo/vtp.jpg" alt="VTP" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Build Something For Your Portfolio</h2>
+                <p>"Don't just collect certificates. Build proof of what you can do."</p>
+            </div>
+            <div class="portfolio-flow">
+                <div class="portfolio-step">
+                    <i class="fas fa-user"></i>
+                    <h4>Student</h4>
+                </div>
+                <div class="portfolio-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="portfolio-step">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Idea</h4>
+                </div>
+                <div class="portfolio-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="portfolio-step">
+                    <i class="fas fa-magic"></i>
+                    <h4>AI + Marketing</h4>
+                </div>
+                <div class="portfolio-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="portfolio-step">
+                    <i class="fas fa-film"></i>
+                    <h4>Reel / Project</h4>
+                </div>
+                <div class="portfolio-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="portfolio-step">
+                    <i class="fas fa-folder-open"></i>
+                    <h4>Portfolio</h4>
+                </div>
+            </div>
+            <div class="portfolio-mockups">
+                <div class="mockup-card">
+                    <div class="mockup-image">
+                        <img src="portfolio/Resume.webp">
+                    </div>
+                    <div class="mockup-label">Resume</div>
+                </div>
+                <div class="mockup-card">
+                    <div class="mockup-image">
+                        <img src="portfolio/LinkedIn.webp">
+                    </div>
+                    <div class="mockup-label">LinkedIn</div>
+                </div>
+                <div class="mockup-card">
+                    <div class="mockup-image">
+                        <img src="portfolio/instagram.webp">
+                    </div>
+                    <div class="mockup-label">Instagram</div>
+                </div>
+                <div class="mockup-card">
+                    <div class="mockup-image">
+                        <img src="portfolio/Portfolio.webp">
+                    </div>
+                    <div class="mockup-label">Portfolio</div>
+                </div>
+                <div class="mockup-card">
+                    <div class="mockup-image">
+                        <img src="portfolio/Freelancing.webp">
+                    </div>
+                    <div class="mockup-label">Freelancing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery -->
+    <section class="video-gallery-section" id="videoGallery">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge premium-badge">
+                    <i class="fas fa-play-circle"></i>
+                    Video Gallery
+                </div>
+                <h2 class="section-title premium-title">Watch <span class="gradient-text">Teonox in Action</span></h2>
+                <p class="section-subtitle">Get a sneak peek into our workshops, team culture, and the energy we bring to every session.</p>
+            </div>
+        </div>
+        <div class="video-slider-wrap">
+            <div class="video-slider-track" id="videoSliderTrack">
+                <!-- Video 1 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-1.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">10:34</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-2.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">10:54</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-3.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">0:15</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 4 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-4.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">0:15</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 5 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-5.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">1:00</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 6 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-6.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">0:15</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 7 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-1.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">0:15</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+                <!-- Video 8 -->
+                <div class="video-slider-card">
+                    <div class="video-slider-wrapper">
+                        <video poster="teonox-office-2.webp" preload="metadata">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-slider-overlay">
+                            <button class="video-slider-play" onclick="playSliderVideo(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-slider-duration">14:48</div>
+                    </div>
+                    <div class="video-slider-info">
+                    </div>
+                </div>
+            </div>
+            <div class="video-slider-nav">
+                <button class="video-slider-prev" onclick="slideVideos(-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="video-slider-dots" id="videoSliderDots"></div>
+                <button class="video-slider-next" onclick="slideVideos(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2 class="testimonials-heading">What Students Are Saying</h2>
+                <p class="testimonials-subheading">Hear from participants who've experienced the Teonox difference.</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"This workshop completely changed how I think about marketing. The AI tools we learned are game-changers!"</p>
+                        <div class="testimonial-author">
+                            <img src="mentor and social proff/Priya Sharma.webp" alt="Priya Sharma" class="testimonial-avatar-img">
+                            <div>
+                                <div class="testimonial-name">Priya Sharma</div>
+                                <div class="testimonial-college">Delhi University</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The Reel Competition was so much fun! I never thought I could create something like that in just a few hours."</p>
+                        <div class="testimonial-author">
+                            <img src="mentor and social proff/rahul kumar.jpg" alt="Rahul Kumar" class="testimonial-avatar-img">
+                            <div>
+                                <div class="testimonial-name">Rahul Kumar</div>
+                                <div class="testimonial-college">Mumbai University</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"I came in confused about my career. I left with clarity and a portfolio project I'm actually proud of."</p>
+                        <div class="testimonial-author">
+                            <img src="mentor and social proff/Ananya Patel.webp" alt="Ananya Patel" class="testimonial-avatar-img">
+                            <div>
+                                <div class="testimonial-name">Ananya Patel</div>
+                                <div class="testimonial-college">Bangalore Institute</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Best investment I've made in my skills. The hands-on approach and real-world tools made everything click instantly."</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Vikram Joshi" class="testimonial-avatar-img">
+                            <div>
+                                <div class="testimonial-name">Vikram Joshi</div>
+                                <div class="testimonial-college">Pune University</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"I finally understand how AI can help me create content faster. This workshop is a must for every creator!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Nisha Mehta" class="testimonial-avatar-img">
+                            <div>
+                                <div class="testimonial-name">Nisha Mehta</div>
+                                <div class="testimonial-college">Delhi College of Arts</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The mentors actually work in the industry. Their real-life examples and tips are worth more than any online course."</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Arjun Reddy" class="testimonial-avatar-img">
+                            <div>
+                                <div class="testimonial-name">Arjun Reddy</div>
+                                <div class="testimonial-college">Hyderabad University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-nav">
+                <button class="testimonials-btn" id="testPrevBtn"><i class="fas fa-chevron-left"></i></button>
+                <div class="testimonials-dots" id="testDots"></div>
+                <button class="testimonials-btn" id="testNextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="gallery-header">
+                <h2 class="gallery-heading">Inside the Teonox Experience</h2>
+                <p class="gallery-subheading">A glimpse into our workspace, workshops, and community moments.</p>
+            </div>
+        </div>
+        <div class="gallery-slider-wrap">
+            <div class="gallery-slider-track" id="gallerySliderTrack">
+                <div class="gallery-slide">
+                    <img src="teonox-office-1.webp" alt="Teonox Office">
+                    <div class="gallery-slide-label">Teonox Office, Pune</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-office-2.webp" alt="Workshop Session">
+                    <div class="gallery-slide-label">Workshop Session</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-office-3.webp" alt="Student Interaction">
+                    <div class="gallery-slide-label">Student Interaction</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-office-4.webp" alt="AI Tools Demo">
+                    <div class="gallery-slide-label">AI Tools Demo</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-office-5.webp" alt="Learning Space">
+                    <div class="gallery-slide-label">Learning Space</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-office-6.webp" alt="Content Creation">
+                    <div class="gallery-slide-label">Content Creation</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-strip-1.jpg" alt="Community Moments">
+                    <div class="gallery-slide-label">Community Moments</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-strip-2.jpg" alt="Team Collaboration">
+                    <div class="gallery-slide-label">Team Collaboration</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="teonox-strip-3.jpg" alt="Certificate Ceremony">
+                    <div class="gallery-slide-label">Certificate Ceremony</div>
+                </div>
+            </div>
+            <div class="gallery-nav">
+                <button class="gallery-nav-btn" id="galleryPrevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-nav-btn" id="galleryNextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mentors -->
+    <section class="mentors-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    OUR MENTORS
+                </div>
+                <h2>Learn From People Who Actually Work in the Field</h2>
+                <p>Our mentors are industry practitioners, not just theorists.</p>
+            </div>
+            <div class="mentors-grid">
+                <div class="mentor-card">
+                    <div class="mentor-avatar">
+                        <img src="OUR MENTORS/amit.jpg" alt="Amit Manglani">
+                    </div>
+                    <h3>Amit Manglani</h3>
+                    <div class="mentor-role">Founder</div>
+                    <div class="mentor-expertise">Teonox & A2 Digital</div>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-avatar">
+                        <img src="OUR MENTORS/hitiesh.jpeg" alt="Hitesh Chhtralia">
+                    </div>
+                    <h3>Hitesh Chhtralia</h3>
+                    <div class="mentor-role">Centre Operations Leadership</div>
+                    <div class="mentor-expertise">Academics & Marketing</div>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-avatar">
+                        <img src="OUR MENTORS/ayush.jpeg" alt="Ayush Tandon">
+                    </div>
+                    <h3>Ayush Tandon</h3>
+                    <div class="mentor-role">Academics & Marketing</div>
+                    <div class="mentor-expertise">Marketing Strategy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Is This For -->
+    <section class="who-section">
+        <div class="container">
+            <div class="who-container">
+                <div class="who-badge">
+                    <i class="fas fa-users"></i>
+                    WHO IS THIS FOR?
+                </div>
+                <h2 class="who-heading">Not Sure What You Want<br>to Become Yet?</h2>
+                <div class="who-roles">
+                    <div class="who-role">
+                        <i class="fas fa-user-graduate"></i>
+                        Students
+                    </div>
+                    <div class="who-role">
+                        <i class="fas fa-robot"></i>
+                        AI Enthusiasts
+                    </div>
+                    <div class="who-role">
+                        <i class="fas fa-video"></i>
+                        Creators
+                    </div>
+                    <div class="who-role">
+                        <i class="fas fa-bullhorn"></i>
+                        Marketers
+                    </div>
+                    <div class="who-role">
+                        <i class="fas fa-lightbulb"></i>
+                        Entrepreneurs
+                    </div>
+                </div>
+                <p class="who-subtext">That's exactly where you should start.<br><strong>Let TEONOX guide you to your path.</strong></p>
+                <a href="#register" class="who-cta">
+                    Explore Your Path <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Surprise Gift - Premium Design -->
+    <section class="gift-section">
+        <div class="gift-bg-effects">
+            <div class="gift-orb gift-orb-1"></div>
+            <div class="gift-orb gift-orb-2"></div>
+            <div class="gift-orb gift-orb-3"></div>
+            <div class="gift-particles" id="giftParticles"></div>
+        </div>
+        <div class="container">
+            <div class="gift-wrapper">
+                <div class="gift-left">
+                    <div class="gift-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span>EXCLUSIVE</span>
+                    </div>
+                    <h2 class="gift-title">There's One More<br><span class="gift-highlight">Surprise Waiting</span></h2>
+                    <p class="gift-subtitle">Every participant receives a special Teonox surprise gift. But we're not telling you what it is yet...</p>
+                    
+                    <div class="gift-clues">
+                        <div class="gift-clue">
+                            <div class="gift-clue-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Exclusive for workshop attendees only</span>
+                        </div>
+                        <div class="gift-clue">
+                            <div class="gift-clue-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Teonox branded premium merchandise</span>
+                        </div>
+                        <div class="gift-clue">
+                            <div class="gift-clue-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Worth more than the workshop itself</span>
+                        </div>
+                    </div>
+
+                    <a href="#register" class="gift-cta-btn">
+                        <span>Register to Claim</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="gift-right">
+                    <div class="gift-box-scene" onclick="revealGift()">
+                        <div class="gift-glow-ring"></div>
+                        <div class="gift-glow-ring gift-glow-ring-2"></div>
+                        
+                        <div class="gift-3d-box">
+                            <div class="gift-box-lid">
+                                <div class="gift-lid-ribbon-v"></div>
+                                <div class="gift-lid-ribbon-h"></div>
+                            </div>
+                            <div class="gift-box-body">
+                                <div class="gift-body-ribbon-v"></div>
+                                <div class="gift-body-ribbon-h"></div>
+                                <div class="gift-box-content">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                            </div>
+                            <div class="gift-bow">
+                                <div class="gift-bow-loop gift-bow-left"></div>
+                                <div class="gift-bow-loop gift-bow-right"></div>
+                                <div class="gift-bow-center"></div>
+                            </div>
+                        </div>
+
+                        <div class="gift-floating-items">
+                            <div class="gift-float-item gift-float-1">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="gift-float-item gift-float-2">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="gift-float-item gift-float-3">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="gift-float-item gift-float-4">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                        </div>
+
+                        <div class="gift-tap-hint">
+                            <div class="gift-tap-pulse"></div>
+                            <i class="fas fa-hand-pointer"></i>
+                            <span>Tap to Reveal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gift-reveal-modal" id="giftRevealModal">
+                <div class="gift-reveal-content">
+                    <div class="gift-reveal-close" onclick="closeGiftReveal()">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="gift-reveal-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Nice Try! 😄</h3>
+                    <p>The surprise is too good to reveal here. You'll have to attend the workshop to find out!</p>
+                    <div class="gift-reveal-perks">
+                        <div class="gift-perk">
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% Free Workshop</span>
+                        </div>
+                        <div class="gift-perk">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Certificate Included</span>
+                        </div>
+                        <div class="gift-perk">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Surprise Gift</span>
+                        </div>
+                    </div>
+                    <a href="#register" class="gift-reveal-cta" onclick="closeGiftReveal()">
+                        <span>RESERVE MY FREE SEAT</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about the workshop.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        I'm confused about what career path to choose. Can this workshop help me?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. You'll explore different paths across AI, Digital Marketing, Content, Creator Economy, Freelancing, Growth and Entrepreneurship - and understand what each path looks like, what skills you need and what you can do next.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Do I need any prior knowledge of AI or Digital Marketing?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Not at all. The workshop is designed to be beginner-friendly. You'll be introduced to the concepts, tools and real-world applications from the ground up.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Is this workshop only for students who want to become Digital Marketers?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        No. AI and Digital Marketing can open multiple career directions. Whether you're interested in building a career, becoming a creator, freelancing, starting a business or exploring AI, you'll find relevant insights here.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What will I actually learn at the workshop?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You'll explore Business, Digital Marketing and AI through practical concepts and real-world use cases, including content, audience research, growth, online business and AI-powered workflows.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Will I get to actually do something during the workshop?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. This isn't designed to be a sit-and-listen session. You'll take part in interactive activities, practical exercises and an interesting challenge where you can apply your thinking.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What kind of challenge will there be?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        There'll be an interesting real-world challenge or activity designed to get you thinking, creating and applying what you learn. The challenge can vary, so expect something you won't see coming.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Will I actually create something I can use later?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You'll get an opportunity to work on something practical that can potentially be developed further into a project or portfolio piece.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What career options can I explore after learning these skills?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You could explore paths such as AI Marketing, Digital Marketing, Content Creation, Growth, Freelancing, Entrepreneurship and other emerging digital roles.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What will I take home from the workshop?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        More than notes. You'll leave with practical insights, resources, new ideas, exposure to AI tools, a better understanding of possible career paths and clarity on what you can learn or build next.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Will I receive a certificate?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. Every participant receives a Teonox Workshop Certificate.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Is this workshop useful if I want to start my own business?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. You'll explore how AI, Digital Marketing, content, audience building, lead generation and online growth can help you build and grow a business.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What happens after the workshop?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        The goal is to help you understand what to do next - whether that means choosing a career direction, developing a skill, building a project, creating a portfolio or continuing your learning journey.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Think Global Section -->
+    <section class="think-global-section">
+        <div class="think-global-bg">
+            <div class="think-global-orb think-global-orb-1"></div>
+            <div class="think-global-orb think-global-orb-2"></div>
+            <div class="think-global-orb think-global-orb-3"></div>
+        </div>
+        <div class="container">
+            <div class="think-global-content">
+                <div class="think-global-badge">
+                    <i class="fas fa-globe"></i>
+                    <span>THINK BEYOND BORDERS</span>
+                </div>
+                <h2 class="think-global-title">
+                    Don't Think Local.<br>
+                    <span class="think-global-highlight">Think Global.</span>
+                </h2>
+                <p class="think-global-subtitle">The world is no longer limited by geography.</p>
+                <p class="think-global-desc">Your skills can take you beyond your city, your country and your comfort zone.</p>
+                <div class="think-global-cta">
+                    <p class="think-global-question">The world is waiting. <strong>Are you ready?</strong></p>
+                    <a href="#register" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket"></i>
+                        START YOUR JOURNEY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="final-cta-content">
+                <h2>Still Thinking? Here's What You'll Miss:</h2>
+                <div class="final-cta-checks">
+                    <div class="final-check"><i class="fas fa-check"></i> Live AI Tools Demo</div>
+                    <div class="final-check"><i class="fas fa-check"></i> Hands-on Marketing Exercise</div>
+                    <div class="final-check"><i class="fas fa-check"></i> Career Roadmap Session</div>
+                    <div class="final-check"><i class="fas fa-check"></i> Reel Competition with Prizes</div>
+                    <div class="final-check"><i class="fas fa-check"></i> Official Certificate</div>
+                    <div class="final-check"><i class="fas fa-check"></i> Surprise Gift</div>
+                </div>
+                <h3>All this for FREE. Limited seats only.</h3>
+                <a href="#register" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i>
+                    RESERVE MY FREE SPOT NOW
+                </a>
+                <div class="final-trust">
+                    <div class="final-trust-item">
+                        <i class="fas fa-certificate"></i>
+                        Certificate
+                    </div>
+                    <div class="final-trust-item">
+                        <i class="fas fa-video"></i>
+                        Reel Competition
+                    </div>
+                    <div class="final-trust-item">
+                        <i class="fas fa-folder-open"></i>
+                        Portfolio Project
+                    </div>
+                    <div class="final-trust-item">
+                        <i class="fas fa-gift"></i>
+                        Surprise Gift
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="registration-section" id="register">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Reserve Your FREE Seat</h2>
+                    <p>Limited seats available. Fill in your details to secure your spot.</p>
+                    <div class="countdown-bar">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="days">02</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">14</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">32</span>
+                            <span class="countdown-label">Mins</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">45</span>
+                            <span class="countdown-label">Secs</span>
+                        </div>
+                    </div>
+                </div>
+                <form id="registrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="e.g., Rahul Sharma">
+                        </div>
+                    </div>
+                    <div class="form-row form-row-2col">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp Number *</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+91 98765 43210">
+                        </div>
+                    </div>
+                    <div class="form-row form-row-2col">
+                        <div class="form-group">
+                            <label for="location">City / Location *</label>
+                            <input type="text" id="location" name="location" required placeholder="e.g., Pune">
+                        </div>
+                        <div class="form-group">
+                            <label for="qualification">Highest Qualification *</label>
+                            <select id="qualification" name="qualification" required>
+                                <option value="" disabled selected>Select qualification</option>
+                                <option value="12th Pass">12th Pass</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Currently Pursuing Graduation">Currently Pursuing Graduation</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Postgraduate">Postgraduate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row form-row-2col">
+                        <div class="form-group">
+                            <label for="profile">What best describes you? *</label>
+                            <select id="profile" name="profile" required>
+                                <option value="" disabled selected>Select profile</option>
+                                <option value="Student">Student</option>
+                                <option value="Fresher / Recent Graduate">Fresher / Recent Graduate</option>
+                                <option value="Working Professional">Working Professional</option>
+                                <option value="Freelancer">Freelancer</option>
+                                <option value="Entrepreneur">Entrepreneur</option>
+                                <option value="Content Creator">Content Creator</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">Why do you want to attend? *</label>
+                            <select id="reason" name="reason" required>
+                                <option value="" disabled selected>Select reason</option>
+                                <option value="Learn practical marketing skills">Learn practical marketing skills</option>
+                                <option value="Build a career in marketing">Build a career in marketing</option>
+                                <option value="Get a job / internship">Get a job / internship</option>
+                                <option value="Start freelancing">Start freelancing</option>
+                                <option value="Grow my business / personal brand">Grow my business / personal brand</option>
+                                <option value="Explore marketing as a career">Explore marketing as a career</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row form-row-2col">
+                        <div class="form-group">
+                            <label for="source">How did you hear about us? *</label>
+                            <select id="source" name="source" required>
+                                <option value="" disabled selected>Select source</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="College">College</option>
+                                <option value="Friend / Referral">Friend / Referral</option>
+                                <option value="Influencer / Creator">Influencer / Creator</option>
+                                <option value="Google">Google</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="referral">Referral / Influencer Name <span class="label-optional">(Optional)</span></label>
+                            <input type="text" id="referral" name="referral" placeholder="If someone referred you, enter their name">
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <i class="fas fa-check-circle"></i>
+                            RESERVE MY FREE SEAT
+                        </button>
+                        <p class="form-disclaimer">By submitting this form, you agree to be contacted by the Teonox team regarding the workshop.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="stickyCta">
+        <div class="sticky-cta-inner">
+            <div class="sticky-cta-text">
+                <strong class="sticky-cta-title">FREE Business AI + Digital Marketing Workshop</strong>
+                <div class="sticky-cta-benefits">
+                    <span><i class="fas fa-check"></i> 100% Free</span>
+                    <span><i class="fas fa-check"></i> Certificate</span>
+                    <span><i class="fas fa-check"></i> Hands-on</span>
+                </div>
+            </div>
+            <a href="#register" class="btn btn-primary">Reserve FREE Seat</a>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+
+    <!-- Registration Popup Modal -->
+    <div class="register-modal" id="registerModal">
+        <div class="register-modal-overlay" onclick="closeRegisterModal()"></div>
+        <div class="register-modal-content">
+            <button class="register-modal-close" onclick="closeRegisterModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="register-modal-header">
+                <h2>Reserve Your FREE Seat</h2>
+                <p>Limited seats available. Secure your spot in the Business AI + Digital Marketing workshop.</p>
+            </div>
+            <form id="popupRegistrationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="popup-fullName">Full Name *</label>
+                        <input type="text" id="popup-fullName" name="fullName" required placeholder="e.g., Rahul Sharma">
+                    </div>
+                </div>
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
+                        <label for="popup-email">Email Address *</label>
+                        <input type="email" id="popup-email" name="email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="popup-whatsapp">WhatsApp Number *</label>
+                        <input type="tel" id="popup-whatsapp" name="whatsapp" required placeholder="+91 98765 43210">
+                    </div>
+                </div>
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
+                        <label for="popup-location">City / Location *</label>
+                        <input type="text" id="popup-location" name="location" required placeholder="e.g., Pune">
+                    </div>
+                    <div class="form-group">
+                        <label for="popup-qualification">Highest Qualification *</label>
+                        <select id="popup-qualification" name="qualification" required>
+                            <option value="" disabled selected>Select qualification</option>
+                            <option value="12th Pass">12th Pass</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Currently Pursuing Graduation">Currently Pursuing Graduation</option>
+                            <option value="Graduate">Graduate</option>
+                            <option value="Postgraduate">Postgraduate</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
+                        <label for="popup-profile">What best describes you? *</label>
+                        <select id="popup-profile" name="profile" required>
+                            <option value="" disabled selected>Select profile</option>
+                            <option value="Student">Student</option>
+                            <option value="Fresher / Recent Graduate">Fresher / Recent Graduate</option>
+                            <option value="Working Professional">Working Professional</option>
+                            <option value="Freelancer">Freelancer</option>
+                            <option value="Entrepreneur">Entrepreneur</option>
+                            <option value="Content Creator">Content Creator</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="popup-reason">Why do you want to attend? *</label>
+                        <select id="popup-reason" name="reason" required>
+                            <option value="" disabled selected>Select reason</option>
+                            <option value="Learn practical marketing skills">Learn practical marketing skills</option>
+                            <option value="Build a career in marketing">Build a career in marketing</option>
+                            <option value="Get a job / internship">Get a job / internship</option>
+                            <option value="Start freelancing">Start freelancing</option>
+                            <option value="Grow my business / personal brand">Grow my business / personal brand</option>
+                            <option value="Explore marketing as a career">Explore marketing as a career</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
+                        <label for="popup-source">How did you hear about us? *</label>
+                        <select id="popup-source" name="source" required>
+                            <option value="" disabled selected>Select source</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="College">College</option>
+                            <option value="Friend / Referral">Friend / Referral</option>
+                            <option value="Influencer / Creator">Influencer / Creator</option>
+                            <option value="Google">Google</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="popup-referral">Referral / Influencer Name <span class="label-optional">(Optional)</span></label>
+                        <input type="text" id="popup-referral" name="referral" placeholder="If someone referred you, enter their name">
+                    </div>
+                </div>
+                <button type="submit" class="register-modal-submit">
+                    <i class="fas fa-check-circle"></i>
+                    RESERVE MY FREE SEAT
+                </button>
+                <p class="register-modal-disclaimer">By submitting this form, you agree to be contacted by the Teonox team.</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

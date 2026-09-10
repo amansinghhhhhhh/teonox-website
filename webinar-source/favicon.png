@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow" />
+    <script>
+      (function() {
+        try {
+          var currentFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(v) {
+              currentFetch = v;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            var proto = Object.getPrototypeOf(window);
+            if (proto) {
+              Object.defineProperty(proto, 'fetch', {
+                get: function() {
+                  return currentFetch;
+                },
+                set: function(v) {
+                  currentFetch = v;
+                },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (e2) {}
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI Automation &amp; Digital Marketing Courses in Pune | Teonox</title>
+    <meta name="description" content="Upskill with Teonox's AI automation &amp; digital marketing courses in Pune. 100% placement support for students, graduates &amp; career switchers. Enroll today!">
+    <link rel="canonical" href="https://teonox.com/">
+    <meta property="og:title" content="AI Automation &amp; Digital Marketing Courses in Pune | Teonox">
+    <meta property="og:description" content="Upskill with Teonox's AI automation &amp; digital marketing courses in Pune. 100% placement support for students, graduates &amp; career switchers. Enroll today!">
+    <meta property="og:image" content="https://teonox.com/og-default.webp">
+    <meta property="og:url" content="https://teonox.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TEONOX">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" onload="this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <script type="module" crossorigin src="/assets/index-CKeog9Yv.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-D4iuoTGX.js">
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-CKhrLWzL.js">
+    <link rel="modulepreload" crossorigin href="/assets/icons-C0dp4qkk.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-D_z7fNg-.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BG5yvl4T.css">
+  </head>
+  <body class="bg-[#FFFFFF] text-[#201A17] font-['Inter',sans-serif] antialiased selection:bg-[#FF6A2B] selection:text-white">
+    <div id="root"></div>
+  </body>
+</html>
+
