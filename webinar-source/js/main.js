@@ -278,7 +278,7 @@
                     if (res.success) {
                         alert('Thank you for registering! We will contact you with workshop details soon.');
                         popupForm.reset();
-                        closeRegisterModal();
+                        setTimeout(function() { closeRegisterModal(); }, 300);
                     } else {
                         alert('Something went wrong. Please try again.');
                     }
@@ -668,9 +668,6 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
-
-        // Initialize quiz
-        updateQuiz();
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
