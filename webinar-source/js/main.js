@@ -285,7 +285,6 @@
                     if (result.success) {
                         popupForm.reset();
                         successEl.style.display = 'block';
-                        setTimeout(function() { closeRegisterModal(); }, 2500);
                     } else {
                         errorEl.style.display = 'block';
                     }
