@@ -15,7 +15,7 @@ const path = require('path');
 
 const SRC = path.resolve(__dirname, '..', 'webinar-source');
 const DIST = path.resolve(__dirname, '..', 'dist');
-const DEST_ASSETS = path.join(DIST, 'webinar');
+const DEST_ASSETS = path.join(DIST, 'webinar-assets');
 
 function copyDirSync(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -50,9 +50,12 @@ function main() {
     process.exit(1);
   }
 
-  // Clean destination assets directory
-  if (fs.existsSync(DEST_ASSETS)) {
-    fs.rmSync(DEST_ASSETS, { recursive: true, force: true });
+  // Clean destination — remove old directories if they exist
+  for (const oldDir of ['webinar', 'webinar-assets']) {
+    const oldPath = path.join(DIST, oldDir);
+    if (fs.existsSync(oldPath)) {
+      fs.rmSync(oldPath, { recursive: true, force: true });
+    }
   }
 
   // Copy css/, js/, images/ to dist/webinar/
@@ -69,16 +72,16 @@ function main() {
   let html = fs.readFileSync(htmlSrc, 'utf8');
 
   // Update relative paths: href="css/ → href="webinar/css/, src="js/ → src="webinar/js/, etc.
-  html = html.replace(/(href|src|action)="(css\/)/g, '$1="webinar/css/');
-  html = html.replace(/(href|src|action)="(js\/)/g, '$1="webinar/js/');
-  html = html.replace(/(href|src|action)="(images\/)/g, '$1="webinar/images/');
+  html = html.replace(/(href|src|action)="(css\/)/g, '$1="webinar-assets/css/');
+  html = html.replace(/(href|src|action)="(js\/)/g, '$1="webinar-assets/js/');
+  html = html.replace(/(href|src|action)="(images\/)/g, '$1="webinar-assets/images/');
 
   // Write to dist/webinar.html
   const htmlDest = path.join(DIST, 'webinar.html');
   fs.writeFileSync(htmlDest, html, 'utf8');
 
   const assetCount = countFiles(DEST_ASSETS);
-  console.log(`[build-webinar] Built dist/webinar.html + ${assetCount} asset file(s) in dist/webinar/`);
+  console.log(`[build-webinar] Built dist/webinar.html + ${assetCount} asset file(s) in dist/webinar-assets/`);
 }
 
 main();
