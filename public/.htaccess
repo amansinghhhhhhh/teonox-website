@@ -2,6 +2,10 @@
   RewriteEngine On
   RewriteBase /
 
+  # Strip trailing slashes (except root) — keeps /webinar clean, no redirect to /webinar/
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)/$ /$1 [R=301,L]
+
   # SPA fallback: serve index.html for any unknown non-file/non-dir path.
   # (The old /api/* mod_proxy block was removed — Hostinger LiteSpeed does not
   # enable mod_proxy, so /api/* was serving index.html and causing rewrite loops.)

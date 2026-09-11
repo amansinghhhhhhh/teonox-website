@@ -258,6 +258,8 @@
         if (popupForm) {
             popupForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                e.stopPropagation();
+                if (e.defaultPrevented === false) return;
                 var btn = this.querySelector('button[type="submit"]');
                 var originalText = btn.textContent;
                 var successEl = document.getElementById('popupFormSuccessMessage');
@@ -621,6 +623,8 @@
         // Form submission
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            if (e.defaultPrevented === false) return;
             var btn = this.querySelector('button[type="submit"]');
             var originalText = btn.textContent;
             var successEl = document.getElementById('formSuccessMessage');
