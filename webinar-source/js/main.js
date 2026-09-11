@@ -195,18 +195,15 @@ document.addEventListener('DOMContentLoaded', function() {
         clearErrors(form);
         var valid = true;
 
-        // Full Name: required, min 2 chars, text only
+        // Full Name: required, min 3 chars, text only (letters, spaces, hyphens, apostrophes)
         var fullName = form.querySelector('[name="fullName"]');
         if (fullName) {
             var nameVal = fullName.value.trim();
             if (!nameVal) {
                 showError(form, fullName.id, 'Full name is required.');
                 valid = false;
-            } else if (nameVal.length < 2) {
-                showError(form, fullName.id, 'Name must be at least 2 characters.');
-                valid = false;
-            } else if (!/^[a-zA-Z\s.'-]+$/.test(nameVal)) {
-                showError(form, fullName.id, 'Name must contain only letters.');
+            } else if (!/^[a-zA-Z\s'-]{3,}$/.test(nameVal)) {
+                showError(form, fullName.id, 'Name must be at least 3 characters (letters, spaces, hyphens only).');
                 valid = false;
             }
         }
@@ -224,28 +221,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // WhatsApp: required, 10+ digits
+        // WhatsApp: required, exactly 10-15 digits
         var whatsapp = form.querySelector('[name="whatsapp"]');
         if (whatsapp) {
             var digits = whatsapp.value.replace(/\D/g, '');
             if (!digits) {
                 showError(form, whatsapp.id, 'WhatsApp number is required.');
                 valid = false;
-            } else if (digits.length < 10) {
-                showError(form, whatsapp.id, 'Please enter at least 10 digits.');
+            } else if (!/^\d{10,15}$/.test(digits)) {
+                showError(form, whatsapp.id, 'Please enter 10 to 15 digits.');
                 valid = false;
             }
         }
 
-        // Location: required, min 2 chars
+        // Location: required, letters and spaces only, min 2 chars
         var location = form.querySelector('[name="location"]');
         if (location) {
             var locVal = location.value.trim();
             if (!locVal) {
                 showError(form, location.id, 'City / location is required.');
                 valid = false;
-            } else if (locVal.length < 2) {
-                showError(form, location.id, 'Please enter a valid city name.');
+            } else if (!/^[a-zA-Z\s'-]{2,}$/.test(locVal)) {
+                showError(form, location.id, 'Please enter a valid city name (letters only, min 2 characters).');
                 valid = false;
             }
         }
@@ -330,6 +327,14 @@ document.addEventListener('DOMContentLoaded', function() {
             submitForm(inlineForm, 'formSuccessMessage', 'formErrorMessage');
         });
     }
+
+    // ─── Strip non-numeric characters from WhatsApp inputs ───
+
+    document.querySelectorAll('input[name="whatsapp"]').forEach(function(input) {
+        input.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    });
 
     // ─── Open modal on register buttons ───
 
