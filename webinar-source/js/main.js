@@ -500,10 +500,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ─── Countdown Timer ───
 
+    var TARGET_DATE = new Date('2026-09-16T10:00:00+05:30');
+
     function updateCountdown() {
-        var workshopDate = new Date('2026-09-15T10:00:00');
         var now = new Date();
-        var diff = workshopDate - now;
+        var diff = TARGET_DATE - now;
 
         if (diff <= 0) {
             var ids = ['days', 'hours', 'minutes', 'seconds'];
@@ -542,13 +543,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
-        var endDate = new Date();
-        endDate.setDate(endDate.getDate() + 6);
-        endDate.setHours(23, 59, 59, 0);
+        var maxDays = 7;
 
         function tick() {
             var now = new Date();
-            var diff = endDate - now;
+            var diff = TARGET_DATE - now;
 
             if (diff <= 0) {
                 daysEl.textContent = '00';
@@ -573,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var ringMins = document.getElementById('countdownRingMins');
             var ringSecs = document.getElementById('countdownRingSecs');
 
-            if (ring) ring.style.strokeDashoffset = 283 - (days / 6) * 283;
+            if (ring) ring.style.strokeDashoffset = 283 - (days / maxDays) * 283;
             if (ringHours) ringHours.style.strokeDashoffset = 283 - (hours / 24) * 283;
             if (ringMins) ringMins.style.strokeDashoffset = 283 - (minutes / 60) * 283;
             if (ringSecs) ringSecs.style.strokeDashoffset = 283 - (seconds / 60) * 283;
