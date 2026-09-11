@@ -256,40 +256,43 @@
         // Popup form submission
         var popupForm = document.getElementById('popupRegistrationForm');
         if (popupForm) {
-            popupForm.addEventListener('submit', function(e) {
+            popupForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 var btn = this.querySelector('button[type="submit"]');
                 var originalText = btn.textContent;
+                var successEl = document.getElementById('popupFormSuccessMessage');
+                var errorEl = document.getElementById('popupFormErrorMessage');
                 btn.textContent = 'Submitting...';
                 btn.disabled = true;
+                successEl.style.display = 'none';
+                errorEl.style.display = 'none';
 
-                var formData = new FormData(this);
-                var data = Object.fromEntries(formData);
-                data.traffic_channel = data.source;
-                data.source = 'webinar';
-                data.submittedAt = new Date().toISOString();
+                try {
+                    var formData = new FormData(this);
+                    var data = Object.fromEntries(formData);
+                    data.traffic_channel = data.source;
+                    data.source = 'webinar';
+                    data.submittedAt = new Date().toISOString();
 
-                fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                })
-                .then(function(res) { return res.json(); })
-                .then(function(res) {
-                    if (res.success) {
-                        alert('Thank you for registering! We will contact you with workshop details soon.');
+                    var res = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                    });
+                    var result = await res.json();
+
+                    if (result.success) {
                         popupForm.reset();
-                        setTimeout(function() { closeRegisterModal(); }, 300);
+                        successEl.style.display = 'block';
+                        setTimeout(function() { closeRegisterModal(); }, 2500);
                     } else {
-                        alert('Something went wrong. Please try again.');
+                        errorEl.style.display = 'block';
                     }
-                })
-                .catch(function() {
-                    alert('Something went wrong. Please try again.');
-                })
-                .finally(function() {
+                } catch (err) {
+                    errorEl.style.display = 'block';
+                } finally {
                     btn.textContent = originalText;
                     btn.disabled = false;
-                });
+                }
             });
         }
 
@@ -616,39 +619,42 @@
         });
 
         // Form submission
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             var btn = this.querySelector('button[type="submit"]');
             var originalText = btn.textContent;
+            var successEl = document.getElementById('formSuccessMessage');
+            var errorEl = document.getElementById('formErrorMessage');
             btn.textContent = 'Submitting...';
             btn.disabled = true;
+            successEl.style.display = 'none';
+            errorEl.style.display = 'none';
 
-            var formData = new FormData(this);
-            var data = Object.fromEntries(formData);
-            data.traffic_channel = data.source;
-            data.source = 'webinar';
-            data.submittedAt = new Date().toISOString();
+            try {
+                var formData = new FormData(this);
+                var data = Object.fromEntries(formData);
+                data.traffic_channel = data.source;
+                data.source = 'webinar';
+                data.submittedAt = new Date().toISOString();
 
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(res) {
-                if (res.success) {
-                    alert('Thank you for registering! We will contact you with workshop details soon.');
+                var res = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                });
+                var result = await res.json();
+
+                if (result.success) {
                     document.getElementById('registrationForm').reset();
+                    successEl.style.display = 'block';
                 } else {
-                    alert('Something went wrong. Please try again.');
+                    errorEl.style.display = 'block';
                 }
-            })
-            .catch(function() {
-                alert('Something went wrong. Please try again.');
-            })
-            .finally(function() {
+            } catch (err) {
+                errorEl.style.display = 'block';
+            } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
-            });
+            }
         });
 
         // Scroll animations
