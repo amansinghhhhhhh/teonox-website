@@ -141,6 +141,142 @@ document.addEventListener('DOMContentLoaded', function() {
     // Google Apps Script webhook URL
     var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec';
 
+    // ─── Form validation helper ───
+
+    function clearErrors(form) {
+        form.querySelectorAll('.field-error').forEach(function(el) { el.remove(); });
+        form.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('error'); });
+    }
+
+    function showError(form, fieldId, message) {
+        var group = form.querySelector('#' + fieldId);
+        if (!group) return;
+        var formGroup = group.closest('.form-group');
+        if (!formGroup) return;
+        formGroup.classList.add('error');
+        var err = document.createElement('div');
+        err.className = 'field-error';
+        err.textContent = message;
+        err.style.display = 'block';
+        formGroup.appendChild(err);
+    }
+
+    function validateForm(form) {
+        clearErrors(form);
+        var valid = true;
+
+        // Full Name: required, min 2 chars, text only
+        var fullName = form.querySelector('[name="fullName"]');
+        if (fullName) {
+            var nameVal = fullName.value.trim();
+            if (!nameVal) {
+                showError(form, fullName.id, 'Full name is required.');
+                valid = false;
+            } else if (nameVal.length < 2) {
+                showError(form, fullName.id, 'Name must be at least 2 characters.');
+                valid = false;
+            } else if (!/^[a-zA-Z\s.'-]+$/.test(nameVal)) {
+                showError(form, fullName.id, 'Name must contain only letters.');
+                valid = false;
+            }
+        }
+
+        // Email: required, valid pattern
+        var email = form.querySelector('[name="email"]');
+        if (email) {
+            var emailVal = email.value.trim();
+            if (!emailVal) {
+                showError(form, email.id, 'Email address is required.');
+                valid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                showError(form, email.id, 'Please enter a valid email address.');
+                valid = false;
+            }
+        }
+
+        // WhatsApp: required, 10+ digits
+        var whatsapp = form.querySelector('[name="whatsapp"]');
+        if (whatsapp) {
+            var digits = whatsapp.value.replace(/\D/g, '');
+            if (!digits) {
+                showError(form, whatsapp.id, 'WhatsApp number is required.');
+                valid = false;
+            } else if (digits.length < 10) {
+                showError(form, whatsapp.id, 'Please enter at least 10 digits.');
+                valid = false;
+            }
+        }
+
+        // Location: required, min 2 chars
+        var location = form.querySelector('[name="location"]');
+        if (location) {
+            var locVal = location.value.trim();
+            if (!locVal) {
+                showError(form, location.id, 'City / location is required.');
+                valid = false;
+            } else if (locVal.length < 2) {
+                showError(form, location.id, 'Please enter a valid city name.');
+                valid = false;
+            }
+        }
+
+        // Dropdowns: required selection (value must not be empty)
+        var dropdowns = ['qualification', 'profile', 'reason', 'source'];
+        dropdowns.forEach(function(name) {
+            var sel = form.querySelector('[name="' + name + '"]');
+            if (sel && !sel.value) {
+                var label = name.charAt(0).toUpperCase() + name.slice(1);
+                showError(form, sel.id, 'Please select a ' + label.toLowerCase() + '.');
+                valid = false;
+            }
+        });
+
+        // Referral: optional — no validation
+
+        return valid;
+    }
+
+    // ─── Submit handler (shared logic) ───
+
+    function submitForm(form, successId, errorId) {
+        var btn = form.querySelector('button[type="submit"]');
+        var originalText = btn.textContent;
+        var successEl = document.getElementById(successId);
+        var errorEl = document.getElementById(errorId);
+        btn.textContent = 'Submitting...';
+        btn.disabled = true;
+        successEl.style.display = 'none';
+        errorEl.style.display = 'none';
+
+        var formData = new FormData(form);
+        var data = {};
+        formData.forEach(function(value, key) { data[key] = value; });
+        data.traffic_channel = data.source;
+        data.source = 'webinar';
+        data.submittedAt = new Date().toISOString();
+
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(result) {
+            if (result.success) {
+                form.reset();
+                successEl.style.display = 'block';
+            } else {
+                errorEl.style.display = 'block';
+            }
+        })
+        .catch(function() {
+            errorEl.style.display = 'block';
+        })
+        .finally(function() {
+            btn.textContent = originalText;
+            btn.disabled = false;
+        });
+    }
+
     // ─── Popup form submission ───
 
     var popupForm = document.getElementById('popupRegistrationForm');
@@ -148,43 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
         popupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             e.stopPropagation();
-
-            var btn = popupForm.querySelector('button[type="submit"]');
-            var originalText = btn.textContent;
-            var successEl = document.getElementById('popupFormSuccessMessage');
-            var errorEl = document.getElementById('popupFormErrorMessage');
-            btn.textContent = 'Submitting...';
-            btn.disabled = true;
-            successEl.style.display = 'none';
-            errorEl.style.display = 'none';
-
-            var formData = new FormData(popupForm);
-            var data = {};
-            formData.forEach(function(value, key) { data[key] = value; });
-            data.traffic_channel = data.source;
-            data.source = 'webinar';
-            data.submittedAt = new Date().toISOString();
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(result) {
-                if (result.success) {
-                    popupForm.reset();
-                    successEl.style.display = 'block';
-                } else {
-                    errorEl.style.display = 'block';
-                }
-            })
-            .catch(function() {
-                errorEl.style.display = 'block';
-            })
-            .finally(function() {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            });
+            if (!validateForm(popupForm)) return;
+            submitForm(popupForm, 'popupFormSuccessMessage', 'popupFormErrorMessage');
         });
     }
 
@@ -195,43 +296,8 @@ document.addEventListener('DOMContentLoaded', function() {
         inlineForm.addEventListener('submit', function(e) {
             e.preventDefault();
             e.stopPropagation();
-
-            var btn = inlineForm.querySelector('button[type="submit"]');
-            var originalText = btn.textContent;
-            var successEl = document.getElementById('formSuccessMessage');
-            var errorEl = document.getElementById('formErrorMessage');
-            btn.textContent = 'Submitting...';
-            btn.disabled = true;
-            successEl.style.display = 'none';
-            errorEl.style.display = 'none';
-
-            var formData = new FormData(inlineForm);
-            var data = {};
-            formData.forEach(function(value, key) { data[key] = value; });
-            data.traffic_channel = data.source;
-            data.source = 'webinar';
-            data.submittedAt = new Date().toISOString();
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(result) {
-                if (result.success) {
-                    inlineForm.reset();
-                    successEl.style.display = 'block';
-                } else {
-                    errorEl.style.display = 'block';
-                }
-            })
-            .catch(function() {
-                errorEl.style.display = 'block';
-            })
-            .finally(function() {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            });
+            if (!validateForm(inlineForm)) return;
+            submitForm(inlineForm, 'formSuccessMessage', 'formErrorMessage');
         });
     }
 

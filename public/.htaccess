@@ -7,8 +7,8 @@
   RewriteEngine On
   RewriteBase /
 
-  # Serve /webinar cleanly without trailing slash redirect
-  RewriteRule ^webinar$ /webinar/index.html [L]
+  # Serve /webinar as /webinar.html (no physical directory, no trailing slash)
+  RewriteRule ^webinar$ /webinar.html [L]
 
   # SPA fallback: serve index.html for any unknown non-file/non-dir path.
   RewriteRule ^index\.html$ - [L]

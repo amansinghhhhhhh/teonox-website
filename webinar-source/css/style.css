@@ -4731,6 +4731,21 @@
             margin-top: 8px;
         }
 
+        /* Form validation error styles */
+        .field-error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.15);
+        }
+
         /* Video Gallery Section - Vertical Slider */
         .video-gallery-section {
             padding: 100px 0;
