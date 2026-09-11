@@ -1,9 +1,13 @@
+# Prevent mod_dir from adding trailing slash to /webinar
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Prevent mod_dir trailing slash redirect on /webinar (physical directory)
-  DirectorySlash Off
+  # Serve /webinar cleanly without trailing slash redirect
   RewriteRule ^webinar$ /webinar/index.html [L]
 
   # SPA fallback: serve index.html for any unknown non-file/non-dir path.
