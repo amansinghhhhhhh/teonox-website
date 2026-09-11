@@ -1,11 +1,9 @@
 /**
- * Build script: copies the static webinar landing page into dist/.
+ * Build script: copies the entire static webinar landing page into dist/webinar-assets/.
  *
- * Output structure:
- *   dist/webinar.html          ← main HTML (rewrites from /webinar)
- *   dist/webinar/css/style.css ← assets served from /webinar/ path
- *   dist/webinar/js/main.js
- *   dist/webinar/images/
+ * Output:
+ *   dist/webinar.html               ← main HTML (rewrites from /webinar)
+ *   dist/webinar-assets/**           ← ALL assets with /webinar-assets/ root-relative paths
  *
  * Source: ./webinar-source/ (static HTML/CSS/JS, committed to repo)
  */
@@ -58,27 +56,52 @@ function main() {
     }
   }
 
-  // Copy css/, js/, images/ to dist/webinar/
-  const assetDirs = ['css', 'js', 'images'];
-  for (const dir of assetDirs) {
-    const srcDir = path.join(SRC, dir);
-    if (fs.existsSync(srcDir)) {
-      copyDirSync(srcDir, path.join(DEST_ASSETS, dir));
-    }
-  }
+  // Copy entire webinar-source/ to dist/webinar-assets/ (including root-level files)
+  copyDirSync(SRC, DEST_ASSETS);
 
-  // Read index.html and rewrite asset paths from "css/" to "webinar/css/" etc.
+  // Read index.html and rewrite ALL paths to root-relative /webinar-assets/
   const htmlSrc = path.join(SRC, 'index.html');
   let html = fs.readFileSync(htmlSrc, 'utf8');
 
-  // Update relative paths: href="css/ → href="webinar/css/, src="js/ → src="webinar/js/, etc.
-  html = html.replace(/(href|src|action)="(css\/)/g, '$1="webinar-assets/css/');
-  html = html.replace(/(href|src|action)="(js\/)/g, '$1="webinar-assets/js/');
-  html = html.replace(/(href|src|action)="(images\/)/g, '$1="webinar-assets/images/');
+  // Rewrite href="css/... → href="/webinar-assets/css/...
+  html = html.replace(/(href|src|action)="(css\/)/g, '$1="/webinar-assets/css/');
+  // Rewrite href="js/... → href="/webinar-assets/js/...
+  html = html.replace(/(href|src|action)="(js\/)/g, '$1="/webinar-assets/js/');
+  // Rewrite href="assets/... → href="/webinar-assets/assets/...
+  html = html.replace(/(href|src|action)="(assets\/)/g, '$1="/webinar-assets/assets/');
+  // Rewrite src="images/... → src="/webinar-assets/images/...
+  html = html.replace(/(href|src|action)="(images\/)/g, '$1="/webinar-assets/images/');
+
+  // Rewrite root-level image files: src="teonox-... → src="/webinar-assets/teonox-...
+  // Match src=" or href=" followed by a filename (no slash) ending in common image extensions
+  html = html.replace(/(src|href)="(?!https?:\/\/|#|mailto:|\/)([^"\/][^"]*\.(jpg|jpeg|png|webp|gif|svg|ico))"/gi,
+    '$1="/webinar-assets/$2"');
+
+  // Rewrite folder-based paths with spaces: src="Tool logo/... → src="/webinar-assets/Tool logo/...
+  // These have spaces so they start with a capital letter followed by a space and /
+  html = html.replace(/(src|href)="([A-Z][^"\/]*\/)/g, '$1="/webinar-assets/$2');
+
+  // Rewrite url() in inline styles if any
+  html = html.replace(/url\(\s*['"]?(css\/|images\/|assets\/)/g, 'url(/webinar-assets/$1');
 
   // Write to dist/webinar.html
   const htmlDest = path.join(DIST, 'webinar.html');
   fs.writeFileSync(htmlDest, html, 'utf8');
+
+  // Also rewrite CSS url() references to use root-relative paths
+  const cssFiles = [
+    path.join(DEST_ASSETS, 'css', 'style.css')
+  ];
+  for (const cssFile of cssFiles) {
+    if (fs.existsSync(cssFile)) {
+      let css = fs.readFileSync(cssFile, 'utf8');
+      // url('../hero5.jpg') → url('/webinar-assets/hero5.jpg')
+      css = css.replace(/url\(\s*['"]\.\.\/([^'"]+)['"\s*]\)/g, "url('/webinar-assets/$1')");
+      // url('images/...') → url('/webinar-assets/images/...')
+      css = css.replace(/url\(\s*['"](?:\.\.\/)?(images\/[^'"]+)['"\s*]\)/g, "url('/webinar-assets/$1')");
+      fs.writeFileSync(cssFile, css, 'utf8');
+    }
+  }
 
   const assetCount = countFiles(DEST_ASSETS);
   console.log(`[build-webinar] Built dist/webinar.html + ${assetCount} asset file(s) in dist/webinar-assets/`);
