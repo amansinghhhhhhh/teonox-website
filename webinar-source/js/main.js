@@ -48,14 +48,44 @@ function playSliderVideo(btn) {
 function togglePhoneVideo(overlay) {
     var phoneScreen = overlay.closest('.phone-screen');
     var video = phoneScreen.querySelector('.phone-video');
+    var icon = overlay.querySelector('.phone-play-btn i');
 
     if (video.paused) {
         video.play();
-        overlay.classList.add('hidden');
+        overlay.classList.add('playing');
+        icon.classList.remove('fa-play');
+        icon.classList.add('fa-pause');
+        clearTimeout(overlay._fadeTimer);
+        overlay._fadeTimer = setTimeout(function() {
+            overlay.classList.add('faded');
+        }, 2000);
     } else {
         video.pause();
-        overlay.classList.remove('hidden');
+        overlay.classList.remove('playing', 'faded');
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-play');
+        clearTimeout(overlay._fadeTimer);
     }
+}
+
+function initPhoneVideoHover() {
+    var screens = document.querySelectorAll('.phone-screen');
+    screens.forEach(function(screen) {
+        var overlay = screen.querySelector('.phone-video-overlay');
+        if (!overlay) return;
+        screen.addEventListener('mouseenter', function() {
+            overlay.classList.remove('faded');
+        });
+        screen.addEventListener('mouseleave', function() {
+            var video = screen.querySelector('.phone-video');
+            if (video && !video.paused) {
+                clearTimeout(overlay._fadeTimer);
+                overlay._fadeTimer = setTimeout(function() {
+                    overlay.classList.add('faded');
+                }, 1500);
+            }
+        });
+    });
 }
 
 function toggleTopic(card) {
@@ -760,5 +790,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    initPhoneVideoHover();
 
 });

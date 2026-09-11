@@ -2132,9 +2132,18 @@
             transition: opacity 0.3s ease;
         }
 
-        .phone-video-overlay.hidden {
+        .phone-video-overlay.playing {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .phone-video-overlay.playing.faded {
             opacity: 0;
             pointer-events: none;
+        }
+
+        .phone-screen:hover .phone-video-overlay.faded {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .phone-play-btn {
