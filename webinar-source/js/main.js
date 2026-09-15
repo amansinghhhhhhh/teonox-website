@@ -278,22 +278,31 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = new FormData(form);
         var data = {};
         formData.forEach(function(value, key) { data[key] = value; });
-        data.traffic_channel = data.source;
-        data.source = 'webinar';
-        data.submittedAt = new Date().toISOString();
+
+        var payload = {
+            name: data.fullName || '',
+            email: data.email || '',
+            phone: data.whatsapp || '',
+            location: data.location || '',
+            qualification: data.qualification || '',
+            profile: data.profile || '',
+            reason: data.reason || '',
+            source: 'webinar',
+            traffic_channel: data.source || '',
+            referral: data.referral || '',
+            formName: 'webinar_registration',
+            submittedAt: new Date().toISOString()
+        };
 
         fetch(WEBHOOK_URL, {
             method: 'POST',
-            body: JSON.stringify(data),
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
         })
-        .then(function(res) { return res.json(); })
-        .then(function(result) {
-            if (result.success) {
-                form.reset();
-                successEl.style.display = 'block';
-            } else {
-                errorEl.style.display = 'block';
-            }
+        .then(function() {
+            form.reset();
+            successEl.style.display = 'block';
         })
         .catch(function() {
             errorEl.style.display = 'block';

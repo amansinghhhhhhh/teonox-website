@@ -1,7 +1,6 @@
 // Google Apps Script webhook (Google Sheets + Drive + Email).
-// Ported directly from the legacy teonox website. Override via
-// VITE_WEBHOOK_URL when set, otherwise fall back to the exact
-// deployed Apps Script endpoint so no re-configuration is needed.
+// Uses no-cors mode because Apps Script redirects responses through
+// an echo URL, causing CORS read failures in the browser.
 const WEBHOOK =
   import.meta.env.VITE_WEBHOOK_URL ||
   "https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec";
@@ -33,10 +32,8 @@ const fileToBase64 = (file: File): Promise<string> =>
  * Pushes form data to the Google Apps Script webhook, which saves text to
  * the Sheet, stores files in Drive, and sends the email notification.
  *
- * Uses standard CORS so we can read the response and detect failures.
- * Falls back to no-cors only if the server rejects the preflight (legacy
- * Apps Script deployments without doOptions), in which case we assume
- * success on network-level completion since the response is opaque.
+ * Uses no-cors mode to bypass the Apps Script redirect/CORS issue.
+ * Response is opaque — we assume success on network-level completion.
  */
 export const submitForm = async (
   formName: string,
@@ -59,51 +56,39 @@ export const submitForm = async (
     }
   }
 
-  const body = JSON.stringify({ formName, fields: textFields, files });
+  // Map fields to match what doPost expects
+  const payload = {
+    name: textFields.fullName || textFields.name || "",
+    email: textFields.email || "",
+    phone: textFields.whatsapp || textFields.phone || "",
+    location: textFields.location || "",
+    qualification: textFields.qualification || "",
+    profile: textFields.profile || "",
+    reason: textFields.reason || "",
+    source: textFields.source || "",
+    traffic_channel: textFields.traffic_channel || "",
+    referral: textFields.referral || "",
+    formName: formName,
+    submittedAt: new Date().toISOString(),
+    fields: textFields,
+    files,
+  };
+
+  const body = JSON.stringify(payload);
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
 
   try {
-    // Attempt CORS first — allows us to read the response status/body.
-    let res: Response;
-    try {
-      res = await fetch(WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body,
-        signal: controller.signal,
-      });
-    } catch {
-      // CORS preflight rejected — try no-cors (opaque response).
-      // This happens with legacy Apps Script deployments.
-      console.warn("[formService] CORS rejected, retrying with no-cors mode");
-      res = await fetch(WEBHOOK, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body,
-        signal: controller.signal,
-      });
-    }
-
-    // If we got a readable response (CORS mode), validate it.
-    if (res.type === "basic" || res.type === "cors") {
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        console.error(`[formService] Webhook returned ${res.status}:`, text);
-        throw new Error(`Webhook failed with status ${res.status}`);
-      }
-
-      // Some Apps Script deployments return { success: true/false }.
-      const json = await res.json().catch(() => null);
-      if (json && json.success === false) {
-        console.error("[formService] Webhook reported failure:", json);
-        throw new Error(json.message || "Webhook reported failure");
-      }
-    }
-    // If res.type is "opaque" (no-cors), we can't read the body — assume
-    // the request reached the server. Network errors still throw.
+    // Use no-cors directly — Apps Script redirects cause CORS failures.
+    // Response is opaque; we assume success if no network error throws.
+    await fetch(WEBHOOK, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body,
+      signal: controller.signal,
+    });
   } finally {
     clearTimeout(timeout);
   }
