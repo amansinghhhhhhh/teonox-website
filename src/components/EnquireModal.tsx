@@ -163,7 +163,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                   {isCampusVisit ? 'Book Campus Visit' : 'Need Assistance?'}
                 </h3>
                 <p className="font-inter text-[14px] sm:text-[15px] font-[500] text-[#666666] mt-1">
-                  {isCampusVisit ? 'Schedule your visit to TEONOX Kothrud Campus.' : 'Get on a call with our senior career counsellor'}
+                  {isCampusVisit ? 'Schedule your visit to TEONOX Kothrud Campus.' : 'Connect with us to explore the right path for you'}
                 </p>
               </div>
 
