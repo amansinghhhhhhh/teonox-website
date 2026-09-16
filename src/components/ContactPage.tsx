@@ -659,27 +659,6 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
             {/* Embedded Map Section */}
             <motion.div {...fadeUp(0.15)} className="lg:col-span-7 rounded-3xl border border-[#EFEFEF] overflow-hidden shadow-lg min-h-[420px] lg:min-h-[100%] bg-[#FAF8F5] relative group">
-              {/* Floating Google Maps Style Card on top left of map */}
-              <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-md max-w-[280px] hidden sm:block">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <h4 className="font-sora text-sm font-bold text-[#111111]">Revolution Mall</h4>
-                    <p className="font-inter text-[11px] text-[#666666]">Paschimanagri, Kothrud, Pune, 411038</p>
-                    <div className="flex items-center gap-1 mt-1 text-[11px] text-amber-500 font-bold">
-                      <span>4.0 ★★★★★ (554)</span>
-                    </div>
-                  </div>
-                  <a
-                    href="https://maps.app.goo.gl/1EPnX5kVCPbZsTP16"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-8 h-8 rounded-full bg-[#F15A29] text-white flex items-center justify-center shrink-0 hover:scale-105 transition-transform"
-                    title="Get Directions"
-                  >
-                    <Compass className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
 
               <iframe
                 title="TEONOX Campus Location - Revolution Mall Kothrud Pune"
