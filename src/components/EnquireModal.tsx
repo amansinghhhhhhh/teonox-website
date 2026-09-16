@@ -8,6 +8,7 @@ interface EnquireModalProps {
   onClose: () => void;
   onNavigate?: (href: string, label: string) => void;
   defaultCourse?: string;
+  source?: string;
 }
 
 const COURSES = [
@@ -17,7 +18,8 @@ const COURSES = [
   "Specialization in Performance Marketing",
 ];
 
-export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }: EnquireModalProps) {
+export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', source = '' }: EnquireModalProps) {
+  const isCampusVisit = source === 'campus-visit';
   const [selectedCourse, setSelectedCourse] = useState<string>(defaultCourse || '');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -63,7 +65,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedCourse) {
+    if (!isCampusVisit && !selectedCourse) {
       setError('Please select a course');
       return;
     }
@@ -89,7 +91,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
     try {
       // Field keys match the legacy "Home Hero Enquiry" payload so the
       // Sheet columns and email template keep working unchanged.
-      await submitForm('Home Hero Enquiry', {
+      await submitForm(isCampusVisit ? 'Campus Visit Booking' : 'Home Hero Enquiry', {
         'Full Name': fullName,
         'Email Address': email,
         'Phone Number': phone,
@@ -158,10 +160,10 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
             <>
               <div className="mb-6">
                 <h3 id="enquire-modal-title" className="font-sora text-[24px] sm:text-[28px] font-[800] text-[#111111] tracking-tight leading-tight">
-                  Need Assistance?
+                  {isCampusVisit ? 'Book Campus Visit' : 'Need Assistance?'}
                 </h3>
                 <p className="font-inter text-[14px] sm:text-[15px] font-[500] text-[#666666] mt-1">
-                  Get on a call with our senior career counsellor
+                  {isCampusVisit ? 'Schedule your visit to TEONOX Kothrud Campus.' : 'Get on a call with our senior career counsellor'}
                 </p>
               </div>
 
@@ -172,7 +174,8 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Course Select Dropdown */}
+                {/* Course Select Dropdown — hidden for campus visit */}
+                {!isCampusVisit && (
                 <div>
                   <label htmlFor="enquire-course" className="block text-[12px] font-bold text-[#444444] uppercase tracking-wider mb-1.5">
                     Select Course *
@@ -194,6 +197,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
                     <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#0066FF] pointer-events-none" />
                   </div>
                 </div>
+                )}
 
                 {/* Name Input */}
                 <div>
@@ -282,10 +286,14 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '' }
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h3 className="font-sora text-[24px] font-[800] text-[#111111] mb-2">
-                Callback Requested!
+                {isCampusVisit ? 'Campus Visit Requested!' : 'Callback Requested!'}
               </h3>
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
-                Thank you <span className="font-bold text-[#111111]">{fullName}</span>! Our senior career counsellor will call you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> regarding <span className="font-bold text-[#111111]">{selectedCourse}</span>.
+                {isCampusVisit ? (
+                  <>Thank You, <span className="font-bold text-[#111111]">{fullName}</span>, for showing your interest in visiting our campus. One of our team members will connect with you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> to schedule your visit.</>
+                ) : (
+                  <>Thank You, <span className="font-bold text-[#111111]">{fullName}</span>! Our senior career counsellor will call you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> regarding <span className="font-bold text-[#111111]">{selectedCourse}</span>.</>
+                )}
               </p>
               <button type="button"
                 onClick={handleReset}

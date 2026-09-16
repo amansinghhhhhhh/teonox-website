@@ -25,7 +25,7 @@ import { ORG, BASE_URL } from '../utils/schema';
 import { EASE_OUT } from '../utils/easing';
 
 interface ContactPageProps {
-  onEnquireClick?: (topic?: string) => void;
+  onEnquireClick?: (topic?: string, source?: string) => void;
 }
 
 const fadeUp = (delay = 0) => ({
@@ -377,7 +377,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
               <div className="pt-4">
                 <button type="button"
-                  onClick={() => (onEnquireClick ? onEnquireClick('Book Campus Visit') : scrollToForm())}
+                  onClick={() => (onEnquireClick ? onEnquireClick('Book Campus Visit', 'campus-visit') : scrollToForm())}
                   className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
                 >
                   <span>Book Campus Visit</span>

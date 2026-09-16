@@ -203,7 +203,7 @@ export default function App() {
   const [selectedInterest, setSelectedInterest] = useState<string>('');
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState<boolean>(false);
   const [enquireDefaultCourse, setEnquireDefaultCourse] = useState<string>('');
-  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState<boolean>(false);
+  const [enquireSource, setEnquireSource] = useState<string>('');  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState<boolean>(false);
   const [brochureDefaultCourse, setBrochureDefaultCourse] = useState<string>('');
   const [blogLoading, setBlogLoading] = useState<boolean>(initialRoute.blogLoading);
   const requestedPostIdRef = useRef<string | null>(null);
@@ -331,9 +331,10 @@ export default function App() {
     navigate(`/blog/${post.slug || post.id}`);
   };
 
-  const handleEnquireClick = (interestTopic: string = '') => {
+  const handleEnquireClick = (interestTopic: string = '', source: string = '') => {
     setSelectedInterest(interestTopic);
     setEnquireDefaultCourse(interestTopic);
+    setEnquireSource(source);
     setIsEnquireModalOpen(true);
   };
 
@@ -435,7 +436,7 @@ export default function App() {
           />
         ) : currentPage === 'contact' ? (
           /* Dedicated Contact Page */
-          <ContactPage onEnquireClick={(topic) => handleEnquireClick(topic || 'Contact Page Enquiry')} />
+          <ContactPage onEnquireClick={(topic, source) => handleEnquireClick(topic || 'Contact Page Enquiry', source || '')} />
         ) : currentPage === 'about' ? (
           /* Dedicated About Us Brand Storytelling Page */
           <AboutUsPage onEnquireClick={(topic) => handleEnquireClick(topic || 'About TEONOX')} />
@@ -584,6 +585,7 @@ export default function App() {
         onClose={() => setIsEnquireModalOpen(false)}
         onNavigate={(href, label) => handleNavClick(href, label)}
         defaultCourse={enquireDefaultCourse}
+        source={enquireSource}
       />
 
       {/* Download Brochure Popup Form Modal */}
