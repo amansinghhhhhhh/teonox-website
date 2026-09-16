@@ -417,7 +417,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   Message Received!
                 </h3>
                 <p className="font-inter text-[16px] text-[#666666] max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out to TEONOX. Our admissions team will get back to you shortly.
+                  Thank you for reaching out to TEONOX. We will get back to you shortly.
                 </p>
                 <button type="button"
                   onClick={() => {
