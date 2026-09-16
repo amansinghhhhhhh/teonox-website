@@ -292,7 +292,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                 {isCampusVisit ? (
                   <>Thank You, <span className="font-bold text-[#111111]">{fullName}</span>, for showing your interest in visiting our campus. One of our team members will connect with you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> to schedule your visit.</>
                 ) : (
-                  <>Thank You, <span className="font-bold text-[#111111]">{fullName}</span>! Our senior career counsellor will call you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> regarding <span className="font-bold text-[#111111]">{selectedCourse}</span>.</>
+                  <>Thank You, <span className="font-bold text-[#111111]">{fullName}</span>! We will contact you shortly on <span className="font-bold text-[#F15A29]">+91 {phone}</span> regarding <span className="font-bold text-[#111111]">{selectedCourse}</span>.</>
                 )}
               </p>
               <button type="button"
