@@ -220,11 +220,11 @@ mode: progOrTitle.mode || 'On Campus, Pune',
         <section id="programs-grid-section" className="space-y-8">
           <div className="text-center max-w-4xl mx-auto space-y-4">
             <h1 className="font-sora text-[32px] sm:text-[44px] md:text-[50px] font-[800] text-[#111111] tracking-tight leading-[1.15]">
-              Kickstart your career with our programs
+              Kickstart your career with our programmes
             </h1>
 
             <p className="font-inter text-[16px] sm:text-[18px] text-[#555555] leading-relaxed">
-              Our programs have helped thousands launch careers in tech
+              Our programmes have helped thousands launch careers in tech
             </p>
 
             {/* Program Key Highlights */}
