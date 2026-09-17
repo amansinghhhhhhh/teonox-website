@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ─── Countdown Timer ───
 
-    var TARGET_DATE = new Date('2026-09-16T10:00:00+05:30');
+    var TARGET_DATE = new Date('2026-09-26T10:00:00+05:30');
 
     function updateCountdown() {
         var now = new Date();
