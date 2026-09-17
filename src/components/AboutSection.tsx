@@ -45,7 +45,7 @@ export function AboutSection({ onConnect }: AboutSectionProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
-                For over 12 years, A2 Digital has partnered with businesses to help them grow in an increasingly digital world. Along the way, we hired fresh graduates, trained teams, worked with ambitious professionals, and helped organizations scale.
+                For over 12 years, A2 Digital has partnered with businesses to help them grow in an increasingly digital world. Along the way, we hired fresh graduates, trained teams, worked with ambitious professionals, and helped organisations scale.
               </motion.p>
 
               <motion.p

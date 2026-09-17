@@ -27,7 +27,7 @@ const TEONOX_VIDEOS: MomentVideo[] = [
   { id: 'v1', title: 'Live AI Campaign Build & Performance Strategy', videoUrl: 'https://www.instagram.com/reel/DV_KQluArs_/embed', thumbnail: momentThumb1 },
   { id: 'v2', title: 'Real Brand Pitch & Student Case Presentation', videoUrl: 'https://www.instagram.com/reel/DWN5rOAjMts/embed', thumbnail: momentThumb2 },
   { id: 'v3', title: 'Mentorship & 1-on-1 Growth Guidance Session', videoUrl: 'https://www.instagram.com/reel/DWf3dceghLh/embed', thumbnail: momentThumb3 },
-  { id: 'v4', title: 'Analytics Breakdown & Funnel Optimization', videoUrl: 'https://www.instagram.com/reel/DYWhSgig_gL/embed', thumbnail: momentThumb4 },
+  { id: 'v4', title: 'Analytics Breakdown & Funnel Optimisation', videoUrl: 'https://www.instagram.com/reel/DYWhSgig_gL/embed', thumbnail: momentThumb4 },
 ];
 
 export function MomentsSection() {

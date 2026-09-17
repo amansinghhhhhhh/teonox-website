@@ -69,8 +69,8 @@ export const FAQ_DATA: FAQItem[] = [
     a: "Companies are investing in this training to reduce manual workload, speed up repetitive processes, and keep teams competitive as AI adoption becomes standard across marketing, sales, and operations functions.",
   },
   {
-    q: 'Can corporate AI training be customized for a specific team?',
-    a: "Yes, corporate AI automation training is typically customized based on the team's function (marketing, sales, operations, etc.) and the specific tools or workflows the business already uses.",
+    q: 'Can corporate AI training be customised for a specific team?',
+    a: "Yes, corporate AI automation training is typically customised based on the team's function (marketing, sales, operations, etc.) and the specific tools or workflows the business already uses.",
   },
   {
     q: 'What is a Gen AI school of marketing in Pune?',

@@ -17,7 +17,7 @@ export function HireFromUsSection({ onEnquireHire }: HireFromUsSectionProps) {
       id: '01',
       title: 'Digital Marketing & Growth Professionals',
       subtitle: 'Performance Marketing & SEO',
-      tags: ['Meta & Google Ads', 'SEO Optimization', 'Growth Loops'],
+      tags: ['Meta & Google Ads', 'SEO Optimisation', 'Growth Loops'],
       icon: TrendingUp,
     },
     {

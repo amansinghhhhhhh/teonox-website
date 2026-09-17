@@ -170,7 +170,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
     {
       title: "Resume",
       code: "04",
-      focus: "ATS-optimized executive profile & metrics formatting",
+      focus: "ATS-optimised executive profile & metrics formatting",
       detail: "Structuring your experience with quantifiable business outcomes, commercial math, and tool stack highlights.",
       icon: FileText,
       image: placementResumeImg
@@ -178,7 +178,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
     {
       title: "Mock Interview",
       code: "05",
-      focus: "1-on-1 strategy defense with industry HR heads",
+      focus: "1-on-1 strategy defence with industry HR heads",
       detail: "Defending campaign choices, handling stress scenarios, and answering high-stakes commercial growth questions.",
       icon: Users,
       image: placementMockInterviewImg
@@ -196,8 +196,8 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
   // Career Roadmap Stages
   const roadmapStages = [
     { name: "Learn", code: "01", detail: "Foundational marketing principles, consumer math & AI tools", highlight: "Core Competency" },
-    { name: "Specialize", code: "02", detail: "Deep channel mastery in SEO, PPC, Analytics or Content", highlight: "Channel Authority" },
-    { name: "Gain Experience", code: "03", detail: "Executing real client budgets & live optimization loops", highlight: "Real-World Practice" },
+    { name: "Specialise", code: "02", detail: "Deep channel mastery in SEO, PPC, Analytics or Content", highlight: "Channel Authority" },
+    { name: "Gain Experience", code: "03", detail: "Executing real client budgets & live optimisation loops", highlight: "Real-World Practice" },
     { name: "Apply", code: "04", detail: "Solving complex commercial growth & acquisition problems", highlight: "Strategic Thinking" },
     { name: "Build Expertise", code: "05", detail: "Developing custom attribution & CRO growth frameworks", highlight: "Advanced Mastery" },
     { name: "Grow", code: "06", detail: "Scaling campaigns, managing team budgets & cross-functional strategy", highlight: "Leadership Scaling" },
@@ -303,7 +303,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
     {
       title: "Websites",
       icon: Globe,
-      desc: "Responsive conversion-optimized landings, UX wireframes, lead magnet triggers & analytics pixel mapping.",
+      desc: "Responsive conversion-optimised landings, UX wireframes, lead magnet triggers & analytics pixel mapping.",
       img: portfolioWebsitesImg,
       bullets: ["High-Converting Wireframes", "Custom CTA Placements", "Tag Manager Integration", "Speed & Accessibility"]
     },
@@ -317,7 +317,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
     {
       title: "Social Media Strategies",
       icon: Users,
-      desc: "Brand voice positioning, community growth playbooks, influencer brief templates & organic reach optimization.",
+      desc: "Brand voice positioning, community growth playbooks, influencer brief templates & organic reach optimisation.",
       img: portfolioSocialMediaImg,
       bullets: ["Audience Growth Playbooks", "Creative Asset Specs", "Engagement Funnel", "Influencer ROI Tracker"]
     },
@@ -801,7 +801,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               </p>
 
               <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed font-medium">
-                Compensation in Digital Marketing varies significantly based on skills, specialization, experience, city, company, portfolio and demonstrated performance.
+                Compensation in Digital Marketing varies significantly based on skills, specialisation, experience, city, company, portfolio and demonstrated performance.
               </p>
 
               <p className="font-inter text-base sm:text-lg text-[#CCCCCC] leading-relaxed font-medium">
@@ -820,7 +820,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                 <div className="space-y-4">
                   {[
                     { tier: "Foundational Specialist", focus: "Tool execution & channel campaigns", growth: "Core Entry Level", bar: 40 },
-                    { tier: "Performance Strategist", focus: "ROAS optimization & funnel math", growth: "Accelerated Growth", bar: 70 },
+                    { tier: "Performance Strategist", focus: "ROAS optimisation & funnel math", growth: "Accelerated Growth", bar: 70 },
                     { tier: "Growth Lead & Consultant", focus: "Commercial strategy & team leadership", growth: "High Impact", bar: 95 }
                   ].map((item, idx) => (
                     <motion.div key={idx} {...fadeUp(0.1 * idx)} className="p-5 rounded-2xl bg-[#1A1A1A] border border-[#2B2B2B] hover:border-[#F15A29]/50 transition-colors">
@@ -971,10 +971,10 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               <motion.div {...fadeUp(0.1)} className="card-premium p-8 rounded-3xl bg-[#FAF8F5] border border-[#EBE4DC] space-y-4 shadow-md hover:border-[#F15A29] transition-colors">
                 <div className="flex items-center gap-3 text-[#0A66C2]">
                   <Linkedin className="w-7 h-7" />
-                  <span className="font-sora text-lg font-extrabold text-[#111111]">LinkedIn Profile Optimization</span>
+                  <span className="font-sora text-lg font-extrabold text-[#111111]">LinkedIn Profile Optimisation</span>
                 </div>
                 <p className="font-inter text-sm text-[#555555] leading-relaxed">
-                  Positioning headline, keyword optimization for recruiter searchability, and project portfolio attachments.
+                  Positioning headline, keyword optimisation for recruiter searchability, and project portfolio attachments.
                 </p>
               </motion.div>
 

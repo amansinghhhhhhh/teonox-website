@@ -138,14 +138,14 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
             'Customer support',
           ]}
         />
-        <p>These partners are required to protect your information and use it only for authorized purposes.</p>
+        <p>These partners are required to protect your information and use it only for authorised purposes.</p>
         <p>We may also disclose information if required by law or to protect our legal rights.</p>
       </LegalSection>
 
       <LegalSection id="pp-5" number={5} title="Data Security">
         <p>
-          We implement reasonable administrative, technical, and organizational measures to safeguard your personal
-          information against unauthorized access, misuse, alteration, disclosure, or destruction.
+          We implement reasonable administrative, technical, and organisational measures to safeguard your personal
+          information against unauthorised access, misuse, alteration, disclosure, or destruction.
         </p>
         <p>
           While we strive to use commercially acceptable means to protect your information, no method of transmission
@@ -163,7 +163,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
             'Maintain business records',
           ]}
         />
-        <p>Once information is no longer required, it is securely deleted or anonymized where reasonably practicable.</p>
+        <p>Once information is no longer required, it is securely deleted or anonymised where reasonably practicable.</p>
       </LegalSection>
 
       <LegalSection id="pp-7" number={7} title="Third-Party Services">

@@ -23,7 +23,7 @@ export function WorkWithUsSection({ onEnquire }: WorkWithUsSectionProps) {
       num: '03',
       icon: Star,
       title: 'Long-term collaboration mindset',
-      desc: 'Build lasting partnerships with practitioners, advisors, and scaling industry organizations.',
+      desc: 'Build lasting partnerships with practitioners, advisors, and scaling industry organisations.',
     },
     {
       num: '04',

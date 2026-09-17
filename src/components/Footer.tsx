@@ -243,7 +243,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 </h4>
               </div>
               <p className="font-inter text-[14px] text-[#9E9082] leading-relaxed">
-                Career-focused specializations built for real-world outcomes.
+                Career-focused specialisations built for real-world outcomes.
               </p>
               <a
                 href="/programs"

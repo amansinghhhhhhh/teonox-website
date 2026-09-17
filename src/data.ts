@@ -36,8 +36,8 @@ export const PROGRAMS_DATA = {
     },
     {
       id: "performance-marketing",
-      title: "Specialization in Performance Marketing",
-      repeatedTitle: "Specialization in Performance Marketing",
+      title: "Specialisation in Performance Marketing",
+      repeatedTitle: "Specialisation in Performance Marketing",
       description: "Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling.",
       duration: "45 Days",
       durationText: "45 Days | 2 Live Ad Campaigns",
@@ -52,8 +52,8 @@ export const PROGRAMS_DATA = {
     },
     {
       id: "seo-specialization",
-      title: "Specialization in Search Engine Optimization",
-      repeatedTitle: "Specialization in Search Engine Optimization",
+      title: "Specialisation in Search Engine Optimisation",
+      repeatedTitle: "Specialisation in Search Engine Optimisation",
       description: "Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth.",
       duration: "45 Days",
       durationText: "45 Days | 2 Technical Audits",
@@ -68,8 +68,8 @@ export const PROGRAMS_DATA = {
     },
     {
       id: "social-media-marketing",
-      title: "Specialization in Social Media Marketing",
-      repeatedTitle: "Specialization in Social Media Marketing",
+      title: "Specialisation in Social Media Marketing",
+      repeatedTitle: "Specialisation in Social Media Marketing",
       description: "Social Media Strategy, Content Creation, Community Management, Analytics & Paid Social.",
       duration: "45 Days",
       durationText: "45 Days | 2 Live Campaigns",
@@ -140,7 +140,7 @@ export const LEARNING_EXPERIENCE_DATA = {
     {
       tag: "Agency ExposureAgency",
       title: "Agency & Industry Exposure",
-      description: "Gain first-hand exposure to agencies, startups, and growth-focused organizations through visits and interactions."
+      description: "Gain first-hand exposure to agencies, startups, and growth-focused organisations through visits and interactions."
     },
     {
       tag: "Portfolio & Career DevelopmentPortfolio",
@@ -155,7 +155,7 @@ export const ABOUT_DATA = {
   heading: "12+ Years in Industry Led Us Here.",
   intro: "TEONOX wasn't created in a classroom.",
   paragraphs: [
-    "For over 12 years, A2 Digital has partnered with businesses to help them grow in an increasingly digital world. Along the way, we hired fresh graduates, trained teams, worked with ambitious professionals, and helped organizations scale.",
+    "For over 12 years, A2 Digital has partnered with businesses to help them grow in an increasingly digital world. Along the way, we hired fresh graduates, trained teams, worked with ambitious professionals, and helped organisations scale.",
     "And we kept noticing the same pattern.",
     "Many candidates had qualifications. Few had practical business exposure.",
     "Most understood concepts. Very few understood execution.",
@@ -303,7 +303,7 @@ export const INSIGHTS_DATA = {
       image: digitalMarketingRoadmapImg,
       content: [
         "Marketing in the digital age is one of the fastest-growing professions around the world. From startups to multi-national enterprises, companies require growth marketers who can drive measurable business results.",
-        "A successful roadmap begins with understanding foundational marketing psychology, mastering paid media algorithms across Google and Meta, optimizing organic search through technical SEO, and utilizing AI for rapid content & campaign scaling.",
+        "A successful roadmap begins with understanding foundational marketing psychology, mastering paid media algorithms across Google and Meta, optimising organic search through technical SEO, and utilising AI for rapid content & campaign scaling.",
         "Follow this structured pathway to transition from absolute beginner to an execution-focused digital marketing specialist."
       ]
     },
@@ -318,8 +318,8 @@ export const INSIGHTS_DATA = {
       image: aiSkillsImg,
       content: [
         "Artificial Intelligence (AI) is not just for software engineers or large tech conglomerates. In 2026, AI Literacy has become a baseline requirement for professionals across marketing, sales, strategy, and operations.",
-        "Mastering prompt engineering, workflow automation, autonomous AI agents, and data synthesis will set you apart in any modern organization.",
-        "Discover how learning these essential AI skills today prepares you to lead growth initiatives and maximize your daily output."
+        "Mastering prompt engineering, workflow automation, autonomous AI agents, and data synthesis will set you apart in any modern organisation.",
+        "Discover how learning these essential AI skills today prepares you to lead growth initiatives and maximise your daily output."
       ]
     }
   ] as BlogPost[]

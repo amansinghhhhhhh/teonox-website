@@ -59,9 +59,9 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
   const programOptions = [
     'Business Digital Marketing With AI',
-    'Specialization in Search Engine Optimization',
-    'Specialization in Social Media Marketing',
-    'Specialization in Performance Marketing',
+    'Specialisation in Search Engine Optimisation',
+    'Specialisation in Social Media Marketing',
+    'Specialisation in Performance Marketing',
     'Career Counselling & Admissions Enquiry',
     'Campus Visit Booking',
     'Hire Talent / Corporate Training',

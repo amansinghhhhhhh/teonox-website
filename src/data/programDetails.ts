@@ -171,8 +171,8 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Business Digital Marketing With AI is the flagship 6-month certification program at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
       main: 'The program covers the full digital marketing stack: marketing fundamentals and strategy, SEO and search, paid advertising across Google and Meta, social media and content, email and automation, web analytics, and AI-powered marketing workflows. Throughout, learners work on real projects, build portfolios and prepare for internships, jobs and freelancing.',
       expanded: [
-        'AI is embedded throughout the curriculum — from content and creative generation to campaign optimization, analytics and reporting — so learners graduate ready for AI-augmented marketing roles.',
-        'The final months focus on business growth: measurement, conversion optimization, customer journeys and growth strategy, followed by placement and career support.'
+        'AI is embedded throughout the curriculum — from content and creative generation to campaign optimisation, analytics and reporting — so learners graduate ready for AI-augmented marketing roles.',
+        'The final months focus on business growth: measurement, conversion optimisation, customer journeys and growth strategy, followed by placement and career support.'
       ]
     },
     designedFor: [
@@ -228,7 +228,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'Learn SEO, Google Ads, Meta Ads, social media, email, analytics and business growth',
       'Hands-on projects and portfolio building from week one',
       'Industry-recognized TEONOX certification plus support for Google, Meta, HubSpot and other certifications',
-      'Placement assistance, resume and LinkedIn optimization and interview preparation',
+      'Placement assistance, resume and LinkedIn optimisation and interview preparation',
       'Internship and freelancing opportunities for eligible learners',
       'On-campus immersive training at TEONOX, Pune with mentors and community',
       'Eligible for 12th-pass students, graduates and working professionals',
@@ -255,7 +255,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         heading: 'Market & Grow Your Business',
         bullets: [
           'Understand how to acquire and retain customers across search, social and paid channels.',
-          'Use analytics and AI to make smarter marketing decisions and optimize spend.',
+          'Use analytics and AI to make smarter marketing decisions and optimise spend.',
           'Build sustainable marketing systems instead of depending on agencies for everything.'
         ]
       },
@@ -290,7 +290,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Run Google Ads and Meta Ads campaigns end to end',
         'Manage social media, content and community programs',
         'Set up email marketing and automation flows',
-        'Use web analytics to measure and optimize performance',
+        'Use web analytics to measure and optimise performance',
         'Apply AI tools across content, creative, analytics and campaigns',
         'Design customer journeys and conversion-focused funnels',
         'Present data-backed recommendations to teams and clients',
@@ -343,7 +343,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       intro:
         'Eligible learners can receive career support for digital marketing and related roles through tailored career services:',
       bullets: [
-        'Resume and LinkedIn optimization for marketing roles',
+        'Resume and LinkedIn optimisation for marketing roles',
         'Portfolio preparation featuring live project case studies',
         'Interview preparation and marketing scenario practice',
         'Mock interviews with marketing and hiring professionals',
@@ -414,7 +414,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '6. Will I learn AI?',
-        a: 'Yes. AI is embedded throughout the program — content and creative generation, campaign optimization, analytics, reporting and marketing operations.'
+        a: 'Yes. AI is embedded throughout the program — content and creative generation, campaign optimisation, analytics, reporting and marketing operations.'
       },
       {
         q: '7. Will I get a certification?',
@@ -426,7 +426,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '9. Does the program offer placement support?',
-        a: 'Eligible learners receive placement assistance including resume and LinkedIn optimization, interview preparation, mock interviews and job opportunity assistance through TEONOX hiring networks.'
+        a: 'Eligible learners receive placement assistance including resume and LinkedIn optimisation, interview preparation, mock interviews and job opportunity assistance through TEONOX hiring networks.'
       },
       {
         q: '10. Can I freelance after completing this program?',
@@ -437,22 +437,22 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         a: 'It is for students and graduates, working professionals, career switchers, business owners, freelancers and job seekers who want a complete digital marketing skill set.'
       },
       {
-        q: '12. Why choose the flagship program over a specialization?',
-        a: 'The flagship program covers the entire digital marketing stack in one 6-month path, while specializations focus on one advanced area like SEO, Social Media or Performance Marketing.'
+        q: '12. Why choose the flagship program over a specialisation?',
+        a: 'The flagship program covers the entire digital marketing stack in one 6-month path, while specialisations focus on one advanced area like SEO, Social Media or Performance Marketing.'
       }
     ]
   },
   'social-media-marketing': {
     id: 'social-media-marketing',
-    programTitle: 'SPECIALIZATION IN SOCIAL MEDIA MARKETING',
+    programTitle: 'SPECIALISATION IN SOCIAL MEDIA MARKETING',
     badge: '8-WEEK ADVANCED SPECIALIZATION PROGRAM',
     subHeading: 'Advanced Content Systems, Algorithms, Communities, Influence & Social Commerce',
     duration: '8 Weeks',
     mode: 'On Campus, Pune',
-    heroIntro: 'Social Media Growth Engineering is an intensive 8-week advanced specialization program designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
+    heroIntro: 'Social Media Growth Engineering is an intensive 8-week advanced specialisation program designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
     heroImage: imgSocialMediaMktg,
     overview: {
-      highlight: 'Social Media Growth Engineering is an intensive 8-week advanced specialization program designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
+      highlight: 'Social Media Growth Engineering is an intensive 8-week advanced specialisation program designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
       main: 'The program goes beyond routine posting and platform management. Learners explore social media algorithms, advanced audience intelligence, content engineering, short-form video growth, persuasion psychology, personal branding, influencer marketing, community-led growth, Social SEO, social commerce, analytics and growth experimentation across major platforms.',
       expanded: [
         'The program also integrates AI-powered content creation, social listening, automation, CRM workflows, chatbot integration and AI agents, helping learners build scalable and data-driven social media systems.',
@@ -463,7 +463,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       {
         title: 'Digital Marketing Students',
         icon: GraduationCap,
-        text: 'Students seeking a Social Media specialization to build strategic careers in Content Strategy, Creator Marketing and Growth.'
+        text: 'Students seeking a Social Media specialisation to build strategic careers in Content Strategy, Creator Marketing and Growth.'
       },
       {
         title: 'Social Media Executives & Managers',
@@ -473,7 +473,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       {
         title: 'Content Creators & Influencers',
         icon: Video,
-        text: 'Creators looking to engineer viral reach, audience retention, brand partnerships and digital monetization.'
+        text: 'Creators looking to engineer viral reach, audience retention, brand partnerships and digital monetisation.'
       },
       {
         title: 'Digital Marketing Professionals',
@@ -503,7 +503,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       {
         title: 'Personal Brands & Aspiring Creators',
         icon: Users,
-        text: 'Individuals building niche authority, digital presence, audience trust and monetization systems.'
+        text: 'Individuals building niche authority, digital presence, audience trust and monetisation systems.'
       }
     ],
     keyReasons: [
@@ -512,8 +512,8 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'Master short-form video, hooks, retention curves and viral rewatch engineering',
       'Develop personal brands, founder-led content and industry thought leadership',
       'Learn influencer and creator growth strategies, outreach and campaign attribution',
-      'Build, engage and monetize active online brand communities',
-      'Master Social SEO, keyword indexing and platform discovery optimization',
+      'Build, engage and monetise active online brand communities',
+      'Master Social SEO, keyword indexing and platform discovery optimisation',
       'Understand social commerce, shoppable posts, conversational selling and revenue generation',
       'Use analytics, experimentation, social listening and brand intelligence for growth',
       'Integrate AI-powered content creation, chatbots and automation into social media operations'
@@ -522,16 +522,16 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     benefits: {
       students: {
         title: 'For Students',
-        intro: 'Develop an advanced specialization for careers in Social Media Marketing, Content Strategy, Influencer Marketing, Community Management and Creator Marketing.',
+        intro: 'Develop an advanced specialisation for careers in Social Media Marketing, Content Strategy, Influencer Marketing, Community Management and Creator Marketing.',
         heading: 'The program empowers students to:',
         bullets: [
           'Think strategically about audiences, algorithms, content, growth and analytics instead of simply operating social media accounts',
-          'Develop an advanced specialization for high-demand digital careers',
+          'Develop an advanced specialisation for high-demand digital careers',
           'Build scalable multi-platform content distribution pipelines',
           'Master short-form video production, viral hooks and retention pacing',
           'Build a portfolio of real social media growth campaigns and audits',
           'Learn creator positioning, influencer outreach and campaign management',
-          'Optimize brand profiles and content for Social SEO and platform search',
+          'Optimise brand profiles and content for Social SEO and platform search',
           'Build and nurture active online communities across platforms',
           'Apply AI tools for scriptwriting, image/video generation and content repurposing',
           'Measure social media ROI, velocity, reach and conversion metrics'
@@ -548,7 +548,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
           'Harness social commerce, shoppable posts and conversational selling',
           'Implement automated social-to-CRM workflows and lead capture chatbots',
           'Leverage social listening to monitor brand sentiment and customer insights',
-          'Monetize online brand communities and customer advocacy',
+          'Monetise online brand communities and customer advocacy',
           'Use AI tools to scale content production without expanding headcount',
           'Drive organic discovery with Social SEO on Instagram, YouTube and TikTok',
           'Make informed marketing budget decisions across organic and creator channels'
@@ -573,7 +573,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       }
     },
     prerequisites: {
-      intro: 'This is an advanced specialization program, so basic knowledge of Digital Marketing and Social Media Marketing is recommended.',
+      intro: 'This is an advanced specialisation program, so basic knowledge of Digital Marketing and Social Media Marketing is recommended.',
       bullets: [
         'Major social media platforms (Instagram, Facebook, LinkedIn, YouTube, X, TikTok, etc.)',
         'Basic content creation and publishing workflows',
@@ -592,8 +592,8 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Engineer short-form video for maximum reach, watch time and retention',
         'Develop personal branding and executive thought leadership strategies',
         'Plan, execute and measure influencer and creator marketing campaigns',
-        'Build and monetize community-led growth systems',
-        'Optimize social content for Social SEO, hashtag architecture and search discovery',
+        'Build and monetise community-led growth systems',
+        'Optimise social content for Social SEO, hashtag architecture and search discovery',
         'Develop social commerce, shoppable content and conversational sales funnels',
         'Measure social media ROI, campaign velocity and growth metrics',
         'Use social listening tools for brand intelligence and market monitoring',
@@ -650,9 +650,9 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     placementAssistance: {
       intro: 'Eligible learners receive career support and guidance to position themselves for high-growth roles in social media, creator economy, and brand management.',
       bullets: [
-        'Resume and LinkedIn optimization tailored for social growth roles',
+        'Resume and LinkedIn optimisation tailored for social growth roles',
         'Social Media growth portfolio development and case study creation',
-        'Interview preparation and campaign defense strategy',
+        'Interview preparation and campaign defence strategy',
         'Mock interviews with industry social leads',
         'Career guidance and personal branding positioning',
         'Job opportunity assistance through TEONOX hiring partner connections'
@@ -702,7 +702,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     faqs: [
       {
         q: '1. What is Social Media Growth Engineering?',
-        a: 'It is an 8-week advanced specialization focused on systematically growing audiences, brands, communities and business outcomes through content, algorithms, analytics, influence, AI and experimentation.'
+        a: 'It is an 8-week advanced specialisation focused on systematically growing audiences, brands, communities and business outcomes through content, algorithms, analytics, influence, AI and experimentation.'
       },
       {
         q: '2. How is Growth Engineering different from regular Social Media Marketing?',
@@ -710,7 +710,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '3. Is this course suitable for beginners?',
-        a: 'It is designed as an advanced specialization. Basic knowledge of Digital Marketing and major social media platforms is recommended.'
+        a: 'It is designed as an advanced specialisation. Basic knowledge of Digital Marketing and major social media platforms is recommended.'
       },
       {
         q: '4. Which platforms are covered?',
@@ -726,15 +726,15 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '7. Will I learn Influencer Marketing?',
-        a: 'Yes. The program covers creator positioning, influencer discovery and evaluation, brand-creator fit, outreach, negotiation, campaign management, attribution and monetization.'
+        a: 'Yes. The program covers creator positioning, influencer discovery and evaluation, brand-creator fit, outreach, negotiation, campaign management, attribution and monetisation.'
       },
       {
-        q: '8. Does the program cover monetization?',
-        a: 'Yes. Social commerce includes shoppable content, creator and affiliate commerce, social selling, conversational commerce, lead generation, digital products, memberships and community monetization.'
+        q: '8. Does the program cover monetisation?',
+        a: 'Yes. Social commerce includes shoppable content, creator and affiliate commerce, social selling, conversational commerce, lead generation, digital products, memberships and community monetisation.'
       },
       {
         q: '9. Does the course include AI?',
-        a: 'Yes. AI applications include audience research, content ideation, scriptwriting, image, video and voice generation, content repurposing, social listening, sentiment analysis, community management, personalization and AI agents.'
+        a: 'Yes. AI applications include audience research, content ideation, scriptwriting, image, video and voice generation, content repurposing, social listening, sentiment analysis, community management, personalisation and AI agents.'
       },
       {
         q: '10. Will I learn Social Media Automation?',
@@ -742,7 +742,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '11. Is Personal Branding included?',
-        a: 'Yes. The program covers positioning, niche authority, thought leadership, founder-led content, executive branding, authority building, digital footprint management and monetization.'
+        a: 'Yes. The program covers positioning, niche authority, thought leadership, founder-led content, executive branding, authority building, digital footprint management and monetisation.'
       },
       {
         q: '12. Can business owners benefit from this program?',
@@ -764,18 +764,18 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   },
   'seo-specialization': {
     id: 'seo-specialization',
-    programTitle: 'SPECIALIZATION IN SEARCH ENGINE OPTIMIZATION',
+    programTitle: 'SPECIALISATION IN SEARCH ENGINE OPTIMISATION',
     badge: '8-WEEK ADVANCED SPECIALIZATION PROGRAM',
     subHeading: 'Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth',
     duration: '45 Days',
     mode: 'On Campus, Pune',
-    heroIntro: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialization program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
+    heroIntro: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialisation program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
     heroImage: imgSeoSpecialization,
     overview: {
-      highlight: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialization program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
+      highlight: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialisation program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
       main: 'The program covers advanced search strategy, technical SEO, website architecture, Core Web Vitals, JavaScript SEO, Semantic SEO, Entity SEO, structured data, Programmatic SEO, advanced content engineering, off-page authority and Digital PR.',
       expanded: [
-        'A major focus is placed on the future of search, including AI Search, AEO, GEO, AI citations and visibility across Google AI Overviews, ChatGPT, Gemini, Perplexity and Microsoft Copilot, along with Search Everywhere Optimization across social, video, marketplace and other discovery platforms.',
+        'A major focus is placed on the future of search, including AI Search, AEO, GEO, AI citations and visibility across Google AI Overviews, ChatGPT, Gemini, Perplexity and Microsoft Copilot, along with Search Everywhere Optimisation across social, video, marketplace and other discovery platforms.',
         'The curriculum spans the complete organic growth ecosystem, from search intelligence and technical infrastructure to AI visibility, authority building, analytics and business growth.'
       ]
     },
@@ -783,7 +783,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       {
         title: 'Digital Marketing Students',
         icon: GraduationCap,
-        text: 'Students seeking an advanced SEO specialization to build high-value careers in Search, Organic Growth and AI Discovery.'
+        text: 'Students seeking an advanced SEO specialisation to build high-value careers in Search, Organic Growth and AI Discovery.'
       },
       {
         title: 'SEO Executives & Specialists',
@@ -842,13 +842,13 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     benefits: {
       students: {
         title: 'For Students',
-        intro: 'Develop a high-value specialization for careers in SEO, Technical SEO, Organic Growth, Content SEO and AI Search Optimization.',
+        intro: 'Develop a high-value specialisation for careers in SEO, Technical SEO, Organic Growth, Content SEO and AI Search Optimisation.',
         heading: 'Master Modern Search Ecosystems',
         bullets: [
           'Move beyond keyword-and-ranking-based SEO and develop a deeper understanding of how modern search engines, entities, content systems and AI discovery platforms work.',
           'Build strong fundamentals in Technical SEO, JavaScript SEO and website architecture.',
           'Learn to design Programmatic SEO and scalable content engines.',
-          'Prepare for high-demand roles in enterprise SEO and AI search optimization.'
+          'Prepare for high-demand roles in enterprise SEO and AI search optimisation.'
         ]
       },
       business: {
@@ -875,7 +875,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       }
     },
     prerequisites: {
-      intro: 'This is an advanced specialization program, so basic knowledge of SEO and Digital Marketing is recommended. Learners should ideally understand:',
+      intro: 'This is an advanced specialisation program, so basic knowledge of SEO and Digital Marketing is recommended. Learners should ideally understand:',
       bullets: [
         'SEO fundamentals',
         'Keyword research',
@@ -893,13 +893,13 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Conduct search intent and competitor intelligence',
         'Design SEO-friendly website architecture',
         'Perform advanced Technical SEO audits',
-        'Optimize Core Web Vitals and web performance',
+        'Optimise Core Web Vitals and web performance',
         'Understand JavaScript SEO and modern web technologies',
         'Build Semantic SEO and Topical Authority systems',
         'Develop Entity SEO and Knowledge Graph strategies',
         'Implement advanced structured data',
         'Develop Programmatic SEO strategies',
-        'Optimize for AI Search, AEO and GEO',
+        'Optimise for AI Search, AEO and GEO',
         'Build authority through advanced link acquisition and Digital PR',
         'Develop Local, International and E-Commerce SEO strategies',
         'Automate SEO workflows using AI and automation',
@@ -947,11 +947,11 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       }
     ],
     placementAssistance: {
-      intro: 'Eligible learners can receive career support and guidance to position themselves for specialized high-growth roles in search and organic marketing.',
+      intro: 'Eligible learners can receive career support and guidance to position themselves for specialised high-growth roles in search and organic marketing.',
       bullets: [
-        'Resume and LinkedIn optimization tailored for Technical & Search roles',
+        'Resume and LinkedIn optimisation tailored for Technical & Search roles',
         'SEO portfolio development and live technical audit case studies',
-        'Interview preparation and technical defense strategy',
+        'Interview preparation and technical defence strategy',
         'Mock interviews with enterprise search leads',
         'Career guidance and consulting positioning',
         'Job opportunity assistance through TEONOX hiring connections'
@@ -974,7 +974,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
           { title: 'SEO audits', iconName: 'Search' },
           { title: 'Technical SEO projects', iconName: 'Code' },
           { title: 'Keyword and competitor research', iconName: 'LineChart' },
-          { title: 'Content optimization', iconName: 'FileText' },
+          { title: 'Content optimisation', iconName: 'FileText' },
           { title: 'Local SEO projects', iconName: 'Globe' },
           { title: 'AI Search visibility projects', iconName: 'Bot' },
           { title: 'Link building and Digital PR', iconName: 'Share2' },
@@ -992,7 +992,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
           { title: 'Content SEO', iconName: 'FileText' },
           { title: 'On-Page SEO', iconName: 'Layout' },
           { title: 'AEO & GEO Consulting', iconName: 'Wand2' },
-          { title: 'AI Search Optimization', iconName: 'Bot' },
+          { title: 'AI Search Optimisation', iconName: 'Bot' },
           { title: 'Link Building & Digital PR', iconName: 'Megaphone' },
           { title: 'SEO Analytics', iconName: 'PieChart' },
           { title: 'SEO Strategy & Consulting', iconName: 'Target' }
@@ -1002,15 +1002,15 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     faqs: [
       {
         q: '1. What is Search & Organic Growth Intelligence?',
-        a: 'It is an 8-week advanced specialization program focused on SEO, Technical SEO, content authority, AI Search, AEO, GEO, Digital PR, automation and sustainable organic growth.'
+        a: 'It is an 8-week advanced specialisation program focused on SEO, Technical SEO, content authority, AI Search, AEO, GEO, Digital PR, automation and sustainable organic growth.'
       },
       {
         q: '2. How is this different from a regular SEO course?',
-        a: 'A regular SEO course typically teaches how to optimize websites for search engines.\n\nSearch & Organic Growth Intelligence goes further by teaching how to engineer visibility, authority and organic growth across traditional search engines, AI search platforms, social search and other discovery ecosystems.'
+        a: 'A regular SEO course typically teaches how to optimise websites for search engines.\n\nSearch & Organic Growth Intelligence goes further by teaching how to engineer visibility, authority and organic growth across traditional search engines, AI search platforms, social search and other discovery ecosystems.'
       },
       {
         q: '3. Is this course suitable for beginners?',
-        a: 'It is designed as an advanced specialization. Basic knowledge of SEO and Digital Marketing is recommended.'
+        a: 'It is designed as an advanced specialisation. Basic knowledge of SEO and Digital Marketing is recommended.'
       },
       {
         q: '4. Does the course cover Technical SEO?',
@@ -1018,7 +1018,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '5. Will I learn AEO and GEO?',
-        a: 'Yes. A dedicated module covers: Answer Engine Optimization, Generative Engine Optimization, AI citation optimization, citation-worthy content, passage optimization, entity authority and AI search visibility measurement.'
+        a: 'Yes. A dedicated module covers: Answer Engine Optimisation, Generative Engine Optimisation, AI citation optimisation, citation-worthy content, passage optimisation, entity authority and AI search visibility measurement.'
       },
       {
         q: '6. Does the course cover ChatGPT and other AI search platforms?',
@@ -1034,11 +1034,11 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '9. Does the course cover SEO beyond Google?',
-        a: 'Yes. Search Everywhere Optimization includes YouTube, Instagram, LinkedIn, Pinterest, Reddit, Quora, marketplaces, Amazon, App Stores, podcasts and broader social search.'
+        a: 'Yes. Search Everywhere Optimisation includes YouTube, Instagram, LinkedIn, Pinterest, Reddit, Quora, marketplaces, Amazon, App Stores, podcasts and broader social search.'
       },
       {
         q: '10. Does the course cover Local and E-Commerce SEO?',
-        a: 'Yes. Dedicated advanced modules cover Local SEO at scale, International SEO and E-Commerce SEO, including multi-location businesses, international websites, category and product optimization, product schema and marketplace SEO.'
+        a: 'Yes. Dedicated advanced modules cover Local SEO at scale, International SEO and E-Commerce SEO, including multi-location businesses, international websites, category and product optimisation, product schema and marketplace SEO.'
       },
       {
         q: '11. Will I learn SEO automation and AI workflows?',
@@ -1050,7 +1050,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '13. Can I freelance after completing the course?',
-        a: 'Yes. The skills can be applied to SEO audits, Technical SEO, Local SEO, E-Commerce SEO, Content SEO, AEO/GEO, AI Search Optimization, Digital PR, analytics and SEO consulting.'
+        a: 'Yes. The skills can be applied to SEO audits, Technical SEO, Local SEO, E-Commerce SEO, Content SEO, AEO/GEO, AI Search Optimisation, Digital PR, analytics and SEO consulting.'
       },
       {
         q: '14. Does the program include practical projects?',
@@ -1064,15 +1064,15 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   },
   'performance-marketing': {
     id: 'performance-marketing',
-    programTitle: 'SPECIALIZATION IN PERFORMANCE MARKETING',
+    programTitle: 'SPECIALISATION IN PERFORMANCE MARKETING',
     badge: '8-WEEK ADVANCED SPECIALIZATION PROGRAM',
     subHeading: 'Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling',
     duration: '45 Days',
     mode: 'On Campus, Pune',
-    heroIntro: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialization program designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimization and campaign scaling.',
+    heroIntro: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialisation program designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimisation and campaign scaling.',
     heroImage: imgPerformanceMktg,
     overview: {
-      highlight: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialization program designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimization and campaign scaling.',
+      highlight: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialisation program designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimisation and campaign scaling.',
       main: 'The program takes a business and profitability-driven approach to performance marketing. Learners explore advanced Google Ads, Meta Ads, LinkedIn Advertising, YouTube, Microsoft Advertising, Programmatic and Native Advertising alongside media planning, creative strategy, CRO, funnel engineering and lifecycle advertising.',
       expanded: [
         'A major focus is placed on measurement and growth economics, including CAC, LTV, LTV:CAC ratio, contribution margin, payback period, marginal ROAS, server-side tracking, postback URLs, attribution and incrementality.',
@@ -1083,7 +1083,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       {
         title: 'Digital Marketing Students',
         icon: GraduationCap,
-        text: 'Students seeking an advanced specialization in performance marketing, growth, and media buying.'
+        text: 'Students seeking an advanced specialisation in performance marketing, growth, and media buying.'
       },
       {
         title: 'Performance Marketers & Media Buyers',
@@ -1113,7 +1113,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       {
         title: 'Growth Marketers & Acquisition Leads',
         icon: Rocket,
-        text: 'Growth specialists focusing on full-funnel acquisition, experimentation, and conversion optimization.'
+        text: 'Growth specialists focusing on full-funnel acquisition, experimentation, and conversion optimisation.'
       },
       {
         title: 'Freelancers & Paid Media Consultants',
@@ -1133,7 +1133,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'Develop media planning and budget allocation capabilities',
       'Master CRO, funnels and performance creative',
       'Learn systematic A/B testing and experimentation',
-      'Use AI and automation for campaign operations and optimization',
+      'Use AI and automation for campaign operations and optimisation',
       'Learn how to scale campaigns profitably, not simply increase ad spend',
       'Develop strategies across E-Commerce, D2C, B2B, SaaS, Lead Generation and other business models',
       'Build advanced skills applicable to careers, agencies, consulting and freelancing'
@@ -1142,7 +1142,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     benefits: {
       students: {
         title: 'For Students',
-        intro: 'Students can build a specialization beyond general Digital Marketing and prepare for roles in Performance Marketing, Paid Media, Growth Marketing and Media Buying.',
+        intro: 'Students can build a specialisation beyond general Digital Marketing and prepare for roles in Performance Marketing, Paid Media, Growth Marketing and Media Buying.',
         heading: 'Master Paid Media & Growth Engineering',
         bullets: [
           'They will develop practical understanding of campaign strategy, tracking, analytics, CRO, creative testing, attribution and scaling.',
@@ -1157,7 +1157,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         bullets: [
           'Business owners can learn how to evaluate advertising beyond clicks and leads by understanding CAC, LTV, ROAS, contribution margin and profitability.',
           'This helps them make better decisions about budgets, agencies, channels, funnels and growth.',
-          'Establish scalable paid acquisition loops without wasting budget on unoptimized campaigns.'
+          'Establish scalable paid acquisition loops without wasting budget on unoptimised campaigns.'
         ]
       },
       corporate: {
@@ -1166,13 +1166,13 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         heading: 'Drive Strategic Media Operations',
         bullets: [
           'The program can help professionals develop capabilities in media planning, attribution, analytics, experimentation, automation and cross-channel growth strategy.',
-          'Upgrade from campaign execution to strategic performance management and cross-channel optimization.',
+          'Upgrade from campaign execution to strategic performance management and cross-channel optimisation.',
           'Master server-side tracking, postback integrations, and executive ROI dashboards.'
         ]
       }
     },
     prerequisites: {
-      intro: 'This is an advanced specialization program, so basic knowledge of Digital Marketing and online advertising is recommended. Learners should ideally understand:',
+      intro: 'This is an advanced specialisation program, so basic knowledge of Digital Marketing and online advertising is recommended. Learners should ideally understand:',
       bullets: [
         'Digital Marketing fundamentals',
         'Basic Google Ads and Meta Ads',
@@ -1194,7 +1194,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Analyze attribution and incrementality',
         'Develop CRO and experimentation programs',
         'Build performance creative testing systems',
-        'Optimize budgets and scale campaigns',
+        'Optimise budgets and scale campaigns',
         'Use AI and automation in campaign operations',
         'Create multi-channel growth strategies'
       ],
@@ -1242,7 +1242,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     placementAssistance: {
       intro: 'Eligible learners can receive career support for Performance Marketing and related roles through tailored career services:',
       bullets: [
-        'Resume and LinkedIn optimization tailored for Performance & Growth roles',
+        'Resume and LinkedIn optimisation tailored for Performance & Growth roles',
         'Portfolio and project preparation featuring live audit and media plan case studies',
         'Interview preparation and campaign scenario strategy',
         'Mock interviews with performance marketing leads and media buyers',
@@ -1269,12 +1269,12 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
           { title: 'Google and Meta Ads projects', iconName: 'Zap' },
           { title: 'Tracking and analytics assignments', iconName: 'PieChart' },
           { title: 'CRO and creative testing', iconName: 'TrendingUp' },
-          { title: 'Campaign optimization and reporting', iconName: 'BarChart' }
+          { title: 'Campaign optimisation and reporting', iconName: 'BarChart' }
         ]
       },
       freelancing: {
         title: 'Freelancing & Performance Agency Services',
-        note: 'The specialization can prepare learners to offer high-demand services to clients, brands, and agencies.',
+        note: 'The specialisation can prepare learners to offer high-demand services to clients, brands, and agencies.',
         items: [
           { title: 'Google Ads Management', iconName: 'Search' },
           { title: 'Meta Ads Management', iconName: 'Share2' },
@@ -1283,7 +1283,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
           { title: 'Campaign Audits', iconName: 'FileText' },
           { title: 'Conversion Tracking Setup', iconName: 'Code' },
           { title: 'Analytics & Attribution', iconName: 'PieChart' },
-          { title: 'Landing Page & Funnel Optimization', iconName: 'Layout' },
+          { title: 'Landing Page & Funnel Optimisation', iconName: 'Layout' },
           { title: 'CRO Consulting', iconName: 'Wand2' },
           { title: 'Performance Creative Strategy', iconName: 'Sparkles' }
         ]
@@ -1292,11 +1292,11 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     faqs: [
       {
         q: '1. What is Performance Marketing & Growth Strategy?',
-        a: 'It is an 8-week advanced specialization program focused on measurable, ROI-driven marketing using paid media, analytics, tracking, attribution, experimentation, CRO and growth strategies.'
+        a: 'It is an 8-week advanced specialisation program focused on measurable, ROI-driven marketing using paid media, analytics, tracking, attribution, experimentation, CRO and growth strategies.'
       },
       {
         q: '2. Is this a beginner-level course?',
-        a: 'No. This is an advanced specialization. Basic knowledge of Digital Marketing and paid advertising is recommended.'
+        a: 'No. This is an advanced specialisation. Basic knowledge of Digital Marketing and paid advertising is recommended.'
       },
       {
         q: '3. What is the duration of the program?',
@@ -1308,7 +1308,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '5. Does the course cover Google Ads and Meta Ads in depth?',
-        a: 'Yes. Dedicated advanced sections cover campaign architecture, audiences, bidding, tracking, automation, experimentation, optimization and scaling across Google and Meta.'
+        a: 'Yes. Dedicated advanced sections cover campaign architecture, audiences, bidding, tracking, automation, experimentation, optimisation and scaling across Google and Meta.'
       },
       {
         q: '6. Will I learn tracking and attribution?',
@@ -1316,7 +1316,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '7. Does the course include AI?',
-        a: 'Yes. The curriculum includes AI for campaign research, audience intelligence, media planning, ad copy and creative generation, predictive analytics, budget allocation, reporting, optimization and campaign operations.'
+        a: 'Yes. The curriculum includes AI for campaign research, audience intelligence, media planning, ad copy and creative generation, predictive analytics, budget allocation, reporting, optimisation and campaign operations.'
       },
       {
         q: '8. Will I learn how to scale advertising campaigns?',

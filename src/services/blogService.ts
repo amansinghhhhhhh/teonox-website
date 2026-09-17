@@ -41,13 +41,13 @@ const FALLBACK_BLOGS: BlogPost[] = [
     category: 'Digital Marketing',
     categories: ['Career & Skills', 'Digital Marketing', 'Online Marketing'],
     title: 'Digital Marketing Roadmap for Beginners (2026): A Complete Step-by-Step Guide to Build a Successful Career',
-    excerpt: 'Marketing in the digital age is one of the fastest-growing professions around the world. From small businesses and startups to global enterprises, every organization relies on digital strategies...',
+    excerpt: 'Marketing in the digital age is one of the fastest-growing professions around the world. From small businesses and startups to global enterprises, every organisation relies on digital strategies...',
     author: 'By TEONOX Team',
     date: '08/07/2026',
     readTime: '5 min read',
     image: 'https://cms.teonox.com/wp-content/uploads/2026/07/Digital-Marketing-Roadmap-for-Beginners-2026.webp',
     content: [
-      'Marketing in the digital age is one of the fastest-growing professions around the world. From small businesses and startups to global enterprises, every organization relies on digital strategies to reach customers and build sustainable brand equity.',
+      'Marketing in the digital age is one of the fastest-growing professions around the world. From small businesses and startups to global enterprises, every organisation relies on digital strategies to reach customers and build sustainable brand equity.',
       'To build a long-term career in digital marketing in 2026, beginners must master SEO, paid advertising funnels, analytics tracking, and AI content generation techniques.'
     ],
     link: 'https://teonox.com/blog/digital-marketing-roadmap-for-beginners-2026-a-complete-step-by-step-guide-to-build-a-successful-career'

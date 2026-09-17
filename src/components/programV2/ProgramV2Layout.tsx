@@ -1092,7 +1092,7 @@ export function ProgramV2Layout({ detail, onEnquire, onBrochure, heroLoading = f
 
             <p className="font-inter text-[15px] sm:text-[16.5px] text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
               {detail.cta?.description ||
-                'Get personalized guidance from our senior career counsellor. We will help you select the ideal specialization, explain the course structure, and plan your career transition.'}
+                'Get personalised guidance from our senior career counsellor. We will help you select the ideal specialisation, explain the course structure, and plan your career transition.'}
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-4 pt-2">

@@ -105,10 +105,10 @@ function showCareerInfo(card, career) {
     var desc = document.getElementById('careerDescription');
 
     var careerData = {
-        'AI Marketing': 'Combine artificial intelligence with marketing strategies to create data-driven campaigns, automate processes, and deliver personalized customer experiences at scale.',
+        'AI Marketing': 'Combine artificial intelligence with marketing strategies to create data-driven campaigns, automate processes, and deliver personalised customer experiences at scale.',
         'Digital Marketing': 'Master social media marketing, SEO, content marketing, email campaigns, and analytics to grow businesses online.',
         'Content Creation': 'Create compelling videos, reels, blogs, and social media content that captures attention and builds audiences.',
-        'Creator Economy': 'Build your personal brand, grow your following, and monetize your content across platforms like Instagram, YouTube, and TikTok.',
+        'Creator Economy': 'Build your personal brand, grow your following, and monetise your content across platforms like Instagram, YouTube, and TikTok.',
         'Freelancing': 'Offer your AI and marketing skills to clients worldwide, working on your own terms and schedule.',
         'Business': 'Launch your own venture using AI-powered tools and digital marketing strategies to reach customers globally.'
     };
@@ -145,7 +145,7 @@ window._quizState = {
     currentQuestion: 0,
     questions: [
         { question: "Do you enjoy creating content?", options: ["Yes, I love it!", "Sometimes, it depends", "Not really"] },
-        { question: "Do you like understanding people?", options: ["Yes, I'm curious about behavior", "Sometimes", "Not particularly"] },
+        { question: "Do you like understanding people?", options: ["Yes, I'm curious about behaviour", "Sometimes", "Not particularly"] },
         { question: "Do you enjoy selling or convincing others?", options: ["Yes, it's thrilling", "I'm okay at it", "Not my thing"] },
         { question: "Do you like experimenting with new tools?", options: ["Yes, especially AI tools", "I try when I have to", "I prefer what I know"] },
         { question: "Do you enjoy solving business problems?", options: ["Yes, it's like a puzzle", "Sometimes", "Not really"] }

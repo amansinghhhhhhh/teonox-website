@@ -60,7 +60,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
   ];
 
   const differentiators = [
-    { num: '01', contrast: 'Most institutes teach platforms.', title: 'We teach business.', desc: 'Understanding consumer behavior, business revenue models, and strategy behind every digital dollar spent.' },
+    { num: '01', contrast: 'Most institutes teach platforms.', title: 'We teach business.', desc: 'Understanding consumer behaviour, business revenue models, and strategy behind every digital dollar spent.' },
     { num: '02', contrast: 'Most courses explain features.', title: 'We explain why they matter.', desc: 'Focusing on market impact, funnel dynamics, and business ROI rather than just clicking buttons in a dashboard.' },
     { num: '03', contrast: 'Most programs stop at knowledge.', title: 'We focus on application & outcomes.', desc: 'Every module builds tangible portfolio artifacts, live campaign execution, and practical problem-solving.' },
   ];
@@ -78,7 +78,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
     { icon: Layers, title: 'Industry Case Studies', desc: 'Breakdowns of top global campaigns' },
     { icon: Zap, title: 'Marketing Simulations', desc: 'Risk-free budget allocation labs' },
     { icon: Briefcase, title: 'Portfolio Development', desc: 'Showcaseable work for hiring managers' },
-    { icon: UserCheck, title: 'Career Coaching', desc: 'Personalized guidance & pathway planning' },
+    { icon: UserCheck, title: 'Career Coaching', desc: 'Personalised guidance & pathway planning' },
     { icon: Users, title: 'Industry Mentorship', desc: 'Sessions with seasoned leaders' },
     { icon: Award, title: 'Interview Preparation', desc: 'Mock interviews, scenarios & confidence' },
     { icon: MessageSquareText, title: 'Continuous Feedback', desc: 'Constructive evaluation on every output' },
@@ -135,7 +135,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
 
               <motion.div {...fadeUp(0.15)} className="space-y-4 font-inter text-[15.5px] sm:text-[17px] leading-[1.75] text-[#444444]">
                 <p>
-                  The world of business is changing faster than ever. Artificial Intelligence is transforming industries. Digital technologies are redefining customer behavior. Companies are no longer looking for people who simply hold degrees, they are looking for professionals who can think strategically, solve business problems, embrace technology, and create measurable impact.
+                  The world of business is changing faster than ever. Artificial Intelligence is transforming industries. Digital technologies are redefining customer behaviour. Companies are no longer looking for people who simply hold degrees, they are looking for professionals who can think strategically, solve business problems, embrace technology, and create measurable impact.
                 </p>
                 <p className="font-semibold text-[#111111]">
                   TEONOX was created to bridge that gap. We are a school of marketing, AI and business and a leading digital marketing training institute in Pune, dedicated to preparing students, professionals, entrepreneurs, and business leaders for the opportunities of the digital & AI era. As an Institute of Digital Marketing Pune, we focus on practical learning, industry-relevant skills, and real-world applications to help learners build future-ready careers and businesses.

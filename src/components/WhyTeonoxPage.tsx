@@ -85,7 +85,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
     { q: "Can you solve a business problem with it?", detail: "Identifying root causes for performance drops and executing turnarounds." },
     { q: "Can you execute independently?", detail: "Taking complete ownership of digital channels without constant supervision." },
     { q: "Can you communicate your strategy?", detail: "Pitching complex growth strategies to founders and executive leaders." },
-    { q: "Can you analyze why something failed?", detail: "Conducting data audits and conversion rate optimization experiments." },
+    { q: "Can you analyse why something failed?", detail: "Conducting data audits and conversion rate optimisation experiments." },
     { q: "Can you improve it?", detail: "Iterating on ad creatives, funnels, and keywords for continuous ROI gains." },
     { q: "Can you use AI without becoming dependent on AI?", detail: "Combining human strategy with generative tools for exponential productivity." },
     { q: "Can you walk into an interview, client meeting or business discussion and demonstrate that you understand Marketing, not merely marketing tools?", detail: "Demonstrating commercial acumen, commercial funnel math, and leadership capability." }
@@ -294,13 +294,13 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
 
             {/* Paragraph 1 */}
             <p className="font-inter text-base sm:text-xl text-[#D0C3B6] leading-relaxed max-w-3xl mx-auto text-center font-medium">
-              At TEONOX, we believe Digital Marketing education must go beyond knowing how Google Ads works, how to post on Instagram, or how to optimize a webpage.
+              At TEONOX, we believe Digital Marketing education must go beyond knowing how Google Ads works, how to post on Instagram, or how to optimise a webpage.
             </p>
 
             {/* Core Box Paragraph 2 */}
             <div className="p-8 sm:p-11 rounded-2xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/15 shadow-2xl relative overflow-hidden text-center group hover:border-[#F15A29]/50 transition-all">
               <p className="font-sora text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-snug tracking-tight relative z-10">
-                The industry needs people who can think, communicate, execute, analyze, solve problems, understand customers, use AI intelligently and contribute to business growth.
+                The industry needs people who can think, communicate, execute, analyse, solve problems, understand customers, use AI intelligently and contribute to business growth.
               </p>
             </div>
 
@@ -588,7 +588,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                       "Which strategy should we use?", 
                       "What should we measure?", 
                       "What happens when results aren't as expected?", 
-                      "How do we optimize?"
+                      "How do we optimise?"
                     ].map((q, i) => (
                       <li key={i} className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#F15A29] shrink-0 mt-0.5" />
@@ -632,7 +632,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                     Knowing Digital Marketing and building a career in Digital Marketing require different skills.
                   </p>
                   <p className="font-inter text-base text-[#444444] leading-relaxed">
-                    Career readiness can include career-path identification, resume development, LinkedIn optimization, portfolio building, interview preparation, mock interviews and professional positioning.
+                    Career readiness can include career-path identification, resume development, LinkedIn optimisation, portfolio building, interview preparation, mock interviews and professional positioning.
                   </p>
                   <p className="font-inter text-base text-[#444444] leading-relaxed">
                     Whether a learner wants to pursue employment, freelancing, consulting or entrepreneurship, the objective is to help them understand:
@@ -899,7 +899,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                     TEONOX&apos;s placement assistance can support eligible learners with areas such as:
                   </p>
                   <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#EBE4DC] text-xs sm:text-sm font-sora font-extrabold text-[#111111] leading-relaxed">
-                    Resume Building | LinkedIn Optimization | Portfolio Development | Interview Preparation | Mock Interviews | Career Guidance | Opportunity Assistance
+                    Resume Building | LinkedIn Optimisation | Portfolio Development | Interview Preparation | Mock Interviews | Career Guidance | Opportunity Assistance
                   </div>
                   <p className="font-inter text-base text-[#444444] leading-relaxed">
                     The objective isn&apos;t simply to send students to interviews.
@@ -947,7 +947,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                     Real environments introduce factors that classroom exercises cannot fully reproduce:
                   </p>
                   <ul className="grid grid-cols-2 gap-2 font-sora text-xs sm:text-sm font-bold text-[#111111]">
-                    {["Deadlines.", "Budgets.", "Client Expectations.", "KPIs.", "Competition.", "Reporting.", "Optimization.", "Accountability."].map((item, idx) => (
+                    {["Deadlines.", "Budgets.", "Client Expectations.", "KPIs.", "Competition.", "Reporting.", "Optimisation.", "Accountability."].map((item, idx) => (
                       <li key={idx} className="flex items-center gap-1.5 p-2 rounded-lg bg-[#FAF8F5] border border-[#EBE4DC]">
                         <span className="w-2 h-2 rounded-full bg-[#F15A29]" />
                         <span>{item}</span>

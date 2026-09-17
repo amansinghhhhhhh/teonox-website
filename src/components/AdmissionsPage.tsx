@@ -111,8 +111,8 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
 
   const admissionSteps = [
     { num: '01', title: 'Explore', desc: 'Choose the program aligned with your career goals and interest areas.', icon: Compass, tag: 'Step 1' },
-    { num: '02', title: 'Inquiry', desc: 'Connect with us to explore courses, specializations, fees and career opportunities.', icon: PhoneCall, tag: 'Step 2' },
-    { num: '03', title: 'Counselling', desc: 'Get personalized guidance to choose the right program based on your goals and interests.', icon: Users, tag: 'Step 3' },
+    { num: '02', title: 'Inquiry', desc: 'Connect with us to explore courses, specialisations, fees and career opportunities.', icon: PhoneCall, tag: 'Step 2' },
+    { num: '03', title: 'Counselling', desc: 'Get personalised guidance to choose the right program based on your goals and interests.', icon: Users, tag: 'Step 3' },
     { num: '04', title: 'Apply', desc: 'Complete the simple application and eligibility review process.', icon: FileCheck, tag: 'Step 4' },
     { num: '05', title: 'Assessment', desc: 'Understand your current skills, aptitude and learning needs through a basic assessment.', icon: HelpCircle, tag: 'Step 5' },
     { num: '06', title: 'Explore Scholarships', desc: 'Eligible students may apply for available scholarship options and financial aid.', icon: Award, tag: 'Step 6' },
@@ -124,7 +124,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
   const valueBadges = [
     { icon: CheckCircle2, title: 'No Coding Needed', sub: 'Open for all streams' },
     { icon: Award, title: 'Scholarships', sub: 'Merit-based aid' },
-    { icon: Users, title: '1-on-1 Guidance', sub: 'Personalized counselling' },
+    { icon: Users, title: '1-on-1 Guidance', sub: 'Personalised counselling' },
     { icon: GraduationCap, title: 'Practical Learning', sub: 'Live brand projects' },
   ];
 
