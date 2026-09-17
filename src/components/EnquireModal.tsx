@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { X, ChevronDown, CheckCircle2, MessageSquare } from 'lucide-react';
+import { X, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
@@ -248,10 +248,6 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                       onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                       className="w-full px-3.5 py-3 text-[#111111] font-sora text-[14px] sm:text-[15px] font-[500] outline-none"
                     />
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-1.5 text-[12px] font-medium text-[#25D366]">
-                    <MessageSquare className="w-3.5 h-3.5 fill-current" />
-                    <span>You will receive updates on WhatsApp</span>
                   </div>
                 </div>
 
