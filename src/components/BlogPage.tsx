@@ -37,6 +37,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [email, setEmail] = useState<string>('');
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [agreeTerms, setAgreeTerms] = useState<boolean>(true);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLiveConnection, setIsLiveConnection] = useState<boolean>(false);
@@ -149,14 +150,14 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     const value = email.trim();
-    if (value && value.includes('@')) {
-      // Fire-and-forget push to the Google Apps Script webhook (Sheet + email).
-      submitForm('Blog Newsletter', { 'Email Address': value }).catch((err) => {
-        console.warn('Newsletter subscription push failed:', err);
-      });
-      setIsSubscribed(true);
-      setEmail('');
-    }
+    if (!value || !value.includes('@')) return;
+    if (!agreeTerms) return;
+    // Fire-and-forget push to the Google Apps Script webhook (Sheet + email).
+    submitForm('Blog Newsletter', { 'Email Address': value }).catch((err) => {
+      console.warn('Newsletter subscription push failed:', err);
+    });
+    setIsSubscribed(true);
+    setEmail('');
   };
 
   const scrollToNewsletter = () => {
@@ -472,23 +473,37 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
           </motion.h2>
 
           {!isSubscribed ? (
-            <motion.form {...fadeUp(0.12)} onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col sm:flex-row items-center gap-3">
-              <label htmlFor="blog-email" className="sr-only">Email address</label>
-              <input
-                id="blog-email"
-                type="email"
-                required
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#1A1816] border border-white/20 focus:border-[#F15A29] text-white font-sora text-[15px] rounded-full px-5 py-3.5 outline-none transition-colors placeholder:text-[#777777]"
-              />
-              <button
-                type="submit"
-                className="w-full sm:w-auto shrink-0 px-8 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-[15px] font-[700] transition-all shadow-lg shadow-[#F15A29]/25 active:scale-95 hover:-translate-y-0.5"
-              >
-                Subscribe
-              </button>
+            <motion.form {...fadeUp(0.12)} onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col items-center gap-3">
+              <div className="flex w-full flex-col sm:flex-row items-center gap-3">
+                <label htmlFor="blog-email" className="sr-only">Email address</label>
+                <input
+                  id="blog-email"
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-[#1A1816] border border-white/20 focus:border-[#F15A29] text-white font-sora text-[15px] rounded-full px-5 py-3.5 outline-none transition-colors placeholder:text-[#777777]"
+                />
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto shrink-0 px-8 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-[15px] font-[700] transition-all shadow-lg shadow-[#F15A29]/25 active:scale-95 hover:-translate-y-0.5"
+                >
+                  Subscribe
+                </button>
+              </div>
+              <div className="flex items-start gap-2.5 w-full">
+                <input
+                  type="checkbox"
+                  id="blog-terms-check"
+                  checked={agreeTerms}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 text-[#F15A29] rounded border-white/30 bg-[#1A1816] focus:ring-[#F15A29] cursor-pointer shrink-0"
+                />
+                <label htmlFor="blog-terms-check" className="text-[11px] sm:text-[12px] text-white/60 font-inter leading-tight cursor-pointer">
+                  I agree to TEONOX's <a href="/terms-and-conditions" className="text-[#0066FF] hover:underline font-semibold">T&C</a> and <a href="/privacy-policy" className="text-[#0066FF] hover:underline font-semibold">Privacy Policy</a>. This consent overrides any DNC/NDNC registrations.
+                </label>
+              </div>
             </motion.form>
           ) : (
             <motion.div

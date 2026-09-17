@@ -1,24 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Download, CheckCircle2, FileText, Loader2, MessageCircle } from 'lucide-react';
+import { X, CheckCircle2, Loader2, MessageCircle, MessageSquare } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import popupFormImg from '../assets/images/popup_form_image.webp';
-
-const BROCHURE_PDF_URL = 'https://teonox.com/brochure/teonox-brochure.pdf';
-
-/** Clean phone to digits-only and ensure country code 91 prefix. */
-function cleanWhatsAppPhone(raw: string): string {
-  const digits = raw.replace(/\D/g, '');
-  if (digits.startsWith('91') && digits.length >= 12) return digits;
-  if (digits.length === 10) return `91${digits}`;
-  return digits;
-}
-
-/** Build a pre-filled WhatsApp wa.me link with brochure message. */
-function buildWhatsAppUrl(name: string, phone: string): string {
-  const clean = cleanWhatsAppPhone(phone);
-  const msg = `Hi ${name}, here is your TEONOX Brochure: ${BROCHURE_PDF_URL}`;
-  return `https://wa.me/${clean}?text=${encodeURIComponent(msg)}`;
-}
 
 interface BrochureModalProps {
   isOpen: boolean;
@@ -27,10 +10,11 @@ interface BrochureModalProps {
   defaultCourse?: string;
 }
 
-export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureModalProps) {
+export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' }: BrochureModalProps) {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [agreeTerms, setAgreeTerms] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -77,6 +61,10 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
     }
     if (!phone.trim() || phone.trim().length < 10) {
       setError('Please enter a valid 10-digit WhatsApp number');
+      return;
+    }
+    if (!agreeTerms) {
+      setError('Please accept terms & conditions');
       return;
     }
 
@@ -146,9 +134,6 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
             <>
               {/* Header */}
               <div className="mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center mb-4">
-                  <FileText className="w-6 h-6" />
-                </div>
                 <h3 id="brochure-modal-title" className="font-sora text-[24px] sm:text-[28px] font-[800] text-[#111111] tracking-tight leading-tight">
                   Get the Brochure
                 </h3>
@@ -213,9 +198,24 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                       className="w-full px-3.5 py-3 text-[#111111] font-sora text-[14px] sm:text-[15px] font-[500] outline-none"
                     />
                   </div>
-                  <p className="mt-1.5 text-[12px] text-[#888888] font-inter">
-                    Please enter your active WhatsApp number to receive the brochure directly on WhatsApp.
-                  </p>
+                  <div className="flex items-center gap-1.5 mt-1.5 text-[12px] font-medium text-[#25D366]">
+                    <MessageSquare className="w-3.5 h-3.5 fill-current" />
+                    <span>You will receive updates on WhatsApp</span>
+                  </div>
+                </div>
+
+                {/* Terms Agreement Checkbox */}
+                <div className="flex items-start gap-2.5 pt-1">
+                  <input
+                    type="checkbox"
+                    id="brochure-terms-check"
+                    checked={agreeTerms}
+                    onChange={(e) => setAgreeTerms(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 text-[#F15A29] rounded border-gray-300 focus:ring-[#F15A29] cursor-pointer"
+                  />
+                  <label htmlFor="brochure-terms-check" className="text-[11px] sm:text-[12px] text-gray-500 font-inter leading-tight cursor-pointer">
+                    I agree to TEONOX's <a href="/terms-and-conditions" onClick={(e) => { e.preventDefault(); onNavigate?.('/terms-and-conditions', 'Terms & Conditions'); onClose(); }} className="text-[#0066FF] hover:underline font-semibold">T&C</a> and <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); onNavigate?.('/privacy-policy', 'Privacy Policy'); onClose(); }} className="text-[#0066FF] hover:underline font-semibold">Privacy Policy</a>. This consent overrides any DNC/NDNC registrations.
+                  </label>
                 </div>
 
                 {/* Submit Button */}
@@ -230,10 +230,7 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                       <span>Sending...</span>
                     </>
                   ) : (
-                    <>
-                      <Download className="w-4 h-4" />
-                      <span>Get Brochure</span>
-                    </>
+                    <span>Get Brochure</span>
                   )}
                 </button>
               </form>
@@ -248,28 +245,8 @@ export function BrochureModal({ isOpen, onClose, defaultCourse = '' }: BrochureM
                 Thank you, {fullName}!
               </h3>
               <p className="font-inter text-[14px] text-gray-600 max-w-sm mb-6 leading-relaxed">
-                We've emailed your brochure! You can also receive it directly on WhatsApp or download it below.
+                We've received your request! Your brochure will be sent to your Email & WhatsApp shortly.
               </p>
-              <div className="flex flex-col gap-3 w-full max-w-sm mx-auto mb-4">
-                <a
-                  href={BROCHURE_PDF_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora font-[700] text-[14px] py-3 px-6 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Download className="w-4 h-4 shrink-0" />
-                  View / Download Brochure PDF
-                </a>
-                <a
-                  href="https://wa.me/919890004828?text=Hi%20TEONOX%2C%20I%20just%20requested%20the%20brochure"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white font-sora font-[700] text-[14px] py-3 px-6 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <MessageCircle className="w-4 h-4 shrink-0" />
-                  Chat with Us on WhatsApp
-                </a>
-              </div>
               <button type="button"
                 onClick={handleReset}
                 className="bg-[#111111] hover:bg-black text-white font-sora font-bold text-[14px] px-8 py-3 rounded-xl transition-all cursor-pointer"

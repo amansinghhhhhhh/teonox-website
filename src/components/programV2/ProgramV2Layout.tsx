@@ -64,6 +64,7 @@ import certOpenaiLogo from '../../assets/tools/openai.png';
 interface ProgramV2LayoutProps {
   detail: ProgramDetailData;
   onEnquire?: (label: string) => void;
+  onBrochure?: (programTitle: string) => void;
   heroLoading?: boolean;
 }
 
@@ -151,7 +152,7 @@ const CERT_LOGO: Record<string, { logo: React.ReactNode; accent: string; height:
   youtube: { logo: null, accent: '#FF0000', height: 'h-7' },
 };
 
-export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: ProgramV2LayoutProps) {
+export function ProgramV2Layout({ detail, onEnquire, onBrochure, heroLoading = false }: ProgramV2LayoutProps) {
   const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
   const [activeDesignedIndex, setActiveDesignedIndex] = useState<number>(0);
   const [activeBenefitTab, setActiveBenefitTab] = useState<BenefitKey>('students');
@@ -255,7 +256,7 @@ export function ProgramV2Layout({ detail, onEnquire, heroLoading = false }: Prog
               </button>
 
               <button type="button"
-                onClick={() => enquire('Download Brochure - ' + detail.programTitle)}
+                onClick={() => onBrochure?.(detail.programTitle)}
                 className="w-full sm:w-auto py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF0EB] text-[#111111] font-sora font-[700] text-sm sm:text-[15px] border border-[#ECECEC] hover:border-[#F8E3D8] transition-all duration-300 shadow-2xs hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
                 <Download className="w-4.5 h-4.5 shrink-0 text-[#F15A29]" />

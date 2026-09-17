@@ -54,6 +54,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(true);
   const [error, setError] = useState('');
 
   const programOptions = [
@@ -82,6 +83,10 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
     }
     if (!validateRequired(formData.phone) || !validatePhone(formData.phone)) {
       setError('Please enter a valid 10-digit Indian phone number.');
+      return;
+    }
+    if (!agreeTerms) {
+      setError('Please accept terms & conditions');
       return;
     }
 
@@ -559,6 +564,20 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                     {error}
                   </div>
                 )}
+
+                {/* Terms Agreement Checkbox */}
+                <div className="flex items-start gap-2.5 pt-1">
+                  <input
+                    type="checkbox"
+                    id="contact-terms-check"
+                    checked={agreeTerms}
+                    onChange={(e) => setAgreeTerms(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 text-[#F15A29] rounded border-gray-300 focus:ring-[#F15A29] cursor-pointer"
+                  />
+                  <label htmlFor="contact-terms-check" className="text-[11px] sm:text-[12px] text-gray-500 font-inter leading-tight cursor-pointer">
+                    I agree to TEONOX's <a href="/terms-and-conditions" className="text-[#0066FF] hover:underline font-semibold">T&C</a> and <a href="/privacy-policy" className="text-[#0066FF] hover:underline font-semibold">Privacy Policy</a>. This consent overrides any DNC/NDNC registrations.
+                  </label>
+                </div>
 
                 {/* Primary Button: Send Message */}
                 <button

@@ -40,6 +40,7 @@ import { BASE_URL, ORG, WEBSITE } from '../utils/schema';
 interface ProgramsPageProps {
   onSelectProgram: (program: Program) => void;
   onEnquireProgram: (programTitle: string) => void;
+  onBrochureClick: (programTitle: string) => void;
 }
 
 interface ProgramCategory {
@@ -51,7 +52,7 @@ interface ProgramCategory {
 
 /**
  * Fallback tabs shown only when the WP `program-category` taxonomy fetch fails.
- * When the CMS is reachable, tabs are built live from the taxonomy terms — the
+ * When the CMS is reachable, tabs are built live from the taxonomy terms ï¿½ the
  * names/icons come straight from WordPress, not from hardcoded strings.
  */
 const FALLBACK_CATEGORIES: ProgramCategory[] = [
@@ -80,7 +81,7 @@ const TERM_ICONS: Record<string, React.ElementType> = {
 /** WP term slugs that should carry the "NEW" badge. */
 const NEW_TERM_SLUGS = new Set(['gen-ai-marketing']);
 
-export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPageProps) {
+export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClick }: ProgramsPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [liveCards, setLiveCards] = useState<LiveProgramCard[] | null>(null);
   const [categories, setCategories] = useState<ProgramCategory[]>(FALLBACK_CATEGORIES);
@@ -93,7 +94,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram }: ProgramsPage
   };
 
   // Build the sidebar tabs live from the WP `program-category` taxonomy (fully
-  // dynamic — names come from WordPress, not hardcoded). "All Programs" always
+  // dynamic ï¿½ names come from WordPress, not hardcoded). "All Programs" always
   // comes first, then categories with programs before the empties.
   useEffect(() => {
     let cancelled = false;
@@ -349,7 +350,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     className="bg-white rounded-[24px] border border-[#ECECEC] shadow-2xs hover:shadow-xl hover:border-[#F15A29] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between overflow-hidden cursor-pointer group relative"
                   >
                     <div>
-                      {/* Top Image Frame — strictly WP hero image; local placeholder when missing/failed */}
+                      {/* Top Image Frame ï¿½ strictly WP hero image; local placeholder when missing/failed */}
                       <div className="aspect-[16/10] w-full overflow-hidden relative bg-[#FAF8F5] rounded-t-[24px]">
                         <ProgramImage
                           src={prog.image}
@@ -408,11 +409,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                       <button type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (prog.brochureUrl) {
-                            window.open(prog.brochureUrl, '_blank', 'noopener,noreferrer');
-                          } else {
-                            onEnquireProgram(prog.title);
-                          }
+                          onBrochureClick(prog.title);
                         }}
                         className="flex-1 py-3 px-4 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-all duration-300 shadow-2xs flex items-center justify-center gap-2 cursor-pointer group/btn"
                       >

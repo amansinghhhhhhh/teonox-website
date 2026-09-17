@@ -11,6 +11,7 @@ interface ProgramDetailPageProps {
   program?: Program | null;
   onBack: () => void;
   onEnquire: (programTitle: string) => void;
+  onBrochure?: (programTitle: string) => void;
 }
 
 /**
@@ -32,7 +33,7 @@ function extractSlugFromUrl(): string {
   }
 }
 
-export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailPageProps) {
+export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: ProgramDetailPageProps) {
   // Priority: URL slug > program.id from props > empty (shows error state)
   const urlSlug = extractSlugFromUrl();
   const identifier = urlSlug || program?.id || '';
@@ -187,7 +188,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire }: ProgramDetailP
         slug={canonicalSlug}
       />
       <div className="w-[88%] max-w-7xl mx-auto relative z-10">
-        <ProgramV2Layout detail={displayDetail} heroLoading={loading} onEnquire={(label) => onEnquire(label)} />
+        <ProgramV2Layout detail={displayDetail} heroLoading={loading} onEnquire={(label) => onEnquire(label)} onBrochure={(title) => onBrochure?.(title)} />
       </div>
     </div>
   );

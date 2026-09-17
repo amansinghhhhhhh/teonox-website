@@ -21,6 +21,7 @@ import { fetchLivePrograms, LiveProgramCard } from '../services/programService';
 interface ProgramsSectionProps {
   onSelectProgram: (program: Program) => void;
   onEnquireProgram: (programName: string) => void;
+  onBrochureClick: (programName: string) => void;
 }
 
 interface ProgramCardData {
@@ -39,6 +40,7 @@ interface ProgramCardData {
 export function ProgramsSection({
   onSelectProgram,
   onEnquireProgram,
+  onBrochureClick,
 }: ProgramsSectionProps) {
   const [activeTab, setActiveTab] = useState<string>('all');
   const [liveCards, setLiveCards] = useState<LiveProgramCard[] | null>(null);
@@ -66,7 +68,7 @@ export function ProgramsSection({
     { id: 'social', name: 'Social Media', icon: Share2 },
   ];
 
-  // Strictly live V2 programs from WordPress — no static fallback cards. When the
+  // Strictly live V2 programs from WordPress ï¿½ no static fallback cards. When the
   // CMS has no published V2 content yet, this renders the "coming soon" state.
   const displayedPrograms: ProgramCardData[] = (liveCards ?? [])
     .map((c) => ({
@@ -158,7 +160,7 @@ export function ProgramsSection({
               className="card-premium bg-white rounded-[24px] border border-[#ECECEC] shadow-2xs hover:border-[#F15A29] flex flex-col justify-between overflow-hidden cursor-pointer group relative h-full"
             >
               <div>
-                {/* Header Image — strictly WP hero image; local placeholder when missing/failed */}
+                {/* Header Image ï¿½ strictly WP hero image; local placeholder when missing/failed */}
                 <div className="aspect-[16/10] w-full overflow-hidden relative bg-[#FAF8F5] rounded-t-[24px]">
                   <div className="img-zoom w-full h-full">
                     <ProgramImage
@@ -214,7 +216,7 @@ export function ProgramsSection({
                 <button type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onEnquireProgram(prog.title);
+                    onBrochureClick(prog.title);
                   }}
                   className="flex-1 py-3 px-4 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#F15A29]/20 flex items-center justify-center gap-2 cursor-pointer group/btn active:scale-95"
                 >

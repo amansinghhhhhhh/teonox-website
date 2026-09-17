@@ -397,6 +397,7 @@ export default function App() {
             program={selectedProgram}
             onBack={() => navigate('/programs')}
             onEnquire={(topic) => handleEnquireClick(topic)}
+            onBrochure={(title) => handleBrochureClick(title)}
           />
         ) : selectedPost ? (
           /* Full Page Blog Detail View */
@@ -433,6 +434,7 @@ export default function App() {
           <ProgramsPage
             onSelectProgram={(program) => handleSelectProgram(program)}
             onEnquireProgram={(programTitle) => handleEnquireClick(programTitle)}
+            onBrochureClick={(programTitle) => handleBrochureClick(programTitle)}
           />
         ) : currentPage === 'contact' ? (
           /* Dedicated Contact Page */
@@ -509,6 +511,7 @@ export default function App() {
             <ProgramsSection
               onSelectProgram={(program) => handleSelectProgram(program)}
               onEnquireProgram={(programName) => handleEnquireClick(programName)}
+              onBrochureClick={(programName) => handleBrochureClick(programName)}
             />
 
             {/* Learning Methodology */}
