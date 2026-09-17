@@ -9,6 +9,7 @@ interface EnquireModalProps {
   onNavigate?: (href: string, label: string) => void;
   defaultCourse?: string;
   source?: string;
+  formName?: string;
 }
 
 const COURSES = [
@@ -18,7 +19,7 @@ const COURSES = [
   "Specialization in Performance Marketing",
 ];
 
-export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', source = '' }: EnquireModalProps) {
+export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', source = '', formName = 'Home Hero Enquiry' }: EnquireModalProps) {
   const isCampusVisit = source === 'campus-visit';
   const [selectedCourse, setSelectedCourse] = useState<string>(defaultCourse || '');
   const [fullName, setFullName] = useState('');
@@ -89,9 +90,9 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
     setError('');
     setIsSubmitting(true);
     try {
-      // Field keys match the legacy "Home Hero Enquiry" payload so the
+      // Field keys match the legacy payload so the
       // Sheet columns and email template keep working unchanged.
-      await submitForm(isCampusVisit ? 'Campus Visit Booking' : 'Home Hero Enquiry', {
+      await submitForm(formName, {
         'Full Name': fullName,
         'Email Address': email,
         'Phone Number': phone,

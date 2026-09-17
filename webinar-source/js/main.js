@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
             source: 'webinar',
             traffic_channel: data.source || '',
             referral: data.referral || '',
-            formName: 'webinar_registration',
+            formName: 'Webinar',
             submittedAt: new Date().toISOString()
         };
 

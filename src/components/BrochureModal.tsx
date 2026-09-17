@@ -71,7 +71,7 @@ export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' 
     setError('');
     setIsSubmitting(true);
     try {
-      await submitForm('Brochure Download', {
+      await submitForm('Brochure Downloads', {
         'Full Name': fullName,
         'Email Address': email,
         'WhatsApp Number': phone,

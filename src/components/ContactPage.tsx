@@ -25,7 +25,7 @@ import { ORG, BASE_URL } from '../utils/schema';
 import { EASE_OUT } from '../utils/easing';
 
 interface ContactPageProps {
-  onEnquireClick?: (topic?: string, source?: string) => void;
+  onEnquireClick?: (topic?: string, source?: string, formName?: string) => void;
 }
 
 const fadeUp = (delay = 0) => ({
@@ -180,7 +180,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
           <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center justify-center gap-4 relative z-10">
             {/* Primary Button */}
             <button type="button"
-              onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
+              onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling', '', 'Book Counselling') : scrollToForm())}
               className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
               Book a Counselling Session
@@ -303,7 +303,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
               <div className="pt-2">
                 <button type="button"
-                  onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
+                  onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling', '', 'Book Counselling') : scrollToForm())}
                   className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center gap-2"
                 >
                   <span>Book Counselling</span>
@@ -712,7 +712,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
             <button type="button"
-              onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling') : scrollToForm())}
+              onClick={() => (onEnquireClick ? onEnquireClick('Book Counselling', '', 'Book Counselling') : scrollToForm())}
               className="px-8 py-4 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] transition-all duration-300 shadow-lg shadow-[#F15A29]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
               Book Counselling

@@ -203,7 +203,8 @@ export default function App() {
   const [selectedInterest, setSelectedInterest] = useState<string>('');
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState<boolean>(false);
   const [enquireDefaultCourse, setEnquireDefaultCourse] = useState<string>('');
-  const [enquireSource, setEnquireSource] = useState<string>('');  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState<boolean>(false);
+  const [enquireSource, setEnquireSource] = useState<string>('');
+  const [enquireFormName, setEnquireFormName] = useState<string>('Home Hero Enquiry');  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState<boolean>(false);
   const [brochureDefaultCourse, setBrochureDefaultCourse] = useState<string>('');
   const [blogLoading, setBlogLoading] = useState<boolean>(initialRoute.blogLoading);
   const requestedPostIdRef = useRef<string | null>(null);
@@ -331,10 +332,11 @@ export default function App() {
     navigate(`/blog/${post.slug || post.id}`);
   };
 
-  const handleEnquireClick = (interestTopic: string = '', source: string = '') => {
+  const handleEnquireClick = (interestTopic: string = '', source: string = '', formName: string = '') => {
     setSelectedInterest(interestTopic);
     setEnquireDefaultCourse(interestTopic);
     setEnquireSource(source);
+    setEnquireFormName(formName || (source === 'campus-visit' ? 'Campus Visit Booking' : 'Home Hero Enquiry'));
     setIsEnquireModalOpen(true);
   };
 
@@ -438,7 +440,7 @@ export default function App() {
           />
         ) : currentPage === 'contact' ? (
           /* Dedicated Contact Page */
-          <ContactPage onEnquireClick={(topic, source) => handleEnquireClick(topic || 'Contact Page Enquiry', source || '')} />
+          <ContactPage onEnquireClick={(topic, source, formName) => handleEnquireClick(topic || 'Contact Page Enquiry', source || '', formName || '')} />
         ) : currentPage === 'about' ? (
           /* Dedicated About Us Brand Storytelling Page */
           <AboutUsPage onEnquireClick={(topic) => handleEnquireClick(topic || 'About TEONOX')} />
@@ -589,6 +591,7 @@ export default function App() {
         onNavigate={(href, label) => handleNavClick(href, label)}
         defaultCourse={enquireDefaultCourse}
         source={enquireSource}
+        formName={enquireFormName}
       />
 
       {/* Download Brochure Popup Form Modal */}
