@@ -155,7 +155,7 @@ export function Footer({ onNavigate }: FooterProps) {
               </li>
               <li>
                 <a href="/programs" onClick={(e) => { e.preventDefault(); onNavigate('/programs', 'Programs'); }} className="font-inter text-[15.5px] font-[400] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline">
-                  Program
+                  Programme
                 </a>
               </li>
               <li>
@@ -239,7 +239,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   <BookOpen className="w-[18px] h-[18px]" />
                 </div>
                 <h4 className="font-mono text-[14px] font-[700] uppercase tracking-[0.08em] text-[#EDE4DB]">
-                  Explore Programs
+                  Explore Programmes
                 </h4>
               </div>
               <p className="font-inter text-[14px] text-[#9E9082] leading-relaxed">
@@ -250,7 +250,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 onClick={(e) => { e.preventDefault(); onNavigate('/programs', 'Programs'); }}
                 className="inline-flex items-center gap-1.5 mt-4 font-sora text-[13.5px] font-[700] text-[#FF8A50] hover:text-white transition-colors group"
               >
-                View All Programs
+                View All Programmes
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
             </div>
