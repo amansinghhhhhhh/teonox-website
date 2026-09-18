@@ -16,7 +16,7 @@ export function ContactSection({
     if (onExplorePrograms) {
       onExplorePrograms();
     } else {
-      window.location.href = '/programs';
+      window.location.href = '/programmes';
     }
   };
 

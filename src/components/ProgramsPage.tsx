@@ -183,14 +183,14 @@ mode: progOrTitle.mode || 'On Campus, Pune',
       <SEO
         title="Best Digital Marketing Course in Pune Near You | Teonox"
         description="Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enrol now."
-        canonical="/programs"
+        canonical="/programmes"
         jsonLd={{
           '@context': 'https://schema.org',
           '@graph': [
             {
               '@type': 'CollectionPage',
-              '@id': `${BASE_URL}/programs/#webpage`,
-              url: `${BASE_URL}/programs/`,
+              '@id': `${BASE_URL}/programmes/#webpage`,
+              url: `${BASE_URL}/programmes/`,
               name: 'AI & Digital Marketing Programmes | TEONOX',
               description: 'Explore AI, digital marketing, performance marketing, SEO and social media programmes offered by TEONOX in Pune.',
               isPartOf: { '@id': `${BASE_URL}/#website` },
@@ -198,14 +198,14 @@ mode: progOrTitle.mode || 'On Campus, Pune',
             },
             {
               '@type': 'ItemList',
-              '@id': `${BASE_URL}/programs/#program-list`,
+              '@id': `${BASE_URL}/programmes/#program-list`,
               name: 'TEONOX Programmes',
               numberOfItems: 4,
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programs/business-digital-marketing-with-ai/` },
-                { '@type': 'ListItem', position: 2, name: 'Specialisation in Performance Marketing', url: `${BASE_URL}/programs/performance-marketing/` },
-                { '@type': 'ListItem', position: 3, name: 'Specialisation in Search Engine Optimisation', url: `${BASE_URL}/programs/search-engine-optimization/` },
-                { '@type': 'ListItem', position: 4, name: 'Specialising in Social Media Marketing', url: `${BASE_URL}/programs/specialization-in-social-media-marketing/` },
+                { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programmes/business-digital-marketing-with-ai/` },
+                { '@type': 'ListItem', position: 2, name: 'Specialisation in Performance Marketing', url: `${BASE_URL}/programmes/performance-marketing/` },
+                { '@type': 'ListItem', position: 3, name: 'Specialisation in Search Engine Optimisation', url: `${BASE_URL}/programmes/search-engine-optimization/` },
+                { '@type': 'ListItem', position: 4, name: 'Specialising in Social Media Marketing', url: `${BASE_URL}/programmes/specialization-in-social-media-marketing/` },
               ],
             },
           ],
@@ -213,7 +213,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
       />
       <BreadcrumbSchema items={[
         { name: 'Home', path: '/' },
-        { name: 'Programmes', path: '/programs' },
+        { name: 'Programmes', path: '/programmes' },
       ]} />
 
       <div className="w-[90%] max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16">

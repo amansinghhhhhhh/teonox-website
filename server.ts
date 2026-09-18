@@ -22,7 +22,7 @@ const PROGRAM_IDS = [
 const STATIC_PAGES: Array<{ path: string; priority: string; changefreq: string }> = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/about', priority: '0.8', changefreq: 'monthly' },
-  { path: '/programs', priority: '0.9', changefreq: 'weekly' },
+  { path: '/programmes', priority: '0.9', changefreq: 'weekly' },
   { path: '/blog', priority: '0.8', changefreq: 'weekly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
   { path: '/admissions', priority: '0.8', changefreq: 'monthly' },
@@ -67,7 +67,7 @@ app.get('/sitemap.xml', async (_req, res) => {
 
   // Programs
   for (const id of PROGRAM_IDS) {
-    urls.push(buildSitemapUrl(`${BASE_URL}/programs/${id}`, today, 'monthly', '0.8'));
+    urls.push(buildSitemapUrl(`${BASE_URL}/programmes/${id}`, today, 'monthly', '0.8'));
   }
 
   // Live blog posts from WordPress
@@ -87,7 +87,7 @@ app.get('/sitemap.xml', async (_req, res) => {
 app.get('/sitemap.html', async (_req, res) => {
   const blogs = await fetchLiveBlogSlugs();
   const blogLinks = blogs.map((p) => `<li><a href="${BASE_URL}/blog/${p.slug}">${BASE_URL}/blog/${p.slug}</a></li>`).join('\n');
-  const programLinks = PROGRAM_IDS.map((id) => `<li><a href="${BASE_URL}/programs/${id}">${BASE_URL}/programs/${id}</a></li>`).join('\n');
+  const programLinks = PROGRAM_IDS.map((id) => `<li><a href="${BASE_URL}/programmes/${id}">${BASE_URL}/programmes/${id}</a></li>`).join('\n');
   const pageLinks = STATIC_PAGES.map((p) => `<li><a href="${BASE_URL}${p.path}">${BASE_URL}${p.path}</a></li>`).join('\n');
 
   const html = `<!DOCTYPE html>
@@ -145,10 +145,10 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Learn business digital marketing classes in Pune at Teonox, a trusted digital marketing training institute with practical, placement-focused courses.',
     canonical: '/about',
   },
-  '/programs': {
+  '/programmes': {
     title: 'Best Digital Marketing Course in Pune Near You | Teonox',
     description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enrol now.",
-    canonical: '/programs',
+    canonical: '/programmes',
   },
   '/blog': {
     title: 'Blog & Insights | TEONOX',
@@ -278,7 +278,7 @@ async function fetchProgramMeta(slug: string): Promise<RouteMeta | null> {
     const meta: RouteMeta = {
       title: `${title} | TEONOX`,
       description: heroIntro || `Explore ${title} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`,
-      canonical: `/programs/${slug}`,
+      canonical: `/programmes/${slug}`,
     };
     setCachedDynamicMeta(cacheKey, meta);
     return meta;
@@ -300,8 +300,8 @@ async function resolveRouteMeta(pathname: string): Promise<RouteMeta | null> {
     return fetchBlogMeta(segments[1]);
   }
 
-  // Dynamic: /programs/:slug or /program/:slug
-  if (segments.length === 2 && (segments[0] === 'programs' || segments[0] === 'program')) {
+  // Dynamic: /programmes/:slug or /programs/:slug or /program/:slug
+  if (segments.length === 2 && (segments[0] === 'programmes' || segments[0] === 'programs' || segments[0] === 'program')) {
     return fetchProgramMeta(segments[1]);
   }
 
@@ -548,6 +548,10 @@ async function startServer() {
 
     // Serve real static assets (JS, CSS, images, PDFs) — but NOT index.html
     app.use(express.static(distPath, { index: false }));
+
+    // 301 redirect /programs → /programmes (SEO link equity preservation)
+    app.get('/programs', (_req, res) => { res.redirect(301, '/programmes'); });
+    app.get('/programs/*', (req, res) => { res.redirect(301, `/programmes${req.params[0]}`); });
 
     // All remaining GET requests → serve index.html with injected meta tags
     app.get('*', serveWithMeta(indexHtml));

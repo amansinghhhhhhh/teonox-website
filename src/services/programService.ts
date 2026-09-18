@@ -7,7 +7,7 @@ import socialImg from '../assets/images/uploaded_social_media.webp';
 import { CMS_URL, decodeHtmlEntities, stripHtml, safeJson } from '../utils/html';
 
 /**
- * Normalised data for a single program card on the /programs listing page.
+ * Normalised data for a single program card on the /programmes listing page.
  * Populated from the WP "Card Information" ACF fields, with the detail-tab
  * fields as fallbacks when a card-specific value hasn't been entered yet.
  */
@@ -682,7 +682,7 @@ export async function fetchLiveProgramDetail(
 
 /**
  * Convert a raw WordPress post (with ACF V2 "Card Information" fields) into a
- * LiveProgramCard for the /programs listing page. Card-specific ACF fields win;
+ * LiveProgramCard for the /programmes listing page. Card-specific ACF fields win;
  * WP core fields are used as fallbacks so cards render fully even before the
  * new card fields are populated on the CMS.
  */
@@ -894,7 +894,7 @@ const FALLBACK_CARD_IMAGES: Record<string, string> = {
 /**
  * Static fallback cards used when the WordPress CMS is unreachable (e.g. a CORS
  * block on cms.teonox.com). Derived from the bundled PROGRAMS_DATA so the
- * /programs listing and the home page section never collapse into the "Programs
+ * /programmes listing and the home page section never collapse into the "Programs
  * coming soon" state just because the live API could not be reached.
  */
 const FALLBACK_PROGRAM_CARDS: LiveProgramCard[] = PROGRAMS_DATA.programs.map((p) => {
@@ -963,7 +963,7 @@ export async function fetchLivePrograms(): Promise<{ programs: LiveProgramCard[]
 }
 
 /**
- * Fetch the `program-category` custom taxonomy terms for the /programs page.
+ * Fetch the `program-category` custom taxonomy terms for the /programmes page.
  * Categories drive the sidebar/tab UI directly from WordPress data (direct
  * REST fetch — no same-origin proxy on production).
  */

@@ -2,6 +2,13 @@
   RewriteEngine On
   RewriteBase /
 
+  # 301 redirect /programs and /programs/:slug to /programmes (SEO link equity preservation)
+  RewriteRule ^programs/(.+)$ /programmes/$1 [R=301,L]
+  RewriteRule ^programs$ /programmes [R=301,L]
+
+  # /programmes/ (with trailing slash) -> 301 redirect to /programmes (no slash)
+  RewriteRule ^programmes/$ /programmes [R=301,L]
+
   # /webinar/ (with slash) -> 301 redirect to /webinar (no slash)
   RewriteRule ^webinar/$ /webinar [R=301,L]
 

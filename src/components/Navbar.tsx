@@ -22,7 +22,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Programmes", href: "/programs" },
+    { label: "Programmes", href: "/programmes" },
     { label: "Why TEONOX", href: "/why-teonox" },
     { label: "Career Outcomes", href: "/careers" },
     { label: "Admissions", href: "/admissions" },

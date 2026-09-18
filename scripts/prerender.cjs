@@ -27,10 +27,10 @@ const META_MAP = {
     description: 'Learn business digital marketing classes in Pune at Teonox, a trusted digital marketing training institute with practical, placement-focused courses.',
     canonical: '/about',
   },
-  '/programs': {
+  '/programmes': {
     title: 'Best Digital Marketing Course in Pune Near You | Teonox',
-    description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enroll now.",
-    canonical: '/programs',
+    description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enrol now.",
+    canonical: '/programmes',
   },
   '/blog': {
     title: 'Blog & Insights | TEONOX',
@@ -252,7 +252,7 @@ async function main() {
 
   for (const prog of programs) {
     // Scrape Rank Math SEO title + description from WP front-end
-    console.log(`[Prerender] Scraping Rank Math meta for /programs/${prog.slug}...`);
+    console.log(`[Prerender] Scraping Rank Math meta for /programmes/${prog.slug}...`);
     const rankMath = await scrapeRankMathMeta(prog.slug);
 
     const title = (rankMath && rankMath.seoTitle) || `${prog.title} | TEONOX`;
@@ -263,12 +263,12 @@ async function main() {
     const meta = {
       title,
       description,
-      canonical: `/programs/${prog.slug}`,
+      canonical: `/programmes/${prog.slug}`,
     };
-    const outPath = writePage(distDir, `/programs/${prog.slug}`, injectMeta(htmlTemplate, meta));
+    const outPath = writePage(distDir, `/programmes/${prog.slug}`, injectMeta(htmlTemplate, meta));
     count++;
     const source = (rankMath && rankMath.seoTitle) ? 'Rank Math' : 'fallback';
-    console.log(`  /programs/${prog.slug} [${source}] -> ${path.relative(process.cwd(), outPath)}`);
+    console.log(`  /programmes/${prog.slug} [${source}] -> ${path.relative(process.cwd(), outPath)}`);
   }
 
   console.log(`\n[Prerender] Done! Generated ${count} prerendered page(s) in dist/`);

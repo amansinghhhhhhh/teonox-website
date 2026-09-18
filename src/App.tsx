@@ -54,7 +54,7 @@ const PAGE_PATHS: Record<Page, string> = {
   about: '/about',
   blog: '/blog',
   contact: '/contact',
-  programs: '/programs',
+  programs: '/programmes',
   careers: '/careers',
   'why-teonox': '/why-teonox',
   admissions: '/admissions',
@@ -85,11 +85,14 @@ function parsePath(pathname: string): Route {
       return { page: 'privacy-policy' };
     case 'terms-and-conditions':
       return { page: 'terms-and-conditions' };
-    // /programs/<slug> -> single program detail page (primary route)
-    // /programs -> program listing page
+    // /programmes/<slug> -> single programme detail page (primary route)
+    // /programmes -> programme listing page
+    case 'programmes':
+      return second ? { page: 'programs', programId: second } : { page: 'programs' };
+    // /programs/<slug> -> 301 redirect backward compat (kept for existing links / SEO equity)
     case 'programs':
       return second ? { page: 'programs', programId: second } : { page: 'programs' };
-    // /program/<slug> -> backward compat redirect (kept for existing links)
+    // /program/<slug> -> legacy backward compat redirect (kept for existing links)
     case 'program':
       return { page: 'programs', programId: second };
     case 'blog':
@@ -325,7 +328,7 @@ export default function App() {
   }, [syncFromUrl]);
 
   const handleSelectProgram = (program: Program) => {
-    navigate(`/programs/${program.id}`);
+    navigate(`/programmes/${program.id}`);
   };
 
   const handleSelectPost = (post: BlogPost) => {
@@ -397,7 +400,7 @@ export default function App() {
           /* Dedicated Course Details Page */
           <ProgramDetailPage
             program={selectedProgram}
-            onBack={() => navigate('/programs')}
+            onBack={() => navigate('/programmes')}
             onEnquire={(topic) => handleEnquireClick(topic)}
             onBrochure={(title) => handleBrochureClick(title)}
           />
@@ -408,7 +411,7 @@ export default function App() {
             onBack={() => navigate('/blog')}
             onSelectPost={(post) => handleSelectPost(post)}
             onEnquireClick={(topic) => handleEnquireClick(topic)}
-            onExplorePrograms={() => navigate('/programs')}
+            onExplorePrograms={() => navigate('/programmes')}
           />
         ) : blogLoading ? (
           /* Loading state while resolving a directly-linked blog article */
@@ -417,19 +420,19 @@ export default function App() {
           /* Dedicated Why TEONOX Page */
           <WhyTeonoxPage
             onEnquireClick={(topic) => handleEnquireClick(topic || 'Why TEONOX Advisory')}
-            onExplorePrograms={() => navigate('/programs')}
+            onExplorePrograms={() => navigate('/programmes')}
           />
         ) : currentPage === 'careers' ? (
           /* Dedicated Career Outcomes Page */
           <CareerOutcomesPage
             onEnquireClick={(topic) => handleEnquireClick(topic || 'Career Advisory')}
-            onExplorePrograms={() => navigate('/programs')}
+            onExplorePrograms={() => navigate('/programmes')}
           />
         ) : currentPage === 'admissions' ? (
           /* Dedicated Admissions Page */
           <AdmissionsPage
             onEnquireClick={(topic) => handleEnquireClick(topic || 'Admissions Enquiry')}
-            onExplorePrograms={() => navigate('/programs')}
+            onExplorePrograms={() => navigate('/programmes')}
           />
         ) : currentPage === 'programs' ? (
           /* Dedicated Programs Page */
@@ -455,7 +458,7 @@ export default function App() {
           <BlogPage
             onSelectPost={(post) => handleSelectPost(post)}
             onEnquireClick={(topic) => handleEnquireClick(topic || 'Blog Subscription')}
-            onExplorePrograms={() => navigate('/programs')}
+            onExplorePrograms={() => navigate('/programmes')}
           />
         ) : currentPage === 'not-found' ? (
           /* 404 Page */
@@ -497,7 +500,7 @@ export default function App() {
             />
             {/* Hero Section */}
             <Hero
-              onExploreClick={() => navigate('/programs')}
+              onExploreClick={() => navigate('/programmes')}
               onEnquireClick={() => handleEnquireClick()}
               onBrochureClick={() => handleBrochureClick()}
             />
@@ -507,7 +510,7 @@ export default function App() {
 
             {/* Reworked Why TEONOX - "More Than a Course. A Community That Builds You."
                 COMMENTED OUT per request. Restore by uncommenting the line below.
-            {false && <WhyTeonoxSection onExplorePrograms={() => handleNavClick('/programs', 'Programs')} />} */}
+            {false && <WhyTeonoxSection onExplorePrograms={() => handleNavClick('/programmes', 'Programmes')} />} */}
 
             {/* Our Programmes - directly after the Why TEONOX section and before Learning Methodology */}
             <ProgramsSection
@@ -568,7 +571,7 @@ export default function App() {
             />
             {/* Contact CTA */}
             <ContactSection
-              onExplorePrograms={() => navigate('/programs')}
+              onExplorePrograms={() => navigate('/programmes')}
               onEnquireClick={(topic) => handleEnquireClick(topic || 'Talk to TEONOX')}
             />
             {/* FAQ Section */}

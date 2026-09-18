@@ -23,8 +23,8 @@ interface ProgramDetailPageProps {
 function extractSlugFromUrl(): string {
   try {
     const segments = window.location.pathname.split('/').filter(Boolean);
-    // URL patterns: /programs/<slug> (primary) or /program/<slug> (backward compat)
-    if (segments.length >= 2 && (segments[0] === 'programs' || segments[0] === 'program')) {
+    // URL patterns: /programmes/<slug> (primary) or /program/<slug> (backward compat)
+    if (segments.length >= 2 && (segments[0] === 'programmes' || segments[0] === 'programs' || segments[0] === 'program')) {
       return segments[1];
     }
     return '';
@@ -78,7 +78,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
               window.history.replaceState(
                 { type: 'page', page: 'programs' },
                 '',
-                `/programs/${canonicalSlug}`,
+                `/programmes/${canonicalSlug}`,
               );
             } catch {
               // Ignore security errors in sandboxed iframes
@@ -180,7 +180,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
       <SEO
         title={displayDetail?.seoTitle || displayDetail?.programTitle || program?.title || 'Programme'}
         description={displayDetail?.seoDescription || displayDetail?.heroIntro || `Explore ${program?.title || 'this programme'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
-        canonical={`/programs/${canonicalSlug}`}
+        canonical={`/programmes/${canonicalSlug}`}
       />
       <CourseSchema
         name={displayDetail?.programTitle || program?.title || ''}

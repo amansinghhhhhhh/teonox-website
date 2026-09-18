@@ -154,7 +154,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="/programs" onClick={(e) => { e.preventDefault(); onNavigate('/programs', 'Programs'); }} className="font-inter text-[15.5px] font-[400] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline">
+                <a href="/programmes" onClick={(e) => { e.preventDefault(); onNavigate('/programmes', 'Programmes'); }} className="font-inter text-[15.5px] font-[400] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline">
                   Programme
                 </a>
               </li>
@@ -246,8 +246,8 @@ export function Footer({ onNavigate }: FooterProps) {
                 Career-focused specialisations built for real-world outcomes.
               </p>
               <a
-                href="/programs"
-                onClick={(e) => { e.preventDefault(); onNavigate('/programs', 'Programs'); }}
+                href="/programmes"
+                onClick={(e) => { e.preventDefault(); onNavigate('/programmes', 'Programmes'); }}
                 className="inline-flex items-center gap-1.5 mt-4 font-sora text-[13.5px] font-[700] text-[#FF8A50] hover:text-white transition-colors group"
               >
                 View All Programmes
@@ -266,10 +266,10 @@ export function Footer({ onNavigate }: FooterProps) {
                       </span>
                     )}
                     <a
-                      href={`/programs/${program.id}`}
+                      href={`/programmes/${program.id}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        onNavigate(`/programs/${program.id}`, program.title);
+                        onNavigate(`/programmes/${program.id}`, program.title);
                       }}
                       className="font-inter text-[15px] sm:text-[15.5px] font-[500] text-[#C9BDB2] hover:text-[#FF8A50] transition-colors link-underline whitespace-normal break-words leading-snug"
                     >
