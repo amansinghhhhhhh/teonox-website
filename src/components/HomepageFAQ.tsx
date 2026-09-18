@@ -10,11 +10,11 @@ export interface FAQItem {
 export const FAQ_DATA: FAQItem[] = [
   {
     q: 'Which AI course in Pune offers placement assistance?',
-    a: "Teonox in Pune offers an AI & Automation training program with placement support, covering practical AI tools, automation workflows, and job-readiness training. The course is designed for freshers and working professionals looking to enter AI-driven roles.",
+    a: "Teonox in Pune offers an AI & Automation training programme with placement support, covering practical AI tools, automation workflows, and job-readiness training. The course is designed for freshers and working professionals looking to enter AI-driven roles.",
   },
   {
     q: 'Do AI courses in Pune guarantee a job after completion?',
-    a: "Most reputable AI courses, including Teonox's program, offer placement assistance, resume building, interview prep, and hiring partner connections, rather than a guaranteed job, since final hiring depends on the candidate's performance and the employer's requirements.",
+    a: "Most reputable AI courses, including Teonox's programme, offer placement assistance, resume building, interview prep, and hiring partner connections, rather than a guaranteed job, since final hiring depends on the candidate's performance and the employer's requirements.",
   },
   {
     q: 'What is included in an AI course with placement support in Pune?',
@@ -22,7 +22,7 @@ export const FAQ_DATA: FAQItem[] = [
   },
   {
     q: 'Who can join an AI course with placement in Pune?',
-    a: "Students, fresh graduates, working professionals looking to upskill, and career switchers can join, these programs are usually built for multiple experience levels with no strict prerequisite of a technical background.",
+    a: "Students, fresh graduates, working professionals looking to upskill, and career switchers can join, these programmes are usually built for multiple experience levels with no strict prerequisite of a technical background.",
   },
   {
     q: 'What is the best course to do after graduation in Pune?',
@@ -38,11 +38,11 @@ export const FAQ_DATA: FAQItem[] = [
   },
   {
     q: 'What courses in Pune help fresh graduates get hired faster?',
-    a: "Courses combining practical training with placement support, such as Teonox's programs in AI & Automation, Digital Marketing, and Data Analytics, help fresh graduates get hired faster than purely theoretical courses.",
+    a: "Courses combining practical training with placement support, such as Teonox's programmes in AI & Automation, Digital Marketing, and Data Analytics, help fresh graduates get hired faster than purely theoretical courses.",
   },
   {
     q: 'Where can I upskill in AI and automation in Pune?',
-    a: "Teonox in Pune offers an AI & Automation upskilling program covering practical tools and workflows for professionals who want to add AI skills to their existing career without switching fields entirely.",
+    a: "Teonox in Pune offers an AI & Automation upskilling programme covering practical tools and workflows for professionals who want to add AI skills to their existing career without switching fields entirely.",
   },
   {
     q: 'Is AI and automation training useful for non-tech professionals?',
@@ -50,7 +50,7 @@ export const FAQ_DATA: FAQItem[] = [
   },
   {
     q: 'How long does it take to upskill in AI and automation?',
-    a: "Most AI & Automation upskilling programs in Pune run for a few weeks to a few months, depending on depth, short programs cover tool usage and prompt-based automation, while longer ones include hands-on project work.",
+    a: "Most AI & Automation upskilling programmes in Pune run for a few weeks to a few months, depending on depth, short programs cover tool usage and prompt-based automation, while longer ones include hands-on project work.",
   },
   {
     q: 'What topics are covered in an AI and automation upskilling course?',
@@ -101,7 +101,7 @@ export function HomepageFAQ() {
             Frequently Asked Questions
           </h2>
           <p className="font-inter text-[15px] sm:text-[16px] text-[#665A4E] leading-relaxed mt-3">
-            Choosing the right digital marketing course near me can be challenging, especially with so many options available. Our Frequently Asked Questions section answers common queries about course eligibility, curriculum, certifications, placements, fees, batch timings, online and classroom training, and career opportunities. Whether you're looking for an AI course with placement in Pune, searching for the best course after graduation in Pune, or planning to upskill in AI and automation in Pune, our FAQs provide useful information to help you choose the right career-focused program. You can also explore options for corporate AI automation training in Pune and discover how Teonox is building a Gen AI School of Marketing in Pune with practical, industry-relevant learning.
+            Choosing the right digital marketing course near me can be challenging, especially with so many options available. Our Frequently Asked Questions section answers common queries about course eligibility, curriculum, certifications, placements, fees, batch timings, online and classroom training, and career opportunities. Whether you're looking for an AI course with placement in Pune, searching for the best course after graduation in Pune, or planning to upskill in AI and automation in Pune, our FAQs provide useful information to help you choose the right career-focused programme. You can also explore options for corporate AI automation training in Pune and discover how Teonox is building a Gen AI School of Marketing in Pune with practical, industry-relevant learning.
           </p>
         </Reveal>
 

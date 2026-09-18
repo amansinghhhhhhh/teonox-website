@@ -56,8 +56,8 @@ interface ProgramCategory {
  * names/icons come straight from WordPress, not from hardcoded strings.
  */
 const FALLBACK_CATEGORIES: ProgramCategory[] = [
-  { id: 'all', name: 'All Programs', icon: LayoutGrid },
-  { id: 'popular', name: 'Popular Programs', icon: Flame },
+  { id: 'all', name: 'All Programmes', icon: LayoutGrid },
+  { id: 'popular', name: 'Popular Programmes', icon: Flame },
   { id: 'genai', name: 'GEN AI & Marketing', icon: Brain, isNew: true },
   { id: 'performance', name: 'Performance & Paid Ads', icon: Target },
   { id: 'seo', name: 'SEO & Search Growth', icon: Search },
@@ -102,7 +102,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
       (terms) => {
         if (cancelled || terms.length === 0) return;
         const tabs: ProgramCategory[] = [
-          { id: 'all', name: 'All Programs', icon: LayoutGrid },
+          { id: 'all', name: 'All Programmes', icon: LayoutGrid },
           ...terms
             .slice()
             .sort((a, b) => (b.count ?? 0) - (a.count ?? 0))
@@ -164,7 +164,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
         eligibilityLabel: 'Eligibility',
 mode: progOrTitle.mode || 'On Campus, Pune',
         modeLabel: 'Mode',
-        buttonText: 'View Program',
+        buttonText: 'View Programme',
         image: progOrTitle.image
       });
       return;
@@ -191,7 +191,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
               '@type': 'CollectionPage',
               '@id': `${BASE_URL}/programs/#webpage`,
               url: `${BASE_URL}/programs/`,
-              name: 'AI & Digital Marketing Programs | TEONOX',
+              name: 'AI & Digital Marketing Programmes | TEONOX',
               description: 'Explore AI, digital marketing, performance marketing, SEO and social media programmes offered by TEONOX in Pune.',
               isPartOf: { '@id': `${BASE_URL}/#website` },
               about: { '@id': ORG['@id'] },
@@ -199,7 +199,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
             {
               '@type': 'ItemList',
               '@id': `${BASE_URL}/programs/#program-list`,
-              name: 'TEONOX Programs',
+              name: 'TEONOX Programmes',
               numberOfItems: 4,
               itemListElement: [
                 { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programs/business-digital-marketing-with-ai/` },
@@ -213,7 +213,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
       />
       <BreadcrumbSchema items={[
         { name: 'Home', path: '/' },
-        { name: 'Programs', path: '/programs' },
+        { name: 'Programmes', path: '/programs' },
       ]} />
 
       <div className="w-[90%] max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16">
@@ -437,13 +437,13 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                     <Sparkles className="w-7 h-7 text-[#F15A29]" />
                   </div>
                   <h4 className="font-sora text-[22px] sm:text-[26px] font-[800] text-[#111111]">
-                    Programs coming soon
+                    Programmes coming soon
                   </h4>
                   <p className="mt-2.5 font-inter text-[14.5px] text-[#6B625A] max-w-md mx-auto leading-relaxed">
                     We&apos;re preparing new course content in this category. Register your interest and our counsellor will notify you the moment it goes live.
                   </p>
                   <button type="button"
-                    onClick={() => onEnquireProgram('Program coming soon enquiry')}
+                    onClick={() => onEnquireProgram('Programme coming soon enquiry')}
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#F15A29] hover:bg-[#D94A1F] text-white font-sora font-[700] text-[13px] px-6 py-3 transition-all duration-300 shadow-2xs cursor-pointer"
                   >
                     <Mail className="w-4 h-4" />

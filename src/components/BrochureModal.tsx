@@ -120,7 +120,7 @@ export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' 
           <div className="w-full h-full flex items-center justify-center">
             <img
               src={popupFormImg}
-              alt="TEONOX program brochure"
+              alt="TEONOX programme brochure"
               loading="lazy"
               decoding="async"
               className="w-full h-full object-contain object-center"

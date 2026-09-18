@@ -159,17 +159,17 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   'business-digital-marketing-with-ai': {
     id: 'business-digital-marketing-with-ai',
     programTitle: 'BUSINESS DIGITAL MARKETING WITH AI',
-    badge: 'FLAGSHIP CERTIFICATION PROGRAM',
+    badge: 'FLAGSHIP CERTIFICATION PROGRAMME',
     subHeading: 'Complete Digital Marketing Mastery Across AI, SEO, Paid Ads, Analytics & Business Growth',
     duration: '6 Months',
     mode: 'On Campus, Pune',
     heroIntro:
-      'Business Digital Marketing With AI is the flagship 6-month certification program at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
+      'Business Digital Marketing With AI is the flagship 6-month certification programme at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
     heroImage: imgDigitalMarketingAi,
     overview: {
       highlight:
-        'Business Digital Marketing With AI is the flagship 6-month certification program at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
-      main: 'The program covers the full digital marketing stack: marketing fundamentals and strategy, SEO and search, paid advertising across Google and Meta, social media and content, email and automation, web analytics, and AI-powered marketing workflows. Throughout, learners work on real projects, build portfolios and prepare for internships, jobs and freelancing.',
+        'Business Digital Marketing With AI is the flagship 6-month certification programme at TEONOX. It builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth — combining strategy, practical execution and career support so learners can get hired, get promoted, or grow a business.',
+      main: 'The programme covers the full digital marketing stack: marketing fundamentals and strategy, SEO and search, paid advertising across Google and Meta, social media and content, email and automation, web analytics, and AI-powered marketing workflows. Throughout, learners work on real projects, build portfolios and prepare for internships, jobs and freelancing.',
       expanded: [
         'AI is embedded throughout the curriculum — from content and creative generation to campaign optimisation, analytics and reporting — so learners graduate ready for AI-augmented marketing roles.',
         'The final months focus on business growth: measurement, conversion optimisation, customer journeys and growth strategy, followed by placement and career support.'
@@ -227,7 +227,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'AI-powered marketing skills embedded throughout every module',
       'Learn SEO, Google Ads, Meta Ads, social media, email, analytics and business growth',
       'Hands-on projects and portfolio building from week one',
-      'Industry-recognized TEONOX certification plus support for Google, Meta, HubSpot and other certifications',
+      'Industry-recognised TEONOX certification plus support for Google, Meta, HubSpot and other certifications',
       'Placement assistance, resume and LinkedIn optimisation and interview preparation',
       'Internship and freelancing opportunities for eligible learners',
       'On-campus immersive training at TEONOX, Pune with mentors and community',
@@ -273,7 +273,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     },
     prerequisites: {
       intro:
-        'The program is designed for 12th-pass students, graduates and working professionals. No prior marketing experience is required — beginners are welcome. Learners should be comfortable with:',
+        'The programme is designed for 12th-pass students, graduates and working professionals. No prior marketing experience is required — beginners are welcome. Learners should be comfortable with:',
       bullets: [
         'Using a computer and browsing the internet',
         'Basic English communication and writing',
@@ -283,12 +283,12 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       note: 'Eligibility: 12th Passed, Graduates & Working Professionals.'
     },
     outcomes: {
-      intro: 'After completing the program, learners should be able to:',
+      intro: 'After completing the programme, learners should be able to:',
       bullets: [
         'Plan and execute complete digital marketing strategies',
         'Implement SEO and organic growth across search engines',
         'Run Google Ads and Meta Ads campaigns end to end',
-        'Manage social media, content and community programs',
+        'Manage social media, content and community programmes',
         'Set up email marketing and automation flows',
         'Use web analytics to measure and optimise performance',
         'Apply AI tools across content, creative, analytics and campaigns',
@@ -297,7 +297,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Build a professional portfolio ready for jobs or freelancing'
       ],
       projectsNote:
-        'The program culminates in capstone projects covering a full marketing plan, live campaign work, analytics reporting and an AI-powered marketing workflow portfolio.'
+        'The programme culminates in capstone projects covering a full marketing plan, live campaign work, analytics reporting and an AI-powered marketing workflow portfolio.'
     },
     valueSequence: [
       'Marketing Strategy',
@@ -308,7 +308,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'Business Growth'
     ],
     valueProposition:
-      'The value of the flagship program lies in turning a beginner into a complete, AI-enabled digital marketer ready for real business impact.',
+      'The value of the flagship programme lies in turning a beginner into a complete, AI-enabled digital marketer ready for real business impact.',
     certifications: [
       {
         title: 'TEONOX Certification in Business Digital Marketing With AI',
@@ -376,7 +376,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       freelancing: {
         title: 'Freelancing & Client Services',
-        note: 'The program can prepare learners to offer high-demand services to clients, brands, and agencies.',
+        note: 'The programme can prepare learners to offer high-demand services to clients, brands, and agencies.',
         items: [
           { title: 'Digital Marketing Strategy', iconName: 'Lightbulb' },
           { title: 'SEO Services', iconName: 'Search' },
@@ -393,20 +393,20 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     },
     faqs: [
       {
-        q: '1. What is the Business Digital Marketing With AI program?',
-        a: 'It is the flagship 6-month certification program at TEONOX that builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth.'
+        q: '1. What is the Business Digital Marketing With AI programme?',
+        a: 'It is the flagship 6-month certification programme at TEONOX that builds a complete digital marketer trained across AI, SEO, paid ads, social media, analytics and business growth.'
       },
       {
         q: '2. Do I need prior marketing experience?',
-        a: 'No. The program is designed for 12th-pass students, graduates and working professionals. Beginners start with fundamentals and progress to advanced, AI-powered marketing.'
+        a: 'No. The programme is designed for 12th-pass students, graduates and working professionals. Beginners start with fundamentals and progress to advanced, AI-powered marketing.'
       },
       {
-        q: '3. What is the duration of the program?',
-        a: 'The program duration is 6 months.'
+        q: '3. What is the duration of the programme?',
+        a: 'The programme duration is 6 months.'
       },
       {
         q: '4. What is the mode of delivery?',
-        a: 'The program is delivered On Campus in Pune with hands-on projects, mentorship and a learning community.'
+        a: 'The programme is delivered On Campus in Pune with hands-on projects, mentorship and a learning community.'
       },
       {
         q: '5. What topics are covered?',
@@ -414,48 +414,48 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '6. Will I learn AI?',
-        a: 'Yes. AI is embedded throughout the program — content and creative generation, campaign optimisation, analytics, reporting and marketing operations.'
+        a: 'Yes. AI is embedded throughout the programme — content and creative generation, campaign optimisation, analytics, reporting and marketing operations.'
       },
       {
         q: '7. Will I get a certification?',
         a: 'Yes. Learners earn the TEONOX Certification in Business Digital Marketing With AI, with support for Google, Meta, HubSpot and GA4 certifications.'
       },
       {
-        q: '8. Does the program include practical projects?',
+        q: '8. Does the programme include practical projects?',
         a: 'Yes. Learners build a portfolio through live projects covering a full marketing plan, campaign work, analytics reporting and an AI-powered marketing workflow.'
       },
       {
-        q: '9. Does the program offer placement support?',
+        q: '9. Does the programme offer placement support?',
         a: 'Eligible learners receive placement assistance including resume and LinkedIn optimisation, interview preparation, mock interviews and job opportunity assistance through TEONOX hiring networks.'
       },
       {
-        q: '10. Can I freelance after completing this program?',
+        q: '10. Can I freelance after completing this programme?',
         a: 'Yes. The skills are applicable to freelancing in SEO, social media, paid ads, content, email and AI-powered marketing services.'
       },
       {
-        q: '11. Who is this program for?',
+        q: '11. Who is this programme for?',
         a: 'It is for students and graduates, working professionals, career switchers, business owners, freelancers and job seekers who want a complete digital marketing skill set.'
       },
       {
-        q: '12. Why choose the flagship program over a specialisation?',
-        a: 'The flagship program covers the entire digital marketing stack in one 6-month path, while specialisations focus on one advanced area like SEO, Social Media or Performance Marketing.'
+        q: '12. Why choose the flagship programme over a specialisation?',
+        a: 'The flagship programme covers the entire digital marketing stack in one 6-month path, while specialisations focus on one advanced area like SEO, Social Media or Performance Marketing.'
       }
     ]
   },
   'social-media-marketing': {
     id: 'social-media-marketing',
     programTitle: 'SPECIALISATION IN SOCIAL MEDIA MARKETING',
-    badge: '8-WEEK ADVANCED SPECIALIZATION PROGRAM',
+    badge: '8-WEEK ADVANCED SPECIALISATION PROGRAMME',
     subHeading: 'Advanced Content Systems, Algorithms, Communities, Influence & Social Commerce',
     duration: '8 Weeks',
     mode: 'On Campus, Pune',
-    heroIntro: 'Social Media Growth Engineering is an intensive 8-week advanced specialisation program designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
+    heroIntro: 'Social Media Growth Engineering is an intensive 8-week advanced specialisation programme designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
     heroImage: imgSocialMediaMktg,
     overview: {
-      highlight: 'Social Media Growth Engineering is an intensive 8-week advanced specialisation program designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
-      main: 'The program goes beyond routine posting and platform management. Learners explore social media algorithms, advanced audience intelligence, content engineering, short-form video growth, persuasion psychology, personal branding, influencer marketing, community-led growth, Social SEO, social commerce, analytics and growth experimentation across major platforms.',
+      highlight: 'Social Media Growth Engineering is an intensive 8-week advanced specialisation programme designed to transform social media knowledge into a structured system for audience growth, content performance, influence, community building, brand authority and revenue generation.',
+      main: 'The programme goes beyond routine posting and platform management. Learners explore social media algorithms, advanced audience intelligence, content engineering, short-form video growth, persuasion psychology, personal branding, influencer marketing, community-led growth, Social SEO, social commerce, analytics and growth experimentation across major platforms.',
       expanded: [
-        'The program also integrates AI-powered content creation, social listening, automation, CRM workflows, chatbot integration and AI agents, helping learners build scalable and data-driven social media systems.',
+        'The programme also integrates AI-powered content creation, social listening, automation, CRM workflows, chatbot integration and AI agents, helping learners build scalable and data-driven social media systems.',
         'The curriculum combines platform growth with content, influence, community, commerce, analytics and experimentation rather than treating social media purely as a publishing function.'
       ]
     },
@@ -523,7 +523,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       students: {
         title: 'For Students',
         intro: 'Develop an advanced specialisation for careers in Social Media Marketing, Content Strategy, Influencer Marketing, Community Management and Creator Marketing.',
-        heading: 'The program empowers students to:',
+        heading: 'The programme empowers students to:',
         bullets: [
           'Think strategically about audiences, algorithms, content, growth and analytics instead of simply operating social media accounts',
           'Develop an advanced specialisation for high-demand digital careers',
@@ -573,7 +573,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       }
     },
     prerequisites: {
-      intro: 'This is an advanced specialisation program, so basic knowledge of Digital Marketing and Social Media Marketing is recommended.',
+      intro: 'This is an advanced specialisation programme, so basic knowledge of Digital Marketing and Social Media Marketing is recommended.',
       bullets: [
         'Major social media platforms (Instagram, Facebook, LinkedIn, YouTube, X, TikTok, etc.)',
         'Basic content creation and publishing workflows',
@@ -601,7 +601,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Apply AI agents and automation to social media workflows',
         'Design and execute data-driven social media growth experiments'
       ],
-      projectsNote: 'The program concludes with advanced projects covering multi-platform growth, creator brands, viral content experimentation, influencer campaigns, community growth, social commerce, AI content systems and automation.'
+      projectsNote: 'The programme concludes with advanced projects covering multi-platform growth, creator brands, viral content experimentation, influencer campaigns, community growth, social commerce, AI content systems and automation.'
     },
     certifications: [
       {
@@ -718,7 +718,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '5. Will I learn social media algorithms?',
-        a: 'Yes. The program covers recommendation systems, content distribution, interest and social graphs, engagement prediction, watch time, retention, satisfaction signals, content velocity and algorithm testing.'
+        a: 'Yes. The programme covers recommendation systems, content distribution, interest and social graphs, engagement prediction, watch time, retention, satisfaction signals, content velocity and algorithm testing.'
       },
       {
         q: '6. Does the course cover Reels and short-form video?',
@@ -726,10 +726,10 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '7. Will I learn Influencer Marketing?',
-        a: 'Yes. The program covers creator positioning, influencer discovery and evaluation, brand-creator fit, outreach, negotiation, campaign management, attribution and monetisation.'
+        a: 'Yes. The programme covers creator positioning, influencer discovery and evaluation, brand-creator fit, outreach, negotiation, campaign management, attribution and monetisation.'
       },
       {
-        q: '8. Does the program cover monetisation?',
+        q: '8. Does the programme cover monetisation?',
         a: 'Yes. Social commerce includes shoppable content, creator and affiliate commerce, social selling, conversational commerce, lead generation, digital products, memberships and community monetisation.'
       },
       {
@@ -742,10 +742,10 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '11. Is Personal Branding included?',
-        a: 'Yes. The program covers positioning, niche authority, thought leadership, founder-led content, executive branding, authority building, digital footprint management and monetisation.'
+        a: 'Yes. The programme covers positioning, niche authority, thought leadership, founder-led content, executive branding, authority building, digital footprint management and monetisation.'
       },
       {
-        q: '12. Can business owners benefit from this program?',
+        q: '12. Can business owners benefit from this programme?',
         a: 'Yes. It can help business owners understand how to use social media for brand building, audience growth, community development, customer engagement, lead generation and social commerce.'
       },
       {
@@ -753,7 +753,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         a: 'Yes. The skills can be applied to Social Media Management, Content Strategy, Personal Branding, Influencer Marketing, Community Management, Analytics, AI content and automation services.'
       },
       {
-        q: '14. Does the program include practical projects?',
+        q: '14. Does the programme include practical projects?',
         a: 'Yes. The curriculum concludes with projects covering multi-platform growth, creator brand development, viral content experimentation, influencer campaigns, community-led growth, social commerce, social listening, AI content production and automation.'
       },
       {
@@ -765,15 +765,15 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   'seo-specialization': {
     id: 'seo-specialization',
     programTitle: 'SPECIALISATION IN SEARCH ENGINE OPTIMISATION',
-    badge: '8-WEEK ADVANCED SPECIALIZATION PROGRAM',
+    badge: '8-WEEK ADVANCED SPECIALISATION PROGRAMME',
     subHeading: 'Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth',
     duration: '45 Days',
     mode: 'On Campus, Pune',
-    heroIntro: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialisation program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
+    heroIntro: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialisation programme designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
     heroImage: imgSeoSpecialization,
     overview: {
-      highlight: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialisation program designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
-      main: 'The program covers advanced search strategy, technical SEO, website architecture, Core Web Vitals, JavaScript SEO, Semantic SEO, Entity SEO, structured data, Programmatic SEO, advanced content engineering, off-page authority and Digital PR.',
+      highlight: 'Search & Organic Growth Intelligence is an intensive 8-week advanced specialisation programme designed for learners who want to move beyond traditional SEO and master the rapidly evolving world of search, organic visibility, AI discovery and digital authority.',
+      main: 'The programme covers advanced search strategy, technical SEO, website architecture, Core Web Vitals, JavaScript SEO, Semantic SEO, Entity SEO, structured data, Programmatic SEO, advanced content engineering, off-page authority and Digital PR.',
       expanded: [
         'A major focus is placed on the future of search, including AI Search, AEO, GEO, AI citations and visibility across Google AI Overviews, ChatGPT, Gemini, Perplexity and Microsoft Copilot, along with Search Everywhere Optimisation across social, video, marketplace and other discovery platforms.',
         'The curriculum spans the complete organic growth ecosystem, from search intelligence and technical infrastructure to AI visibility, authority building, analytics and business growth.'
@@ -875,7 +875,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       }
     },
     prerequisites: {
-      intro: 'This is an advanced specialisation program, so basic knowledge of SEO and Digital Marketing is recommended. Learners should ideally understand:',
+      intro: 'This is an advanced specialisation programme, so basic knowledge of SEO and Digital Marketing is recommended. Learners should ideally understand:',
       bullets: [
         'SEO fundamentals',
         'Keyword research',
@@ -887,7 +887,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       note: 'Coding knowledge is not mandatory, although basic familiarity with HTML and website technology can be helpful for advanced Technical SEO topics.'
     },
     outcomes: {
-      intro: 'After completing the program, learners should be able to:',
+      intro: 'After completing the programme, learners should be able to:',
       bullets: [
         'Build advanced SEO and organic growth strategies',
         'Conduct search intent and competitor intelligence',
@@ -905,7 +905,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Automate SEO workflows using AI and automation',
         'Measure SEO performance, conversions and ROI'
       ],
-      projectsNote: 'The program concludes with advanced capstone work covering Technical SEO, Topical Authority, Programmatic SEO, AI Search Visibility, Digital PR, Local SEO, E-Commerce SEO, automation, analytics and complete organic growth strategy.'
+      projectsNote: 'The programme concludes with advanced capstone work covering Technical SEO, Topical Authority, Programmatic SEO, AI Search Visibility, Digital PR, Local SEO, E-Commerce SEO, automation, analytics and complete organic growth strategy.'
     },
     valueSequence: [
       'Search Strategy',
@@ -915,7 +915,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'Digital PR',
       'Organic Growth'
     ],
-    valueProposition: 'The value of the program lies in moving beyond traditional SEO to master AI search, technical engineering, entity authority, and scalable organic growth.',
+    valueProposition: 'The value of the programme lies in moving beyond traditional SEO to master AI search, technical engineering, entity authority, and scalable organic growth.',
     certifications: [
       {
         title: 'TEONOX Certification in Search & Organic Growth Intelligence',
@@ -1002,7 +1002,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     faqs: [
       {
         q: '1. What is Search & Organic Growth Intelligence?',
-        a: 'It is an 8-week advanced specialisation program focused on SEO, Technical SEO, content authority, AI Search, AEO, GEO, Digital PR, automation and sustainable organic growth.'
+        a: 'It is an 8-week advanced specialisation programme focused on SEO, Technical SEO, content authority, AI Search, AEO, GEO, Digital PR, automation and sustainable organic growth.'
       },
       {
         q: '2. How is this different from a regular SEO course?',
@@ -1026,7 +1026,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '7. Will I learn Semantic SEO and Entity SEO?',
-        a: 'Yes. The program covers Semantic Search, Topical Maps, Topical Authority, entities, Knowledge Graphs, entity associations, brand entities and structured data for entity reinforcement.'
+        a: 'Yes. The programme covers Semantic Search, Topical Maps, Topical Authority, entities, Knowledge Graphs, entity associations, brand entities and structured data for entity reinforcement.'
       },
       {
         q: '8. Is Programmatic SEO included?',
@@ -1042,7 +1042,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '11. Will I learn SEO automation and AI workflows?',
-        a: 'Yes. The program covers automated keyword clustering, content briefs, topical maps, technical audits, internal linking, schema generation, monitoring, reporting, APIs, Google Sheets, Make, Zapier, Python applications and AI agents for SEO.'
+        a: 'Yes. The programme covers automated keyword clustering, content briefs, topical maps, technical audits, internal linking, schema generation, monitoring, reporting, APIs, Google Sheets, Make, Zapier, Python applications and AI agents for SEO.'
       },
       {
         q: '12. Can business owners benefit from this course?',
@@ -1053,7 +1053,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         a: 'Yes. The skills can be applied to SEO audits, Technical SEO, Local SEO, E-Commerce SEO, Content SEO, AEO/GEO, AI Search Optimisation, Digital PR, analytics and SEO consulting.'
       },
       {
-        q: '14. Does the program include practical projects?',
+        q: '14. Does the programme include practical projects?',
         a: 'Yes. Capstone projects include an Enterprise Technical SEO Audit, Topical Authority Development, Programmatic SEO, AI Search Visibility, Digital PR, Multi-Location SEO, E-Commerce SEO, SEO Automation, Analytics Dashboard and Complete Organic Growth Strategy.'
       },
       {
@@ -1065,18 +1065,18 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   'performance-marketing': {
     id: 'performance-marketing',
     programTitle: 'SPECIALISATION IN PERFORMANCE MARKETING',
-    badge: '8-WEEK ADVANCED SPECIALIZATION PROGRAM',
+    badge: '8-WEEK ADVANCED SPECIALISATION PROGRAMME',
     subHeading: 'Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling',
     duration: '45 Days',
     mode: 'On Campus, Pune',
-    heroIntro: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialisation program designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimisation and campaign scaling.',
+    heroIntro: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialisation programme designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimisation and campaign scaling.',
     heroImage: imgPerformanceMktg,
     overview: {
-      highlight: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialisation program designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimisation and campaign scaling.',
-      main: 'The program takes a business and profitability-driven approach to performance marketing. Learners explore advanced Google Ads, Meta Ads, LinkedIn Advertising, YouTube, Microsoft Advertising, Programmatic and Native Advertising alongside media planning, creative strategy, CRO, funnel engineering and lifecycle advertising.',
+      highlight: 'Performance Marketing & Growth Strategy is an intensive 8-week advanced specialisation programme designed for learners who want to move beyond basic digital advertising and develop expertise in paid media, growth strategy, tracking, attribution, analytics, experimentation, conversion optimisation and campaign scaling.',
+      main: 'The programme takes a business and profitability-driven approach to performance marketing. Learners explore advanced Google Ads, Meta Ads, LinkedIn Advertising, YouTube, Microsoft Advertising, Programmatic and Native Advertising alongside media planning, creative strategy, CRO, funnel engineering and lifecycle advertising.',
       expanded: [
         'A major focus is placed on measurement and growth economics, including CAC, LTV, LTV:CAC ratio, contribution margin, payback period, marginal ROAS, server-side tracking, postback URLs, attribution and incrementality.',
-        'The program also integrates AI, automation, first-party data and privacy-first advertising into modern performance marketing operations.'
+        'The programme also integrates AI, automation, first-party data and privacy-first advertising into modern performance marketing operations.'
       ]
     },
     designedFor: [
@@ -1165,14 +1165,14 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         intro: 'Marketing professionals can upgrade from campaign execution to strategic performance management.',
         heading: 'Drive Strategic Media Operations',
         bullets: [
-          'The program can help professionals develop capabilities in media planning, attribution, analytics, experimentation, automation and cross-channel growth strategy.',
+          'The programme can help professionals develop capabilities in media planning, attribution, analytics, experimentation, automation and cross-channel growth strategy.',
           'Upgrade from campaign execution to strategic performance management and cross-channel optimisation.',
           'Master server-side tracking, postback integrations, and executive ROI dashboards.'
         ]
       }
     },
     prerequisites: {
-      intro: 'This is an advanced specialisation program, so basic knowledge of Digital Marketing and online advertising is recommended. Learners should ideally understand:',
+      intro: 'This is an advanced specialisation programme, so basic knowledge of Digital Marketing and online advertising is recommended. Learners should ideally understand:',
       bullets: [
         'Digital Marketing fundamentals',
         'Basic Google Ads and Meta Ads',
@@ -1183,7 +1183,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       note: 'Prior professional experience is useful but not mandatory.'
     },
     outcomes: {
-      intro: 'After completing the program, learners should be able to:',
+      intro: 'After completing the programme, learners should be able to:',
       bullets: [
         'Develop performance and growth marketing strategies',
         'Plan full-funnel paid media campaigns',
@@ -1191,14 +1191,14 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
         'Evaluate CAC, LTV, ROAS and profitability',
         'Build advanced tracking and measurement frameworks',
         'Understand server-side and postback tracking',
-        'Analyze attribution and incrementality',
-        'Develop CRO and experimentation programs',
+        'Analyse attribution and incrementality',
+        'Develop CRO and experimentation programmes',
         'Build performance creative testing systems',
         'Optimise budgets and scale campaigns',
         'Use AI and automation in campaign operations',
         'Create multi-channel growth strategies'
       ],
-      projectsNote: 'The program culminates in advanced capstone work covering Google Ads, Meta scaling, media planning, tracking, attribution, CRO, creative testing, dashboards and multi-channel growth strategy.'
+      projectsNote: 'The programme culminates in advanced capstone work covering Google Ads, Meta scaling, media planning, tracking, attribution, CRO, creative testing, dashboards and multi-channel growth strategy.'
     },
     valueSequence: [
       'Media Planning',
@@ -1208,7 +1208,7 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       'Creative Testing',
       'Profitable Scaling'
     ],
-    valueProposition: 'The value of the program lies in uniting advertising, analytics, growth economics, and experimentation to scale profitable revenue.',
+    valueProposition: 'The value of the programme lies in uniting advertising, analytics, growth economics, and experimentation to scale profitable revenue.',
     certifications: [
       {
         title: 'TEONOX Certification in Performance Marketing & Growth Strategy',
@@ -1292,14 +1292,14 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
     faqs: [
       {
         q: '1. What is Performance Marketing & Growth Strategy?',
-        a: 'It is an 8-week advanced specialisation program focused on measurable, ROI-driven marketing using paid media, analytics, tracking, attribution, experimentation, CRO and growth strategies.'
+        a: 'It is an 8-week advanced specialisation programme focused on measurable, ROI-driven marketing using paid media, analytics, tracking, attribution, experimentation, CRO and growth strategies.'
       },
       {
         q: '2. Is this a beginner-level course?',
         a: 'No. This is an advanced specialisation. Basic knowledge of Digital Marketing and paid advertising is recommended.'
       },
       {
-        q: '3. What is the duration of the program?',
+        q: '3. What is the duration of the programme?',
         a: 'The course duration is 8 weeks.'
       },
       {
@@ -1320,14 +1320,14 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
       },
       {
         q: '8. Will I learn how to scale advertising campaigns?',
-        a: 'Yes. The program covers vertical and horizontal scaling, budget, bid, audience, creative, geographic and channel scaling along with marginal CAC, marginal ROAS and diminishing returns.'
+        a: 'Yes. The programme covers vertical and horizontal scaling, budget, bid, audience, creative, geographic and channel scaling along with marginal CAC, marginal ROAS and diminishing returns.'
       },
       {
         q: '9. Is this course useful for business owners?',
         a: 'Yes. It is particularly useful for owners who invest significantly in paid advertising and want to understand performance, profitability, measurement and scaling.'
       },
       {
-        q: '10. Can I freelance after completing this program?',
+        q: '10. Can I freelance after completing this programme?',
         a: 'Yes. The skills are applicable to paid media management, tracking, campaign audits, analytics, CRO, consulting and performance marketing services.'
       },
       {

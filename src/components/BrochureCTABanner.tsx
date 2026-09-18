@@ -18,7 +18,7 @@ const PERKS = ['Curriculum & modules', 'Fees & duration', 'Certifications & plac
  */
 export function BrochureCTABanner({
   onBrochureClick,
-  heading = 'Get the Full Program Brochure',
+  heading = 'Get the Full Programme Brochure',
   subcopy = 'Modules, fees, eligibility and certification details — download everything you need to make an informed decision.',
   buttonLabel = 'Download Brochure',
   yellow = false,

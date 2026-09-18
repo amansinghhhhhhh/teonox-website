@@ -110,9 +110,9 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
   ];
 
   const admissionSteps = [
-    { num: '01', title: 'Explore', desc: 'Choose the program aligned with your career goals and interest areas.', icon: Compass, tag: 'Step 1' },
+    { num: '01', title: 'Explore', desc: 'Choose the programme aligned with your career goals and interest areas.', icon: Compass, tag: 'Step 1' },
     { num: '02', title: 'Inquiry', desc: 'Connect with us to explore courses, specialisations, fees and career opportunities.', icon: PhoneCall, tag: 'Step 2' },
-    { num: '03', title: 'Counselling', desc: 'Get personalised guidance to choose the right program based on your goals and interests.', icon: Users, tag: 'Step 3' },
+    { num: '03', title: 'Counselling', desc: 'Get personalised guidance to choose the right programme based on your goals and interests.', icon: Users, tag: 'Step 3' },
     { num: '04', title: 'Apply', desc: 'Complete the simple application and eligibility review process.', icon: FileCheck, tag: 'Step 4' },
     { num: '05', title: 'Assessment', desc: 'Understand your current skills, aptitude and learning needs through a basic assessment.', icon: HelpCircle, tag: 'Step 5' },
     { num: '06', title: 'Explore Scholarships', desc: 'Eligible students may apply for available scholarship options and financial aid.', icon: Award, tag: 'Step 6' },
@@ -178,7 +178,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
                   onClick={onExplorePrograms}
                   className="px-7 py-3.5 rounded-full bg-white border border-[#F0DFCE] text-[#201A17] hover:border-[#FF6A2B] hover:bg-[#FFF6EE] font-sora text-sm sm:text-base font-semibold transition-all flex items-center gap-2 shadow-xs hover:-translate-y-0.5"
                 >
-                  <span>Explore Programs</span>
+                  <span>Explore Programmes</span>
                   <ChevronRight className="w-5 h-5 text-[#FF6A2B]" />
                 </button>
               </div>
@@ -263,7 +263,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               Course Pre-Requisites <span className="text-[#FF6A2B]">(Eligibility)</span>
             </h2>
             <p className="font-inter text-[15.5px] sm:text-[17px] text-[#444444]">
-              No prior Digital Marketing experience is required. The program progresses from foundational concepts toward advanced applications.
+              No prior Digital Marketing experience is required. The programme progresses from foundational concepts toward advanced applications.
             </p>
           </motion.div>
 
@@ -279,7 +279,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
             </motion.div>
             <div className="relative z-10">
               <h3 className="font-sora text-[17px] sm:text-[19px] font-bold text-[#111111]">Zero Technical or Coding Background Required</h3>
-              <p className="font-inter text-[14px] sm:text-[15px] text-[#555555]">A technical or coding background is not mandatory for joining the program. We teach you from the ground up, combining strategic business thinking with user-friendly modern AI tools.</p>
+              <p className="font-inter text-[14px] sm:text-[15px] text-[#555555]">A technical or coding background is not mandatory for joining the programme. We teach you from the ground up, combining strategic business thinking with user-friendly modern AI tools.</p>
             </div>
           </motion.div>
 
@@ -453,7 +453,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
           </motion.h2>
 
           <motion.p {...fadeUp(0.15)} className="font-inter text-[15.5px] sm:text-[17px] text-[#C5BCB3] max-w-2xl mx-auto">
-            Connect with our admissions counsellors today to choose the right program, explore scholarship options, and start your practical learning journey.
+            Connect with our admissions counsellors today to choose the right programme, explore scholarship options, and start your practical learning journey.
           </motion.p>
 
           <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center justify-center gap-5 pt-4">
@@ -461,7 +461,7 @@ export function AdmissionsPage({ onEnquireClick, onExplorePrograms }: Admissions
               onClick={onExplorePrograms}
               className="group px-8 py-4 rounded-full bg-[#FF6A2B] hover:bg-[#D8420F] text-white font-sora font-semibold text-base shadow-xl shadow-[#FF6A2B]/30 hover:shadow-2xl transition-colors flex items-center gap-2 active:scale-95"
             >
-              <span>Explore Programs</span>
+              <span>Explore Programmes</span>
               <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </MagneticButton>
             <MagneticButton

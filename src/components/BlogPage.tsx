@@ -208,7 +208,7 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                   }}
                   className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-[14.5px] font-[700] transition-all shadow-md shadow-[#F15A29]/20 flex items-center gap-2 active:scale-95"
                 >
-                  <span>Explore Programs</span>
+                  <span>Explore Programmes</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 

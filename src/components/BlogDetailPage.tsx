@@ -197,7 +197,7 @@ export function BlogDetailPage({
               Want to master these skills in real brand environments?
             </h3>
             <p className="font-inter text-[#A79885] text-[15.5px]">
-              TEONOX offers practitioner-led cohort programs in Digital Marketing, AI Automation, Analytics, and Performance Growth.
+              TEONOX offers practitioner-led cohort programmes in Digital Marketing, AI Automation, Analytics, and Performance Growth.
             </p>
             <div className="pt-3 flex flex-wrap items-center gap-4">
               <button type="button"

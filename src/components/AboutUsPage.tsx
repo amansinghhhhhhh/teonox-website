@@ -56,13 +56,13 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
     { value: '12+', label: 'Years Industry Experience' },
     { value: '50+', label: 'AI & Business Tools' },
     { value: '100%', label: 'Practical Learning' },
-    { value: '5+', label: 'Industry Programs' },
+    { value: '5+', label: 'Industry Programmes' },
   ];
 
   const differentiators = [
     { num: '01', contrast: 'Most institutes teach platforms.', title: 'We teach business.', desc: 'Understanding consumer behaviour, business revenue models, and strategy behind every digital dollar spent.' },
     { num: '02', contrast: 'Most courses explain features.', title: 'We explain why they matter.', desc: 'Focusing on market impact, funnel dynamics, and business ROI rather than just clicking buttons in a dashboard.' },
-    { num: '03', contrast: 'Most programs stop at knowledge.', title: 'We focus on application & outcomes.', desc: 'Every module builds tangible portfolio artifacts, live campaign execution, and practical problem-solving.' },
+    { num: '03', contrast: 'Most programmes stop at knowledge.', title: 'We focus on application & outcomes.', desc: 'Every module builds tangible portfolio artifacts, live campaign execution, and practical problem-solving.' },
   ];
 
   const philosophy = [
@@ -219,7 +219,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
               <div className="space-y-4 font-inter text-[15.5px] sm:text-[16.5px] leading-[1.75] text-[#444444]">
                 <p>TEONOX is built on over 12 years of industry experience gained through A2 Digital, a company that has partnered with businesses across industries to solve marketing, technology, growth, analytics, automation, and digital transformation challenges.</p>
                 <p>Over the years, one pattern became impossible to ignore: Thousands of graduates entered the job market every year with qualifications, but many struggled when faced with real business challenges.</p>
-                <p className="font-semibold text-[#111111]">TEONOX was created to change that. Our programs are designed by industry practitioners who understand what businesses actually expect from modern professionals.</p>
+                <p className="font-semibold text-[#111111]">TEONOX was created to change that. Our programmes are designed by industry practitioners who understand what businesses actually expect from modern professionals.</p>
               </div>
             </motion.div>
 
@@ -355,7 +355,7 @@ export function AboutUsPage({ onEnquireClick }: AboutUsPageProps) {
             <h2 className="font-sora text-[30px] sm:text-[42px] font-[900] leading-[1.15] text-[#111111]">
               The TEONOX <span className="text-[#FF6A2B]">Learning Experience</span>
             </h2>
-            <p className="font-inter text-[16px] text-[#555555]">Every TEONOX program is designed around experiential learning. Our learners don't just watch demonstrations, they actively participate in solving real business challenges.</p>
+            <p className="font-inter text-[16px] text-[#555555]">Every TEONOX programme is designed around experiential learning. Our learners don't just watch demonstrations, they actively participate in solving real business challenges.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">

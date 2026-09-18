@@ -109,7 +109,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
             className="btn-sassriver-primary py-3.5 px-5 sm:px-8 text-sm sm:text-[16px] group cursor-pointer"
           >
             <Sparkles className="w-5 h-5 shrink-0 fill-white/20 group-hover:rotate-12 transition-transform duration-300" />
-            <span className="whitespace-nowrap">Explore Programs</span>
+            <span className="whitespace-nowrap">Explore Programmes</span>
             <ArrowRight className="w-4 h-4 ml-1 shrink-0 group-hover:translate-x-1.5 transition-transform duration-300" />
           </button>
 

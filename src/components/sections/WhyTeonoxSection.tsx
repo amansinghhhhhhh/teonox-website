@@ -17,7 +17,7 @@ const EXPERIENCE_CARDS = [
   {
     icon: Users,
     title: 'Belong to a Real Community',
-    desc: 'Small cohorts, big networks. Learn beside ambitious peers who push you, celebrate your wins, and stay connected long after the program ends.',
+    desc: 'Small cohorts, big networks. Learn beside ambitious peers who push you, celebrate your wins, and stay connected long after the programme ends.',
   },
   {
     icon: HeartHandshake,
@@ -181,7 +181,7 @@ export function WhyTeonoxSection({ onExplorePrograms }: WhyTeonoxSectionProps) {
                 onClick={onExplorePrograms}
                 className="inline-flex items-center justify-center gap-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[14.5px] font-[700] px-7 py-3.5 rounded-xl transition-all active:scale-95 cursor-pointer w-full sm:w-auto"
               >
-                Explore Programs
+                Explore Programmes
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

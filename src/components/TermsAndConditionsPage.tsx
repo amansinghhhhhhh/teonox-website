@@ -6,7 +6,7 @@ const TOC = [
   { id: 'tc-1', title: 'Acceptance of Terms' },
   { id: 'tc-2', title: 'Use of the Website' },
   { id: 'tc-3', title: 'Intellectual Property' },
-  { id: 'tc-4', title: 'Program Information & Admissions' },
+  { id: 'tc-4', title: 'Programme Information & Admissions' },
   { id: 'tc-5', title: 'Payments, Fees & Refunds' },
   { id: 'tc-6', title: 'User Responsibilities' },
   { id: 'tc-7', title: 'Privacy' },
@@ -28,7 +28,7 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
     <>
       <SEO
         title="Terms & Conditions | TEONOX"
-        description="Read the TEONOX Terms & Conditions — governing your access to and use of our website, programs, and services."
+        description="Read the TEONOX Terms & Conditions — governing your access to and use of our website, programmes, and services."
         canonical="/terms-and-conditions"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -49,7 +49,7 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
             <a href="https://teonox.com" target="_blank" rel="noreferrer" className="text-[#F15A29] hover:underline font-medium">
               https://teonox.com
             </a>{' '}
-            and the services offered by TEONOX, including our programs, enquiries, and related communications.
+            and the services offered by TEONOX, including our programmes, enquiries, and related communications.
           </p>
           <p>
             Please read these Terms carefully. By accessing or using our website and services, you agree to be bound by
@@ -64,7 +64,7 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
     >
       <LegalSection id="tc-1" number={1} title="Acceptance of Terms">
         <p>
-          By accessing, browsing, or using this website, submitting an enquiry, or enrolling in any TEONOX program, you
+          By accessing, browsing, or using this website, submitting an enquiry, or enrolling in any TEONOX programme, you
           acknowledge that you have read, understood, and agree to be bound by these Terms and all applicable laws and
           regulations.
         </p>
@@ -100,20 +100,20 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
             'You may not copy, reproduce, republish, upload, post, transmit, or distribute any content without our prior written permission.',
             'You may not use our name, logos, or branding without explicit authorisation.',
             'You may not decompile, reverse engineer, or modify any software or code underlying the website.',
-            'Course materials provided during programs are for your personal educational use only.',
+            'Course materials provided during programmes are for your personal educational use only.',
           ]}
         />
       </LegalSection>
 
-      <LegalSection id="tc-4" number={4} title="Program Information & Admissions">
+      <LegalSection id="tc-4" number={4} title="Programme Information & Admissions">
         <p>
-          TEONOX reserves the right to modify, suspend, or discontinue any program, course, schedule, curriculum,
+          TEONOX reserves the right to modify, suspend, or discontinue any programme, course, schedule, curriculum,
           faculty, or offering at any time without prior notice.
         </p>
         <LegalBullets
           items={[
             "Admission decisions are made at TEONOX's sole discretion.",
-            'Program details, durations, fees, and outcomes are subject to change.',
+            'Programme details, durations, fees, and outcomes are subject to change.',
             'Placement or career outcome statistics are indicative and not guaranteed.',
             'Any representations regarding outcomes are aspirational and depend on individual effort and market conditions.',
           ]}
@@ -121,12 +121,12 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
       </LegalSection>
 
       <LegalSection id="tc-5" number={5} title="Payments, Fees & Refunds">
-        <p>Where applicable, fees for our services and programs are communicated at the time of enrolment.</p>
+        <p>Where applicable, fees for our services and programmes are communicated at the time of enrolment.</p>
         <LegalBullets
           items={[
             'All payments must be completed by the due dates communicated to you.',
             'Fees are non-transferable unless agreed in writing.',
-            'Refund policies, if any, are as communicated at the time of purchase and may vary by program.',
+            'Refund policies, if any, are as communicated at the time of purchase and may vary by programme.',
             'Requested refunds must be submitted in writing as per the applicable policy.',
           ]}
         />
@@ -264,7 +264,7 @@ export function TermsAndConditionsPage({ onNavigate }: TermsAndConditionsPagePro
           <div className="bg-[#FAF8F5] border border-[#EFEBE4] rounded-2xl p-5 flex flex-col justify-center gap-3">
             <p className="font-sora font-[700] text-[#111111] text-[16px]">Have a Question?</p>
             <p className="font-inter text-[14px] leading-relaxed text-[#555555]">
-              Our support team is available to answer any questions about your enquiry or our programs.
+              Our support team is available to answer any questions about your enquiry or our programmes.
             </p>
             <button type="button"
               onClick={() => onNavigate?.('/contact', 'Contact')}

@@ -70,7 +70,7 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
             <p className="text-sm text-[#6B6560] mb-4">Quick Links</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               {[
-                { label: 'Programs', href: '/programs' },
+                { label: 'Programmes', href: '/programs' },
                 { label: 'Blog', href: '/blog' },
                 { label: 'About', href: '/about' },
                 { label: 'Contact', href: '/contact' },

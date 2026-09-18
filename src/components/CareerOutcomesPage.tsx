@@ -427,7 +427,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
                   onClick={onExplorePrograms}
                   className="px-7 py-3.5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm sm:text-base font-bold border border-[#EBE4DC] hover:border-[#111111] transition-all cursor-pointer shadow-xs"
                 >
-                  <span>Explore Programs</span>
+                  <span>Explore Programmes</span>
                 </button>
               </div>
             </motion.div>
@@ -1052,7 +1052,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
               onClick={onExplorePrograms}
               className="px-9 py-5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-base font-extrabold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
             >
-              <span>Explore Programs</span>
+              <span>Explore Programmes</span>
               <ArrowRight className="w-5 h-5" />
             </button>
             <button type="button"

@@ -43,7 +43,7 @@ export const ProgramCardGraphic: React.FC<ProgramCardGraphicProps> = ({
       <div className="relative w-full h-full flex items-center justify-center">
         <img
           src={defaultImage}
-          alt={`${programId} program cover image`}
+          alt={`${programId} programme cover image`}
           onError={(e) => {
             const target = e.currentTarget;
             if (target.src !== defaultImage) {

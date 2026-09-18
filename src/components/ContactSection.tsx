@@ -57,7 +57,7 @@ export function ContactSection({
                   onClick={handleExplore}
                   className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora text-[14.5px] font-[700] transition-all duration-300 shadow-md shadow-[#F15A29]/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2 group/btn"
                 >
-                  <span>Explore Programs</span>
+                  <span>Explore Programmes</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
 

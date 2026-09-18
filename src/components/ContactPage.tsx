@@ -146,7 +146,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
               '@id': `${BASE_URL}/contact/#webpage`,
               url: `${BASE_URL}/contact/`,
               name: 'Contact TEONOX',
-              description: 'Contact TEONOX in Kothrud, Pune for information about AI, digital marketing, business and automation programs.',
+              description: 'Contact TEONOX in Kothrud, Pune for information about AI, digital marketing, business and automation programmes.',
               isPartOf: { '@id': `${BASE_URL}/#website` },
               about: { '@id': ORG['@id'] },
             },
@@ -298,7 +298,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
               </h2>
 
               <p className="font-sora text-[15px] sm:text-[17px] font-[500] text-[#555555] leading-relaxed">
-                Schedule a one-on-one session with our Career Advisors to discuss programs, admissions, fees, and career opportunities.
+                Schedule a one-on-one session with our Career Advisors to discuss programmes, admissions, fees, and career opportunities.
               </p>
 
               <div className="pt-2">
@@ -433,7 +433,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                       email: '',
                       phone: '',
                       city: '',
-                      program: 'Executive PG Program in AI & Performance Marketing',
+                      program: 'Executive PG Programme in AI & Performance Marketing',
                       message: '',
                     });
                   }}
@@ -522,10 +522,10 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   </div>
                 </div>
 
-                {/* Field 5: Program Interested In (Dropdown) */}
+                  {/* Field 5: Programme Interested In (Dropdown) */}
                 <div className="space-y-1.5">
                   <label htmlFor="contact-program" className="block font-sora text-[13px] font-[600] text-[#111111]">
-                    Program Interested In
+                    Programme Interested In
                   </label>
                   <select
                     id="contact-program"

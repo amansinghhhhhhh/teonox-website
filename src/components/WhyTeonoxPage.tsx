@@ -154,14 +154,14 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                   onClick={() => onEnquireClick('Why TEONOX Admissions')}
                   className="px-7 py-3.5 rounded-full bg-[#F15A29] hover:bg-[#D9491D] text-white font-sora text-sm font-extrabold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 cursor-pointer"
                 >
-                  <span>Enquire For Program</span>
+                  <span>Enquire For Programme</span>
                   <ArrowRight className="w-4.5 h-4.5" />
                 </button>
                 <button type="button"
                   onClick={onExplorePrograms}
                   className="px-7 py-3.5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm font-bold border border-[#EBE4DC] hover:border-[#111111] transition-all cursor-pointer shadow-xs"
                 >
-                  <span>Explore All Programs</span>
+                  <span>Explore All Programmes</span>
                 </button>
               </motion.div>
             </div>
@@ -246,7 +246,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
             <motion.div {...fadeLeft(0)} className="p-8 sm:p-9 rounded-3xl bg-white border border-[#EBE4DC] shadow-sm relative overflow-hidden flex flex-col justify-between space-y-6 group">
               <div className="space-y-4">
                 <p className="font-sora text-base sm:text-lg text-[#555555] font-semibold leading-relaxed">
-                  But choosing a Professional Program should not begin with:
+                  But choosing a Professional Programme should not begin with:
                 </p>
               </div>
               <div className="p-6 sm:p-7 rounded-2xl bg-[#FAF8F5] border border-[#EBE4DC] space-y-2 flex items-center justify-center min-h-[104px]">
@@ -955,7 +955,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                     ))}
                   </ul>
                   <p className="font-inter text-base text-[#444444] leading-relaxed">
-                    Depending on the program, eligibility and availability, learners may receive opportunities to work on practical projects across areas such as Digital Marketing, SEO, Social Media, Advertising, Content, Websites, Analytics and AI-enabled marketing.
+                    Depending on the programme, eligibility and availability, learners may receive opportunities to work on practical projects across areas such as Digital Marketing, SEO, Social Media, Advertising, Content, Websites, Analytics and AI-enabled marketing.
                   </p>
                 </div>
                 <div className="pt-5 border-t border-[#EBE4DC]">
@@ -987,7 +987,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                     <h3 className="text-xl sm:text-2xl font-extrabold font-sora text-[#111111]">Your Course May End. Your Network Shouldn&apos;t.</h3>
                   </div>
                   <p className="font-inter text-base text-[#444444] leading-relaxed">
-                    Learning doesn&apos;t stop when a program ends.
+                    Learning doesn&apos;t stop when a programme ends.
                   </p>
                   <p className="font-inter text-base text-[#444444] leading-relaxed">
                     Neither should professional relationships.
@@ -1031,7 +1031,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               So, Why TEONOX?
             </h2>
             <p className="font-sora text-lg sm:text-xl font-bold text-[#FF8A50] leading-relaxed">
-              If two institutes teach Google Ads, SEO, Social Media and AI, why should one program cost significantly more than another?
+              If two institutes teach Google Ads, SEO, Social Media and AI, why should one programme cost significantly more than another?
             </p>
           </div>
 
@@ -1130,7 +1130,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               A ₹20,000 course that gives you information can ultimately be expensive if it doesn&apos;t make you capable.
             </p>
             <p className="font-inter text-base sm:text-lg text-[#555555]">
-              A premium program must justify its investment by developing something substantially more valuable:
+              A premium programme must justify its investment by developing something substantially more valuable:
             </p>
           </div>
 
@@ -1228,7 +1228,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               onClick={onExplorePrograms}
               className="px-9 py-5 rounded-full bg-white hover:bg-[#FAF8F5] text-[#111111] font-sora text-sm sm:text-base font-bold border border-white/20 transition-all cursor-pointer shadow-md"
             >
-              <span>Explore All Programs</span>
+              <span>Explore All Programmes</span>
             </button>
           </div>
 

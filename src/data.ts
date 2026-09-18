@@ -14,9 +14,9 @@ export const HERO_DATA = {
 };
 
 export const PROGRAMS_DATA = {
-  sectionTag: "Our Programs",
-  sectionHeader: "Explore Our Programs",
-  sectionDescription: "Practical, immersive programs designed to help you build skills that businesses actually hire for.",
+  sectionTag: "Our Programmes",
+  sectionHeader: "Explore Our Programmes",
+  sectionDescription: "Practical, immersive programmes designed to help you build skills that businesses actually hire for.",
   programs: [
     {
       id: "business-digital-marketing-with-ai",
@@ -32,7 +32,7 @@ export const PROGRAMS_DATA = {
       eligibilityLabel: "Eligibility",
       mode: "On Campus, Pune",
       modeLabel: "Mode",
-      buttonText: "View Program"
+      buttonText: "View Programme"
     },
     {
       id: "performance-marketing",
@@ -48,7 +48,7 @@ export const PROGRAMS_DATA = {
       eligibilityLabel: "Eligibility",
       mode: "On Campus, Pune",
       modeLabel: "Mode",
-      buttonText: "View Program"
+      buttonText: "View Programme"
     },
     {
       id: "seo-specialization",
@@ -64,7 +64,7 @@ export const PROGRAMS_DATA = {
       eligibilityLabel: "Eligibility",
       mode: "On Campus, Pune",
       modeLabel: "Mode",
-      buttonText: "View Program"
+      buttonText: "View Programme"
     },
     {
       id: "social-media-marketing",
@@ -80,10 +80,10 @@ export const PROGRAMS_DATA = {
       eligibilityLabel: "Eligibility",
       mode: "On Campus, Pune",
       modeLabel: "Mode",
-      buttonText: "View Program"
+      buttonText: "View Programme"
     }
   ] as Program[],
-  viewAllText: "View All Programs →"
+  viewAllText: "View All Programmes →"
 };
 
 export const APPROACH_DATA = {
@@ -167,7 +167,7 @@ export const ABOUT_DATA = {
 
 export const CURRICULUM_PILLARS_DATA = {
   sectionTag: "Curriculum Pillars",
-  heading: "The 5 Pillars of the Program",
+  heading: "The 5 Pillars of the Programme",
   pillars: [
     {
       title: "Strategy",
@@ -352,7 +352,7 @@ export const FOOTER_DATA = {
   links: [
     "Home",
     "About",
-    "Program",
+    "Programme",
     "Hire From Us",
     "More",
     "Careers",

@@ -47,7 +47,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
             <a href="https://teonox.com" target="_blank" rel="noreferrer" className="text-[#F15A29] hover:underline font-medium">
               https://teonox.com
             </a>
-            , submit an enquiry, apply for a program, or interact with our services.
+            , submit an enquiry, apply for a programme, or interact with our services.
           </p>
           <p>By using our website, you agree to the practices described in this Privacy Policy.</p>
         </>
@@ -61,7 +61,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
         <p>We may collect the following categories of information:</p>
         <p className="font-sora font-[700] text-[#111111] text-[16px] pt-1">Personal Information</p>
         <p>
-          When you submit an enquiry, register for a program, book a counselling session, or contact us, we may collect:
+          When you submit an enquiry, register for a programme, book a counselling session, or contact us, we may collect:
         </p>
         <LegalBullets
           items={[
@@ -71,7 +71,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
             'City/Location',
             'Educational Background',
             'Professional Experience',
-            'Course or Program Interest',
+            'Course or Programme Interest',
             'Any information voluntarily shared through forms, emails, WhatsApp, or phone calls',
           ]}
         />
@@ -95,7 +95,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
         <LegalBullets
           items={[
             'Respond to your enquiries.',
-            'Provide information about our programs and services.',
+            'Provide information about our programmes and services.',
             'Process applications and admissions.',
             'Schedule counselling sessions.',
             'Improve our website and user experience.',
@@ -197,7 +197,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
 
       <LegalSection id="pp-9" number={9} title="Children's Privacy">
         <p>
-          Our programs are generally intended for individuals aged 18 years and above. If we become aware that personal
+          Our programmes are generally intended for individuals aged 18 years and above. If we become aware that personal
           information has been collected from a minor without appropriate consent where required, we will take
           reasonable steps to delete such information.
         </p>

@@ -61,20 +61,20 @@ export function CertificationsSection() {
                 <span className="font-inter text-[16px] sm:text-[18px] text-[#665A4E] leading-snug pb-2">
                   certifications & certificates
                   <br />
-                  and growing with every new program we launch
+                  and growing with every new programme we launch
                 </span>
               </div>
             ) : (
               <p className="font-sora text-[22px] sm:text-[26px] font-[800] text-[#111111] leading-snug tracking-tight">
-                Industry-recognized credentials for every program you complete.
+                Industry-recognised credentials for every programme you complete.
               </p>
             )}
           </Reveal>
 
           <Reveal>
             <p className="font-inter text-[15.5px] sm:text-[16.5px] text-[#665A4E] leading-relaxed max-w-lg">
-              Every program combines an official TEONOX certification with
-              preparation support for industry-recognized platform certifications —
+              Every programme combines an official TEONOX certification with
+              preparation support for industry-recognised platform certifications —
               so you graduate with proof, not just knowledge.
             </p>
           </Reveal>
@@ -131,7 +131,7 @@ export function CertificationsSection() {
                   </p>
 
                   <p className="font-inter text-[13px] sm:text-[14px] text-[#8A7C6E] max-w-sm mx-auto leading-relaxed">
-                    has successfully completed the hands-on, project-based program
+                    has successfully completed the hands-on, project-based programme
                     in <span className="font-[700] text-[#111111]">Business Digital Marketing with AI</span>{' '}
                     at TEONOX.
                   </p>

@@ -105,19 +105,19 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
             <WifiOff className="w-7 h-7 text-[#F15A29]" />
           </div>
           <h1 className="font-sora text-[24px] font-[800] text-[#111111]">
-            {!identifier ? 'Invalid program URL' : 'Program not found'}
+            {!identifier ? 'Invalid programme URL' : 'Programme not found'}
           </h1>
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
             {!identifier
-              ? 'The URL does not contain a valid program identifier.'
-              : <>The program <code className="text-[#111111] font-mono">{identifier}</code> does not exist or is no longer available.</>}
+              ? 'The URL does not contain a valid programme identifier.'
+              : <>The programme <code className="text-[#111111] font-mono">{identifier}</code> does not exist or is no longer available.</>}
           </p>
           <button type="button"
             onClick={onBack}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Programs
+            Back to Programmes
           </button>
         </div>
       </div>
@@ -154,7 +154,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
           <div className="w-16 h-16 mx-auto rounded-full bg-[#FFF0EB] flex items-center justify-center">
             <WifiOff className="w-7 h-7 text-[#F15A29]" />
           </div>
-          <h1 className="font-sora text-[24px] font-[800] text-[#111111]">Program content unavailable</h1>
+          <h1 className="font-sora text-[24px] font-[800] text-[#111111]">Programme content unavailable</h1>
           <p className="font-inter text-[14.5px] text-[#555555] max-w-md mx-auto">
             We could not load content for <code className="text-[#111111] font-mono">{identifier}</code>. The CMS may be temporarily unreachable. Please try again later.
           </p>
@@ -163,7 +163,7 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[700] text-[13px] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Programs
+            Back to Programmes
           </button>
         </div>
       </div>
@@ -178,8 +178,8 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pt-20 sm:pt-24 pb-0 font-['Sora',sans-serif] relative overflow-hidden" data-source={liveDetail ? 'cms' : 'static'}>
       <SEO
-        title={displayDetail?.seoTitle || displayDetail?.programTitle || program?.title || 'Program'}
-        description={displayDetail?.seoDescription || displayDetail?.heroIntro || `Explore ${program?.title || 'this program'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
+        title={displayDetail?.seoTitle || displayDetail?.programTitle || program?.title || 'Programme'}
+        description={displayDetail?.seoDescription || displayDetail?.heroIntro || `Explore ${program?.title || 'this programme'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
         canonical={`/programs/${canonicalSlug}`}
       />
       <CourseSchema

@@ -61,7 +61,7 @@ export function ProgramsSection({
   }, []);
 
   const categories = [
-    { id: 'all', name: 'All Programs', icon: Flame },
+    { id: 'all', name: 'All Programmes', icon: Flame },
     { id: 'genai', name: 'GEN AI & Marketing', icon: Brain, isNew: true },
     { id: 'performance', name: 'Performance & Paid Ads', icon: Target },
     { id: 'seo', name: 'SEO & Organic Growth', icon: Search },
@@ -99,7 +99,7 @@ export function ProgramsSection({
       eligibilityLabel: 'Eligibility',
       mode: 'On Campus, Pune',
       modeLabel: 'Mode',
-      buttonText: 'View Program',
+      buttonText: 'View Programme',
       image: prog.image,
     });
   };
@@ -111,7 +111,7 @@ export function ProgramsSection({
         {/* Section Header */}
         <Reveal className="text-left space-y-3">
           <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] tracking-tight leading-[1.18]">
-            Explore Upskill <span className="text-[#F15A29] heading-accent">Gen AI Programs</span>
+            Explore Upskill <span className="text-[#F15A29] heading-accent">Gen AI Programmes</span>
           </h2>
           <p className="font-sora text-[15px] sm:text-[17px] font-[600] text-[#555555] leading-relaxed">
             Digital Marketing Courses in Pune, Designed for Students, Working Professionals, entrepreneurs, and business leaders. School of Digital Marketing Provides Top Digital Marketing Courses in Pune Integrated with AI and GenAI Tools.
@@ -245,13 +245,13 @@ export function ProgramsSection({
               <Sparkles className="w-7 h-7 text-[#F15A29]" />
             </div>
             <h4 className="font-sora text-[22px] sm:text-[26px] font-[800] text-[#111111]">
-              Programs coming soon
+              Programmes coming soon
             </h4>
             <p className="mt-2.5 font-inter text-[14.5px] text-[#6B625A] max-w-md mx-auto leading-relaxed">
               We&apos;re preparing new course content. Register your interest and our counsellor will notify you the moment it goes live.
             </p>
             <button type="button"
-              onClick={() => onEnquireProgram('Program coming soon enquiry')}
+              onClick={() => onEnquireProgram('Programme coming soon enquiry')}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#F15A29] hover:bg-[#D94A1F] text-white font-sora font-[700] text-[13px] px-6 py-3 transition-all duration-300 shadow-2xs cursor-pointer"
             >
               Notify Me

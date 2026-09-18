@@ -130,7 +130,7 @@ function stubProgram(slug: string): Program | null {
     eligibilityLabel: 'Eligibility',
     mode: '',
     modeLabel: 'Mode',
-    buttonText: 'View Program',
+    buttonText: 'View Programme',
   };
 }
 
@@ -352,7 +352,7 @@ export default function App() {
   // Active nav label used by the Header/Mobile menu highlight
   const getActiveNavLabel = (): string => {
     if (selectedPost) return 'Blog';
-    if (selectedProgram) return 'Programs';
+    if (selectedProgram) return 'Programmes';
     switch (currentPage) {
       case 'why-teonox':
         return 'Why TEONOX';
@@ -361,7 +361,7 @@ export default function App() {
       case 'admissions':
         return 'Admissions';
       case 'programs':
-        return 'Programs';
+        return 'Programmes';
       case 'contact':
         return 'Contact';
       case 'about':
@@ -509,7 +509,7 @@ export default function App() {
                 COMMENTED OUT per request. Restore by uncommenting the line below.
             {false && <WhyTeonoxSection onExplorePrograms={() => handleNavClick('/programs', 'Programs')} />} */}
 
-            {/* Our Programs - directly after the Why TEONOX section and before Learning Methodology */}
+            {/* Our Programmes - directly after the Why TEONOX section and before Learning Methodology */}
             <ProgramsSection
               onSelectProgram={(program) => handleSelectProgram(program)}
               onEnquireProgram={(programName) => handleEnquireClick(programName)}
