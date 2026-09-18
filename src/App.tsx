@@ -465,7 +465,7 @@ export default function App() {
           <>
             <SEO
               title="AI Automation & Digital Marketing Courses in Pune | Teonox"
-              description="Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enroll today!"
+              description="Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enrol today!"
               canonical="/"
               jsonLd={{
                 '@context': 'https://schema.org',

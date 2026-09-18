@@ -50,7 +50,7 @@ export const FAQ_DATA: FAQItem[] = [
   },
   {
     q: 'How long does it take to upskill in AI and automation?',
-    a: "Most AI & Automation upskilling programmes in Pune run for a few weeks to a few months, depending on depth, short programs cover tool usage and prompt-based automation, while longer ones include hands-on project work.",
+    a: "Most AI & Automation upskilling programmes in Pune run for a few weeks to a few months, depending on depth, short programmes cover tool usage and prompt-based automation, while longer ones include hands-on project work.",
   },
   {
     q: 'What topics are covered in an AI and automation upskilling course?',

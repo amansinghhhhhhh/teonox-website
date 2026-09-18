@@ -137,7 +137,7 @@ interface RouteMeta {
 const META_MAP: Record<string, RouteMeta> = {
   '/': {
     title: 'AI Automation & Digital Marketing Courses in Pune | Teonox',
-    description: "Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enroll today!",
+    description: "Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enrol today!",
     canonical: '/',
   },
   '/about': {
@@ -147,7 +147,7 @@ const META_MAP: Record<string, RouteMeta> = {
   },
   '/programs': {
     title: 'Best Digital Marketing Course in Pune Near You | Teonox',
-    description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enroll now.",
+    description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enrol now.",
     canonical: '/programs',
   },
   '/blog': {
@@ -182,7 +182,7 @@ const META_MAP: Record<string, RouteMeta> = {
   },
   '/terms-and-conditions': {
     title: 'Terms & Conditions | TEONOX',
-    description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programs, and services.',
+    description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
     canonical: '/terms-and-conditions',
   },
 };

@@ -173,7 +173,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
           {/* Paragraph */}
           <motion.p {...fadeUp(0.15)} className="font-inter text-[16px] sm:text-[19px] text-[#666666] leading-[1.7] max-w-2xl mx-auto mb-10 relative z-10">
-            Whether you're exploring our programs, planning your career, or looking to visit our campus, our team is here to help every step of the way.
+            Whether you're exploring our programmes, planning your career, or looking to visit our campus, our team is here to help every step of the way.
           </motion.p>
 
           {/* 3 CTA Buttons Row */}
