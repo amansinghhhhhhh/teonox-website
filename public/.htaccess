@@ -1,28 +1,29 @@
-# Prevent Apache from automatically adding trailing slashes to physical directories
 DirectorySlash Off
+RewriteEngine On
+RewriteBase /
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
+# 1. If requesting a physical directory, directly serve its index.html without trailing slash
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+)$ $1/index.html [L]
 
-  # Force removal of trailing slashes for all GET requests (except root /)
-  RewriteCond %{REQUEST_METHOD} =GET
-  RewriteCond %{REQUEST_URI} ^/(.+)/$
-  RewriteRule ^ %1 [L,R=301]
+# 2. Force removal of trailing slashes for all GET requests (except root /)
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteCond %{REQUEST_URI} ^/(.+)/$
+RewriteRule ^ %1 [R=301,L]
 
-  # 301 redirect /programs and /programs/:slug to /programmes (SEO link equity preservation)
-  RewriteRule ^programs/(.+)$ /programmes/$1 [R=301,L]
-  RewriteRule ^programs$ /programmes [R=301,L]
+# 3. 301 redirect /programs to /programmes
+RewriteRule ^programs/(.+)$ /programmes/$1 [R=301,L]
+RewriteRule ^programs$ /programmes [R=301,L]
 
-  # /webinar -> serve webinar.html (flat file, no directory)
-  RewriteRule ^webinar$ /webinar.html [L]
+# 4. Special route for webinar
+RewriteRule ^webinar$ /webinar.html [L]
 
-  # SPA fallback: serve index.html for any unknown non-file/non-dir path.
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
+# 5. SPA fallback for unknown paths
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
 
 # Security headers
 <IfModule mod_headers.c>
