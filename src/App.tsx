@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TeonoxStorySections } from './components/TeonoxStorySections';
 import { LearningMethodologySection } from './components/LearningMethodologySection';
+import { trackPageView } from './utils/analytics';
 import { ToolsSection } from './components/ToolsSection';
 import { ProgramsSection } from './components/ProgramsSection';
 import { LearningExperienceSection } from './components/LearningExperienceSection';
@@ -272,6 +273,8 @@ export default function App() {
         // Ignore security errors in sandboxed iframes
       }
 
+      trackPageView(url);
+
       if (anchor) {
         setTimeout(() => {
           try {
@@ -310,6 +313,7 @@ export default function App() {
 
       if (opts?.scroll !== false) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        trackPageView(window.location.pathname);
       }
     },
     [loadBlogPost],
