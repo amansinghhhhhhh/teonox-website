@@ -307,7 +307,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                           <span>{cat.name}</span>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 md:hidden">
                           {cat.isNew && (
                             <span
                               className={`font-mono text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
