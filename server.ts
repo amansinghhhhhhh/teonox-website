@@ -112,7 +112,7 @@ app.get('/sitemap.html', async (_req, res) => {
   <p>Auto-generated from live WordPress data — no rebuild needed.</p>
   <p><a href="${BASE_URL}/sitemap.xml">Download XML Sitemap</a></p>
   <div class="section"><h2>Main Pages</h2><ul>${pageLinks}</ul></div>
-  <div class="section"><h2>Programs</h2><ul>${programLinks}</ul></div>
+  <div class="section"><h2>Programmes</h2><ul>${programLinks}</ul></div>
   <div class="section"><h2>Blog Posts (${blogs.length} live)</h2><ul>${blogLinks.length > 0 ? blogLinks : '<li>No blog posts found</li>'}</ul></div>
 </body>
 </html>`;

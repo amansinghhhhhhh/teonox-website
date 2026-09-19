@@ -125,7 +125,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
   };
 
   const handleOpenWhatsApp = () => {
-    window.open('https://wa.me/919890004828?text=Hello%20TEONOX%20Team%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs.', '_blank');
+    window.open('https://wa.me/919890004828?text=Hello%20TEONOX%20Team%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programmes.', '_blank');
   };
 
   const handleOpenGoogleMaps = () => {
@@ -144,7 +144,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
             {
               '@type': 'ContactPage',
               '@id': `${BASE_URL}/contact/#webpage`,
-              url: `${BASE_URL}/contact/`,
+              url: `${BASE_URL}/contact`,
               name: 'Contact TEONOX',
               description: 'Contact TEONOX in Kothrud, Pune for information about AI, digital marketing, business and automation programmes.',
               isPartOf: { '@id': `${BASE_URL}/#website` },

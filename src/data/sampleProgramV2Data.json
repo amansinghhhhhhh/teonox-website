@@ -167,7 +167,7 @@
     "prerequisites_note": "[V2] Coding knowledge is not mandatory, although basic familiarity with HTML and website technology can be helpful for advanced Technical SEO topics."
   },
   "outcomes": {
-    "outcomes_intro": "[V2] After completing the program, learners should be able to:",
+    "outcomes_intro": "[V2] After completing the programme, learners should be able to:",
     "outcomes_bullets": [
       { "bullet": "[V2] Build advanced SEO and organic growth strategies" },
       { "bullet": "[V2] Conduct search intent and competitor intelligence" },
@@ -185,7 +185,7 @@
       { "bullet": "[V2] Automate SEO workflows using AI and automation" },
       { "bullet": "[V2] Measure SEO performance, conversions and ROI" }
     ],
-    "outcomes_projects_note": "[V2] The program concludes with advanced capstone work covering Technical SEO, Topical Authority, Programmatic SEO, AI Search Visibility, Digital PR, Local SEO, E-Commerce SEO, automation, analytics and complete organic growth strategy."
+    "outcomes_projects_note": "[V2] The programme concludes with advanced capstone work covering Technical SEO, Topical Authority, Programmatic SEO, AI Search Visibility, Digital PR, Local SEO, E-Commerce SEO, automation, analytics and complete organic growth strategy."
   },
   "value_sequence": [
     { "step": "[V2] Search Strategy" },
@@ -195,7 +195,7 @@
     { "step": "[V2] Digital PR" },
     { "step": "[V2] Organic Growth" }
   ],
-  "value_proposition": "[V2] The value of the program lies in moving beyond traditional SEO to master AI search, technical engineering, entity authority, and scalable organic growth.",
+  "value_proposition": "[V2] The value of the programme lies in moving beyond traditional SEO to master AI search, technical engineering, entity authority, and scalable organic growth.",
   "certifications": [
     {
       "cert_title": "[V2] TEONOX Certification in Search & Organic Growth Intelligence",
@@ -340,7 +340,7 @@
       "faq_answer": "[V2] Yes. The skills can be applied to SEO audits, Technical SEO, Local SEO, E-Commerce SEO, Content SEO, AEO/GEO, AI Search Optimisation, Digital PR, analytics and SEO consulting."
     },
     {
-      "faq_question": "[V2] 14. Does the program include practical projects?",
+      "faq_question": "[V2] 14. Does the programme include practical projects?",
       "faq_answer": "[V2] Yes. Capstone projects include an Enterprise Technical SEO Audit, Topical Authority Development, Programmatic SEO, AI Search Visibility, Digital PR, Multi-Location SEO, E-Commerce SEO, SEO Automation, Analytics Dashboard and Complete Organic Growth Strategy."
     },
     {
