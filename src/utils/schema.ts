@@ -45,7 +45,7 @@ export const COURSE_DEFAULTS = {
 };
 
 export function courseUrl(slug: string): string {
-  return `${BASE_URL}/programmes/${slug}/`;
+  return `${BASE_URL}/programmes/${slug}`;
 }
 
 export function pageUrl(path: string): string {

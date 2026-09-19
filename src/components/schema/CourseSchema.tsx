@@ -55,7 +55,7 @@ export function CourseSchema({ name, description, slug, courseWorkload }: Course
         '@id': breadcrumbId,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Programmes', item: `${BASE_URL}/programmes/` },
+          { '@type': 'ListItem', position: 2, name: 'Programmes', item: `${BASE_URL}/programmes` },
           { '@type': 'ListItem', position: 3, name, item: url },
         ],
       },
