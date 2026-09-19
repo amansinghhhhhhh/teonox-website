@@ -239,7 +239,7 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
     {
       title: "Data Analyst",
       image: dataAnalystImg,
-      tag: "Traffic & User Behavior"
+      tag: "Traffic & User Behaviour"
     },
     {
       title: "Marketing Analyst",
