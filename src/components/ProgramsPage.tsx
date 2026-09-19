@@ -256,7 +256,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
                 <span className="px-3 py-2 text-xs font-mono font-bold text-[#888888] uppercase tracking-wider">
                   Select Category
                 </span>
-                <div className="flex items-center gap-2">
+                <div className="flex md:!hidden items-center gap-2">
                   <button type="button"
                     onClick={() => scrollCategoryBar('left')}
                     className="flex w-7 h-7 rounded-full bg-white border border-[#ECECEC] shadow-sm items-center justify-center text-[#666] hover:bg-[#F15A29] hover:text-white hover:border-[#F15A29] transition-all cursor-pointer"
