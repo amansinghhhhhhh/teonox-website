@@ -547,7 +547,18 @@ async function startServer() {
     });
 
     // Serve real static assets (JS, CSS, images, PDFs) — but NOT index.html
-    app.use(express.static(distPath, { index: false }));
+    app.use(express.static(distPath, {
+      index: false,
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        } else if (/\.[a-f0-9]{8,}\.(js|css)$/.test(filePath)) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=31536000');
+        }
+      },
+    }));
 
     // 301 redirect /programs → /programmes (SEO link equity preservation)
     app.get('/programs', (_req, res) => { res.redirect(301, '/programmes'); });

@@ -7,20 +7,31 @@ interface Props {
 interface State {
   hasError: boolean;
   error: Error | null;
+  chunkReloadAttempted: boolean;
 }
+
+const CHUNK_ERROR_PATTERN = /Failed to fetch dynamically imported module|Importing a module script failed|Loading chunk \d+ failed/;
 
 export class ErrorBoundary extends Component<Props, State> {
   public override state: State = {
     hasError: false,
     error: null,
+    chunkReloadAttempted: false,
   };
 
   public static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return { hasError: true, error, chunkReloadAttempted: false };
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error caught by ErrorBoundary:', error, errorInfo);
+
+    // Auto-reload once on chunk load failures (stale deployment hashes)
+    const isChunkError = CHUNK_ERROR_PATTERN.test(error.message);
+    if (isChunkError && !this.state.chunkReloadAttempted) {
+      this.setState({ chunkReloadAttempted: true });
+      window.location.reload();
+    }
   }
 
   public handleReset = () => {
@@ -34,6 +45,25 @@ export class ErrorBoundary extends Component<Props, State> {
 
   public override render() {
     if (this.state.hasError) {
+      // Show "Reloading..." if a chunk error auto-reload is in progress
+      if (this.state.chunkReloadAttempted) {
+        return (
+          <div className="min-h-screen bg-[#FAF8F5] text-[#201A17] flex items-center justify-center p-6 font-['Sora',sans-serif]">
+            <div className="max-w-md w-full bg-white rounded-2xl border border-[#EBE4DC] p-8 text-center shadow-lg space-y-5">
+              <div className="w-14 h-14 bg-[#FFF0EB] text-[#F15A29] rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold">
+                !
+              </div>
+              <h2 className="text-2xl font-bold text-[#111111]">
+                Updating application...
+              </h2>
+              <p className="text-[#555555] text-sm leading-relaxed">
+                A new version is being loaded. This page will refresh automatically.
+              </p>
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className="min-h-screen bg-[#FAF8F5] text-[#201A17] flex items-center justify-center p-6 font-['Sora',sans-serif]">
           <div className="max-w-md w-full bg-white rounded-2xl border border-[#EBE4DC] p-8 text-center shadow-lg space-y-5">

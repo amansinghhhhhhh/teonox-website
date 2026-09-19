@@ -25,8 +25,17 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
 
-# Security headers
+# Cache-Control headers
 <IfModule mod_headers.c>
+  # HTML: no-cache (always revalidate for fresh deployments)
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+
+  # Hashed assets (Vite output): immutable long cache
+  <FilesMatch "\.(js|css|woff2?|ttf|eot|ico|svg|webp|avif|png|jpg|jpeg|gif)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Security headers
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"

@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TeonoxStorySections } from './components/TeonoxStorySections';
 import { LearningMethodologySection } from './components/LearningMethodologySection';
 import { trackPageView } from './utils/analytics';
+import { lazyWithRetry } from './utils/lazyWithRetry';
 import { ToolsSection } from './components/ToolsSection';
 import { ProgramsSection } from './components/ProgramsSection';
 import { LearningExperienceSection } from './components/LearningExperienceSection';
@@ -28,18 +29,18 @@ import { fetchLiveBlogDetail } from './services/blogService';
 import { SEO } from './components/SEO';
 import { ORG, WEBSITE, BASE_URL } from './utils/schema';
 
-const AboutUsPage = lazy(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
-const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
-const BlogDetailPage = lazy(() => import('./components/BlogDetailPage').then((m) => ({ default: m.BlogDetailPage })));
-const ContactPage = lazy(() => import('./components/ContactPage').then((m) => ({ default: m.ContactPage })));
-const ProgramsPage = lazy(() => import('./components/ProgramsPage').then((m) => ({ default: m.ProgramsPage })));
-const CareerOutcomesPage = lazy(() => import('./components/CareerOutcomesPage').then((m) => ({ default: m.CareerOutcomesPage })));
-const WhyTeonoxPage = lazy(() => import('./components/WhyTeonoxPage').then((m) => ({ default: m.WhyTeonoxPage })));
-const AdmissionsPage = lazy(() => import('./components/AdmissionsPage').then((m) => ({ default: m.AdmissionsPage })));
-const ProgramDetailPage = lazy(() => import('./components/ProgramDetailPage').then((m) => ({ default: m.ProgramDetailPage })));
-const PrivacyPolicyPage = lazy(() => import('./components/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
-const TermsAndConditionsPage = lazy(() => import('./components/TermsAndConditionsPage').then((m) => ({ default: m.TermsAndConditionsPage })));
-const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+const AboutUsPage = lazyWithRetry(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
+const BlogPage = lazyWithRetry(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
+const BlogDetailPage = lazyWithRetry(() => import('./components/BlogDetailPage').then((m) => ({ default: m.BlogDetailPage })));
+const ContactPage = lazyWithRetry(() => import('./components/ContactPage').then((m) => ({ default: m.ContactPage })));
+const ProgramsPage = lazyWithRetry(() => import('./components/ProgramsPage').then((m) => ({ default: m.ProgramsPage })));
+const CareerOutcomesPage = lazyWithRetry(() => import('./components/CareerOutcomesPage').then((m) => ({ default: m.CareerOutcomesPage })));
+const WhyTeonoxPage = lazyWithRetry(() => import('./components/WhyTeonoxPage').then((m) => ({ default: m.WhyTeonoxPage })));
+const AdmissionsPage = lazyWithRetry(() => import('./components/AdmissionsPage').then((m) => ({ default: m.AdmissionsPage })));
+const ProgramDetailPage = lazyWithRetry(() => import('./components/ProgramDetailPage').then((m) => ({ default: m.ProgramDetailPage })));
+const PrivacyPolicyPage = lazyWithRetry(() => import('./components/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
+const TermsAndConditionsPage = lazyWithRetry(() => import('./components/TermsAndConditionsPage').then((m) => ({ default: m.TermsAndConditionsPage })));
+const NotFoundPage = lazyWithRetry(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'not-found';
 
@@ -274,6 +275,9 @@ export default function App() {
       }
 
       trackPageView(url);
+
+      // Reset chunk-load retry flag after successful navigation
+      window.sessionStorage.setItem('page_has_been_refreshed', 'false');
 
       if (anchor) {
         setTimeout(() => {
