@@ -476,8 +476,8 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
               </p>
             </div>
 
-            {/* Filter Pills — single scrollable row on mobile */}
-            <div className="flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden gap-2 py-1 pr-4 md:pr-0 w-full min-w-0 md:w-auto">
+            {/* Filter Pills — scrollable on mobile, wrapping on desktop */}
+            <div className="flex flex-wrap md:flex-wrap gap-2 py-1 w-full min-w-0 overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pr-4 md:pr-0">
               {[
                 { id: 'all', label: 'All Pillars' },
                 { id: 'skills', label: 'Skills & AI' },
@@ -487,7 +487,7 @@ export function WhyTeonoxPage({ onEnquireClick, onExplorePrograms }: WhyTeonoxPa
                 <button type="button"
                   key={tab.id}
                   onClick={() => setActivePillarFilter(tab.id as any)}
-                  className={`shrink-0 whitespace-nowrap px-4 py-2.5 rounded-xl font-sora text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-sora text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                     activePillarFilter === tab.id
                       ? 'bg-[#111111] text-white shadow-sm'
                       : 'bg-white border border-[#EBE4DC] text-[#666666] hover:text-[#111111] hover:border-[#111111]'
