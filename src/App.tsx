@@ -314,11 +314,6 @@ export default function App() {
         loadBlogPost(route.postId);
       }
 
-      if (opts?.scroll !== false) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        trackPageView(window.location.pathname);
-      }
-
       if (hash) {
         setTimeout(() => {
           try {
@@ -329,7 +324,10 @@ export default function App() {
           } catch {
             // Fallback
           }
-        }, 200);
+        }, 100);
+      } else if (opts?.scroll !== false) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        trackPageView(window.location.pathname);
       }
     },
     [loadBlogPost],
