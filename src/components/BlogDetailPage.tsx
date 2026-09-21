@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, Clock, Calendar, User, Share2, Bookmark, CheckCircle2, ArrowRight, Sparkles, MessageSquare, CornerUpRight } from 'lucide-react';
 import { BlogPost } from '../types';
 import { fetchLiveBlogDetail, fetchLiveBlogs } from '../services/blogService';
+import { injectHeadingIds } from '../utils/heading';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
 
@@ -49,6 +50,19 @@ export function BlogDetailPage({
       () => {},
     );
   }, [initialPost]);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const timer = setTimeout(() => {
+        const target = document.getElementById(hash.slice(1));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [post]);
 
   const handleCopyLink = () => {
     const url = `https://teonox.com/blog/${post.slug || post.id}`;
@@ -174,8 +188,8 @@ export function BlogDetailPage({
         <div className="prose-container max-w-none">
           {post.contentHtml ? (
             <div
-              className="font-inter text-[#3A312A] text-[16.5px] sm:text-[18px] leading-[1.8] space-y-6 [&_h2]:font-sora [&_h2]:text-[24px] [&_h2]:sm:text-[28px] [&_h2]:font-[800] [&_h2]:text-[#201A17] [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:pt-4 [&_h2]:border-t [&_h2]:border-[#F0DFCE] [&_h3]:font-sora [&_h3]:text-[20px] [&_h3]:font-[700] [&_h3]:text-[#201A17] [&_h3]:mt-6 [&_h3]:mb-3 [&_p]:mb-5 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_li]:pl-1 [&_strong]:text-[#201A17] [&_strong]:font-[700] [&_a]:text-[#FF6A2B] [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF6A2B] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:bg-[#FFF6EE] [&_blockquote]:py-2 [&_blockquote]:rounded-r"
-              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+              className="font-inter text-[#3A312A] text-[16.5px] sm:text-[18px] leading-[1.8] space-y-6 [&_h2]:font-sora [&_h2]:text-[24px] [&_h2]:sm:text-[28px] [&_h2]:font-[800] [&_h2]:text-[#201A17] [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:pt-4 [&_h2]:border-t [&_h2]:border-[#F0DFCE] [&_h2]:scroll-mt-28 [&_h3]:font-sora [&_h3]:text-[20px] [&_h3]:font-[700] [&_h3]:text-[#201A17] [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:scroll-mt-28 [&_p]:mb-5 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_li]:pl-1 [&_strong]:text-[#201A17] [&_strong]:font-[700] [&_a]:text-[#FF6A2B] [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF6A2B] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:bg-[#FFF6EE] [&_blockquote]:py-2 [&_blockquote]:rounded-r"
+              dangerouslySetInnerHTML={{ __html: injectHeadingIds(post.contentHtml) }}
             />
           ) : post.content && post.content.length > 0 ? (
             <div className="font-inter text-[#3A312A] text-[16.5px] sm:text-[18px] leading-[1.8] space-y-6">

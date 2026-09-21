@@ -285,8 +285,6 @@ export default function App() {
             const element = document.getElementById(anchor);
             if (element) {
               element.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           } catch {
             // Fallback
@@ -303,6 +301,7 @@ export default function App() {
   const syncFromUrl = useCallback(
     (opts?: { scroll?: boolean }) => {
       const route = parsePath(window.location.pathname);
+      const hash = window.location.hash;
       setSelectedPost(null);
       setSelectedProgram(null);
       setBlogLoading(false);
@@ -318,6 +317,19 @@ export default function App() {
       if (opts?.scroll !== false) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         trackPageView(window.location.pathname);
+      }
+
+      if (hash) {
+        setTimeout(() => {
+          try {
+            const element = document.getElementById(hash.slice(1));
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          } catch {
+            // Fallback
+          }
+        }, 200);
       }
     },
     [loadBlogPost],
