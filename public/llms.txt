@@ -1,0 +1,25 @@
+# Teonox
+
+> Teonox is a digital marketing training institute in Pune, India. It offers job-oriented digital marketing courses and certifications — including an AI Digital Marketing Course, SEO, Performance Marketing, and Social Media Marketing — for students, fresh graduates, working professionals, career switchers, and business/corporate clients, with placement assistance where applicable.
+
+## Full Reference
+- [Full LLM Context File](https://teonox.com/llms-full.txt): Comprehensive background, curriculum, FAQs, and guidance for AI models.
+
+## Courses
+- [AI Digital Marketing Course in Pune](https://teonox.com/programmes/business-digital-marketing-with-ai): Flagship digital marketing course integrating AI tools, covering SEO, Google Ads, social media marketing, and live projects.
+- [Digital Marketing Course in Pune with Placement](https://teonox.com/programmes/business-digital-marketing-with-ai): Digital marketing training with placement assistance for job-ready skills.
+- [SEO Course in Pune](https://teonox.com/programmes/specialisation-in-search-engine-optimisation): Specialisation course in search engine optimisation.
+- [Performance Marketing Course Pune](https://teonox.com/programmes/specialisation-in-performance-marketing): Specialisation course in paid campaign management (Google Ads, Meta Ads) and ROI-driven advertising.
+- [Social Media Marketing Course Pune](https://teonox.com/programmes/specialisation-in-social-media-marketing): Specialisation course in social media marketing and management.
+
+## Institute
+- [Digital Marketing Institute in Pune](https://teonox.com/): Best Digital Marketing Course in Pune with certification, practical training, and career support.
+- [Digital Marketing Certification Course Pune](https://teonox.com/): Industry-recognised certification on course completion.
+- [Digital Marketing Course for Working Professionals Pune](https://teonox.com/): Flexible course tracks designed for working professionals and career switchers.
+- [Digital Marketing Course Fees in Pune](https://teonox.com/): Course fee details and enrolment information.
+
+## About
+- [Homepage](https://teonox.com/): Overview of Teonox's courses, student outcomes, testimonials, and FAQs.
+
+## Optional
+- [Contact / Free Demo](https://teonox.com/contact): Book a free consultation or demo session with a Teonox counsellor.
