@@ -1,28 +1,14 @@
-// Navigation scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// Mobile nav
-function toggleMobileNav() {
-  document.getElementById('mobileNav').classList.toggle('active');
-}
-function closeMobileNav() {
-  document.getElementById('mobileNav').classList.remove('active');
-}
-
 // FAQ accordion
 function toggleFaq(btn) {
   const item = btn.parentElement;
-  const answer = item.querySelector('.faq-answer');
-  const isActive = item.classList.contains('active');
-  document.querySelectorAll('.faq-item').forEach(i => {
-    i.classList.remove('active');
-    i.querySelector('.faq-answer').style.maxHeight = null;
+  const answer = item.querySelector('.teonox-online-faq-answer');
+  const isActive = item.classList.contains('teonox-online-active');
+  document.querySelectorAll('.teonox-online-faq-item').forEach(i => {
+    i.classList.remove('teonox-online-active');
+    i.querySelector('.teonox-online-faq-answer').style.maxHeight = null;
   });
   if (!isActive) {
-    item.classList.add('active');
+    item.classList.add('teonox-online-active');
     answer.style.maxHeight = answer.scrollHeight + 'px';
   }
 }
@@ -31,16 +17,16 @@ function toggleFaq(btn) {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+      entry.target.classList.add('teonox-online-visible');
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.teonox-online-reveal').forEach(el => observer.observe(el));
 
 
 // Auto-scroll using requestAnimationFrame
 // NOTE: all movement (autoplay, arrow nav, drag) is done by translating
-// the inner .slider-track, and always wraps modulo half the track width
+// the inner .teonox-online-slider-track, and always wraps modulo half the track width
 // (the track's content is duplicated once) so the loop is seamless in
 // both directions with no blank space at the ends.
 var scrollOffsets = {};
@@ -48,7 +34,7 @@ var scrollAnimations = {};
 
 function getSliderTrack(id) {
   var viewport = document.getElementById(id);
-  return viewport ? viewport.querySelector('.slider-track') : null;
+  return viewport ? viewport.querySelector('.teonox-online-slider-track') : null;
 }
 
 function applyOffset(id, offset) {
@@ -82,8 +68,8 @@ function stopAutoScroll(id) {
 }
 
 // Start auto-scroll for all sliders
-document.querySelectorAll('.slider-wrap').forEach(function(wrap) {
-  var viewport = wrap.querySelector('.slider-viewport');
+document.querySelectorAll('.teonox-online-slider-wrap').forEach(function(wrap) {
+  var viewport = wrap.querySelector('.teonox-online-slider-viewport');
   var id = viewport ? viewport.id : null;
   if (!id) return;
   scrollOffsets[id] = 0;
@@ -111,7 +97,7 @@ function slideScroll(id, dir) {
 
 // Touch/Swipe Support (drag also moves the track via the same offset
 // system as autoplay/arrows, so it wraps the same seamless way)
-document.querySelectorAll('.slider-viewport').forEach(function(viewport) {
+document.querySelectorAll('.teonox-online-slider-viewport').forEach(function(viewport) {
   var startX, startOffset, isDragging = false;
   var viewportId = viewport.id;
 
@@ -163,8 +149,8 @@ document.querySelectorAll('.slider-viewport').forEach(function(viewport) {
 });
 
 // Reel card hover — pause/resume parent slider-track
-document.querySelectorAll('.reel-card').forEach(function(card) {
-  var viewport = card.closest('.slider-viewport');
+document.querySelectorAll('.teonox-online-reel-card').forEach(function(card) {
+  var viewport = card.closest('.teonox-online-slider-viewport');
   if (!viewport) return;
   card.addEventListener('mouseenter', function() {
     stopAutoScroll(viewport.id);
@@ -183,9 +169,9 @@ function submitForm(e) {
 
 // Video Controls
 function playReel(overlay) {
-  var card = overlay.closest('.reel-card');
+  var card = overlay.closest('.teonox-online-reel-card');
   var video = card.querySelector('video');
-  var allVideos = document.querySelectorAll('.reel-card video');
+  var allVideos = document.querySelectorAll('.teonox-online-reel-card video');
   allVideos.forEach(function(v) {
     if (v !== video) { v.pause(); v.currentTime = 0; }
   });
@@ -195,31 +181,31 @@ function playReel(overlay) {
 }
 
 function togglePause(btn) {
-  var card = btn.closest('.reel-card');
+  var card = btn.closest('.teonox-online-reel-card');
   var video = card.querySelector('video');
   var icon = btn.querySelector('i');
   if (video.paused) {
     video.play();
-    icon.className = 'fas fa-pause';
-    btn.classList.remove('active');
+    icon.className = 'teonox-online-fas teonox-online-fa-pause';
+    btn.classList.remove('teonox-online-active');
   } else {
     video.pause();
-    icon.className = 'fas fa-play';
-    btn.classList.add('active');
+    icon.className = 'teonox-online-fas teonox-online-fa-play';
+    btn.classList.add('teonox-online-active');
   }
 }
 
 function toggleMute(btn) {
-  var card = btn.closest('.reel-card');
+  var card = btn.closest('.teonox-online-reel-card');
   var video = card.querySelector('video');
   var icon = btn.querySelector('i');
   video.muted = !video.muted;
   if (video.muted) {
-    icon.className = 'fas fa-volume-xmark';
-    btn.classList.add('active');
+    icon.className = 'teonox-online-fas fa-volume-xmark';
+    btn.classList.add('teonox-online-active');
   } else {
-    icon.className = 'fas fa-volume-high';
-    btn.classList.remove('active');
+    icon.className = 'teonox-online-fas teonox-online-fa-volume-high';
+    btn.classList.remove('teonox-online-active');
   }
 }
 
@@ -238,15 +224,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 
 function openApplyModal() {
-  document.getElementById('applyModal').classList.add('active');
+  document.getElementById('teonox-online-applyModal').classList.add('teonox-online-active');
   document.body.style.overflow = 'hidden';
 }
 function closeApplyModal() {
-  document.getElementById('applyModal').classList.remove('active');
+  document.getElementById('teonox-online-applyModal').classList.remove('teonox-online-active');
   document.body.style.overflow = '';
 }
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('applyModal').addEventListener('click', function(e) {
+  document.getElementById('teonox-online-applyModal').addEventListener('click', function(e) {
     if (e.target === this) closeApplyModal();
   });
 });
