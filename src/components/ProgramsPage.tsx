@@ -137,11 +137,26 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
     };
   }, []);
 
-  const filteredPrograms = (liveCards ?? []).filter((p) => {
+  const ONLINE_PROGRAMME_CARD: LiveProgramCard = {
+  id: 'build-digital-marketing-skills-with-ai',
+  title: 'Business Digital Marketing + AI (Online)',
+  slug: 'build-digital-marketing-skills-with-ai',
+  brandBadge: 'Online',
+  description: '6-month online digital marketing programme with AI integration, live instructor-led classes, and practical projects.',
+  durationText: '6 Months',
+  certText: 'Industry-recognised certification',
+  targetText: 'Online — 30-35 Students',
+  mode: 'Online',
+  brochureUrl: '',
+  categoryId: 'ai',
+  categorySlugs: ['ai', 'business', 'marketing'],
+  categoryIds: ['ai', 'business', 'marketing'],
+  categories: ['Digital Marketing', 'AI', 'Business'],
+  image: 'online-programme/assets/images/mobile-banner.webp',
+};
+
+  const filteredPrograms = ((liveCards ?? []).find((p) => p.id === 'build-digital-marketing-skills-with-ai') ? liveCards ?? [] : [ONLINE_PROGRAMME_CARD, ...(liveCards ?? [])]).filter((p) => {
     if (activeCategory === 'all') return true;
-    // Match the selected category tab against the program's assigned
-    // `program-category` slugs OR term IDs (plus the curated ids used by the
-    // static fallback tabs when the taxonomy fetch fails).
     return (
       p.categorySlugs?.includes(activeCategory) ||
       p.categoryIds?.includes(activeCategory) ||
@@ -200,13 +215,14 @@ mode: progOrTitle.mode || 'On Campus, Pune',
               '@type': 'ItemList',
               '@id': `${BASE_URL}/programmes/#program-list`,
               name: 'TEONOX Programmes',
-              numberOfItems: 4,
-              itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programmes/business-digital-marketing-with-ai` },
-                { '@type': 'ListItem', position: 2, name: 'Specialisation in Performance Marketing', url: `${BASE_URL}/programmes/performance-marketing` },
-                { '@type': 'ListItem', position: 3, name: 'Specialisation in Search Engine Optimisation', url: `${BASE_URL}/programmes/search-engine-optimization` },
-                { '@type': 'ListItem', position: 4, name: 'Specialising in Social Media Marketing', url: `${BASE_URL}/programmes/specialization-in-social-media-marketing` },
-              ],
+numberOfItems: 5,
+                itemListElement: [
+                  { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing + AI (Online)', url: `${BASE_URL}/programmes/build-digital-marketing-skills-with-ai` },
+                  { '@type': 'ListItem', position: 2, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programmes/business-digital-marketing-with-ai` },
+                  { '@type': 'ListItem', position: 3, name: 'Specialisation in Performance Marketing', url: `${BASE_URL}/programmes/performance-marketing` },
+                  { '@type': 'ListItem', position: 4, name: 'Specialisation in Search Engine Optimisation', url: `${BASE_URL}/programmes/search-engine-optimization` },
+                  { '@type': 'ListItem', position: 5, name: 'Specialising in Social Media Marketing', url: `${BASE_URL}/programmes/specialization-in-social-media-marketing` },
+                ],
             },
           ],
         }}

@@ -32,6 +32,11 @@ const META_MAP = {
     description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enrol now.",
     canonical: '/programmes',
   },
+  '/programmes/build-digital-marketing-skills-with-ai': {
+    title: 'Business Digital Marketing + AI (Online) | 6-Month Programme | TEONOX',
+    description: 'Enrol in TEONOX\'s 6-month Business Digital Marketing + AI online programme. Live instructor-led classes, practical projects, AI-powered learning. Apply now.',
+    canonical: '/programmes/build-digital-marketing-skills-with-ai',
+  },
   '/blog': {
     title: 'Blog & Insights | TEONOX',
     description: 'Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX \u2014 Gen AI School of Marketing & Business in Pune.',

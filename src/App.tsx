@@ -41,6 +41,7 @@ const ProgramDetailPage = lazyWithRetry(() => import('./components/ProgramDetail
 const PrivacyPolicyPage = lazyWithRetry(() => import('./components/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
 const TermsAndConditionsPage = lazyWithRetry(() => import('./components/TermsAndConditionsPage').then((m) => ({ default: m.TermsAndConditionsPage })));
 const NotFoundPage = lazyWithRetry(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+const OnlineProgrammePage = lazyWithRetry(() => import('./pages/programmes/OnlineProgrammePage').then((m) => ({ default: m.OnlineProgrammePage })));
 
 export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'not-found';
 
@@ -122,6 +123,8 @@ function normalizePath(path: string): string {
  * resolved dynamically by ProgramDetailPage via the WP REST API — no static
  * maps needed here. Returns null for empty slugs.
  */
+const ONLINE_PROGRAMME_SLUG = 'build-digital-marketing-skills-with-ai';
+
 function stubProgram(slug: string): Program | null {
   if (!slug) return null;
   return {
@@ -414,9 +417,17 @@ export default function App() {
       {/* Main Page Layout */}
       <main id="main-content" className="flex-grow">
           <Suspense fallback={<PageSkeleton />}>
-          {selectedProgram ? (
-          /* Dedicated Course Details Page */
-          <ProgramDetailPage
+{selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG ? (
+            /* Online Programme Static Page */
+            <OnlineProgrammePage
+              onBack={() => navigate('/programmes')}
+              onEnquireClick={(topic) => handleEnquireClick(topic)}
+              onBrochureClick={(title) => handleBrochureClick(title)}
+              onNavigate={(href, label) => handleNavClick(href, label)}
+            />
+          ) : selectedProgram ? (
+            /* Dedicated Course Details Page */
+            <ProgramDetailPage
             program={selectedProgram}
             onBack={() => navigate('/programmes')}
             onEnquire={(topic) => handleEnquireClick(topic)}

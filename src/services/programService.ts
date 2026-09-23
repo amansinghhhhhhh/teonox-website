@@ -20,12 +20,11 @@ export interface LiveProgramCard {
   certText: string;
   targetText: string;
   mode: string;
+  slug?: string;
   image?: string;
   brochureUrl: string;
   categoryId: string;
-  /** Assigned `program-category` term slugs (from embedded WP terms). */
   categorySlugs: string[];
-  /** Assigned `program-category` term IDs (from post['program-category'] / embedded terms). */
   categoryIds: string[];
   categories: string[];
 }
