@@ -161,12 +161,23 @@ export function OnlineProgrammePage({
           <div className="slider-viewport" ref={trustSliderRef} id="trustSlider">
             <div className="slider-track" style={{ transform: `translateX(-${sliderOffset}px)` }}>
               {[
-                '5 Live Classes/Week', 'Recordings', 'Mentorship', 'Community', 'Certificate',
-                'Practical Projects', 'AI Wrench', '5 Live Classes/Week', 'Recordings', 'Mentorship',
-                'Community', 'Certificate', 'Practical Projects', 'AI Wrench',
+                { icon: Video, label: '5 Live Classes/Week' },
+                { icon: Play, label: 'Recordings' },
+                { icon: Users, label: 'Mentorship' },
+                { icon: Users, label: 'Community' },
+                { icon: Award, label: 'Certificate' },
+                { icon: Target, label: 'Practical Projects' },
+                { icon: Wrench, label: 'AI Wrench' },
+                { icon: Video, label: '5 Live Classes/Week' },
+                { icon: Play, label: 'Recordings' },
+                { icon: Users, label: 'Mentorship' },
+                { icon: Users, label: 'Community' },
+                { icon: Award, label: 'Certificate' },
+                { icon: Target, label: 'Practical Projects' },
+                { icon: Wrench, label: 'AI Wrench' },
               ].map((item, i) => (
                 <div key={i} className="slider-slide">
-                  <span className="trust-item">{item}</span>
+                  <span className="trust-item"><item.icon style={{ width: 18, height: 18, minWidth: 18, minHeight: 18 }} /> {item.label}</span>
                 </div>
               ))}
             </div>
