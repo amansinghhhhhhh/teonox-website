@@ -186,11 +186,11 @@ function togglePause(btn) {
   var icon = btn.querySelector('i');
   if (video.paused) {
     video.play();
-    icon.className = 'teonox-online-fas teonox-online-fa-pause';
+    icon.className = 'fas fa-pause';
     btn.classList.remove('teonox-online-active');
   } else {
     video.pause();
-    icon.className = 'teonox-online-fas teonox-online-fa-play';
+    icon.className = 'fas fa-play';
     btn.classList.add('teonox-online-active');
   }
 }
@@ -201,10 +201,10 @@ function toggleMute(btn) {
   var icon = btn.querySelector('i');
   video.muted = !video.muted;
   if (video.muted) {
-    icon.className = 'teonox-online-fas fa-volume-xmark';
+    icon.className = 'fas fa-volume-xmark';
     btn.classList.add('teonox-online-active');
   } else {
-    icon.className = 'teonox-online-fas teonox-online-fa-volume-high';
+    icon.className = 'fas fa-volume-high';
     btn.classList.remove('teonox-online-active');
   }
 }

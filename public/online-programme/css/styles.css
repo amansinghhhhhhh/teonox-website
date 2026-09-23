@@ -845,11 +845,11 @@ a { text-decoration: none; color: inherit; }
   .tl-landing-page-faculty-grid { grid-template-columns: repeat(2, 1fr); }
   .tl-landing-page-masterclass-inner { grid-template-columns: 1fr; }
   .tl-landing-page-proof-grid { grid-template-columns: repeat(2, 1fr); }
-  .tl-landing-page-nav.scrolled {     display: none; position: fixed; top: 64px; left: 0; right: 0;
+  .tl-landing-page-nav.scrolled { display: none; position: fixed; top: 64px; left: 0; right: 0;
     background: var(--white); border-bottom: 1px solid var(--orange-border);
     padding: 20px 24px; box-shadow: var(--shadow-lg);
   }
-  .tl-landing-page-nav a {     display: block; padding: 12px 0; font-size: 15px; font-weight: 500;
+  .tl-landing-page-nav a { display: block; padding: 12px 0; font-size: 15px; font-weight: 500;
     color: var(--text-secondary); border-bottom: 1px solid var(--orange-border);
   }
 }

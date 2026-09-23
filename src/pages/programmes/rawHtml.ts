@@ -7,16 +7,16 @@ export const rawHtmlBody = `<!-- Hero -->
         <h1>Build Digital Marketing Skills. Master AI. Build Your <span>Career.</span></h1>
         <p class="tl-landing-page-hero-subtitle">TEONOX — 6-Month Business Digital Marketing + AI Programme</p>
         <div class="tl-landing-page-hero-highlights">
-          <span class="tl-landing-page-hero-chip"><i class="tl-landing-page-fas teonox-online-fa-clock"></i> 6 Months</span>
-          <span class="tl-landing-page-hero-chip"><i class="tl-landing-page-fas teonox-online-fa-video"></i> Live Classes</span>
-          <span class="tl-landing-page-hero-chip"><i class="tl-landing-page-fas teonox-online-fa-laptop-code"></i> Practical Projects</span>
-          <span class="tl-landing-page-hero-chip"><i class="tl-landing-page-fas teonox-online-fa-robot"></i> AI-Powered Learning</span>
-          <span class="tl-landing-page-hero-chip teonox-online-hero-chip-urgent"><i class="tl-landing-page-fas teonox-online-fa-users"></i> Batch Size: 30-35 Students</span>
+          <span class="tl-landing-page-hero-chip"><i class="fas fa-clock"></i> 6 Months</span>
+          <span class="tl-landing-page-hero-chip"><i class="fas fa-video"></i> Live Classes</span>
+          <span class="tl-landing-page-hero-chip"><i class="fas fa-laptop-code"></i> Practical Projects</span>
+          <span class="tl-landing-page-hero-chip"><i class="fas fa-robot"></i> AI-Powered Learning</span>
+          <span class="tl-landing-page-hero-chip teonox-online-hero-chip-urgent"><i class="fas fa-users"></i> Batch Size: 30-35 Students</span>
         </div>
 
         <div class="tl-landing-page-hero-ctas">
-          <a href="javascript:void(0)" class="tl-landing-page-btn teonox-online-btn-primary" onclick="openApplyModal()"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i> Apply Now</a>
-          <a href="#teonox-online-masterclass" class="tl-landing-page-btn teonox-online-btn-outline"><i class="tl-landing-page-fas teonox-online-fa-phone"></i> Book a Counselling Call</a>
+          <a href="javascript:void(0)" class="tl-landing-page-btn teonox-online-btn-primary" onclick="openApplyModal()"><i class="fas fa-arrow-right"></i> Apply Now</a>
+          <a href="#teonox-online-masterclass" class="tl-landing-page-btn teonox-online-btn-outline"><i class="fas fa-phone"></i> Book a Counselling Call</a>
         </div>
       </div>
     </div>
@@ -28,20 +28,20 @@ export const rawHtmlBody = `<!-- Hero -->
   <div class="tl-landing-page-slider-wrap">
     <div class="tl-landing-page-slider-viewport" id="teonox-online-trustSlider">
       <div class="tl-landing-page-slider-track">
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-calendar-check"></i> 5 Live Classes/Week</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-play-circle"></i> Recordings</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-user-tie"></i> Mentorship</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-users"></i> Community</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-certificate"></i> Certificate</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-laptop-code"></i> Practical Projects</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-robot"></i> AI Tools</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-calendar-check"></i> 5 Live Classes/Week</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-play-circle"></i> Recordings</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-user-tie"></i> Mentorship</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-users"></i> Community</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-certificate"></i> Certificate</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-laptop-code"></i> Practical Projects</span></div>
-        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="tl-landing-page-fas teonox-online-fa-robot"></i> AI Tools</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-calendar-check"></i> 5 Live Classes/Week</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-play-circle"></i> Recordings</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-user-tie"></i> Mentorship</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-users"></i> Community</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-certificate"></i> Certificate</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-laptop-code"></i> Practical Projects</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-robot"></i> AI Tools</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-calendar-check"></i> 5 Live Classes/Week</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-play-circle"></i> Recordings</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-user-tie"></i> Mentorship</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-users"></i> Community</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-certificate"></i> Certificate</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-laptop-code"></i> Practical Projects</span></div>
+        <div class="tl-landing-page-slider-slide"><span class="tl-landing-page-trust-item"><i class="fas fa-robot"></i> AI Tools</span></div>
       </div>
     </div>
   </div>
@@ -56,42 +56,42 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-learning-flow">
       <div class="tl-landing-page-learning-step">
-        <div class="tl-landing-page-learning-step-icon"><i class="tl-landing-page-fas teonox-online-fa-book-open"></i></div>
+        <div class="tl-landing-page-learning-step-icon"><i class="fas fa-book-open"></i></div>
         <span>Learn</span>
       </div>
-      <span class="tl-landing-page-learning-arrow"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i></span>
+      <span class="tl-landing-page-learning-arrow"><i class="fas fa-arrow-right"></i></span>
       <div class="tl-landing-page-learning-step">
-        <div class="tl-landing-page-learning-step-icon"><i class="tl-landing-page-fas teonox-online-fa-tools"></i></div>
+        <div class="tl-landing-page-learning-step-icon"><i class="fas fa-tools"></i></div>
         <span>Implement</span>
       </div>
-      <span class="tl-landing-page-learning-arrow"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i></span>
+      <span class="tl-landing-page-learning-arrow"><i class="fas fa-arrow-right"></i></span>
       <div class="tl-landing-page-learning-step">
-        <div class="tl-landing-page-learning-step-icon"><i class="tl-landing-page-fas teonox-online-fa-comments"></i></div>
+        <div class="tl-landing-page-learning-step-icon"><i class="fas fa-comments"></i></div>
         <span>Feedback</span>
       </div>
-      <span class="tl-landing-page-learning-arrow"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i></span>
+      <span class="tl-landing-page-learning-arrow"><i class="fas fa-arrow-right"></i></span>
       <div class="tl-landing-page-learning-step">
-        <div class="tl-landing-page-learning-step-icon"><i class="tl-landing-page-fas teonox-online-fa-sync-alt"></i></div>
+        <div class="tl-landing-page-learning-step-icon"><i class="fas fa-sync-alt"></i></div>
         <span>Improve</span>
       </div>
-      <span class="tl-landing-page-learning-arrow"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i></span>
+      <span class="tl-landing-page-learning-arrow"><i class="fas fa-arrow-right"></i></span>
       <div class="tl-landing-page-learning-step">
-        <div class="tl-landing-page-learning-step-icon"><i class="tl-landing-page-fas teonox-online-fa-trophy"></i></div>
+        <div class="tl-landing-page-learning-step-icon"><i class="fas fa-trophy"></i></div>
         <span>Present</span>
       </div>
     </div>
     <div class="tl-landing-page-learning-features">
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-video"></i><span>5 Live Classes / Week</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-tasks"></i><span>Practical Assignments</span></div>
-      <div class="tl-landing-page-learning-feature teonox-online-hide-mobile"><i class="tl-landing-page-fas teonox-online-fa-question-circle"></i><span>Weekly Doubt Support</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-clipboard-check"></i><span>Project Reviews</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-play"></i><span>Recordings</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-users"></i><span>Student Community</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-chart-bar"></i><span>Monthly Performance Reviews</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-microphone"></i><span>Guest Industry Sessions</span></div>
-      <div class="tl-landing-page-learning-feature teonox-online-hide-mobile"><i class="tl-landing-page-fas teonox-online-fa-star"></i><span>Final Demo Day</span></div>
-      <div class="tl-landing-page-learning-feature teonox-online-hide-mobile"><i class="tl-landing-page-fas teonox-online-fa-clock"></i><span>Attendance Tracking</span></div>
-      <div class="tl-landing-page-learning-feature"><i class="tl-landing-page-fas teonox-online-fa-laptop"></i><span>Tool & Software Access Included</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-video"></i><span>5 Live Classes / Week</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-tasks"></i><span>Practical Assignments</span></div>
+      <div class="tl-landing-page-learning-feature teonox-online-hide-mobile"><i class="fas fa-question-circle"></i><span>Weekly Doubt Support</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-clipboard-check"></i><span>Project Reviews</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-play"></i><span>Recordings</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-users"></i><span>Student Community</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-chart-bar"></i><span>Monthly Performance Reviews</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-microphone"></i><span>Guest Industry Sessions</span></div>
+      <div class="tl-landing-page-learning-feature teonox-online-hide-mobile"><i class="fas fa-star"></i><span>Final Demo Day</span></div>
+      <div class="tl-landing-page-learning-feature teonox-online-hide-mobile"><i class="fas fa-clock"></i><span>Attendance Tracking</span></div>
+      <div class="tl-landing-page-learning-feature"><i class="fas fa-laptop"></i><span>Tool & Software Access Included</span></div>
     </div>
   </div>
 </section>
@@ -105,27 +105,27 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-who-grid">
       <div class="tl-landing-page-who-card teonox-online-reveal">
-        <div class="tl-landing-page-who-card-icon"><i class="tl-landing-page-fas teonox-online-fa-graduation-cap"></i></div>
+        <div class="tl-landing-page-who-card-icon"><i class="fas fa-graduation-cap"></i></div>
         <h4>Students & Graduates</h4>
         <p>Start your career with real skills and a portfolio that stands out.</p>
       </div>
       <div class="tl-landing-page-who-card teonox-online-reveal">
-        <div class="tl-landing-page-who-card-icon"><i class="tl-landing-page-fas teonox-online-fa-briefcase"></i></div>
+        <div class="tl-landing-page-who-card-icon"><i class="fas fa-briefcase"></i></div>
         <h4>Working Professionals</h4>
         <p>Upskill and transition into marketing roles with confidence.</p>
       </div>
       <div class="tl-landing-page-who-card teonox-online-reveal">
-        <div class="tl-landing-page-who-card-icon"><i class="tl-landing-page-fas teonox-online-fa-arrows-rotate"></i></div>
+        <div class="tl-landing-page-who-card-icon"><i class="fas fa-arrows-rotate"></i></div>
         <h4>Career Switchers</h4>
         <p>Move into digital marketing with structured, practical training.</p>
       </div>
       <div class="tl-landing-page-who-card teonox-online-reveal">
-        <div class="tl-landing-page-who-card-icon"><i class="tl-landing-page-fas teonox-online-fa-laptop-code"></i></div>
+        <div class="tl-landing-page-who-card-icon"><i class="fas fa-laptop-code"></i></div>
         <h4>Freelancers</h4>
         <p>Build service offerings and attract better clients with proven skills.</p>
       </div>
       <div class="tl-landing-page-who-card teonox-online-reveal">
-        <div class="tl-landing-page-who-card-icon"><i class="tl-landing-page-fas teonox-online-fa-rocket"></i></div>
+        <div class="tl-landing-page-who-card-icon"><i class="fas fa-rocket"></i></div>
         <h4>Founders & Business Owners</h4>
         <p>Learn to manage your own marketing and reduce dependency on agencies.</p>
       </div>
@@ -249,7 +249,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <span class="tl-landing-page-timeline-tag">Prompt Engineering</span>
           </div>
           <div class="tl-landing-page-timeline-output">
-            <i class="tl-landing-page-fas teonox-online-fa-flag-checkered"></i>
+            <i class="fas fa-flag-checkered"></i>
             <span>Output: Marketing Strategy + AI Workflow</span>
           </div>
         </div>
@@ -268,7 +268,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <span class="tl-landing-page-timeline-tag">CRO</span>
           </div>
           <div class="tl-landing-page-timeline-output">
-            <i class="tl-landing-page-fas teonox-online-fa-flag-checkered"></i>
+            <i class="fas fa-flag-checkered"></i>
             <span>Output: Business Website / Landing Page</span>
           </div>
         </div>
@@ -288,7 +288,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <span class="tl-landing-page-timeline-tag">Social Media</span>
           </div>
           <div class="tl-landing-page-timeline-output">
-            <i class="tl-landing-page-fas teonox-online-fa-flag-checkered"></i>
+            <i class="fas fa-flag-checkered"></i>
             <span>Output: SEO & Content Growth Project</span>
           </div>
         </div>
@@ -307,7 +307,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <span class="tl-landing-page-timeline-tag">Retargeting</span>
           </div>
           <div class="tl-landing-page-timeline-output">
-            <i class="tl-landing-page-fas teonox-online-fa-flag-checkered"></i>
+            <i class="fas fa-flag-checkered"></i>
             <span>Output: Meta Ads Project</span>
           </div>
         </div>
@@ -326,7 +326,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <span class="tl-landing-page-timeline-tag">Reporting</span>
           </div>
           <div class="tl-landing-page-timeline-output">
-            <i class="tl-landing-page-fas teonox-online-fa-flag-checkered"></i>
+            <i class="fas fa-flag-checkered"></i>
             <span>Output: Google Ads + Analytics Project</span>
           </div>
         </div>
@@ -345,7 +345,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <span class="tl-landing-page-timeline-tag">Personal Branding</span>
           </div>
           <div class="tl-landing-page-timeline-output">
-            <i class="tl-landing-page-fas teonox-online-fa-flag-checkered"></i>
+            <i class="fas fa-flag-checkered"></i>
             <span>Output: Capstone + Portfolio + Career Roadmap</span>
           </div>
         </div>
@@ -462,7 +462,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
     </div>
     <div class="tl-landing-page-ai-bottom">
-      <span class="tl-landing-page-quote-icon"><i class="tl-landing-page-fas teonox-online-fa-quote-left"></i></span>
+      <span class="tl-landing-page-quote-icon"><i class="fas fa-quote-left"></i></span>
       <p class="tl-landing-page-quote-text">Learn how marketers use AI to work faster, think better and execute smarter.</p>
       <div class="tl-landing-page-quote-accent"><span></span><span></span><span></span></div>
     </div>
@@ -478,246 +478,246 @@ export const rawHtmlBody = `<!-- Hero -->
       <p class="tl-landing-page-section-subtitle" style="margin:0 auto;">From classrooms to real-world projects — see what makes TEONOX different.</p>
     </div>
     <div class="tl-landing-page-slider-wrap" style="margin-top:40px;">
-      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-videoSlider',-1)"><i class="tl-landing-page-fas teonox-online-fa-chevron-left"></i></button>
+      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-videoSlider',-1)"><i class="fas fa-chevron-left"></i></button>
       <div class="tl-landing-page-slider-viewport" id="teonox-online-videoSlider">
         <div class="tl-landing-page-slider-track">
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-1.mp4" loop playsinline poster="assets/images/gallery/poster-video-1.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-2.mp4" loop playsinline poster="assets/images/gallery/poster-video-2.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-3.mp4" loop playsinline poster="assets/images/gallery/poster-video-3.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-4.mp4" loop playsinline poster="assets/images/gallery/poster-video-4.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-5.mp4" loop playsinline poster="assets/images/gallery/poster-video-5.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-6.mp4" loop playsinline poster="assets/images/gallery/poster-video-6.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-7.mp4" loop playsinline poster="assets/images/gallery/poster-video-7.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-8.mp4" loop playsinline poster="assets/images/gallery/poster-video-8.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-9.mp4" loop playsinline poster="assets/images/gallery/poster-video-9.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-1.mp4" loop playsinline poster="assets/images/gallery/poster-video-1.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-2.mp4" loop playsinline poster="assets/images/gallery/poster-video-2.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-3.mp4" loop playsinline poster="assets/images/gallery/poster-video-3.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-4.mp4" loop playsinline poster="assets/images/gallery/poster-video-4.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-5.mp4" loop playsinline poster="assets/images/gallery/poster-video-5.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-6.mp4" loop playsinline poster="assets/images/gallery/poster-video-6.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-7.mp4" loop playsinline poster="assets/images/gallery/poster-video-7.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-8.mp4" loop playsinline poster="assets/images/gallery/poster-video-8.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
               <video src="assets/videos/video-9.mp4" loop playsinline poster="assets/images/gallery/poster-video-9.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
-                <i class="tl-landing-page-fas teonox-online-fa-play"></i>
+                <i class="fas fa-play"></i>
               </div>
               <div class="tl-landing-page-reel-controls">
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="tl-landing-page-fas teonox-online-fa-pause"></i></button>
-                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="tl-landing-page-fas teonox-online-fa-volume-high"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="togglePause(this)" title="Pause"><i class="fas fa-pause"></i></button>
+                <button class="tl-landing-page-reel-ctrl-btn" onclick="toggleMute(this)" title="Mute"><i class="fas fa-volume-high"></i></button>
               </div>
-              <div class="tl-landing-page-reel-badge"><i class="tl-landing-page-fas teonox-online-fa-play"></i> Watch</div>
+              <div class="tl-landing-page-reel-badge"><i class="fas fa-play"></i> Watch</div>
             </div>
           </div>
         </div>
       </div>
-      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-right" onclick="slideScroll('teonox-online-videoSlider',1)"><i class="tl-landing-page-fas teonox-online-fa-chevron-right"></i></button>
+      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-right" onclick="slideScroll('teonox-online-videoSlider',1)"><i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
 </section>
@@ -731,7 +731,7 @@ export const rawHtmlBody = `<!-- Hero -->
       <p class="tl-landing-page-section-subtitle" style="margin:0 auto;">From classrooms to real-world projects — see what makes TEONOX different.</p>
     </div>
     <div class="tl-landing-page-slider-wrap" style="margin-top:40px;">
-      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-gallerySlider',-1)"><i class="tl-landing-page-fas teonox-online-fa-chevron-left"></i></button>
+      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-gallerySlider',-1)"><i class="fas fa-chevron-left"></i></button>
       <div class="tl-landing-page-slider-viewport" id="teonox-online-gallerySlider">
         <div class="tl-landing-page-slider-track">
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
@@ -772,7 +772,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
         </div>
       </div>
-      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-right" onclick="slideScroll('teonox-online-gallerySlider',1)"><i class="tl-landing-page-fas teonox-online-fa-chevron-right"></i></button>
+      <button class="tl-landing-page-slider-btn teonox-online-slider-btn-right" onclick="slideScroll('teonox-online-gallerySlider',1)"><i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
 </section>
@@ -856,7 +856,7 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-career-grid">
       <div class="tl-landing-page-career-col">
-        <h3><i class="tl-landing-page-fas teonox-online-fa-building"></i> Career Paths</h3>
+        <h3><i class="fas fa-building"></i> Career Paths</h3>
         <ul class="tl-landing-page-career-roles">
           <li>Digital Marketing Executive</li>
           <li>SEO Executive</li>
@@ -870,7 +870,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-career-col">
         <div class="tl-landing-page-career-independent">
-          <h3><i class="tl-landing-page-fas teonox-online-fa-user-check"></i> For Independent Professionals</h3>
+          <h3><i class="fas fa-user-check"></i> For Independent Professionals</h3>
           <div class="tl-landing-page-career-tags">
             <span class="tl-landing-page-career-tag">Freelancing</span>
             <span class="tl-landing-page-career-tag">Client Acquisition</span>
@@ -953,13 +953,13 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-proof-content teonox-online-active">
       <div class="tl-landing-page-slider-wrap" style="margin-top:0;">
-        <button class="tl-landing-page-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-proofSlider',-1)"><i class="tl-landing-page-fas teonox-online-fa-chevron-left"></i></button>
+        <button class="tl-landing-page-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-proofSlider',-1)"><i class="fas fa-chevron-left"></i></button>
         <div class="tl-landing-page-slider-viewport" id="teonox-online-proofSlider">
           <div class="tl-landing-page-slider-track">
             <div class="tl-landing-page-slider-slide" style="min-width:320px;max-width:320px;">
               <div class="tl-landing-page-proof-card">
                 <div class="tl-landing-page-proof-card-stars">
-                  <i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
                 <p class="tl-landing-page-proof-text">"This workshop completely changed how I think about marketing. The AI tools we learned are game-changers!"</p>
                 <div class="tl-landing-page-proof-author">
@@ -974,7 +974,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <div class="tl-landing-page-slider-slide" style="min-width:320px;max-width:320px;">
               <div class="tl-landing-page-proof-card">
                 <div class="tl-landing-page-proof-card-stars">
-                  <i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
                 <p class="tl-landing-page-proof-text">"The Reel Competition was so much fun! I never thought I could create something like that in just a few hours."</p>
                 <div class="tl-landing-page-proof-author">
@@ -989,7 +989,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <div class="tl-landing-page-slider-slide" style="min-width:320px;max-width:320px;">
               <div class="tl-landing-page-proof-card">
                 <div class="tl-landing-page-proof-card-stars">
-                  <i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
                 <p class="tl-landing-page-proof-text">"I came in confused about my career. I left with clarity and a portfolio project I'm actually proud of."</p>
                 <div class="tl-landing-page-proof-author">
@@ -1004,7 +1004,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <div class="tl-landing-page-slider-slide" style="min-width:320px;max-width:320px;">
               <div class="tl-landing-page-proof-card">
                 <div class="tl-landing-page-proof-card-stars">
-                  <i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
                 <p class="tl-landing-page-proof-text">"This workshop completely changed how I think about marketing. The AI tools we learned are game-changers!"</p>
                 <div class="tl-landing-page-proof-author">
@@ -1019,7 +1019,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <div class="tl-landing-page-slider-slide" style="min-width:320px;max-width:320px;">
               <div class="tl-landing-page-proof-card">
                 <div class="tl-landing-page-proof-card-stars">
-                  <i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
                 <p class="tl-landing-page-proof-text">"The Reel Competition was so much fun! I never thought I could create something like that in just a few hours."</p>
                 <div class="tl-landing-page-proof-author">
@@ -1034,7 +1034,7 @@ export const rawHtmlBody = `<!-- Hero -->
             <div class="tl-landing-page-slider-slide" style="min-width:320px;max-width:320px;">
               <div class="tl-landing-page-proof-card">
                 <div class="tl-landing-page-proof-card-stars">
-                  <i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i><i class="tl-landing-page-fas teonox-online-fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
                 <p class="tl-landing-page-proof-text">"I came in confused about my career. I left with clarity and a portfolio project I'm actually proud of."</p>
                 <div class="tl-landing-page-proof-author">
@@ -1048,7 +1048,7 @@ export const rawHtmlBody = `<!-- Hero -->
             </div>
           </div>
         </div>
-        <button class="tl-landing-page-slider-btn teonox-online-slider-btn-right" onclick="slideScroll('teonox-online-proofSlider',1)"><i class="tl-landing-page-fas teonox-online-fa-chevron-right"></i></button>
+        <button class="tl-landing-page-slider-btn teonox-online-slider-btn-right" onclick="slideScroll('teonox-online-proofSlider',1)"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </div>
@@ -1063,7 +1063,7 @@ export const rawHtmlBody = `<!-- Hero -->
         <h2 class="tl-landing-page-masterclass-title">Build a Complete Digital Marketing Campaign Using AI — LIVE</h2>
         <p class="tl-landing-page-masterclass-sub">90-Minute Practical Masterclass</p>
         <div class="tl-landing-page-masterclass-cta">
-          <a href="#" class="tl-landing-page-btn teonox-online-btn-white"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i> Register for the Masterclass</a>
+          <a href="#" class="tl-landing-page-btn teonox-online-btn-white"><i class="fas fa-arrow-right"></i> Register for the Masterclass</a>
         </div>
       </div>
       <div>
@@ -1089,43 +1089,43 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-faq-list">
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">What is TEONOX?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">What is TEONOX?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner"><b>TEONOX is a School of Marketing, AI & Business</b> focused on helping learners build practical skills for the modern business environment. Our programmes combine <b>marketing, technology, AI and business thinking</b> with hands-on learning.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Who can join TEONOX?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Who can join TEONOX?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">TEONOX is designed for <b>students, graduates, aspiring marketers, working professionals, entrepreneurs</b> and anyone looking to build practical skills in <b>digital marketing, AI and business</b>.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Does TEONOX offer online and offline learning?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Does TEONOX offer online and offline learning?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">Yes. TEONOX offers both <b>online and offline</b> learning options, depending on the programme. This gives learners the flexibility to choose a format that works best for them.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">What does TEONOX focus on?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">What does TEONOX focus on?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">TEONOX focuses on the intersection of <b>Digital Marketing, AI and Business</b>. Our programmes cover areas such as <b>performance marketing, Meta Ads, Google Ads, SEO, analytics, content, AI tools</b> and business thinking.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Is TEONOX only about learning digital marketing tools?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Is TEONOX only about learning digital marketing tools?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">No. Tools are only one part of the learning process. We focus on helping learners <b>understand how to apply those tools, think through marketing problems</b> and connect their work with <b>real business objectives</b>.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">How is TEONOX different from a typical digital marketing course?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">How is TEONOX different from a typical digital marketing course?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">We believe learning should go beyond watching lessons and collecting certificates. TEONOX focuses on <b>structured learning, practical application, projects, guidance and problem-solving</b>, helping learners develop skills they can <b>actually use</b>.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Do I need prior experience in digital marketing or AI?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Do I need prior experience in digital marketing or AI?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">No. Most programmes are designed to accommodate <b>beginners</b> and progressively build knowledge and practical skills. Specific eligibility requirements may vary depending on the programme.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Will I get practical exposure at TEONOX?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Will I get practical exposure at TEONOX?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">Yes. Practical application is an important part of the TEONOX learning approach. Depending on the programme, learners may work on <b>projects, campaigns, case studies and business-oriented assignments</b>.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Can I join TEONOX while studying or working?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Can I join TEONOX while studying or working?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">Yes. TEONOX has learning options designed for different learner profiles, including <b>students and working professionals</b>. Programme schedules and formats may vary.</div></div>
       </div>
       <div class="tl-landing-page-faq-item">
-        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Why should I choose TEONOX?<i class="tl-landing-page-fas teonox-online-fa-chevron-down"></i></button>
+        <button class="tl-landing-page-faq-question" onclick="toggleFaq(this)">Why should I choose TEONOX?<i class="fas fa-chevron-down"></i></button>
         <div class="tl-landing-page-faq-answer"><div class="tl-landing-page-faq-answer-inner">Because the goal is not simply to help you complete a course. The goal is to help you <b>build relevant skills, understand how modern marketing and AI work together</b>, and become more <b>confident in solving real-world business problems</b>.</div></div>
       </div>
     </div>
@@ -1139,8 +1139,8 @@ export const rawHtmlBody = `<!-- Hero -->
     <p class="tl-landing-page-final-cta-sub">6 Months. Live Learning. Real Projects. AI-Powered Skills.</p>
     <!-- <div class="tl-landing-page-final-cta-price">₹69,999</div> -->
     <div class="tl-landing-page-final-cta-buttons">
-      <a href="javascript:void(0)" class="tl-landing-page-btn teonox-online-btn-white" onclick="openApplyModal()"><i class="tl-landing-page-fas teonox-online-fa-arrow-right"></i> Apply Now</a>
-      <!-- <a href="#teonox-online-masterclass" class="tl-landing-page-btn teonox-online-btn-outline-white"><i class="tl-landing-page-fas teonox-online-fa-phone"></i> Book a Counselling Call</a> -->
+      <a href="javascript:void(0)" class="tl-landing-page-btn teonox-online-btn-white" onclick="openApplyModal()"><i class="fas fa-arrow-right"></i> Apply Now</a>
+      <!-- <a href="#teonox-online-masterclass" class="tl-landing-page-btn teonox-online-btn-outline-white"><i class="fas fa-phone"></i> Book a Counselling Call</a> -->
     </div>
   </div>
 </section>
@@ -1151,7 +1151,7 @@ export const rawHtmlBody = `<!-- Hero -->
 <!-- Apply Now Popup Modal -->
 <div class="tl-landing-page-apply-modal-overlay" id="teonox-online-applyModal">
   <div class="tl-landing-page-apply-modal">
-    <button class="tl-landing-page-apply-modal-close" onclick="closeApplyModal()"><i class="tl-landing-page-fas teonox-online-fa-times"></i></button>
+    <button class="tl-landing-page-apply-modal-close" onclick="closeApplyModal()"><i class="fas fa-times"></i></button>
     <div class="tl-landing-page-apply-modal-grid">
       <div class="tl-landing-page-apply-modal-image">
         <img src="assets/images/apply-modal.png" alt="Apply at TEONOX">
@@ -1196,10 +1196,10 @@ export const rawHtmlBody = `<!-- Hero -->
             </select>
           </div>
           <button type="submit" class="tl-landing-page-btn teonox-online-btn-primary" style="width:100%;padding:14px;font-size:15px;">
-            <i class="tl-landing-page-fas teonox-online-fa-paper-plane"></i> Submit Application
+            <i class="fas fa-paper-plane"></i> Submit Application
           </button>
           <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">
-            <i class="tl-landing-page-fas teonox-online-fa-lock" style="font-size:10px;"></i> Your information is secure. We will never share your data.
+            <i class="fas fa-lock" style="font-size:10px;"></i> Your information is secure. We will never share your data.
           </p>
         </form>
       </div>

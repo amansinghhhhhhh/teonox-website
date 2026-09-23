@@ -421,12 +421,7 @@ export default function App() {
           <Suspense fallback={<PageSkeleton />}>
 {selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG ? (
             /* Online Programme Static Page */
-            <OnlineProgrammePage
-              onBack={() => navigate('/programmes')}
-              onEnquireClick={(topic) => handleEnquireClick(topic)}
-              onBrochureClick={(title) => handleBrochureClick(title)}
-              onNavigate={(href, label) => handleNavClick(href, label)}
-            />
+            <OnlineProgrammePage />
           ) : selectedProgram ? (
             /* Dedicated Course Details Page */
             <ProgramDetailPage
