@@ -408,11 +408,13 @@ export default function App() {
       </a>
 
       {/* Navigation */}
-      <Navbar
-        onEnquireClick={() => handleEnquireClick()}
-        activeSection={getActiveNavLabel()}
-        onNavigate={(href, label) => handleNavClick(href, label)}
-      />
+      {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && (
+        <Navbar
+          onEnquireClick={() => handleEnquireClick()}
+          activeSection={getActiveNavLabel()}
+          onNavigate={(href, label) => handleNavClick(href, label)}
+        />
+      )}
 
       {/* Main Page Layout */}
       <main id="main-content" className="flex-grow">
@@ -611,10 +613,12 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer
-        onEnquireClick={() => handleEnquireClick()}
-        onNavigate={(href, label) => handleNavClick(href, label)}
-      />
+      {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && (
+        <Footer
+          onEnquireClick={() => handleEnquireClick()}
+          onNavigate={(href, label) => handleNavClick(href, label)}
+        />
+      )}
 
       {/* Enquire Now Popup Form Modal */}
       <EnquireModal
