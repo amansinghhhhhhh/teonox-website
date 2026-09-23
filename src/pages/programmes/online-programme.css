@@ -55,10 +55,17 @@
 
 /* ── Hero ── */
 .online-programme-page .op-hero {
-  padding: 120px 0 80px;
-  background: linear-gradient(180deg, #FFF8F5 0%, #ffffff 100%);
-  text-align: center;
+  padding: 140px 0 80px;
+  background: url('/online-programme/images/hero-bg.jpg') center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+  min-height: 550px;
 }
+.online-programme-page .op-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(84deg, rgba(255,255,255,0.92) 0%, rgba(255,246,238,0.88) 44%, rgba(255,255,255,0.1) 63%);
+}
+.online-programme-page .op-hero .op-container { position: relative; z-index: 1; }
 
 .online-programme-page .op-hero-grid {
   display: grid;
@@ -477,20 +484,29 @@
   position: relative;
   margin-top: 40px;
 }
-
-.online-programme-page .op-timeline-item {
-  display: flex;
-  gap: 32px;
-  margin-bottom: 0;
-  position: relative;
+.online-programme-page .op-timeline::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 2px; background: var(--orange-border); transform: translateX(-50%);
 }
-
+.online-programme-page .op-timeline-item {
+  display: flex; align-items: flex-start; margin-bottom: 40px; position: relative;
+}
+.online-programme-page .op-timeline-item:nth-child(odd) { flex-direction: row; }
+.online-programme-page .op-timeline-item:nth-child(even) { flex-direction: row-reverse; }
 .online-programme-page .op-timeline-content {
-  flex: 1;
-  padding: 32px;
-  background: #ffffff;
-  border: 1px solid #ECECEC;
-  border-radius: 24px;
+  width: calc(50% - 40px); background: #ffffff;
+  border: 1px solid var(--orange-border); border-radius: 16px;
+  padding: 28px; transition: all 0.3s;
+}
+.online-programme-page .op-timeline-content:hover {
+  border-color: #F15A29; box-shadow: 0 10px 40px rgba(32,26,23,0.12);
+}
+.online-programme-page .op-timeline-dot {
+  position: absolute; left: 50%; top: 28px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #F15A29; border: 4px solid #ffffff;
+  transform: translateX(-50%); box-shadow: 0 0 0 2px #F15A29;
+  z-index: 2;
 }
 
 .online-programme-page .op-timeline-month {
@@ -1262,7 +1278,8 @@
   }
 
   .online-programme-page .op-timeline-dot {
-    margin: 0 auto 16px;
+    left: 50%; top: 28px;
+    transform: translateX(-50%); margin: 0;
   }
 
   .online-programme-page .op-who-grid {

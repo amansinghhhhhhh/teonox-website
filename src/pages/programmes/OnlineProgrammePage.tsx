@@ -282,7 +282,7 @@ export function OnlineProgrammePage({
               { title: 'Live Instructor-Led Classes', desc: 'Learn directly from industry experts in real-time interactive sessions.', img: '/online-programme/images/why-teonox/Live-Instructor-Led-Classes.webp' },
               { title: '5 Classes Every Week', desc: 'Consistent learning rhythm with structured sessions throughout the week.', img: '/online-programme/images/why-teonox/5-Classes-Every-Week.webp' },
               { title: 'Real Practical Projects', desc: 'Work on live projects that build your portfolio and real-world experience.', img: '/online-programme/images/why-teonox/Real-Practical-Projects.webp' },
-              { title: 'AI Wrench & Workflows', desc: 'Learn to use AI across research, strategy, content, analytics and automation.', img: '/online-programme/images/why-teonox/AI-Wrench-&-Workflows.webp' },
+              { title: 'AI Wrench & Workflows', desc: 'Learn to use AI across research, strategy, content, analytics and automation.', img: '/online-programme/images/why-teonox/AI-Tools-&-Workflows.webp' },
               { title: 'Mentor & Doubt Support', desc: 'Get your questions answered with dedicated mentor support throughout.', img: '/online-programme/images/why-teonox/Mentor-&-Doubt-Support.webp' },
               { title: 'Portfolio-Based Learning', desc: 'Every module contributes to a professional portfolio you can show employers.', img: '/online-programme/images/why-teonox/Portfolio-Based-Learning.webp' },
             ].map((card, i) => (
@@ -555,7 +555,7 @@ export function OnlineProgrammePage({
             ].map((faq, i) => (
               <div key={i} className={`op-faq-item ${activeFaq === i ? 'active' : ''}`}>
                 <button className="op-faq-question" onClick={() => toggleFaq(i)}>
-                  {faq.q} <ChevronDown />
+                  {faq.q} <ChevronDown size={20} />
                 </button>
                 <div className="op-faq-answer" style={{ maxHeight: activeFaq === i ? '500px' : '0' }}>
                   <div className="op-faq-answer-inner">{faq.a}</div>
