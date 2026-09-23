@@ -279,12 +279,12 @@ export function OnlineProgrammePage({
           </div>
           <div className="op-why-grid">
             {[
-              { title: 'Live Instructor-Led Classes', desc: 'Learn directly from industry experts in real-time interactive sessions.', img: 'online-programme/assets/images/why-teonox/Live-Instructor-Led-Classes.webp' },
-              { title: '5 Classes Every Week', desc: 'Consistent learning rhythm with structured sessions throughout the week.', img: 'online-programme/assets/images/why-teonox/5-Classes-Every-Week.webp' },
-              { title: 'Real Practical Projects', desc: 'Work on live projects that build your portfolio and real-world experience.', img: 'online-programme/assets/images/why-teonox/Real-Practical-Projects.webp' },
-              { title: 'AI Wrench & Workflows', desc: 'Learn to use AI across research, strategy, content, analytics and automation.', img: 'online-programme/assets/images/why-teonox/AI-Wrench-&-Workflows.webp' },
-              { title: 'Mentor & Doubt Support', desc: 'Get your questions answered with dedicated mentor support throughout.', img: 'online-programme/assets/images/why-teonox/Mentor-&-Doubt-Support.webp' },
-              { title: 'Portfolio-Based Learning', desc: 'Every module contributes to a professional portfolio you can show employers.', img: 'online-programme/assets/images/why-teonox/Portfolio-Based-Learning.webp' },
+              { title: 'Live Instructor-Led Classes', desc: 'Learn directly from industry experts in real-time interactive sessions.', img: '/online-programme/images/why-teonox/Live-Instructor-Led-Classes.webp' },
+              { title: '5 Classes Every Week', desc: 'Consistent learning rhythm with structured sessions throughout the week.', img: '/online-programme/images/why-teonox/5-Classes-Every-Week.webp' },
+              { title: 'Real Practical Projects', desc: 'Work on live projects that build your portfolio and real-world experience.', img: '/online-programme/images/why-teonox/Real-Practical-Projects.webp' },
+              { title: 'AI Wrench & Workflows', desc: 'Learn to use AI across research, strategy, content, analytics and automation.', img: '/online-programme/images/why-teonox/AI-Wrench-&-Workflows.webp' },
+              { title: 'Mentor & Doubt Support', desc: 'Get your questions answered with dedicated mentor support throughout.', img: '/online-programme/images/why-teonox/Mentor-&-Doubt-Support.webp' },
+              { title: 'Portfolio-Based Learning', desc: 'Every module contributes to a professional portfolio you can show employers.', img: '/online-programme/images/why-teonox/Portfolio-Based-Learning.webp' },
             ].map((card, i) => (
               <div key={i} className="op-why-card">
                 <div className="op-why-card-img">
@@ -346,11 +346,11 @@ export function OnlineProgrammePage({
           </div>
           <div className="op-portfolio-grid">
             {[
-              { num: '01', title: 'Website', desc: 'Business website + conversion flow', img: 'online-programme/assets/images/gallery/portfolio-website.webp' },
-              { num: '02', title: 'SEO & Content', desc: 'Keyword strategy + optimised content + reporting', img: 'online-programme/assets/images/gallery/portfolio-seo.webp' },
-              { num: '03', title: 'Meta Ads', desc: 'Campaign structure + creatives + targeting + optimisation', img: 'online-programme/assets/images/gallery/portfolio-meta-ads.webp' },
-              { num: '04', title: 'Google Ads & Analytics', desc: 'Search campaign + tracking + performance report', img: 'online-programme/assets/images/gallery/portfolio-google-ads.webp' },
-              { num: '05', title: 'Capstone Growth Project', desc: 'Complete business growth strategy using all modules + AI', img: 'online-programme/assets/images/gallery/portfolio-capstone.webp' },
+              { num: '01', title: 'Website', desc: 'Business website + conversion flow', img: '/online-programme/images/gallery/portfolio-website.webp' },
+              { num: '02', title: 'SEO & Content', desc: 'Keyword strategy + optimised content + reporting', img: '/online-programme/images/gallery/portfolio-seo.webp' },
+              { num: '03', title: 'Meta Ads', desc: 'Campaign structure + creatives + targeting + optimisation', img: '/online-programme/images/gallery/portfolio-meta-ads.webp' },
+              { num: '04', title: 'Google Ads & Analytics', desc: 'Search campaign + tracking + performance report', img: '/online-programme/images/gallery/portfolio-google-ads.webp' },
+              { num: '05', title: 'Capstone Growth Project', desc: 'Complete business growth strategy using all modules + AI', img: '/online-programme/images/gallery/portfolio-capstone.webp' },
             ].map((card, i) => (
               <div key={i} className="op-portfolio-card">
                 <div className="op-portfolio-card-img">
@@ -384,7 +384,7 @@ export function OnlineProgrammePage({
             ].map((card, i) => (
               <div key={i} className="op-ai-card">
                 <div className="op-ai-card-img">
-                  <img src={`online-programme/assets/images/ai-learning/${card.title}.webp`} alt={card.title} loading="lazy" decoding="async" />
+                  <img src={`/online-programme/images/ai-learning/${card.title}.webp`} alt={card.title} loading="lazy" decoding="async" />
                 </div>
                 <div className="op-ai-card-body">
                   <h4>{card.title}</h4>
@@ -417,7 +417,7 @@ export function OnlineProgrammePage({
                   <div key={n} className="op-slider-slide" style={{ minWidth: 200, maxWidth: 200 }}>
                     <div className="op-reel-card">
                       <div className="op-reel-placeholder">
-                        <img src={`online-programme/assets/images/gallery/poster-video-${n}.jpg`} alt={`Video ${n}`} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
+                        <img src={`/online-programme/images/gallery/poster-video-${n}.jpg`} alt={`Video ${n}`} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
                         <div className="op-reel-overlay" onClick={(e) => playReel(e.currentTarget.closest('.op-reel-card') || e.currentTarget)}><Play /></div>
                         <div className="op-reel-controls">
                           <button type="button" className="op-reel-ctrl-btn" onClick={(e) => togglePause(e.currentTarget)}><Pause /></button>
@@ -445,14 +445,14 @@ export function OnlineProgrammePage({
           </div>
           <div className="op-whatyouget-grid">
             {[
-              { title: 'Business AI + Digital Marketing', desc: 'Complete programme access', img: 'online-programme/assets/images/what-you-get/Business-AI-+-Digital-Marketing.webp' },
-              { title: 'TEONOX Certificate', desc: 'Verified completion certificate', img: 'online-programme/assets/images/what-you-get/TEONOX-Certificate.webp' },
-              { title: 'Portfolio Projects', desc: '5 real project outputs', img: 'online-programme/assets/images/what-you-get/Portfolio-Projects.webp' },
-              { title: 'Career Direction', desc: 'Personalised career roadmap', img: 'online-programme/assets/images/what-you-get/Career-Direction.webp' },
-              { title: '30-Day Creator Guide', desc: 'Launch your content journey', img: 'online-programme/assets/images/what-you-get/30-Day-Creator-Guide.webp' },
-              { title: 'Growth Strategy', desc: 'Business growth frameworks', img: 'online-programme/assets/images/what-you-get/Growth-Strategy.webp' },
-              { title: 'Reel Competition', desc: 'Creative content challenges', img: 'online-programme/assets/images/what-you-get/Reel-Competition.webp' },
-              { title: 'Surprise Gift', desc: 'Special welcome kit', img: 'online-programme/assets/images/what-you-get/Surprise-Gift.webp' },
+              { title: 'Business AI + Digital Marketing', desc: 'Complete programme access', img: '/online-programme/images/what-you-get/Business-AI-+-Digital-Marketing.webp' },
+              { title: 'TEONOX Certificate', desc: 'Verified completion certificate', img: '/online-programme/images/what-you-get/TEONOX-Certificate.webp' },
+              { title: 'Portfolio Projects', desc: '5 real project outputs', img: '/online-programme/images/what-you-get/Portfolio-Projects.webp' },
+              { title: 'Career Direction', desc: 'Personalised career roadmap', img: '/online-programme/images/what-you-get/Career-Direction.webp' },
+              { title: '30-Day Creator Guide', desc: 'Launch your content journey', img: '/online-programme/images/what-you-get/30-Day-Creator-Guide.webp' },
+              { title: 'Growth Strategy', desc: 'Business growth frameworks', img: '/online-programme/images/what-you-get/Growth-Strategy.webp' },
+              { title: 'Reel Competition', desc: 'Creative content challenges', img: '/online-programme/images/what-you-get/Reel-Competition.webp' },
+              { title: 'Surprise Gift', desc: 'Special welcome kit', img: '/online-programme/images/what-you-get/Surprise-Gift.webp' },
             ].map((card, i) => (
               <div key={i} className="op-whatyouget-card">
                 <img src={card.img} alt={card.title} className="op-whatyouget-card-img" loading="lazy" decoding="async" />
@@ -514,9 +514,9 @@ export function OnlineProgrammePage({
           </div>
           <div className="op-faculty-grid">
             {[
-              { name: 'Amit Manglani', role: 'Founder', desc: 'Leading TEONOX and A2 Digital with hands-on expertise in digital marketing, business growth, and AI-driven marketing strategy.', img: 'online-programme/assets/images/mentors/amit.jpg', tags: ['Digital Marketing', 'Business Growth', 'Strategy'] },
-              { name: 'Hitesh Chhtralia', role: 'Centre Operations Leadership', desc: 'Driving academics and marketing operations with a focus on practical, outcome-driven education delivery.', img: 'online-programme/assets/images/mentors/hitesh.jpg', tags: ['Academics', 'Marketing', 'Operations'] },
-              { name: 'Ayush Tandon', role: 'Academics & Marketing', desc: 'Specialising in marketing strategy and practical skill development for the next generation of digital marketers.', img: 'online-programme/assets/images/mentors/ayush.jpg', tags: ['Marketing Strategy', 'Academics'] },
+              { name: 'Amit Manglani', role: 'Founder', desc: 'Leading TEONOX and A2 Digital with hands-on expertise in digital marketing, business growth, and AI-driven marketing strategy.', img: '/online-programme/images/mentors/amit.jpg', tags: ['Digital Marketing', 'Business Growth', 'Strategy'] },
+              { name: 'Hitesh Chhtralia', role: 'Centre Operations Leadership', desc: 'Driving academics and marketing operations with a focus on practical, outcome-driven education delivery.', img: '/online-programme/images/mentors/hitesh.jpg', tags: ['Academics', 'Marketing', 'Operations'] },
+              { name: 'Ayush Tandon', role: 'Academics & Marketing', desc: 'Specialising in marketing strategy and practical skill development for the next generation of digital marketers.', img: '/online-programme/images/mentors/ayush.jpg', tags: ['Marketing Strategy', 'Academics'] },
             ].map((fac, i) => (
               <div key={i} className="op-faculty-card">
                 <div className="op-faculty-photo">
@@ -589,7 +589,7 @@ export function OnlineProgrammePage({
             <button type="button" className="op-apply-modal-close" onClick={() => { setShowApplyModal(false); setIsSubmitted(false); }}><X /></button>
             <div className="op-apply-modal-grid">
               <div className="op-apply-modal-image">
-                <img src="online-programme/assets/images/apply-modal.png" alt="Apply at TEONOX" />
+                <img src="/online-programme/images/apply-modal.png" alt="Apply at TEONOX" />
               </div>
               <div className="op-apply-modal-form">
                 <div className="op-section-label">APPLY NOW</div>
