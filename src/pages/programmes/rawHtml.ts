@@ -171,7 +171,7 @@ export const rawHtmlBody = `<!-- Hero -->
     <div class="tl-landing-page-why-grid">
       <div class="tl-landing-page-why-card teonox-online-reveal">
         <div class="tl-landing-page-why-card-img">
-          <img src="assets/images/why-teonox/Live-Instructor-Led-Classes.webp" alt="Live Instructor">
+          <img src="/online-programme/images/why-teonox/Live-Instructor-Led-Classes.webp" alt="Live Instructor">
         </div>
         <div class="tl-landing-page-why-card-body">
           <h3>Live Instructor-Led Classes</h3>
@@ -180,7 +180,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-why-card teonox-online-reveal">
         <div class="tl-landing-page-why-card-img">
-          <img src="assets/images/why-teonox/5-Classes-Every-Week.webp" alt="5 Classes Every Week">
+          <img src="/online-programme/images/why-teonox/5-Classes-Every-Week.webp" alt="5 Classes Every Week">
         </div>
         <div class="tl-landing-page-why-card-body">
           <h3>5 Classes Every Week</h3>
@@ -189,7 +189,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-why-card teonox-online-reveal">
         <div class="tl-landing-page-why-card-img">
-          <img src="assets/images/why-teonox/Real-Practical-Projects.webp" alt="Real Practical Projects">
+          <img src="/online-programme/images/why-teonox/Real-Practical-Projects.webp" alt="Real Practical Projects">
         </div>
         <div class="tl-landing-page-why-card-body">
           <h3>Real Practical Projects</h3>
@@ -198,7 +198,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-why-card teonox-online-reveal">
         <div class="tl-landing-page-why-card-img">
-          <img src="assets/images/why-teonox/AI-Tools-&-Workflows.webp" alt="AI Tools & Workflows">
+          <img src="/online-programme/images/why-teonox/AI-Tools-&-Workflows.webp" alt="AI Tools & Workflows">
         </div>
         <div class="tl-landing-page-why-card-body">
           <h3>AI Tools & Workflows</h3>
@@ -207,7 +207,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-why-card teonox-online-reveal">
         <div class="tl-landing-page-why-card-img">
-          <img src="assets/images/why-teonox/Mentor-&-Doubt-Support.webp" alt="Mentor & Doubt Support">
+          <img src="/online-programme/images/why-teonox/Mentor-&-Doubt-Support.webp" alt="Mentor & Doubt Support">
         </div>
         <div class="tl-landing-page-why-card-body">
           <h3>Mentor & Doubt Support</h3>
@@ -216,7 +216,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-why-card teonox-online-reveal">
         <div class="tl-landing-page-why-card-img">
-          <img src="assets/images/why-teonox/Portfolio-Based-Learning.webp" alt="Portfolio-Based Learning">
+          <img src="/online-programme/images/why-teonox/Portfolio-Based-Learning.webp" alt="Portfolio-Based Learning">
         </div>
         <div class="tl-landing-page-why-card-body">
           <h3>Portfolio-Based Learning</h3>
@@ -364,7 +364,7 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-portfolio-grid">
       <div class="tl-landing-page-portfolio-card teonox-online-reveal">
-        <div class="tl-landing-page-portfolio-card-img"><img src="assets/images/gallery/portfolio-website.webp" alt="Website Project"></div>
+        <div class="tl-landing-page-portfolio-card-img"><img src="/online-programme/images/gallery/portfolio-website.webp" alt="Website Project"></div>
         <div class="tl-landing-page-portfolio-card-header"><span class="tl-landing-page-portfolio-num">01</span></div>
         <div class="tl-landing-page-portfolio-card-body">
           <h4>Website</h4>
@@ -372,7 +372,7 @@ export const rawHtmlBody = `<!-- Hero -->
         </div>
       </div>
       <div class="tl-landing-page-portfolio-card teonox-online-reveal">
-        <div class="tl-landing-page-portfolio-card-img"><img src="assets/images/gallery/portfolio-seo.webp" alt="SEO & Content Project"></div>
+        <div class="tl-landing-page-portfolio-card-img"><img src="/online-programme/images/gallery/portfolio-seo.webp" alt="SEO & Content Project"></div>
         <div class="tl-landing-page-portfolio-card-header"><span class="tl-landing-page-portfolio-num">02</span></div>
         <div class="tl-landing-page-portfolio-card-body">
           <h4>SEO & Content</h4>
@@ -380,7 +380,7 @@ export const rawHtmlBody = `<!-- Hero -->
         </div>
       </div>
       <div class="tl-landing-page-portfolio-card teonox-online-reveal">
-        <div class="tl-landing-page-portfolio-card-img"><img src="assets/images/gallery/portfolio-meta-ads.webp" alt="Meta Ads Project"></div>
+        <div class="tl-landing-page-portfolio-card-img"><img src="/online-programme/images/gallery/portfolio-meta-ads.webp" alt="Meta Ads Project"></div>
         <div class="tl-landing-page-portfolio-card-header"><span class="tl-landing-page-portfolio-num">03</span></div>
         <div class="tl-landing-page-portfolio-card-body">
           <h4>Meta Ads</h4>
@@ -388,7 +388,7 @@ export const rawHtmlBody = `<!-- Hero -->
         </div>
       </div>
       <div class="tl-landing-page-portfolio-card teonox-online-reveal">
-        <div class="tl-landing-page-portfolio-card-img"><img src="assets/images/gallery/portfolio-google-ads.webp" alt="Google Ads & Analytics Project"></div>
+        <div class="tl-landing-page-portfolio-card-img"><img src="/online-programme/images/gallery/portfolio-google-ads.webp" alt="Google Ads & Analytics Project"></div>
         <div class="tl-landing-page-portfolio-card-header"><span class="tl-landing-page-portfolio-num">04</span></div>
         <div class="tl-landing-page-portfolio-card-body">
           <h4>Google Ads & Analytics</h4>
@@ -396,7 +396,7 @@ export const rawHtmlBody = `<!-- Hero -->
         </div>
       </div>
       <div class="tl-landing-page-portfolio-card teonox-online-reveal">
-        <div class="tl-landing-page-portfolio-card-img"><img src="assets/images/gallery/portfolio-capstone.webp" alt="Capstone Growth Project"></div>
+        <div class="tl-landing-page-portfolio-card-img"><img src="/online-programme/images/gallery/portfolio-capstone.webp" alt="Capstone Growth Project"></div>
         <div class="tl-landing-page-portfolio-card-header"><span class="tl-landing-page-portfolio-num">05</span></div>
         <div class="tl-landing-page-portfolio-card-body">
           <h4>Capstone Growth Project</h4>
@@ -417,7 +417,7 @@ export const rawHtmlBody = `<!-- Hero -->
     <div class="tl-landing-page-ai-grid">
       <div class="tl-landing-page-ai-card teonox-online-reveal">
         <div class="tl-landing-page-ai-card-img">
-          <img src="assets/images/ai-learning/Research.webp" alt="Research">
+          <img src="/online-programme/images/ai-learning/Research.webp" alt="Research">
         </div>
         <div class="tl-landing-page-ai-card-body">
           <h4>Research</h4>
@@ -426,7 +426,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-ai-card teonox-online-reveal">
         <div class="tl-landing-page-ai-card-img">
-          <img src="assets/images/ai-learning/Strategy.webp" alt="Strategy">
+          <img src="/online-programme/images/ai-learning/Strategy.webp" alt="Strategy">
         </div>
         <div class="tl-landing-page-ai-card-body">
           <h4>Strategy</h4>
@@ -435,7 +435,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-ai-card teonox-online-reveal">
         <div class="tl-landing-page-ai-card-img">
-          <img src="assets/images/ai-learning/Content.webp" alt="Content">
+          <img src="/online-programme/images/ai-learning/Content.webp" alt="Content">
         </div>
         <div class="tl-landing-page-ai-card-body">
           <h4>Content</h4>
@@ -444,7 +444,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-ai-card teonox-online-reveal">
         <div class="tl-landing-page-ai-card-img">
-          <img src="assets/images/ai-learning/Analytics.webp" alt="Analytics">
+          <img src="/online-programme/images/ai-learning/Analytics.webp" alt="Analytics">
         </div>
         <div class="tl-landing-page-ai-card-body">
           <h4>Analytics</h4>
@@ -453,7 +453,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-ai-card teonox-online-reveal">
         <div class="tl-landing-page-ai-card-img">
-          <img src="assets/images/ai-learning/Automation.webp" alt="Automation">
+          <img src="/online-programme/images/ai-learning/Automation.webp" alt="Automation">
         </div>
         <div class="tl-landing-page-ai-card-body">
           <h4>Automation</h4>
@@ -735,40 +735,40 @@ export const rawHtmlBody = `<!-- Hero -->
       <div class="tl-landing-page-slider-viewport" id="teonox-online-gallerySlider">
         <div class="tl-landing-page-slider-track">
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05960-BtjqLRMj.webp" alt="TEONOX Classroom" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05960-BtjqLRMj.webp" alt="TEONOX Classroom" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05964-B06h5BD2.webp" alt="TEONOX Session" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05964-B06h5BD2.webp" alt="TEONOX Session" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05970-BhyL-rZK.webp" alt="TEONOX Mentoring" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05970-BhyL-rZK.webp" alt="TEONOX Mentoring" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05973-ei-49GfA.webp" alt="TEONOX Learning" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05973-ei-49GfA.webp" alt="TEONOX Learning" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05977-DpdHS_-Y.webp" alt="TEONOX Community" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05977-DpdHS_-Y.webp" alt="TEONOX Community" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05981-CUnU8UMJ.webp" alt="TEONOX Office" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05981-CUnU8UMJ.webp" alt="TEONOX Office" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05960-BtjqLRMj.webp" alt="TEONOX Classroom" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05960-BtjqLRMj.webp" alt="TEONOX Classroom" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05964-B06h5BD2.webp" alt="TEONOX Session" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05964-B06h5BD2.webp" alt="TEONOX Session" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05970-BhyL-rZK.webp" alt="TEONOX Mentoring" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05970-BhyL-rZK.webp" alt="TEONOX Mentoring" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05973-ei-49GfA.webp" alt="TEONOX Learning" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05973-ei-49GfA.webp" alt="TEONOX Learning" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05977-DpdHS_-Y.webp" alt="TEONOX Community" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05977-DpdHS_-Y.webp" alt="TEONOX Community" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:280px;max-width:280px;">
-            <img src="assets/images/gallery/svl05981-CUnU8UMJ.webp" alt="TEONOX Office" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
+            <img src="/online-programme/images/gallery/svl05981-CUnU8UMJ.webp" alt="TEONOX Office" style="width:100%;border-radius:12px;aspect-ratio:4/3;object-fit:cover;">
           </div>
         </div>
       </div>
@@ -787,56 +787,56 @@ export const rawHtmlBody = `<!-- Hero -->
     </div>
     <div class="tl-landing-page-whatyouget-grid">
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/Business-AI-+-Digital-Marketing.webp" alt="Business AI + Digital Marketing" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/Business-AI-+-Digital-Marketing.webp" alt="Business AI + Digital Marketing" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>Business AI + Digital Marketing</h4>
           <p>Complete programme access</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/TEONOX-Certificate.webp" alt="Certificate" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/TEONOX-Certificate.webp" alt="Certificate" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>TEONOX Certificate</h4>
           <p>Verified completion certificate</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/Portfolio-Projects.webp" alt="Portfolio" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/Portfolio-Projects.webp" alt="Portfolio" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>Portfolio Projects</h4>
           <p>5 real project outputs</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/Career-Direction.webp" alt="Career Direction" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/Career-Direction.webp" alt="Career Direction" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>Career Direction</h4>
           <p>Personalised career roadmap</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/30-Day-Creator-Guide.webp" alt="Creator Guide" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/30-Day-Creator-Guide.webp" alt="Creator Guide" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>30-Day Creator Guide</h4>
           <p>Launch your content journey</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/Growth-Strategy.webp" alt="Growth Strategy" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/Growth-Strategy.webp" alt="Growth Strategy" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>Growth Strategy</h4>
           <p>Business growth frameworks</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/Reel-Competition.webp" alt="Reel Competition" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/Reel-Competition.webp" alt="Reel Competition" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>Reel Competition</h4>
           <p>Creative content challenges</p>
         </div>
       </div>
       <div class="tl-landing-page-whatyouget-card teonox-online-reveal">
-        <img src="assets/images/what-you-get/Surprise-Gift.webp" alt="Surprise Gift" class="tl-landing-page-whatyouget-card-img">
+        <img src="/online-programme/images/what-you-get/Surprise-Gift.webp" alt="Surprise Gift" class="tl-landing-page-whatyouget-card-img">
         <div class="tl-landing-page-whatyouget-card-body">
           <h4>Surprise Gift</h4>
           <p>Special welcome kit</p>
@@ -895,7 +895,7 @@ export const rawHtmlBody = `<!-- Hero -->
     <div class="tl-landing-page-faculty-grid">
       <div class="tl-landing-page-faculty-card teonox-online-reveal">
         <div class="tl-landing-page-faculty-photo">
-          <img src="assets/images/mentors/hitesh.jpg" alt="Amit Manglani">
+          <img src="/online-programme/images/mentors/hitesh.jpg" alt="Amit Manglani">
         </div>
         <div class="tl-landing-page-faculty-info">
           <h3>Amit Manglani</h3>
@@ -910,7 +910,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-faculty-card teonox-online-reveal">
         <div class="tl-landing-page-faculty-photo">
-          <img src="assets/images/mentors/ayush.jpg" alt="Hitesh Chhtralia">
+          <img src="/online-programme/images/mentors/ayush.jpg" alt="Hitesh Chhtralia">
         </div>
         <div class="tl-landing-page-faculty-info">
           <h3>Hitesh Chhtralia</h3>
@@ -925,7 +925,7 @@ export const rawHtmlBody = `<!-- Hero -->
       </div>
       <div class="tl-landing-page-faculty-card teonox-online-reveal">
         <div class="tl-landing-page-faculty-photo">
-          <img src="assets/images/testimonials/priya-sharma.webp" alt="Ayush Tandon">
+          <img src="/online-programme/images/testimonials/priya-sharma.webp" alt="Ayush Tandon">
         </div>
         <div class="tl-landing-page-faculty-info">
           <h3>Ayush Tandon</h3>
@@ -963,7 +963,7 @@ export const rawHtmlBody = `<!-- Hero -->
                 </div>
                 <p class="tl-landing-page-proof-text">"This workshop completely changed how I think about marketing. The AI tools we learned are game-changers!"</p>
                 <div class="tl-landing-page-proof-author">
-                  <div class="tl-landing-page-proof-avatar"><img src="assets/images/testimonials/rahul-kumar.jpg" alt="Priya Sharma"></div>
+                  <div class="tl-landing-page-proof-avatar"><img src="/online-programme/images/testimonials/rahul-kumar.jpg" alt="Priya Sharma"></div>
                   <div>
                     <div class="tl-landing-page-proof-name">Priya Sharma</div>
                     <div class="tl-landing-page-proof-meta">Delhi University</div>
@@ -978,7 +978,7 @@ export const rawHtmlBody = `<!-- Hero -->
                 </div>
                 <p class="tl-landing-page-proof-text">"The Reel Competition was so much fun! I never thought I could create something like that in just a few hours."</p>
                 <div class="tl-landing-page-proof-author">
-                  <div class="tl-landing-page-proof-avatar"><img src="assets/images/testimonials/ananya-patel.webp" alt="Rahul Kumar"></div>
+                  <div class="tl-landing-page-proof-avatar"><img src="/online-programme/images/testimonials/ananya-patel.webp" alt="Rahul Kumar"></div>
                   <div>
                     <div class="tl-landing-page-proof-name">Rahul Kumar</div>
                     <div class="tl-landing-page-proof-meta">Mumbai University</div>
@@ -993,7 +993,7 @@ export const rawHtmlBody = `<!-- Hero -->
                 </div>
                 <p class="tl-landing-page-proof-text">"I came in confused about my career. I left with clarity and a portfolio project I'm actually proud of."</p>
                 <div class="tl-landing-page-proof-author">
-                  <div class="tl-landing-page-proof-avatar"><img src="assets/images/testimonials/priya-sharma-2.webp" alt="Ananya Patel"></div>
+                  <div class="tl-landing-page-proof-avatar"><img src="/online-programme/images/testimonials/priya-sharma-2.webp" alt="Ananya Patel"></div>
                   <div>
                     <div class="tl-landing-page-proof-name">Ananya Patel</div>
                     <div class="tl-landing-page-proof-meta">Bangalore Institute</div>
@@ -1008,7 +1008,7 @@ export const rawHtmlBody = `<!-- Hero -->
                 </div>
                 <p class="tl-landing-page-proof-text">"This workshop completely changed how I think about marketing. The AI tools we learned are game-changers!"</p>
                 <div class="tl-landing-page-proof-author">
-                  <div class="tl-landing-page-proof-avatar"><img src="assets/images/testimonials/rahul-kumar-2.jpg" alt="Priya Sharma"></div>
+                  <div class="tl-landing-page-proof-avatar"><img src="/online-programme/images/testimonials/rahul-kumar-2.jpg" alt="Priya Sharma"></div>
                   <div>
                     <div class="tl-landing-page-proof-name">Priya Sharma</div>
                     <div class="tl-landing-page-proof-meta">Delhi University</div>
@@ -1023,7 +1023,7 @@ export const rawHtmlBody = `<!-- Hero -->
                 </div>
                 <p class="tl-landing-page-proof-text">"The Reel Competition was so much fun! I never thought I could create something like that in just a few hours."</p>
                 <div class="tl-landing-page-proof-author">
-                  <div class="tl-landing-page-proof-avatar"><img src="assets/images/testimonials/ananya-patel-2.webp" alt="Rahul Kumar"></div>
+                  <div class="tl-landing-page-proof-avatar"><img src="/online-programme/images/testimonials/ananya-patel-2.webp" alt="Rahul Kumar"></div>
                   <div>
                     <div class="tl-landing-page-proof-name">Rahul Kumar</div>
                     <div class="tl-landing-page-proof-meta">Mumbai University</div>
@@ -1038,7 +1038,7 @@ export const rawHtmlBody = `<!-- Hero -->
                 </div>
                 <p class="tl-landing-page-proof-text">"I came in confused about my career. I left with clarity and a portfolio project I'm actually proud of."</p>
                 <div class="tl-landing-page-proof-author">
-                  <div class="tl-landing-page-proof-avatar"><img src="assets/images/footer-logo.png" alt="Ananya Patel"></div>
+                  <div class="tl-landing-page-proof-avatar"><img src="/online-programme/images/footer-logo.png" alt="Ananya Patel"></div>
                   <div>
                     <div class="tl-landing-page-proof-name">Ananya Patel</div>
                     <div class="tl-landing-page-proof-meta">Bangalore Institute</div>
@@ -1154,7 +1154,7 @@ export const rawHtmlBody = `<!-- Hero -->
     <button class="tl-landing-page-apply-modal-close" onclick="closeApplyModal()"><i class="fas fa-times"></i></button>
     <div class="tl-landing-page-apply-modal-grid">
       <div class="tl-landing-page-apply-modal-image">
-        <img src="assets/images/apply-modal.png" alt="Apply at TEONOX">
+        <img src="/online-programme/images/apply-modal.png" alt="Apply at TEONOX">
       </div>
       <div class="tl-landing-page-apply-modal-form">
         <div class="tl-landing-page-section-label">APPLY NOW</div>
