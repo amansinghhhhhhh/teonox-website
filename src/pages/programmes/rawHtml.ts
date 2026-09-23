@@ -483,7 +483,7 @@ export const rawHtmlBody = `<!-- Hero -->
         <div class="tl-landing-page-slider-track">
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-1.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-1.jpg"></video>
+              <video src="/online-programme/videos/video-1.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-1.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -496,7 +496,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-2.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-2.jpg"></video>
+              <video src="/online-programme/videos/video-2.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-2.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -509,7 +509,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-3.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-3.jpg"></video>
+              <video src="/online-programme/videos/video-3.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-3.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -522,7 +522,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-4.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-4.jpg"></video>
+              <video src="/online-programme/videos/video-4.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-4.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -535,7 +535,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-5.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-5.jpg"></video>
+              <video src="/online-programme/videos/video-5.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-5.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -548,7 +548,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-6.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-6.jpg"></video>
+              <video src="/online-programme/videos/video-6.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-6.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -561,7 +561,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-7.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-7.jpg"></video>
+              <video src="/online-programme/videos/video-7.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-7.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -574,7 +574,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-8.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-8.jpg"></video>
+              <video src="/online-programme/videos/video-8.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-8.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -587,7 +587,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-9.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-9.jpg"></video>
+              <video src="/online-programme/videos/video-9.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-9.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -600,7 +600,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-1.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-1.jpg"></video>
+              <video src="/online-programme/videos/video-1.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-1.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -613,7 +613,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-2.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-2.jpg"></video>
+              <video src="/online-programme/videos/video-2.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-2.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -626,7 +626,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-3.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-3.jpg"></video>
+              <video src="/online-programme/videos/video-3.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-3.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -639,7 +639,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-4.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-4.jpg"></video>
+              <video src="/online-programme/videos/video-4.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-4.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -652,7 +652,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-5.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-5.jpg"></video>
+              <video src="/online-programme/videos/video-5.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-5.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -665,7 +665,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-6.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-6.jpg"></video>
+              <video src="/online-programme/videos/video-6.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-6.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -678,7 +678,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-7.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-7.jpg"></video>
+              <video src="/online-programme/videos/video-7.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-7.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -691,7 +691,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-8.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-8.jpg"></video>
+              <video src="/online-programme/videos/video-8.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-8.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
@@ -704,7 +704,7 @@ export const rawHtmlBody = `<!-- Hero -->
           </div>
           <div class="tl-landing-page-slider-slide" style="min-width:200px;max-width:200px;">
             <div class="tl-landing-page-reel-card">
-              <video src="/online-programme/assets/videos/video-9.mp4" loop playsinline poster="/online-programme/assets/images/gallery/poster-video-9.jpg"></video>
+              <video src="/online-programme/videos/video-9.mp4" loop playsinline poster="/online-programme/images/gallery/poster-video-9.jpg"></video>
               <div class="tl-landing-page-reel-overlay" onclick="playReel(this)">
                 <i class="fas fa-play"></i>
               </div>
