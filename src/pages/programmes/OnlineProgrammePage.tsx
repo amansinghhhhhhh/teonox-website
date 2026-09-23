@@ -4,10 +4,24 @@ import '../../pages/programmes/online-programme.css';
 
 export function OnlineProgrammePage() {
   useEffect(() => {
+    (window as any).openApplyModal = () => {
+      const modal = document.querySelector('.teonox-online-apply-modal') || document.querySelector('.apply-modal');
+      if (modal) { modal.classList.add('active'); (modal as HTMLElement).style.display = 'flex'; }
+    };
+    (window as any).closeApplyModal = () => {
+      const modal = document.querySelector('.teonox-online-apply-modal') || document.querySelector('.apply-modal');
+      if (modal) { modal.classList.remove('active'); (modal as HTMLElement).style.display = 'none'; }
+    };
     (window as any).toggleFaq = (element: HTMLElement) => {
       const item = element.closest('.teonox-online-faq-item') || element.parentElement;
       if (item) item.classList.toggle('active');
     };
+    const handleWindowClick = (e: MouseEvent) => {
+      const modal = document.querySelector('.teonox-online-apply-modal');
+      if (modal && e.target === modal) (window as any).closeApplyModal();
+    };
+    window.addEventListener('click', handleWindowClick);
+    return () => window.removeEventListener('click', handleWindowClick);
 
     const links = document.querySelectorAll('.tl-landing-page a[href^="#"]');
     links.forEach(link => {
