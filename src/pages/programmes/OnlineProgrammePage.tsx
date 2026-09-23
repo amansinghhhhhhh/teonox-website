@@ -1,3 +1,4 @@
+// Static online programme page - no WordPress fetch, fully self-contained
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Clock, Video, Laptop, Bot, Users, ArrowRight, Phone,
