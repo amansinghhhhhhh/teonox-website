@@ -11,6 +11,7 @@ import { submitForm } from '../../services/formService';
 import { SEO } from '../../components/SEO';
 import { BreadcrumbSchema } from '../../components/schema/BreadcrumbSchema';
 import '../../pages/programmes/online-programme.css';
+import { rawHtmlBody } from './rawHtml';
 
 interface OnlineProgrammePageProps {
   onBack?: () => void;
