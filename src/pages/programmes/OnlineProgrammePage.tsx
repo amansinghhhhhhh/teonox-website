@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { rawHtmlBody } from './rawHtml';
+import '../../index.css';
 import '../../pages/programmes/online-programme.css';
 
 export function OnlineProgrammePage() {
