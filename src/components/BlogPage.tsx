@@ -168,8 +168,8 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
   return (
     <div className="bg-white text-[#111111] pt-20 sm:pt-24 pb-0 min-h-screen overflow-x-hidden">
       <SEO
-        title="Blog & Insights | TEONOX"
-        description="Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX — Gen AI School of Marketing & Business in Pune."
+        title="School of Digital Marketing Pune | Courses Near You"
+        description="Looking for a digital marketing course institute near you? Learn SEO, Google Ads, social media, analytics and AI marketing with practical training in Pune."
         canonical="/blog"
         jsonLd={{
           '@context': 'https://schema.org',
