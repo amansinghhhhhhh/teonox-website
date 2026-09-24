@@ -1132,3 +1132,10 @@ footer h4 { color: #FFFFFF !important; }
 .tl-landing-page .teonox-online-apply-modal-image img {
   background: #000000;
 }
+
+/* Mobile Hero Padding */
+@media (max-width: 768px) {
+  .tl-landing-page .teonox-online-hero {
+    padding: 90px 0;
+  }
+}

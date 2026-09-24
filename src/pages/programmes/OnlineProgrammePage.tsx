@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
+import { validateEmail, validatePhone, validateRequired } from '../../utils/validation';
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
 import '../../pages/programmes/online-programme.css';
@@ -115,9 +116,9 @@ export function OnlineProgrammePage() {
 
       removeError(form);
 
-      if (!fullName) { injectError(form, 'Please enter your full name.'); return; }
-      if (!phone || phone.replace(/[^0-9]/g, '').length < 10) { injectError(form, 'Please enter a valid 10-digit phone number.'); return; }
-      if (!email || !email.includes('@')) { injectError(form, 'Please enter a valid email address.'); return; }
+      if (!validateRequired(fullName)) { injectError(form, 'Full Name is required.'); return; }
+      if (!validateRequired(email) || !validateEmail(email)) { injectError(form, 'Please enter a valid email address.'); return; }
+      if (!validateRequired(phone) || !validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit Indian phone number.'); return; }
 
       showSubmitting(form);
 
