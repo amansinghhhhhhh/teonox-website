@@ -5,6 +5,15 @@ import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
 import '../../pages/programmes/online-programme.css';
 
+function navigateTo(path: string) {
+  if (path.startsWith('#')) {
+    const el = document.querySelector(path);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.location.href = path;
+  }
+}
+
 export function OnlineProgrammePage() {
   useEffect(() => {
     // --- Global Window Handlers ---
@@ -82,14 +91,15 @@ export function OnlineProgrammePage() {
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.teonox-online-reveal').forEach(el => observer.observe(el));
 
-    // --- Smooth Scroll ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // --- Smooth Scroll: ONLY intercept # hash links inside .tl-landing-page ---
+    document.querySelectorAll('.tl-landing-page a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e: Event) {
-        const href = (this as HTMLAnchorElement).getAttribute('href');
-        if (href === '#' || !href) return;
+        const target = e.target as HTMLElement;
+        const href = target.getAttribute('href');
+        if (href === '#' || !href || !href.startsWith('#')) return;
         e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
@@ -170,7 +180,7 @@ export function OnlineProgrammePage() {
 
   return (
     <>
-      <Navbar onEnquireClick={() => {}} activeSection="programmes" onNavigate={() => {}} />
+      <Navbar onEnquireClick={() => {}} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
       <div className="tl-landing-page">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1123,3 +1123,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .tl-landing-page .teonox-online-proof-section { display: none; }
 .tl-landing-page .teonox-online-masterclass-section { display: none; }
+/* Footer Text Visibility */
+footer h3, footer h4, footer p, footer span, footer a, footer li, footer nav a {
+  color: #FFFFFF !important;
+  font-weight: 600;
+}
+footer a:hover {
+  color: #FF6A2B !important;
+}
