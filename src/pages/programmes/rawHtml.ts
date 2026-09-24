@@ -727,8 +727,8 @@ export const rawHtmlBody = `<!-- Hero -->
   <div class="teonox-online-container">
     <div style="text-align:center;">
       <div class="teonox-online-section-label" style="justify-content:center;">LIFE AT TEONOX</div>
-      <h2 class="teonox-online-section-title">Experience the TEONOX Environment</h2>
-      <p class="teonox-online-section-subtitle" style="margin:0 auto;">Work. Learn. Grow. Repeat. A glimpse into our world — real sessions, real energy, real growth.</p>
+      <h2 class="teonox-online-section-title">A Glimpse Into <span style="color:var(--orange)">Our World</span></h2>
+      <p class="teonox-online-section-subtitle" style="margin:0 auto;">From classrooms to real-world projects — see what makes TEONOX different.</p>
     </div>
     <div class="teonox-online-slider-wrap" style="margin-top:40px;">
       <button class="teonox-online-slider-btn teonox-online-slider-btn-left" onclick="slideScroll('teonox-online-gallerySlider',-1)"><i class="fas fa-chevron-left"></i></button>
