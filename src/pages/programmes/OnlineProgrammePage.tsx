@@ -21,7 +21,7 @@ function getField(form: HTMLFormElement, selector: string): string {
   return el?.value?.trim() || '';
 }
 
-function injectError(form: HTMLFormElement, message: string): void {
+function injectError(form: HTMLFormElement, message: string, selector?: string): void {
   const existing = form.querySelector('.teonox-online-form-error');
   if (existing) existing.remove();
   const div = document.createElement('div');
@@ -33,6 +33,10 @@ function injectError(form: HTMLFormElement, message: string): void {
     btn.parentNode?.insertBefore(div, btn);
   } else {
     form.appendChild(div);
+  }
+  if (selector) {
+    const el = form.querySelector(selector) as HTMLElement | null;
+    if (el) el.focus();
   }
 }
 
@@ -116,9 +120,9 @@ export function OnlineProgrammePage() {
 
       removeError(form);
 
-      if (!validateRequired(fullName)) { injectError(form, 'Full Name is required.'); return; }
-      if (!validateRequired(email) || !validateEmail(email)) { injectError(form, 'Please enter a valid email address.'); return; }
-      if (!validateRequired(phone) || !validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit Indian phone number.'); return; }
+      if (!validateRequired(fullName)) { injectError(form, 'Full Name is required.', 'input[type="text"]'); return; }
+      if (!validateRequired(email) || !validateEmail(email)) { injectError(form, 'Please enter a valid email address containing \'@\'.', 'input[type="email"]'); return; }
+      if (!validateRequired(phone) || !validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit phone number.', 'input[type="tel"]'); return; }
 
       showSubmitting(form);
 

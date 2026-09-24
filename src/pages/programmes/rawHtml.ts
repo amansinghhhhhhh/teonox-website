@@ -1168,7 +1168,7 @@ export const rawHtmlBody = `<!-- Hero -->
             </div>
             <div class="teonox-online-form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="Enter your phone number" required>
+              <input type="tel" placeholder="Enter your phone number" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
             </div>
           </div>
           <div class="teonox-online-form-group">
