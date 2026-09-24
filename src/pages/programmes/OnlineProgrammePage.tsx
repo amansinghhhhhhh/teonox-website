@@ -21,6 +21,11 @@ function getField(form: HTMLFormElement, selector: string): string {
   return el?.value?.trim() || '';
 }
 
+function removeError(form: HTMLFormElement): void {
+  const existing = form.querySelector('.teonox-online-form-error');
+  if (existing) existing.remove();
+}
+
 function injectError(form: HTMLFormElement, message: string, selector?: string): void {
   const existing = form.querySelector('.teonox-online-form-error');
   if (existing) existing.remove();
@@ -40,8 +45,18 @@ function injectError(form: HTMLFormElement, message: string, selector?: string):
   }
 }
 
-function removeError(form: HTMLFormElement): void {
-  const existing = form.querySelector('.teonox-online-form-error');
+function injectRealtimeError(input: HTMLInputElement, form: HTMLFormElement, message: string, key: string): void {
+  const existing = form.querySelector(`.teonox-online-rt-${key}`);
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = `teonox-online-rt-${key}`;
+  div.style.cssText = 'color:#e74c3c;font-size:13px;margin-top:4px;font-family:Inter,sans-serif;';
+  div.textContent = message;
+  input.parentNode?.insertBefore(div, input.nextSibling);
+}
+
+function clearRealtimeError(input: HTMLInputElement, form: HTMLFormElement, key: string): void {
+  const existing = form.querySelector(`.teonox-online-rt-${key}`);
   if (existing) existing.remove();
 }
 
@@ -124,6 +139,15 @@ export function OnlineProgrammePage() {
       if (!validateRequired(email) || !validateEmail(email)) { injectError(form, 'Please enter a valid email address containing \'@\'.', 'input[type="email"]'); return; }
       if (!validateRequired(phone) || !validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit phone number.', 'input[type="tel"]'); return; }
 
+      // Block submission if real-time validation errors exist
+      const hasPhoneError = form.querySelector('.teonox-online-rt-phone');
+      const hasEmailError = form.querySelector('.teonox-online-rt-email');
+      if (hasPhoneError || hasEmailError) {
+        if (hasPhoneError) { (hasPhoneError.previousElementSibling as HTMLElement)?.focus(); }
+        else if (hasEmailError) { (hasEmailError.previousElementSibling as HTMLElement)?.focus(); }
+        return;
+      }
+
       showSubmitting(form);
 
       const fields: Record<string, string> = {
@@ -152,6 +176,52 @@ export function OnlineProgrammePage() {
         injectError(form, 'Something went wrong. Please try again.');
       }
     };
+    // --- Real-time Input Validation Listeners ---
+    const form = document.querySelector('form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
+    if (form) {
+      const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
+      const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement | null;
+
+      if (phoneInput) {
+        phoneInput.addEventListener('input', () => {
+          phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+          const phone = phoneInput.value.trim();
+          if (phone && (!validatePhone(phone))) {
+            injectRealtimeError(phoneInput, form, "Must be a valid 10-digit number starting with 6-9.", 'phone');
+          } else {
+            clearRealtimeError(phoneInput, form, 'phone');
+          }
+        });
+        phoneInput.addEventListener('blur', () => {
+          const phone = phoneInput.value.trim();
+          if (phone && (!validatePhone(phone))) {
+            injectRealtimeError(phoneInput, form, "Must be a valid 10-digit number starting with 6-9.", 'phone');
+          } else {
+            clearRealtimeError(phoneInput, form, 'phone');
+          }
+        });
+      }
+
+      if (emailInput) {
+        emailInput.addEventListener('input', () => {
+          const email = emailInput.value.trim();
+          if (email && (!validateEmail(email))) {
+            injectRealtimeError(emailInput, form, "Please enter a valid email address with '@' and domain.", 'email');
+          } else {
+            clearRealtimeError(emailInput, form, 'email');
+          }
+        });
+        emailInput.addEventListener('blur', () => {
+          const email = emailInput.value.trim();
+          if (email && (!validateEmail(email))) {
+            injectRealtimeError(emailInput, form, "Please enter a valid email address with '@' and domain.", 'email');
+          } else {
+            clearRealtimeError(emailInput, form, 'email');
+          }
+        });
+      }
+    }
+
     (window as any).playReel = (overlay: HTMLElement) => {
       const card = overlay.closest('.teonox-online-reel-card');
       const video = card?.querySelector('video') as HTMLVideoElement | null;
