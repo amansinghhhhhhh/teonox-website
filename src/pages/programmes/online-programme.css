@@ -1123,3 +1123,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .tl-landing-page .teonox-online-proof-section { display: none; }
 .tl-landing-page .teonox-online-masterclass-section { display: none; }
+
+/* Footer Header Colors */
+footer h5 { color: #9e9082 !important; }
+footer h4 { color: #FFFFFF !important; }
+
+/* Apply Modal Image Background */
+.tl-landing-page .teonox-online-apply-modal-image img {
+  background: #000000;
+}

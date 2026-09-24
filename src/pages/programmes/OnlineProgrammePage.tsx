@@ -42,8 +42,24 @@ export function OnlineProgrammePage() {
     };
     (window as any).submitForm = (e: Event) => {
       e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const fullName = formData.get('') || form.querySelector('input[type="text"]')?.value || '';
+      const phone = formData.get('') || form.querySelector('input[type="tel"]')?.value || '';
+      const email = formData.get('') || form.querySelector('input[type="email"]')?.value || '';
+      const profile = formData.get('') || form.querySelector('select')?.value || '';
+      const batch = form.querySelectorAll('select')[1]?.value || '';
+      if (!fullName || !phone || !email) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      const payload = { fullName, phone, email, profile, preferredBatchTiming: batch };
+      console.log('Application submitted:', payload);
+      try {
+        fetch('/api/apply', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
+      } catch {}
+      form.reset();
       alert('Thank you! Your application has been submitted. Our team will contact you soon.');
-      (e.target as HTMLFormElement).reset();
     };
     (window as any).playReel = (overlay: HTMLElement) => {
       const card = overlay.closest('.teonox-online-reel-card');
