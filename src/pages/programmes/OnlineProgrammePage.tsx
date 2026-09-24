@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
+import { submitForm as submitLeadForm } from '../../services/formService';
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
 import '../../pages/programmes/online-programme.css';
@@ -12,6 +13,69 @@ function navigateTo(path: string) {
   } else {
     window.location.href = path;
   }
+}
+
+function getField(form: HTMLFormElement, selector: string): string {
+  const el = form.querySelector(selector) as HTMLInputElement | HTMLSelectElement | null;
+  return el?.value?.trim() || '';
+}
+
+function injectError(form: HTMLFormElement, message: string): void {
+  const existing = form.querySelector('.teonox-online-form-error');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = 'teonox-online-form-error';
+  div.style.cssText = 'color:#e74c3c;font-size:13px;margin-bottom:8px;font-family:Inter,sans-serif;';
+  div.textContent = message;
+  const btn = form.querySelector('button[type="submit"]');
+  if (btn) {
+    btn.parentNode?.insertBefore(div, btn);
+  } else {
+    form.appendChild(div);
+  }
+}
+
+function removeError(form: HTMLFormElement): void {
+  const existing = form.querySelector('.teonox-online-form-error');
+  if (existing) existing.remove();
+}
+
+function showSubmitting(form: HTMLFormElement): void {
+  const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+  if (btn) {
+    btn.disabled = true;
+    btn.dataset.originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+  }
+}
+
+function resetSubmit(form: HTMLFormElement, success: boolean): void {
+  const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = btn.dataset.originalText || '<i class="fas fa-paper-plane"></i> Submit Application';
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = '';
+  }
+}
+
+function showSuccessMessage(form: HTMLFormElement): void {
+  const formContainer = form.closest('.teonox-online-apply-modal-form');
+  if (!formContainer) return;
+  formContainer.innerHTML = `
+    <div style="text-align:center;padding:40px 20px;">
+      <div style="width:80px;height:80px;border-radius:50%;background:#FF8A50;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+        <i class="fas fa-check" style="font-size:36px;color:#FFFFFF;"></i>
+      </div>
+      <h3 style="font-family:Sora,sans-serif;font-size:24px;font-weight:800;color:#EDE4DB;margin-bottom:12px;">Application Received!</h3>
+      <p style="font-family:Inter,sans-serif;font-size:15px;color:#9E9082;line-height:1.6;margin-bottom:24px;">Thank you for your interest. Our team will reach out to you within 24 hours with the perfect batch timing.</p>
+      <button type="button" class="teonox-online-btn teonox-online-btn-primary" style="padding:14px 32px;font-size:15px;cursor:pointer;" onclick="closeApplyModal()">
+        <i class="fas fa-arrow-right"></i> Close
+      </button>
+    </div>
+  `;
 }
 
 export function OnlineProgrammePage() {
@@ -40,26 +104,48 @@ export function OnlineProgrammePage() {
         answer.style.maxHeight = answer.scrollHeight + 'px';
       }
     };
-    (window as any).submitForm = (e: Event) => {
+    (window as any).submitForm = async (e: Event) => {
       e.preventDefault();
       const form = e.target as HTMLFormElement;
-      const formData = new FormData(form);
-      const fullName = formData.get('') || form.querySelector('input[type="text"]')?.value || '';
-      const phone = formData.get('') || form.querySelector('input[type="tel"]')?.value || '';
-      const email = formData.get('') || form.querySelector('input[type="email"]')?.value || '';
-      const profile = formData.get('') || form.querySelector('select')?.value || '';
-      const batch = form.querySelectorAll('select')[1]?.value || '';
-      if (!fullName || !phone || !email) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-      const payload = { fullName, phone, email, profile, preferredBatchTiming: batch };
-      console.log('Application submitted:', payload);
+      const fullName = getField(form, 'input[type="text"]');
+      const phone = getField(form, 'input[type="tel"]');
+      const email = getField(form, 'input[type="email"]');
+      const profile = getField(form, 'select');
+      const batchTiming = form.querySelectorAll('select')[1]?.value?.trim() || '';
+
+      removeError(form);
+
+      if (!fullName) { injectError(form, 'Please enter your full name.'); return; }
+      if (!phone || phone.replace(/[^0-9]/g, '').length < 10) { injectError(form, 'Please enter a valid 10-digit phone number.'); return; }
+      if (!email || !email.includes('@')) { injectError(form, 'Please enter a valid email address.'); return; }
+
+      showSubmitting(form);
+
+      const fields: Record<string, string> = {
+        'Full Name': fullName,
+        'Email Address': email,
+        'Phone Number': phone,
+        'Profile': profile,
+        'Preferred Batch Timing': batchTiming,
+        fullName,
+        name: fullName,
+        email,
+        phone,
+        profile,
+        batchTiming,
+        preferredBatch: batchTiming,
+        source: 'build-digital-marketing-skills-with-ai-landing-page',
+      };
+
       try {
-        fetch('/api/apply', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
-      } catch {}
-      form.reset();
-      alert('Thank you! Your application has been submitted. Our team will contact you soon.');
+        await submitLeadForm('Online Programme Apply', fields);
+        form.reset();
+        resetSubmit(form, true);
+        showSuccessMessage(form);
+      } catch {
+        resetSubmit(form, false);
+        injectError(form, 'Something went wrong. Please try again.');
+      }
     };
     (window as any).playReel = (overlay: HTMLElement) => {
       const card = overlay.closest('.teonox-online-reel-card');
