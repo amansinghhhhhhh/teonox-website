@@ -180,7 +180,7 @@ export function OnlineProgrammePage() {
 
   return (
     <>
-      <Navbar onEnquireClick={() => {}} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
+      <Navbar onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
       <div className="tl-landing-page">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
