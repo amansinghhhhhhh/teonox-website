@@ -34,9 +34,9 @@
   --radius-full: 9999px;
   --transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
 }
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+.tl-landing-page *, .tl-landing-page *::before, .tl-landing-page *::after{ margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-body {
+.tl-landing-page body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--white);
   color: var(--text-primary);
@@ -50,8 +50,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   line-height: 1.2;
 }
-img { max-width: 100%; height: auto; display: block; }
-a { text-decoration: none; color: inherit; }
+.tl-landing-page img { max-width: 100%; height: auto; display: block; }
+.tl-landing-page a { text-decoration: none; color: inherit; }
 .tl-landing-page .teonox-online-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .tl-landing-page .teonox-online-section-padding { padding: 80px 0; }
 .tl-landing-page .teonox-online-section-label {
