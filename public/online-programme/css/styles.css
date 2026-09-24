@@ -95,7 +95,7 @@ a { text-decoration: none; color: inherit; }
 /* Hero */
 .tl-landing-page .teonox-online-hero {
   padding: 140px 0 80px;
-  background: url('/online-programme/images/hero-bg.jpg') center/cover no-repeat;
+  background: url('../assets/images/hero-bg.jpg') center/cover no-repeat;
   position: relative; overflow: hidden;
   min-height: 550px;
 }
@@ -682,14 +682,14 @@ a { text-decoration: none; color: inherit; }
   display: block; font-size: 13px; font-weight: 600;
   color: var(--text-primary); margin-bottom: 6px;
 }
-.teonox-online-apply-form input,
+.tl-landing-page .teonox-online-apply-form input,
 .tl-landing-page .teonox-online-apply-form select {
   width: 100%; padding: 12px 14px; border: 1px solid var(--orange-border);
   border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif;
   color: var(--text-primary); background: var(--white);
   transition: var(--transition); outline: none;
 }
-.teonox-online-apply-form input:focus,
+.tl-landing-page .teonox-online-apply-form input:focus,
 .tl-landing-page .teonox-online-apply-form select:focus {
   border-color: var(--orange);
   box-shadow: 0 0 0 3px rgba(255,106,43,0.1);
@@ -846,7 +846,9 @@ a { text-decoration: none; color: inherit; }
   .tl-landing-page .teonox-online-masterclass-inner { grid-template-columns: 1fr; }
   .tl-landing-page .teonox-online-proof-grid { grid-template-columns: repeat(2, 1fr); }
   .tl-landing-page .teonox-online-nav.scrolled { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--orange-border); padding: 20px 24px; box-shadow: var(--shadow-lg); }
-  .tl-landing-page .teonox-online-nav a { display: block; padding: 12px 0; font-size: 15px; font-weight: 500; color: var(--text-secondary); border-bottom: 1px solid var(--orange-border); }
+  .tl-landing-page .teonox-online-nav a { display: block; padding: 12px 0; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); border-bottom: 1px solid var(--orange-border);
+  }
 }
 @media (max-width: 768px) {
   .tl-landing-page .teonox-online-section-padding { padding: 56px 0; }
@@ -860,7 +862,7 @@ a { text-decoration: none; color: inherit; }
   .tl-landing-page .teonox-online-proof-grid { grid-template-columns: 1fr; }
   .tl-landing-page .teonox-online-faculty-grid { grid-template-columns: 1fr; }
   .tl-landing-page .teonox-online-hero h1 { font-size: 30px; }
-  .tl-landing-page .teonox-online-hero { padding: 50px 0; min-height: 550px; background: url('/online-programme/images/mobile-banner.webp') center/cover no-repeat; }
+  .tl-landing-page .teonox-online-hero { padding: 50px 0; min-height: 550px; background: url('../assets/images/mobile-banner.webp') center/cover no-repeat; }
   .tl-landing-page .teonox-online-hero::before { display: none; }
   .tl-landing-page .teonox-online-learning-flow { gap: 4px; }
   .tl-landing-page .teonox-online-learning-step { padding: 12px 10px; }
@@ -873,9 +875,9 @@ a { text-decoration: none; color: inherit; }
     border-top: 2px solid var(--orange);
   }
   .tl-landing-page .teonox-online-ai-grid { grid-template-columns: 1fr; margin-top: 0; }
-  .tl-landing-page .teonox-online-ai-card { display: grid; }
-  .tl-landing-page .teonox-online-ai-section .teonox-online-section-label { display: block; }
-  .tl-landing-page .teonox-online-ai-section .teonox-online-section-title { display: block; }
+  .tl-landing-page .teonox-online-ai-card { display: none; }
+  .tl-landing-page .teonox-online-ai-section .teonox-online-section-label { display: none; }
+  .tl-landing-page .teonox-online-ai-section .teonox-online-section-title { display: none; }
   .tl-landing-page .teonox-online-ai-bottom { margin-top: 0; padding: 32px 20px; }
   .tl-landing-page .teonox-online-ai-bottom .teonox-online-quote-text { font-size: 18px; }
   .tl-landing-page .teonox-online-ai-bottom .teonox-online-quote-mark { font-size: 50px; top: 5px; left: 10px; }
@@ -1102,14 +1104,14 @@ a { text-decoration: none; color: inherit; }
   display: block; font-size: 12px; font-weight: 600;
   color: var(--text-primary); margin-bottom: 5px;
 }
-.teonox-online-apply-modal-form input,
+.tl-landing-page .teonox-online-apply-modal-form input,
 .tl-landing-page .teonox-online-apply-modal-form select {
   width: 100%; padding: 11px 12px; border: 1px solid var(--orange-border);
   border-radius: 8px; font-size: 13px; font-family: 'Inter', sans-serif;
   color: var(--text-primary); background: var(--white);
   transition: var(--transition); outline: none;
 }
-.teonox-online-apply-modal-form input:focus,
+.tl-landing-page .teonox-online-apply-modal-form input:focus,
 .tl-landing-page .teonox-online-apply-modal-form select:focus {
   border-color: var(--orange);
   box-shadow: 0 0 0 3px rgba(255,106,43,0.1);
@@ -1121,27 +1123,3 @@ a { text-decoration: none; color: inherit; }
 }
 .tl-landing-page .teonox-online-proof-section { display: none; }
 .tl-landing-page .teonox-online-masterclass-section { display: none; }
-
-/* Timeline Visibility Overrides */
-.tl-landing-page .timeline-card,
-.tl-landing-page .curriculum-card,
-.tl-landing-page [data-aos] {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-  display: block !important;
-}
-
-/* Force Visibility Overrides */
-.tl-landing-page .teonox-online-reveal,
-.tl-landing-page .teonox-online-timeline-item,
-.tl-landing-page .teonox-online-timeline-content,
-.tl-landing-page .teonox-online-ai-card {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-  display: block !important;
-}
-.tl-landing-page .teonox-online-ai-grid {
-  display: grid !important;
-}
