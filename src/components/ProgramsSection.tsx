@@ -68,9 +68,34 @@ export function ProgramsSection({
     { id: 'social', name: 'Social Media', icon: Share2 },
   ];
 
+  // Homepage mirror of the /programmes ONLINE_PROGRAMME_CARD so the homepage
+  // grid matches the listing page. Categories include popular + genai so the
+  // card appears under "All Programmes" and "GEN AI & Marketing".
+  const ONLINE_PROGRAMME_CARD: LiveProgramCard = {
+    id: 'build-digital-marketing-skills-with-ai',
+    title: 'Business Digital Marketing + AI (Online)',
+    brandBadge: 'Online',
+    description: '6-month online digital marketing programme with AI integration, live instructor-led classes, and practical projects.',
+    durationText: '6 Months',
+    certText: 'Industry-recognised certification',
+    targetText: 'Online — 30-35 Students',
+    mode: 'Online',
+    brochureUrl: '',
+    categoryId: 'genai',
+    categorySlugs: ['ai', 'business', 'marketing'],
+    categoryIds: ['ai', 'business', 'marketing'],
+    categories: ['popular', 'genai'],
+    image: '/images/business-digital-marketing-ai-online.webp',
+  };
+
   // Strictly live V2 programs from WordPress � no static fallback cards. When the
   // CMS has no published V2 content yet, this renders the "coming soon" state.
-  const displayedPrograms: ProgramCardData[] = (liveCards ?? [])
+  // The Online programme card is always prepended (matching /programmes) unless
+  // the CMS already returns it.
+  const allCards: LiveProgramCard[] = (liveCards ?? []).find((p) => p.id === 'build-digital-marketing-skills-with-ai')
+    ? (liveCards ?? [])
+    : [ONLINE_PROGRAMME_CARD, ...(liveCards ?? [])];
+  const displayedPrograms: ProgramCardData[] = allCards
     .map((c) => ({
       id: c.id,
       categoryIds: c.categories,
@@ -97,7 +122,7 @@ export function ProgramsSection({
       durationLabel: 'Duration',
       eligibility: '12th Passed, Graduates & Working Professionals',
       eligibilityLabel: 'Eligibility',
-      mode: 'On Campus, Pune',
+      mode: prog.mode || 'On Campus, Pune',
       modeLabel: 'Mode',
       buttonText: 'View Programme',
       image: prog.image,
@@ -170,10 +195,17 @@ export function ProgramsSection({
                     />
                   </div>
 
-                  {/* Campus Tag */}
+                  {/* Campus Tag — green pulsing dot for Online, pin for on-campus */}
                   <div className="absolute top-3.5 right-3.5 z-20">
-                    <span className="font-mono text-[10.5px] font-[700] px-2.5 py-1 rounded-full bg-[#111111]/90 text-white backdrop-blur-md border border-white/20 flex items-center gap-1 shadow-2xs">
-                      <MapPin className="w-3 h-3 text-[#F15A29]" />
+                    <span className="font-mono text-[10.5px] font-[700] px-2.5 py-1 rounded-full bg-[#111111]/90 text-white backdrop-blur-md border border-white/20 flex items-center gap-1.5 shadow-2xs">
+                      {prog.mode?.toLowerCase().includes('online') ? (
+                        <span className="relative flex h-2 w-2 shrink-0">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                        </span>
+                      ) : (
+                        <MapPin className="w-3 h-3 text-[#F15A29]" />
+                      )}
                       <span>{prog.mode}</span>
                     </span>
                   </div>
