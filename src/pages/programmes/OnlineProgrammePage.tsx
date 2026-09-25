@@ -114,11 +114,21 @@ let otpResendTimer: number | null = null;
 
 function initOtpRecaptcha(): RecaptchaVerifier | null {
   if (otpRecaptcha) return otpRecaptcha;
+  // The host node is rendered statically in the modal (never conditional),
+  // so it is always available by mount time.
   if (!document.getElementById('recaptcha-container')) return null;
   try {
-    otpRecaptcha = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      size: 'invisible',
+    (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      'size': 'invisible',
+      'callback': (_response: unknown) => {
+        // reCAPTCHA solved - allow signInWithPhoneNumber
+      },
+      'expired-callback': () => {
+        // Response expired. Reset reCAPTCHA so the next attempt rebuilds it.
+        resetOtpRecaptcha();
+      },
     });
+    otpRecaptcha = (window as any).recaptchaVerifier as RecaptchaVerifier;
   } catch {
     otpRecaptcha = null;
   }
@@ -132,6 +142,40 @@ function resetOtpRecaptcha(): void {
     // Widget may already be cleared — safe to ignore.
   }
   otpRecaptcha = null;
+  try {
+    if ((window as any).recaptchaVerifier) (window as any).recaptchaVerifier = null;
+  } catch {
+    // Non-browser / restricted contexts — safe to ignore.
+  }
+}
+
+// Fallback: when Firebase rejects the invisible check
+// (auth/invalid-app-credential, auth/captcha-check-failed), render a standard
+// visible reCAPTCHA checkbox inside the phone error slot so the user can solve
+// it manually and retry Get OTP with the solved verifier.
+function renderVisibleRecaptchaFallback(): void {
+  const slot = document.getElementById('teonox-phone-error-slot');
+  if (!slot || document.getElementById('teonox-visible-recaptcha')) return;
+  resetOtpRecaptcha();
+  const wrap = document.createElement('div');
+  wrap.id = 'teonox-visible-recaptcha';
+  wrap.style.marginTop = '8px';
+  slot.appendChild(wrap);
+  try {
+    (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'teonox-visible-recaptcha', {
+      'size': 'normal',
+      'callback': (_response: unknown) => {
+        // reCAPTCHA solved - allow signInWithPhoneNumber
+      },
+      'expired-callback': () => {
+        // Response expired. Reset reCAPTCHA.
+        resetOtpRecaptcha();
+      },
+    });
+    otpRecaptcha = (window as any).recaptchaVerifier as RecaptchaVerifier;
+  } catch {
+    otpRecaptcha = null;
+  }
 }
 
 function stopOtpResendTimer(): void {
@@ -152,6 +196,8 @@ function friendlyOtpError(code?: string): string {
     case 'auth/captcha-check-failed':
     case 'auth/missing-client-identifiers':
       return 'Verification check failed. Please refresh the page and try again.';
+    case 'auth/invalid-app-credential':
+      return 'App verification failed. Please complete the reCAPTCHA below and tap Get OTP again.';
     case 'auth/code-expired':
       return 'This code has expired. Please tap Resend OTP for a new code.';
     case 'auth/invalid-verification-code':
@@ -373,9 +419,14 @@ export function OnlineProgrammePage() {
         showOtpBox();
         startOtpCooldown();
       } catch (err: unknown) {
-        const code = (err as { code?: string })?.code;
+        const code = (err as { code?: string; message?: string })?.code;
+        const message = (err as { code?: string; message?: string })?.message;
+        console.error('[OTP] signInWithPhoneNumber failed:', code, message);
         if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
           resetOtpRecaptcha();
+        }
+        if (code === 'auth/invalid-app-credential' || code === 'auth/captcha-check-failed') {
+          renderVisibleRecaptchaFallback();
         }
         setGetOtpBusy(false);
         showPhoneSlotError(friendlyOtpError(code));
@@ -406,7 +457,10 @@ export function OnlineProgrammePage() {
         hideOtpBox();
         showVerifiedBadge();
       } catch (err: unknown) {
-        showOtpInlineError(friendlyOtpError((err as { code?: string })?.code));
+        const code = (err as { code?: string; message?: string })?.code;
+        const message = (err as { code?: string; message?: string })?.message;
+        console.error('[OTP] confirmationResult.confirm failed:', code, message);
+        showOtpInlineError(friendlyOtpError(code));
       } finally {
         setVerifyBusy(false);
       }
@@ -442,9 +496,14 @@ export function OnlineProgrammePage() {
         otpConfirmation = await signInWithPhoneNumber(auth, '+91' + phone, verifier);
         startOtpCooldown();
       } catch (err: unknown) {
-        const code = (err as { code?: string })?.code;
+        const code = (err as { code?: string; message?: string })?.code;
+        const message = (err as { code?: string; message?: string })?.message;
+        console.error('[OTP] signInWithPhoneNumber (resend) failed:', code, message);
         if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
           resetOtpRecaptcha();
+        }
+        if (code === 'auth/invalid-app-credential' || code === 'auth/captcha-check-failed') {
+          renderVisibleRecaptchaFallback();
         }
         if (resendBtn) {
           resendBtn.disabled = false;
