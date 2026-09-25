@@ -292,7 +292,7 @@ function hideOtpBox(): void {
 
 function showVerifiedBadge(): void {
   const badge = document.getElementById('teonox-phone-verified') as HTMLElement | null;
-  if (badge) badge.style.display = 'flex';
+  if (badge) badge.style.display = 'block';
   const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
   if (btn) {
     btn.disabled = true;
@@ -456,6 +456,14 @@ export function OnlineProgrammePage() {
         stopOtpResendTimer();
         hideOtpBox();
         showVerifiedBadge();
+        // Re-arm the submit button in case the strict gate locked it earlier.
+        const applyForm = getApplyForm();
+        const submitBtn = applyForm?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.pointerEvents = '';
+        }
       } catch (err: unknown) {
         const code = (err as { code?: string; message?: string })?.code;
         const message = (err as { code?: string; message?: string })?.message;
@@ -464,14 +472,6 @@ export function OnlineProgrammePage() {
       } finally {
         setVerifyBusy(false);
       }
-    };
-    // "Edit" toggle on the verified badge: re-enable phone editing and force
-    // a fresh OTP cycle for the new number.
-    (window as any).editPhoneNumber = () => {
-      resetPhoneVerification();
-      clearPhoneSlotError();
-      const phoneInput = document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null;
-      phoneInput?.focus();
     };
     // Fresh SMS code for the currently typed phone number.
     (window as any).resendInlineOtp = async () => {
@@ -537,9 +537,17 @@ export function OnlineProgrammePage() {
         return;
       }
 
-      // Gate: phone must be OTP-verified (and verification must match the typed number).
-      if (!otpVerifiedPhone || otpVerifiedPhone !== phone) {
-        injectError(form, 'Please verify your phone number with the OTP first.', 'input[type="tel"]');
+      // Strict gate: the webhook is only ever called when otpVerifiedPhone
+      // explicitly matches the typed number. Otherwise intercept immediately —
+      // no fetch — lock the submit button and show the inline error.
+      if (otpVerifiedPhone === '' || otpVerifiedPhone !== phone) {
+        const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.5';
+          submitBtn.style.pointerEvents = 'none';
+        }
+        injectError(form, 'Please verify your phone number with OTP to submit.', 'input[type="tel"]');
         return;
       }
 
