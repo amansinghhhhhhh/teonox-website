@@ -1171,7 +1171,8 @@ export const rawHtmlBody = `<!-- Hero -->
                   <span style="flex-shrink:0;padding-left:12px;font-size:13px;font-weight:700;color:var(--text-secondary);font-family:Inter,sans-serif;">+91</span>
                   <input type="tel" placeholder="10-digit mobile number" required maxlength="10" style="flex:1;min-width:0;border:none;background:transparent;box-shadow:none;padding-left:8px;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
                 </div>
-                <button type="button" id="teonox-get-otp-btn" onclick="requestOtp()" disabled style="flex-shrink:0;white-space:nowrap;padding:11px 14px;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;border:1px solid var(--orange);background:var(--white);color:var(--orange);opacity:0.5;">
+                <!-- TEMPORARY: OTP flow disabled — Get OTP hidden, direct submission restored -->
+                <button type="button" id="teonox-get-otp-btn" onclick="requestOtp()" disabled style="display:none;flex-shrink:0;white-space:nowrap;padding:11px 14px;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;border:1px solid var(--orange);background:var(--white);color:var(--orange);opacity:0.5;">
                   <i class="fas fa-comment-sms"></i> Get OTP
                 </button>
               </div>

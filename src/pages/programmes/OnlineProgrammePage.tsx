@@ -537,19 +537,10 @@ export function OnlineProgrammePage() {
         return;
       }
 
-      // Strict gate: the webhook is only ever called when otpVerifiedPhone
-      // explicitly matches the typed number. Otherwise intercept immediately —
-      // no fetch — lock the submit button and show the inline error.
-      if (otpVerifiedPhone === '' || otpVerifiedPhone !== phone) {
-        const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.style.opacity = '0.5';
-          submitBtn.style.pointerEvents = 'none';
-        }
-        injectError(form, 'Please verify your phone number with OTP to submit.', 'input[type="tel"]');
-        return;
-      }
+      // TEMPORARY: OTP verification bypassed — submit directly on a valid
+      // 10-digit number. To re-enable, restore the otpVerifiedPhone strict
+      // gate here (lock submit + "Please verify your phone number with OTP
+      // to submit.") and unhide the Get OTP button in rawHtml.ts.
 
       showSubmitting(form);
 
@@ -567,8 +558,8 @@ export function OnlineProgrammePage() {
         batchTiming,
         preferredBatch: batchTiming,
         source: 'build-digital-marketing-skills-with-ai-landing-page',
-        otpVerified: 'true',
-        phoneVerified: 'true',
+        otpVerified: 'false',
+        phoneVerified: 'false',
       };
 
       try {
