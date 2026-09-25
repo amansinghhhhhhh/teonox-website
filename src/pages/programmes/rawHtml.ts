@@ -1153,15 +1153,13 @@ export const rawHtmlBody = `<!-- Hero -->
   <div class="teonox-online-apply-modal">
     <button class="teonox-online-apply-modal-close" onclick="closeApplyModal()"><i class="fas fa-times"></i></button>
     <div class="teonox-online-apply-modal-grid">
-      <div class="teonox-online-apply-modal-image">
-        <img src="/online-programme/images/apply-modal.png" alt="Apply at TEONOX">
-      </div>
       <div class="teonox-online-apply-modal-form">
+        <img src="/images/teonox-logo.svg" alt="TEONOX" style="height:30px;width:auto;margin-bottom:14px;">
         <div class="teonox-online-section-label">APPLY NOW</div>
         <h2 style="font-size:24px;font-weight:800;margin-bottom:6px;">Ready to <span style="color:var(--orange)">Get Started?</span></h2>
         <p style="color:var(--text-secondary);margin-bottom:24px;font-size:14px;">Fill in your details and our team will reach out within 24 hours.</p>
         <form onsubmit="submitForm(event)">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div style="display:grid;grid-template-columns:1fr;gap:0;">
             <div class="teonox-online-form-group">
               <label>Full Name</label>
               <input type="text" placeholder="Enter your full name" required>
@@ -1178,9 +1176,6 @@ export const rawHtmlBody = `<!-- Hero -->
                 </button>
               </div>
               <div id="teonox-phone-error-slot" style="margin-top:2px;"></div>
-              <div id="teonox-phone-verified" style="display:none;margin-top:8px;background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:700;font-family:Inter,sans-serif;color:#15803d;">
-                <i class="fas fa-circle-check"></i> ✓ Phone Number Verified
-              </div>
             </div>
             <div id="teonox-otp-box" style="display:none;grid-column:1/-1;">
               <div style="background:#FFF6EE;border:1px solid var(--orange-border);border-radius:8px;padding:14px;">
@@ -1198,6 +1193,9 @@ export const rawHtmlBody = `<!-- Hero -->
                 <div id="teonox-otp-error" style="display:none;color:#e74c3c;font-size:13px;margin-top:6px;font-family:Inter,sans-serif;"></div>
               </div>
             </div>
+          </div>
+          <div id="teonox-phone-verified" style="display:none;margin:8px 0 14px;background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:10px 12px;font-size:13px;font-weight:700;font-family:Inter,sans-serif;color:#15803d;">
+            ✓ Phone Number Verified
           </div>
           <div class="teonox-online-form-group">
             <label>Email Address</label>
