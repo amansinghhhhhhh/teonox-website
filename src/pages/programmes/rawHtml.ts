@@ -1195,8 +1195,9 @@ export const rawHtmlBody = `<!-- Hero -->
               <option>Evening (6 PM - 9 PM)</option>
             </select>
           </div>
+          <div id="teonox-recaptcha-container"></div>
           <button type="submit" class="teonox-online-btn teonox-online-btn-primary" style="width:100%;padding:14px;font-size:15px;">
-            <i class="fas fa-paper-plane"></i> Submit Application
+            <i class="fas fa-comment-sms"></i> Send OTP
           </button>
           <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">
             <i class="fas fa-lock" style="font-size:10px;"></i> Your information is secure. We will never share your data.
