@@ -1168,7 +1168,31 @@ export const rawHtmlBody = `<!-- Hero -->
             </div>
             <div class="teonox-online-form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="Enter your phone number" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
+              <div style="display:flex;gap:8px;align-items:stretch;">
+                <input type="tel" placeholder="Enter your phone number" required maxlength="10" style="flex:1;min-width:0;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
+                <button type="button" id="teonox-get-otp-btn" onclick="requestOtp()" disabled style="flex-shrink:0;padding:11px 16px;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;border:1px solid var(--orange);background:var(--white);color:var(--orange);opacity:0.5;">
+                  <i class="fas fa-comment-sms"></i> Get OTP
+                </button>
+              </div>
+              <div id="teonox-phone-verified" style="display:none;margin-top:8px;font-size:12px;font-weight:700;font-family:Inter,sans-serif;color:#15803d;background:#dcfce7;border:1px solid #86efac;border-radius:999px;padding:5px 12px;width:fit-content;">
+                <i class="fas fa-circle-check"></i> Verified ✓
+              </div>
+              <div id="teonox-otp-box" style="display:none;margin-top:10px;background:#FFF6EE;border:1px solid var(--orange-border);border-radius:8px;padding:12px;">
+                <label style="display:block;font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:5px;">Enter 6-digit OTP</label>
+                <div style="display:flex;gap:8px;align-items:stretch;">
+                  <input id="teonox-otp-input" type="text" inputmode="numeric" placeholder="6-digit code" maxlength="6" autocomplete="one-time-code" style="flex:1;min-width:0;letter-spacing:4px;text-align:center;font-size:16px;font-weight:700;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
+                  <button type="button" id="teonox-verify-otp-btn" onclick="verifyInlineOtp()" style="flex-shrink:0;padding:11px 16px;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;font-weight:700;cursor:pointer;border:none;background:var(--orange);color:#fff;">
+                    <i class="fas fa-check"></i> Verify
+                  </button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+                  <span id="teonox-otp-timer" style="font-size:12px;color:var(--text-muted);font-family:Inter,sans-serif;"></span>
+                  <button type="button" id="teonox-otp-resend" onclick="resendInlineOtp()" disabled style="background:none;border:none;color:var(--orange);font-size:12px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;opacity:0.5;padding:0;">
+                    <i class="fas fa-rotate-right"></i> Resend OTP
+                  </button>
+                </div>
+                <div id="teonox-otp-error" style="display:none;color:#e74c3c;font-size:13px;margin-top:6px;font-family:Inter,sans-serif;"></div>
+              </div>
             </div>
           </div>
           <div class="teonox-online-form-group">
@@ -1195,9 +1219,9 @@ export const rawHtmlBody = `<!-- Hero -->
               <option>Evening (6 PM - 9 PM)</option>
             </select>
           </div>
-          <div id="teonox-recaptcha-container"></div>
+          <div id="recaptcha-container" style="display:none;"></div>
           <button type="submit" class="teonox-online-btn teonox-online-btn-primary" style="width:100%;padding:14px;font-size:15px;">
-            <i class="fas fa-comment-sms"></i> Send OTP
+            <i class="fas fa-paper-plane"></i> Submit Application
           </button>
           <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">
             <i class="fas fa-lock" style="font-size:10px;"></i> Your information is secure. We will never share your data.

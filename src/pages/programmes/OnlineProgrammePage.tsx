@@ -81,7 +81,7 @@ function resetSubmit(form: HTMLFormElement, success: boolean): void {
   const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
   if (btn) {
     btn.disabled = false;
-    btn.innerHTML = btn.dataset.originalText || '<i class="fas fa-comment-sms"></i> Send OTP';
+    btn.innerHTML = btn.dataset.originalText || '<i class="fas fa-paper-plane"></i> Submit Application';
     btn.style.opacity = '1';
     btn.style.pointerEvents = '';
   }
@@ -104,19 +104,24 @@ function showSuccessMessage(form: HTMLFormElement): void {
   `;
 }
 
-// --- Firebase Phone OTP state (Apply modal 2-step verification) ---
-// The lead fields collected in step 1 are held here until the SMS code is
-// confirmed in step 2 — only then is the Google Apps Script webhook called.
+// --- Firebase Phone OTP state (inline verification under the Phone field) ---
+// The RecaptchaVerifier is created ONCE on mount and cleared on unmount.
+// Re-creating it on every click is what triggers identitytoolkit 400 errors.
 let otpConfirmation: ConfirmationResult | null = null;
 let otpRecaptcha: RecaptchaVerifier | null = null;
-let otpPendingLead: Record<string, string> | null = null;
+let otpVerifiedPhone = '';
 let otpResendTimer: number | null = null;
 
-function getOtpRecaptcha(): RecaptchaVerifier {
+function initOtpRecaptcha(): RecaptchaVerifier | null {
   if (otpRecaptcha) return otpRecaptcha;
-  otpRecaptcha = new RecaptchaVerifier(auth, 'teonox-recaptcha-container', {
-    size: 'invisible',
-  });
+  if (!document.getElementById('recaptcha-container')) return null;
+  try {
+    otpRecaptcha = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      size: 'invisible',
+    });
+  } catch {
+    otpRecaptcha = null;
+  }
   return otpRecaptcha;
 }
 
@@ -156,79 +161,132 @@ function friendlyOtpError(code?: string): string {
   }
 }
 
-function maskPhone(phone: string): string {
-  const digits = phone.replace(/\D/g, '');
-  return digits.length >= 4 ? `XXXXXX${digits.slice(-4)}` : phone;
+// --- Inline OTP DOM helpers (scoped to the Apply modal form) ---
+function getApplyForm(): HTMLFormElement | null {
+  return document.querySelector('.teonox-online-apply-modal-form form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
 }
 
-function setOtpFormBusy(otpForm: HTMLFormElement, busy: boolean, label: string): void {
-  const submitBtn = otpForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-  const resendBtn = otpForm.querySelector('[data-otp-resend]') as HTMLButtonElement | null;
-  if (submitBtn) {
-    submitBtn.disabled = busy;
-    if (busy) {
-      submitBtn.dataset.originalText = submitBtn.dataset.originalText || submitBtn.innerHTML;
-      submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${label}`;
-      submitBtn.style.opacity = '0.7';
-      submitBtn.style.pointerEvents = 'none';
-    } else {
-      submitBtn.innerHTML = submitBtn.dataset.originalText || '<i class="fas fa-check"></i> Verify & Submit';
-      submitBtn.style.opacity = '1';
-      submitBtn.style.pointerEvents = '';
-    }
+function showOtpInlineError(message: string): void {
+  const err = document.getElementById('teonox-otp-error');
+  if (!err) return;
+  err.textContent = message;
+  err.style.display = 'block';
+}
+
+function clearOtpInlineError(): void {
+  const err = document.getElementById('teonox-otp-error');
+  if (!err) return;
+  err.textContent = '';
+  err.style.display = 'none';
+}
+
+function setGetOtpEnabled(enabled: boolean): void {
+  const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
+  if (!btn) return;
+  btn.disabled = !enabled;
+  btn.style.opacity = enabled ? '1' : '0.5';
+  btn.style.cursor = enabled ? 'pointer' : 'not-allowed';
+}
+
+function setGetOtpBusy(busy: boolean, label = 'Sending…'): void {
+  const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
+  if (!btn) return;
+  if (busy) {
+    btn.dataset.originalText = btn.dataset.originalText || btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${label}`;
+    btn.style.opacity = '0.7';
+  } else {
+    btn.innerHTML = btn.dataset.originalText || '<i class="fas fa-comment-sms"></i> Get OTP';
+    btn.style.opacity = '1';
   }
-  if (resendBtn && busy) resendBtn.disabled = true;
 }
 
-function startResendCooldown(resendBtn: HTMLButtonElement, seconds = 30): void {
+function showOtpBox(): void {
+  const box = document.getElementById('teonox-otp-box');
+  if (box) box.style.display = 'block';
+  clearOtpInlineError();
+  const input = document.getElementById('teonox-otp-input') as HTMLInputElement | null;
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+}
+
+function hideOtpBox(): void {
+  const box = document.getElementById('teonox-otp-box');
+  if (box) box.style.display = 'none';
+  clearOtpInlineError();
+}
+
+function showVerifiedBadge(): void {
+  const badge = document.getElementById('teonox-phone-verified');
+  if (badge) badge.style.display = 'block';
+  const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-circle-check"></i> OTP Sent';
+    btn.style.opacity = '0.5';
+  }
+}
+
+function hideVerifiedBadge(): void {
+  const badge = document.getElementById('teonox-phone-verified');
+  if (badge) badge.style.display = 'none';
+}
+
+function setVerifyBusy(busy: boolean): void {
+  const btn = document.getElementById('teonox-verify-otp-btn') as HTMLButtonElement | null;
+  if (!btn) return;
+  if (busy) {
+    btn.dataset.originalText = btn.dataset.originalText || btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying…';
+    btn.style.opacity = '0.7';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = btn.dataset.originalText || '<i class="fas fa-check"></i> Verify';
+    btn.style.opacity = '1';
+  }
+}
+
+// 30-second resend cooldown rendered on the Resend button + timer label.
+function startOtpCooldown(seconds = 30): void {
   stopOtpResendTimer();
+  const resendBtn = document.getElementById('teonox-otp-resend') as HTMLButtonElement | null;
+  const timer = document.getElementById('teonox-otp-timer');
   let remaining = seconds;
-  resendBtn.disabled = true;
-  resendBtn.innerHTML = `<i class="fas fa-clock"></i> Resend OTP in ${remaining}s`;
+  const paint = () => {
+    if (timer) timer.textContent = remaining > 0 ? `Resend available in ${remaining}s` : 'Didn\'t get the code?';
+    if (resendBtn) {
+      resendBtn.disabled = remaining > 0;
+      resendBtn.style.opacity = remaining > 0 ? '0.5' : '1';
+      resendBtn.style.cursor = remaining > 0 ? 'not-allowed' : 'pointer';
+    }
+  };
+  paint();
   otpResendTimer = window.setInterval(() => {
     remaining -= 1;
-    if (remaining <= 0) {
-      stopOtpResendTimer();
-      resendBtn.disabled = false;
-      resendBtn.innerHTML = '<i class="fas fa-rotate-right"></i> Resend OTP';
-      return;
-    }
-    resendBtn.innerHTML = `<i class="fas fa-clock"></i> Resend OTP in ${remaining}s`;
+    paint();
+    if (remaining <= 0) stopOtpResendTimer();
   }, 1000);
 }
 
-// Step 2 UI: hide the details form and show the 6-digit code entry.
-function renderOtpStep(detailsForm: HTMLFormElement, phone: string): HTMLFormElement {
-  detailsForm.style.display = 'none';
-  detailsForm.parentNode?.querySelector('.teonox-online-otp-step')?.remove();
-  const step = document.createElement('div');
-  step.className = 'teonox-online-otp-step';
-  step.innerHTML = `
-    <div class="teonox-online-section-label">VERIFY PHONE</div>
-    <h2 style="font-size:24px;font-weight:800;margin-bottom:6px;">Check your <span style="color:var(--orange)">messages</span></h2>
-    <p style="color:var(--text-secondary);margin-bottom:24px;font-size:14px;">We sent a 6-digit code to <strong>+91 ${maskPhone(phone)}</strong>. <a href="javascript:void(0)" onclick="otpGoBack()" style="color:var(--orange);font-weight:600;">Wrong number?</a></p>
-    <form onsubmit="verifyOtp(event)">
-      <div class="teonox-online-form-group">
-        <label>6-digit OTP</label>
-        <input type="text" inputmode="numeric" placeholder="Enter 6-digit code" required maxlength="6" autocomplete="one-time-code" style="letter-spacing:6px;text-align:center;font-size:18px;font-weight:700;" oninput="this.value=this.value.replace(/\\D/g,'').slice(0,6)">
-      </div>
-      <button type="submit" class="teonox-online-btn teonox-online-btn-primary" style="width:100%;padding:14px;font-size:15px;">
-        <i class="fas fa-check"></i> Verify &amp; Submit
-      </button>
-      <button type="button" data-otp-resend onclick="resendOtp()" class="teonox-online-btn teonox-online-btn-outline" style="width:100%;padding:12px;font-size:14px;margin-top:10px;cursor:pointer;">
-        <i class="fas fa-rotate-right"></i> Resend OTP
-      </button>
-      <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">
-        <i class="fas fa-lock" style="font-size:10px;"></i> Your information is secure. We will never share your data.
-      </p>
-    </form>
-  `;
-  detailsForm.parentNode?.insertBefore(step, detailsForm.nextSibling);
-  const otpForm = step.querySelector('form') as HTMLFormElement;
-  const resendBtn = step.querySelector('[data-otp-resend]') as HTMLButtonElement | null;
-  if (resendBtn) startResendCooldown(resendBtn);
-  (step.querySelector('input') as HTMLInputElement | null)?.focus();
-  return otpForm;
+// Phone number changed (or user must re-verify): drop verified state,
+// hide the OTP box + badge, and re-arm Get OTP from current validity.
+function resetPhoneVerification(): void {
+  stopOtpResendTimer();
+  otpConfirmation = null;
+  otpVerifiedPhone = '';
+  hideOtpBox();
+  hideVerifiedBadge();
+  const phone = (document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null)?.value.trim() || '';
+  const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
+  if (btn) {
+    delete btn.dataset.originalText;
+    btn.innerHTML = '<i class="fas fa-comment-sms"></i> Get OTP';
+  }
+  setGetOtpEnabled(validatePhone(phone));
 }
 
 export function OnlineProgrammePage() {
@@ -257,8 +315,101 @@ export function OnlineProgrammePage() {
         answer.style.maxHeight = answer.scrollHeight + 'px';
       }
     };
-    // Step 1 of Apply verification: validate details, then send the SMS OTP.
-    // The lead is only submitted to the webhook after the code is confirmed.
+    // "Get OTP" beside the Phone field: sends the SMS code via the single
+    // mount-time RecaptchaVerifier instance.
+    (window as any).requestOtp = async () => {
+      const form = getApplyForm();
+      const phoneInput = form?.querySelector('input[type="tel"]') as HTMLInputElement | null;
+      const phone = phoneInput?.value.trim() || '';
+      clearOtpInlineError();
+      if (!validatePhone(phone)) {
+        showOtpInlineError('Please enter a valid 10-digit phone number first.');
+        phoneInput?.focus();
+        return;
+      }
+      const verifier = initOtpRecaptcha();
+      if (!verifier) {
+        showOtpInlineError('Verification unavailable. Please refresh the page and try again.');
+        return;
+      }
+      setGetOtpBusy(true);
+      try {
+        otpConfirmation = await signInWithPhoneNumber(auth, '+91' + phone, verifier);
+        otpVerifiedPhone = '';
+        hideVerifiedBadge();
+        setGetOtpBusy(false);
+        showOtpBox();
+        startOtpCooldown();
+      } catch (err: unknown) {
+        const code = (err as { code?: string })?.code;
+        if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
+          resetOtpRecaptcha();
+        }
+        setGetOtpBusy(false);
+        showOtpInlineError(friendlyOtpError(code));
+      }
+    };
+    // "Verify" under the Phone field: confirms the 6-digit code inline.
+    (window as any).verifyInlineOtp = async () => {
+      const code = (document.getElementById('teonox-otp-input') as HTMLInputElement | null)?.value.trim() || '';
+      clearOtpInlineError();
+      if (!/^\d{6}$/.test(code)) {
+        showOtpInlineError('Please enter the 6-digit code sent to your phone.');
+        return;
+      }
+      if (!otpConfirmation) {
+        showOtpInlineError('Your session expired. Please tap Resend OTP for a new code.');
+        return;
+      }
+      setVerifyBusy(true);
+      try {
+        await otpConfirmation.confirm(code);
+        const phone = (document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null)?.value.trim() || '';
+        otpVerifiedPhone = phone;
+        stopOtpResendTimer();
+        hideOtpBox();
+        showVerifiedBadge();
+      } catch (err: unknown) {
+        showOtpInlineError(friendlyOtpError((err as { code?: string })?.code));
+      } finally {
+        setVerifyBusy(false);
+      }
+    };
+    // Fresh SMS code for the currently typed phone number.
+    (window as any).resendInlineOtp = async () => {
+      const form = getApplyForm();
+      const phone = (form?.querySelector('input[type="tel"]') as HTMLInputElement | null)?.value.trim() || '';
+      clearOtpInlineError();
+      if (!validatePhone(phone)) {
+        showOtpInlineError('Please enter a valid 10-digit phone number first.');
+        return;
+      }
+      const verifier = initOtpRecaptcha();
+      if (!verifier) {
+        showOtpInlineError('Verification unavailable. Please refresh the page and try again.');
+        return;
+      }
+      const resendBtn = document.getElementById('teonox-otp-resend') as HTMLButtonElement | null;
+      if (resendBtn) {
+        resendBtn.disabled = true;
+        resendBtn.style.opacity = '0.5';
+      }
+      try {
+        otpConfirmation = await signInWithPhoneNumber(auth, '+91' + phone, verifier);
+        startOtpCooldown();
+      } catch (err: unknown) {
+        const code = (err as { code?: string })?.code;
+        if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
+          resetOtpRecaptcha();
+        }
+        if (resendBtn) {
+          resendBtn.disabled = false;
+          resendBtn.style.opacity = '1';
+        }
+        showOtpInlineError(friendlyOtpError(code));
+      }
+    };
+    // Final submit: allowed only after the typed number passes OTP verification.
     (window as any).submitForm = async (e: Event) => {
       e.preventDefault();
       const form = e.target as HTMLFormElement;
@@ -283,12 +434,13 @@ export function OnlineProgrammePage() {
         return;
       }
 
-      if (!document.getElementById('teonox-recaptcha-container')) {
-        injectError(form, 'Verification unavailable. Please refresh the page and try again.');
+      // Gate: phone must be OTP-verified (and verification must match the typed number).
+      if (!otpVerifiedPhone || otpVerifiedPhone !== phone) {
+        injectError(form, 'Please verify your phone number with the OTP first.', 'input[type="tel"]');
         return;
       }
 
-      showSubmitting(form, 'Sending OTP…');
+      showSubmitting(form);
 
       const fields: Record<string, string> = {
         'Full Name': fullName,
@@ -304,107 +456,29 @@ export function OnlineProgrammePage() {
         batchTiming,
         preferredBatch: batchTiming,
         source: 'build-digital-marketing-skills-with-ai-landing-page',
+        otpVerified: 'true',
+        phoneVerified: 'true',
       };
 
       try {
-        otpConfirmation = await signInWithPhoneNumber(auth, '+91' + phone, getOtpRecaptcha());
-        otpPendingLead = fields;
+        await submitLeadForm('Online Programme Apply', fields);
+        form.reset();
         resetSubmit(form, true);
-        renderOtpStep(form, phone);
-      } catch (err: unknown) {
-        const code = (err as { code?: string })?.code;
-        if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
-          resetOtpRecaptcha();
-        }
-        resetSubmit(form, false);
-        injectError(form, friendlyOtpError(code));
-      }
-    };
-    // Step 2: confirm the 6-digit SMS code, then submit the stored lead.
-    (window as any).verifyOtp = async (e: Event) => {
-      e.preventDefault();
-      const otpForm = e.target as HTMLFormElement;
-      const code = (otpForm.querySelector('input')?.value || '').trim();
-      removeError(otpForm);
-
-      if (!/^\d{6}$/.test(code)) {
-        injectError(otpForm, 'Please enter the 6-digit code sent to your phone.', 'input');
-        return;
-      }
-      if (!otpConfirmation || !otpPendingLead) {
-        injectError(otpForm, 'Your session expired. Please tap Resend OTP for a new code.');
-        return;
-      }
-
-      setOtpFormBusy(otpForm, true, 'Verifying…');
-      try {
-        await otpConfirmation.confirm(code);
-      } catch (err: unknown) {
-        setOtpFormBusy(otpForm, false, 'Verifying…');
-        injectError(otpForm, friendlyOtpError((err as { code?: string })?.code), 'input');
-        return;
-      }
-
-      // OTP verified — submit the lead via the existing webhook.
-      setOtpFormBusy(otpForm, true, 'Submitting…');
-      const detailsForm = otpForm.closest('.teonox-online-apply-modal-form')?.querySelector('form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
-      try {
-        await submitLeadForm('Online Programme Apply', {
-          ...otpPendingLead,
-          otpVerified: 'true',
-          phoneVerified: 'true',
-        });
         stopOtpResendTimer();
         otpConfirmation = null;
-        otpPendingLead = null;
-        if (detailsForm) {
-          detailsForm.reset();
-          showSuccessMessage(detailsForm);
-        }
+        otpVerifiedPhone = '';
+        showSuccessMessage(form);
       } catch {
-        setOtpFormBusy(otpForm, false, 'Submitting…');
-        injectError(otpForm, 'Something went wrong. Please try again.');
+        resetSubmit(form, false);
+        injectError(form, 'Something went wrong. Please try again.');
       }
     };
-    // Request a fresh SMS code for the stored phone number.
-    (window as any).resendOtp = async () => {
-      const step = document.querySelector('.teonox-online-otp-step');
-      const otpForm = step?.querySelector('form') as HTMLFormElement | null;
-      const resendBtn = step?.querySelector('[data-otp-resend]') as HTMLButtonElement | null;
-      const phone = otpPendingLead?.phone;
-      if (!otpForm || !phone) return;
-      removeError(otpForm);
-      if (resendBtn) {
-        resendBtn.disabled = true;
-        resendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
-      }
-      try {
-        otpConfirmation = await signInWithPhoneNumber(auth, '+91' + phone, getOtpRecaptcha());
-        if (resendBtn) startResendCooldown(resendBtn);
-      } catch (err: unknown) {
-        const code = (err as { code?: string })?.code;
-        if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
-          resetOtpRecaptcha();
-        }
-        if (resendBtn) {
-          resendBtn.disabled = false;
-          resendBtn.innerHTML = '<i class="fas fa-rotate-right"></i> Resend OTP';
-        }
-        injectError(otpForm, friendlyOtpError(code));
-      }
-    };
-    // Back to the details form (keeps typed values — the form was only hidden).
-    (window as any).otpGoBack = () => {
-      document.querySelector('.teonox-online-otp-step')?.remove();
-      const form = document.querySelector('.teonox-online-apply-modal-form form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
-      if (form) {
-        form.style.display = '';
-        resetSubmit(form, true);
-      }
-      stopOtpResendTimer();
-      otpConfirmation = null;
-      otpPendingLead = null;
-    };
+    // --- reCAPTCHA lifecycle: initialize ONCE on mount, clear on unmount ---
+    // (Created here — not inside click handlers — so only one widget ever
+    // binds to #recaptcha-container, fixing identitytoolkit 400 errors.)
+    initOtpRecaptcha();
+    setGetOtpEnabled(false);
+
     // --- Real-time Input Validation Listeners ---
     const form = document.querySelector('form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
     if (form) {
@@ -419,6 +493,14 @@ export function OnlineProgrammePage() {
             injectRealtimeError(phoneInput, form, "Must be a valid 10-digit number starting with 6-9.", 'phone');
           } else {
             clearRealtimeError(phoneInput, form, 'phone');
+          }
+          // Arm Get OTP from validity; any edit after verify / while the OTP
+          // box is open invalidates that state and requires a fresh code.
+          const otpBoxOpen = (document.getElementById('teonox-otp-box') as HTMLElement | null)?.style.display === 'block';
+          if (otpVerifiedPhone !== '' || otpBoxOpen) {
+            if (phone !== otpVerifiedPhone) resetPhoneVerification();
+          } else {
+            setGetOtpEnabled(validatePhone(phone));
           }
         });
         phoneInput.addEventListener('blur', () => {
@@ -580,7 +662,7 @@ export function OnlineProgrammePage() {
       stopOtpResendTimer();
       resetOtpRecaptcha();
       otpConfirmation = null;
-      otpPendingLead = null;
+      otpVerifiedPhone = '';
       document.querySelectorAll('.teonox-online-slider-viewport').forEach(v => {
         (v as HTMLElement).style.cursor = '';
       });
