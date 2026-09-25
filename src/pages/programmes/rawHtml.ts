@@ -1168,21 +1168,26 @@ export const rawHtmlBody = `<!-- Hero -->
             </div>
             <div class="teonox-online-form-group">
               <label>Phone Number</label>
-              <div style="display:flex;gap:8px;align-items:stretch;">
-                <input type="tel" placeholder="Enter your phone number" required maxlength="10" style="flex:1;min-width:0;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
-                <button type="button" id="teonox-get-otp-btn" onclick="requestOtp()" disabled style="flex-shrink:0;padding:11px 16px;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;border:1px solid var(--orange);background:var(--white);color:var(--orange);opacity:0.5;">
+              <div style="display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;">
+                <div style="flex:1;min-width:140px;display:flex;align-items:center;background:var(--white);border:1px solid var(--orange-border);border-radius:8px;overflow:hidden;">
+                  <span style="flex-shrink:0;padding-left:12px;font-size:13px;font-weight:700;color:var(--text-secondary);font-family:Inter,sans-serif;">+91</span>
+                  <input type="tel" placeholder="10-digit mobile number" required maxlength="10" style="flex:1;min-width:0;border:none;background:transparent;box-shadow:none;padding-left:8px;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
+                </div>
+                <button type="button" id="teonox-get-otp-btn" onclick="requestOtp()" disabled style="flex-shrink:0;white-space:nowrap;padding:11px 14px;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;border:1px solid var(--orange);background:var(--white);color:var(--orange);opacity:0.5;">
                   <i class="fas fa-comment-sms"></i> Get OTP
                 </button>
               </div>
-              <div id="teonox-phone-verified" style="display:none;margin-top:8px;font-size:12px;font-weight:700;font-family:Inter,sans-serif;color:#15803d;background:#dcfce7;border:1px solid #86efac;border-radius:999px;padding:5px 12px;width:fit-content;">
-                <i class="fas fa-circle-check"></i> Verified ✓
+              <div id="teonox-phone-error-slot" style="margin-top:2px;"></div>
+              <div id="teonox-phone-verified" style="display:none;margin-top:8px;align-items:center;justify-content:space-between;gap:8px;background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:8px 12px;">
+                <span style="font-size:13px;font-weight:700;font-family:Inter,sans-serif;color:#15803d;"><i class="fas fa-circle-check"></i> ✓ Phone Verified</span>
+                <button type="button" onclick="editPhoneNumber()" style="background:none;border:none;color:#15803d;font-size:12px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;text-decoration:underline;padding:0;">Edit</button>
               </div>
               <div id="teonox-otp-box" style="display:none;margin-top:10px;background:#FFF6EE;border:1px solid var(--orange-border);border-radius:8px;padding:12px;">
-                <label style="display:block;font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:5px;">Enter 6-digit OTP</label>
-                <div style="display:flex;gap:8px;align-items:stretch;">
-                  <input id="teonox-otp-input" type="text" inputmode="numeric" placeholder="6-digit code" maxlength="6" autocomplete="one-time-code" style="flex:1;min-width:0;letter-spacing:4px;text-align:center;font-size:16px;font-weight:700;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
-                  <button type="button" id="teonox-verify-otp-btn" onclick="verifyInlineOtp()" style="flex-shrink:0;padding:11px 16px;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;font-weight:700;cursor:pointer;border:none;background:var(--orange);color:#fff;">
-                    <i class="fas fa-check"></i> Verify
+                <label style="display:block;font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:5px;">Enter 6-digit OTP sent to your mobile</label>
+                <div style="display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;">
+                  <input id="teonox-otp-input" type="text" inputmode="numeric" placeholder="6-digit code" maxlength="6" autocomplete="one-time-code" style="flex:1;min-width:140px;letter-spacing:4px;text-align:center;font-size:16px;font-weight:700;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
+                  <button type="button" id="teonox-verify-otp-btn" onclick="verifyInlineOtp()" style="flex-shrink:0;white-space:nowrap;padding:11px 16px;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;font-weight:700;cursor:pointer;border:none;background:var(--orange);color:#fff;">
+                    <i class="fas fa-check"></i> Verify Code
                   </button>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">

@@ -144,7 +144,7 @@ function stopOtpResendTimer(): void {
 function friendlyOtpError(code?: string): string {
   switch (code) {
     case 'auth/invalid-phone-number':
-      return 'Please enter a valid 10-digit phone number.';
+      return 'Please enter a valid 10-digit mobile number.';
     case 'auth/too-many-requests':
       return 'Too many attempts. Please wait a while and try again.';
     case 'auth/quota-exceeded':
@@ -159,6 +159,31 @@ function friendlyOtpError(code?: string): string {
     default:
       return 'Something went wrong. Please try again.';
   }
+}
+
+// Strip spaces/dashes/etc so Firebase only ever receives exactly 10 digits
+// (the +91 prefix is visual only — the user types just their mobile number).
+function normalizePhone(raw: string): string {
+  return (raw || '').replace(/\D/g, '');
+}
+
+// Dedicated error slot under the phone row (always visible, never cramped
+// inside the input). Reuses the .teonox-online-rt-phone class so the submit
+// gate still detects outstanding phone errors.
+function showPhoneSlotError(message: string): void {
+  const slot = document.getElementById('teonox-phone-error-slot');
+  if (!slot) return;
+  slot.innerHTML = '';
+  const div = document.createElement('div');
+  div.className = 'teonox-online-rt-phone';
+  div.style.cssText = 'color:#e74c3c;font-size:13px;margin-top:4px;font-family:Inter,sans-serif;';
+  div.textContent = message;
+  slot.appendChild(div);
+}
+
+function clearPhoneSlotError(): void {
+  const slot = document.getElementById('teonox-phone-error-slot');
+  if (slot) slot.innerHTML = '';
 }
 
 // --- Inline OTP DOM helpers (scoped to the Apply modal form) ---
@@ -220,8 +245,8 @@ function hideOtpBox(): void {
 }
 
 function showVerifiedBadge(): void {
-  const badge = document.getElementById('teonox-phone-verified');
-  if (badge) badge.style.display = 'block';
+  const badge = document.getElementById('teonox-phone-verified') as HTMLElement | null;
+  if (badge) badge.style.display = 'flex';
   const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
   if (btn) {
     btn.disabled = true;
@@ -273,14 +298,19 @@ function startOtpCooldown(seconds = 30): void {
 }
 
 // Phone number changed (or user must re-verify): drop verified state,
-// hide the OTP box + badge, and re-arm Get OTP from current validity.
+// re-enable editing, hide the OTP box + badge, and re-arm Get OTP.
 function resetPhoneVerification(): void {
   stopOtpResendTimer();
   otpConfirmation = null;
   otpVerifiedPhone = '';
+  const phoneInput = document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null;
+  if (phoneInput) {
+    phoneInput.disabled = false;
+    phoneInput.style.opacity = '1';
+  }
   hideOtpBox();
   hideVerifiedBadge();
-  const phone = (document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null)?.value.trim() || '';
+  const phone = normalizePhone(phoneInput?.value || '');
   const btn = document.getElementById('teonox-get-otp-btn') as HTMLButtonElement | null;
   if (btn) {
     delete btn.dataset.originalText;
@@ -316,20 +346,22 @@ export function OnlineProgrammePage() {
       }
     };
     // "Get OTP" beside the Phone field: sends the SMS code via the single
-    // mount-time RecaptchaVerifier instance.
+    // mount-time RecaptchaVerifier instance. Firebase is only called with a
+    // strictly validated 10-digit payload — anything shorter never hits the API.
     (window as any).requestOtp = async () => {
       const form = getApplyForm();
       const phoneInput = form?.querySelector('input[type="tel"]') as HTMLInputElement | null;
-      const phone = phoneInput?.value.trim() || '';
+      const phone = normalizePhone(phoneInput?.value || '');
+      clearPhoneSlotError();
       clearOtpInlineError();
       if (!validatePhone(phone)) {
-        showOtpInlineError('Please enter a valid 10-digit phone number first.');
+        showPhoneSlotError('Please enter a valid 10-digit mobile number.');
         phoneInput?.focus();
         return;
       }
       const verifier = initOtpRecaptcha();
       if (!verifier) {
-        showOtpInlineError('Verification unavailable. Please refresh the page and try again.');
+        showPhoneSlotError('Verification unavailable. Please refresh the page and try again.');
         return;
       }
       setGetOtpBusy(true);
@@ -346,7 +378,7 @@ export function OnlineProgrammePage() {
           resetOtpRecaptcha();
         }
         setGetOtpBusy(false);
-        showOtpInlineError(friendlyOtpError(code));
+        showPhoneSlotError(friendlyOtpError(code));
       }
     };
     // "Verify" under the Phone field: confirms the 6-digit code inline.
@@ -364,8 +396,12 @@ export function OnlineProgrammePage() {
       setVerifyBusy(true);
       try {
         await otpConfirmation.confirm(code);
-        const phone = (document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null)?.value.trim() || '';
-        otpVerifiedPhone = phone;
+        const phoneInput = document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null;
+        otpVerifiedPhone = normalizePhone(phoneInput?.value || '');
+        if (phoneInput) {
+          phoneInput.disabled = true;
+          phoneInput.style.opacity = '0.6';
+        }
         stopOtpResendTimer();
         hideOtpBox();
         showVerifiedBadge();
@@ -375,13 +411,21 @@ export function OnlineProgrammePage() {
         setVerifyBusy(false);
       }
     };
+    // "Edit" toggle on the verified badge: re-enable phone editing and force
+    // a fresh OTP cycle for the new number.
+    (window as any).editPhoneNumber = () => {
+      resetPhoneVerification();
+      clearPhoneSlotError();
+      const phoneInput = document.querySelector('.teonox-online-apply-modal-form input[type="tel"]') as HTMLInputElement | null;
+      phoneInput?.focus();
+    };
     // Fresh SMS code for the currently typed phone number.
     (window as any).resendInlineOtp = async () => {
       const form = getApplyForm();
-      const phone = (form?.querySelector('input[type="tel"]') as HTMLInputElement | null)?.value.trim() || '';
+      const phone = normalizePhone((form?.querySelector('input[type="tel"]') as HTMLInputElement | null)?.value || '');
       clearOtpInlineError();
       if (!validatePhone(phone)) {
-        showOtpInlineError('Please enter a valid 10-digit phone number first.');
+        showPhoneSlotError('Please enter a valid 10-digit mobile number.');
         return;
       }
       const verifier = initOtpRecaptcha();
@@ -414,7 +458,7 @@ export function OnlineProgrammePage() {
       e.preventDefault();
       const form = e.target as HTMLFormElement;
       const fullName = getField(form, 'input[type="text"]');
-      const phone = getField(form, 'input[type="tel"]');
+      const phone = normalizePhone(getField(form, 'input[type="tel"]'));
       const email = getField(form, 'input[type="email"]');
       const profile = getField(form, 'select');
       const batchTiming = form.querySelectorAll('select')[1]?.value?.trim() || '';
@@ -423,7 +467,7 @@ export function OnlineProgrammePage() {
 
       if (!validateRequired(fullName)) { injectError(form, 'Full Name is required.', 'input[type="text"]'); return; }
       if (!validateRequired(email) || !validateEmail(email)) { injectError(form, 'Please enter a valid email address containing \'@\'.', 'input[type="email"]'); return; }
-      if (!validateRequired(phone) || !validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit phone number.', 'input[type="tel"]'); return; }
+      if (!validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit mobile number.', 'input[type="tel"]'); return; }
 
       // Block submission if real-time validation errors exist
       const hasPhoneError = form.querySelector('.teonox-online-rt-phone');
@@ -488,11 +532,11 @@ export function OnlineProgrammePage() {
       if (phoneInput) {
         phoneInput.addEventListener('input', () => {
           phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
-          const phone = phoneInput.value.trim();
-          if (phone && (!validatePhone(phone))) {
-            injectRealtimeError(phoneInput, form, "Must be a valid 10-digit number starting with 6-9.", 'phone');
+          const phone = normalizePhone(phoneInput.value);
+          if (phoneInput.value.trim() && (!validatePhone(phone))) {
+            showPhoneSlotError('Must be a valid 10-digit number starting with 6-9.');
           } else {
-            clearRealtimeError(phoneInput, form, 'phone');
+            clearPhoneSlotError();
           }
           // Arm Get OTP from validity; any edit after verify / while the OTP
           // box is open invalidates that state and requires a fresh code.
@@ -504,11 +548,11 @@ export function OnlineProgrammePage() {
           }
         });
         phoneInput.addEventListener('blur', () => {
-          const phone = phoneInput.value.trim();
-          if (phone && (!validatePhone(phone))) {
-            injectRealtimeError(phoneInput, form, "Must be a valid 10-digit number starting with 6-9.", 'phone');
+          const phone = normalizePhone(phoneInput.value);
+          if (phoneInput.value.trim() && (!validatePhone(phone))) {
+            showPhoneSlotError('Must be a valid 10-digit number starting with 6-9.');
           } else {
-            clearRealtimeError(phoneInput, form, 'phone');
+            clearPhoneSlotError();
           }
         });
       }
