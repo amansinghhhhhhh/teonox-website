@@ -862,7 +862,7 @@ h1, h2, h3, h4, h5, h6 {
   .tl-landing-page .teonox-online-proof-grid { grid-template-columns: 1fr; }
   .tl-landing-page .teonox-online-faculty-grid { grid-template-columns: 1fr; }
   .tl-landing-page .teonox-online-hero h1 { font-size: 30px; }
-  .tl-landing-page .teonox-online-hero { padding: 50px 0; min-height: 550px; background: url('/online-programme/images/mobile-banner.webp') center/cover no-repeat; }
+  .tl-landing-page .teonox-online-hero { padding: 50px 0; min-height: 550px; background: url('/images/new-mobile-banner.webp') center/cover no-repeat; }
   .tl-landing-page .teonox-online-hero::before { display: none; }
   .tl-landing-page .teonox-online-learning-flow { gap: 4px; }
   .tl-landing-page .teonox-online-learning-step { padding: 12px 10px; }
