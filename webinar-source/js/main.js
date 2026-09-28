@@ -168,8 +168,14 @@ function closeRegisterModal() {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Google Apps Script webhook URL
-    var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec';
+    // Google Apps Script webhook URL (override via window.__WEBHOOK_URL__ if injected at build)
+    var WEBHOOK_URL = window.__WEBHOOK_URL__ || 'https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec';
+
+    // TagMango checkout + ₹99 pricing config.
+    // URL injected at build from VITE_TAGMANGO_URL; placeholder fallback keeps CTAs functional.
+    // Secrets (Zapier/Pabbly JWTs) must NEVER be added here — keep them server-side / in Apps Script properties.
+    var TAGMANGO_URL = window.__TAGMANGO_URL__ || 'https://tagmango.com/checkout/placeholder';
+    var WORKSHOP_AMOUNT = window.__WORKSHOP_AMOUNT__ || 99;
 
     // ─── Form validation helper ───
 
@@ -291,6 +297,10 @@ document.addEventListener('DOMContentLoaded', function() {
             traffic_channel: data.source || '',
             referral: data.referral || '',
             formName: 'Webinar',
+            amount: WORKSHOP_AMOUNT,
+            price: WORKSHOP_AMOUNT,
+            gateway: 'tagmango',
+            tagmango_url: TAGMANGO_URL,
             submittedAt: new Date().toISOString()
         };
 
@@ -303,6 +313,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(function() {
             form.reset();
             successEl.style.display = 'block';
+            // Lead captured → hand off to TagMango checkout for ₹99 payment.
+            if (TAGMANGO_URL) {
+                setTimeout(function() {
+                    window.location.href = TAGMANGO_URL;
+                }, 900);
+            }
         })
         .catch(function() {
             errorEl.style.display = 'block';
@@ -512,91 +528,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ─── Countdown Timer ───
+    // ─── Countdown Timer (REMOVED — evergreen recurring batches, no fixed date) ───
+    // Kept as no-op guard so legacy element IDs (days/hours/minutes/seconds) never throw
+    // if cached HTML still contains them. No fixed TARGET_DATE is used anymore.
 
-    var TARGET_DATE = new Date('2026-09-26T10:00:00+05:30');
-
-    function updateCountdown() {
-        var now = new Date();
-        var diff = TARGET_DATE - now;
-
-        if (diff <= 0) {
-            var ids = ['days', 'hours', 'minutes', 'seconds'];
-            ids.forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el) el.textContent = '00';
-            });
-            return;
-        }
-
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        var daysEl = document.getElementById('days');
-        var hoursEl = document.getElementById('hours');
-        var minutesEl = document.getElementById('minutes');
-        var secondsEl = document.getElementById('seconds');
-        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-        if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
-        if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // ─── Offer Countdown ───
-
-    function startOfferCountdown() {
-        var daysEl = document.getElementById('offerDays');
-        var hoursEl = document.getElementById('offerHours');
-        var minutesEl = document.getElementById('offerMinutes');
-        var secondsEl = document.getElementById('offerSeconds');
-
-        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
-
-        var maxDays = 7;
-
-        function tick() {
-            var now = new Date();
-            var diff = TARGET_DATE - now;
-
-            if (diff <= 0) {
-                daysEl.textContent = '00';
-                hoursEl.textContent = '00';
-                minutesEl.textContent = '00';
-                secondsEl.textContent = '00';
-                return;
-            }
-
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            daysEl.textContent = days < 10 ? '0' + days : days;
-            hoursEl.textContent = hours < 10 ? '0' + hours : hours;
-            minutesEl.textContent = minutes < 10 ? '0' + minutes : minutes;
-            secondsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
-
-            var ring = document.getElementById('countdownRing');
-            var ringHours = document.getElementById('countdownRingHours');
-            var ringMins = document.getElementById('countdownRingMins');
-            var ringSecs = document.getElementById('countdownRingSecs');
-
-            if (ring) ring.style.strokeDashoffset = 283 - (days / maxDays) * 283;
-            if (ringHours) ringHours.style.strokeDashoffset = 283 - (hours / 24) * 283;
-            if (ringMins) ringMins.style.strokeDashoffset = 283 - (minutes / 60) * 283;
-            if (ringSecs) ringSecs.style.strokeDashoffset = 283 - (seconds / 60) * 283;
-        }
-
-        tick();
-        setInterval(tick, 1000);
-    }
-
-    startOfferCountdown();
+    // ─── Offer Countdown (REMOVED — replaced by evergreen "Limited Seats Available" copy) ───
+    // No-op: offer timer elements are hidden in HTML; nothing to tick.
 
     // ─── Animated counter for urgency ───
 

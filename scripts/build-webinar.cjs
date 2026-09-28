@@ -86,6 +86,26 @@ function main() {
 
   // Write to dist/webinar.html
   const htmlDest = path.join(DIST, 'webinar.html');
+
+  // Inject runtime config from env (no secrets in client bundle — only public checkout URL + amount).
+  // VITE_TAGMANGO_URL / TAGMANGO_URL → window.__TAGMANGO_URL__ (default placeholder).
+  // VITE_WEBHOOK_URL → window.__WEBHOOK_URL__ (optional override, defaults to Apps Script URL in main.js).
+  // VITE_WORKSHOP_PRICE → window.__WORKSHOP_AMOUNT__ (default 99).
+  const tagmangoUrl = process.env.VITE_TAGMANGO_URL || process.env.TAGMANGO_URL || 'https://tagmango.com/checkout/placeholder';
+  const webhookUrl = process.env.VITE_WEBHOOK_URL || '';
+  const workshopAmount = process.env.VITE_WORKSHOP_PRICE || '99';
+  // Source HTML already contains a fallback config block; just sync its values from env
+  // so dist output never carries duplicate config scripts.
+  html = html.replace(/window\.__TAGMANGO_URL__\s*=\s*[^;]+;/, `window.__TAGMANGO_URL__=${JSON.stringify(tagmangoUrl)};`);
+  html = html.replace(/window\.__WORKSHOP_AMOUNT__\s*=\s*[^;]+;/, `window.__WORKSHOP_AMOUNT__=${JSON.stringify(Number(workshopAmount) || 99)};`);
+  if (webhookUrl && !html.includes('__WEBHOOK_URL__')) {
+    const configScript = `<script>window.__WEBHOOK_URL__=${JSON.stringify(webhookUrl)};</script>`;
+    if (html.includes('/webinar-assets/js/main.js')) {
+      html = html.replace(/(<script\s+src="\/webinar-assets\/js\/main\.js"><\/script>)/, `${configScript}\n  $1`);
+    } else {
+      html = html.replace('</body>', `  ${configScript}\n</body>`);
+    }
+  }
   fs.writeFileSync(htmlDest, html, 'utf8');
 
   // Also rewrite CSS url() references to use root-relative paths

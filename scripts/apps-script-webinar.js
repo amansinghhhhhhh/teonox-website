@@ -15,6 +15,10 @@
  *   source,           // hardcoded "webinar"
  *   traffic_channel,  // user's dropdown selection (Instagram, LinkedIn, etc.)
  *   referral,         // optional
+ *   amount,           // 99 (workshop price in INR)
+ *   price,            // alias of amount
+ *   gateway,          // 'tagmango'
+ *   tagmango_url,     // checkout link used for redirect
  *   submittedAt       // ISO timestamp
  * }
  */
@@ -46,21 +50,33 @@ function doPost(e) {
         'Traffic Channel',
         'Source',
         'Referral',
+        'Amount',
+        'Gateway',
         'Submitted At'
       ]);
       // Style the header row
-      var headerRange = sheet.getRange(1, 1, 1, 12);
+      var headerRange = sheet.getRange(1, 1, 1, 14);
       headerRange.setFontWeight('bold');
       headerRange.setBackground('#FF6A2B');
       headerRange.setFontColor('#FFFFFF');
+    } else {
+      // Backfill Amount/Gateway columns for existing sheets
+      var existingHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+      if (existingHeaders.indexOf('Amount') === -1) {
+        sheet.getRange(1, existingHeaders.length + 1).setValue('Amount');
+      }
+      var refreshedHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+      if (refreshedHeaders.indexOf('Gateway') === -1) {
+        sheet.getRange(1, refreshedHeaders.length + 1).setValue('Gateway');
+      }
     }
 
     // Append the submission row
     sheet.appendRow([
       new Date().toISOString(),   // Timestamp
-      data.fullName   || '',
+      data.fullName   || data.name || '',
       data.email      || '',
-      data.whatsapp   || '',
+      data.whatsapp   || data.phone || '',
       data.location   || '',
       data.qualification || '',
       data.profile    || '',
@@ -68,6 +84,8 @@ function doPost(e) {
       data.traffic_channel || '', // User's selected dropdown value
       data.source     || 'webinar',
       data.referral   || '',
+      data.amount != null ? data.amount : (data.price != null ? data.price : 99),
+      data.gateway    || 'tagmango',
       data.submittedAt || ''
     ]);
 
@@ -99,6 +117,8 @@ function testDoPost() {
         source: 'webinar',
         traffic_channel: 'Instagram',
         referral: '',
+        amount: 99,
+        gateway: 'tagmango',
         submittedAt: new Date().toISOString()
       })
     }
