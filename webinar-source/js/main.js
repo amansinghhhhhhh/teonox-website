@@ -172,9 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var WEBHOOK_URL = window.__WEBHOOK_URL__ || 'https://script.google.com/macros/s/AKfycbwD25H1aTA5MzUXZvNjVOEPoBXNUl-QzFCNxwqwytC9_ysq1RUaLxHUwfWFAXO6jt4Mpw/exec';
 
     // TagMango checkout + ₹99 pricing config.
-    // URL injected at build from VITE_TAGMANGO_URL; placeholder fallback keeps CTAs functional.
+    // URL injected at build from VITE_TAGMANGO_URL; live default keeps CTAs functional if env is empty.
     // Secrets (Zapier/Pabbly JWTs) must NEVER be added here — keep them server-side / in Apps Script properties.
-    var TAGMANGO_URL = window.__TAGMANGO_URL__ || 'https://tagmango.com/checkout/placeholder';
+    var TAGMANGO_URL = window.__TAGMANGO_URL__ || 'https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb';
     var WORKSHOP_AMOUNT = window.__WORKSHOP_AMOUNT__ || 99;
 
     // ─── Form validation helper ───

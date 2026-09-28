@@ -88,10 +88,10 @@ function main() {
   const htmlDest = path.join(DIST, 'webinar.html');
 
   // Inject runtime config from env (no secrets in client bundle — only public checkout URL + amount).
-  // VITE_TAGMANGO_URL / TAGMANGO_URL → window.__TAGMANGO_URL__ (default placeholder).
+  // VITE_TAGMANGO_URL / TAGMANGO_URL → window.__TAGMANGO_URL__ (default live production URL).
   // VITE_WEBHOOK_URL → window.__WEBHOOK_URL__ (optional override, defaults to Apps Script URL in main.js).
   // VITE_WORKSHOP_PRICE → window.__WORKSHOP_AMOUNT__ (default 99).
-  const tagmangoUrl = process.env.VITE_TAGMANGO_URL || process.env.TAGMANGO_URL || 'https://tagmango.com/checkout/placeholder';
+  const tagmangoUrl = process.env.VITE_TAGMANGO_URL || process.env.TAGMANGO_URL || 'https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb';
   const webhookUrl = process.env.VITE_WEBHOOK_URL || '';
   const workshopAmount = process.env.VITE_WORKSHOP_PRICE || '99';
   // Source HTML already contains a fallback config block; just sync its values from env
