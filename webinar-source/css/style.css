@@ -521,6 +521,22 @@
             background: #fff;
         }
 
+        /* Strict dimensions: Calendly's auto-resize can collapse the container
+           to 0px when third-party storage is restricted — these rules win over
+           any inline height the widget sets. */
+        #calendlyWidget,
+        .calendly-slot-widget {
+            min-height: 700px !important;
+            height: 700px !important;
+            width: 100%;
+            display: block !important;
+        }
+
+        #calendlyWidget iframe {
+            height: 100% !important;
+            min-height: 700px !important;
+        }
+
         .calendly-fallback {
             padding: 32px 20px;
             text-align: center;
@@ -529,8 +545,14 @@
         }
 
         @media (max-width: 640px) {
-            .calendly-slot-widget {
+            .calendly-slot-widget,
+            #calendlyWidget {
                 height: 750px !important;
+                min-height: 750px !important;
+            }
+
+            #calendlyWidget iframe {
+                min-height: 750px !important;
             }
 
             .batch-tab {

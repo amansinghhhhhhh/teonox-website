@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectedBatch = 'morning';
     var lastLead = { name: '', email: '', phone: '' };
     var calendlyTimer = null;
+    var calendlyMountedBatch = null;
 
     function calendlyUrlFor(batch) {
         return batch === 'evening' ? CALENDLY_EVENING_URL : CALENDLY_MORNING_URL;
@@ -227,13 +228,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lastLead.phone) {
             prefill.customAnswers = { a1: lastLead.phone };
         }
-        container.innerHTML = '';
+        // Re-init guard: explicitly tear down any previous frame so a batch
+        // switch can never leave the widget stuck in an unmounted state.
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+        // Re-assert dimensions in case a previous resize set the box to 0px.
+        container.style.display = 'block';
+        container.style.width = '100%';
+        container.style.minHeight = '700px';
+        container.style.height = '700px';
         window.Calendly.initInlineWidget({
             url: url,
             parentElement: container,
             prefill: prefill,
             resize: true
         });
+        calendlyMountedBatch = selectedBatch;
     }
 
     // Reveal Step 2 (batch + slot picker) after lead details are saved.
@@ -255,7 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function setSelectedBatch(batch) {
-        selectedBatch = (batch === 'evening') ? 'evening' : 'morning';
+        var next = (batch === 'evening') ? 'evening' : 'morning';
+        var changed = next !== selectedBatch;
+        selectedBatch = next;
         document.querySelectorAll('.batch-tab').forEach(function(tab) {
             var active = tab.getAttribute('data-batch') === selectedBatch;
             tab.classList.toggle('active', active);
@@ -264,9 +277,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.hero-slot[data-batch]').forEach(function(slot) {
             slot.classList.toggle('selected', slot.getAttribute('data-batch') === selectedBatch);
         });
-        // Re-render widget only if Step 2 is already visible (i.e. lead captured).
+        // Re-render widget only if Step 2 is visible AND the batch actually
+        // changed — avoids tearing down a healthy frame on repeat clicks.
         var step = document.getElementById('slotStep');
-        if (step && step.style.display !== 'none') renderCalendlyWidget();
+        if (changed && step && step.style.display !== 'none') renderCalendlyWidget();
     }
 
     // ─── Form validation helper ───
