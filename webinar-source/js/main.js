@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var CALENDLY_EVENING_URL = window.__CALENDLY_EVENING_URL__ || 'https://calendly.com/calendly-teonox/teonox-evening-batch';
     var selectedBatch = 'morning';
     var lastLead = { name: '', email: '', phone: '' };
+    var calendlyTimer = null;
 
     function calendlyUrlFor(batch) {
         return batch === 'evening' ? CALENDLY_EVENING_URL : CALENDLY_MORNING_URL;
@@ -190,22 +191,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // (Re-)render the inline Calendly widget with lead prefill. Calendly needs a
     // fresh init per URL, so the container is cleared on every batch switch.
+    // NOTE: the container intentionally does NOT use Calendly's own
+    // `calendly-inline-widget` CSS class — widget.js auto-scans for that class
+    // and crashes on elements without a data-url attribute.
     function renderCalendlyWidget() {
         var container = document.getElementById('calendlyWidget');
         if (!container) return;
-        if (!window.Calendly || !window.Calendly.initInlineWidget) {
-            container.innerHTML = '<p class="calendly-fallback">Slot picker is loading… if it does not appear, please refresh the page.</p>';
+        var url = calendlyUrlFor(selectedBatch);
+        if (typeof url !== 'string' || !url.length) {
+            container.innerHTML = '<p class="calendly-fallback">Slot picker is unavailable right now. Please refresh the page or contact the Teonox team.</p>';
             return;
+        }
+        // widget.js loads async — poll briefly so a fast submit can't miss it.
+        if (calendlyTimer) clearInterval(calendlyTimer);
+        var waited = 0;
+        calendlyTimer = setInterval(function() {
+            if (window.Calendly && window.Calendly.initInlineWidget) {
+                clearInterval(calendlyTimer);
+                calendlyTimer = null;
+                mountCalendlyWidget(container, url);
+            } else if ((waited += 500) >= 10000) {
+                clearInterval(calendlyTimer);
+                calendlyTimer = null;
+                container.innerHTML = '<p class="calendly-fallback">Slot picker is loading… if it does not appear, please refresh the page.</p>';
+            }
+        }, 500);
+    }
+
+    function mountCalendlyWidget(container, url) {
+        var prefill = {
+            name: lastLead.name || '',
+            email: lastLead.email || ''
+        };
+        // Only send the phone custom answer when present (a1 = phone question).
+        if (lastLead.phone) {
+            prefill.customAnswers = { a1: lastLead.phone };
         }
         container.innerHTML = '';
         window.Calendly.initInlineWidget({
-            url: calendlyUrlFor(selectedBatch),
+            url: url,
             parentElement: container,
-            prefill: {
-                name: lastLead.name || '',
-                email: lastLead.email || '',
-                customAnswers: { a1: lastLead.phone || '' }
-            },
+            prefill: prefill,
             resize: true
         });
     }

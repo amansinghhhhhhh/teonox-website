@@ -514,7 +514,7 @@
             color: #fff;
         }
 
-        .calendly-inline-widget {
+        .calendly-slot-widget {
             border: 1px solid rgba(255, 106, 43, 0.2);
             border-radius: 16px;
             overflow: hidden;
@@ -529,7 +529,7 @@
         }
 
         @media (max-width: 640px) {
-            .calendly-inline-widget {
+            .calendly-slot-widget {
                 height: 750px !important;
             }
 
