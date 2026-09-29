@@ -439,27 +439,7 @@
             outline-offset: 3px;
         }
 
-        /* Step 2: batch tabs + Calendly slot picker */
-        .slot-step-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .slot-step-header h3 {
-            font-family: 'Sora', sans-serif;
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .slot-step-header h3 i {
-            color: #FF6A2B;
-        }
-
-        .slot-step-header p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
+        /* Step 2: batch tabs + Calendly slot picker (rendered in slot modal) */
 
         .batch-tabs {
             display: flex;
@@ -4832,6 +4812,102 @@
         .register-modal-close:hover {
             background: var(--orange-primary);
             color: white;
+        }
+
+        /* Slot picker modal (batch tabs + Calendly embed) */
+        .slot-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 24px 20px;
+            overflow-y: auto;
+        }
+
+        .slot-modal.active {
+            display: flex;
+        }
+
+        .slot-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .slot-modal-content {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 28px 28px 32px;
+            max-width: 880px;
+            width: 100%;
+            margin: auto;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .slot-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--warm-bg);
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .slot-modal-close:hover {
+            background: var(--orange-primary);
+            color: white;
+        }
+
+        .slot-modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-right: 48px;
+        }
+
+        .slot-modal-header h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .slot-modal-header h2 i {
+            color: #FF6A2B;
+        }
+
+        .slot-modal-header p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        @media (max-width: 640px) {
+            .slot-modal {
+                padding: 12px;
+            }
+
+            .slot-modal-content {
+                padding: 20px 14px 24px;
+                border-radius: 16px;
+            }
+
+            .slot-modal-header h2 {
+                font-size: 20px;
+            }
         }
 
         .register-modal-header {

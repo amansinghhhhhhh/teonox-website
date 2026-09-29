@@ -164,6 +164,21 @@ function closeRegisterModal() {
     document.body.style.overflow = '';
 }
 
+function openSlotModal() {
+    document.getElementById('slotModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSlotModal() {
+    document.getElementById('slotModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function isSlotModalOpen() {
+    var modal = document.getElementById('slotModal');
+    return !!(modal && modal.classList.contains('active'));
+}
+
 // ─── DOMContentLoaded — ALL event listeners and DOM manipulation ───
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -182,7 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var CALENDLY_MORNING_URL = window.__CALENDLY_MORNING_URL__ || 'https://calendly.com/calendly-teonox/teonox-morning-batch';
     var CALENDLY_EVENING_URL = window.__CALENDLY_EVENING_URL__ || 'https://calendly.com/calendly-teonox/teonox-evening-batch';
     var selectedBatch = 'morning';
-    var lastLead = { name: '', email: '', phone: '' };
+    // Name/email only — Calendly rejects unknown custom-answer keys (e.g. a1)
+    // with a 400 on /api/booking/invitees, so phone stays in our lead sheet.
+    var lastLead = { name: '', email: '' };
     var calendlyTimer = null;
     var calendlyMountedBatch = null;
 
@@ -220,14 +237,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mountCalendlyWidget(container, url) {
+        // Prefill name + email only. Custom answers are omitted unless a key
+        // is known to match a Calendly custom question (a mismatched key
+        // throws POST /api/booking/invitees 400 at booking time).
         var prefill = {
             name: lastLead.name || '',
             email: lastLead.email || ''
         };
-        // Only send the phone custom answer when present (a1 = phone question).
-        if (lastLead.phone) {
-            prefill.customAnswers = { a1: lastLead.phone };
-        }
         // Re-init guard: explicitly tear down any previous frame so a batch
         // switch can never leave the widget stuck in an unmounted state.
         while (container.firstChild) {
@@ -247,22 +263,11 @@ document.addEventListener('DOMContentLoaded', function() {
         calendlyMountedBatch = selectedBatch;
     }
 
-    // Reveal Step 2 (batch + slot picker) after lead details are saved.
+    // Open the slot-picker modal after lead details are saved.
     function showSlotStep(fromModal) {
-        var step = document.getElementById('slotStep');
-        if (step) step.style.display = 'block';
+        if (fromModal) closeRegisterModal();
+        openSlotModal();
         renderCalendlyWidget();
-        if (fromModal) {
-            closeRegisterModal();
-            setTimeout(function() {
-                var target = document.getElementById('register');
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 150);
-        } else if (step) {
-            setTimeout(function() {
-                step.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 150);
-        }
     }
 
     function setSelectedBatch(batch) {
@@ -277,10 +282,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.hero-slot[data-batch]').forEach(function(slot) {
             slot.classList.toggle('selected', slot.getAttribute('data-batch') === selectedBatch);
         });
-        // Re-render widget only if Step 2 is visible AND the batch actually
-        // changed — avoids tearing down a healthy frame on repeat clicks.
-        var step = document.getElementById('slotStep');
-        if (changed && step && step.style.display !== 'none') renderCalendlyWidget();
+        // Re-render widget only if the slot modal is open AND the batch
+        // actually changed — avoids tearing down a healthy frame on repeat clicks.
+        if (changed && isSlotModalOpen()) renderCalendlyWidget();
     }
 
     // ─── Form validation helper ───
@@ -420,8 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Stash lead details for Calendly prefill (no re-typing in widget).
             lastLead = {
                 name: data.fullName || '',
-                email: data.email || '',
-                phone: data.whatsapp || ''
+                email: data.email || ''
             };
             form.reset();
             successEl.style.display = 'block';
@@ -491,8 +494,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.hero-slot[data-batch]').forEach(function(slot) {
         var pick = function() {
             setSelectedBatch(slot.getAttribute('data-batch'));
-            var target = document.getElementById('register');
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            openSlotModal();
+            renderCalendlyWidget();
         };
         slot.addEventListener('click', pick);
         slot.addEventListener('keydown', function(e) {
@@ -503,10 +506,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ─── Close modal on escape key ───
+    // ─── Close modals on escape key ───
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeRegisterModal();
+        if (e.key === 'Escape') {
+            closeRegisterModal();
+            closeSlotModal();
+        }
     });
 
     // ─── Close gift modal on outside click ───

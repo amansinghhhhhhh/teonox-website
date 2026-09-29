@@ -1901,7 +1901,7 @@
                             PAY ₹99 & CLAIM MY SEAT
                         </button>
                         <div id="formSuccessMessage" style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:10px; padding:14px 18px; margin-top:14px; font-weight:600; text-align:center;">
-                            <i class="fas fa-check-circle"></i> Details saved! Pick your batch below to reserve your seat.
+                            <i class="fas fa-check-circle"></i> Details saved! Opening the slot picker...
                         </div>
                         <div id="formErrorMessage" style="display:none; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; border-radius:10px; padding:14px 18px; margin-top:14px; font-weight:600; text-align:center;">
                             <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
@@ -1909,24 +1909,6 @@
                         <p class="form-disclaimer">By submitting this form, you agree to be contacted by the Teonox team regarding the workshop.</p>
                     </div>
                 </form>
-                <!-- Step 2: Batch + slot selection (revealed after lead details are saved) -->
-                <div id="slotStep" style="display:none; margin-top:28px;">
-                    <div class="slot-step-header">
-                        <h3><i class="fas fa-calendar-check"></i> Step 2 — Pick Your Batch & Slot</h3>
-                        <p>Your details are saved. Select a batch, then choose your slot. Payment (₹99) happens automatically after booking.</p>
-                    </div>
-                    <div class="batch-tabs" role="tablist" aria-label="Batch selection">
-                        <button type="button" class="batch-tab active" data-batch="morning" role="tab" aria-selected="true">
-                            <i class="fas fa-sun"></i> Morning Batch
-                            <span class="batch-tab-time">10 AM – 12 PM</span>
-                        </button>
-                        <button type="button" class="batch-tab" data-batch="evening" role="tab" aria-selected="false">
-                            <i class="fas fa-moon"></i> Evening Batch
-                            <span class="batch-tab-time">5 PM – 7 PM</span>
-                        </button>
-                    </div>
-                    <div id="calendlyWidget" class="calendly-slot-widget" style="min-width:320px;height:700px;"></div>
-                </div>
             </div>
         </div>
     </section>
@@ -2050,6 +2032,31 @@
                 </div>
                 <p class="register-modal-disclaimer">By submitting this form, you agree to be contacted by the Teonox team.</p>
             </form>
+        </div>
+    </div>
+
+    <!-- Batch + Slot Picker Modal (opens after lead capture or via hero batch slots) -->
+    <div class="slot-modal" id="slotModal" role="dialog" aria-modal="true" aria-label="Pick your batch and slot">
+        <div class="slot-modal-overlay" onclick="closeSlotModal()"></div>
+        <div class="slot-modal-content">
+            <button class="slot-modal-close" onclick="closeSlotModal()" aria-label="Close slot picker">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="slot-modal-header">
+                <h2><i class="fas fa-calendar-check"></i> Pick Your Batch & Slot</h2>
+                <p>Select a batch, then choose your slot. Payment (₹99) happens automatically after booking.</p>
+            </div>
+            <div class="batch-tabs" role="tablist" aria-label="Batch selection">
+                <button type="button" class="batch-tab active" data-batch="morning" role="tab" aria-selected="true">
+                    <i class="fas fa-sun"></i> Morning Batch
+                    <span class="batch-tab-time">10 AM – 12 PM</span>
+                </button>
+                <button type="button" class="batch-tab" data-batch="evening" role="tab" aria-selected="false">
+                    <i class="fas fa-moon"></i> Evening Batch
+                    <span class="batch-tab-time">5 PM – 7 PM</span>
+                </button>
+            </div>
+            <div id="calendlyWidget" class="calendly-slot-widget" style="min-width:320px;height:700px;"></div>
         </div>
     </div>
 
