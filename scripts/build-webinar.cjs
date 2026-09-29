@@ -94,10 +94,14 @@ function main() {
   const tagmangoUrl = process.env.VITE_TAGMANGO_URL || process.env.TAGMANGO_URL || 'https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb';
   const webhookUrl = process.env.VITE_WEBHOOK_URL || '';
   const workshopAmount = process.env.VITE_WORKSHOP_PRICE || '99';
+  const calendlyMorning = process.env.VITE_CALENDLY_MORNING_URL || 'https://calendly.com/calendly-teonox/teonox-morning-batch';
+  const calendlyEvening = process.env.VITE_CALENDLY_EVENING_URL || 'https://calendly.com/calendly-teonox/teonox-evening-batch';
   // Source HTML already contains a fallback config block; just sync its values from env
   // so dist output never carries duplicate config scripts.
   html = html.replace(/window\.__TAGMANGO_URL__\s*=\s*[^;]+;/, `window.__TAGMANGO_URL__=${JSON.stringify(tagmangoUrl)};`);
   html = html.replace(/window\.__WORKSHOP_AMOUNT__\s*=\s*[^;]+;/, `window.__WORKSHOP_AMOUNT__=${JSON.stringify(Number(workshopAmount) || 99)};`);
+  html = html.replace(/window\.__CALENDLY_MORNING_URL__\s*=\s*[^;]+;/, `window.__CALENDLY_MORNING_URL__=${JSON.stringify(calendlyMorning)};`);
+  html = html.replace(/window\.__CALENDLY_EVENING_URL__\s*=\s*[^;]+;/, `window.__CALENDLY_EVENING_URL__=${JSON.stringify(calendlyEvening)};`);
   if (webhookUrl && !html.includes('__WEBHOOK_URL__')) {
     const configScript = `<script>window.__WEBHOOK_URL__=${JSON.stringify(webhookUrl)};</script>`;
     if (html.includes('/webinar-assets/js/main.js')) {

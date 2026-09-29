@@ -177,6 +177,72 @@ document.addEventListener('DOMContentLoaded', function() {
     var TAGMANGO_URL = window.__TAGMANGO_URL__ || 'https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb';
     var WORKSHOP_AMOUNT = window.__WORKSHOP_AMOUNT__ || 99;
 
+    // Calendly batch event URLs (seat-capped in Calendly; post-booking redirect to
+    // TagMango is configured inside Calendly). Overridable at build via env.
+    var CALENDLY_MORNING_URL = window.__CALENDLY_MORNING_URL__ || 'https://calendly.com/calendly-teonox/teonox-morning-batch';
+    var CALENDLY_EVENING_URL = window.__CALENDLY_EVENING_URL__ || 'https://calendly.com/calendly-teonox/teonox-evening-batch';
+    var selectedBatch = 'morning';
+    var lastLead = { name: '', email: '', phone: '' };
+
+    function calendlyUrlFor(batch) {
+        return batch === 'evening' ? CALENDLY_EVENING_URL : CALENDLY_MORNING_URL;
+    }
+
+    // (Re-)render the inline Calendly widget with lead prefill. Calendly needs a
+    // fresh init per URL, so the container is cleared on every batch switch.
+    function renderCalendlyWidget() {
+        var container = document.getElementById('calendlyWidget');
+        if (!container) return;
+        if (!window.Calendly || !window.Calendly.initInlineWidget) {
+            container.innerHTML = '<p class="calendly-fallback">Slot picker is loading… if it does not appear, please refresh the page.</p>';
+            return;
+        }
+        container.innerHTML = '';
+        window.Calendly.initInlineWidget({
+            url: calendlyUrlFor(selectedBatch),
+            parentElement: container,
+            prefill: {
+                name: lastLead.name || '',
+                email: lastLead.email || '',
+                customAnswers: { a1: lastLead.phone || '' }
+            },
+            resize: true
+        });
+    }
+
+    // Reveal Step 2 (batch + slot picker) after lead details are saved.
+    function showSlotStep(fromModal) {
+        var step = document.getElementById('slotStep');
+        if (step) step.style.display = 'block';
+        renderCalendlyWidget();
+        if (fromModal) {
+            closeRegisterModal();
+            setTimeout(function() {
+                var target = document.getElementById('register');
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
+        } else if (step) {
+            setTimeout(function() {
+                step.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
+        }
+    }
+
+    function setSelectedBatch(batch) {
+        selectedBatch = (batch === 'evening') ? 'evening' : 'morning';
+        document.querySelectorAll('.batch-tab').forEach(function(tab) {
+            var active = tab.getAttribute('data-batch') === selectedBatch;
+            tab.classList.toggle('active', active);
+            tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        document.querySelectorAll('.hero-slot[data-batch]').forEach(function(slot) {
+            slot.classList.toggle('selected', slot.getAttribute('data-batch') === selectedBatch);
+        });
+        // Re-render widget only if Step 2 is already visible (i.e. lead captured).
+        var step = document.getElementById('slotStep');
+        if (step && step.style.display !== 'none') renderCalendlyWidget();
+    }
+
     // ─── Form validation helper ───
 
     function clearErrors(form) {
@@ -311,14 +377,18 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(payload)
         })
         .then(function() {
+            // Stash lead details for Calendly prefill (no re-typing in widget).
+            lastLead = {
+                name: data.fullName || '',
+                email: data.email || '',
+                phone: data.whatsapp || ''
+            };
             form.reset();
             successEl.style.display = 'block';
-            // Lead captured → hand off to TagMango checkout for ₹99 payment.
-            if (TAGMANGO_URL) {
-                setTimeout(function() {
-                    window.location.href = TAGMANGO_URL;
-                }, 900);
-            }
+            // Lead captured → Step 2: batch + slot selection in Calendly.
+            // Calendly's own post-booking redirect routes to TagMango checkout.
+            var isModal = form.id === 'popupRegistrationForm';
+            setTimeout(function() { showSlotStep(isModal); }, 900);
         })
         .catch(function() {
             errorEl.style.display = 'block';
@@ -367,6 +437,29 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             openRegisterModal();
+        });
+    });
+
+    // ─── Batch selection (hero slots + Step 2 tabs) ───
+
+    document.querySelectorAll('.batch-tab[data-batch]').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            setSelectedBatch(tab.getAttribute('data-batch'));
+        });
+    });
+
+    document.querySelectorAll('.hero-slot[data-batch]').forEach(function(slot) {
+        var pick = function() {
+            setSelectedBatch(slot.getAttribute('data-batch'));
+            var target = document.getElementById('register');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        slot.addEventListener('click', pick);
+        slot.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                pick();
+            }
         });
     });
 

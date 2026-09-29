@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -62,11 +63,11 @@
                     <div class="hero-slots-wrapper">
                         <p class="hero-slots-label">Select Your Preferred Batch:</p>
                         <div class="hero-slots">
-                            <div class="hero-slot">
+                            <div class="hero-slot" data-batch="morning" role="button" tabindex="0" aria-label="Select morning batch">
                                 <i class="fas fa-sun"></i>
                                 <span>Morning: 10 AM – 12 PM</span>
                             </div>
-                            <div class="hero-slot">
+                            <div class="hero-slot" data-batch="evening" role="button" tabindex="0" aria-label="Select evening batch">
                                 <i class="fas fa-moon"></i>
                                 <span>Evening: 5 PM – 7 PM</span>
                             </div>
@@ -1900,7 +1901,7 @@
                             PAY ₹99 & CLAIM MY SEAT
                         </button>
                         <div id="formSuccessMessage" style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:10px; padding:14px 18px; margin-top:14px; font-weight:600; text-align:center;">
-                            <i class="fas fa-check-circle"></i> Details saved! Redirecting to TagMango to complete your ₹99 payment...
+                            <i class="fas fa-check-circle"></i> Details saved! Pick your batch below to reserve your seat.
                         </div>
                         <div id="formErrorMessage" style="display:none; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; border-radius:10px; padding:14px 18px; margin-top:14px; font-weight:600; text-align:center;">
                             <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
@@ -1908,6 +1909,24 @@
                         <p class="form-disclaimer">By submitting this form, you agree to be contacted by the Teonox team regarding the workshop.</p>
                     </div>
                 </form>
+                <!-- Step 2: Batch + slot selection (revealed after lead details are saved) -->
+                <div id="slotStep" style="display:none; margin-top:28px;">
+                    <div class="slot-step-header">
+                        <h3><i class="fas fa-calendar-check"></i> Step 2 — Pick Your Batch & Slot</h3>
+                        <p>Your details are saved. Select a batch, then choose your slot. Payment (₹99) happens automatically after booking.</p>
+                    </div>
+                    <div class="batch-tabs" role="tablist" aria-label="Batch selection">
+                        <button type="button" class="batch-tab active" data-batch="morning" role="tab" aria-selected="true">
+                            <i class="fas fa-sun"></i> Morning Batch
+                            <span class="batch-tab-time">10 AM – 12 PM</span>
+                        </button>
+                        <button type="button" class="batch-tab" data-batch="evening" role="tab" aria-selected="false">
+                            <i class="fas fa-moon"></i> Evening Batch
+                            <span class="batch-tab-time">5 PM – 7 PM</span>
+                        </button>
+                    </div>
+                    <div id="calendlyWidget" class="calendly-inline-widget" style="min-width:320px;height:700px;"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -2024,7 +2043,7 @@
                     PAY ₹99 & CLAIM MY SEAT
                 </button>
                 <div id="popupFormSuccessMessage" style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:10px; padding:14px 18px; margin-top:14px; font-weight:600; text-align:center;">
-                    <i class="fas fa-check-circle"></i> Details saved! Redirecting to TagMango to complete your ₹99 payment...
+                    <i class="fas fa-check-circle"></i> Details saved! Taking you to batch & slot selection...
                 </div>
                 <div id="popupFormErrorMessage" style="display:none; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; border-radius:10px; padding:14px 18px; margin-top:14px; font-weight:600; text-align:center;">
                     <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
@@ -2034,11 +2053,15 @@
         </div>
     </div>
 
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script>
         // Injected at build time from VITE_TAGMANGO_URL (see scripts/build-webinar.cjs).
         // Live default; override without editing source via env.
         window.__TAGMANGO_URL__ = window.__TAGMANGO_URL__ || "https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb";
         window.__WORKSHOP_AMOUNT__ = 99;
+        // Calendly batch event URLs (seat-capped in Calendly). Overridable via env at build time.
+        window.__CALENDLY_MORNING_URL__ = window.__CALENDLY_MORNING_URL__ || "https://calendly.com/calendly-teonox/teonox-morning-batch";
+        window.__CALENDLY_EVENING_URL__ = window.__CALENDLY_EVENING_URL__ || "https://calendly.com/calendly-teonox/teonox-evening-batch";
     </script>
     <script src="js/main.js"></script>
 </body>
