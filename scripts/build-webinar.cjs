@@ -110,6 +110,18 @@ function main() {
       html = html.replace('</body>', `  ${configScript}\n</body>`);
     }
   }
+  // Cache-bust the workshop bundle: main.js keeps a stable filename across
+  // builds, so append its mtime — this guarantees the test browser runs the
+  // current submit handler (stash + open modal) and never a stale cached copy.
+  try {
+    var mainJsMtime = fs.statSync(path.join(SRC, 'js', 'main.js')).mtimeMs;
+    html = html.replace(
+      '/webinar-assets/js/main.js"></script>',
+      '/webinar-assets/js/main.js?v=' + Number(mainJsMtime).toString(36) + '"></script>'
+    );
+  } catch (err) {
+    console.warn('[build-webinar] cache-bust skipped:', err.message);
+  }
   fs.writeFileSync(htmlDest, html, 'utf8');
 
   // Also rewrite CSS url() references to use root-relative paths

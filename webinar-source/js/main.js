@@ -165,6 +165,7 @@ function closeRegisterModal() {
 }
 
 function openSlotModal() {
+    console.log("Opening slot modal only - no redirect");
     document.getElementById('slotModal').classList.add('active');
     document.body.style.overflow = 'hidden';
 }
