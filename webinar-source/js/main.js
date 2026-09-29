@@ -448,6 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var popupForm = document.getElementById('popupRegistrationForm');
     if (popupForm) {
         popupForm.addEventListener('submit', function(e) {
+            debugger;
             e.preventDefault();
             e.stopPropagation();
             if (!validateForm(popupForm)) return;
@@ -460,6 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var inlineForm = document.getElementById('registrationForm');
     if (inlineForm) {
         inlineForm.addEventListener('submit', function(e) {
+            debugger;
             e.preventDefault();
             e.stopPropagation();
             if (!validateForm(inlineForm)) return;
