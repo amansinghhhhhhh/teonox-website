@@ -874,6 +874,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // ─── Smooth scroll for anchor links ───
 
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        // #register CTAs open the lead modal instead of scrolling (handled
+        // by the register-button listener above) — user stays in place.
+        if (anchor.getAttribute('href') === '#register') return;
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             var target = document.querySelector(this.getAttribute('href'));
