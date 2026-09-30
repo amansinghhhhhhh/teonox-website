@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { ArrowUpRight, BookOpen } from 'lucide-react';
 import { INSIGHTS_DATA } from '../data';
 import { BlogPost } from '../types';
+import { fetchLiveBlogs } from '../services/blogService';
 import { Reveal } from './Reveal';
 
 interface InsightsSectionProps {
@@ -9,6 +11,25 @@ interface InsightsSectionProps {
 }
 
 export function InsightsSection({ onSelectPost, onViewAll }: InsightsSectionProps) {
+  // Start with the static fallback so the section never renders empty, then
+  // swap in the latest CMS posts (same source as /blog) when they resolve.
+  const [posts, setPosts] = useState<BlogPost[]>(INSIGHTS_DATA.posts);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchLiveBlogs()
+      .then(({ blogs }) => {
+        if (!cancelled && blogs.length > 0) {
+          setPosts(blogs.slice(0, 3));
+        }
+      })
+      .catch(() => {
+        // Keep the static fallback on network failure.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   return (
     <section id="insights" className="py-10 sm:py-14 bg-white relative border-t border-[#F0DFCE]">
       <div className="w-[80%] mx-auto">
@@ -36,7 +57,7 @@ export function InsightsSection({ onSelectPost, onViewAll }: InsightsSectionProp
 
         {/* 3 Column Article Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {INSIGHTS_DATA.posts.map((post, i) => (
+          {posts.map((post, i) => (
             <Reveal key={post.id} delay={i * 0.1} y={32}>
             <article
               onClick={() => onSelectPost?.(post)}

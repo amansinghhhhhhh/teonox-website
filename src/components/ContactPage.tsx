@@ -168,12 +168,12 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
 
           {/* Heading */}
           <motion.h1 {...fadeUp(0.08)} className="font-sora text-[36px] sm:text-[52px] md:text-[60px] font-[800] text-[#111111] leading-[1.12] tracking-tight mb-6 relative z-10">
-            Let's Talk About Your Future
+            Talk to a Digital Marketing Course Institute Near You
           </motion.h1>
 
           {/* Paragraph */}
           <motion.p {...fadeUp(0.15)} className="font-inter text-[16px] sm:text-[19px] text-[#666666] leading-[1.7] max-w-2xl mx-auto mb-10 relative z-10">
-            Whether you're exploring our programmes, planning your career, or looking to visit our campus, our team is here to help every step of the way.
+            Looking for a digital marketing course institute near you? Teonox's Pune campus and live online classrooms bring together industry practitioners, hands-on projects, and placement support across digital marketing, AI & automation, data analytics, and sales. Whether you'd rather learn in person or from home, get in touch below, and our counsellors will help you pick the right batch.
           </motion.p>
 
           {/* 3 CTA Buttons Row */}
@@ -354,7 +354,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
             {/* Right Content */}
             <motion.div {...fadeUp(0.15)} className="order-1 lg:order-2 space-y-6">
               <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] text-[#111111] leading-[1.18] tracking-tight">
-                Campus Visit
+                Visit Our Institute
               </h2>
 
               <p className="font-sora text-[15px] sm:text-[17px] font-[500] text-[#555555] leading-relaxed">

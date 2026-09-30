@@ -62,6 +62,7 @@ import {
   Award,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   Monitor,
   Building2,
   CheckSquare,
@@ -75,6 +76,7 @@ import {
 import heroImg from '../assets/images/career-outcomes/career_outcomes_hero.webp';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
+import { FAQSchema } from './schema/FAQSchema';
 import { EASE_OUT } from '../utils/easing';
 
 interface CareerOutcomesPageProps {
@@ -140,6 +142,41 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
     ref: React.RefObject<HTMLDivElement | null>,
     dir: number
   ) => ref.current?.scrollBy({ left: dir * 240, behavior: 'smooth' });
+
+  // Open FAQ index for Section 11 (single-open accordion)
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  // Frequently Asked Questions (Section 11)
+  const careerFaqs = [
+    {
+      q: "What is the best Career-oriented digital marketing course?",
+      a: "A Career-oriented digital marketing course in Pune should combine live projects, industry-recognised certification, and placement support, not just theory. TEONOX Digital Marketing course is built around practical, AI-integrated digital marketing training (SEO, paid ads, content, analytics) with hands-on projects and career guidance designed for students, fresh graduates, and working professionals looking to build job-ready skills.",
+    },
+    {
+      q: "Are there digital marketing courses with a job guarantee?",
+      a: "Most institutes that advertise \u201Cjob guarantee\u201D are referring to placement assistance, not a legal guarantee of employment. No course can guarantee a job, since hiring depends on the employer. TEONOX offers placement assistance and career support (resume help, interview prep, employer connections) alongside its Digital Marketing course in Pune, rather than an unconditional guarantee, so students get real support without misleading promises.",
+    },
+    {
+      q: "Which is the best digital marketing course with placement?",
+      a: "Leading digital marketing course with placement assistance in Pune is one that pairs a strong curriculum with an active placement cell and employer network. TEONOX course includes placement assistance as part of the programme, covering practical skills in AI-driven digital marketing, live campaigns, and portfolio-building so graduates are placement-ready.",
+    },
+    {
+      q: "What does a career-oriented digital marketing course typically include?",
+      a: "It typically includes core modules (SEO, SEM, social media, content marketing, and analytics), AI and automation tools, live projects, and career services like resume building and mock interviews. TEONOX structures its Pune-based programme this way specifically to prepare students for real job roles rather than just certification.",
+    },
+    {
+      q: "How long does a digital marketing course with placement support usually take?",
+      a: "Most placement-oriented digital marketing courses in Pune run a few months to under a year, depending on depth and specialisation.",
+    },
+    {
+      q: "Who should take a career-oriented digital marketing course?",
+      a: "It suits students, fresh graduates, working professionals looking to upskill, career switchers, and business owners wanting to run their own marketing. TEONOX Pune course is designed to serve all these groups with tracks that fit different starting points.",
+    },
+    {
+      q: "What makes a digital marketing course the best rather than simply the cheapest?",
+      a: "The \u201Cbest\u201D course is judged by placement outcomes, curriculum relevance (especially AI integration now), trainer expertise, and live project exposure \u2014 not just price. The course fee is one factor, but outcomes and support matter more for long-term career value.",
+    },
+  ];
 
   // Placement Process Steps
   const placementSteps = [
@@ -1031,6 +1068,53 @@ export function CareerOutcomesPage({ onEnquireClick, onExplorePrograms }: Career
             </motion.div>
 
           </div>
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SECTION 11: FREQUENTLY ASKED QUESTIONS (Light Section)
+          ───────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#FAF8F5] text-[#111111] relative overflow-hidden border-b border-[#EBE4DC]">
+        <FAQSchema faqs={careerFaqs.map((faq) => ({ question: faq.q, answer: faq.a }))} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div {...fadeUp(0)} className="max-w-3xl mx-auto space-y-4 text-center mb-10">
+            <h2 className="font-sora text-[28px] sm:text-[36px] lg:text-[42px] font-[800] tracking-tight leading-[1.18]">
+              Frequently Asked Questions
+            </h2>
+            <p className="font-inter text-base sm:text-lg text-[#555555] leading-relaxed font-medium">
+              Everything you need to know about career-oriented digital marketing courses, placements, and what to expect.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeUp(0.1)} className="max-w-3xl mx-auto space-y-3">
+            {careerFaqs.map((faq, idx) => {
+              const isOpen = openFaqIndex === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-[20px] border border-[#ECECEC] bg-white overflow-hidden transition-all duration-300"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                    aria-expanded={isOpen}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FFF0EB]/40 transition-colors"
+                  >
+                    <span className="font-sora text-[15.5px] font-[700] text-[#111111]">{faq.q}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-[#F15A29] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="p-5 pt-0 border-t border-[#ECECEC] bg-white font-inter text-[14.5px] text-[#444444] leading-relaxed whitespace-pre-line">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
