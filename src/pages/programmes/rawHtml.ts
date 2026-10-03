@@ -1171,33 +1171,9 @@ export const rawHtmlBody = `<!-- Hero -->
                   <span style="flex-shrink:0;padding-left:12px;font-size:13px;font-weight:700;color:var(--text-secondary);font-family:Inter,sans-serif;">+91</span>
                   <input type="tel" placeholder="10-digit mobile number" required maxlength="10" style="flex:1;min-width:0;border:none;background:transparent;box-shadow:none;padding-left:8px;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
                 </div>
-                <!-- TEMPORARY: OTP flow disabled — Get OTP hidden, direct submission restored -->
-                <button type="button" id="teonox-get-otp-btn" onclick="requestOtp()" disabled style="display:none;flex-shrink:0;white-space:nowrap;padding:11px 14px;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;border:1px solid var(--orange);background:var(--white);color:var(--orange);opacity:0.5;">
-                  <i class="fas fa-comment-sms"></i> Get OTP
-                </button>
               </div>
               <div id="teonox-phone-error-slot" style="margin-top:2px;"></div>
             </div>
-            <div id="teonox-otp-box" style="display:none;grid-column:1/-1;">
-              <div style="background:#FFF6EE;border:1px solid var(--orange-border);border-radius:8px;padding:14px;">
-                <label style="display:block;font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Enter 6-digit OTP sent to your mobile</label>
-                <input id="teonox-otp-input" type="text" inputmode="numeric" placeholder="6-digit code" maxlength="6" autocomplete="one-time-code" style="width:100%;letter-spacing:6px;text-align:center;font-size:18px;font-weight:700;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
-                <button type="button" id="teonox-verify-otp-btn" onclick="verifyInlineOtp()" style="width:100%;margin-top:8px;padding:13px 16px;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;font-weight:700;cursor:pointer;border:none;background:var(--orange);color:#fff;">
-                  <i class="fas fa-check"></i> Verify Code
-                </button>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
-                  <span id="teonox-otp-timer" style="font-size:12px;color:var(--text-muted);font-family:Inter,sans-serif;"></span>
-                  <button type="button" id="teonox-otp-resend" onclick="resendInlineOtp()" disabled style="background:none;border:none;color:var(--orange);font-size:12px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;opacity:0.5;padding:0;">
-                    <i class="fas fa-rotate-right"></i> Resend OTP
-                  </button>
-                </div>
-                <div id="teonox-otp-error" style="display:none;color:#e74c3c;font-size:13px;margin-top:6px;font-family:Inter,sans-serif;"></div>
-              </div>
-            </div>
-          </div>
-          <div id="teonox-phone-verified" style="display:none;margin:8px 0 14px;background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:10px 12px;font-size:13px;font-weight:700;font-family:Inter,sans-serif;color:#15803d;">
-            ✓ Phone Number Verified
-          </div>
           <div class="teonox-online-form-group">
             <label>Email Address</label>
             <input type="email" placeholder="Enter your email address" required>
@@ -1222,7 +1198,6 @@ export const rawHtmlBody = `<!-- Hero -->
               <option>Evening (6 PM - 9 PM)</option>
             </select>
           </div>
-          <div id="recaptcha-container" style="display:none;"></div>
           <button type="submit" class="teonox-online-btn teonox-online-btn-primary" style="width:100%;padding:14px;font-size:15px;">
             <i class="fas fa-paper-plane"></i> Submit Application
           </button>

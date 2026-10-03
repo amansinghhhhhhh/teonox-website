@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
+import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
+import { PhoneOtpModal } from './PhoneOtpModal';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
 interface EnquireModalProps {
@@ -29,6 +31,8 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [otpOpen, setOtpOpen] = useState(false);
+  const [pendingFields, setPendingFields] = useState<Record<string, string> | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Focus trap + Escape key + focus on open
@@ -64,6 +68,20 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
 
   if (!isOpen) return null;
 
+  const doDirectSubmit = async (fields: Record<string, string>) => {
+    setIsSubmitting(true);
+    try {
+      // Field keys match the legacy payload so the
+      // Sheet columns and email template keep working unchanged.
+      await submitForm(formName, fields);
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    } catch {
+      setIsSubmitting(false);
+      setError('Something went wrong. Please try again.');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isCampusVisit && !selectedCourse) {
@@ -88,22 +106,28 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
     }
 
     setError('');
-    setIsSubmitting(true);
-    try {
-      // Field keys match the legacy payload so the
-      // Sheet columns and email template keep working unchanged.
-      await submitForm(formName, {
-        'Full Name': fullName,
-        'Email Address': email,
-        'Phone Number': phone,
-        'Interested In': selectedCourse,
-      });
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    } catch {
-      setIsSubmitting(false);
-      setError('Something went wrong. Please try again.');
+    const fields = {
+      'Full Name': fullName,
+      'Email Address': email,
+      'Phone Number': phone,
+      'Interested In': selectedCourse,
+    };
+    // Phone-gated forms verify the number via OTP first; exempt forms
+    // (e.g. Brochure Downloads) and invalid numbers submit directly.
+    if (!shouldVerifyOtp(formName, phone)) {
+      await doDirectSubmit(fields);
+      return;
     }
+    setPendingFields(fields);
+    setOtpOpen(true);
+  };
+
+  const handleOtpVerified = async (verifiedPhone: string) => {
+    setOtpOpen(false);
+    const fields = pendingFields;
+    setPendingFields(null);
+    if (!fields) return;
+    await doDirectSubmit({ ...fields, 'Phone Number': verifiedPhone });
   };
 
   const handleReset = () => {
@@ -304,6 +328,17 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
         </div>
 
       </div>
+
+      {/* Shared phone-verification step (skipped for exempt forms) */}
+      <PhoneOtpModal
+        open={otpOpen}
+        phone={phone}
+        onClose={() => {
+          setOtpOpen(false);
+          setPendingFields(null);
+        }}
+        onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
+      />
     </div>
   );
 }

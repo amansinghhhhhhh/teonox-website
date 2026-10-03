@@ -632,6 +632,10 @@ export default function App() {
         defaultCourse={brochureDefaultCourse}
       />
 
+      {/* Singleton invisible reCAPTCHA host for Firebase phone OTP.
+          Always mounted so usePhoneOtp never re-binds the verifier. */}
+      <div id="recaptcha-container" style={{ display: 'none' }} aria-hidden="true" />
+
       <FloatingControls />
     </div>
   );

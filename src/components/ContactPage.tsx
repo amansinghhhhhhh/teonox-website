@@ -16,6 +16,8 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { submitForm } from '../services/formService';
+import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
+import { PhoneOtpModal } from './PhoneOtpModal';
 import { validateEmail, validatePhone, validateRequired } from '../utils/validation';
 import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
 import campusImg from '../assets/images/contact/campus.webp';
@@ -56,6 +58,8 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(true);
   const [error, setError] = useState('');
+  const [otpOpen, setOtpOpen] = useState(false);
+  const [pendingFields, setPendingFields] = useState<Record<string, string> | null>(null);
 
   const programOptions = [
     'Business Digital Marketing With AI',
@@ -67,6 +71,20 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
     'Hire Talent / Corporate Training',
     'Other / General Enquiry',
   ];
+
+  const doDirectSubmit = async (fields: Record<string, string>) => {
+    setIsSubmitting(true);
+    try {
+      // Field keys match the legacy "Contact Page" payload so the Sheet
+      // columns and email template keep working unchanged.
+      await submitForm('Contact Page', fields);
+      setIsSubmitting(false);
+      setSubmitted(true);
+    } catch {
+      setIsSubmitting(false);
+      setError('Something went wrong. Please try again.');
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -90,24 +108,29 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
       return;
     }
 
-    setIsSubmitting(true);
-    try {
-      // Field keys match the legacy "Contact Page" payload so the Sheet
-      // columns and email template keep working unchanged.
-      await submitForm('Contact Page', {
-        'Full Name': formData.fullName,
-        'Email Address': formData.email,
-        'Phone Number': formData.phone,
-        City: formData.city,
-        'Interested In': formData.program,
-        'Your Message': formData.message,
-      });
-      setIsSubmitting(false);
-      setSubmitted(true);
-    } catch {
-      setIsSubmitting(false);
-      setError('Something went wrong. Please try again.');
+    const fields = {
+      'Full Name': formData.fullName,
+      'Email Address': formData.email,
+      'Phone Number': formData.phone,
+      City: formData.city,
+      'Interested In': formData.program,
+      'Your Message': formData.message,
+    };
+    // Phone-gated submit: verify the number via OTP first.
+    if (!shouldVerifyOtp('Contact Page', formData.phone)) {
+      await doDirectSubmit(fields);
+      return;
     }
+    setPendingFields(fields);
+    setOtpOpen(true);
+  };
+
+  const handleOtpVerified = async (verifiedPhone: string) => {
+    setOtpOpen(false);
+    const fields = pendingFields;
+    setPendingFields(null);
+    if (!fields) return;
+    await doDirectSubmit({ ...fields, 'Phone Number': verifiedPhone });
   };
 
   const scrollToMap = () => {
@@ -728,6 +751,17 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
           </div>
         </div>
       </motion.section>
+
+      {/* Shared phone-verification step */}
+      <PhoneOtpModal
+        open={otpOpen}
+        phone={formData.phone}
+        onClose={() => {
+          setOtpOpen(false);
+          setPendingFields(null);
+        }}
+        onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
+      />
     </div>
   );
 }
