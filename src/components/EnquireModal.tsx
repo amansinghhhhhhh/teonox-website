@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
+import { redirectToThankYou } from '../utils/thankYou';
 import { PhoneOtpInline } from './PhoneOtpInline';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
@@ -57,6 +58,18 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
   }, [isOpen, onClose]);
 
   useEffect(() => {
+    if (isOpen) return;
+    setError('');
+    setIsSubmitting(false);
+    setIsSubmitted(false);
+    setFullName('');
+    setEmail('');
+    setPhone('');
+    setVerifiedPhone('');
+    setSelectedCourse('');
+  }, [isOpen]);
+
+  useEffect(() => {
     if (defaultCourse) {
       // Find matching course or default
       const matched = COURSES.find(c => c.toLowerCase().includes(defaultCourse.toLowerCase()));
@@ -76,6 +89,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
       await submitForm(formName, fields);
       setIsSubmitting(false);
       setIsSubmitted(true);
+      redirectToThankYou(formName, 'enquire-modal');
     } catch {
       setIsSubmitting(false);
       setError('Something went wrong. Please try again.');

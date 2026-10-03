@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, Loader2, MessageCircle, MessageSquare } from 'lucide-react';
 import { submitForm } from '../services/formService';
+import { redirectToThankYou } from '../utils/thankYou';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
 interface BrochureModalProps {
@@ -21,9 +22,18 @@ export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' 
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (isOpen) {
+      setError('');
+      setIsSubmitted(false);
+      return;
+    }
     setError('');
     setIsSubmitted(false);
+    setIsSubmitting(false);
+    setFullName('');
+    setEmail('');
+    setPhone('');
+    setAgreeTerms(true);
   }, [isOpen, defaultCourse]);
 
   // Focus trap + Escape key + focus on open
@@ -79,6 +89,7 @@ export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' 
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
+      redirectToThankYou('Brochure Downloads', 'brochure-modal');
     } catch (err) {
       console.error('[BrochureModal] Form submission failed:', err);
       setIsSubmitting(false);

@@ -16,6 +16,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { submitForm } from '../services/formService';
+import { redirectToThankYou } from '../utils/thankYou';
 import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
 import { PhoneOtpInline } from './PhoneOtpInline';
 import { validateEmail, validatePhone, validateRequired } from '../utils/validation';
@@ -80,6 +81,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
       await submitForm('Contact Page', fields);
       setIsSubmitting(false);
       setSubmitted(true);
+      redirectToThankYou('Contact Page', 'contact-form-section');
     } catch {
       setIsSubmitting(false);
       setError('Something went wrong. Please try again.');

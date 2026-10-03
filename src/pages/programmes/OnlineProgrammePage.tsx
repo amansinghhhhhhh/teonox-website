@@ -5,6 +5,7 @@ import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
 import { shouldVerifyOtp } from '../../hooks/usePhoneOtp';
 import { PhoneOtpInline } from '../../components/PhoneOtpInline';
+import { redirectToThankYou } from '../../utils/thankYou';
 import { validateEmail, validatePhone, validateRequired } from '../../utils/validation';
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
@@ -146,7 +147,10 @@ async function completeApplySubmit(fields: Record<string, string>): Promise<void
     await submitLeadForm('Online Programme Apply', verifiedFields);
     form.reset();
     resetSubmit(form, true);
-    showSuccessMessage(form);
+    (window as unknown as { teonoxOnlinePhoneVerified?: string }).teonoxOnlinePhoneVerified = '';
+    const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
+    phoneInput?.dispatchEvent(new Event('input', { bubbles: true }));
+    redirectToThankYou('Online Programme Apply', 'teonox-online-applyModal');
   } catch {
     resetSubmit(form, false);
     injectError(form, 'Something went wrong. Please try again.');
@@ -211,6 +215,16 @@ export function OnlineProgrammePage() {
     (window as any).closeApplyModal = () => {
       const modal = document.getElementById('teonox-online-applyModal') || document.querySelector('.teonox-online-apply-modal');
       if (modal) { modal.classList.remove('teonox-online-active'); document.body.style.overflow = ''; }
+      const form = getApplyForm();
+      if (form) {
+        removeError(form);
+        clearPhoneSlotError();
+        form.querySelectorAll('.teonox-online-rt-phone, .teonox-online-rt-email').forEach((el) => el.remove());
+        form.reset();
+        (window as unknown as { teonoxOnlinePhoneVerified?: string }).teonoxOnlinePhoneVerified = '';
+        const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
+        phoneInput?.dispatchEvent(new Event('input', { bubbles: true }));
+      }
     };
     (window as any).toggleFaq = (btn: HTMLElement) => {
       const item = btn.closest('.teonox-online-faq-item');

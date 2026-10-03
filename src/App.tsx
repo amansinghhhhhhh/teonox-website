@@ -41,9 +41,10 @@ const ProgramDetailPage = lazyWithRetry(() => import('./components/ProgramDetail
 const PrivacyPolicyPage = lazyWithRetry(() => import('./components/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
 const TermsAndConditionsPage = lazyWithRetry(() => import('./components/TermsAndConditionsPage').then((m) => ({ default: m.TermsAndConditionsPage })));
 const NotFoundPage = lazyWithRetry(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+const ThankYouPage = lazyWithRetry(() => import('./components/ThankYouPage').then((m) => ({ default: m.ThankYouPage })));
 const OnlineProgrammePage = lazyWithRetry(() => import('./pages/programmes/OnlineProgrammePage').then((m) => ({ default: m.OnlineProgrammePage })));
 
-export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'not-found';
+export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'thank-you' | 'not-found';
 
 interface Route {
   page: Page;
@@ -63,6 +64,7 @@ const PAGE_PATHS: Record<Page, string> = {
   admissions: '/admissions',
   'privacy-policy': '/privacy-policy',
   'terms-and-conditions': '/terms-and-conditions',
+  'thank-you': '/thank-you',
   'not-found': '/404',
 };
 
@@ -88,6 +90,8 @@ function parsePath(pathname: string): Route {
       return { page: 'privacy-policy' };
     case 'terms-and-conditions':
       return { page: 'terms-and-conditions' };
+    case 'thank-you':
+      return { page: 'thank-you' };
     // /programmes/<slug> -> single programme detail page (primary route)
     // /programmes -> programme listing page
     case 'programmes':
@@ -486,6 +490,8 @@ export default function App() {
             onEnquireClick={(topic) => handleEnquireClick(topic || 'Blog Subscription')}
             onExplorePrograms={() => navigate('/programmes')}
           />
+        ) : currentPage === 'thank-you' ? (
+          <ThankYouPage />
         ) : currentPage === 'not-found' ? (
           /* 404 Page */
           <NotFoundPage onNavigate={(href, label) => handleNavClick(href, label || '')} />

@@ -180,6 +180,11 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Read the TEONOX Privacy Policy \u2014 how we collect, use, store, and protect your personal information.',
     canonical: '/privacy-policy',
   },
+  '/thank-you': {
+    title: 'Thank You | TEONOX',
+    description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',
+    canonical: '/thank-you',
+  },
   '/terms-and-conditions': {
     title: 'Terms & Conditions | TEONOX',
     description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',

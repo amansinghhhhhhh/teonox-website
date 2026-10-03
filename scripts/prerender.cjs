@@ -62,6 +62,11 @@ const META_MAP = {
     description: "Discover why Teonox is Pune's leading AI marketing school. Learn business digital marketing with AI-driven, industry-relevant training. Know more.",
     canonical: '/why-teonox',
   },
+  '/thank-you': {
+    title: 'Thank You | TEONOX',
+    description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',
+    canonical: '/thank-you',
+  },
   '/privacy-policy': {
     title: 'Privacy Policy | TEONOX',
     description: 'Read the TEONOX Privacy Policy \u2014 how we collect, use, store, and protect your personal information.',

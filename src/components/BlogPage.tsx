@@ -4,6 +4,7 @@ import { ArrowUpRight, ArrowRight, CheckCircle2, Globe, Loader2, ChevronLeft, Ch
 import { BlogPost } from '../types';
 import { fetchLiveBlogs, fetchLiveCategories } from '../services/blogService';
 import { submitForm } from '../services/formService';
+import { redirectToThankYou } from '../utils/thankYou';
 import heroImage from '../assets/images/regenerated_image_1785412705719.avif';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
@@ -153,11 +154,15 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
     if (!value || !value.includes('@')) return;
     if (!agreeTerms) return;
     // Fire-and-forget push to the Google Apps Script webhook (Sheet + email).
-    submitForm('Blog Newsletter', { 'Email Address': value }).catch((err) => {
-      console.warn('Newsletter subscription push failed:', err);
-    });
-    setIsSubscribed(true);
-    setEmail('');
+    submitForm('Blog Newsletter', { 'Email Address': value })
+      .then(() => {
+        setIsSubscribed(true);
+        setEmail('');
+        redirectToThankYou('Blog Newsletter', 'newsletter-section');
+      })
+      .catch((err) => {
+        console.warn('Newsletter subscription push failed:', err);
+      });
   };
 
   const scrollToNewsletter = () => {
