@@ -68,30 +68,45 @@ function clearVerifier(v: RecaptchaVerifier | null): void {
   }
 }
 
-function getInvisibleVerifier(): RecaptchaVerifier | null {
-  if (invisibleVerifier) return invisibleVerifier;
-  if (typeof document === 'undefined' || !document.getElementById('recaptcha-container')) return null;
+function clearInvisibleVerifier(): void {
+  clearVerifier(invisibleVerifier);
+  invisibleVerifier = null;
   try {
-    invisibleVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    const w = window as unknown as { recaptchaVerifier?: RecaptchaVerifier | null };
+    if (w.recaptchaVerifier && w.recaptchaVerifier !== visibleVerifier) {
+      clearVerifier(w.recaptchaVerifier);
+    }
+    w.recaptchaVerifier = null;
+  } catch {
+    // Non-browser / restricted contexts — safe to ignore.
+  }
+}
+
+async function getFreshInvisibleVerifier(): Promise<RecaptchaVerifier | null> {
+  if (typeof document === 'undefined' || !document.getElementById('recaptcha-container')) return null;
+  clearInvisibleVerifier();
+  try {
+    const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
       size: 'invisible',
       callback: () => {
         // reCAPTCHA solved - allow signInWithPhoneNumber
       },
       'expired-callback': () => {
-        clearVerifier(invisibleVerifier);
-        invisibleVerifier = null;
+        clearInvisibleVerifier();
       },
     });
+    invisibleVerifier = verifier;
     try {
-      (window as unknown as { recaptchaVerifier?: RecaptchaVerifier | null }).recaptchaVerifier =
-        invisibleVerifier;
+      (window as unknown as { recaptchaVerifier?: RecaptchaVerifier | null }).recaptchaVerifier = verifier;
     } catch {
       // Non-browser / restricted contexts — safe to ignore.
     }
+    await verifier.render();
+    return verifier;
   } catch {
-    invisibleVerifier = null;
+    clearInvisibleVerifier();
+    return null;
   }
-  return invisibleVerifier;
 }
 
 export function renderVisibleRecaptchaFallback(): boolean {
@@ -116,8 +131,7 @@ export function renderVisibleRecaptchaFallback(): boolean {
 }
 
 export function resetRecaptchaVerifiers(): void {
-  clearVerifier(invisibleVerifier);
-  invisibleVerifier = null;
+  clearInvisibleVerifier();
   clearVerifier(visibleVerifier);
   visibleVerifier = null;
   try {
@@ -191,7 +205,7 @@ export function usePhoneOtp(): UsePhoneOtp {
         setError('Please enter a valid 10-digit mobile number.');
         return false;
       }
-      const verifier = getInvisibleVerifier();
+      const verifier = await getFreshInvisibleVerifier();
       if (!verifier) {
         setError('Verification unavailable. Please refresh the page and try again.');
         return false;
@@ -206,8 +220,7 @@ export function usePhoneOtp(): UsePhoneOtp {
       } catch (err: unknown) {
         const code = (err as { code?: string })?.code;
         if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
-          clearVerifier(invisibleVerifier);
-          invisibleVerifier = null;
+          clearInvisibleVerifier();
         }
         if (code === 'auth/invalid-app-credential' || code === 'auth/captcha-check-failed') {
           setNeedsVisibleCaptcha(true);
@@ -215,6 +228,8 @@ export function usePhoneOtp(): UsePhoneOtp {
         setError(friendlyOtpError(code));
         setStatus('idle');
         return false;
+      } finally {
+        clearInvisibleVerifier();
       }
     },
     [startCooldown]
@@ -246,7 +261,11 @@ export function usePhoneOtp(): UsePhoneOtp {
 
   const resendOtp = useCallback(async (): Promise<boolean> => {
     if (!phoneRef.current) return false;
-    return sendOtp(phoneRef.current);
+    const ok = await sendOtp(phoneRef.current);
+    // A failed resend must not collapse the code UI back to idle —
+    // keep the input visible so the user can retry or enter a code.
+    if (!ok) setStatus('awaiting-code');
+    return ok;
   }, [sendOtp]);
 
   const reset = useCallback(() => {

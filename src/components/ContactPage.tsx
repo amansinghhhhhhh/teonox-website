@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
-import { PhoneOtpStep } from './PhoneOtpModal';
+import { PhoneOtpInline } from './PhoneOtpInline';
 import { validateEmail, validatePhone, validateRequired } from '../utils/validation';
 import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
 import campusImg from '../assets/images/contact/campus.webp';
@@ -58,8 +58,8 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(true);
   const [error, setError] = useState('');
-  const [otpOpen, setOtpOpen] = useState(false);
-  const [pendingFields, setPendingFields] = useState<Record<string, string> | null>(null);
+  const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null);
+  const phoneVerified = verifiedPhone !== null && verifiedPhone === formData.phone.replace(/\D/g, '');
 
   const programOptions = [
     'Business Digital Marketing With AI',
@@ -116,21 +116,11 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
       'Interested In': formData.program,
       'Your Message': formData.message,
     };
-    // Phone-gated submit: verify the number via OTP first.
-    if (!shouldVerifyOtp('Contact Page', formData.phone)) {
-      await doDirectSubmit(fields);
+    if (shouldVerifyOtp('Contact Page', formData.phone) && !phoneVerified) {
+      setError('Please verify your phone number with OTP to submit.');
       return;
     }
-    setPendingFields(fields);
-    setOtpOpen(true);
-  };
-
-  const handleOtpVerified = async (verifiedPhone: string) => {
-    setOtpOpen(false);
-    const fields = pendingFields;
-    setPendingFields(null);
-    if (!fields) return;
-    await doDirectSubmit({ ...fields, 'Phone Number': verifiedPhone });
+    await doDirectSubmit(fields);
   };
 
   const scrollToMap = () => {
@@ -451,6 +441,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   onClick={() => {
                     setSubmitted(false);
                     setError('');
+                    setVerifiedPhone(null);
                     setFormData({
                       fullName: '',
                       email: '',
@@ -465,16 +456,6 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   Send Another Message
                 </button>
               </div>
-            ) : otpOpen ? (
-              /* OTP step renders inline in this card (no nested overlay) */
-              <PhoneOtpStep
-                phone={formData.phone}
-                onBack={() => {
-                  setOtpOpen(false);
-                  setPendingFields(null);
-                }}
-                onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
-              />
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Field 1: Full Name */}
@@ -534,6 +515,7 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                         className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-[#EFEFEF] font-inter text-[15px] text-[#111111] placeholder-[#A8A8A8] focus:outline-none focus:border-[#F15A29] focus:ring-4 focus:ring-[#F15A29]/10 transition-all bg-[#FAF8F5]/40 focus:bg-white"
                       />
                     </div>
+                    <PhoneOtpInline phone={formData.phone} onVerifiedChange={setVerifiedPhone} />
                   </div>
                 </div>
 
@@ -615,12 +597,17 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                 {/* Primary Button: Send Message */}
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !phoneVerified}
                   className="w-full py-4 px-8 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] tracking-wide shadow-md shadow-[#F15A29]/25 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-75 group"
                 >
                   <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
+                {!phoneVerified && (
+                  <p className="text-center font-inter text-[12.5px] text-[#A0988A]">
+                    Please verify your phone number with OTP to submit.
+                  </p>
+                )}
               </form>
             )}
           </motion.div>

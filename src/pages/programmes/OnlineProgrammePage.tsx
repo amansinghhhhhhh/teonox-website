@@ -4,7 +4,7 @@ import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
 import { shouldVerifyOtp } from '../../hooks/usePhoneOtp';
-import { PhoneOtpStep } from '../../components/PhoneOtpModal';
+import { PhoneOtpInline } from '../../components/PhoneOtpInline';
 import { validateEmail, validatePhone, validateRequired } from '../../utils/validation';
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
@@ -135,11 +135,7 @@ function getApplyForm(): HTMLFormElement | null {
   return document.querySelector('.teonox-online-apply-modal-form form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
 }
 
-// Bridge for the shared <PhoneOtpModal/>: window.submitForm validates and
-// stashes the lead, then hands off to the modal registered by the component.
-let openApplyOtpModal: ((phone: string, fields: Record<string, string>) => void) | null = null;
-
-// Runs after the modal confirms the SMS code. Re-queries the live form so
+// Runs after the phone is verified inline. Re-queries the live form so
 // success/error UI always targets the current DOM.
 async function completeApplySubmit(fields: Record<string, string>): Promise<void> {
   const form = getApplyForm();
@@ -157,15 +153,56 @@ async function completeApplySubmit(fields: Record<string, string>): Promise<void
   }
 }
 
-export function OnlineProgrammePage() {
-  // Pending lead awaiting SMS-code confirmation in the shared OTP modal.
-  const [applyOtp, setApplyOtp] = useState<{ phone: string; fields: Record<string, string> } | null>(null);
+function OnlineProgrammeOtpGate() {
+  const [phone, setPhone] = useState('');
+  const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null);
+  const [slotEl, setSlotEl] = useState<HTMLElement | null>(null);
+  const phoneVerified = verifiedPhone !== null && verifiedPhone === phone;
 
   useEffect(() => {
-    // Bridge registration is idempotent — re-assigning the same opener is safe.
-    openApplyOtpModal = (phone: string, fields: Record<string, string>) => {
-      setApplyOtp({ phone, fields });
+    const slot = document.getElementById('teonox-otp-slot');
+    setSlotEl(slot);
+    const form = getApplyForm();
+    const input = form?.querySelector('input[type="tel"]') as HTMLInputElement | null;
+    if (!input) return;
+    const sync = () => setPhone(normalizePhone(input.value));
+    sync();
+    input.addEventListener('input', sync);
+    input.addEventListener('blur', sync);
+    return () => {
+      input.removeEventListener('input', sync);
+      input.removeEventListener('blur', sync);
     };
+  }, []);
+
+  useEffect(() => {
+    (window as unknown as { teonoxOnlinePhoneVerified?: string }).teonoxOnlinePhoneVerified =
+      phoneVerified ? phone : '';
+    const form = getApplyForm();
+    const btn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    if (btn) {
+      btn.disabled = !phoneVerified;
+      btn.style.opacity = phoneVerified ? '1' : '0.7';
+      btn.style.pointerEvents = phoneVerified ? '' : 'none';
+    }
+    if (form) {
+      let note = document.getElementById('teonox-online-otp-gate-note') as HTMLParagraphElement | null;
+      if (!note) {
+        note = document.createElement('p');
+        note.id = 'teonox-online-otp-gate-note';
+        note.style.cssText = 'text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:10px;font-family:Inter,sans-serif;';
+        form.insertBefore(note, btn?.nextSibling || null);
+      }
+      note.textContent = phoneVerified ? '' : 'Please verify your phone number with OTP to submit.';
+    }
+  }, [phone, phoneVerified]);
+
+  if (!slotEl) return null;
+  return createPortal(<PhoneOtpInline phone={phone} onVerifiedChange={setVerifiedPhone} />, slotEl);
+}
+
+export function OnlineProgrammePage() {
+  useEffect(() => {
     // --- Global Window Handlers ---
     (window as any).openApplyModal = () => {
       const modal = document.getElementById('teonox-online-applyModal') || document.querySelector('.teonox-online-apply-modal');
@@ -217,8 +254,8 @@ export function OnlineProgrammePage() {
         return;
       }
 
-      // Number is valid — stash the lead and hand off to the shared OTP
-      // modal. Submission completes only after code confirmation.
+      // Number is valid — submission is gated on the inline OTP having
+      // verified this exact number before the main submit button enables.
       const fields: Record<string, string> = {
         'Full Name': fullName,
         'Email Address': email,
@@ -237,19 +274,18 @@ export function OnlineProgrammePage() {
         phoneVerified: 'false',
       };
 
-      if (!shouldVerifyOtp('Online Programme Apply', phone) || !openApplyOtpModal) {
-        await completeApplySubmit(fields);
-        return;
+      if (shouldVerifyOtp('Online Programme Apply', phone)) {
+        const verified = (window as unknown as { teonoxOnlinePhoneVerified?: string }).teonoxOnlinePhoneVerified;
+        if (!verified || verified !== phone) {
+          injectError(form, 'Please verify your phone number with OTP to submit.', 'input[type="tel"]');
+          return;
+        }
       }
-      openApplyOtpModal(phone, fields);
+      await completeApplySubmit(fields);
     };
     // --- reCAPTCHA lifecycle: the singleton verifier is owned by the shared
     // usePhoneOtp hook and binds to #recaptcha-container in App.tsx — nothing
     // to initialize per page (single binding avoids identitytoolkit 400s).
-    // Register the modal bridge so window.submitForm can hand off validated leads.
-    openApplyOtpModal = (phone: string, fields: Record<string, string>) => {
-      setApplyOtp({ phone, fields });
-    };
 
     // --- Real-time Input Validation Listeners ---
     const form = document.querySelector('form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;
@@ -423,7 +459,6 @@ export function OnlineProgrammePage() {
 
     // --- Cleanup ---
     return () => {
-      openApplyOtpModal = null;
       document.querySelectorAll('.teonox-online-slider-viewport').forEach(v => {
         (v as HTMLElement).style.cursor = '';
       });
@@ -442,26 +477,7 @@ export function OnlineProgrammePage() {
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody }} />
       </div>
       <Footer onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} onNavigate={(path, label) => navigateTo(path)} />
-      {/* Shared verification step portalled inline into the raw apply form.
-          Renders inside the 520px modal frame — never as a nested overlay. */}
-      {applyOtp && typeof document !== 'undefined' && (() => {
-        const slot = document.getElementById('teonox-otp-slot');
-        if (!slot) return null;
-        return createPortal(
-          <div style={{ margin: '4px 0 14px' }}>
-            <PhoneOtpStep
-              phone={applyOtp.phone}
-              onBack={() => setApplyOtp(null)}
-              onVerified={(verifiedPhone) => {
-                const pending = applyOtp;
-                setApplyOtp(null);
-                void completeApplySubmit({ ...pending.fields, 'Phone Number': verifiedPhone, phone: verifiedPhone });
-              }}
-            />
-          </div>,
-          slot
-        );
-      })()}
+      <OnlineProgrammeOtpGate />
     </>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
-import { PhoneOtpStep } from './PhoneOtpModal';
+import { PhoneOtpInline } from './PhoneOtpInline';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
 interface EnquireModalProps {
@@ -31,9 +31,9 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [otpOpen, setOtpOpen] = useState(false);
-  const [pendingFields, setPendingFields] = useState<Record<string, string> | null>(null);
+  const [verifiedPhone, setVerifiedPhone] = useState('');
   const modalRef = useRef<HTMLDivElement>(null);
+  const phoneVerified = verifiedPhone !== '' && verifiedPhone === phone.trim();
 
   // Focus trap + Escape key + focus on open
   useEffect(() => {
@@ -112,22 +112,13 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
       'Phone Number': phone,
       'Interested In': selectedCourse,
     };
-    // Phone-gated forms verify the number via OTP first; exempt forms
-    // (e.g. Brochure Downloads) and invalid numbers submit directly.
-    if (!shouldVerifyOtp(formName, phone)) {
-      await doDirectSubmit(fields);
+    // Submission gate: phone-gated forms require OTP verification first.
+    // Exempt forms (e.g. Brochure Downloads) submit directly.
+    if (shouldVerifyOtp(formName, phone) && !phoneVerified) {
+      setError('Please verify your phone number with OTP to submit.');
       return;
     }
-    setPendingFields(fields);
-    setOtpOpen(true);
-  };
-
-  const handleOtpVerified = async (verifiedPhone: string) => {
-    setOtpOpen(false);
-    const fields = pendingFields;
-    setPendingFields(null);
-    if (!fields) return;
-    await doDirectSubmit({ ...fields, 'Phone Number': verifiedPhone });
+    await doDirectSubmit(fields);
   };
 
   const handleReset = () => {
@@ -135,6 +126,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
     setFullName('');
     setEmail('');
     setPhone('');
+    setVerifiedPhone('');
     setSelectedCourse('');
     onClose();
   };
@@ -199,16 +191,6 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
               )}
 
               {/* OTP step renders inline in this panel (no nested overlay) */}
-              {otpOpen ? (
-                <PhoneOtpStep
-                  phone={phone}
-                  onBack={() => {
-                    setOtpOpen(false);
-                    setPendingFields(null);
-                  }}
-                  onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
-                />
-              ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Course Select Dropdown — hidden for campus visit */}
                 {!isCampusVisit && (
@@ -285,6 +267,8 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                       className="w-full px-3.5 py-3 text-[#111111] font-sora text-[14px] sm:text-[15px] font-[500] outline-none"
                     />
                   </div>
+                  {/* Inline phone verification — directly under the phone field */}
+                  <PhoneOtpInline phone={phone} onVerifiedChange={setVerifiedPhone} />
                 </div>
 
                 {/* Terms Agreement Checkbox */}
@@ -301,16 +285,20 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                   </label>
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit Button — locked until the number is OTP-verified */}
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !phoneVerified}
                   className="w-full mt-2 bg-[#F15A29] hover:bg-[#D8481A] text-white font-sora text-[16px] font-[700] py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                 >
                   <span>{isSubmitting ? 'Submitting...' : 'Proceed'}</span>
                 </button>
+                {!phoneVerified && (
+                  <p className="text-center font-inter text-[12.5px] text-[#A0988A]">
+                    Please verify your phone number with OTP to submit.
+                  </p>
+                )}
               </form>
-              )}
             </>
           ) : (
             /* SUCCESS STATE */
