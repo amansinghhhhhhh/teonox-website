@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
 import { shouldVerifyOtp } from '../../hooks/usePhoneOtp';
-import { PhoneOtpModal } from '../../components/PhoneOtpModal';
+import { PhoneOtpStep } from '../../components/PhoneOtpModal';
 import { validateEmail, validatePhone, validateRequired } from '../../utils/validation';
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
@@ -441,19 +442,26 @@ export function OnlineProgrammePage() {
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody }} />
       </div>
       <Footer onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} onNavigate={(path, label) => navigateTo(path)} />
-      {/* Shared phone-verification step — replaces the legacy inline OTP box */}
-      {applyOtp && (
-        <PhoneOtpModal
-          open
-          phone={applyOtp.phone}
-          onClose={() => setApplyOtp(null)}
-          onVerified={(verifiedPhone) => {
-            const pending = applyOtp;
-            setApplyOtp(null);
-            void completeApplySubmit({ ...pending.fields, 'Phone Number': verifiedPhone, phone: verifiedPhone });
-          }}
-        />
-      )}
+      {/* Shared verification step portalled inline into the raw apply form.
+          Renders inside the 520px modal frame — never as a nested overlay. */}
+      {applyOtp && typeof document !== 'undefined' && (() => {
+        const slot = document.getElementById('teonox-otp-slot');
+        if (!slot) return null;
+        return createPortal(
+          <div style={{ margin: '4px 0 14px' }}>
+            <PhoneOtpStep
+              phone={applyOtp.phone}
+              onBack={() => setApplyOtp(null)}
+              onVerified={(verifiedPhone) => {
+                const pending = applyOtp;
+                setApplyOtp(null);
+                void completeApplySubmit({ ...pending.fields, 'Phone Number': verifiedPhone, phone: verifiedPhone });
+              }}
+            />
+          </div>,
+          slot
+        );
+      })()}
     </>
   );
 }

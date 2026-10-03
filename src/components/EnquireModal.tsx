@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
-import { PhoneOtpModal } from './PhoneOtpModal';
+import { PhoneOtpStep } from './PhoneOtpModal';
 import popupFormImg from '../assets/images/popup_form_image.webp';
 
 interface EnquireModalProps {
@@ -198,6 +198,17 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                 </div>
               )}
 
+              {/* OTP step renders inline in this panel (no nested overlay) */}
+              {otpOpen ? (
+                <PhoneOtpStep
+                  phone={phone}
+                  onBack={() => {
+                    setOtpOpen(false);
+                    setPendingFields(null);
+                  }}
+                  onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
+                />
+              ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Course Select Dropdown — hidden for campus visit */}
                 {!isCampusVisit && (
@@ -299,6 +310,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
                   <span>{isSubmitting ? 'Submitting...' : 'Proceed'}</span>
                 </button>
               </form>
+              )}
             </>
           ) : (
             /* SUCCESS STATE */
@@ -328,17 +340,6 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
         </div>
 
       </div>
-
-      {/* Shared phone-verification step (skipped for exempt forms) */}
-      <PhoneOtpModal
-        open={otpOpen}
-        phone={phone}
-        onClose={() => {
-          setOtpOpen(false);
-          setPendingFields(null);
-        }}
-        onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
-      />
     </div>
   );
 }

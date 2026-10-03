@@ -1174,6 +1174,8 @@ export const rawHtmlBody = `<!-- Hero -->
               </div>
               <div id="teonox-phone-error-slot" style="margin-top:2px;"></div>
             </div>
+            <!-- Shared OTP step mounts here (React portal, inline single-column layout) -->
+            <div id="teonox-otp-slot"></div>
           <div class="teonox-online-form-group">
             <label>Email Address</label>
             <input type="email" placeholder="Enter your email address" required>

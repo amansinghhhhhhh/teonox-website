@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { submitForm } from '../services/formService';
 import { shouldVerifyOtp } from '../hooks/usePhoneOtp';
-import { PhoneOtpModal } from './PhoneOtpModal';
+import { PhoneOtpStep } from './PhoneOtpModal';
 import { validateEmail, validatePhone, validateRequired } from '../utils/validation';
 import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
 import campusImg from '../assets/images/contact/campus.webp';
@@ -465,6 +465,16 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
                   Send Another Message
                 </button>
               </div>
+            ) : otpOpen ? (
+              /* OTP step renders inline in this card (no nested overlay) */
+              <PhoneOtpStep
+                phone={formData.phone}
+                onBack={() => {
+                  setOtpOpen(false);
+                  setPendingFields(null);
+                }}
+                onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
+              />
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Field 1: Full Name */}
@@ -751,17 +761,6 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
           </div>
         </div>
       </motion.section>
-
-      {/* Shared phone-verification step */}
-      <PhoneOtpModal
-        open={otpOpen}
-        phone={formData.phone}
-        onClose={() => {
-          setOtpOpen(false);
-          setPendingFields(null);
-        }}
-        onVerified={(verifiedPhone) => void handleOtpVerified(verifiedPhone)}
-      />
     </div>
   );
 }
