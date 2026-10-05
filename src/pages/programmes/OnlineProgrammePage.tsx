@@ -287,8 +287,8 @@ export function OnlineProgrammePage() {
         otpVerified: 'false',
         phoneVerified: 'false',
         page_url: window.location.href,
-        form_type: 'Online Programme Lead Form',
-        section_name: 'Apply Modal',
+        form_type: 'Online Programme Apply',
+        section_name: 'Online Programme Apply',
       };
 
       if (shouldVerifyOtp('Online Programme Apply', phone)) {

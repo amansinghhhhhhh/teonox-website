@@ -207,6 +207,21 @@ function PageSkeleton() {
   );
 }
 
+function resolveEnquireFormName(interestTopic: string, source: string, formName: string): string {
+  if (formName) return formName;
+  if (source === 'campus-visit') return 'Campus Visit Booking';
+  const path = window.location.pathname.toLowerCase();
+  const topic = interestTopic.toLowerCase();
+  if (path.includes('/careers') || topic.includes('career')) return 'Career Enquiry';
+  if (path.includes('/admissions') || topic.includes('admissions')) return 'Admissions Enquiry';
+  if (path.includes('/about') || topic.includes('about')) return 'About TEONOX';
+  if (path.includes('/why-teonox') || topic.includes('why teonox')) return 'Why TEONOX';
+  if (path.includes('/programmes') || topic.includes('programme') || topic.includes('program')) return 'Programmes Enquiry';
+  if (path.includes('/blog') || topic.includes('blog')) return 'Blog Enquiry';
+  if (path.includes('/contact') || topic.includes('counselling') || topic.includes('counseling')) return 'Contact Enquiry';
+  return 'Home Hero Enquiry';
+}
+
 export default function App() {
   const initialRoute = useRef(getInitialRouteState()).current;
   const [currentPage, setCurrentPage] = useState<Page>(initialRoute.page);
@@ -364,7 +379,7 @@ export default function App() {
     setSelectedInterest(interestTopic);
     setEnquireDefaultCourse(interestTopic);
     setEnquireSource(source);
-    setEnquireFormName(formName || (source === 'campus-visit' ? 'Campus Visit Booking' : 'Home Hero Enquiry'));
+    setEnquireFormName(resolveEnquireFormName(interestTopic, source, formName));
     setIsEnquireModalOpen(true);
   };
 
