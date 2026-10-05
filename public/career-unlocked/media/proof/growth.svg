@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="DM Sans, Arial, Helvetica, sans-serif">
+  <defs>
+    <filter id="blur" x="-20%" y="-60%" width="140%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B1A" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#FF6B1A" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFDF9"/>
+  <rect x="0" y="0" width="960" height="64" fill="#1E1611"/>
+  <circle cx="34" cy="32" r="9" fill="#FF6B1A"/>
+  <text x="54" y="38" fill="#FFFFFF" font-size="19" font-weight="700">Client growth · monthly billings</text>
+  <rect x="744" y="18" width="188" height="28" rx="14" fill="#FF6B1A"/>
+  <text x="838" y="37" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">SAMPLE GRAPH</text>
+
+  <text x="40" y="112" font-size="13" fill="#6B5E53">Client</text>
+  <rect x="104" y="96" width="200" height="24" rx="8" fill="#EFE6DA"/>
+  <rect x="114" y="103" width="176" height="10" rx="5" fill="#B9A896" filter="url(#blur)"/>
+
+  <text x="40" y="182" font-size="56" font-weight="800" fill="#1E1611">₹[X.X]L</text>
+  <text x="40" y="212" font-size="15" fill="#6B5E53">per month today · from ₹[X.X]L in month one</text>
+  <rect x="270" y="146" width="112" height="34" rx="17" fill="#E6F7EE" stroke="#B7E6CC"/>
+  <text x="326" y="168" font-size="15" font-weight="800" fill="#12A150" text-anchor="middle">+[XXX]%</text>
+
+  <g stroke="#EADFD0" stroke-width="1">
+    <line x1="300" y1="250" x2="920" y2="250"/>
+    <line x1="300" y1="320" x2="920" y2="320"/>
+    <line x1="300" y1="390" x2="920" y2="390"/>
+    <line x1="300" y1="460" x2="920" y2="460"/>
+    <line x1="300" y1="520" x2="920" y2="520"/>
+  </g>
+
+  <path d="M300,470 C380,455 430,440 490,415 C550,392 590,370 650,335 C710,300 770,285 920,248 L920,520 L300,520 Z" fill="url(#area)"/>
+  <path d="M300,470 C380,455 430,440 490,415 C550,392 590,370 650,335 C710,300 770,285 920,248"
+        fill="none" stroke="#FF6B1A" stroke-width="5" stroke-linecap="round"/>
+
+  <g fill="#FFFDF9" stroke="#E24A0B" stroke-width="4">
+    <circle cx="300" cy="470" r="8"/>
+    <circle cx="490" cy="415" r="8"/>
+    <circle cx="650" cy="335" r="8"/>
+    <circle cx="800" cy="272" r="8"/>
+    <circle cx="920" cy="248" r="8"/>
+  </g>
+
+  <g font-size="13" fill="#6B5E53" text-anchor="middle">
+    <text x="300" y="548">M1</text>
+    <text x="420" y="548">M2</text>
+    <text x="540" y="548">M3</text>
+    <text x="660" y="548">M6</text>
+    <text x="780" y="548">M9</text>
+    <text x="900" y="548">M12</text>
+  </g>
+
+  <rect x="40" y="250" width="216" height="120" rx="16" fill="#1E1611"/>
+  <text x="60" y="284" font-size="13" fill="#CDBFB1">Campaigns managed</text>
+  <text x="60" y="322" font-size="30" font-weight="800" fill="#FF9A3D">[XXX]+</text>
+  <text x="60" y="350" font-size="12" fill="#CDBFB1">across [XX]+ brands</text>
+
+  <rect x="40" y="386" width="216" height="134" rx="16" fill="#FFFFFF" stroke="#EADFD0"/>
+  <text x="60" y="418" font-size="13" fill="#6B5E53">Ad spend managed</text>
+  <text x="60" y="456" font-size="30" font-weight="800" fill="#E24A0B">₹[X.X] Cr</text>
+  <text x="60" y="484" font-size="12" fill="#6B5E53">Meta + Google, lifetime</text>
+  <rect x="60" y="496" width="170" height="14" rx="7" fill="#DFD2C3" filter="url(#blur)"/>
+
+  <rect x="40" y="546" width="880" height="34" rx="12" fill="#FFE9D6" stroke="#FFC79A"/>
+  <text x="480" y="568" font-size="13" font-weight="700" fill="#E24A0B" text-anchor="middle">Placeholder graph — replace with the real A2 Digital numbers in the [brackets]</text>
+</svg>

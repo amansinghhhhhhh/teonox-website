@@ -15,6 +15,8 @@ const STATIC_PAGES = [
   { path: '/admissions',              priority: '0.8', changefreq: 'monthly' },
   { path: '/careers',                priority: '0.7', changefreq: 'monthly' },
   { path: '/why-teonox',              priority: '0.7', changefreq: 'monthly' },
+  { path: '/career-unlocked',          priority: '0.8', changefreq: 'monthly' },
+  { path: '/thank-you',                priority: '0.1', changefreq: 'yearly'  },
   { path: '/privacy-policy',          priority: '0.3', changefreq: 'yearly'  },
   { path: '/terms-and-conditions',    priority: '0.3', changefreq: 'yearly'  },
   { path: '/webinar',                 priority: '0.8', changefreq: 'weekly'  },

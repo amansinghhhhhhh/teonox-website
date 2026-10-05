@@ -180,6 +180,11 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Read the TEONOX Privacy Policy \u2014 how we collect, use, store, and protect your personal information.',
     canonical: '/privacy-policy',
   },
+  '/career-unlocked': {
+    title: 'Career Unlocked: Digital Marketing, Business & AI Workshop in Pune | Teonox',
+    description: '90-minute live career workshop for students, graduates, and aspiring marketers. Backed by A2 Digital, 12+ years of industry experience.',
+    canonical: '/career-unlocked',
+  },
   '/thank-you': {
     title: 'Thank You | TEONOX',
     description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',

@@ -62,6 +62,11 @@ const META_MAP = {
     description: "Discover why Teonox is Pune's leading AI marketing school. Learn business digital marketing with AI-driven, industry-relevant training. Know more.",
     canonical: '/why-teonox',
   },
+  '/career-unlocked': {
+    title: 'Career Unlocked: Digital Marketing, Business & AI Workshop in Pune | Teonox',
+    description: '90-minute live career workshop for students, graduates, and aspiring marketers. Backed by A2 Digital, 12+ years of industry experience.',
+    canonical: '/career-unlocked',
+  },
   '/thank-you': {
     title: 'Thank You | TEONOX',
     description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',

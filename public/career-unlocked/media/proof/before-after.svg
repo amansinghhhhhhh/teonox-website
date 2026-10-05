@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="DM Sans, Arial, Helvetica, sans-serif">
+  <defs>
+    <filter id="blur" x="-20%" y="-60%" width="140%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <linearGradient id="after" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B1A"/>
+      <stop offset="100%" stop-color="#E24A0B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFDF9"/>
+  <rect x="0" y="0" width="960" height="64" fill="#1E1611"/>
+  <circle cx="34" cy="32" r="9" fill="#FF6B1A"/>
+  <text x="54" y="38" fill="#FFFFFF" font-size="19" font-weight="700">Before &amp; after · one account, 90 days</text>
+  <rect x="770" y="18" width="162" height="28" rx="14" fill="#FF6B1A"/>
+  <text x="851" y="37" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">DEMO DATA</text>
+
+  <text x="40" y="104" font-size="13" fill="#6B5E53">Client</text>
+  <rect x="104" y="88" width="230" height="24" rx="8" fill="#EFE6DA"/>
+  <rect x="114" y="95" width="204" height="10" rx="5" fill="#B9A896" filter="url(#blur)"/>
+  <text x="420" y="104" font-size="13" fill="#6B5E53">Account ID</text>
+  <rect x="510" y="88" width="170" height="24" rx="8" fill="#EFE6DA"/>
+  <rect x="520" y="95" width="146" height="10" rx="5" fill="#B9A896" filter="url(#blur)"/>
+  <text x="716" y="104" font-size="13" font-weight="700" fill="#E24A0B">hidden — not yet approved</text>
+
+  <rect x="40" y="136" width="424" height="34" rx="10" fill="#EFE6DA"/>
+  <text x="60" y="159" font-size="14" font-weight="800" fill="#6B5E53" letter-spacing="1">BEFORE</text>
+  <rect x="496" y="136" width="424" height="34" rx="10" fill="#FFE9D6"/>
+  <text x="516" y="159" font-size="14" font-weight="800" fill="#E24A0B" letter-spacing="1">AFTER 90 DAYS</text>
+
+  <g>
+    <text x="60" y="204" font-size="13" fill="#6B5E53">Leads / month</text>
+    <rect x="60" y="214" width="120" height="34" rx="8" fill="#CFC2B4"/>
+    <text x="190" y="237" font-size="16" font-weight="700" fill="#6B5E53">42</text>
+
+    <text x="60" y="286" font-size="13" fill="#6B5E53">Cost per lead</text>
+    <rect x="60" y="296" width="330" height="34" rx="8" fill="#CFC2B4"/>
+    <text x="400" y="319" font-size="16" font-weight="700" fill="#6B5E53">₹640</text>
+
+    <text x="60" y="368" font-size="13" fill="#6B5E53">Return on ad spend</text>
+    <rect x="60" y="378" width="96" height="34" rx="8" fill="#CFC2B4"/>
+    <text x="166" y="401" font-size="16" font-weight="700" fill="#6B5E53">1.4x</text>
+
+    <text x="60" y="450" font-size="13" fill="#6B5E53">Landing page conversion</text>
+    <rect x="60" y="460" width="74" height="34" rx="8" fill="#CFC2B4"/>
+    <text x="144" y="483" font-size="16" font-weight="700" fill="#6B5E53">0.9%</text>
+  </g>
+
+  <g>
+    <text x="516" y="204" font-size="13" fill="#6B5E53">Leads / month</text>
+    <rect x="516" y="214" width="304" height="34" rx="8" fill="url(#after)"/>
+    <text x="830" y="237" font-size="16" font-weight="800" fill="#E24A0B">318</text>
+
+    <text x="516" y="286" font-size="13" fill="#6B5E53">Cost per lead</text>
+    <rect x="516" y="296" width="132" height="34" rx="8" fill="url(#after)"/>
+    <text x="658" y="319" font-size="16" font-weight="800" fill="#E24A0B">₹240</text>
+
+    <text x="516" y="368" font-size="13" fill="#6B5E53">Return on ad spend</text>
+    <rect x="516" y="378" width="330" height="34" rx="8" fill="url(#after)"/>
+    <text x="856" y="401" font-size="16" font-weight="800" fill="#E24A0B">5.2x</text>
+
+    <text x="516" y="450" font-size="13" fill="#6B5E53">Landing page conversion</text>
+    <rect x="516" y="460" width="286" height="34" rx="8" fill="url(#after)"/>
+    <text x="812" y="483" font-size="16" font-weight="800" fill="#E24A0B">4.6%</text>
+  </g>
+
+  <rect x="40" y="520" width="880" height="60" rx="14" fill="#1E1611"/>
+  <text x="480" y="546" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Worked on by the A2 Digital team that runs this workshop</text>
+  <text x="480" y="568" font-size="12" fill="#CDBFB1" text-anchor="middle">Placeholder screen — swap in your real screenshot; client name and account ID stay blurred until approved</text>
+</svg>
