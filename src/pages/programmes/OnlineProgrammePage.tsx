@@ -286,6 +286,9 @@ export function OnlineProgrammePage() {
         source: 'build-digital-marketing-skills-with-ai-landing-page',
         otpVerified: 'false',
         phoneVerified: 'false',
+        page_url: window.location.href,
+        form_type: 'Online Programme Lead Form',
+        section_name: 'Apply Modal',
       };
 
       if (shouldVerifyOtp('Online Programme Apply', phone)) {

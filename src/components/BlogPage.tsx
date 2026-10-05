@@ -154,7 +154,12 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
     if (!value || !value.includes('@')) return;
     if (!agreeTerms) return;
     // Fire-and-forget push to the Google Apps Script webhook (Sheet + email).
-    submitForm('Blog Newsletter', { 'Email Address': value })
+    submitForm('Blog Newsletter', {
+      'Email Address': value,
+      page_url: window.location.href,
+      form_type: 'Newsletter Signup',
+      section_name: 'Newsletter Section',
+    })
       .then(() => {
         setIsSubscribed(true);
         setEmail('');

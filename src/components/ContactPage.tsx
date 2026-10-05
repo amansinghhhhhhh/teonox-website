@@ -117,6 +117,9 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
       City: formData.city,
       'Interested In': formData.program,
       'Your Message': formData.message,
+      page_url: window.location.href,
+      form_type: 'Contact Form',
+      section_name: 'Contact Page Form',
     };
     if (shouldVerifyOtp('Contact Page', formData.phone) && !phoneVerified) {
       setError('Please verify your phone number with OTP to submit.');

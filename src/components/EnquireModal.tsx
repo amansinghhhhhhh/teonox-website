@@ -126,6 +126,9 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
       'Email Address': email,
       'Phone Number': phone,
       'Interested In': selectedCourse,
+      page_url: window.location.href,
+      form_type: 'Enquire Modal',
+      section_name: defaultCourse || selectedCourse || formName || 'Enquire Modal',
     };
     // Submission gate: phone-gated forms require OTP verification first.
     // Exempt forms (e.g. Brochure Downloads) submit directly.

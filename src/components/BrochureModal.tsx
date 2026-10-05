@@ -86,6 +86,9 @@ export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' 
         'Email Address': email,
         'WhatsApp Number': phone,
         'Interested In': defaultCourse || 'General Enquiry',
+        page_url: window.location.href,
+        form_type: 'Brochure Download',
+        section_name: defaultCourse || 'Brochure Download',
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
