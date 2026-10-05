@@ -19,6 +19,9 @@ RewriteRule ^programs$ /programmes [R=301,L]
 # 4. Special route for webinar
 RewriteRule ^webinar$ /webinar.html [L]
 
+# 5. Career Unlocked LP should always restore to its prerendered SPA shell
+RewriteRule ^career-unlocked/?$ /career-unlocked/index.html [L]
+
 # 5. SPA fallback for unknown paths
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
