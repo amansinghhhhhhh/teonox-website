@@ -161,8 +161,6 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
       section_name: 'Newsletter Section',
     })
       .then(() => {
-        setIsSubscribed(true);
-        setEmail('');
         redirectToThankYou('Blog Newsletter', 'newsletter-section');
       })
       .catch((err) => {

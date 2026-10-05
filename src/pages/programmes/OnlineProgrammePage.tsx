@@ -145,11 +145,6 @@ async function completeApplySubmit(fields: Record<string, string>): Promise<void
   const verifiedFields = { ...fields, otpVerified: 'true', phoneVerified: 'true' };
   try {
     await submitLeadForm('Online Programme Apply', verifiedFields);
-    form.reset();
-    resetSubmit(form, true);
-    (window as unknown as { teonoxOnlinePhoneVerified?: string }).teonoxOnlinePhoneVerified = '';
-    const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
-    phoneInput?.dispatchEvent(new Event('input', { bubbles: true }));
     redirectToThankYou('Online Programme Apply', 'teonox-online-applyModal');
   } catch {
     resetSubmit(form, false);

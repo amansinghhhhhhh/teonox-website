@@ -79,8 +79,6 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
       // Field keys match the legacy "Contact Page" payload so the Sheet
       // columns and email template keep working unchanged.
       await submitForm('Contact Page', fields);
-      setIsSubmitting(false);
-      setSubmitted(true);
       redirectToThankYou('Contact Page', 'contact-form-section');
     } catch {
       setIsSubmitting(false);

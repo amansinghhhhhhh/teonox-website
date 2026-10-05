@@ -88,8 +88,6 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
       // Field keys match the legacy payload so the
       // Sheet columns and email template keep working unchanged.
       await submitForm(formName, fields);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
       redirectToThankYou(formName, 'enquire-modal');
     } catch {
       setIsSubmitting(false);

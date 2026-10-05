@@ -90,8 +90,6 @@ export function BrochureModal({ isOpen, onClose, onNavigate, defaultCourse = '' 
         form_type: 'Brochure Downloads',
         section_name: 'Brochure Downloads',
       });
-      setIsSubmitting(false);
-      setIsSubmitted(true);
       redirectToThankYou('Brochure Downloads', 'brochure-modal');
     } catch (err) {
       console.error('[BrochureModal] Form submission failed:', err);
