@@ -70,6 +70,7 @@ export function EnquireModal({ isOpen, onClose, onNavigate, defaultCourse = '', 
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
     if (defaultCourse) {
       // Find matching course or default
       const matched = COURSES.find(c => c.toLowerCase().includes(defaultCourse.toLowerCase()));

@@ -2,13 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 const FALLBACK = '/';
 
-function getParams(): { source: string; form: string; section: string } {
+function getParams(): { source: string } {
   const params = new URLSearchParams(window.location.search);
-  return {
-    source: params.get('source') || '',
-    form: params.get('form') || '',
-    section: params.get('section') || '',
-  };
+  return { source: params.get('source') || '' };
 }
 
 function safeSource(source: string): string {
@@ -42,14 +38,11 @@ export function ThankYouPage() {
         </div>
         <h1 className="mt-6 text-2xl sm:text-3xl font-[800] text-[#111111]">Thank You!</h1>
         <p className="mt-3 text-[15px] text-[#666666] leading-relaxed">
-          Your submission{params.form ? ` for ${params.form}` : ''} was received successfully.
+          Your submission was received successfully.
         </p>
         <p className="mt-2 text-[13px] text-[#999999]">
           You will be redirected back in {seconds} second{seconds === 1 ? '' : 's'}.
         </p>
-        {params.source && (
-          <p className="mt-1 text-[12px] text-[#BBBBBB] break-all">Source: {params.source}</p>
-        )}
         <a
           href={backTo}
           className="inline-flex mt-8 items-center justify-center rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white px-8 py-3.5 text-[14px] font-[700] transition-colors"
