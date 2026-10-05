@@ -37,7 +37,8 @@
   },
   "overrides": {
     "esbuild": "0.28.2",
-    "qs": "^6.16.0"
+    "qs": "^6.16.0",
+    "@grpc/grpc-js": "^1.13.6"
   },
   "engines": {
     "node": ">=18.0.0"
