@@ -20,6 +20,14 @@
 @media(max-width:640px){.career-unlocked-lp .wrap{width:92%}}
 .career-unlocked-lp details.faq>summary{list-style:none;cursor:pointer}.career-unlocked-lp details.faq>summary::-webkit-details-marker{display:none}
 .modal-open{overflow:hidden}
+.career-unlocked-lp #stickyBar a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 .career-unlocked-lp h1 em { display:inline-block; font-style:normal; }
 @media (max-width: 768px) {
   .career-unlocked-lp h1 em { transform: none !important; }
