@@ -1,4 +1,5 @@
-export const careerUnlockedScript = `var WA='919890004828', VENUE='TEONOX Campus, Kothrud, Pune', NEXT='Saturday, 10 Oct 2026';
+export function initializeCareerUnlocked(submitForm, redirectToThankYou) {
+var WA='919890004828', VENUE='TEONOX Campus, Kothrud, Pune', NEXT='Saturday, 10 Oct 2026';
 function wa(m){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(m)}
 document.getElementById('waFloat').href=wa("Hi Teonox, I'd like to know more about Career Unlocked.");
 document.getElementById('waBook').href=wa('Hi Teonox, I want to book a seat for Career Unlocked ('+NEXT+', '+VENUE+').');
@@ -149,9 +150,5 @@ body.innerHTML=(fresh?'<div class="p-3 bg-[#FFE7E0] border border-[#FFC6B5] roun
 +'<p class="text-[11px] mt-3 text-white/70">BOOKED ON '+p.registeredAt+' · ₹99 CONFIRMATION · Entry + exit scan</p></div>'
 +'<div class="flex gap-3 mt-4"><button id="print" class="flex-1 min-h-[44px] rounded-xl bg-[#FAF6EF] border border-[#EADFD0] font-bold text-sm">Save / Print Pass</button><button id="cancel" class="text-xs underline text-[#6B5E53]">Cancel Pass</button></div>';
 document.getElementById('print').onclick=function(){window.print()};
-document.getElementById('cancel').onclick=function(){if(confirm('Cancel your reserved pass? Your seat will be released.')){try{localStorage.removeItem('teonox_career_unlocked_pass')}catch(e){}step='details';renderDetails()}}}`;
-
-export function initializeCareerUnlocked(submitForm: (formName: string, fields: Record<string, string>) => Promise<void>, redirectToThankYou: (formType: string, sectionId?: string) => void): void {
-  const run = new Function('submitForm', 'redirectToThankYou', careerUnlockedScript) as (submitForm: unknown, redirectToThankYou: unknown) => void;
-  run(submitForm, redirectToThankYou);
+document.getElementById('cancel').onclick=function(){if(confirm('Cancel your reserved pass? Your seat will be released.')){try{localStorage.removeItem('teonox_career_unlocked_pass')}catch(e){}step='details';renderDetails()}}}
 }
