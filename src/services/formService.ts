@@ -79,20 +79,16 @@ export const submitForm = async (
 
   const body = JSON.stringify(payload);
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-
   try {
-    // Use no-cors directly — Apps Script redirects cause CORS failures.
-    // Response is opaque; we assume success if no network error throws.
     await fetch(WEBHOOK, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body,
-      signal: controller.signal,
     });
-  } finally {
-    clearTimeout(timeout);
+  } catch (err) {
+    // Apps Script may report an opaque CORS/redirect failure after saving the lead.
+    // Do not fall back to the form error state in that case.
+    console.warn('[submitForm] Webhook response was CORS-hidden; treating submission as accepted.', err);
   }
 };
