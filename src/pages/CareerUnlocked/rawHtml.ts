@@ -23,7 +23,7 @@ export const rawHtmlBody = `
   <div class="absolute inset-0 bg-[#FAF6EF]/55 lg:hidden pointer-events-none"></div>
   <div class="relative wrap"><div class="max-w-2xl text-left space-y-4">
     <span class="inline-block text-[11px] sm:text-xs font-bold tracking-wide uppercase bg-[#1E1611] text-white px-3 py-1.5 rounded-full">Before you choose a career, understand your options.</span>
-    <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold font-display leading-[1.08] tracking-tight">Career Unlocked: See Where <span class="not-italic text-white bg-[#FF5C00] px-2 py-0.5 rounded-md inline-block">Digital Marketing, Business &amp; AI</span> Can Take You.</h1>
+    <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold font-display leading-[1.08] tracking-tight">Career Unlocked: See Where <em class="not-italic text-white bg-[#FF6B1A] px-2 py-0.5 rounded-md inline-block" style="transform:rotate(-1deg);">Digital Marketing, Business &amp; AI</em> Can Take You.</h1>
     <p class="text-base sm:text-lg leading-relaxed">90-minute live career workshop for students, graduates, and aspiring marketers.</p>
     <div class="flex items-stretch bg-[#FFFDF9] border-[1.5px] border-[#1E1611] rounded-2xl overflow-hidden max-w-md shadow-sm">
       <div class="px-5 py-3.5 bg-[#FF6B1A] text-white font-display font-black text-3xl sm:text-4xl flex items-center justify-center border-r-2 border-dashed border-[#1E1611]">₹99</div>
