@@ -129,6 +129,7 @@ function resolveTabName_(data) {
   if (formType.includes("brochure") || rawFormName.includes("brochure")) return "Brochure Downloads";
   if (formType.includes("newsletter") || rawFormName.includes("newsletter")) return "Newsletter Signup";
   if (formType.includes("contact") || rawFormName.includes("contact")) return "Contact Page";
+  if (formType.includes("career unlocked") || rawFormName.includes("career unlocked") || url.includes("/career-unlocked")) return "Career Unlocked Workshop";
   if (formType.includes("career") || rawFormName.includes("career") || section.includes("career") || url.includes("/careers")) return "Career Enquiry";
   if (rawFormName.includes("admissions") || section.includes("admissions") || url.includes("/admissions")) return "Admissions Enquiry";
   if (rawFormName.includes("campus") || section.includes("campus") || formType.includes("campus")) return "Campus Visit Booking";
