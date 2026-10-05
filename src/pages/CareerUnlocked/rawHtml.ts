@@ -288,7 +288,7 @@ export const rawHtmlBody = `
 
 <!-- Floating -->
 <button id="toTop" aria-label="Back to top" class="fixed right-4 bottom-[156px] sm:bottom-[164px] z-40 w-11 h-11 rounded-full bg-[#FFFDF9] border border-[#EADFD0] shadow-xl opacity-0 translate-y-3 pointer-events-none transition-all">↑</button>
-<a id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="fixed right-4 bottom-[92px] sm:bottom-24 z-40 w-14 h-14 rounded-full bg-[#25D366] shadow-xl flex items-center justify-center text-white text-2xl">✆</a>
+<a id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="fixed right-4 bottom-[92px] sm:bottom-24 z-40 w-14 h-14 rounded-full bg-[#25D366] shadow-xl flex items-center justify-center text-white"><img src="/career-unlocked/media/whatsapp.svg" alt="" class="h-7 w-7" /></a>
 <div id="stickyBar" class="fixed bottom-0 sm:bottom-4 left-0 sm:left-1/2 sm:-translate-x-1/2 right-0 sm:right-auto z-40 w-full sm:w-auto bg-[#FFFDF9]/95 backdrop-blur-md border-t sm:border border-[#EADFD0] sm:rounded-2xl shadow-xl px-4 py-3 flex items-center justify-between gap-4 transition-transform duration-300 translate-y-full">
   <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#E24A0B] animate-pulse"></span><div><span class="text-[10px] font-bold text-[#6B5E53] uppercase block">12 seats left</span><span class="font-display font-extrabold text-sm text-[#E24A0B]">₹99 · full 90 minutes</span></div></div>
   <a href="#reserve" data-book class="min-h-[46px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-xs sm:text-sm">Book seat</a>
