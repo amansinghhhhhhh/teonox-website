@@ -1179,6 +1179,7 @@ export const rawHtmlBody = `<!-- Hero -->
           <div class="teonox-online-form-group">
             <label>Email Address</label>
             <input type="email" placeholder="Enter your email address" required>
+            <div id="teonox-email-error-slot" style="margin-top:4px;color:#e74c3c;font-size:13px;font-family:Inter,sans-serif;"></div>
           </div>
           <div class="teonox-online-form-group">
             <label>I am a</label>
@@ -1200,9 +1201,11 @@ export const rawHtmlBody = `<!-- Hero -->
               <option>Evening (6 PM - 9 PM)</option>
             </select>
           </div>
+          <div id="teonox-online-form-error" style="color:#e74c3c;font-size:13px;margin-bottom:8px;font-family:Inter,sans-serif;"></div>
           <button type="submit" class="teonox-online-btn teonox-online-btn-primary" style="width:100%;padding:14px;font-size:15px;">
             <i class="fas fa-paper-plane"></i> Submit Application
           </button>
+          <p id="teonox-online-otp-gate-note" style="text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:10px;font-family:Inter,sans-serif;">Please verify your phone number with OTP to submit.</p>
           <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">
             <i class="fas fa-lock" style="font-size:10px;"></i> Your information is secure. We will never share your data.
           </p>

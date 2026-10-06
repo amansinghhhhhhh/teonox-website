@@ -26,23 +26,13 @@ function getField(form: HTMLFormElement, selector: string): string {
 }
 
 function removeError(form: HTMLFormElement): void {
-  const existing = form.querySelector('.teonox-online-form-error');
-  if (existing) existing.remove();
+  const existing = document.getElementById('teonox-online-form-error');
+  if (existing) existing.textContent = '';
 }
 
 function injectError(form: HTMLFormElement, message: string, selector?: string): void {
-  const existing = form.querySelector('.teonox-online-form-error');
-  if (existing) existing.remove();
-  const div = document.createElement('div');
-  div.className = 'teonox-online-form-error';
-  div.style.cssText = 'color:#e74c3c;font-size:13px;margin-bottom:8px;font-family:Inter,sans-serif;';
-  div.textContent = message;
-  const btn = form.querySelector('button[type="submit"]');
-  if (btn) {
-    btn.parentNode?.insertBefore(div, btn);
-  } else {
-    form.appendChild(div);
-  }
+  const existing = document.getElementById('teonox-online-form-error');
+  if (existing) existing.textContent = message;
   if (selector) {
     const el = form.querySelector(selector) as HTMLElement | null;
     if (el) el.focus();
@@ -50,18 +40,13 @@ function injectError(form: HTMLFormElement, message: string, selector?: string):
 }
 
 function injectRealtimeError(input: HTMLInputElement, form: HTMLFormElement, message: string, key: string): void {
-  const existing = form.querySelector(`.teonox-online-rt-${key}`);
-  if (existing) existing.remove();
-  const div = document.createElement('div');
-  div.className = `teonox-online-rt-${key}`;
-  div.style.cssText = 'color:#e74c3c;font-size:13px;margin-top:4px;font-family:Inter,sans-serif;';
-  div.textContent = message;
-  input.parentNode?.insertBefore(div, input.nextSibling);
+  const slot = document.getElementById(`teonox-${key}-error-slot`);
+  if (slot) slot.textContent = message;
 }
 
 function clearRealtimeError(input: HTMLInputElement, form: HTMLFormElement, key: string): void {
-  const existing = form.querySelector(`.teonox-online-rt-${key}`);
-  if (existing) existing.remove();
+  const slot = document.getElementById(`teonox-${key}-error-slot`);
+  if (slot) slot.textContent = '';
 }
 
 function showSubmitting(form: HTMLFormElement, label = 'Submitting…'): void {
@@ -117,18 +102,12 @@ function normalizePhone(raw: string): string {
 // gate still detects outstanding phone errors.
 function showPhoneSlotError(message: string): void {
   const slot = document.getElementById('teonox-phone-error-slot');
-  if (!slot) return;
-  slot.innerHTML = '';
-  const div = document.createElement('div');
-  div.className = 'teonox-online-rt-phone';
-  div.style.cssText = 'color:#e74c3c;font-size:13px;margin-top:4px;font-family:Inter,sans-serif;';
-  div.textContent = message;
-  slot.appendChild(div);
+  if (slot) slot.textContent = message;
 }
 
 function clearPhoneSlotError(): void {
   const slot = document.getElementById('teonox-phone-error-slot');
-  if (slot) slot.innerHTML = '';
+  if (slot) slot.textContent = '';
 }
 
 // --- Inline OTP DOM helpers (scoped to the Apply modal form) ---
@@ -185,14 +164,11 @@ function OnlineProgrammeOtpGate() {
       btn.style.pointerEvents = phoneVerified ? '' : 'none';
     }
     if (form) {
-      let note = document.getElementById('teonox-online-otp-gate-note') as HTMLParagraphElement | null;
-      if (!note) {
-        note = document.createElement('p');
-        note.id = 'teonox-online-otp-gate-note';
-        note.style.cssText = 'text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:10px;font-family:Inter,sans-serif;';
-        form.insertBefore(note, btn?.nextSibling || null);
+      const note = document.getElementById('teonox-online-otp-gate-note') as HTMLParagraphElement | null;
+      if (note) {
+        note.textContent = phoneVerified ? '' : 'Please verify your phone number with OTP to submit.';
+        note.style.display = phoneVerified ? 'none' : 'block';
       }
-      note.textContent = phoneVerified ? '' : 'Please verify your phone number with OTP to submit.';
     }
   }, [phone, phoneVerified]);
 
@@ -214,7 +190,8 @@ export function OnlineProgrammePage() {
       if (form) {
         removeError(form);
         clearPhoneSlotError();
-        form.querySelectorAll('.teonox-online-rt-phone, .teonox-online-rt-email').forEach((el) => el.remove());
+        const emailSlot = document.getElementById('teonox-email-error-slot');
+        if (emailSlot) emailSlot.textContent = '';
         form.reset();
         (window as unknown as { teonoxOnlinePhoneVerified?: string }).teonoxOnlinePhoneVerified = '';
         const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
@@ -255,11 +232,18 @@ export function OnlineProgrammePage() {
       if (!validatePhone(phone)) { injectError(form, 'Please enter a valid 10-digit mobile number.', 'input[type="tel"]'); return; }
 
       // Block submission if real-time validation errors exist
-      const hasPhoneError = form.querySelector('.teonox-online-rt-phone');
-      const hasEmailError = form.querySelector('.teonox-online-rt-email');
+      const phoneErrorSlot = document.getElementById('teonox-phone-error-slot');
+      const emailErrorSlot = document.getElementById('teonox-email-error-slot');
+      const hasPhoneError = (phoneErrorSlot?.textContent || '').trim();
+      const hasEmailError = (emailErrorSlot?.textContent || '').trim();
       if (hasPhoneError || hasEmailError) {
-        if (hasPhoneError) { (hasPhoneError.previousElementSibling as HTMLElement)?.focus(); }
-        else if (hasEmailError) { (hasEmailError.previousElementSibling as HTMLElement)?.focus(); }
+        if (hasPhoneError) {
+          const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
+          phoneInput?.focus();
+        } else if (hasEmailError) {
+          const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement | null;
+          emailInput?.focus();
+        }
         return;
       }
 
@@ -471,6 +455,12 @@ export function OnlineProgrammePage() {
 
     // --- Cleanup ---
     return () => {
+      document.body.style.overflow = '';
+      const w = window as any;
+      ['openApplyModal', 'closeApplyModal', 'toggleFaq', 'submitForm', 'playReel', 'togglePause', 'toggleMute', 'slideScroll'].forEach((key) => {
+        if (w[key]) delete w[key];
+      });
+      observer.disconnect();
       document.querySelectorAll('.teonox-online-slider-viewport').forEach(v => {
         (v as HTMLElement).style.cursor = '';
       });
