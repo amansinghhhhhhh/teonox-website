@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { SEO } from '../../components/SEO';
-import { initMetaPixel } from '../../utils/metaPixel';
 
 export function CareerUnlockedThankYouPage() {
   const [seconds, setSeconds] = useState(6);
@@ -18,7 +17,6 @@ export function CareerUnlockedThankYouPage() {
     }
 
     setAllowed(true);
-    initMetaPixel();
 
     const countdown = window.setInterval(() => {
       setSeconds((s) => {
