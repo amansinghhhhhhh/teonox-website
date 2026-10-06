@@ -107,7 +107,7 @@ function closeModal(){modal.classList.add('hidden');modal.classList.remove('flex
 document.getElementById('modalClose').onclick=closeModal;
 modal.addEventListener('click',function(e){if(e.target===modal)closeModal()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
-document.querySelectorAll('[data-book]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=(this.textContent||this.title||'').replace(/\s+/g,' ').trim();F.sectionName=t||'Career Unlocked CTA';openModal()})});
+document.querySelectorAll('[data-book]').forEach(function(a){a.addEventListener('click',function(){var t=(this.getAttribute('data-cta')||this.textContent||this.title||'').replace(/\s+/g,' ').trim();F.sectionName=t||'Career Unlocked CTA';})});
 function field(l,h){return '<label class="block text-xs font-bold mb-1.5">'+l+'</label>'+h}
 function renderDetails(){
 setBar(1);document.getElementById('stepBar').style.display='';document.getElementById('modalTitle').textContent='Book my seat — ₹99';

@@ -67,6 +67,11 @@ const META_MAP = {
     description: '90-minute live career workshop for students, graduates, and aspiring marketers. Backed by A2 Digital, 12+ years of industry experience.',
     canonical: '/career-unlocked',
   },
+  '/career-unlocked/thank-you': {
+    title: 'Registration Successful | Career Unlocked',
+    description: 'You have successfully registered for the Career Unlocked webinar.',
+    canonical: '/career-unlocked/thank-you',
+  },
   '/thank-you': {
     title: 'Thank You | TEONOX',
     description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',
