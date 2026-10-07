@@ -10,7 +10,7 @@ export const rawHtmlBody = `
   <header class="bg-[#FFFDF9]/95 backdrop-blur-md border-b border-[#EADFD0]">
     <div class="wrap h-14 sm:h-16 flex items-center justify-between gap-4">
       <a href="#" class="flex items-center gap-2 flex-none" aria-label="Teonox home"><img src="/career-unlocked/media/logo-on-light.png" alt="Teonox — Learn, Apply, Lead" class="h-9 sm:h-11 w-auto" width="114" height="44" /></a>
-      <a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="flex-none min-h-[40px] px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-xs sm:text-sm shadow-md">Book My Seat — ₹99</a>
+      <a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="flex-none min-h-[40px] px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-xs sm:text-sm shadow-md">Book My Seat — ₹99</a>
     </div>
   </header>
 </div>
@@ -34,7 +34,7 @@ export const rawHtmlBody = `
       <span class="bg-[#FFFDF9] border border-[#EADFD0] px-3 py-1.5 rounded-full">BACKED BY A2 DIGITAL · 12+ YEARS</span>
       <span class="bg-[#FFFDF9] border border-[#EADFD0] px-3 py-1.5 rounded-full">INDIA + GLOBAL OPPORTUNITIES</span>
     </div>
-    <div class="pt-2 max-w-md"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white shadow-xl w-full min-h-[52px] px-6 py-3.5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-2">Book My Seat — ₹99 <span>→</span></a></div>
+    <div class="pt-2 max-w-md"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white shadow-xl w-full min-h-[52px] px-6 py-3.5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-2">Book My Seat — ₹99 <span>→</span></a></div>
   </div></div>
 </section>
 
@@ -111,7 +111,7 @@ export const rawHtmlBody = `
     <div class="hidden sm:flex flex-wrap items-center justify-center gap-4" id="brandGrid"></div>
     <div class="sm:hidden overflow-hidden"><div class="flex slider-track" id="brandTrack" style="gap:16px"></div>
     <div class="flex items-center justify-center gap-4 mt-5"><button data-brand="-1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0]">‹</button><button data-brand="1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0]">›</a></div></div></div>
-  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] px-6 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2">Book My Seat — ₹99 →</a></div>
+  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] px-6 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2">Book My Seat — ₹99 →</a></div>
 </div></section>
 
 <!-- Six routes -->
@@ -131,7 +131,7 @@ export const rawHtmlBody = `
   <div class="mt-8 bg-[#FFFDF9] border border-[#EADFD0] rounded-[28px] p-5 sm:p-8"><div class="grid grid-cols-4 gap-2 sm:gap-5" id="stairs"></div>
     <div class="mt-6 pt-5 border-t border-[#EADFD0] space-y-3"><div class="flex items-start gap-2.5 text-xs sm:text-sm bg-[#FAF6EF] border border-[#EADFD0] rounded-2xl p-3.5"><span>⚠️</span><span>Earnings depend on skill, results and consistency. The workshop shows you the path; walking it is on you.</span></div>
     <p class="text-[11px] text-[#6B5E53]">Figures are 2026 market ranges for India and global freelance platforms. Example months are illustrations, not guarantees.</p></div></div>
-  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
+  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
 </div></section>
 
 <!-- Scope -->
@@ -148,7 +148,7 @@ export const rawHtmlBody = `
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">See What Happens Inside the Room</h2><p class="text-[#6B5E53]">No lecture hall. Phones out, teams arguing over campaigns, and a plan you leave with.</p></div>
   <div class="overflow-hidden" id="vidView"><div class="flex slider-track" id="vidTrack" style="gap:24px"></div></div>
   <div class="flex items-center justify-center gap-4 mt-7"><button data-vid="-1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">‹</button><div class="flex items-center gap-2" id="vidDots"></div><button data-vid="1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">›</a></div>
-  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
+  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
 </div></section>
 
 <!-- Global -->
@@ -197,7 +197,7 @@ export const rawHtmlBody = `
       <div class="mt-5 flex flex-wrap gap-2"><span class="border border-[#6A4A33] rounded-full px-3 py-1 text-[11px] font-bold">Opportunity Map</span><span class="border border-[#6A4A33] rounded-full px-3 py-1 text-[11px] font-bold">Scorecard</span><span class="border border-[#6A4A33] rounded-full px-3 py-1 text-[11px] font-bold">90-day plan</span><span class="border border-[#6A4A33] rounded-full px-3 py-1 text-[11px] font-bold">First-client checklist</span></div>
     </div></div>
   </div>
-  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
+  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
 </div></section>
 
 <!-- Agenda -->
@@ -206,7 +206,7 @@ export const rawHtmlBody = `
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">90 Minutes. One Clearer Direction.</h2></div>
   <div class="relative pl-6 sm:pl-10"><div class="absolute left-2 sm:left-4 top-2 bottom-2 w-0.5 bg-[#EADFD0]"></div><div class="space-y-4" id="agendaList"></div></div>
   <div class="flex flex-wrap justify-center gap-2 mt-7 text-xs sm:text-sm font-bold"><span class="bg-[#FFFDF9] border border-[#EADFD0] px-3.5 py-2 rounded-full">In person at venue, Pune</span><span class="bg-[#FFFDF9] border border-[#EADFD0] px-3.5 py-2 rounded-full">Bring your phone</span><span class="bg-[#FFFDF9] border border-[#EADFD0] px-3.5 py-2 rounded-full">Team exercises</span><span class="bg-[#FFFDF9] border border-[#EADFD0] px-3.5 py-2 rounded-full">Digital certificate</span></div>
-  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
+  <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
 </div></section>
 
 <!-- Who for -->
@@ -230,7 +230,7 @@ export const rawHtmlBody = `
       <li class="flex gap-2 bg-[#FAF6EF] border border-[#EADFD0] rounded-2xl p-3.5 text-xs sm:text-sm font-medium">🛡️ No pressure to enrol in anything</li>
       <li class="flex gap-2 bg-[#FAF6EF] border border-[#EADFD0] rounded-2xl p-3.5 text-xs sm:text-sm font-medium">🛡️ Entry at the door</li>
     </ul>
-    <div class="flex flex-col sm:flex-row gap-3"><a id="parentShare" href="#" target="_blank" rel="noopener" class="flex-1 min-h-[52px] px-6 py-3.5 rounded-2xl bg-[#1E1611] text-white font-bold text-sm flex items-center justify-center gap-2">✈ Send this page to my parents</a><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="flex-1 min-h-[52px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold flex items-center justify-center">Book for my child</a></div>
+    <div class="flex flex-col sm:flex-row gap-3"><a id="parentShare" href="#" target="_blank" rel="noopener" class="flex-1 min-h-[52px] px-6 py-3.5 rounded-2xl bg-[#1E1611] text-white font-bold text-sm flex items-center justify-center gap-2">✈ Send this page to my parents</a><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="flex-1 min-h-[52px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold flex items-center justify-center">Book for my child</a></div>
   </div>
 </div></section>
 
@@ -246,7 +246,7 @@ export const rawHtmlBody = `
     </div>
     <div class="mt-6 bg-white rounded-3xl p-4 sm:p-5 text-[#1E1611] max-w-md mx-auto relative"><div class="flex items-center justify-between gap-3"><div class="text-left"><p class="font-display font-black text-3xl text-[#E24A0B]">₹99</p><p class="text-xs font-bold text-[#6B5E53]"></p></div>
       <ul class="text-left space-y-1 text-xs text-[#6B5E53]"><li>✓ The 90-minute workshop</li><li>✓ Take-home kit</li><li>✓ Open Q&amp;A + certificate</li></ul></div></div>
-    <div class="mt-7 flex justify-center relative"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="bg-white text-[#E24A0B] shadow-xl min-h-[52px] px-6 py-3.5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-2">Book My Seat — ₹99 →</a></div>
+    <div class="mt-7 flex justify-center relative"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-white text-[#E24A0B] shadow-xl min-h-[52px] px-6 py-3.5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-2">Book My Seat — ₹99 →</a></div>
   </div>
 </div></section>
 
@@ -255,8 +255,8 @@ export const rawHtmlBody = `
   <div class="text-center space-y-3.5 mb-8"><span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1.5 rounded-full border bg-[#FFE9D6] border-[#FFC79A] text-[#E24A0B]">● Book your batch</span><div class="mx-auto h-1.5 w-14 rounded-full bg-gradient-to-r from-[#FF6B1A] to-[#FFC93C]"></div>
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">Choose Your Career Unlocked Session</h2></div>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="rounded-3xl p-5 bg-[#FFFDF9] border-[#FF6B1A] border-2 shadow-lg"><p class="text-[11px] font-bold uppercase text-[#6B5E53] mb-2">Saturday</p><p class="font-display font-extrabold text-2xl">10 Oct 2026</p><p class="text-sm text-[#6B5E53] mt-1">🕒 11:00 AM – 12:30 PM</p><p class="text-sm text-[#6B5E53] mt-1">📍 TEONOX Campus, Kothrud, Pune</p><p class="text-xs font-bold text-[#E24A0B] mt-2">12 seats left</p><a data-book href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="mt-4 w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-sm">Choose this date →</a></div>
-    <div class="rounded-3xl p-5 bg-[#FFFDF9] border border-[#EADFD0]"><p class="text-[11px] font-bold uppercase text-[#6B5E53] mb-2">Saturday</p><p class="font-display font-extrabold text-2xl">10 Oct 2026</p><p class="text-sm text-[#6B5E53] mt-1">🕒 4:00 PM – 5:30 PM</p><p class="text-sm text-[#6B5E53] mt-1">📍 TEONOX Campus, Kothrud, Pune</p><p class="text-xs font-bold text-[#E24A0B] mt-2">12 seats left</p><a data-book href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="mt-4 w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-sm">Choose this date →</a></div>
+    <div class="rounded-3xl p-5 bg-[#FFFDF9] border-[#FF6B1A] border-2 shadow-lg"><p class="text-[11px] font-bold uppercase text-[#6B5E53] mb-2">Saturday</p><p class="font-display font-extrabold text-2xl">10 Oct 2026</p><p class="text-sm text-[#6B5E53] mt-1">🕒 11:00 AM – 12:30 PM</p><p class="text-sm text-[#6B5E53] mt-1">📍 TEONOX Campus, Kothrud, Pune</p><p class="text-xs font-bold text-[#E24A0B] mt-2">12 seats left</p><a data-book href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="mt-4 w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-sm">Choose this date →</a></div>
+    <div class="rounded-3xl p-5 bg-[#FFFDF9] border border-[#EADFD0]"><p class="text-[11px] font-bold uppercase text-[#6B5E53] mb-2">Saturday</p><p class="font-display font-extrabold text-2xl">10 Oct 2026</p><p class="text-sm text-[#6B5E53] mt-1">🕒 4:00 PM – 5:30 PM</p><p class="text-sm text-[#6B5E53] mt-1">📍 TEONOX Campus, Kothrud, Pune</p><p class="text-xs font-bold text-[#E24A0B] mt-2">12 seats left</p><a data-book href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="mt-4 w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-sm">Choose this date →</a></div>
   </div>
   <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3"><p class="text-sm text-[#6B5E53]">Questions first?</p><a id="waQuestion" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 min-h-[48px] px-5 py-3 rounded-2xl bg-[#25D366] text-white font-bold text-sm">WhatsApp us</a></div>
 </div></section>
@@ -274,7 +274,7 @@ export const rawHtmlBody = `
     <p class="text-base sm:text-xl font-bold text-[#6B5E53]">Give yourself 90 minutes to see what’s actually out there</p>
     <p class="font-display font-extrabold text-lg">Career Unlocked</p>
     <div class="flex flex-wrap gap-2 text-xs sm:text-sm font-bold"><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● Business</span><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● Digital Marketing</span><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● AI</span><span class="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#EADFD0] text-[#6B5E53]">🕒 90-Minute Career Workshop</span><span class="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#EADFD0] text-[#6B5E53]">📍 Pune</span></div>
-    <div class="pt-3 flex flex-col sm:flex-row gap-3"><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold flex items-center justify-center">Book My Seat — ₹99 →</a><a id="waBook" href="#" target="_blank" rel="noopener" class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-[#25D366] text-white font-bold flex items-center justify-center gap-2">WhatsApp us</a></div></div>
+    <div class="pt-3 flex flex-col sm:flex-row gap-3"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold flex items-center justify-center">Book My Seat — ₹99 →</a><a id="waBook" href="#" target="_blank" rel="noopener" class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-[#25D366] text-white font-bold flex items-center justify-center gap-2">WhatsApp us</a></div></div>
   <div class="hidden lg:flex lg:col-span-5 justify-end"><img src="/career-unlocked/media/nox.png" alt="Nox — the Career Unlocked mascot" class="w-full max-w-[380px]" loading="lazy" /></div>
 </div></div>
 
@@ -282,7 +282,7 @@ export const rawHtmlBody = `
 <footer class="hidden sm:block bg-[#1E1611] text-white pt-12 pb-10"><div class="wrap"><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
   <div><img src="/career-unlocked/media/logo-on-dark.png" alt="Teonox" class="h-10" /><p class="text-xs text-[#CDBFB1] mt-3">School of Marketing, AI &amp; Business, Pune. Backed by A2 Digital.</p></div>
   <div><h4 class="font-display font-extrabold text-sm mb-3">Contact</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li>📍 TEONOX Campus, Kothrud, Pune</li><li><a href="tel:+919890004828">+91 989-000-4828</a></li><li><a href="mailto:info@teonox.com">info@teonox.com</a></li><li><a href="https://www.instagram.com/teonoxofficial" target="_blank" rel="noopener">@teonoxofficial</a></li></ul></div>
-  <div><h4 class="font-display font-extrabold text-sm mb-3">Explore</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="#agenda">Agenda</a></li><li><a href="#who-its-for">Who it's for</a></li><li><a href="#earn">How marketers earn</a></li><li><a href="#faq">FAQ</a></li><li><a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta>Book My Seat — ₹99</a></li></ul></div>
+  <div><h4 class="font-display font-extrabold text-sm mb-3">Explore</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="#agenda">Agenda</a></li><li><a href="#who-its-for">Who it's for</a></li><li><a href="#earn">How marketers earn</a></li><li><a href="#faq">FAQ</a></li><li><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta>Book My Seat — ₹99</a></li></ul></div>
   <div><h4 class="font-display font-extrabold text-sm mb-3">Legal</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/terms-and-conditions">Terms</a></li></ul></div></div>
   <div class="mt-8 pt-6 border-t border-white/10 text-[11px] text-[#CDBFB1]/70">© 2026 Teonox · Backed by A2 Digital. All rights reserved.</div></div></footer>
 
@@ -291,7 +291,7 @@ export const rawHtmlBody = `
 <a id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="fixed right-4 bottom-[92px] sm:bottom-24 z-40 w-14 h-14 rounded-full bg-[#25D366] shadow-xl flex items-center justify-center text-white"><img src="/career-unlocked/media/whatsapp.svg" alt="" class="h-7 w-7" /></a>
 <div id="stickyBar" class="fixed bottom-0 sm:bottom-4 left-0 sm:left-1/2 sm:-translate-x-1/2 right-0 sm:right-auto z-40 w-full sm:w-auto bg-[#FFFDF9]/95 backdrop-blur-md border-t sm:border border-[#EADFD0] sm:rounded-2xl shadow-xl px-4 py-3 flex items-center justify-between gap-4 transition-transform duration-300 translate-y-full">
   <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#E24A0B] animate-pulse"></span><div><span class="text-[10px] font-bold text-[#6B5E53] uppercase block">12 seats left</span><span class="font-display font-extrabold text-sm text-[#E24A0B]">₹99 · full 90 minutes</span></div></div>
-  <a href="https://learn.teonox.com/web/checkout/6aba49657aa7c5e5c7aa70bb" target="_blank" rel="noopener" data-cta class="min-h-[46px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-xs sm:text-sm">Book seat</a>
+  <a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="min-h-[46px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-xs sm:text-sm">Book seat</a>
 </div>
 
 <!-- Booking modal -->
