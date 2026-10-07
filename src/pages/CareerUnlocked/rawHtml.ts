@@ -1,7 +1,7 @@
 export const rawHtmlBody = `
 <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#FF6B1A] to-[#FFC93C] z-[60] transition-all duration-100" style="width:0%"></div>
 <div id="offlineBar" class="hidden fixed top-20 left-3 right-3 sm:left-auto sm:right-6 z-50 items-center gap-3 rounded-2xl bg-[#1E1611]/95 px-4 py-3 text-xs text-[#FAF6EF] shadow-2xl border border-[#FF6B1A]/40">
-  <div><p class="font-bold text-white">Offline Mode Active</p><p class="text-[11px] text-[#EADFD0]/80">Workshop details &amp; your saved ₹99 Pass are cached locally.</p></div>
+  <div><p class="font-bold text-white">Offline Mode Active</p><p class="text-[11px] text-[#EADFD0]">Workshop details &amp; your saved ₹99 Pass are cached locally.</p></div>
 </div>
 
 <!-- Announcement + header -->
@@ -9,7 +9,7 @@ export const rawHtmlBody = `
   <div class="bg-[#1E1611] text-white text-[10px] sm:text-xs font-bold py-2 px-4 text-center leading-snug">Next Career Unlocked: Saturday, 10 Oct 2026 · Kothrud, Pune · <span class="text-[#FF9A3D]">12 seats left</span> · ₹99</div>
   <header class="bg-[#FFFDF9]/95 backdrop-blur-md border-b border-[#EADFD0]">
     <div class="wrap h-14 sm:h-16 flex items-center justify-between gap-4">
-      <a href="#" class="flex items-center gap-2 flex-none" aria-label="Teonox home"><img src="/career-unlocked/media/logo-on-light.png" alt="Teonox — Learn, Apply, Lead" class="h-9 sm:h-11 w-auto" width="114" height="44" /></a>
+      <a href="#" class="flex items-center gap-2 flex-none" aria-label="Teonox home"><img src="/career-unlocked/media/logo-on-light.webp" alt="Teonox — Learn, Apply, Lead" class="h-9 sm:h-11 w-auto" width="835" height="323" fetchpriority="high" /></a>
       <a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="flex-none min-h-[40px] px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold text-xs sm:text-sm shadow-md">Book My Seat — ₹99</a>
     </div>
   </header>
@@ -17,8 +17,8 @@ export const rawHtmlBody = `
 
 <!-- HERO -->
 <section class="relative overflow-hidden pt-8 sm:pt-14 pb-14 sm:pb-20">
-  <img src="/career-unlocked/media/global-tech-visionary.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-right pointer-events-none select-none hidden lg:block" />
-  <img src="/career-unlocked/media/hero-mobile-bg.jpg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none lg:hidden" />
+  <img src="/career-unlocked/media/global-tech-visionary.webp" alt="" aria-hidden="true" width="1983" height="793" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-right pointer-events-none select-none hidden lg:block" />
+  <img src="/career-unlocked/media/hero-mobile-bg.webp" alt="" aria-hidden="true" width="1080" height="1600" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none lg:hidden" />
   <div class="absolute inset-0 bg-gradient-to-r from-[#FAF6EF] via-[#FAF6EF]/90 to-[#FAF6EF]/25 pointer-events-none"></div>
   <div class="absolute inset-0 bg-[#FAF6EF]/55 lg:hidden pointer-events-none"></div>
   <div class="relative wrap"><div class="max-w-2xl text-left space-y-4">
@@ -49,7 +49,7 @@ export const rawHtmlBody = `
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">Don’t Just Hear About Marketing. See It.</h2>
   <p class="text-base sm:text-lg max-w-3xl mx-auto text-[#6B5E53]">Real campaign dashboards from Google Ads, Meta Ads and analytics — so you can see what marketers actually work with.</p></div>
   <div class="overflow-hidden" id="proofView"><div class="flex slider-track" id="proofTrack" style="gap:24px"></div></div>
-  <div class="flex items-center justify-center gap-4 mt-7"><button data-pslider="-1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9] flex items-center justify-center hover:bg-[#FF6B1A] hover:text-white">‹</button><div class="flex items-center gap-2" id="proofDots"></div><button data-pslider="1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9] flex items-center justify-center hover:bg-[#FF6B1A] hover:text-white">›</a></div>
+  <div class="flex items-center justify-center gap-4 mt-7"><button data-pslider="-1" aria-label="Previous proof slide" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9] flex items-center justify-center hover:bg-[#FF6B1A] hover:text-white">‹</button><div class="flex items-center gap-2" id="proofDots"></div><button data-pslider="1" aria-label="Next proof slide" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9] flex items-center justify-center hover:bg-[#FF6B1A] hover:text-white">›</button></div>
 </div></section>
 
 <!-- Confusion -->
@@ -64,7 +64,7 @@ export const rawHtmlBody = `
 <section data-reveal class="py-12 sm:py-16 bg-[#F4ECE0]"><div class="wrap">
   <div class="bg-[#1E1611] rounded-[28px] p-6 sm:p-10 text-white overflow-hidden grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative">
     <div class="md:col-span-5 relative"><div class="relative rounded-[24px] overflow-hidden border border-[#6A4A33] aspect-[4/3]">
-      <img src="/career-unlocked/media/ai-shift.jpg" alt="AI shifting marketing workflows" class="w-full h-full object-cover" loading="lazy" />
+      <img src="/career-unlocked/media/ai-shift.webp" alt="AI shifting marketing workflows" width="1376" height="768" class="w-full h-full object-cover" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#1E1611]/85 via-transparent to-transparent"></div>
       <span class="absolute top-3 right-3 bg-[#FF6B1A] rounded-full px-3 py-1.5 text-[10px] font-black tracking-widest text-white">AI × MARKETING</span>
       <div class="absolute left-3 bottom-3 bg-[#FFFDF9] rounded-2xl px-3.5 py-2.5"><div class="font-display font-black text-lg text-[#FF6B1A]">$11B → $22B</div><div class="text-[10px] font-bold text-[#6B5E53]">India's digital ad market by 2030</div></div>
@@ -89,13 +89,13 @@ export const rawHtmlBody = `
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">Not Built by Career Coaches. Built by Practitioners.</h2>
   <p class="text-[#6B5E53] max-w-3xl mx-auto">Backed by A2 Digital (12+ years of industry experience).</p></div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-    <div class="md:col-span-12 rounded-3xl overflow-hidden border border-[#EADFD0] bg-[#1E1611] relative"><img src="/career-unlocked/media/team.jpg" alt="The A2 Digital and Teonox team at their Pune office" class="w-full aspect-[16/9] object-cover" loading="lazy" /><div class="absolute left-4 bottom-4"><span class="bg-[#FF6B1A] text-white rounded-full px-3 py-1.5 text-[10px] font-black">A2 Digital</span></div></div>
-    <div class="md:col-span-5 bg-[#FFFDF9] border border-[#EADFD0] rounded-3xl p-5 sm:p-6"><img src="/career-unlocked/media/logo-on-light.png" alt="Teonox" class="h-8 mb-4" loading="lazy" />
+    <div class="md:col-span-12 rounded-3xl overflow-hidden border border-[#EADFD0] bg-[#1E1611] relative"><img src="/career-unlocked/media/team.webp" alt="The A2 Digital and Teonox team at their Pune office" width="1800" height="1199" class="w-full aspect-[16/9] object-cover" loading="lazy" /><div class="absolute left-4 bottom-4"><span class="bg-[#FF6B1A] text-white rounded-full px-3 py-1.5 text-[10px] font-black">A2 Digital</span></div></div>
+    <div class="md:col-span-5 bg-[#FFFDF9] border border-[#EADFD0] rounded-3xl p-5 sm:p-6"><img src="/career-unlocked/media/logo-on-light.webp" alt="Teonox" width="835" height="323" class="h-8 w-auto mb-4" loading="lazy" />
       <h3 class="font-display font-extrabold text-xl sm:text-2xl">Teonox — <span class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] bg-clip-text text-transparent">School of Marketing, AI &amp; Business</span>, Pune</h3>
       <p class="text-sm text-[#6B5E53] mt-2">Backed by A2 Digital (12+ years of industry experience).</p>
       <div class="flex flex-wrap gap-2 pt-4 mt-4 border-t border-dashed border-[#E2D5C2]"><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">Pune, India</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">Business</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">Digital marketing</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">AI</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">12+ years</span></div></div>
     <div class="md:col-span-7 bg-[#FFFDF9] border border-[#EADFD0] rounded-3xl p-5 sm:p-6"><div class="flex flex-col sm:flex-row gap-5">
-      <img src="/career-unlocked/media/amit.jpg" alt="Amit Manglani" class="w-44 sm:w-52 rounded-[22px] border-2 border-[#1E1611] aspect-[3/4] object-cover object-top" loading="lazy" />
+      <img src="/career-unlocked/media/amit.webp" alt="Amit Manglani" width="1254" height="1254" class="w-44 sm:w-52 rounded-[22px] border-2 border-[#1E1611] aspect-[3/4] object-cover object-top" loading="lazy" />
       <div class="space-y-2.5"><h3 class="font-display font-extrabold text-xl sm:text-2xl">Amit Manglani</h3><span class="inline-block bg-[#FFE9D6] border border-[#FF6B1A]/40 rounded-full px-3 py-1 text-[11px] font-bold text-[#E24A0B] uppercase">Founder &amp; CEO, A2 Digital | Teonox</span>
       <p class="text-sm text-[#6B5E53]">12+ years across business development, management and marketing. Has worked across multiple industries at A2 Digital, turning business ideas into practical, working solutions.</p>
       <div class="flex flex-wrap gap-2"><span class="bg-[#FAF6EF] border border-[#EADFD0] rounded-full px-3 py-1 text-xs">Business development</span><span class="bg-[#FAF6EF] border border-[#EADFD0] rounded-full px-3 py-1 text-xs">Management</span><span class="bg-[#FAF6EF] border border-[#EADFD0] rounded-full px-3 py-1 text-xs">Marketing</span></div></div></div></div>
@@ -106,11 +106,11 @@ export const rawHtmlBody = `
   </div>
   <div class="mt-8"><p class="text-[11px] font-bold uppercase tracking-widest text-[#E24A0B] mb-4">Inside the Teonox campus, Pune</p>
     <div class="overflow-hidden" id="galView"><div class="flex slider-track" id="galTrack" style="gap:20px"></div></div>
-    <div class="flex items-center justify-center gap-4 mt-5"><button data-gal="-1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">‹</button><button data-gal="1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">›</a></div></div>
+    <div class="flex items-center justify-center gap-4 mt-5"><button data-gal="-1" aria-label="Previous campus photo" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">‹</button><button data-gal="1" aria-label="Next campus photo" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">›</button></div></div>
   <div class="mt-7 bg-[#FFFDF9] border border-[#EADFD0] rounded-3xl px-5 sm:px-8 py-6 shadow-sm"><p class="text-xs sm:text-sm font-black uppercase tracking-widest text-center mb-5">Brands our team has worked with</p>
     <div class="hidden sm:flex flex-wrap items-center justify-center gap-4" id="brandGrid"></div>
     <div class="sm:hidden overflow-hidden"><div class="flex slider-track" id="brandTrack" style="gap:16px"></div>
-    <div class="flex items-center justify-center gap-4 mt-5"><button data-brand="-1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0]">‹</button><button data-brand="1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0]">›</a></div></div></div>
+    <div class="flex items-center justify-center gap-4 mt-5"><button data-brand="-1" aria-label="Previous brand" class="w-12 h-12 rounded-full border-2 border-[#EADFD0]">‹</button><button data-brand="1" aria-label="Next brand" class="w-12 h-12 rounded-full border-2 border-[#EADFD0]">›</button></div></div></div>
   <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] px-6 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2">Book My Seat — ₹99 →</a></div>
 </div></section>
 
@@ -147,7 +147,7 @@ export const rawHtmlBody = `
   <div class="text-center space-y-3.5 mb-8"><span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1.5 rounded-full border bg-[#FFE9D6] border-[#FFC79A] text-[#E24A0B]">● Inside the room</span><div class="mx-auto h-1.5 w-14 rounded-full bg-gradient-to-r from-[#FF6B1A] to-[#FFC93C]"></div>
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">See What Happens Inside the Room</h2><p class="text-[#6B5E53]">No lecture hall. Phones out, teams arguing over campaigns, and a plan you leave with.</p></div>
   <div class="overflow-hidden" id="vidView"><div class="flex slider-track" id="vidTrack" style="gap:24px"></div></div>
-  <div class="flex items-center justify-center gap-4 mt-7"><button data-vid="-1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">‹</button><div class="flex items-center gap-2" id="vidDots"></div><button data-vid="1" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">›</a></div>
+  <div class="flex items-center justify-center gap-4 mt-7"><button data-vid="-1" aria-label="Previous video" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">‹</button><div class="flex items-center gap-2" id="vidDots"></div><button data-vid="1" aria-label="Next video" class="w-12 h-12 rounded-full border-2 border-[#EADFD0] bg-[#FFFDF9]">›</button></div>
   <div class="mt-8 max-w-md mx-auto"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white w-full min-h-[52px] rounded-2xl font-bold flex items-center justify-center">Book My Seat — ₹99 →</a></div>
 </div></section>
 
@@ -177,7 +177,7 @@ export const rawHtmlBody = `
       <p class="text-[11px] font-black uppercase tracking-[0.16em] text-[#FF9A3D] relative">Work from India</p>
       <h3 class="font-display font-extrabold text-xl sm:text-2xl text-white relative">Work with brands worldwide.</h3>
       <p class="text-sm text-[#CDBFB1] mt-2 relative">US, UK, UAE and Australian brands hire remote marketers every day — no relocation, no visa.</p>
-      <div class="relative min-h-[250px] mt-3"><img src="/career-unlocked/media/world-map.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-90" loading="lazy" />
+      <div class="relative min-h-[250px] mt-3"><img src="/career-unlocked/media/world-map.webp" alt="" width="1357" height="617" class="absolute inset-0 w-full h-full object-contain opacity-90" loading="lazy" />
         <span class="absolute bg-[#FF6B1A] rounded-xl px-3 py-1.5 text-[10px] font-bold text-white top-2 right-2">HIRING REMOTELY TODAY</span>
         <div class="absolute bottom-2 left-2 flex flex-wrap gap-2"><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">$</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">£</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">AED</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">₹</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">AUD</span></div>
       </div>
@@ -275,16 +275,16 @@ export const rawHtmlBody = `
     <p class="font-display font-extrabold text-lg">Career Unlocked</p>
     <div class="flex flex-wrap gap-2 text-xs sm:text-sm font-bold"><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● Business</span><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● Digital Marketing</span><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● AI</span><span class="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#EADFD0] text-[#6B5E53]">🕒 90-Minute Career Workshop</span><span class="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#EADFD0] text-[#6B5E53]">📍 Pune</span></div>
     <div class="pt-3 flex flex-col sm:flex-row gap-3"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold flex items-center justify-center">Book My Seat — ₹99 →</a><a id="waBook" href="#" target="_blank" rel="noopener" class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-[#25D366] text-white font-bold flex items-center justify-center gap-2">WhatsApp us</a></div></div>
-  <div class="hidden lg:flex lg:col-span-5 justify-end"><img src="/career-unlocked/media/nox.png" alt="Nox — the Career Unlocked mascot" class="w-full max-w-[380px]" loading="lazy" /></div>
+  <div class="hidden lg:flex lg:col-span-5 justify-end"><img src="/career-unlocked/media/nox.webp" alt="Nox — the Career Unlocked mascot" width="1122" height="1402" class="w-full max-w-[380px]" loading="lazy" /></div>
 </div></div>
 
 <!-- Footer -->
 <footer class="hidden sm:block bg-[#1E1611] text-white pt-12 pb-10"><div class="wrap"><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-  <div><img src="/career-unlocked/media/logo-on-dark.png" alt="Teonox" class="h-10" /><p class="text-xs text-[#CDBFB1] mt-3">School of Marketing, AI &amp; Business, Pune. Backed by A2 Digital.</p></div>
-  <div><h4 class="font-display font-extrabold text-sm mb-3">Contact</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li>📍 TEONOX Campus, Kothrud, Pune</li><li><a href="tel:+919890004828">+91 989-000-4828</a></li><li><a href="mailto:info@teonox.com">info@teonox.com</a></li><li><a href="https://www.instagram.com/teonoxofficial" target="_blank" rel="noopener">@teonoxofficial</a></li></ul></div>
-  <div><h4 class="font-display font-extrabold text-sm mb-3">Explore</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="#agenda">Agenda</a></li><li><a href="#who-its-for">Who it's for</a></li><li><a href="#earn">How marketers earn</a></li><li><a href="#faq">FAQ</a></li><li><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta>Book My Seat — ₹99</a></li></ul></div>
-  <div><h4 class="font-display font-extrabold text-sm mb-3">Legal</h4><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/terms-and-conditions">Terms</a></li></ul></div></div>
-  <div class="mt-8 pt-6 border-t border-white/10 text-[11px] text-[#CDBFB1]/70">© 2026 Teonox · Backed by A2 Digital. All rights reserved.</div></div></footer>
+  <div><img src="/career-unlocked/media/logo-on-dark.webp" alt="Teonox" width="835" height="323" class="h-10 w-auto" /><p class="text-xs text-[#CDBFB1] mt-3">School of Marketing, AI &amp; Business, Pune. Backed by A2 Digital.</p></div>
+  <div><h3 class="font-display font-extrabold text-sm mb-3">Contact</h3><ul class="space-y-2 text-xs text-[#CDBFB1]"><li>📍 TEONOX Campus, Kothrud, Pune</li><li><a href="tel:+919890004828">+91 989-000-4828</a></li><li><a href="mailto:info@teonox.com">info@teonox.com</a></li><li><a href="https://www.instagram.com/teonoxofficial" target="_blank" rel="noopener">@teonoxofficial</a></li></ul></div>
+  <div><h3 class="font-display font-extrabold text-sm mb-3">Explore</h3><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="#agenda">Agenda</a></li><li><a href="#who-its-for">Who it's for</a></li><li><a href="#earn">How marketers earn</a></li><li><a href="#faq">FAQ</a></li><li><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta>Book My Seat — ₹99</a></li></ul></div>
+  <div><h3 class="font-display font-extrabold text-sm mb-3">Legal</h3><ul class="space-y-2 text-xs text-[#CDBFB1]"><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/terms-and-conditions">Terms</a></li></ul></div></div>
+  <div class="mt-8 pt-6 border-t border-white/10 text-[11px] text-[#CDBFB1]">© 2026 Teonox · Backed by A2 Digital. All rights reserved.</div></div></footer>
 
 <!-- Floating -->
 <button id="toTop" aria-label="Back to top" class="fixed right-4 bottom-[164px] sm:bottom-[168px] z-40 w-11 h-11 rounded-full bg-[#FFFDF9] border border-[#EADFD0] shadow-xl opacity-0 translate-y-3 pointer-events-none transition-all">↑</button>
