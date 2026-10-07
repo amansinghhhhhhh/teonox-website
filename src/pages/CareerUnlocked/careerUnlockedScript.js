@@ -61,16 +61,17 @@ function total(){return Math.max(1,Math.ceil(items.length/per()))}
 function draw(){
 var p=per(),gap=parseFloat(getComputedStyle(track).gap)||24;
 track.innerHTML=items.map(function(it,i){return renderCard(it,i,p,gap)}).join('');
-var first=track.children[0];
+if(pos>0){var first=track.children[0];
 var step=first?first.getBoundingClientRect().width+gap:0;
-track.style.transform='translateX(-'+(pos*step)+'px)';
+track.style.transform='translateX(-'+(pos*step)+'px)'}else{track.style.transform=''}
 if(dotsId){var d=document.getElementById(dotsId);if(d){d.innerHTML='';for(var i=0;i<total();i++){var b=document.createElement('button');b.className='p-3 -m-1 inline-flex items-center justify-center';b.setAttribute('aria-label','Go to slide '+(i+1));var s=document.createElement('span');s.className='block h-2.5 rounded-full '+(i===pos?'w-7 bg-[#FF6B1A]':'w-2.5 bg-[#D3C0A6]');b.appendChild(s);(function(i){b.onclick=function(){pos=i;restart();draw()}})(i);d.appendChild(b)}}}
 bindVideos();
 }
 function restart(){if(timer)clearInterval(timer);if(autoMs)timer=setInterval(function(){pos=(pos+1)%total();draw()},autoMs)}
 bindNav(trackId,posSet);function posSet(d){pos=((pos+d)%total()+total())%total();restart();draw()}
 draw();restart();
-addEventListener('resize',draw);
+var resizeRaf=0;
+addEventListener('resize',function(){if(resizeRaf)return;resizeRaf=requestAnimationFrame(function(){resizeRaf=0;draw()})});
 return{go:posSet};
 function bindVideos(){track.querySelectorAll('video').forEach(function(v){v.onclick=function(){if(v.paused){track.querySelectorAll('video').forEach(function(o){if(o!==v)o.pause()});v.play()}else v.pause()}})}
 }
@@ -80,10 +81,15 @@ document.querySelectorAll('[data-gal]').forEach(function(b){if(trackId==='galTra
 document.querySelectorAll('[data-brand]').forEach(function(b){if(trackId==='brandTrack')b.onclick=function(){brandApi.go(+b.dataset.brand)}});
 document.querySelectorAll('[data-vid]').forEach(function(b){if(trackId==='vidTrack')b.onclick=function(){vidApi.go(+b.dataset.vid)}});
 }
-var proofApi=makeSlider('proofTrack','proofDots',function(s,i,p,gap){return '<div class="rounded-[24px] bg-[#FFFDF9] border border-[#EADFD0] overflow-hidden" style="flex:0 0 calc((100% - '+(p-1)*gap+'px)/'+p+')"><div class="flex items-center gap-2 px-3 py-3 border-b border-[#EADFD0]"><span class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF6B5B]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFC93C]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#4CD964]"></span></span><span class="flex-1 h-6 rounded-lg bg-[#F1E8DB] border border-[#EADFD0] text-[10px] px-2.5 flex items-center truncate">'+s.ch+'</span></div><img src="'+s.src+'" alt="'+s.ti+'" class="w-full aspect-[16/7] object-cover object-top" loading="lazy" /><div class="flex items-center gap-2 px-3 py-3 border-t border-[#EADFD0]"><span class="bg-[#FF6B1A] text-white rounded-full px-3 py-1.5 text-[10px] font-black">'+s.tag+'</span><span class="font-display font-extrabold text-xs">'+s.ti+'</span></div></div>'},proof,function(w){return w<=1024?1:2},5000);
-var galApi=makeSlider('galTrack',null,function(p,i,pp,gap){return '<div class="relative rounded-2xl overflow-hidden border border-[#EADFD0] aspect-[16/10]" style="flex:0 0 calc((100% - '+(pp-1)*gap+'px)/'+pp+')"><img src="'+p.src+'" alt="'+p.alt+'" class="w-full h-full object-cover" loading="lazy" /><span class="absolute bottom-3 left-4 right-4 text-white text-[13px] font-semibold">'+p.alt+'</span></div>'},office,function(w){return w<=480?1:w<=768?2:3},4000);
-var brandApi=makeSlider('brandTrack',null,function(b,i,pp,gap){return '<span class="w-full h-[124px] rounded-2xl border border-[#EADFD0] bg-white overflow-hidden flex items-center justify-center" style="flex:0 0 220px"><img src="'+b.src+'" alt="'+b.n+'" class="w-full h-full object-contain p-4" loading="lazy" /></span>'},brands,function(){return 1},3000);
-var vidApi=makeSlider('vidTrack','vidDots',function(v,i,p,gap){return '<div class="rounded-3xl bg-[#FFFDF9] border border-[#EADFD0] overflow-hidden" style="flex:0 0 calc((100% - '+(p-1)*gap+'px)/'+p+')"><div class="relative bg-[#1E1611] aspect-[9/16]"><video src="'+v+'" poster="'+posters[i%posters.length]+'" preload="none" playsinline class="w-full h-full object-cover"></video><span class="absolute bottom-3 left-3 text-white text-xs font-bold bg-black/50 px-2 py-1 rounded-full">Tap to play</span></div></div>'},videos,function(w){return w<=480?1:w<=768?2:w<=1024?3:4},0);
+/* defer below-fold slider setup out of the critical rendering window (TBT) */
+var proofApi,galApi,brandApi,vidApi;
+function initSliders(){
+proofApi=makeSlider('proofTrack','proofDots',function(s,i,p,gap){return '<div class="rounded-[24px] bg-[#FFFDF9] border border-[#EADFD0] overflow-hidden" style="flex:0 0 calc((100% - '+(p-1)*gap+'px)/'+p+')"><div class="flex items-center gap-2 px-3 py-3 border-b border-[#EADFD0]"><span class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF6B5B]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFC93C]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#4CD964]"></span></span><span class="flex-1 h-6 rounded-lg bg-[#F1E8DB] border border-[#EADFD0] text-[10px] px-2.5 flex items-center truncate">'+s.ch+'</span></div><img src="'+s.src+'" alt="'+s.ti+'" class="w-full aspect-[16/7] object-cover object-top" loading="lazy" /><div class="flex items-center gap-2 px-3 py-3 border-t border-[#EADFD0]"><span class="bg-[#FF6B1A] text-white rounded-full px-3 py-1.5 text-[10px] font-black">'+s.tag+'</span><span class="font-display font-extrabold text-xs">'+s.ti+'</span></div></div>'},proof,function(w){return w<=1024?1:2},5000);
+galApi=makeSlider('galTrack',null,function(p,i,pp,gap){return '<div class="relative rounded-2xl overflow-hidden border border-[#EADFD0] aspect-[16/10]" style="flex:0 0 calc((100% - '+(pp-1)*gap+'px)/'+pp+')"><img src="'+p.src+'" alt="'+p.alt+'" class="w-full h-full object-cover" loading="lazy" /><span class="absolute bottom-3 left-4 right-4 text-white text-[13px] font-semibold">'+p.alt+'</span></div>'},office,function(w){return w<=480?1:w<=768?2:3},4000);
+brandApi=makeSlider('brandTrack',null,function(b,i,pp,gap){return '<span class="w-full h-[124px] rounded-2xl border border-[#EADFD0] bg-white overflow-hidden flex items-center justify-center" style="flex:0 0 220px"><img src="'+b.src+'" alt="'+b.n+'" class="w-full h-full object-contain p-4" loading="lazy" /></span>'},brands,function(){return 1},3000);
+vidApi=makeSlider('vidTrack','vidDots',function(v,i,p,gap){return '<div class="rounded-3xl bg-[#FFFDF9] border border-[#EADFD0] overflow-hidden" style="flex:0 0 calc((100% - '+(p-1)*gap+'px)/'+p+')"><div class="relative bg-[#1E1611] aspect-[9/16]"><video src="'+v+'" poster="'+posters[i%posters.length]+'" preload="none" playsinline class="w-full h-full object-cover"></video><span class="absolute bottom-3 left-3 text-white text-xs font-bold bg-black/50 px-2 py-1 rounded-full">Tap to play</span></div></div>'},videos,function(w){return w<=480?1:w<=768?2:w<=1024?3:4},0);
+}
+if('requestIdleCallback' in window){requestIdleCallback(initSliders,{timeout:2000})}else{setTimeout(initSliders,300)}
 
 /* scroll effects */
 var prog=document.getElementById('scrollProgress'),sticky=document.getElementById('stickyBar'),toTop=document.getElementById('toTop');

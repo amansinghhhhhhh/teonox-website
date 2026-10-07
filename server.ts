@@ -323,6 +323,12 @@ async function resolveRouteMeta(pathname: string): Promise<RouteMeta | null> {
   return null;
 }
 
+// Route-specific <head> extras (e.g. LCP image preloads)
+const HEAD_EXTRAS: Record<string, string> = {
+  '/career-unlocked': `    <link rel="preload" as="image" href="/career-unlocked/media/global-tech-visionary.webp" media="(min-width: 1024px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/career-unlocked/media/hero-mobile-bg.webp" media="(max-width: 1023px)" fetchpriority="high">`,
+};
+
 // Serve index.html with injected route-specific meta tags
 function serveWithMeta(html: string) {
   return async (req: express.Request, res: express.Response) => {
@@ -338,7 +344,11 @@ function serveWithMeta(html: string) {
     // Remove the old <meta name="description"> line BEFORE inserting new meta block,
     // because replace() without /g flag removes the FIRST match.
     const withoutOldDesc = html.replace(/\r?\n\s*<meta name="description" content="[^"]*"\s*\/?>/, '');
-    const modified = withoutOldDesc.replace(/<title>[^<]*<\/title>/, metaHtml);
+    let modified = withoutOldDesc.replace(/<title>[^<]*<\/title>/, metaHtml);
+
+    const clean = req.path.replace(/\/+$/, '') || '/';
+    const extra = HEAD_EXTRAS[clean];
+    if (extra) modified = modified.replace('</head>', `${extra}\n  </head>`);
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(modified);

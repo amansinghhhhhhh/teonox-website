@@ -131,12 +131,21 @@ function buildMetaTags(meta) {
     <meta property="og:site_name" content="${SITE_NAME}">`;
 }
 
+// Route-specific <head> extras (e.g. LCP image preloads)
+const HEAD_EXTRAS = {
+  '/career-unlocked': `    <link rel="preload" as="image" href="/career-unlocked/media/global-tech-visionary.webp" media="(min-width: 1024px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/career-unlocked/media/hero-mobile-bg.webp" media="(max-width: 1023px)" fetchpriority="high">`,
+};
+
 // Inject route-specific meta tags into the index.html template
-function injectMeta(htmlTemplate, meta) {
+function injectMeta(htmlTemplate, meta, routePath) {
   const metaBlock = buildMetaTags(meta);
-  return htmlTemplate
+  let html = htmlTemplate
     .replace(/\r?\n\s*<meta name="description" content="[^"]*"\s*\/?>/, '')
     .replace(/<title>[^<]*<\/title>/, metaBlock);
+  const extra = routePath && HEAD_EXTRAS[routePath];
+  if (extra) html = html.replace('</head>', `${extra}\n  </head>`);
+  return html;
 }
 
 // Write a prerendered page: dist/<route>/index.html
@@ -243,7 +252,7 @@ async function main() {
   // 1. Static routes
   console.log('[Prerender] Generating static route pages...');
   for (const [routePath, meta] of Object.entries(META_MAP)) {
-    const outPath = writePage(distDir, routePath, injectMeta(htmlTemplate, meta));
+    const outPath = writePage(distDir, routePath, injectMeta(htmlTemplate, meta, routePath));
     count++;
     console.log(`  ${routePath} -> ${path.relative(process.cwd(), outPath)}`);
   }

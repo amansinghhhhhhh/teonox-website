@@ -64,7 +64,7 @@ export const rawHtmlBody = `
 <section data-reveal class="py-12 sm:py-16 bg-[#F4ECE0]"><div class="wrap">
   <div class="bg-[#1E1611] rounded-[28px] p-6 sm:p-10 text-white overflow-hidden grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative">
     <div class="md:col-span-5 relative"><div class="relative rounded-[24px] overflow-hidden border border-[#6A4A33] aspect-[4/3]">
-      <img src="/career-unlocked/media/ai-shift.webp" alt="AI shifting marketing workflows" width="1376" height="768" class="w-full h-full object-cover" loading="lazy" />
+      <img src="/career-unlocked/media/ai-shift.webp" alt="AI shifting marketing workflows" width="1000" height="558" class="w-full h-full object-cover" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#1E1611]/85 via-transparent to-transparent"></div>
       <span class="absolute top-3 right-3 bg-[#FF6B1A] rounded-full px-3 py-1.5 text-[10px] font-black tracking-widest text-white">AI × MARKETING</span>
       <div class="absolute left-3 bottom-3 bg-[#FFFDF9] rounded-2xl px-3.5 py-2.5"><div class="font-display font-black text-lg text-[#FF6B1A]">$11B → $22B</div><div class="text-[10px] font-bold text-[#6B5E53]">India's digital ad market by 2030</div></div>
@@ -89,13 +89,13 @@ export const rawHtmlBody = `
   <h2 class="text-[26px] sm:text-4xl font-extrabold font-display">Not Built by Career Coaches. Built by Practitioners.</h2>
   <p class="text-[#6B5E53] max-w-3xl mx-auto">Backed by A2 Digital (12+ years of industry experience).</p></div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-    <div class="md:col-span-12 rounded-3xl overflow-hidden border border-[#EADFD0] bg-[#1E1611] relative"><img src="/career-unlocked/media/team.webp" alt="The A2 Digital and Teonox team at their Pune office" width="1800" height="1199" class="w-full aspect-[16/9] object-cover" loading="lazy" /><div class="absolute left-4 bottom-4"><span class="bg-[#FF6B1A] text-white rounded-full px-3 py-1.5 text-[10px] font-black">A2 Digital</span></div></div>
+    <div class="md:col-span-12 rounded-3xl overflow-hidden border border-[#EADFD0] bg-[#1E1611] relative"><img src="/career-unlocked/media/team.webp" alt="The A2 Digital and Teonox team at their Pune office" width="1536" height="1023" class="w-full aspect-[16/9] object-cover" loading="lazy" /><div class="absolute left-4 bottom-4"><span class="bg-[#FF6B1A] text-white rounded-full px-3 py-1.5 text-[10px] font-black">A2 Digital</span></div></div>
     <div class="md:col-span-5 bg-[#FFFDF9] border border-[#EADFD0] rounded-3xl p-5 sm:p-6"><img src="/career-unlocked/media/logo-on-light.webp" alt="Teonox" width="835" height="323" class="h-8 w-auto mb-4" loading="lazy" />
       <h3 class="font-display font-extrabold text-xl sm:text-2xl">Teonox — <span class="bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] bg-clip-text text-transparent">School of Marketing, AI &amp; Business</span>, Pune</h3>
       <p class="text-sm text-[#6B5E53] mt-2">Backed by A2 Digital (12+ years of industry experience).</p>
       <div class="flex flex-wrap gap-2 pt-4 mt-4 border-t border-dashed border-[#E2D5C2]"><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">Pune, India</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">Business</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">Digital marketing</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">AI</span><span class="bg-[#FFE9D6] rounded-full px-3 py-1 text-xs">12+ years</span></div></div>
     <div class="md:col-span-7 bg-[#FFFDF9] border border-[#EADFD0] rounded-3xl p-5 sm:p-6"><div class="flex flex-col sm:flex-row gap-5">
-      <img src="/career-unlocked/media/amit.webp" alt="Amit Manglani" width="1254" height="1254" class="w-44 sm:w-52 rounded-[22px] border-2 border-[#1E1611] aspect-[3/4] object-cover object-top" loading="lazy" />
+      <img src="/career-unlocked/media/amit.webp" alt="Amit Manglani" width="416" height="416" class="w-44 sm:w-52 rounded-[22px] border-2 border-[#1E1611] aspect-[3/4] object-cover object-top" loading="lazy" />
       <div class="space-y-2.5"><h3 class="font-display font-extrabold text-xl sm:text-2xl">Amit Manglani</h3><span class="inline-block bg-[#FFE9D6] border border-[#FF6B1A]/40 rounded-full px-3 py-1 text-[11px] font-bold text-[#E24A0B] uppercase">Founder &amp; CEO, A2 Digital | Teonox</span>
       <p class="text-sm text-[#6B5E53]">12+ years across business development, management and marketing. Has worked across multiple industries at A2 Digital, turning business ideas into practical, working solutions.</p>
       <div class="flex flex-wrap gap-2"><span class="bg-[#FAF6EF] border border-[#EADFD0] rounded-full px-3 py-1 text-xs">Business development</span><span class="bg-[#FAF6EF] border border-[#EADFD0] rounded-full px-3 py-1 text-xs">Management</span><span class="bg-[#FAF6EF] border border-[#EADFD0] rounded-full px-3 py-1 text-xs">Marketing</span></div></div></div></div>
@@ -177,7 +177,7 @@ export const rawHtmlBody = `
       <p class="text-[11px] font-black uppercase tracking-[0.16em] text-[#FF9A3D] relative">Work from India</p>
       <h3 class="font-display font-extrabold text-xl sm:text-2xl text-white relative">Work with brands worldwide.</h3>
       <p class="text-sm text-[#CDBFB1] mt-2 relative">US, UK, UAE and Australian brands hire remote marketers every day — no relocation, no visa.</p>
-      <div class="relative min-h-[250px] mt-3"><img src="/career-unlocked/media/world-map.webp" alt="" width="1357" height="617" class="absolute inset-0 w-full h-full object-contain opacity-90" loading="lazy" />
+      <div class="relative min-h-[250px] mt-3"><img src="/career-unlocked/media/world-map.webp" alt="" width="1000" height="455" class="absolute inset-0 w-full h-full object-contain opacity-90" loading="lazy" />
         <span class="absolute bg-[#FF6B1A] rounded-xl px-3 py-1.5 text-[10px] font-bold text-white top-2 right-2">HIRING REMOTELY TODAY</span>
         <div class="absolute bottom-2 left-2 flex flex-wrap gap-2"><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">$</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">£</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">AED</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">₹</span><span class="animate-float bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white">AUD</span></div>
       </div>
@@ -275,7 +275,7 @@ export const rawHtmlBody = `
     <p class="font-display font-extrabold text-lg">Career Unlocked</p>
     <div class="flex flex-wrap gap-2 text-xs sm:text-sm font-bold"><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● Business</span><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● Digital Marketing</span><span class="px-3 py-1.5 rounded-full bg-[#FFE9D6] border border-[#FFC79A] text-[#E24A0B]">● AI</span><span class="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#EADFD0] text-[#6B5E53]">🕒 90-Minute Career Workshop</span><span class="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#EADFD0] text-[#6B5E53]">📍 Pune</span></div>
     <div class="pt-3 flex flex-col sm:flex-row gap-3"><a href="https://learn.teonox.com/l/0d68fe1e28" target="_blank" rel="noopener" data-cta class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF6B1A] to-[#E24A0B] text-white font-bold flex items-center justify-center">Book My Seat — ₹99 →</a><a id="waBook" href="#" target="_blank" rel="noopener" class="min-h-[52px] px-6 py-3.5 rounded-2xl bg-[#25D366] text-white font-bold flex items-center justify-center gap-2">WhatsApp us</a></div></div>
-  <div class="hidden lg:flex lg:col-span-5 justify-end"><img src="/career-unlocked/media/nox.webp" alt="Nox — the Career Unlocked mascot" width="1122" height="1402" class="w-full max-w-[380px]" loading="lazy" /></div>
+  <div class="hidden lg:flex lg:col-span-5 justify-end"><img src="/career-unlocked/media/nox.webp" alt="Nox — the Career Unlocked mascot" width="760" height="950" class="w-full max-w-[380px]" loading="lazy" /></div>
 </div></div>
 
 <!-- Footer -->
