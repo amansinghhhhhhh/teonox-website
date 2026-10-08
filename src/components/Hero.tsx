@@ -61,7 +61,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
           </div>
 
           <h1 className="font-sora text-[clamp(24px,3.8vw,52px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]">
-            Gen AI Course in Pune
+            Business Digital Marketing Course
             <br />
             <span className="inline-flex flex-wrap items-center justify-center gap-2 mt-2">
               <span>with Assured Placement</span>
