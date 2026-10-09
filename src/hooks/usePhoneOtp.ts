@@ -41,6 +41,9 @@ export function friendlyOtpError(code?: string): string {
     case 'network_error':
       return 'Network error. Please check your connection and try again.';
     default:
+      if (code && code.startsWith('non_json_response_http_')) {
+        return `Server returned an unreadable response (HTTP ${code.replace('non_json_response_http_', '')}). Please try again.`;
+      }
       return 'Something went wrong. Please try again.';
   }
 }
@@ -54,7 +57,10 @@ async function postOtp(path: string, body: Record<string, string>): Promise<{ ok
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; phone?: string; gatewayError?: string };
+    // If the body is not JSON at all (proxy/empty response), surface an
+    // explicit error instead of a bare `{ ok: false }` with undefined keys.
+    const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string; phone?: string; gatewayError?: string } | null;
+    if (!data) return { ok: false, status: res.status, error: `non_json_response_http_${res.status}` };
     if (res.ok && data.ok) return { ok: true, status: res.status, phone: data.phone };
     return {
       ok: false,

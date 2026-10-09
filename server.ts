@@ -578,6 +578,15 @@ function normalizePhoneNumber(raw: unknown): string | null {
   return /^[6-9]\d{9}$/.test(num) ? num : null;
 }
 
+// Single choke-point for /api/send-otp failures: logs the exact payload
+// being returned and guarantees the `error` key is always present so the
+// client never receives a bare `{ ok: false }`.
+function sendOtpFail(res: express.Response, httpStatus: number, error: string, extra?: Record<string, unknown>) {
+  const jsonResponse = { ok: false, error, ...extra };
+  console.log('[SEND OTP RESPONSE PAYLOAD]:', JSON.stringify(jsonResponse).slice(0, 500));
+  return res.status(httpStatus).json(jsonResponse);
+}
+
 app.post('/api/send-otp', async (req, res) => {
   // DEBUG-OTP: verbose tracing for Hostinger Runtime Logs. Remove once stable.
   const phone = normalizePhoneNumber(req.body?.phone);
@@ -595,18 +604,18 @@ app.post('/api/send-otp', async (req, res) => {
     !!process.env.MAGICTEXT_TEMPLATE_ID
   );
   if (!phone) {
-    return res.status(400).json({ ok: false, error: 'invalid_phone' });
+    return sendOtpFail(res, 400, 'invalid_phone');
   }
   if (!MAGICTEXT_AUTH_KEY || !MAGICTEXT_SENDER_ID || !MAGICTEXT_ROUTE || !MAGICTEXT_TEMPLATE_ID) {
     console.error('[OTP] MagicText credentials missing — set MAGICTEXT_* env vars.');
-    return res.status(503).json({ ok: false, error: 'service_unavailable' });
+    return sendOtpFail(res, 200, 'Missing MagicText environment variables on server.');
   }
 
   const now = Date.now();
   const existing = otpStore.get(phone);
   const recentSends = (existing?.sends || []).filter((t) => now - t < OTP_SEND_WINDOW_MS);
   if (recentSends.length >= OTP_SEND_LIMIT) {
-    return res.status(429).json({ ok: false, error: 'rate_limited' });
+    return sendOtpFail(res, 429, 'rate_limited');
   }
 
   const otp = String(crypto.randomInt(100000, 1000000));
@@ -637,14 +646,18 @@ app.post('/api/send-otp', async (req, res) => {
     console.log('[OTP GATEWAY RESPONSE]:', gatewayResponseText.slice(0, 500));
     if (!gw.ok || /fail|error|invalid/i.test(gatewayResponseText)) {
       // Surface the exact raw gateway text to the browser console for debugging.
-      return res.status(200).json({ ok: false, gatewayError: gatewayResponseText, status: gw.status });
+      const raw = gatewayResponseText || `(empty gateway response body, HTTP ${gw.status})`;
+      return sendOtpFail(res, 200, `MagicText gateway rejected the request (HTTP ${gw.status}).`, {
+        gatewayError: raw,
+        status: gw.status,
+      });
     }
   } catch (error: any) {
     // Gateway failures return above, so reaching here means the fetch
     // itself threw (network/DNS/SSL/abort) — no gateway text exists.
     console.error('[OTP FETCH ERROR]:', error?.message || error);
     if (error?.stack) console.error(error.stack);
-    return res.status(500).json({ ok: false, error: error?.message || 'sms_failed', status: 500 });
+    return sendOtpFail(res, 500, error?.message || 'sms_failed', { status: 500 });
   }
 
   otpStore.set(phone, { otp, expiresAt: now + OTP_TTL_MS, attempts: 0, sends: [...recentSends, now] });
