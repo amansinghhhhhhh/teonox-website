@@ -545,9 +545,6 @@ const MAGICTEXT_AUTH_KEY = process.env.MAGICTEXT_AUTH_KEY || '';
 const MAGICTEXT_SENDER_ID = process.env.MAGICTEXT_SENDER_ID || '';
 const MAGICTEXT_ROUTE = process.env.MAGICTEXT_ROUTE || '';
 const MAGICTEXT_TEMPLATE_ID = process.env.MAGICTEXT_TEMPLATE_ID || '';
-const OTP_MESSAGE_TEMPLATE =
-  'OTP for student enrollment request is {#num#}. Please enter this to verify your details for TEONOX enrollment. Thank You TEONOX BUSINESS SOLUTIONS';
-
 const OTP_TTL_MS = 5 * 60 * 1000; // 5 minutes
 const OTP_MAX_ATTEMPTS = 5; // wrong-code tries before invalidation
 const OTP_SEND_LIMIT = 3; // max sends per number per window
@@ -613,17 +610,19 @@ app.post('/api/send-otp', async (req, res) => {
   }
 
   const otp = String(crypto.randomInt(100000, 1000000));
+  // Postman-confirmed format: clean 10-digit number (no +91 prefix),
+  // URLSearchParams-encoded query string.
   const params = new URLSearchParams({
     'authentic-key': MAGICTEXT_AUTH_KEY,
     senderid: MAGICTEXT_SENDER_ID,
     route: MAGICTEXT_ROUTE,
+    number: phone,
+    message: `OTP for student enrollment request is ${otp}. Please enter this to verify your details for TEONOX enrollment. Thank You TEONOX BUSINESS SOLUTIONS`,
     templateid: MAGICTEXT_TEMPLATE_ID,
-    number: `91${phone}`,
-    message: OTP_MESSAGE_TEMPLATE.replace('{#num#}', otp),
   });
   const targetUrl = `${MAGICTEXT_API_URL}?${params.toString()}`;
   console.log(
-    '[OTP REQUEST URL]:',
+    '[MAGIC_TEXT_URL]:',
     targetUrl.replace(MAGICTEXT_AUTH_KEY, `${MAGICTEXT_AUTH_KEY.slice(0, 4)}****`)
   );
 
