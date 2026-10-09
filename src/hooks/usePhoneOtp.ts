@@ -47,16 +47,21 @@ export function friendlyOtpError(code?: string): string {
 
 export type OtpStatus = 'idle' | 'sending' | 'awaiting-code' | 'verifying' | 'verified';
 
-async function postOtp(path: string, body: Record<string, string>): Promise<{ ok: boolean; status: number; error?: string; phone?: string }> {
+async function postOtp(path: string, body: Record<string, string>): Promise<{ ok: boolean; status: number; error?: string; phone?: string; gatewayError?: string }> {
   try {
     const res = await fetch(path, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; phone?: string };
+    const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; phone?: string; gatewayError?: string };
     if (res.ok && data.ok) return { ok: true, status: res.status, phone: data.phone };
-    return { ok: false, status: res.status, error: typeof data.error === 'string' ? data.error : undefined };
+    return {
+      ok: false,
+      status: res.status,
+      error: typeof data.error === 'string' ? data.error : undefined,
+      gatewayError: typeof data.gatewayError === 'string' ? data.gatewayError : undefined,
+    };
   } catch {
     return { ok: false, status: 0, error: 'network_error' };
   }
@@ -134,6 +139,7 @@ export function usePhoneOtp(): UsePhoneOtp {
       }
       // DEBUG-OTP: surface backend failure detail in DevTools console.
       console.log('[CLIENT SEND OTP RESP]:', result.status, result);
+      if (result.gatewayError) console.log('[MAGIC_TEXT_GATEWAY_RESPONSE]:', result.gatewayError);
       setError(friendlyOtpError(result.error));
       setStatus('idle');
       return false;

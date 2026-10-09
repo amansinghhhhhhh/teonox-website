@@ -634,11 +634,15 @@ app.post('/api/send-otp', async (req, res) => {
     const gw = await fetch(targetUrl, { signal: controller.signal });
     clearTimeout(timeout);
     console.log('[OTP GATEWAY STATUS]:', gw.status);
-    const text = (await gw.text()).trim();
-    console.log('[OTP GATEWAY RESPONSE]:', text.slice(0, 500));
-    if (!gw.ok) throw new Error(`MagicText HTTP ${gw.status}: ${text.slice(0, 120)}`);
-    if (/fail|error|invalid/i.test(text)) throw new Error(`MagicText rejected: ${text.slice(0, 120)}`);
+    const gatewayResponseText = (await gw.text()).trim();
+    console.log('[OTP GATEWAY RESPONSE]:', gatewayResponseText.slice(0, 500));
+    if (!gw.ok || /fail|error|invalid/i.test(gatewayResponseText)) {
+      // Surface the exact raw gateway text to the browser console for debugging.
+      return res.status(200).json({ ok: false, gatewayError: gatewayResponseText, status: gw.status });
+    }
   } catch (error: any) {
+    // Gateway failures return above, so reaching here means the fetch
+    // itself threw (network/DNS/SSL/abort) — no gateway text exists.
     console.error('[OTP FETCH ERROR]:', error?.message || error);
     if (error?.stack) console.error(error.stack);
     return res.status(500).json({ ok: false, error: error?.message || 'sms_failed', status: 500 });
