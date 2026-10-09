@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, Loader2, MessageCircle } from 'lucide-react';
-import {
-  VISIBLE_RECAPTCHA_CONTAINER_ID,
-  normalizePhone,
-  renderVisibleRecaptchaFallback,
-  usePhoneOtp,
-} from '../hooks/usePhoneOtp';
+import { normalizePhone, usePhoneOtp } from '../hooks/usePhoneOtp';
 import { validatePhone } from '../utils/validation';
 
 interface PhoneOtpInlineProps {
@@ -26,8 +21,7 @@ interface PhoneOtpInlineProps {
  * No modals, no overlays, no form hiding or swapping.
  */
 export function PhoneOtpInline({ phone, onVerifiedChange }: PhoneOtpInlineProps) {
-  const { status, error, cooldown, needsVisibleCaptcha, sendOtp, verifyOtp, resendOtp, reset } =
-    usePhoneOtp();
+  const { status, error, cooldown, sendOtp, verifyOtp, resendOtp, reset } = usePhoneOtp();
   const [code, setCode] = useState('');
   const digits = normalizePhone(phone);
   const phoneValid = validatePhone(digits);
@@ -45,14 +39,6 @@ export function PhoneOtpInline({ phone, onVerifiedChange }: PhoneOtpInlineProps)
       cbRef.current(null);
     }
   }, [digits, reset]);
-
-  // Render the visible reCAPTCHA fallback inside this block when Firebase
-  // rejects the invisible check.
-  useEffect(() => {
-    if (needsVisibleCaptcha) {
-      renderVisibleRecaptchaFallback();
-    }
-  }, [needsVisibleCaptcha]);
 
   const busy = status === 'sending' || status === 'verifying';
 
@@ -155,11 +141,6 @@ export function PhoneOtpInline({ phone, onVerifiedChange }: PhoneOtpInlineProps)
             )}
           </div>
 
-          {needsVisibleCaptcha && (
-            <div className="mt-2 flex justify-center">
-              <div id={VISIBLE_RECAPTCHA_CONTAINER_ID} />
-            </div>
-          )}
         </div>
       )}
 
@@ -169,11 +150,6 @@ export function PhoneOtpInline({ phone, onVerifiedChange }: PhoneOtpInlineProps)
         </div>
       )}
 
-      {needsVisibleCaptcha && status === 'idle' && (
-        <div className="mt-2 flex justify-center">
-          <div id={VISIBLE_RECAPTCHA_CONTAINER_ID} />
-        </div>
-      )}
     </div>
   );
 }

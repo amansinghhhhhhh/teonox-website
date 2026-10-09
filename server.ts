@@ -1,6 +1,8 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
+import "dotenv/config";
 import { createServer as createViteServer } from "vite";
 
 const app = express();
@@ -532,6 +534,125 @@ app.get("/api/media/:id", async (req, res) => {
     console.error(`Error resolving WP media ${id} from teonox.com:`, error.message);
     res.status(502).json({ success: false, error: error.message });
   }
+});
+
+// ─── MagicText Phone OTP ─────────────────────────────────────────────
+// Server-side OTP so the MagicText credentials never reach the browser.
+// Requires: MAGICTEXT_API_URL, MAGICTEXT_AUTH_KEY, MAGICTEXT_SENDER_ID,
+// MAGICTEXT_ROUTE, MAGICTEXT_TEMPLATE_ID (see .env.example).
+const MAGICTEXT_API_URL = process.env.MAGICTEXT_API_URL || 'http://panel.magictext.in/http-tokenkeyapi.php';
+const MAGICTEXT_AUTH_KEY = process.env.MAGICTEXT_AUTH_KEY || '';
+const MAGICTEXT_SENDER_ID = process.env.MAGICTEXT_SENDER_ID || '';
+const MAGICTEXT_ROUTE = process.env.MAGICTEXT_ROUTE || '';
+const MAGICTEXT_TEMPLATE_ID = process.env.MAGICTEXT_TEMPLATE_ID || '';
+const OTP_MESSAGE_TEMPLATE =
+  'OTP for student enrollment request is {#num#}. Please enter this to verify your details for TEONOX enrollment. Thank You TEONOX BUSINESS SOLUTIONS';
+
+const OTP_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const OTP_MAX_ATTEMPTS = 5; // wrong-code tries before invalidation
+const OTP_SEND_LIMIT = 3; // max sends per number per window
+const OTP_SEND_WINDOW_MS = 10 * 60 * 1000;
+
+interface OtpEntry {
+  otp: string;
+  expiresAt: number;
+  attempts: number;
+  sends: number[];
+}
+
+// In-memory store. Single Node process per deploy; entries are short-lived
+// (5-min TTL) and wiped on restart, which is acceptable for OTPs.
+const otpStore = new Map<string, OtpEntry>();
+
+// Sweep expired entries every minute; unref so it never holds the process open.
+const otpSweeper = setInterval(() => {
+  const now = Date.now();
+  for (const [key, entry] of otpStore) {
+    if (entry.expiresAt <= now) otpStore.delete(key);
+  }
+}, 60 * 1000);
+if (typeof (otpSweeper as unknown as { unref?: () => void }).unref === 'function') {
+  (otpSweeper as unknown as { unref: () => void }).unref();
+}
+
+function normalizePhoneNumber(raw: unknown): string | null {
+  const digits = String(raw ?? '').replace(/\D/g, '');
+  const num = digits.length === 12 && digits.startsWith('91') ? digits.slice(2) : digits;
+  return /^[6-9]\d{9}$/.test(num) ? num : null;
+}
+
+app.post('/api/send-otp', async (req, res) => {
+  const phone = normalizePhoneNumber(req.body?.phone);
+  if (!phone) {
+    return res.status(400).json({ ok: false, error: 'invalid_phone' });
+  }
+  if (!MAGICTEXT_AUTH_KEY || !MAGICTEXT_SENDER_ID || !MAGICTEXT_ROUTE || !MAGICTEXT_TEMPLATE_ID) {
+    console.error('[OTP] MagicText credentials missing — set MAGICTEXT_* env vars.');
+    return res.status(503).json({ ok: false, error: 'service_unavailable' });
+  }
+
+  const now = Date.now();
+  const existing = otpStore.get(phone);
+  const recentSends = (existing?.sends || []).filter((t) => now - t < OTP_SEND_WINDOW_MS);
+  if (recentSends.length >= OTP_SEND_LIMIT) {
+    return res.status(429).json({ ok: false, error: 'rate_limited' });
+  }
+
+  const otp = String(crypto.randomInt(100000, 1000000));
+  const params = new URLSearchParams({
+    'authentic-key': MAGICTEXT_AUTH_KEY,
+    senderid: MAGICTEXT_SENDER_ID,
+    route: MAGICTEXT_ROUTE,
+    templateid: MAGICTEXT_TEMPLATE_ID,
+    number: `91${phone}`,
+    message: OTP_MESSAGE_TEMPLATE.replace('{#num#}', otp),
+  });
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    const gw = await fetch(`${MAGICTEXT_API_URL}?${params.toString()}`, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!gw.ok) throw new Error(`MagicText HTTP ${gw.status}`);
+    const text = (await gw.text()).trim();
+    if (/fail|error|invalid/i.test(text)) throw new Error(`MagicText rejected: ${text.slice(0, 120)}`);
+  } catch (error: any) {
+    console.error('[OTP] SMS send failed:', error?.message || error);
+    return res.status(502).json({ ok: false, error: 'sms_failed' });
+  }
+
+  otpStore.set(phone, { otp, expiresAt: now + OTP_TTL_MS, attempts: 0, sends: [...recentSends, now] });
+  res.json({ ok: true });
+});
+
+app.post('/api/verify-otp', (req, res) => {
+  const phone = normalizePhoneNumber(req.body?.phone);
+  const code = String(req.body?.otp ?? '').trim();
+  if (!phone || !/^\d{6}$/.test(code)) {
+    return res.status(400).json({ ok: false, error: 'invalid_code' });
+  }
+
+  const entry = otpStore.get(phone);
+  if (!entry || entry.expiresAt <= Date.now()) {
+    otpStore.delete(phone);
+    return res.status(400).json({ ok: false, error: 'expired' });
+  }
+  if (entry.attempts >= OTP_MAX_ATTEMPTS) {
+    otpStore.delete(phone);
+    return res.status(429).json({ ok: false, error: 'rate_limited' });
+  }
+
+  const match =
+    code.length === entry.otp.length &&
+    crypto.timingSafeEqual(Buffer.from(code), Buffer.from(entry.otp));
+  if (!match) {
+    entry.attempts += 1;
+    if (entry.attempts >= OTP_MAX_ATTEMPTS) otpStore.delete(phone);
+    return res.status(400).json({ ok: false, error: 'invalid_code' });
+  }
+
+  otpStore.delete(phone); // single-use
+  res.json({ ok: true, phone });
 });
 
 app.get("/api/programs/:id", async (req, res) => {

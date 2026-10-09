@@ -279,9 +279,8 @@ export function OnlineProgrammePage() {
       }
       await completeApplySubmit(fields);
     };
-    // --- reCAPTCHA lifecycle: the singleton verifier is owned by the shared
-    // usePhoneOtp hook and binds to #recaptcha-container in App.tsx — nothing
-    // to initialize per page (single binding avoids identitytoolkit 400s).
+    // --- OTP lifecycle: verification state is owned by the shared
+    // usePhoneOtp hook (MagicText backend) — nothing to initialize per page.
 
     // --- Real-time Input Validation Listeners ---
     const form = document.querySelector('form[onsubmit="submitForm(event)"]') as HTMLFormElement | null;

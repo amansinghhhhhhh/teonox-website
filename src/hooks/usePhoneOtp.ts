@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  ConfirmationResult,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from 'firebase/auth';
-import { auth } from '../lib/firebase';
 import { validatePhone } from '../utils/validation';
 
-// Shared Firebase phone-OTP logic for all lead forms.
-// Extracted from the tested OnlineProgrammePage inline flow and generalized
-// into a hook + modal so every form verifies numbers the same way.
+// Shared MagicText-backed phone-OTP logic for all lead forms.
+// Previously Firebase phone auth; now the browser only talks to our own
+// Express endpoints (/api/send-otp, /api/verify-otp), which own OTP
+// generation, expiry, rate limits, and the MagicText SMS call server-side.
+// The hook interface is unchanged so every consumer keeps working untouched.
 
 export const OTP_RESEND_COOLDOWN_SECONDS = 30;
 
@@ -31,21 +27,19 @@ export function shouldVerifyOtp(formName: string, phone: string): boolean {
 
 export function friendlyOtpError(code?: string): string {
   switch (code) {
-    case 'auth/invalid-phone-number':
+    case 'invalid_phone':
       return 'Please enter a valid 10-digit mobile number.';
-    case 'auth/too-many-requests':
+    case 'rate_limited':
       return 'Too many attempts. Please wait a while and try again.';
-    case 'auth/quota-exceeded':
-      return 'SMS limit reached. Please try again later.';
-    case 'auth/captcha-check-failed':
-    case 'auth/missing-client-identifiers':
-      return 'Verification check failed. Please refresh the page and try again.';
-    case 'auth/invalid-app-credential':
-      return 'App verification failed. Please complete the reCAPTCHA below and tap Resend OTP again.';
-    case 'auth/code-expired':
+    case 'expired':
       return 'This code has expired. Please tap Resend OTP for a new code.';
-    case 'auth/invalid-verification-code':
+    case 'invalid_code':
       return 'Incorrect code. Please check the SMS and try again.';
+    case 'sms_failed':
+    case 'service_unavailable':
+      return 'Could not send the code. Please try again in a bit.';
+    case 'network_error':
+      return 'Network error. Please check your connection and try again.';
     default:
       return 'Something went wrong. Please try again.';
   }
@@ -53,91 +47,18 @@ export function friendlyOtpError(code?: string): string {
 
 export type OtpStatus = 'idle' | 'sending' | 'awaiting-code' | 'verifying' | 'verified';
 
-export const VISIBLE_RECAPTCHA_CONTAINER_ID = 'phone-otp-visible-recaptcha';
-
-// Module-singleton verifiers. Created lazily on first send and never
-// re-created per click — re-binding is what triggers identitytoolkit 400s.
-let invisibleVerifier: RecaptchaVerifier | null = null;
-let visibleVerifier: RecaptchaVerifier | null = null;
-
-function clearVerifier(v: RecaptchaVerifier | null): void {
+async function postOtp(path: string, body: Record<string, string>): Promise<{ ok: boolean; error?: string; phone?: string }> {
   try {
-    v?.clear();
-  } catch {
-    // Widget may already be cleared — safe to ignore.
-  }
-}
-
-function clearInvisibleVerifier(): void {
-  clearVerifier(invisibleVerifier);
-  invisibleVerifier = null;
-  try {
-    const w = window as unknown as { recaptchaVerifier?: RecaptchaVerifier | null };
-    if (w.recaptchaVerifier && w.recaptchaVerifier !== visibleVerifier) {
-      clearVerifier(w.recaptchaVerifier);
-    }
-    w.recaptchaVerifier = null;
-  } catch {
-    // Non-browser / restricted contexts — safe to ignore.
-  }
-}
-
-async function getFreshInvisibleVerifier(): Promise<RecaptchaVerifier | null> {
-  if (typeof document === 'undefined' || !document.getElementById('recaptcha-container')) return null;
-  clearInvisibleVerifier();
-  try {
-    const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      size: 'invisible',
-      callback: () => {
-        // reCAPTCHA solved - allow signInWithPhoneNumber
-      },
-      'expired-callback': () => {
-        clearInvisibleVerifier();
-      },
+    const res = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
-    invisibleVerifier = verifier;
-    try {
-      (window as unknown as { recaptchaVerifier?: RecaptchaVerifier | null }).recaptchaVerifier = verifier;
-    } catch {
-      // Non-browser / restricted contexts — safe to ignore.
-    }
-    await verifier.render();
-    return verifier;
+    const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; phone?: string };
+    if (res.ok && data.ok) return { ok: true, phone: data.phone };
+    return { ok: false, error: typeof data.error === 'string' ? data.error : undefined };
   } catch {
-    clearInvisibleVerifier();
-    return null;
-  }
-}
-
-export function renderVisibleRecaptchaFallback(): boolean {
-  if (typeof document === 'undefined') return false;
-  if (!document.getElementById(VISIBLE_RECAPTCHA_CONTAINER_ID) || visibleVerifier) return !!visibleVerifier;
-  try {
-    visibleVerifier = new RecaptchaVerifier(auth, VISIBLE_RECAPTCHA_CONTAINER_ID, {
-      size: 'normal',
-      callback: () => {
-        // reCAPTCHA solved - allow signInWithPhoneNumber
-      },
-      'expired-callback': () => {
-        clearVerifier(visibleVerifier);
-        visibleVerifier = null;
-      },
-    });
-    return true;
-  } catch {
-    visibleVerifier = null;
-    return false;
-  }
-}
-
-export function resetRecaptchaVerifiers(): void {
-  clearInvisibleVerifier();
-  clearVerifier(visibleVerifier);
-  visibleVerifier = null;
-  try {
-    (window as unknown as { recaptchaVerifier?: RecaptchaVerifier | null }).recaptchaVerifier = null;
-  } catch {
-    // Non-browser / restricted contexts — safe to ignore.
+    return { ok: false, error: 'network_error' };
   }
 }
 
@@ -145,7 +66,6 @@ export interface UsePhoneOtp {
   status: OtpStatus;
   error: string;
   cooldown: number;
-  needsVisibleCaptcha: boolean;
   sendOtp: (rawPhone: string) => Promise<boolean>;
   verifyOtp: (code: string) => Promise<string | null>;
   resendOtp: () => Promise<boolean>;
@@ -156,8 +76,6 @@ export function usePhoneOtp(): UsePhoneOtp {
   const [status, setStatus] = useState<OtpStatus>('idle');
   const [error, setError] = useState('');
   const [cooldown, setCooldown] = useState(0);
-  const [needsVisibleCaptcha, setNeedsVisibleCaptcha] = useState(false);
-  const confirmationRef = useRef<ConfirmationResult | null>(null);
   const phoneRef = useRef('');
   const timerRef = useRef<number | null>(null);
 
@@ -191,46 +109,32 @@ export function usePhoneOtp(): UsePhoneOtp {
   useEffect(
     () => () => {
       stopTimer();
-      confirmationRef.current = null;
+      phoneRef.current = '';
     },
     [stopTimer]
   );
 
   const sendOtp = useCallback(
     async (rawPhone: string): Promise<boolean> => {
-      const phone = normalizePhone(rawPhone);
+      // Accept 10-digit input or a leading-91 variant; the server normalizes.
+      const digits = normalizePhone(rawPhone);
+      const phone = digits.length === 12 && digits.startsWith('91') ? digits.slice(2) : digits;
       setError('');
-      setNeedsVisibleCaptcha(false);
       if (!validatePhone(phone)) {
         setError('Please enter a valid 10-digit mobile number.');
         return false;
       }
-      const verifier = await getFreshInvisibleVerifier();
-      if (!verifier) {
-        setError('Verification unavailable. Please refresh the page and try again.');
-        return false;
-      }
       setStatus('sending');
-      try {
-        confirmationRef.current = await signInWithPhoneNumber(auth, '+91' + phone, verifier);
+      const result = await postOtp('/api/send-otp', { phone });
+      if (result.ok) {
         phoneRef.current = phone;
         setStatus('awaiting-code');
         startCooldown();
         return true;
-      } catch (err: unknown) {
-        const code = (err as { code?: string })?.code;
-        if (code === 'auth/captcha-check-failed' || code === 'auth/missing-client-identifiers') {
-          clearInvisibleVerifier();
-        }
-        if (code === 'auth/invalid-app-credential' || code === 'auth/captcha-check-failed') {
-          setNeedsVisibleCaptcha(true);
-        }
-        setError(friendlyOtpError(code));
-        setStatus('idle');
-        return false;
-      } finally {
-        clearInvisibleVerifier();
       }
+      setError(friendlyOtpError(result.error));
+      setStatus('idle');
+      return false;
     },
     [startCooldown]
   );
@@ -241,22 +145,21 @@ export function usePhoneOtp(): UsePhoneOtp {
       setError('Please enter the 6-digit code sent to your phone.');
       return null;
     }
-    if (!confirmationRef.current) {
+    if (!phoneRef.current) {
       setError('Your session expired. Please tap Resend OTP for a new code.');
       return null;
     }
     setStatus('verifying');
     setError('');
-    try {
-      await confirmationRef.current.confirm(clean);
+    const result = await postOtp('/api/verify-otp', { phone: phoneRef.current, otp: clean });
+    if (result.ok) {
       stopTimer();
       setStatus('verified');
       return phoneRef.current;
-    } catch (err: unknown) {
-      setError(friendlyOtpError((err as { code?: string })?.code));
-      setStatus('awaiting-code');
-      return null;
     }
+    setError(friendlyOtpError(result.error));
+    setStatus('awaiting-code');
+    return null;
   }, [stopTimer]);
 
   const resendOtp = useCallback(async (): Promise<boolean> => {
@@ -269,14 +172,12 @@ export function usePhoneOtp(): UsePhoneOtp {
   }, [sendOtp]);
 
   const reset = useCallback(() => {
-    confirmationRef.current = null;
     phoneRef.current = '';
     stopTimer();
     setCooldown(0);
     setError('');
-    setNeedsVisibleCaptcha(false);
     setStatus('idle');
   }, [stopTimer]);
 
-  return { status, error, cooldown, needsVisibleCaptcha, sendOtp, verifyOtp, resendOtp, reset };
+  return { status, error, cooldown, sendOtp, verifyOtp, resendOtp, reset };
 }
