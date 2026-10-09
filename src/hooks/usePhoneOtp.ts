@@ -50,7 +50,57 @@ export function friendlyOtpError(code?: string): string {
 
 export type OtpStatus = 'idle' | 'sending' | 'awaiting-code' | 'verifying' | 'verified';
 
-async function postOtp(path: string, body: Record<string, string>): Promise<{ ok: boolean; status: number; error?: string; phone?: string; gatewayError?: string }> {
+// Apps Script web-app URL (public exec URL, NOT a secret). When set, OTP
+// calls go there via JSONP — the only cross-origin pattern that can READ an
+// Apps Script response (it 302-redirects, which plain fetch() cannot read
+// due to CORS). Empty = use same-origin Express /api/* (Node build).
+const OTP_API_URL = (import.meta.env.VITE_OTP_API_URL as string | undefined) || '';
+
+type OtpResult = { ok: boolean; status: number; error?: string; phone?: string; gatewayError?: string };
+
+// JSONP GET helper: resolves even if the script 404s (onerror) or hangs (20s cap).
+function jsonpGet(params: Record<string, string>): Promise<OtpResult> {
+  return new Promise((resolve) => {
+    const cb = `__otpCb_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
+    let settled = false;
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      try {
+        delete (window as unknown as Record<string, unknown>)[cb];
+      } catch {
+        // ignore
+      }
+      script.remove();
+    };
+    const finish = (result: OtpResult) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(result);
+    };
+    const timer = window.setTimeout(() => finish({ ok: false, status: 0, error: 'network_error' }), 20000);
+    (window as unknown as Record<string, unknown>)[cb] = (data: unknown) => {
+      const d = (data || {}) as { ok?: boolean; error?: string; phone?: string; gatewayError?: string };
+      finish({
+        ok: d.ok === true,
+        status: 200,
+        error: typeof d.error === 'string' ? d.error : undefined,
+        phone: typeof d.phone === 'string' ? d.phone : undefined,
+        gatewayError: typeof d.gatewayError === 'string' ? d.gatewayError : undefined,
+      });
+    };
+    const script = document.createElement('script');
+    script.onerror = () => finish({ ok: false, status: 0, error: 'network_error' });
+    const q = new URLSearchParams({ ...params, callback: cb }).toString();
+    script.src = `${OTP_API_URL}${OTP_API_URL.includes('?') ? '&' : '?'}${q}`;
+    document.head.appendChild(script);
+  });
+}
+
+async function postOtp(path: string, body: Record<string, string>): Promise<OtpResult> {
+  if (OTP_API_URL) {
+    return jsonpGet({ action: path.includes('verify') ? 'verifyOtp' : 'sendOtp', ...body });
+  }
   try {
     const res = await fetch(path, {
       method: 'POST',
