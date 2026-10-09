@@ -212,10 +212,10 @@ export function Footer({ onNavigate }: FooterProps) {
             </h5>
             <ul className="space-y-3.5 font-inter text-[15.5px] font-[400] text-[#C9BDB2]">
               <li className="leading-relaxed">
-                Office No. 13, 4th Floor, Revolution Mall, Kothrud, Pune - 411038
+                TEONOX BUSINESS SOLUTIONS PRIVATE LIMITED
               </li>
               <li className="leading-relaxed">
-                TEONOX BUSINESS SOLUTIONS PRIVATE LIMITED
+                Office No. 13, 4th Floor, Revolution Mall, Kothrud, Pune - 411038
               </li>
               <li>
                 <a href="mailto:info@teonox.com" className="hover:text-[#FF8A50] transition-colors link-underline">
