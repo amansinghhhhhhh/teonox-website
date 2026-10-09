@@ -2,8 +2,24 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import "dotenv/config";
+import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
+
+// Load .env from the app dir OR Hostinger's hbuilds layout, where the env
+// file lives outside the deploy dir (…/hbuilds/config/.env) while the app
+// runs from …/hbuilds/current/<dir>/). First file found wins; dotenv never
+// overrides real environment variables, so panel-set vars always take
+// precedence over file values.
+for (const candidate of [
+  path.join(process.cwd(), ".env"),
+  path.join(process.cwd(), "..", "config", ".env"),
+  path.join(process.cwd(), "..", "..", "config", ".env"),
+]) {
+  if (fs.existsSync(candidate)) {
+    dotenv.config({ path: candidate });
+    break;
+  }
+}
 
 const app = express();
 const PORT = 3000;
