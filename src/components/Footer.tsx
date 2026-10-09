@@ -214,6 +214,9 @@ export function Footer({ onNavigate }: FooterProps) {
               <li className="leading-relaxed">
                 Office No. 13, 4th Floor, Revolution Mall, Kothrud, Pune - 411038
               </li>
+              <li className="leading-relaxed">
+                TEONOX BUSINESS SOLUTIONS PRIVATE LIMITED
+              </li>
               <li>
                 <a href="mailto:info@teonox.com" className="hover:text-[#FF8A50] transition-colors link-underline">
                   info@teonox.com
