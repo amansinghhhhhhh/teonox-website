@@ -47,7 +47,7 @@ export function friendlyOtpError(code?: string): string {
 
 export type OtpStatus = 'idle' | 'sending' | 'awaiting-code' | 'verifying' | 'verified';
 
-async function postOtp(path: string, body: Record<string, string>): Promise<{ ok: boolean; error?: string; phone?: string }> {
+async function postOtp(path: string, body: Record<string, string>): Promise<{ ok: boolean; status: number; error?: string; phone?: string }> {
   try {
     const res = await fetch(path, {
       method: 'POST',
@@ -55,10 +55,10 @@ async function postOtp(path: string, body: Record<string, string>): Promise<{ ok
       body: JSON.stringify(body),
     });
     const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; phone?: string };
-    if (res.ok && data.ok) return { ok: true, phone: data.phone };
-    return { ok: false, error: typeof data.error === 'string' ? data.error : undefined };
+    if (res.ok && data.ok) return { ok: true, status: res.status, phone: data.phone };
+    return { ok: false, status: res.status, error: typeof data.error === 'string' ? data.error : undefined };
   } catch {
-    return { ok: false, error: 'network_error' };
+    return { ok: false, status: 0, error: 'network_error' };
   }
 }
 
@@ -132,6 +132,8 @@ export function usePhoneOtp(): UsePhoneOtp {
         startCooldown();
         return true;
       }
+      // DEBUG-OTP: surface backend failure detail in DevTools console.
+      console.log('[CLIENT SEND OTP RESP]:', result.status, result);
       setError(friendlyOtpError(result.error));
       setStatus('idle');
       return false;

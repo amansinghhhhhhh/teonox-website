@@ -582,7 +582,21 @@ function normalizePhoneNumber(raw: unknown): string | null {
 }
 
 app.post('/api/send-otp', async (req, res) => {
+  // DEBUG-OTP: verbose tracing for Hostinger Runtime Logs. Remove once stable.
   const phone = normalizePhoneNumber(req.body?.phone);
+  console.log('[OTP SEND START] Phone:', phone);
+  console.log(
+    '[OTP ENV CHECK] API_URL:',
+    process.env.MAGICTEXT_API_URL,
+    'KEY EXISTS:',
+    !!process.env.MAGICTEXT_AUTH_KEY,
+    'SENDER EXISTS:',
+    !!process.env.MAGICTEXT_SENDER_ID,
+    'ROUTE EXISTS:',
+    !!process.env.MAGICTEXT_ROUTE,
+    'TEMPLATE EXISTS:',
+    !!process.env.MAGICTEXT_TEMPLATE_ID
+  );
   if (!phone) {
     return res.status(400).json({ ok: false, error: 'invalid_phone' });
   }
@@ -607,18 +621,27 @@ app.post('/api/send-otp', async (req, res) => {
     number: `91${phone}`,
     message: OTP_MESSAGE_TEMPLATE.replace('{#num#}', otp),
   });
+  const targetUrl = `${MAGICTEXT_API_URL}?${params.toString()}`;
+  console.log(
+    '[OTP REQUEST URL]:',
+    targetUrl.replace(MAGICTEXT_AUTH_KEY, `${MAGICTEXT_AUTH_KEY.slice(0, 4)}****`)
+  );
 
   try {
+    console.log('[OTP FETCH ATTEMPT] at', new Date().toISOString());
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
-    const gw = await fetch(`${MAGICTEXT_API_URL}?${params.toString()}`, { signal: controller.signal });
+    const gw = await fetch(targetUrl, { signal: controller.signal });
     clearTimeout(timeout);
-    if (!gw.ok) throw new Error(`MagicText HTTP ${gw.status}`);
+    console.log('[OTP GATEWAY STATUS]:', gw.status);
     const text = (await gw.text()).trim();
+    console.log('[OTP GATEWAY RESPONSE]:', text.slice(0, 500));
+    if (!gw.ok) throw new Error(`MagicText HTTP ${gw.status}: ${text.slice(0, 120)}`);
     if (/fail|error|invalid/i.test(text)) throw new Error(`MagicText rejected: ${text.slice(0, 120)}`);
   } catch (error: any) {
-    console.error('[OTP] SMS send failed:', error?.message || error);
-    return res.status(502).json({ ok: false, error: 'sms_failed' });
+    console.error('[OTP FETCH ERROR]:', error?.message || error);
+    if (error?.stack) console.error(error.stack);
+    return res.status(500).json({ ok: false, error: error?.message || 'sms_failed', status: 500 });
   }
 
   otpStore.set(phone, { otp, expiresAt: now + OTP_TTL_MS, attempts: 0, sends: [...recentSends, now] });
