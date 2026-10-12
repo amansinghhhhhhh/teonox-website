@@ -597,9 +597,11 @@ function normalizePhoneNumber(raw: unknown): string | null {
 // Single choke-point for /api/send-otp failures: logs the exact payload
 // being returned and guarantees the `error` key is always present so the
 // client never receives a bare `{ ok: false }`.
+// Explicit JSON Content-Type so no proxy/static layer can mislabel it as HTML.
 function sendOtpFail(res: express.Response, httpStatus: number, error: string, extra?: Record<string, unknown>) {
   const jsonResponse = { ok: false, error, ...extra };
   console.log('[SEND OTP RESPONSE PAYLOAD]:', JSON.stringify(jsonResponse).slice(0, 500));
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
   return res.status(httpStatus).json(jsonResponse);
 }
 
@@ -677,10 +679,12 @@ app.post('/api/send-otp', async (req, res) => {
   }
 
   otpStore.set(phone, { otp, expiresAt: now + OTP_TTL_MS, attempts: 0, sends: [...recentSends, now] });
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.json({ ok: true });
 });
 
 app.post('/api/verify-otp', (req, res) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
   const phone = normalizePhoneNumber(req.body?.phone);
   const code = String(req.body?.otp ?? '').trim();
   if (!phone || !/^\d{6}$/.test(code)) {
@@ -728,6 +732,18 @@ app.get("/api/programs/:id", async (req, res) => {
   } catch (error: any) {
     res.status(404).json({ success: false, error: error.message });
   }
+});
+
+// ─── API fallback guard ──────────────────────────────────────────────
+// Express mounts ALL /api/* routes above BEFORE any static middleware or
+// SPA fallback below. Any /api path not matched above is an unknown API
+// route — return JSON 404 here so it can NEVER fall through to
+// express.static() or the `GET *` index.html handler (which would send
+// text/html and break frontend res.json() parsing with the exact
+// `non_json_response_http_200` symptom seen in production).
+app.use('/api', (req, res) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.status(404).json({ ok: false, error: `api_not_found: ${req.method} ${req.path}` });
 });
 
 async function startServer() {
