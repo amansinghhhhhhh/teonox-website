@@ -352,6 +352,16 @@ function serveWithMeta(html: string) {
   return async (req: express.Request, res: express.Response) => {
     const meta = await resolveRouteMeta(req.path);
     if (!meta) {
+      // Dead /blog/:slug (WordPress returned [] / 404 / fetch failed):
+      // 301 to the blog index instead of rendering the SPA 404. This drains
+      // indexed SEO-spam URLs (e.g. /blog/5-star-casinos-in-uk) with a
+      // permanent redirect while leaving every other unknown path on the
+      // SPA fallback.
+      const cleanPath = req.path.replace(/\/+$/, '') || '/';
+      const slugSegments = cleanPath.split('/').filter(Boolean);
+      if (slugSegments.length === 2 && slugSegments[0] === 'blog') {
+        return res.redirect(301, '/blog');
+      }
       return res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
     }
 
