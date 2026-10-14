@@ -33,8 +33,8 @@ const META_MAP = {
     canonical: '/programmes',
   },
   '/programmes/build-digital-marketing-skills-with-ai': {
-    title: 'Business Digital Marketing + AI (Online) | 6-Month Programme | TEONOX',
-    description: 'Enrol in TEONOX\'s 6-month Business Digital Marketing + AI online programme. Live instructor-led classes, practical projects, AI-powered learning. Apply now.',
+    title: 'Digital Marketing Skills in Pune | Course with Live Projects',
+    description: 'Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career.',
     canonical: '/programmes/build-digital-marketing-skills-with-ai',
   },
   '/blog': {

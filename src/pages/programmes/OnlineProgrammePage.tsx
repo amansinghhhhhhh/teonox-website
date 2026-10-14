@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { SEO } from '../../components/SEO';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
@@ -469,6 +470,11 @@ export function OnlineProgrammePage() {
 
   return (
     <>
+      <SEO
+        title="Digital Marketing Skills in Pune | Course with Live Projects"
+        description="Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career."
+        canonical="/programmes/build-digital-marketing-skills-with-ai"
+      />
       <Navbar onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
       <div className="tl-landing-page">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
