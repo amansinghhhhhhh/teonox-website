@@ -1065,7 +1065,7 @@ export function ProgramV2Layout({ detail, onEnquire, onBrochure, heroLoading = f
       <section className="bg-gradient-to-br from-[#F15A29] via-[#E04B1A] to-[#C83808] text-white rounded-[32px] p-6 pb-9 sm:p-10 lg:p-12 relative overflow-hidden shadow-xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           <div className="lg:col-span-5 flex justify-center lg:justify-start items-end h-full">
-            <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] flex items-end justify-center">
+            <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] flex items-end justify-center rounded-[32px] overflow-hidden">
               <img
                 src={detail.cta?.image || imgCounsellor}
                 alt="Career Counsellor & Support Advisor"
