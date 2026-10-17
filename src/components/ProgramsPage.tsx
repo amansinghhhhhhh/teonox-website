@@ -303,13 +303,13 @@ numberOfItems: 5,
                       <button type="button"
                         key={cat.id}
                         onClick={() => setActiveCategory(cat.id)}
-                        className={`flex items-center justify-between px-4 py-3.5 rounded-[16px] font-sora text-[14px] font-[700] transition-all duration-300 text-left shrink-0 snap-start cursor-pointer min-w-[220px] lg:min-w-0 whitespace-nowrap ${
+                        className={`flex items-center gap-2.5 px-3 py-2.5 rounded-[16px] font-sora text-xs sm:text-sm font-[700] transition-all duration-300 text-left shrink-0 snap-start cursor-pointer min-w-[160px] lg:min-w-0 whitespace-normal ${
                           isActive
                             ? 'bg-[#111111] text-white shadow-md border border-[#111111]'
                             : 'bg-white text-[#333333] hover:bg-[#FFF0EB] hover:text-[#F15A29] border border-transparent hover:border-[#F8E3D8]'
                         }`}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2.5">
                           <div
                             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                               isActive
@@ -319,7 +319,7 @@ numberOfItems: 5,
                           >
                             <Icon className="w-4 h-4" />
                           </div>
-                          <span>{cat.name}</span>
+                          <span className="whitespace-normal">{cat.name}</span>
                         </div>
 
                 <div className="flex items-center gap-2 md:hidden">
