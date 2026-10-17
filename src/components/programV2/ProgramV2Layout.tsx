@@ -1080,7 +1080,7 @@ export function ProgramV2Layout({ detail, onEnquire, onBrochure, heroLoading = f
                     t.src = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80';
                   }
                 }}
-                className="relative z-10 w-full h-auto max-h-[380px] sm:max-h-[420px] object-cover rounded-[32px]"
+                className="relative z-10 w-full h-auto max-h-[380px] sm:max-h-[420px] object-cover object-top rounded-[32px]"
               />
             </div>
           </div>
