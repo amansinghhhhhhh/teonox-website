@@ -58,12 +58,14 @@ export function ProgramsSection({
 
   const categories = [
     { id: 'all', name: 'All Programmes', icon: Flame },
+    { id: 'popular', name: 'Popular Programmes', icon: Flame },
+    { id: 'business', name: 'Business', icon: Briefcase },
     { id: 'specialisation', name: 'Specialisation Programmes', icon: Award },
   ] as { id: string; name: string; icon: React.ElementType; isNew?: boolean }[];
 
   // Homepage mirror of the /programmes ONLINE_PROGRAMME_CARD so the homepage
   // grid matches the listing page. The card appears under "All Programmes"
-  // only (it is not a specialisation course).
+  // and "Business" (it is a Business Digital Marketing course).
   const ONLINE_PROGRAMME_CARD: LiveProgramCard = {
     id: 'build-digital-marketing-skills-with-ai',
     title: 'Business Digital Marketing + AI (Online)',
@@ -74,10 +76,10 @@ export function ProgramsSection({
     targetText: 'Online — 30-35 Students',
     mode: 'Online',
     brochureUrl: '',
-    categoryId: 'popular',
-    categorySlugs: ['popular'],
-    categoryIds: ['popular'],
-    categories: ['popular'],
+    categoryId: 'business',
+    categorySlugs: ['business'],
+    categoryIds: ['business'],
+    categories: ['business'],
     image: '/images/business-digital-marketing-ai-online.webp',
   };
 

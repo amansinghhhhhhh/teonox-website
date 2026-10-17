@@ -37,6 +37,11 @@ export interface LiveProgramCard {
 export const PROGRAM_TERM_TO_CATEGORY: Record<string, string> = {
   'popular': 'popular',
   'popular-programs': 'popular',
+  // Map Business Digital Marketing courses to the "Business" tab
+  'business': 'business',
+  'digital-marketing': 'business',
+  'ai': 'business',
+  'business-digital-marketing': 'business',
   // Map all specialisation courses to the "Specialisation Programmes" tab
   'specialisation': 'specialisation',
   'specialisation-programmes': 'specialisation',
@@ -61,6 +66,7 @@ export const PROGRAM_TERM_TO_CATEGORY: Record<string, string> = {
  * still lands on the correct curated tab instead of only "Popular Programs".
  */
 const CATEGORY_KEYWORDS: Array<{ test: RegExp; id: string }> = [
+  { test: /business/i, id: 'business' },
   { test: /specialis|specialization|specializing/i, id: 'specialisation' },
   { test: /seo|search|organic|search-engine/i, id: 'specialisation' },
   { test: /social media|social|content|community/i, id: 'specialisation' },

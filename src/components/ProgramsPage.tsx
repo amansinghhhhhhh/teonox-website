@@ -11,6 +11,7 @@ import {
   Download,
   CheckCircle2,
   Briefcase,
+  Flame,
   Phone,
   Headphones,
   Send,
@@ -52,11 +53,16 @@ interface ProgramCategory {
  */
 const FALLBACK_CATEGORIES: ProgramCategory[] = [
   { id: 'all', name: 'All Programmes', icon: LayoutGrid },
+  { id: 'popular', name: 'Popular Programmes', icon: Flame },
+  { id: 'business', name: 'Business', icon: Briefcase },
   { id: 'specialisation', name: 'Specialisation Programmes', icon: Award },
 ];
 
 /** Icons assigned to dynamic WP `program-category` term slugs. */
 const TERM_ICONS: Record<string, React.ElementType> = {
+  'popular-programs': Flame,
+  popular: Flame,
+  business: Briefcase,
   'specialisation-programmes': Award,
   specialisation: Award,
 };
@@ -141,10 +147,10 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
   targetText: 'Online — 30-35 Students',
   mode: 'Online',
   brochureUrl: '',
-  categoryId: 'ai',
-  categorySlugs: ['ai', 'business', 'marketing'],
-  categoryIds: ['ai', 'business', 'marketing'],
-  categories: ['Digital Marketing', 'AI', 'Business'],
+  categoryId: 'business',
+  categorySlugs: ['business'],
+  categoryIds: ['business'],
+  categories: ['Business', 'AI', 'Digital Marketing'],
   image: '/images/business-digital-marketing-ai-online.webp',
 };
 
