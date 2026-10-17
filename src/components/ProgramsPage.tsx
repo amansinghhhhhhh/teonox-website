@@ -5,15 +5,10 @@ import {
   MapPin,
   Users,
   ArrowRight,
-  Target,
-  Brain,
-  Search,
-  Share2,
   Award,
   ChevronLeft,
   ChevronRight,
   Download,
-  Flame,
   CheckCircle2,
   Briefcase,
   Phone,
@@ -22,7 +17,6 @@ import {
   Sparkles,
   Mail,
   LayoutGrid,
-  TrendingUp,
 } from 'lucide-react';
 import { Program } from '../types';
 import { PROGRAMS_DATA } from '../data';
@@ -57,29 +51,16 @@ interface ProgramCategory {
  */
 const FALLBACK_CATEGORIES: ProgramCategory[] = [
   { id: 'all', name: 'All Programmes', icon: LayoutGrid },
-  { id: 'popular', name: 'Popular Programmes', icon: Flame },
-  { id: 'genai', name: 'GEN AI & Marketing', icon: Brain, isNew: true },
-  { id: 'performance', name: 'Performance & Paid Ads', icon: Target },
-  { id: 'seo', name: 'SEO & Search Growth', icon: Search },
-  { id: 'social', name: 'Social Media & Content', icon: Share2 },
-  { id: 'master', name: 'Master Certification', icon: Award },
+  { id: 'specialisation', name: 'Specialisation Programmes', icon: Award },
 ];
 
 /** Icons assigned to dynamic WP `program-category` term slugs. */
 const TERM_ICONS: Record<string, React.ElementType> = {
-  'popular-programs': Flame,
-  'gen-ai-marketing': Brain,
-  'performance-paid-ads': Target,
-  'seo-search-growth': Search,
-  'social-media-content': Share2,
-  'master-certification': Award,
-  ai: Brain,
-  marketing: TrendingUp,
-  business: Briefcase,
+  'specialisation-programmes': Award,
 };
 
 /** WP term slugs that should carry the "NEW" badge. */
-const NEW_TERM_SLUGS = new Set(['gen-ai-marketing']);
+const NEW_TERM_SLUGS = new Set<string>([]);
 
 export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClick }: ProgramsPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -104,6 +85,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
         const tabs: ProgramCategory[] = [
           { id: 'all', name: 'All Programmes', icon: LayoutGrid },
           ...terms
+            .filter((t) => (t.count ?? 0) > 0)
             .slice()
             .sort((a, b) => (b.count ?? 0) - (a.count ?? 0))
             .map((t) => ({

@@ -5,10 +5,6 @@ import {
   Award,
   Briefcase,
   ArrowRight,
-  Brain,
-  Search,
-  Share2,
-  Target,
   Sparkles,
   Flame,
   Download,
@@ -62,15 +58,12 @@ export function ProgramsSection({
 
   const categories = [
     { id: 'all', name: 'All Programmes', icon: Flame },
-    { id: 'genai', name: 'GEN AI & Marketing', icon: Brain, isNew: true },
-    { id: 'performance', name: 'Performance & Paid Ads', icon: Target },
-    { id: 'seo', name: 'SEO & Organic Growth', icon: Search },
-    { id: 'social', name: 'Social Media', icon: Share2 },
-  ];
+    { id: 'specialisation', name: 'Specialisation Programmes', icon: Award },
+  ] as { id: string; name: string; icon: React.ElementType; isNew?: boolean }[];
 
   // Homepage mirror of the /programmes ONLINE_PROGRAMME_CARD so the homepage
-  // grid matches the listing page. Categories include popular + genai so the
-  // card appears under "All Programmes" and "GEN AI & Marketing".
+  // grid matches the listing page. The card appears under "All Programmes"
+  // only (it is not a specialisation course).
   const ONLINE_PROGRAMME_CARD: LiveProgramCard = {
     id: 'build-digital-marketing-skills-with-ai',
     title: 'Business Digital Marketing + AI (Online)',
@@ -81,10 +74,10 @@ export function ProgramsSection({
     targetText: 'Online — 30-35 Students',
     mode: 'Online',
     brochureUrl: '',
-    categoryId: 'genai',
-    categorySlugs: ['ai', 'business', 'marketing'],
-    categoryIds: ['ai', 'business', 'marketing'],
-    categories: ['popular', 'genai'],
+    categoryId: 'popular',
+    categorySlugs: ['popular'],
+    categoryIds: ['popular'],
+    categories: ['popular'],
     image: '/images/business-digital-marketing-ai-online.webp',
   };
 

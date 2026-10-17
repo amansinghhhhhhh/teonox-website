@@ -35,29 +35,24 @@ export interface LiveProgramCard {
  * Every program card also always belongs to the "popular" tab (see below).
  */
 export const PROGRAM_TERM_TO_CATEGORY: Record<string, string> = {
-  ai: 'genai',
-  'gen-ai': 'genai',
-  'gen-ai-marketing': 'genai',
   'popular': 'popular',
   'popular-programs': 'popular',
-  marketing: 'performance',
-  'performance-marketing': 'performance',
-  'performance-paid-ads': 'performance',
-  'paid-ads': 'performance',
-  'media-buying': 'performance',
-  seo: 'seo',
-  search: 'seo',
-  growth: 'seo',
-  'seo-search-growth': 'seo',
-  'search-engine-optimization': 'seo',
-  social: 'social',
-  'social-media': 'social',
-  'social-media-content': 'social',
-  content: 'social',
-  business: 'master',
-  master: 'master',
-  'master-certification': 'master',
-  executive: 'master',
+  // Map all specialisation courses to the "Specialisation Programmes" tab
+  'specialisation': 'specialisation',
+  'specialisation-programmes': 'specialisation',
+  'performance-marketing': 'specialisation',
+  'performance-paid-ads': 'specialisation',
+  'paid-ads': 'specialisation',
+  'media-buying': 'specialisation',
+  seo: 'specialisation',
+  search: 'specialisation',
+  growth: 'specialisation',
+  'seo-search-growth': 'specialisation',
+  'search-engine-optimization': 'specialisation',
+  social: 'specialisation',
+  'social-media': 'specialisation',
+  'social-media-content': 'specialisation',
+  content: 'specialisation',
 };
 
 /**
@@ -66,11 +61,10 @@ export const PROGRAM_TERM_TO_CATEGORY: Record<string, string> = {
  * still lands on the correct curated tab instead of only "Popular Programs".
  */
 const CATEGORY_KEYWORDS: Array<{ test: RegExp; id: string }> = [
-  { test: /seo|search|organic|search-engine/i, id: 'seo' },
-  { test: /social media|social|content|community/i, id: 'social' },
-  { test: /performance|paid ads|paid-ads|media buying|ads/i, id: 'performance' },
-  { test: /gen\s?ai|generative|artificial intelligence|\bai\b/i, id: 'genai' },
-  { test: /master|executive|diploma|certification/i, id: 'master' },
+  { test: /specialis|specialization|specializing/i, id: 'specialisation' },
+  { test: /seo|search|organic|search-engine/i, id: 'specialisation' },
+  { test: /social media|social|content|community/i, id: 'specialisation' },
+  { test: /performance|paid ads|paid-ads|media buying|ads/i, id: 'specialisation' },
 ];
 
 const POPULAR_CATEGORY = 'popular';
