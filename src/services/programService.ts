@@ -973,7 +973,7 @@ export async function fetchProgramCategories(): Promise<
 
   try {
     const res = await fetch(
-      `${CMS_URL}/program-category&per_page=100&_cb=${Date.now()}`,
+      `${CMS_URL}/program-category?per_page=100&_cb=${Date.now()}`,
     );
     if (res.ok) {
       const json = await safeJson(res);

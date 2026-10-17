@@ -25,6 +25,7 @@ import {
   fetchLivePrograms,
   fetchProgramCategories,
   LiveProgramCard,
+  PROGRAM_TERM_TO_CATEGORY,
 } from '../services/programService';
 import imgCounsellor from '../assets/images/counsellor_support_1785420263109.webp';
 import { SEO } from './SEO';
@@ -57,6 +58,7 @@ const FALLBACK_CATEGORIES: ProgramCategory[] = [
 /** Icons assigned to dynamic WP `program-category` term slugs. */
 const TERM_ICONS: Record<string, React.ElementType> = {
   'specialisation-programmes': Award,
+  specialisation: Award,
 };
 
 /** WP term slugs that should carry the "NEW" badge. */
@@ -88,12 +90,21 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
             .filter((t) => (t.count ?? 0) > 0)
             .slice()
             .sort((a, b) => (b.count ?? 0) - (a.count ?? 0))
-            .map((t) => ({
-              id: String(t.slug || t.id),
-              name: t.name,
-              icon: TERM_ICONS[String(t.slug)] || Sparkles,
-              isNew: NEW_TERM_SLUGS.has(String(t.slug)) || undefined,
-            })),
+            .map((t) => {
+              const slug = String(t.slug || t.id);
+              // Normalise WP term slugs to curated category ids so the tab id
+              // always matches the category id used for filtering.
+              const curatedId =
+                PROGRAM_TERM_TO_CATEGORY[slug] ||
+                PROGRAM_TERM_TO_CATEGORY[slug.toLowerCase()] ||
+                slug;
+              return {
+                id: curatedId,
+                name: t.name,
+                icon: TERM_ICONS[slug] || Sparkles,
+                isNew: NEW_TERM_SLUGS.has(slug) || undefined,
+              };
+            }),
         ];
         setCategories(tabs);
       },
