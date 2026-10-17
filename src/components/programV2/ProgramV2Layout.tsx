@@ -51,7 +51,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import { ProgramDetailData } from '../../data/programDetails';
 import { TeonoxLogo } from '../TeonoxLogo';
-import imgCounsellor from '../../assets/images/counsellor_modal_img_1785398242839.webp';
+import imgCounsellor from '../../assets/images/teonox-2.jpeg';
 import designedForFallback from '../../assets/images/apply.webp';
 import certGoogleLogo from '../../assets/tools/google.svg';
 import certGoogleAnalyticsLogo from '../../assets/tools/googleanalytics.svg';
