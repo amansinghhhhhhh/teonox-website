@@ -64,7 +64,10 @@ export function CourseSchema({ name, description, slug, courseWorkload }: Course
 
   return (
     <Helmet>
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
+      />
     </Helmet>
   );
 }

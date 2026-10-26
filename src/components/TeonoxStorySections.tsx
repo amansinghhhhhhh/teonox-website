@@ -179,7 +179,12 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                   <img
                     src={whatIsTeonoxImg}
                     alt="Young tech and marketing professionals at TEONOX campus"
-                    className="w-full h-[340px] sm:h-[420px] object-cover object-center group-hover/img:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                    width={1200}
+                    height={801}
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-[340px] sm:h-[420px] object-cover object-center group-hover/img:scale-105 transition-transform duration-700" />
                 </div>
               </div>
             </motion.div>

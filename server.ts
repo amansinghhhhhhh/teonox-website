@@ -427,9 +427,13 @@ function transformPost(p: any) {
   const categoriesList = terms.map((t: any) => decodeHtmlEntities(t.name));
   const primaryCategory = categoriesList.length > 0 ? categoriesList[0] : "Career & Skills";
 
-  // Featured Image
-  const featuredMedia = p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  // Featured Image — prefer a smaller WP-generated thumbnail over full-res
+  const featuredMediaObj = p._embedded?.["wp:featuredmedia"]?.[0];
+  const featuredMedia = featuredMediaObj?.source_url;
+  const sizes = featuredMediaObj?.media_details?.sizes || {};
+  const preferredSize = sizes.medium_large || sizes.large || sizes.medium || null;
   const image =
+    preferredSize?.source_url ||
     featuredMedia ||
     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80";
 
@@ -784,6 +788,9 @@ async function startServer() {
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.html')) {
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        } else if (filePath.includes('/assets/') || filePath.includes('\\assets\\')) {
+          // All hashed Vite build assets under /assets/* get long-term immutable caching
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         } else if (/\.[a-f0-9]{8,}\.(js|css)$/.test(filePath)) {
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         } else {

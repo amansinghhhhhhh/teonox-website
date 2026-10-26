@@ -24,7 +24,10 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
 
   return (
     <Helmet>
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
+      />
     </Helmet>
   );
 }

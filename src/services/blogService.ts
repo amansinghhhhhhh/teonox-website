@@ -157,8 +157,14 @@ function transformWpPost(p: any): BlogPost {
   const categoriesList = terms.map((t: any) => decodeHtmlEntities(t.name));
   const primaryCategory = categoriesList.length > 0 ? categoriesList[0] : 'Career & Skills';
 
-  const featuredMedia = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  const featuredMediaObj = p._embedded?.['wp:featuredmedia']?.[0];
+  const featuredMedia = featuredMediaObj?.source_url;
+  // Prefer a smaller WordPress-generated thumbnail over the full-resolution
+  // image to reduce transfer size and improve LCP. Fall back to full URL.
+  const sizes = featuredMediaObj?.media_details?.sizes || {};
+  const preferredSize = sizes.medium_large || sizes.large || sizes.medium || null;
   const image =
+    preferredSize?.source_url ||
     featuredMedia ||
     'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80';
 
