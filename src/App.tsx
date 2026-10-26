@@ -2,32 +2,40 @@ import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TeonoxStorySections } from './components/TeonoxStorySections';
-import { LearningMethodologySection } from './components/LearningMethodologySection';
+import { FAQ_DATA } from './data/faqData';
 import { trackPageView } from './utils/analytics';
 import { lazyWithRetry } from './utils/lazyWithRetry';
-import { ToolsSection } from './components/ToolsSection';
-import { ProgramsSection } from './components/ProgramsSection';
-import { LearningExperienceSection } from './components/LearningExperienceSection';
-import { AboutSection } from './components/AboutSection';
-import { CareerPathsSection } from './components/CareerPathsSection';
-import { WorkWithUsSection } from './components/WorkWithUsSection';
-import { HireFromUsSection } from './components/HireFromUsSection';
-import { InsightsSection } from './components/InsightsSection';
-import { ContactSection } from './components/ContactSection';
-import { HomepageFAQ, FAQ_DATA } from './components/HomepageFAQ';
-import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
 import { BrochureModal } from './components/BrochureModal';
 import { FloatingControls } from './components/FloatingControls';
 import { BrochureCTABanner } from './components/BrochureCTABanner';
-import { TeonoxCultureSection } from './components/sections/TeonoxCultureSection';
-import { LifeAtTeonoxSection } from './components/sections/LifeAtTeonoxSection';
-import { CertificationsSection } from './components/CertificationsSection';
+import { SEO } from './components/SEO';
+import { ORG, WEBSITE, BASE_URL } from './utils/schema';
 import { Program, BlogPost } from './types';
 import { INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
-import { SEO } from './components/SEO';
-import { ORG, WEBSITE, BASE_URL } from './utils/schema';
+
+// Below-the-fold sections are lazy-loaded to reduce initial bundle size
+// and main-thread work during first paint.
+const LearningMethodologySection = lazyWithRetry(() => import('./components/LearningMethodologySection').then((m) => ({ default: m.LearningMethodologySection })));
+const ToolsSection = lazyWithRetry(() => import('./components/ToolsSection').then((m) => ({ default: m.ToolsSection })));
+const ProgramsSection = lazyWithRetry(() => import('./components/ProgramsSection').then((m) => ({ default: m.ProgramsSection })));
+const LearningExperienceSection = lazyWithRetry(() => import('./components/LearningExperienceSection').then((m) => ({ default: m.LearningExperienceSection })));
+const AboutSection = lazyWithRetry(() => import('./components/AboutSection').then((m) => ({ default: m.AboutSection })));
+const CareerPathsSection = lazyWithRetry(() => import('./components/CareerPathsSection').then((m) => ({ default: m.CareerPathsSection })));
+const WorkWithUsSection = lazyWithRetry(() => import('./components/WorkWithUsSection').then((m) => ({ default: m.WorkWithUsSection })));
+const HireFromUsSection = lazyWithRetry(() => import('./components/HireFromUsSection').then((m) => ({ default: m.HireFromUsSection })));
+const InsightsSection = lazyWithRetry(() => import('./components/InsightsSection').then((m) => ({ default: m.InsightsSection })));
+const ContactSection = lazyWithRetry(() => import('./components/ContactSection').then((m) => ({ default: m.ContactSection })));
+const HomepageFAQModule = lazyWithRetry(() => import('./components/HomepageFAQ').then((m) => ({ default: m.HomepageFAQ })));
+const Footer = lazyWithRetry(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
+const TeonoxCultureSection = lazyWithRetry(() => import('./components/sections/TeonoxCultureSection').then((m) => ({ default: m.TeonoxCultureSection })));
+const LifeAtTeonoxSection = lazyWithRetry(() => import('./components/sections/LifeAtTeonoxSection').then((m) => ({ default: m.LifeAtTeonoxSection })));
+const CertificationsSection = lazyWithRetry(() => import('./components/CertificationsSection').then((m) => ({ default: m.CertificationsSection })));
+
+
+// Re-export for convenience
+const HomepageFAQ = HomepageFAQModule;
 
 const AboutUsPage = lazyWithRetry(() => import('./components/AboutUsPage').then((m) => ({ default: m.AboutUsPage })));
 const BlogPage = lazyWithRetry(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
@@ -569,70 +577,73 @@ export default function App() {
                 COMMENTED OUT per request. Restore by uncommenting the line below.
             {false && <WhyTeonoxSection onExplorePrograms={() => handleNavClick('/programmes', 'Programmes')} />} */}
 
-            {/* Our Programmes - directly after the Why TEONOX section and before Learning Methodology */}
-            <ProgramsSection
-              onSelectProgram={(program) => handleSelectProgram(program)}
-              onEnquireProgram={(programName) => handleEnquireClick(programName)}
-              onBrochureClick={(programName) => handleBrochureClick(programName)}
-            />
+            {/* Below-the-fold sections are lazy-loaded to reduce initial bundle */}
+            <Suspense fallback={null}>
+              {/* Our Programmes - directly after the Why TEONOX section and before Learning Methodology */}
+              <ProgramsSection
+                onSelectProgram={(program) => handleSelectProgram(program)}
+                onEnquireProgram={(programName) => handleEnquireClick(programName)}
+                onBrochureClick={(programName) => handleBrochureClick(programName)}
+              />
 
-            {/* Learning Methodology */}
-            <LearningMethodologySection />
+              {/* Learning Methodology */}
+              <LearningMethodologySection />
 
-            {/* Industry Standard Tools Section */}
-            <ToolsSection />
+              {/* Industry Standard Tools Section */}
+              <ToolsSection />
 
-            {/* Download Brochure Conversion Banner */}
-            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
+              {/* Download Brochure Conversion Banner */}
+              <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
 
-            {/* The Learning Experience */}
-            <LearningExperienceSection />
+              {/* The Learning Experience */}
+              <LearningExperienceSection />
 
-            {/* Certifications Showcase */}
-            <CertificationsSection />
+              {/* Certifications Showcase */}
+              <CertificationsSection />
 
-            {/* About TEONOX */}
-            <AboutSection onConnect={() => navigate('/about')} />
+              {/* About TEONOX */}
+              <AboutSection onConnect={() => navigate('/about')} />
 
-            {/* Career Paths */}
-            <CareerPathsSection />
+              {/* Career Paths */}
+              <CareerPathsSection />
 
-            {/* Download Brochure Conversion Banner */}
-            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
+              {/* Download Brochure Conversion Banner */}
+              <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
 
-            {/* Work With Us */}
-            <WorkWithUsSection
-              onEnquire={(interest) => handleEnquireClick(interest)}
-            />
+              {/* Work With Us */}
+              <WorkWithUsSection
+                onEnquire={(interest) => handleEnquireClick(interest)}
+              />
 
-            {/* Why Hire From TEONOX - Value Proposition */}
-            <HireFromUsSection
-              onEnquireHire={() => handleEnquireClick('Hire Talent from TEONOX')}
-            />
+              {/* Why Hire From TEONOX - Value Proposition */}
+              <HireFromUsSection
+                onEnquireHire={() => handleEnquireClick('Hire Talent from TEONOX')}
+              />
 
-            {/* TEONOX Culture — hero, pillars, feature block, industry experts */}
-            <TeonoxCultureSection
-              onVisitCampus={() => handleEnquireClick('Visit Campus / Campus Tour')}
-            />
+              {/* TEONOX Culture — hero, pillars, feature block, industry experts */}
+              <TeonoxCultureSection
+                onVisitCampus={() => handleEnquireClick('Visit Campus / Campus Tour')}
+              />
 
-            {/* Life at TEONOX gallery */}
-            <LifeAtTeonoxSection />
+              {/* Life at TEONOX gallery */}
+              <LifeAtTeonoxSection />
 
-            {/* Download Brochure conversion banner (same as the one below Career Paths) */}
-            <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
+              {/* Download Brochure conversion banner (same as the one below Career Paths) */}
+              <BrochureCTABanner onBrochureClick={() => handleBrochureClick()} />
 
-            {/* Blog / Insights */}
-            <InsightsSection
-              onSelectPost={(post) => handleSelectPost(post)}
-              onViewAll={() => navigate('/blog')}
-            />
-            {/* Contact CTA */}
-            <ContactSection
-              onExplorePrograms={() => navigate('/programmes')}
-              onEnquireClick={(topic) => handleEnquireClick(topic || 'Talk to TEONOX')}
-            />
-            {/* FAQ Section */}
-            <HomepageFAQ />
+              {/* Blog / Insights */}
+              <InsightsSection
+                onSelectPost={(post) => handleSelectPost(post)}
+                onViewAll={() => navigate('/blog')}
+              />
+              {/* Contact CTA */}
+              <ContactSection
+                onExplorePrograms={() => navigate('/programmes')}
+                onEnquireClick={(topic) => handleEnquireClick(topic || 'Talk to TEONOX')}
+              />
+              {/* FAQ Section */}
+              <HomepageFAQ />
+            </Suspense>
           </>
         )}
         </Suspense>
@@ -640,10 +651,12 @@ export default function App() {
 
       {/* Footer */}
       {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && (
-        <Footer
-          onEnquireClick={() => handleEnquireClick()}
-          onNavigate={(href, label) => handleNavClick(href, label)}
-        />
+        <Suspense fallback={null}>
+          <Footer
+            onEnquireClick={() => handleEnquireClick()}
+            onNavigate={(href, label) => handleNavClick(href, label)}
+          />
+        </Suspense>
       )}
 
       {/* Enquire Now Popup Form Modal */}

@@ -168,6 +168,13 @@ function transformWpPost(p: any): BlogPost {
     featuredMedia ||
     'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80';
 
+  // Build a responsive srcset from WordPress-generated image sizes so the
+  // browser can pick the smallest adequate variant for the rendered layout.
+  const imageSrcSet = Object.values(sizes)
+    .filter((s: any) => s?.source_url && s?.width)
+    .map((s: any) => `${s.source_url} ${s.width}w`)
+    .join(', ');
+
   const postDate = p.date ? new Date(p.date).toLocaleDateString('en-GB') : '08/07/2026';
   const authorName = formatAuthorName(p._embedded?.author?.[0]?.name || '');
 
@@ -187,6 +194,7 @@ function transformWpPost(p: any): BlogPost {
     date: postDate,
     readTime: calculateReadTime(rawContent),
     image,
+    imageSrcSet: imageSrcSet || undefined,
     contentHtml: rawContent,
     content: paragraphs,
     link: p.link || `https://teonox.com/blog/${p.slug}`,

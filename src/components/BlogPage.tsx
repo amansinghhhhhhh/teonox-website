@@ -342,6 +342,8 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
               <div className="lg:col-span-6 relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/11] w-full rounded-2xl overflow-hidden bg-[#F5EBE0] shadow-xs">
                 <img
                   src={featuredArticle.image}
+                  srcSet={featuredArticle.imageSrcSet}
+                  sizes="(max-width: 768px) 100vw, 600px"
                   alt={featuredArticle.title}
                   referrerPolicy="no-referrer"
                   onError={(e) => {
@@ -414,6 +416,8 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
                     <div className="relative aspect-[16/10] w-full rounded-[16px] overflow-hidden mb-5 bg-[#F5EBE0] shadow-2xs">
                       <img
                         src={article.image}
+                        srcSet={article.imageSrcSet}
+                        sizes="(max-width: 768px) 100vw, 400px"
                         alt={article.title}
                         referrerPolicy="no-referrer"
                         onError={(e) => {

@@ -195,6 +195,8 @@ const proseRef = useRef<HTMLDivElement>(null);
           <div className="relative rounded-3xl overflow-hidden shadow-lg border border-[#F0DFCE] mb-10 group">
             <img
               src={post.image}
+              srcSet={post.imageSrcSet}
+              sizes="(max-width: 768px) 100vw, 1024px"
               alt={post.title}
               referrerPolicy="no-referrer"
               className="w-full max-h-[520px] object-fill transition-transform duration-700 group-hover:scale-102"
