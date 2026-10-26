@@ -29,6 +29,9 @@ export function TeonoxLogo({
         alt="TEONOX - Learn. Apply. Lead."
         referrerPolicy="no-referrer"
         className={`${heightClasses[size]} w-auto object-contain transition-all`}
+        // Reserve the correct aspect-ratio box (viewBox 0 0 306.91 115.06) so the
+        // logo doesn't cause layout shift while the SVG loads.
+        style={{ aspectRatio: 306.91 / 115.06 }}
       />
     </div>
   );
