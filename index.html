@@ -72,7 +72,41 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2960469077709298&ev=PageView&noscript=1"
     /></noscript>
-    <div id="root"></div>
+    <!--
+      ─── Static above-the-fold hero markup ───
+      Rendered inline so the browser has visible content to paint on first
+      load (FCP) before the React bundle hydrates. React 19 hydrates over this
+      markup once /assets/index-*.js executes. The typewriter SVG/icons are
+      omitted here; React restores them on hydration.
+    -->
+    <div id="root">
+      <section id="home" class="pt-24 pb-16 md:pt-28 md:pb-24 bg-[#F9F8F6] relative overflow-hidden">
+        <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <div class="relative mx-auto mb-6">
+            <h1 class="font-sora text-[clamp(24px,3.8vw,52px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]">
+              Business Digital Marketing Course<br />
+              <span style="display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:8px">
+                <span>with Assured Placement</span>
+              </span>
+            </h1>
+          </div>
+          <p class="font-inter text-[16px] sm:text-[20px] font-[400] text-[#665A4E] leading-relaxed mx-auto mb-10 max-w-4xl">
+            Choose the best business digital marketing courses in Pune with assured job placement, affordable fees, and AI &amp; GenAI-integrated learning in online/offline modes. Join Gen AI School of Marketing to build a career in digital marketing with AI-powered, performance-driven, and practical training.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <button type="button" class="btn-sassriver-primary py-3.5 px-5 sm:px-8 text-sm sm:text-[16px] group cursor-pointer">
+              <span class="whitespace-nowrap">Explore Programmes</span>
+            </button>
+            <button type="button" class="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group">
+              <span class="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Download Brochure</span>
+            </button>
+            <button type="button" class="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group">
+              <span class="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Talk To Our Team</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
