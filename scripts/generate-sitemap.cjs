@@ -24,13 +24,14 @@ const STATIC_PAGES = [
 
 async function fetchProgramSlugs() {
   try {
-    const res = await fetch(`${CMS_URL}/program&_fields=slug&per_page=100&_cb=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/program&_fields=slug,status&per_page=100&_t=${Date.now()}`);
     if (!res.ok) return [];
     const type = (res.headers.get('content-type') || '').toLowerCase();
     if (!type.includes('application/json')) return [];
     const programs = await res.json();
     if (!Array.isArray(programs)) return [];
     return programs
+      .filter((p) => p.status === 'publish')
       .map((p) => String(p.slug || ''))
       .filter(Boolean);
   } catch (e) {
@@ -41,16 +42,19 @@ async function fetchProgramSlugs() {
 
 async function fetchBlogPosts() {
   try {
-    const res = await fetch(`${CMS_URL}/posts&_fields=slug,date&per_page=100&_cb=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/posts&_fields=slug,date,status&per_page=100&_t=${Date.now()}`);
     if (!res.ok) return [];
     const type = (res.headers.get('content-type') || '').toLowerCase();
     if (!type.includes('application/json')) return [];
     const posts = await res.json();
     if (!Array.isArray(posts) || posts.length === 0) return [];
-    return posts.map((p) => ({
-      slug: String(p.slug || ''),
-      lastmod: p.date ? p.date.split('T')[0] : TODAY,
-    })).filter((p) => p.slug);
+    return posts
+      .filter((p) => p.status === 'publish')
+      .map((p) => ({
+        slug: String(p.slug || ''),
+        lastmod: p.date ? p.date.split('T')[0] : TODAY,
+      }))
+      .filter((p) => p.slug);
   } catch (e) {
     console.warn('[Sitemap] Failed to fetch blog posts from WordPress:', e.message);
     return [];
