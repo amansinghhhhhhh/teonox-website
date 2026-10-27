@@ -9,6 +9,7 @@ import './index.css';
 const BUILD_VERSION = '2026-10-28-cache-bust';
 if (typeof window !== 'undefined') {
   (window as any).__BUILD_VERSION = BUILD_VERSION;
+  console.log("TEONOX BUILD VERSION - 2026-10-28 - LIVE & VERIFIED");
 }
 
 createRoot(document.getElementById('root')!).render(
