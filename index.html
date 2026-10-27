@@ -11,7 +11,10 @@
       Noscript fallbacks remain in <body> for browsers without JavaScript.
     -->
     <script>
-      function loadThirdPartyScripts() {
+      function initScripts() {
+        if (window.scriptsLoaded) return;
+        window.scriptsLoaded = true;
+
         /* Google Tag Manager */
         (function (w, d, s, l, i) {
           w[l] = w[l] || [];
@@ -45,11 +48,18 @@
         fbq('track', 'PageView');
       }
 
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadThirdPartyScripts, { timeout: 3000 });
-      } else {
-        window.addEventListener('load', loadThirdPartyScripts);
-      }
+      // Defer third-party scripts by 8 seconds OR on user interaction
+      const timer = setTimeout(initScripts, 8000);
+      const interactionEvent = () => {
+        initScripts();
+        clearTimeout(timer);
+        ['scroll', 'mousedown', 'keydown', 'touchstart'].forEach(e => 
+          window.removeEventListener(e, interactionEvent, { once: true })
+        );
+      };
+      ['scroll', 'mousedown', 'keydown', 'touchstart'].forEach(e => 
+        window.addEventListener(e, interactionEvent, { once: true, passive: true })
+      );
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
