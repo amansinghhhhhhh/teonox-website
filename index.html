@@ -81,6 +81,15 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2960469077709298&ev=PageView&noscript=1"
     /></noscript>
+    
+    <script>
+      // Remove noscript fallbacks once the main JS is loaded to keep DOM clean
+      window.addEventListener('load', () => {
+        const noscripts = document.querySelectorAll('noscript');
+        noscripts.forEach(ns => ns.remove());
+      });
+    </script>
+
     <!--
       ─── Static above-the-fold hero markup ───
       Rendered inline so the browser has visible content to paint on first
