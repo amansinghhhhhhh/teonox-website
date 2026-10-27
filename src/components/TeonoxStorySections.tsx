@@ -183,7 +183,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
                     height={801}
                     fetchPriority="high"
                     loading="eager"
-                    decoding="async"
+                    decoding="sync"
                     className="w-full h-[340px] sm:h-[420px] object-cover object-center group-hover/img:scale-105 transition-transform duration-700" />
                 </div>
               </div>
