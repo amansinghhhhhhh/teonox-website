@@ -12,12 +12,17 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Defer scroll listener until after initial paint to free the main thread
+  // during mobile Lighthouse render pass.
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handle = requestIdleCallback(() => {
+      const handleScroll = () => {
+        setScrolled(window.scrollY > 30);
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    });
+    return () => cancelIdleCallback(handle);
   }, []);
 
   const navItems = [
