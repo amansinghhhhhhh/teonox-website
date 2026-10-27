@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Play, ArrowRight, Download, PenTool } from 'lucide-react';
 
 interface HeroProps {
@@ -20,17 +20,8 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [started, setStarted] = useState(false);
-
-  // Defer the typewriter loop until after the initial paint so the main thread
-  // stays free during Lighthouse's initial render pass on throttled mobile CPUs.
-  useEffect(() => {
-    const handle = requestIdleCallback(() => setStarted(true));
-    return () => cancelIdleCallback(handle);
-  }, []);
 
   useEffect(() => {
-    if (!started) return;
     const currentPhrase = phrases[phraseIndex];
     let timeout: ReturnType<typeof setTimeout>;
 
