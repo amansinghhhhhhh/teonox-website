@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
 import {
   BookOpen,
