@@ -73,32 +73,11 @@ function buildSitemapUrl(loc: string, lastmod: string, changefreq: string, prior
   return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 }
 
-// Register BEFORE static middleware so it takes priority over dist/sitemap.xml
-app.get('/sitemap.xml', async (_req, res) => {
-  const today = new Date().toISOString().split('T')[0];
-  const urls: string[] = [];
-
-  // Static pages
-  for (const page of STATIC_PAGES) {
-    urls.push(buildSitemapUrl(`${BASE_URL}${page.path}`, today, page.changefreq, page.priority));
-  }
-
-  // Programs
-  for (const id of PROGRAM_IDS) {
-    urls.push(buildSitemapUrl(`${BASE_URL}/programmes/${id}`, today, 'monthly', '0.8'));
-  }
-
-  // Live blog posts from WordPress
-  const blogs = await fetchLiveBlogSlugs();
-  for (const post of blogs) {
-    urls.push(buildSitemapUrl(`${BASE_URL}/blog/${post.slug}`, post.lastmod, 'monthly', '0.7'));
-  }
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
-
-  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+// Serve static sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+  res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.send(xml);
+  res.sendFile(path.join(process.cwd(), 'dist', 'sitemap.xml'));
 });
 
 // ─── Dynamic Sitemap HTML ──────────────────────────────────────────
