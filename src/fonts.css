@@ -1,14 +1,8 @@
-﻿@font-face {
-  font-family: 'Sora';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Sora'), url('/fonts/sora-v1-latin-regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Sora';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Sora'), url('/fonts/sora-v1-latin-700.woff2') format('woff2');
-}
+﻿/*
+ * Sora font family is loaded from Google Fonts CDN via index.html:
+ * https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap
+ *
+ * Local @font-face declarations referencing /fonts/sora-v1-latin-*.woff2 were removed
+ * because those font files do not exist in the repository and caused OTS parsing /
+ * decoding errors (invalid sfntVersion). The CDN-loaded Sora is used instead.
+ */
