@@ -64,20 +64,6 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
 
       <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center animate-fade-in-up">
         
-        {/* Hero LCP Image — statically present in the initial DOM shell */}
-        <div className="mx-auto mb-10 sm:mb-14 max-w-[720px] sm:max-w-[900px] lg:max-w-none animate-fade-in-up" style={{ animationDelay: '0.05s' }}>
-          <img
-            src={heroLcpImage}
-            alt="Students learning AI and digital marketing at TEONOX campus"
-            width={1200}
-            height={675}
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-            className="w-full h-auto rounded-[24px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.10)] object-cover"
-          />
-        </div>
-
         {/* Main Display Headline */}
         <div className="relative mx-auto mb-6">
           {/* Floating Sparkle on Left */}
@@ -120,6 +106,20 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
               </span>
             </span>
           </h1>
+        </div>
+
+        {/* Hero LCP Image — placed below the heading to preserve text-first visual order */}
+        <div className="mx-auto mb-10 sm:mb-14 max-w-[720px] sm:max-w-[900px] lg:max-w-none animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <img
+            src={heroLcpImage}
+            alt="Students learning AI and digital marketing at TEONOX campus"
+            width={1200}
+            height={675}
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="w-full h-auto rounded-[24px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.10)] object-cover"
+          />
         </div>
 
         {/* Supporting Paragraph */}
