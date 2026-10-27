@@ -285,6 +285,8 @@ const proseRef = useRef<HTMLDivElement>(null);
                       <div className="aspect-video rounded-xl overflow-hidden mb-3 bg-[#FFF6EE]">
                         <img
                           src={rel.image}
+                          srcSet={rel.imageSrcSet}
+                          sizes="(max-width: 768px) 100vw, 370px"
                           alt={rel.title}
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"

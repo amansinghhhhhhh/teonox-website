@@ -162,7 +162,7 @@ function transformWpPost(p: any): BlogPost {
   // Prefer a smaller WordPress-generated thumbnail over the full-resolution
   // image to reduce transfer size and improve LCP. Fall back to full URL.
   const sizes = featuredMediaObj?.media_details?.sizes || {};
-  const preferredSize = sizes.medium_large || sizes.large || sizes.medium || null;
+  const preferredSize = sizes.medium_large || sizes.medium || sizes.large || null;
   const image =
     preferredSize?.source_url ||
     featuredMedia ||

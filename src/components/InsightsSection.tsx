@@ -69,6 +69,8 @@ export function InsightsSection({ onSelectPost, onViewAll }: InsightsSectionProp
                   <div className="w-full h-52 overflow-hidden relative bg-[#F0DFCE]/30 border-b border-[#F0DFCE]">
                     <img
                       src={post.image}
+                      srcSet={post.imageSrcSet}
+                      sizes="(max-width: 768px) 100vw, 370px"
                       alt={post.title}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-fill object-top group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" decoding="async" />
