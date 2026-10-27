@@ -45,8 +45,8 @@
         fbq('track', 'PageView');
       }
 
-      if (window.requestIdleCallback) {
-        window.requestIdleCallback(loadThirdPartyScripts);
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadThirdPartyScripts, { timeout: 3000 });
       } else {
         window.addEventListener('load', loadThirdPartyScripts);
       }
