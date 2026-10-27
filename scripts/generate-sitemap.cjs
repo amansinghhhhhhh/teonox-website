@@ -20,7 +20,6 @@ const STATIC_PAGES = [
   { path: '/privacy-policy',          priority: '0.3', changefreq: 'yearly'  },
   { path: '/terms-and-conditions',    priority: '0.3', changefreq: 'yearly'  },
   { path: '/webinar',                 priority: '0.8', changefreq: 'weekly'  },
-  { path: '/programmes/build-digital-marketing-skills-with-ai', priority: '0.8', changefreq: 'monthly' },
 ];
 
 async function fetchProgramSlugs() {
