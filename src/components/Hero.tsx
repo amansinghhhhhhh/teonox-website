@@ -60,7 +60,7 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
             <Sparkles className="w-8 h-8 md:w-10 md:h-10 fill-[#F15A29]/20" />
           </div>
 
-          <h1 className="font-sora text-[clamp(24px,3.8vw,52px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]">
+          <h1 className="font-sora text-[clamp(24px,3.8vw,52px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]" id="hero-heading" fetchPriority="high">
             Business Digital Marketing Course
             <br />
             <span className="inline-flex flex-wrap items-center justify-center gap-2 mt-2">
