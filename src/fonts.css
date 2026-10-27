@@ -1,0 +1,14 @@
+﻿@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Sora'), url('/fonts/sora-v1-latin-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Sora'), url('/fonts/sora-v1-latin-700.woff2') format('woff2');
+}

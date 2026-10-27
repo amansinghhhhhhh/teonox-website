@@ -1,136 +1,18 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <!-- Data layer initialised early so GTM/GA events queued before the deferred scripts load are not lost -->
-    <script>window.dataLayer = window.dataLayer || [];</script>
     <meta name="robots" content="index, follow" />
-    <!--
-      Google Tag Manager & Meta Pixel are intentionally deferred until after
-      window.load / requestIdleCallback so they do not block the critical rendering path.
-      Noscript fallbacks remain in <body> for browsers without JavaScript.
-    -->
-    <script>
-      function initScripts() {
-        if (window.scriptsLoaded) return;
-        window.scriptsLoaded = true;
-
-        /* Google Tag Manager */
-        (function (w, d, s, l, i) {
-          w[l] = w[l] || [];
-          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-          var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l !== 'dataLayer' ? '&l=' + l : '';
-          j.async = true;
-          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-          f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-NXCPRP3J');
-
-        /* Meta Pixel */
-        !function (f, b, e, v, n, t, s) {
-          if (f.fbq) return;
-          n = f.fbq = function () {
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-          };
-          if (!f._fbq) f._fbq = n;
-          n.push = n;
-          n.loaded = !0;
-          n.version = '2.0';
-          n.queue = [];
-          t = b.createElement(e);
-          t.async = !0;
-          t.src = v;
-          s = b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t, s);
-        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '2960469077709298');
-        fbq('track', 'PageView');
-      }
-
-      // Defer third-party scripts by 8 seconds OR on user interaction
-      const timer = setTimeout(initScripts, 8000);
-      const interactionEvent = () => {
-        initScripts();
-        clearTimeout(timer);
-        ['scroll', 'mousedown', 'keydown', 'touchstart'].forEach(e => 
-          window.removeEventListener(e, interactionEvent, { once: true })
-        );
-      };
-      ['scroll', 'mousedown', 'keydown', 'touchstart'].forEach(e => 
-        window.addEventListener(e, interactionEvent, { once: true, passive: true })
-      );
-    </script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Automation & Digital Marketing Courses in Pune | Teonox</title>
     <meta name="description" content="Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enrol today!" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap">
-    <style>
-      /* Fallback metrics to reduce CLS */
-      body { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.5; }
-      h1, h2, h3 { font-family: 'Sora', sans-serif; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#FFFFFF] text-[#201A17] font-['Inter',sans-serif] antialiased selection:bg-[#FF6A2B] selection:text-white">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXCPRP3J"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <!-- NoScript Meta Pixel Image -->
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2960469077709298&ev=PageView&noscript=1"
-    /></noscript>
-    
-    <script>
-      // Remove noscript fallbacks once the main JS is loaded to keep DOM clean
-      window.addEventListener('load', () => {
-        const noscripts = document.querySelectorAll('noscript');
-        noscripts.forEach(ns => ns.remove());
-      });
-    </script>
-
-    <!--
-      ─── Static above-the-fold hero markup ───
-      Rendered inline so the browser has visible content to paint on first
-      load (FCP) before the React bundle hydrates. React 19 hydrates over this
-      markup once /assets/index-*.js executes. The typewriter SVG/icons are
-      omitted here; React restores them on hydration.
-    -->
-    <div id="root">
-      <section id="home" class="pt-24 pb-16 md:pt-28 md:pb-24 bg-[#F9F8F6] relative overflow-hidden">
-        <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <div class="relative mx-auto mb-6">
-            <h1 class="font-sora text-[clamp(24px,3.8vw,52px)] font-[800] text-[#201A17] tracking-tight leading-[1.12]">
-              Business Digital Marketing Course<br />
-              <span style="display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:8px">
-                <span>with Assured Placement</span>
-              </span>
-            </h1>
-          </div>
-          <p class="font-inter text-[16px] sm:text-[20px] font-[400] text-[#665A4E] leading-relaxed mx-auto mb-10 max-w-4xl">
-            Choose the best business digital marketing courses in Pune with assured job placement, affordable fees, and AI &amp; GenAI-integrated learning in online/offline modes. Join Gen AI School of Marketing to build a career in digital marketing with AI-powered, performance-driven, and practical training.
-          </p>
-          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-            <button type="button" class="btn-sassriver-primary py-3.5 px-5 sm:px-8 text-sm sm:text-[16px] group cursor-pointer">
-              <span class="whitespace-nowrap">Explore Programmes</span>
-            </button>
-            <button type="button" class="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group">
-              <span class="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Download Brochure</span>
-            </button>
-            <button type="button" class="inline-flex items-center justify-center gap-2.5 py-3.5 px-5 sm:px-8 rounded-full bg-white hover:bg-[#FFF6F2] text-[#201A17] font-sora text-sm sm:text-[16px] font-[700] border border-[#E0D5C8] hover:border-[#F15A29] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer group">
-              <span class="whitespace-nowrap group-hover:text-[#F15A29] transition-colors duration-300">Talk To Our Team</span>
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+  <body class="bg-[#FFFFFF] text-[#201A17] antialiased selection:bg-[#FF6A2B] selection:text-white">
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
