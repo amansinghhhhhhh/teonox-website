@@ -74,11 +74,7 @@ function buildSitemapUrl(loc: string, lastmod: string, changefreq: string, prior
 }
 
 // Serve static sitemap.xml
-app.get('/sitemap.xml', (req, res) => {
-  res.setHeader('Content-Type', 'application/xml');
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.sendFile(path.join(process.cwd(), 'dist', 'sitemap.xml'));
-});
+// Removed app.get('/sitemap.xml') as it is now served as a static file
 
 // ─── Dynamic Sitemap HTML ──────────────────────────────────────────
 app.get('/sitemap.html', async (_req, res) => {
