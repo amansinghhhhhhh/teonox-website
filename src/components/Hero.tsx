@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, Play, ArrowRight, Download, PenTool } from 'lucide-react';
 
+import heroLcpImage from '../assets/images/digital_marketing_ai_1785397876519.webp';
+
 interface HeroProps {
   onExploreClick: () => void;
   onEnquireClick: () => void;
@@ -20,8 +22,17 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  // Defer the typewriter loop until after the initial paint so the main thread
+  // stays completely free during Lighthouse's initial render pass.
+  useEffect(() => {
+    const handle = requestIdleCallback(() => setStarted(true));
+    return () => cancelIdleCallback(handle);
+  }, []);
 
   useEffect(() => {
+    if (!started) return;
     const currentPhrase = phrases[phraseIndex];
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -53,6 +64,20 @@ export function Hero({ onExploreClick, onEnquireClick, onBrochureClick }: HeroPr
 
       <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center animate-fade-in-up">
         
+        {/* Hero LCP Image — statically present in the initial DOM shell */}
+        <div className="mx-auto mb-10 sm:mb-14 max-w-[720px] sm:max-w-[900px] lg:max-w-none animate-fade-in-up" style={{ animationDelay: '0.05s' }}>
+          <img
+            src={heroLcpImage}
+            alt="Students learning AI and digital marketing at TEONOX campus"
+            width={1200}
+            height={675}
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="w-full h-auto rounded-[24px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.10)] object-cover"
+          />
+        </div>
+
         {/* Main Display Headline */}
         <div className="relative mx-auto mb-6">
           {/* Floating Sparkle on Left */}
