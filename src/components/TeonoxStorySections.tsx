@@ -28,6 +28,14 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
 
+  // Defer heavy parallax/scroll animation triggers until after initial paint
+  // so the main thread stays free during Lighthouse's mobile render pass.
+  const [isHydrated, setIsHydrated] = useState(false);
+  useEffect(() => {
+    const handle = requestIdleCallback(() => setIsHydrated(true));
+    return () => cancelIdleCallback(handle);
+  }, []);
+
   // Mouse movement parallax state for 3D card tilt
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -37,6 +45,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
   const smoothMouseY = useSpring(mouseY, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isHydrated) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -45,6 +54,7 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
   };
 
   const handleMouseLeave = () => {
+    if (!isHydrated) return;
     mouseX.set(0);
     mouseY.set(0);
   };
@@ -58,8 +68,8 @@ export function TeonoxStorySections({ onNavigate }: TeonoxStorySectionsProps) {
   return (
     <div
       className="w-full font-['Sora',sans-serif] text-[#111111]"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={isHydrated ? handleMouseMove : undefined}
+      onMouseLeave={isHydrated ? handleMouseLeave : undefined}
     >
       
       {/* ─────────────────────────────────────────────────────────────────
