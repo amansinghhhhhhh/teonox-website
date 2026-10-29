@@ -204,7 +204,7 @@ function transformWpPost(p: any): BlogPost {
 export async function fetchLiveBlogs(): Promise<{ blogs: BlogPost[]; isLive: boolean }> {
   // Strategy 1: direct WordPress REST API.
   try {
-    const res = await fetch(`${CMS_URL}/posts&_embed&per_page=50&_cb=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/posts?_embed&per_page=50&_cb=${Date.now()}`);
     if (res.ok) {
       const json = await safeJson(res);
       const posts = Array.isArray(json) ? json : json?.data;
@@ -227,7 +227,7 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
   if (isNumeric) {
     try {
       const res = await fetch(
-        `${CMS_URL}/posts/${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
+        `${CMS_URL}/posts/${encodeURIComponent(idOrSlug)}?_embed&_cb=${Date.now()}`,
       );
       if (res.ok) {
         const post = await safeJson(res);
@@ -241,7 +241,7 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
   // Slug: query by slug parameter.
   try {
     const res = await fetch(
-      `${CMS_URL}/posts&slug=${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
+      `${CMS_URL}/posts?slug=${encodeURIComponent(idOrSlug)}&_embed&_cb=${Date.now()}`,
     );
     if (res.ok) {
       const posts = await safeJson(res);
@@ -259,7 +259,7 @@ export async function fetchLiveBlogDetail(idOrSlug: string): Promise<BlogPost | 
 export async function fetchLiveCategories(): Promise<{ categories: string[]; isLive: boolean }> {
   // Direct WP categories fetch; fall back to the static list when CORS/network fails.
   try {
-    const res = await fetch(`${CMS_URL}/categories&per_page=100&_cb=${Date.now()}`);
+    const res = await fetch(`${CMS_URL}/categories?per_page=100&_cb=${Date.now()}`);
     if (res.ok) {
       const data = await safeJson(res);
       if (Array.isArray(data) && data.length > 0) {

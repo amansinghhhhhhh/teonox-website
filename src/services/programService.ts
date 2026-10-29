@@ -528,7 +528,7 @@ async function resolveMediaUrl(idOrUrl: string): Promise<string> {
   if (_mediaUrlCache[trimmed]) return _mediaUrlCache[trimmed];
   try {
     const res = await fetch(
-      `${CMS_URL}/media/${trimmed}&_fields=source_url`,
+      `${CMS_URL}/media/${trimmed}?_fields=source_url`,
     );
     if (!res.ok) return '';
     const data = await res.json();
@@ -582,7 +582,7 @@ async function fetchAllProgramPosts(): Promise<any[]> {
 
   _allProgramsCachePromise = (async () => {
     try {
-      const url = `${CMS_URL}/program&_embed&per_page=50&orderby=date&order=desc&_cb=${Date.now()}`;
+      const url = `${CMS_URL}/program?_embed&per_page=50&orderby=date&order=desc&_cb=${Date.now()}`;
       const res = await fetch(url);
       if (!res.ok) return [];
       const raw = await safeJson(res);
@@ -1013,7 +1013,7 @@ export async function fetchCertificationStats(): Promise<{
   const fallback = { total: 0, programs: 0, isLive: false };
   try {
     const res = await fetch(
-      `${CMS_URL}/program&per_page=100&orderby=date&order=desc&_cb=${Date.now()}`,
+      `${CMS_URL}/program?per_page=100&orderby=date&order=desc&_cb=${Date.now()}`,
     );
     if (!res.ok) return fallback;
     const json = await safeJson(res);
@@ -1043,7 +1043,7 @@ export async function fetchFooterPrograms(): Promise<{
   const fallback = FALLBACK_PROGRAM_CARDS.map((c) => ({ id: c.id, title: c.title }));
   try {
     const res = await fetch(
-      `${CMS_URL}/program&per_page=100&orderby=title&order=asc&_cb=${Date.now()}`,
+      `${CMS_URL}/program?per_page=100&orderby=title&order=asc&_cb=${Date.now()}`,
     );
     if (!res.ok) return { programs: fallback, isLive: false };
     const json = await safeJson(res);

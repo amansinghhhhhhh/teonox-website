@@ -1,5 +1,5 @@
 /** Direct WordPress REST API base (ACF fields live under `post.acf`). */
-export const CMS_URL = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
+export const CMS_URL = 'https://cms.teonox.com/wp-json/wp/v2';
 
 /** Decode common HTML entities from WordPress content. */
 export function decodeHtmlEntities(str: string = ''): string {
