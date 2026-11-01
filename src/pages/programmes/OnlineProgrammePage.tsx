@@ -263,7 +263,7 @@ export function OnlineProgrammePage() {
         profile,
         batchTiming,
         preferredBatch: batchTiming,
-        source: 'build-digital-marketing-skills-with-ai-landing-page',
+        source: 'business-digital-marketing-with-ai-6-months-online',
         otpVerified: 'false',
         phoneVerified: 'false',
         page_url: window.location.href,
@@ -473,7 +473,7 @@ export function OnlineProgrammePage() {
       <SEO
         title="Digital Marketing Skills in Pune | Course with Live Projects"
         description="Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career."
-        canonical="/programmes/build-digital-marketing-skills-with-ai"
+        canonical="/programmes/business-digital-marketing-with-ai-6-months-online"
       />
       <Navbar onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
       <div className="tl-landing-page">

@@ -133,7 +133,7 @@ function normalizePath(path: string): string {
  * resolved dynamically by ProgramDetailPage via the WP REST API — no static
  * maps needed here. Returns null for empty slugs.
  */
-const ONLINE_PROGRAMME_SLUG = 'build-digital-marketing-skills-with-ai';
+const ONLINE_PROGRAMME_SLUG = 'business-digital-marketing-with-ai-6-months-online';
 
 function stubProgram(slug: string): Program | null {
   if (!slug) return null;

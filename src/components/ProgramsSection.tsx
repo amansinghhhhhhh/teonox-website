@@ -67,8 +67,8 @@ export function ProgramsSection({
   // grid matches the listing page. The card appears under "All Programmes"
   // and "Business" (it is a Business Digital Marketing course).
   const ONLINE_PROGRAMME_CARD: LiveProgramCard = {
-    id: 'build-digital-marketing-skills-with-ai',
-    title: 'Business Digital Marketing + AI (Online)',
+    id: 'business-digital-marketing-with-ai-6-months-online',
+    title: 'Business Digital Marketing with AI (Online)',
     brandBadge: 'Online',
     description: '6-month online digital marketing programme with AI integration, live instructor-led classes, and practical projects.',
     durationText: '6 Months',
@@ -87,7 +87,7 @@ export function ProgramsSection({
   // CMS has no published V2 content yet, this renders the "coming soon" state.
   // The Online programme card is always prepended (matching /programmes) unless
   // the CMS already returns it.
-  const allCards: LiveProgramCard[] = (liveCards ?? []).find((p) => p.id === 'build-digital-marketing-skills-with-ai')
+  const allCards: LiveProgramCard[] = (liveCards ?? []).find((p) => p.id === 'business-digital-marketing-with-ai-6-months-online')
     ? (liveCards ?? [])
     : [ONLINE_PROGRAMME_CARD, ...(liveCards ?? [])];
   const displayedPrograms: ProgramCardData[] = allCards

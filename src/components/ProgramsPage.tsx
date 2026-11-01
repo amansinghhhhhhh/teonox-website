@@ -137,9 +137,9 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
   }, []);
 
   const ONLINE_PROGRAMME_CARD: LiveProgramCard = {
-  id: 'build-digital-marketing-skills-with-ai',
+  id: 'business-digital-marketing-with-ai-6-months-online',
   title: 'Business Digital Marketing + AI (Online)',
-  slug: 'build-digital-marketing-skills-with-ai',
+  slug: 'business-digital-marketing-with-ai-6-months-online',
   brandBadge: 'Online',
   description: '6-month online digital marketing programme with AI integration, live instructor-led classes, and practical projects.',
   durationText: '6 Months',
@@ -154,7 +154,7 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
   image: '/images/business-digital-marketing-ai-online.webp',
 };
 
-  const filteredPrograms = ((liveCards ?? []).find((p) => p.id === 'build-digital-marketing-skills-with-ai') ? liveCards ?? [] : [ONLINE_PROGRAMME_CARD, ...(liveCards ?? [])]).filter((p) => {
+  const filteredPrograms = ((liveCards ?? []).find((p) => p.id === 'business-digital-marketing-with-ai-6-months-online') ? liveCards ?? [] : [ONLINE_PROGRAMME_CARD, ...(liveCards ?? [])]).filter((p) => {
     if (activeCategory === 'all') return true;
     return (
       p.categorySlugs?.includes(activeCategory) ||
@@ -216,7 +216,7 @@ mode: progOrTitle.mode || 'On Campus, Pune',
               name: 'TEONOX Programmes',
 numberOfItems: 5,
                 itemListElement: [
-                  { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing + AI (Online)', url: `${BASE_URL}/programmes/build-digital-marketing-skills-with-ai` },
+                  { '@type': 'ListItem', position: 1, name: 'Business Digital Marketing with AI (Online)', url: `${BASE_URL}/programmes/business-digital-marketing-with-ai-6-months-online` },
                   { '@type': 'ListItem', position: 2, name: 'Business Digital Marketing With AI', url: `${BASE_URL}/programmes/business-digital-marketing-with-ai` },
                   { '@type': 'ListItem', position: 3, name: 'Specialisation in Performance Marketing', url: `${BASE_URL}/programmes/performance-marketing` },
                   { '@type': 'ListItem', position: 4, name: 'Specialisation in Search Engine Optimisation', url: `${BASE_URL}/programmes/search-engine-optimization` },
