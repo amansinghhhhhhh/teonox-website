@@ -4,7 +4,7 @@ export const rawHtmlBody = `<!-- Hero -->
     <div class="teonox-online-hero-grid">
       <div class="teonox-online-hero-content">
         <div class="teonox-online-hero-badge"><span class="teonox-online-dot"></span> LIVE BATCH + 2-MONTH INTERNSHIP</div>
-        <h1>Build Digital Marketing Skills. Master AI. Build Your <span>Career.</span></h1>
+        <h1>Business Digital Marketing with AI (Online)</h1>
         <p class="teonox-online-hero-subtitle">TEONOX — 6-Month Business Digital Marketing + AI Programme</p>
         <div class="teonox-online-hero-highlights">
           <span class="teonox-online-hero-chip"><i class="fas fa-clock"></i> 6 Months</span>

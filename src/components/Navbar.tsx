@@ -27,7 +27,11 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Programmes", href: "/programmes" },
+    { 
+      label: "Programmes", 
+      href: "/programmes",
+      isProgrammesPage: window.location.pathname.startsWith('/programmes/') 
+    },
     { label: "Why TEONOX", href: "/why-teonox" },
     { label: "Career Outcomes", href: "/careers" },
     { label: "Admissions", href: "/admissions" },
@@ -75,7 +79,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
                   handleNavClick(item.href, item.label);
                 }}
                 className={`px-2.5 xl:px-3.5 py-1.5 rounded-full font-sora text-[12.5px] xl:text-[13px] font-[600] transition-all duration-200 whitespace-nowrap ${
-                  activeSection === item.label
+                  (activeSection === item.label || (item.isProgrammesPage && window.location.pathname.startsWith('/programmes/'))) 
                     ? 'bg-[#FF6A2B] text-white shadow-sm shadow-[#FF6A2B]/25'
                     : 'text-[#736657] hover:text-[#201A17] hover:bg-white/80'
                 }`}
