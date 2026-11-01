@@ -16,7 +16,25 @@ export const rawHtmlBody = `<!-- Hero -->
 
         <div class="teonox-online-hero-ctas">
           <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-primary" onclick="openApplyModal()"><i class="fas fa-arrow-right"></i> Apply Now</a>
-          <a href="#teonox-online-masterclass" class="teonox-online-btn teonox-online-btn-outline"><i class="fas fa-phone"></i> Book a Counselling Call</a>
+          <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-outline" onclick="downloadBrochure()"><i class="fas fa-file-pdf"></i> Download Brochure</a>
+        </div>
+
+        <!-- Duration & Mode Specs -->
+        <div class="teonox-online-hero-specs">
+          <div class="teonox-online-spec-card">
+            <div class="teonox-online-spec-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <p class="teonox-online-spec-label">Duration</p>
+              <p class="teonox-online-spec-value">6 Months</p>
+            </div>
+          </div>
+          <div class="teonox-online-spec-card">
+            <div class="teonox-online-spec-icon"><i class="fas fa-laptop-code"></i></div>
+            <div>
+              <p class="teonox-online-spec-label">Mode</p>
+              <p class="teonox-online-spec-value">Online Live Classes</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
