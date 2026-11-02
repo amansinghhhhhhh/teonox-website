@@ -8,23 +8,23 @@ export const rawHtmlBody = `<!-- Hero -->
         <p class="teonox-online-hero-subtitle">TEONOX — 6-Month Business Digital Marketing + AI Programme</p>
 
         <!-- Duration & Mode Specs -->
-        <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <div class="w-10 h-10 rounded-full bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center shrink-0">
-              <i class="fas fa-clock" style="font-size: 20px; color: #F15A29;"></i>
+            <div class="rounded-2xl bg-white p-3 border border-[#F8E3D8] flex items-center justify-center shrink-0">
+              <i class="fas fa-clock text-[#F15A29] text-base"></i>
             </div>
             <div>
-              <p class="font-inter text-[11px] font-semibold text-[#888888] uppercase tracking-wider">Duration</p>
-              <p class="font-sora text-sm sm:text-[15px] font-bold text-[#111111] break-words">6 Months</p>
+              <p class="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">Duration</p>
+              <p class="text-sm font-bold text-gray-900">6 Months</p>
             </div>
           </div>
           <div>
-            <div class="w-10 h-10 rounded-full bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center shrink-0">
-              <i class="fas fa-laptop-code" style="font-size: 20px; color: #F15A29;"></i>
+            <div class="rounded-2xl bg-white p-3 border border-[#F8E3D8] flex items-center justify-center shrink-0">
+              <i class="fas fa-laptop-code text-[#F15A29] text-base"></i>
             </div>
             <div>
-              <p class="font-inter text-[11px] font-semibold text-[#888888] uppercase tracking-wider">Mode</p>
-              <p class="font-sora text-sm sm:text-[15px] font-bold text-[#111111] break-words">Online Live Classes</p>
+              <p class="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">Mode</p>
+              <p class="text-sm font-bold text-gray-900">Online Live Classes</p>
             </div>
           </div>
         </div>
