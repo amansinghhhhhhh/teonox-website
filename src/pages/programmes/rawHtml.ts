@@ -6,35 +6,32 @@ export const rawHtmlBody = `<!-- Hero -->
         <div class="teonox-online-hero-badge"><span class="teonox-online-dot"></span> LIVE BATCH + 2-MONTH INTERNSHIP</div>
         <h1>Business Digital Marketing with AI (Online)</h1>
         <p class="teonox-online-hero-subtitle">TEONOX — 6-Month Business Digital Marketing + AI Programme</p>
-        <div class="teonox-online-hero-highlights">
-          <span class="teonox-online-hero-chip"><i class="fas fa-clock"></i> 6 Months</span>
-          <span class="teonox-online-hero-chip"><i class="fas fa-video"></i> Live Classes</span>
-          <span class="teonox-online-hero-chip"><i class="fas fa-laptop-code"></i> Practical Projects</span>
-          <span class="teonox-online-hero-chip"><i class="fas fa-robot"></i> AI-Powered Learning</span>
-          <span class="teonox-online-hero-chip teonox-online-hero-chip-urgent"><i class="fas fa-users"></i> Batch Size: 30-35 Students</span>
+
+        <!-- Duration & Mode Specs -->
+        <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div>
+            <div class="w-10 h-10 rounded-full bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center shrink-0">
+              <i class="fas fa-clock" style="font-size: 20px; color: #F15A29;"></i>
+            </div>
+            <div>
+              <p class="font-inter text-[11px] font-semibold text-[#888888] uppercase tracking-wider">Duration</p>
+              <p class="font-sora text-sm sm:text-[15px] font-bold text-[#111111] break-words">6 Months</p>
+            </div>
+          </div>
+          <div>
+            <div class="w-10 h-10 rounded-full bg-[#FFF0EB] text-[#F15A29] flex items-center justify-center shrink-0">
+              <i class="fas fa-laptop-code" style="font-size: 20px; color: #F15A29;"></i>
+            </div>
+            <div>
+              <p class="font-inter text-[11px] font-semibold text-[#888888] uppercase tracking-wider">Mode</p>
+              <p class="font-sora text-sm sm:text-[15px] font-bold text-[#111111] break-words">Online Live Classes</p>
+            </div>
+          </div>
         </div>
 
         <div class="teonox-online-hero-ctas">
           <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-primary" onclick="openApplyModal()"><i class="fas fa-arrow-right"></i> Apply Now</a>
           <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-outline" onclick="downloadBrochure()"><i class="fas fa-file-pdf"></i> Download Brochure</a>
-        </div>
-
-        <!-- Duration & Mode Specs -->
-        <div class="teonox-online-hero-specs">
-          <div class="teonox-online-spec-card">
-            <div class="teonox-online-spec-icon"><i class="fas fa-clock"></i></div>
-            <div>
-              <p class="teonox-online-spec-label">Duration</p>
-              <p class="teonox-online-spec-value">6 Months</p>
-            </div>
-          </div>
-          <div class="teonox-online-spec-card">
-            <div class="teonox-online-spec-icon"><i class="fas fa-laptop-code"></i></div>
-            <div>
-              <p class="teonox-online-spec-label">Mode</p>
-              <p class="teonox-online-spec-value">Online Live Classes</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
