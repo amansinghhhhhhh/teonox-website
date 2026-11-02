@@ -70,6 +70,18 @@ const TERM_ICONS: Record<string, React.ElementType> = {
 /** WP term slugs that should carry the "NEW" badge. */
 const NEW_TERM_SLUGS = new Set<string>([]);
 
+/**
+ * WP term slugs that must always render as a category tab, even when the term
+ * reports 0 directly-assigned posts in WordPress.
+ *
+ * The "Business" category is live in the CMS (term id 11, slug `business`) but
+ * its programmes are tagged with `popular-programmes` / `specialisation-programmes`
+ * and reach the Business tab through PROGRAM_TERM_TO_CATEGORY + the CATEGORY_KEYWORDS
+ * fallback, so WP's `count` stays 0. Without this list the generic
+ * `count > 0` filter below silently drops the tab the client asked for.
+ */
+const ALWAYS_SHOWN_TERM_SLUGS = new Set<string>(['business']);
+
 export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClick }: ProgramsPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [liveCards, setLiveCards] = useState<LiveProgramCard[] | null>(null);
@@ -93,7 +105,11 @@ export function ProgramsPage({ onSelectProgram, onEnquireProgram, onBrochureClic
         const tabs: ProgramCategory[] = [
           { id: 'all', name: 'All Programmes', icon: LayoutGrid },
           ...terms
-            .filter((t) => (t.count ?? 0) > 0)
+            .filter(
+              (t) =>
+                (t.count ?? 0) > 0 ||
+                ALWAYS_SHOWN_TERM_SLUGS.has(String(t.slug || '').toLowerCase()),
+            )
             .slice()
             .sort((a, b) => (b.count ?? 0) - (a.count ?? 0))
             .map((t) => {
