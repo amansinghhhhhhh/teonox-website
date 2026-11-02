@@ -8,26 +8,26 @@ export const rawHtmlBody = `<!-- Hero -->
         <p class="teonox-online-hero-subtitle">TEONOX — 6-Month Business Digital Marketing + AI Programme</p>
 
         <!-- Duration & Mode Specs -->
-        <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
           <div>
-            <div class="rounded-2xl bg-[#FBF9F7] border border-gray-200 p-4 flex items-start gap-3">
-              <div class="rounded-lg bg-[#F15A29] p-2 shrink-0">
-                <i class="fas fa-clock text-white text-sm"></i>
+            <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-5 flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#F15A29] shrink-0">
+                <i class="fas fa-clock text-base"></i>
               </div>
-              <div>
-                <p class="text-xs font-medium text-gray-600 uppercase tracking-wider">Duration</p>
-                <p class="text-sm font-bold text-gray-900">6 Months</p>
+              <div class="flex flex-col ml-3.5">
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Duration</span>
+                <span class="text-base font-bold text-gray-900">6 Months</span>
               </div>
             </div>
           </div>
           <div>
-            <div class="rounded-2xl bg-[#FBF9F7] border border-gray-200 p-4 flex items-start gap-3">
-              <div class="rounded-lg bg-[#F15A29] p-2 shrink-0">
-                <i class="fas fa-laptop-code text-white text-sm"></i>
+            <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-5 flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#F15A29] shrink-0">
+                <i class="fas fa-laptop-code text-base"></i>
               </div>
-              <div>
-                <p class="text-xs font-medium text-gray-600 uppercase tracking-wider">Mode</p>
-                <p class="text-sm font-bold text-gray-900">Online Live Classes</p>
+              <div class="flex flex-col ml-3.5">
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Mode</span>
+                <span class="text-base font-bold text-gray-900">Online Live Classes</span>
               </div>
             </div>
           </div>
