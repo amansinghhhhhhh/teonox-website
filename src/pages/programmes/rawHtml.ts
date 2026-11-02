@@ -8,7 +8,7 @@ export const rawHtmlBody = `<!-- Hero -->
         <p class="teonox-online-hero-subtitle">TEONOX — 6-Month Business Digital Marketing + AI Programme</p>
 
         <!-- Duration & Mode Specs -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+        <div class="teonox-online-hero-specs grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
           <div>
             <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-5 flex items-start gap-4">
               <div class="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#F15A29] shrink-0">

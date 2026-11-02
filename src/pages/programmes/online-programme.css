@@ -159,7 +159,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 .tl-landing-page .teonox-online-hero-price .teonox-online-label { font-size: 14px; color: var(--text-muted); }
-.tl-landing-page .teonox-online-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+/* Duration & Mode specs — explicit (unlayered) spacing: the .tl-landing-page
+   reset above zeroes margin/padding on every descendant, which outranks
+   Tailwind's layered utilities (my-6/mb-6), so it must be set here.
+   24px (mb-6) + 8px (pt-2 on the CTAs) = 32px, matching the offline template. */
+.tl-landing-page .teonox-online-hero-specs { margin-bottom: 24px; }
+.tl-landing-page .teonox-online-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
 
 /* Trust Strip */
 .tl-landing-page .teonox-online-trust-strip {
