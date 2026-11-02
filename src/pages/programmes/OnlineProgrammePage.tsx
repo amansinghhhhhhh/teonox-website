@@ -280,6 +280,13 @@ export function OnlineProgrammePage() {
       }
       await completeApplySubmit(fields);
     };
+    (window as any).downloadBrochure = () => {
+      // Static (dangerouslySetInnerHTML) markup can't reach React state, so it
+      // signals App.tsx to open the shared <BrochureModal/> used everywhere else.
+      window.dispatchEvent(new CustomEvent('teonox:open-brochure', {
+        detail: 'Business Digital Marketing with AI (Online)',
+      }));
+    };
     // --- OTP lifecycle: verification state is owned by the shared
     // usePhoneOtp hook (MagicText backend) — nothing to initialize per page.
 
@@ -457,7 +464,7 @@ export function OnlineProgrammePage() {
     return () => {
       document.body.style.overflow = '';
       const w = window as any;
-      ['openApplyModal', 'closeApplyModal', 'toggleFaq', 'submitForm', 'playReel', 'togglePause', 'toggleMute', 'slideScroll'].forEach((key) => {
+      ['openApplyModal', 'closeApplyModal', 'toggleFaq', 'submitForm', 'downloadBrochure', 'playReel', 'togglePause', 'toggleMute', 'slideScroll'].forEach((key) => {
         if (w[key]) delete w[key];
       });
       observer.disconnect();

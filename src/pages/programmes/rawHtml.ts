@@ -10,7 +10,7 @@ export const rawHtmlBody = `<!-- Hero -->
         <!-- Duration & Mode Specs -->
         <div class="teonox-online-hero-specs grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
           <div>
-            <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-5 flex items-start gap-4">
+            <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-4 flex items-start gap-4">
               <div class="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#F15A29] shrink-0">
                 <i class="fas fa-clock text-base"></i>
               </div>
@@ -21,7 +21,7 @@ export const rawHtmlBody = `<!-- Hero -->
             </div>
           </div>
           <div>
-            <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-5 flex items-start gap-4">
+            <div class="rounded-2xl bg-[#FBF9F7] border border-[#F4EBE6] p-4 flex items-start gap-4">
               <div class="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#F15A29] shrink-0">
                 <i class="fas fa-laptop-code text-base"></i>
               </div>
@@ -35,7 +35,7 @@ export const rawHtmlBody = `<!-- Hero -->
 
         <div class="teonox-online-hero-ctas">
           <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-primary" onclick="openApplyModal()"><i class="fas fa-arrow-right"></i> Apply Now</a>
-          <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-outline" onclick="downloadBrochure()"><i class="fas fa-download"></i> Download Brochure</a>
+          <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-outline" onclick="downloadBrochure()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4.5 h-4.5 shrink-0 text-[#F15A29]" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg> Download Brochure</a>
         </div>
       </div>
     </div>

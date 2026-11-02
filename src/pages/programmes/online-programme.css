@@ -118,9 +118,12 @@ h1, h2, h3, h4, h5, h6 {
   width: 7px; height: 7px; border-radius: 50%; background: var(--orange);
   animation: pulse-dot 2s ease-in-out infinite;
 }
+/* Redundant hero badge — hidden (the trust strip already carries the same
+   message). Declared after the rule above so it wins on equal specificity. */
+.tl-landing-page .teonox-online-hero-badge { display: none; }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 .tl-landing-page .teonox-online-hero h1 {
-  font-size: clamp(34px, 4.5vw, 50px); line-height: 1.12;
+  font-size: 48px; line-height: 1.12;
   margin-bottom: 20px; letter-spacing: -1px; font-weight: 800;
 }
 .tl-landing-page .teonox-online-hero h1 span {
@@ -164,6 +167,10 @@ h1, h2, h3, h4, h5, h6 {
    Tailwind's layered utilities (my-6/mb-6), so it must be set here.
    24px (mb-6) + 8px (pt-2 on the CTAs) = 32px, matching the offline template. */
 .tl-landing-page .teonox-online-hero-specs { margin-bottom: 24px; }
+/* Duration & Mode cards — Tailwind's p-4 is a layered utility and loses to the
+   unlayered .tl-landing-page reset, so the inner padding is restated here
+   (p-4 = calc(var(--spacing) * 4) = 16px, same as the offline template). */
+.tl-landing-page .rounded-2xl.bg-\[\#FBF9F7\].border.border-\[\#F4EBE6\] { padding: calc(var(--spacing) * 4); }
 .tl-landing-page .teonox-online-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
 
 /* Trust Strip */

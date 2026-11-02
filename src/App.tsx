@@ -394,6 +394,20 @@ export default function App() {
     setIsBrochureModalOpen(true);
   };
 
+  // Bridge for the static online-programme markup (rendered via
+  // dangerouslySetInnerHTML): it can't call React state directly, so it
+  // dispatches this event and we open the shared <BrochureModal/> here.
+  useEffect(() => {
+    const handleOpenBrochure = (event: Event) => {
+      handleBrochureClick((event as CustomEvent<string>).detail || '');
+    };
+    window.addEventListener('teonox:open-brochure', handleOpenBrochure);
+    return () => window.removeEventListener('teonox:open-brochure', handleOpenBrochure);
+    // handleBrochureClick only uses stable state setters, so a mount-time
+    // subscription is safe.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleNavClick = (href: string, _label: string) => {
     navigate(href);
   };
