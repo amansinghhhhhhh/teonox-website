@@ -35,7 +35,7 @@ export const rawHtmlBody = `<!-- Hero -->
 
         <div class="teonox-online-hero-ctas">
           <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-primary" onclick="openApplyModal()"><i class="fas fa-arrow-right"></i> Apply Now</a>
-          <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-outline" onclick="downloadBrochure()"><i class="fas fa-file-pdf"></i> Download Brochure</a>
+          <a href="javascript:void(0)" class="teonox-online-btn teonox-online-btn-outline" onclick="downloadBrochure()"><i class="fas fa-download"></i> Download Brochure</a>
         </div>
       </div>
     </div>
