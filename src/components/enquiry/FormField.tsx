@@ -30,7 +30,7 @@ export function FormField({
     <div className={className}>
       <label
         htmlFor={id}
-        className="block font-sora text-[12.5px] font-[600] tracking-[0.01em] text-[#3D3A37] mb-1.5"
+        className="block font-sora text-base sm:text-lg font-bold text-[#201A17] mb-2"
       >
         {label}
         {required ? <span className="text-[#F15A29] ml-0.5">*</span> : null}
@@ -43,13 +43,13 @@ export function FormField({
         : children}
 
       {hint && !error ? (
-        <p className="font-inter text-[11.5px] text-[#9A9490] mt-1.5">{hint}</p>
+        <p className="font-inter text-sm text-[#6B6B6B] mt-1.5">{hint}</p>
       ) : null}
 
       {error ? (
         <p
           role="alert"
-          className="font-inter text-[11.5px] text-[#DC2626] mt-1.5 flex items-center gap-1"
+          className="font-inter text-sm text-[#DC2626] mt-2 flex items-center gap-1"
         >
           {error}
         </p>
@@ -62,18 +62,19 @@ export function FormField({
  * Shared control base. Kept as one string per state (rather than a base plus
  * overrides) so conflicting focus/border utilities never fight for the same
  * property in the generated stylesheet.
+ * New compact design: text-sm height, spacious line-height, consistent fg/bg.
  */
 const CONTROL_BASE =
-  'w-full rounded-xl border px-4 py-3 font-inter text-[14.5px] leading-6 text-[#111111] ' +
-  'placeholder:text-[#A9A29B] bg-white transition duration-200 ease-out ' +
-  'focus:outline-none focus:ring-[3px]';
+  'w-full rounded-xl border border-[#E8E1DC] bg-[#FAF8F5]/60 px-4 py-3 text-sm font-semibold text-[#201A17] ' +
+  'placeholder:text-[#A9A29B] bg-white focus:bg-white focus:border-[#F15A29] ' +
+  'focus:ring-4 focus:ring-[#F15A29]/10 transition-all duration-200 ease-out';
 
 /** Fallback for callers that still import the constant directly. */
-export const INPUT_CLASS = `${CONTROL_BASE} border-[#E7E2DC] hover:border-[#D6CFC8] focus:border-[#F15A29] focus:ring-[#F15A29]/15`;
+export const INPUT_CLASS = `${CONTROL_BASE}`;
 
 export const inputClass = (hasError?: boolean): string =>
   hasError
-    ? `${CONTROL_BASE} border-[#F04438]/70 hover:border-[#F04438] focus:border-[#F04438] focus:ring-[#F04438]/15`
+    ? 'w-full rounded-xl border border-[#F04438] bg-white px-4 py-3 text-sm font-semibold text-[#201A17] placeholder:text-[#F04438] focus:border-[#F04438] focus:ring-4 focus:ring-[#F04438]/15 transition-all duration-200 ease-out'
     : INPUT_CLASS;
 
 interface SelectControlProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -97,7 +98,7 @@ export function SelectControl({ hasError, className = '', children, ...props }: 
         size={16}
         strokeWidth={2.25}
         aria-hidden="true"
-        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9A9490]"
+        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#6B6B6B]"
       />
     </div>
   );

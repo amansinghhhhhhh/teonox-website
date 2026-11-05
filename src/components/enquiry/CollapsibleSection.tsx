@@ -47,14 +47,14 @@ export function CollapsibleSection({
   return (
     <section
       id={`section-${id}`}
-      className="scroll-mt-32 rounded-2xl border border-[#EFE9E3] bg-white shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
+      className="scroll-mt-32 rounded-2xl border border-[#F1EAE4] bg-white p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow"
     >
       <button
         type="button"
         onClick={toggle}
         aria-expanded={isOpen}
         aria-controls={`section-body-${id}`}
-        className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl px-5 py-[18px] text-left transition-colors hover:bg-[#FDFCFA] sm:px-6"
+        className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl px-5 py-[20px] text-left transition-colors hover:bg-[#FEFAF8] sm:px-6"
       >
         <span
           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-[12.5px] font-bold transition-colors ${
@@ -67,11 +67,11 @@ export function CollapsibleSection({
         </span>
 
         <span className="min-w-0 flex-1">
-          <span className="block font-sora text-[15px] font-[700] tracking-[-0.01em] text-[#111111] transition-colors group-hover:text-[#F15A29] sm:text-[16px]">
+          <span className="block font-sora text-base sm:text-lg font-bold tracking-[-0.01em] text-[#201A11] transition-colors group-hover:text-[#F15A29] sm:text-[16px]">
             {title}
           </span>
           {summary ? (
-            <span className="mt-0.5 block truncate font-inter text-[12px] text-[#9A9490]">
+            <span className="mt-0.5 block truncate font-inter text-sm text-[#6B6B6B]">
               {summary}
             </span>
           ) : null}
@@ -85,7 +85,7 @@ export function CollapsibleSection({
 
         <ChevronDown
           size={18}
-          className={`shrink-0 text-[#9A9490] transition-transform duration-300 group-hover:text-[#F15A29] ${
+          className={`shrink-0 text-[#6B6B6B] transition-transform duration-300 group-hover:text-[#F15A29] ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
@@ -98,7 +98,7 @@ export function CollapsibleSection({
         transition={{ duration: 0.3, ease: EASE_OUT }}
         className="overflow-hidden"
       >
-        <div className="space-y-4 border-t border-[#F4F1ED] px-5 pt-5 pb-6 sm:px-6">
+        <div className="space-y-6 border-t border-[#F4F1ED] px-0 pt-6 pb-8 sm:px-6">
           {children}
         </div>
       </motion.div>

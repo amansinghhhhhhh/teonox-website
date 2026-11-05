@@ -330,31 +330,31 @@ export function EnquiryFormPage() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE_OUT }}
-          className="text-center mb-8 sm:mb-10"
+          className="text-center mb-10 sm:mb-12"
         >
-          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#F15A29]">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#F15A29]">
             Admissions Enquiry
           </span>
-          <h1 className="font-sora font-[800] text-[30px] sm:text-[40px] leading-[1.15] tracking-tight mt-3">
+          <h1 className="font-sora text-base sm:text-lg font-bold text-[#201A17] leading-[1.15] tracking-tight mb-3">
             Tell us about yourself
           </h1>
-          <p className="font-inter text-[15px] sm:text-[16.5px] text-[#555555] mt-3 max-w-xl mx-auto leading-relaxed">
+          <p className="font-inter text-sm sm:text-base text-[#555555] mt-2 max-w-xl mx-auto leading-relaxed">
             Fill in the details below and our admissions team will call you back
             with the right programme, batch and career path.
           </p>
         </motion.header>
 
         {draftNotice ? (
-          <div className="mb-5 flex items-start gap-3 p-4 rounded-2xl border border-[#F4EBE6] bg-white shadow-sm">
+          <div className="mb-6 flex items-start gap-3 p-5 rounded-2xl border border-[#F1EAE4] bg-[#FEFAF8] shadow-sm">
             <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
-            <p className="font-inter text-[13px] text-[#555555] flex-1">
+            <p className="font-inter text-sm text-[#555555] flex-1">
               We restored your saved draft. Please capture your photo again — it
               isn't saved between visits.
             </p>
             <button
               type="button"
               onClick={() => setDraftNotice(false)}
-              className="font-sora text-[12px] font-[600] text-[#888888] hover:text-[#F15A29] cursor-pointer"
+              className="font-sora text-xs font-semibold text-[#888888] hover:text-[#F15A29] cursor-pointer"
             >
               Dismiss
             </button>

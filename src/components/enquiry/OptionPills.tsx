@@ -31,7 +31,7 @@ export function OptionPills({
 
   return (
     <fieldset className="min-w-0">
-      <legend className="block font-sora text-[12.5px] font-[600] tracking-[0.01em] text-[#3D3A37] mb-2">
+      <legend className="block font-sora text-sm font-semibold text-[#201A17] mb-2">
         {legend}
         {required ? <span className="text-[#F15A29] ml-0.5">*</span> : null}
       </legend>
@@ -43,12 +43,12 @@ export function OptionPills({
           return (
             <label
               key={option.value}
-              className={`relative flex items-center gap-2.5 rounded-xl border px-3.5 py-2.5 text-[13.5px] font-inter select-none transition duration-200 ease-out cursor-pointer ${
+              className={`relative flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-[13.5px] font-inter select-none transition duration-200 ease-out cursor-pointer ${
                 checked
-                  ? 'border-[#F15A29] bg-[#FFF7F3] text-[#111111] font-[600] shadow-[0_0_0_3px_rgba(241,90,41,0.10)]'
+                  ? 'border-[#F15A29] bg-[#F15A29] text-white font-semibold'
                   : error
                     ? 'border-[#F04438]/35 bg-white text-[#555555] hover:border-[#F04438]/60'
-                    : 'border-[#E7E2DC] bg-white text-[#555555] hover:border-[#D6CFC8] hover:bg-[#FCFBFA]'
+                    : 'border-[#E8E1DC] bg-white text-[#555555] hover:border-[#D6CFC8] hover:bg-[#FCFBFA]'
               }`}
             >
               <input
@@ -73,7 +73,7 @@ export function OptionPills({
       </div>
 
       {error ? (
-        <p role="alert" className="font-inter text-[11.5px] text-[#DC2626] mt-1.5">
+        <p role="alert" className="font-inter text-sm text-[#DC2626] mt-1.5">
           {error}
         </p>
       ) : null}
