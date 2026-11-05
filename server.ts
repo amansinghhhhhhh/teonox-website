@@ -351,13 +351,23 @@ function serveWithMeta(html: string) {
     }
 
     const metaHtml = buildMetaTags(meta);
-    // Replace the fallback <title>...</title> with the full route-specific
-    // meta block (which includes <title>, <meta description>, canonical, OG).
-    // Then also strip the original <meta name="description"> line.
-    // Remove the old <meta name="description"> line BEFORE inserting new meta block,
-    // because replace() without /g flag removes the FIRST match.
-    const withoutOldDesc = html.replace(/\r?\n\s*<meta name="description" content="[^"]*"\s*\/?>/, '');
-    let modified = withoutOldDesc.replace(/<title>[^<]*<\/title>/, metaHtml);
+    // Strip the template's fallback SEO tags BEFORE inserting the
+    // route-specific block. dist/index.html is NOT the raw Vite template: the
+    // prerender step has already written the homepage's full meta block into
+    // it, so it carries a canonical and a complete og:* set pointing at
+    // https://teonox.com/. Replacing only <title> left those behind, which
+    // served every route a duplicate canonical plus duplicate og:title /
+    // og:description / og:url with homepage data.
+    //
+    // Order matters: strip first, then insert — the reverse would strip the
+    // tags we just injected. buildMetaTags() re-emits description, canonical
+    // and every og:* key, so nothing is lost by removing them wholesale.
+    // twitter:* is deliberately left alone: it is not re-emitted below.
+    let modified = html
+      .replace(/(?:\r?\n\s*)?<meta name="description" content="[^"]*"\s*\/?>/g, '')
+      .replace(/(?:\r?\n\s*)?<link rel="canonical" href="[^"]*"\s*\/?>/g, '')
+      .replace(/(?:\r?\n\s*)?<meta property="og:[a-z_:]+" content="[^"]*"\s*\/?>/g, '')
+      .replace(/<title>[^<]*<\/title>/, metaHtml);
 
     const clean = req.path.replace(/\/+$/, '') || '/';
     const extra = HEAD_EXTRAS[clean];

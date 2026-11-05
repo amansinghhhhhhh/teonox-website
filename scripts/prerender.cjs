@@ -145,8 +145,17 @@ const HEAD_EXTRAS = {
 // Inject route-specific meta tags into the index.html template
 function injectMeta(htmlTemplate, meta, routePath) {
   const metaBlock = buildMetaTags(meta);
+  // Strip fallback SEO tags BEFORE inserting the route-specific block.
+  // Today the raw Vite template only ships <title> + <meta description>, but
+  // the server relies on this same file, and re-running against an already
+  // prerendered dist (or a template that gains its own canonical/og:* tags)
+  // would otherwise double them up. Strip first, then insert — the reverse
+  // would remove the block we just wrote. buildMetaTags() re-emits all of
+  // these keys. twitter:* is left alone: it is not re-emitted.
   let html = htmlTemplate
-    .replace(/\r?\n\s*<meta name="description" content="[^"]*"\s*\/?>/, '')
+    .replace(/(?:\r?\n\s*)?<meta name="description" content="[^"]*"\s*\/?>/g, '')
+    .replace(/(?:\r?\n\s*)?<link rel="canonical" href="[^"]*"\s*\/?>/g, '')
+    .replace(/(?:\r?\n\s*)?<meta property="og:[a-z_:]+" content="[^"]*"\s*\/?>/g, '')
     .replace(/<title>[^<]*<\/title>/, metaBlock);
   const extra = routePath && HEAD_EXTRAS[routePath];
   if (extra) html = html.replace('</head>', `${extra}\n  </head>`);
