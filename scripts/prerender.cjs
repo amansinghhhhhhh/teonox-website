@@ -37,6 +37,11 @@ const META_MAP = {
     description: 'Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career.',
     canonical: '/programmes/build-digital-marketing-skills-with-ai',
   },
+  '/programmes/business-digital-marketing-with-ai-6-months-online': {
+    title: 'Best Business Digital Marketing With AI - Online Course Pune',
+    description: 'Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!',
+    canonical: '/programmes/business-digital-marketing-with-ai-6-months-online',
+  },
   '/blog': {
     title: 'Blog & Insights | TEONOX',
     description: 'Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX \u2014 Gen AI School of Marketing & Business in Pune.',
@@ -280,6 +285,14 @@ async function main() {
   console.log(`[Prerender] Found ${programs.length} program(s)`);
 
   for (const prog of programs) {
+    // Static META_MAP entries are authoritative for routes we pin explicitly.
+    // This loop runs after the static pass and would otherwise overwrite them
+    // with Rank Math scraped data whenever the slug exists in WordPress.
+    if (META_MAP[`/programmes/${prog.slug}`]) {
+      console.log(`  /programmes/${prog.slug} [skipped: static META_MAP entry]`);
+      continue;
+    }
+
     // Scrape Rank Math SEO title + description from WP front-end
     console.log(`[Prerender] Scraping Rank Math meta for /programmes/${prog.slug}...`);
     const rankMath = await scrapeRankMathMeta(prog.slug);

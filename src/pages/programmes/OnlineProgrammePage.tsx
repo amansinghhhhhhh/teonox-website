@@ -478,8 +478,8 @@ export function OnlineProgrammePage() {
   return (
     <>
       <SEO
-        title="Digital Marketing Skills in Pune | Course with Live Projects"
-        description="Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career."
+        title="Best Business Digital Marketing With AI - Online Course Pune"
+        description="Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!"
         canonical="/programmes/business-digital-marketing-with-ai-6-months-online"
       />
       <Navbar onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />

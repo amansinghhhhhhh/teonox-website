@@ -148,6 +148,11 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career.',
     canonical: '/programmes/build-digital-marketing-skills-with-ai',
   },
+  '/programmes/business-digital-marketing-with-ai-6-months-online': {
+    title: 'Best Business Digital Marketing With AI - Online Course Pune',
+    description: 'Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!',
+    canonical: '/programmes/business-digital-marketing-with-ai-6-months-online',
+  },
   '/blog': {
     title: 'Blog & Insights | TEONOX',
     description: 'Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX \u2014 Gen AI School of Marketing & Business in Pune.',
