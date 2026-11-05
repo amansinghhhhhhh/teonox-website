@@ -999,7 +999,7 @@ export function EnquiryFormPage() {
               />
               <label
                 htmlFor="enquiry-consent"
-                className="text-sm sm:text-base text-[#201A17] cursor-pointer"
+                className="text-sm text-[#201A17] cursor-pointer"
               >
                 I agree to TEONOX's{' '}
                 <a

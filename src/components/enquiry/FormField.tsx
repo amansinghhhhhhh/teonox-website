@@ -30,7 +30,7 @@ export function FormField({
     <div className={className}>
       <label
         htmlFor={id}
-        className="block font-sora text-base sm:text-lg font-bold text-[#201A17] mb-2"
+        className="block font-sora text-sm font-semibold text-[#201A17] mb-2"
       >
         {label}
         {required ? <span className="text-[#F15A29] ml-0.5">*</span> : null}
