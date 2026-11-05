@@ -249,6 +249,9 @@ export function EnquiryFormPage() {
         'Digital Marketing Knowledge': values.knowledgeStatus,
         'Knowledge Specification': values.knowledgeSpecification.trim(),
         'Discovery Source': withOther(values.discoverySource, values.discoverySourceOther),
+        // Final Sheet column. ISO-8601 so it sorts correctly as text; ignored
+        // by the Apps Script if it appends its own timestamp instead.
+        'Submission Date/Timestamp': new Date().toISOString(),
 
         // Top-level aliases consumed by formService's payload mapping.
         // Deliberately no `whatsapp` key: it would override `phone`
