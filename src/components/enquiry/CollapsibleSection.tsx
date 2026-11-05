@@ -57,7 +57,7 @@ export function CollapsibleSection({
         className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl px-5 py-[20px] text-left transition-colors hover:bg-[#FEFAF8] sm:px-6"
       >
         <span
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-[12.5px] font-bold transition-colors ${
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-[13px] font-bold transition-colors ${
             errorCount > 0
               ? 'bg-[#F04438] text-white'
               : 'bg-[#FFF1EB] text-[#F15A29]'
@@ -71,21 +71,21 @@ export function CollapsibleSection({
             {title}
           </span>
           {summary ? (
-            <span className="mt-0.5 block truncate font-inter text-sm text-[#6B6B6B]">
+            <span className="mt-0.5 block truncate font-inter text-sm text-[#201A17]">
               {summary}
             </span>
           ) : null}
         </span>
 
         {errorCount > 0 ? (
-          <span className="shrink-0 rounded-full bg-[#F04438] px-2 py-0.5 font-mono text-[11px] font-bold text-white">
+          <span className="shrink-0 rounded-full bg-[#F04438] px-2 py-1.5 font-mono text-[12px] font-bold text-white">
             {errorCount}
           </span>
         ) : null}
 
         <ChevronDown
           size={18}
-          className={`shrink-0 text-[#6B6B6B] transition-transform duration-300 group-hover:text-[#F15A29] ${
+          className={`shrink-0 text-[#201A1B] transition-transform duration-300 group-hover:text-[#F15A29] ${
             isOpen ? 'rotate-180' : ''
           }`}
         />

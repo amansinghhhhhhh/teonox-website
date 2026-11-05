@@ -47,8 +47,8 @@ export function OptionPills({
                 checked
                   ? 'border-[#F15A29] bg-[#F15A29] text-white font-semibold'
                   : error
-                    ? 'border-[#F04438]/35 bg-white text-[#555555] hover:border-[#F04438]/60'
-                    : 'border-[#E8E1DC] bg-white text-[#555555] hover:border-[#D6CFC8] hover:bg-[#FCFBFA]'
+                    ? 'border-[#F04438]/35 bg-white text-[#201A17] hover:border-[#F04438]/60'
+                    : 'border-[#E8E1DC] bg-white text-[#201A17] hover:border-[#D6CFC8] hover:bg-[#FCFBFA]'
               }`}
             >
               <input

@@ -338,7 +338,7 @@ export function EnquiryFormPage() {
           <h1 className="font-sora text-base sm:text-lg font-bold text-[#201A17] leading-[1.15] tracking-tight mb-3">
             Tell us about yourself
           </h1>
-          <p className="font-inter text-sm sm:text-base text-[#555555] mt-2 max-w-xl mx-auto leading-relaxed">
+          <p className="font-inter text-sm sm:text-base text-[#201A17] mt-2 max-w-xl mx-auto leading-relaxed">
             Fill in the details below and our admissions team will call you back
             with the right programme, batch and career path.
           </p>
@@ -347,14 +347,14 @@ export function EnquiryFormPage() {
         {draftNotice ? (
           <div className="mb-6 flex items-start gap-3 p-5 rounded-2xl border border-[#F1EAE4] bg-[#FEFAF8] shadow-sm">
             <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
-            <p className="font-inter text-sm text-[#555555] flex-1">
+            <p className="font-inter text-sm text-[#201A17] flex-1">
               We restored your saved draft. Please capture your photo again — it
               isn't saved between visits.
             </p>
             <button
               type="button"
               onClick={() => setDraftNotice(false)}
-              className="font-sora text-xs font-semibold text-[#888888] hover:text-[#F15A29] cursor-pointer"
+              className="font-sora text-sm font-semibold text-[#201A17] hover:text-[#F15A29] cursor-pointer"
             >
               Dismiss
             </button>
@@ -514,7 +514,7 @@ export function EnquiryFormPage() {
                   }}
                   className="w-4 h-4 text-[#F15A29] rounded border-gray-300 focus:ring-[#F15A29] cursor-pointer"
                 />
-                <span className="font-inter text-[13px] text-[#555555]">
+                <span className="font-inter text-sm text-[#201A17]">
                   WhatsApp same as Phone Number
                 </span>
               </label>
@@ -999,7 +999,7 @@ export function EnquiryFormPage() {
               />
               <label
                 htmlFor="enquiry-consent"
-                className="text-[11.5px] sm:text-[12.5px] text-gray-500 font-inter leading-relaxed cursor-pointer"
+                className="text-sm sm:text-base text-[#201A17] cursor-pointer"
               >
                 I agree to TEONOX's{' '}
                 <a
@@ -1043,7 +1043,7 @@ export function EnquiryFormPage() {
             </button>
 
             {!phoneVerified ? (
-              <p className="text-center font-inter text-[12.5px] text-[#A0988A]">
+              <p className="text-center font-inter text-sm text-[#201A17]">
                 Please verify your Phone Number with OTP to submit.
               </p>
             ) : null}

@@ -43,7 +43,7 @@ export function FormField({
         : children}
 
       {hint && !error ? (
-        <p className="font-inter text-sm text-[#6B6B6B] mt-1.5">{hint}</p>
+        <p className="font-inter text-sm text-[#201A17] mt-1.5">{hint}</p>
       ) : null}
 
       {error ? (
@@ -98,7 +98,7 @@ export function SelectControl({ hasError, className = '', children, ...props }: 
         size={16}
         strokeWidth={2.25}
         aria-hidden="true"
-        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#6B6B6B]"
+        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#201A17]"
       />
     </div>
   );
