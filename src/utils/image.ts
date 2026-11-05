@@ -128,3 +128,85 @@ export const formatBytes = (bytes: number): string => {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 };
+
+// ── Live camera capture ─────────────────────────────────────────────────────
+
+/** True when this browser/device can offer a live camera stream. */
+export const isCameraSupported = (): boolean =>
+  typeof navigator !== 'undefined' &&
+  Boolean(navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function');
+
+/**
+ * Opens the front-facing camera after the browser's permission prompt.
+ * Rejects with a message safe to show the user, so the caller can fall back
+ * to the gallery/file picker instead of failing silently.
+ */
+export const startCamera = async (): Promise<MediaStream> => {
+  if (!isCameraSupported()) {
+    throw new Error('Live camera capture is not supported on this device.');
+  }
+
+  try {
+    return await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: 'user',
+        width: { ideal: 1280 },
+        height: { ideal: 1280 },
+      },
+      audio: false,
+    });
+  } catch (err) {
+    const name = err instanceof DOMException ? err.name : '';
+    if (name === 'NotAllowedError' || name === 'PermissionDeniedError') {
+      throw new Error('Camera permission was denied. Allow access, or upload a photo instead.');
+    }
+    if (name === 'NotFoundError' || name === 'OverconstrainedError') {
+      throw new Error('No camera was found on this device. Please upload a photo instead.');
+    }
+    throw new Error('Could not open the camera. Please upload a photo instead.');
+  }
+};
+
+/** Stops every track on a stream. Safe to call with null/undefined. */
+export const stopCamera = (stream: MediaStream | null | undefined): void => {
+  if (!stream) return;
+  stream.getTracks().forEach((track) => track.stop());
+};
+
+/**
+ * Grabs the current video frame as a mirrored JPEG File (selfie convention —
+ * the preview mirrors so the user sees themselves as in a mirror).
+ *
+ * Frames are captured at source resolution, then re-encoded through
+ * compressImage() when they exceed the 2MB validation cap.
+ */
+export const captureSelfie = async (video: HTMLVideoElement): Promise<File> => {
+  const width = video.videoWidth;
+  const height = video.videoHeight;
+  if (!width || !height) {
+    throw new Error('Camera is still starting — please try again in a moment.');
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas is not available in this browser.');
+
+  ctx.translate(width, 0);
+  ctx.scale(-1, 1);
+  ctx.drawImage(video, 0, 0, width, height);
+
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, 'image/jpeg', 0.92),
+  );
+  if (!blob) throw new Error('Could not capture the photo. Please try again.');
+
+  const file = new File([blob], `selfie-${Date.now()}.jpg`, {
+    type: 'image/jpeg',
+    lastModified: Date.now(),
+  });
+
+  return file.size > MAX_IMAGE_BYTES ? compressImage(file) : file;
+};

@@ -4,7 +4,7 @@ import { AlertCircle, Loader2, Send } from 'lucide-react';
 import { SEO } from '../../components/SEO';
 import { BreadcrumbSchema } from '../../components/schema/BreadcrumbSchema';
 import { CollapsibleSection } from '../../components/enquiry/CollapsibleSection';
-import { FormField, inputClass } from '../../components/enquiry/FormField';
+import { FormField, SelectControl, inputClass } from '../../components/enquiry/FormField';
 import { OptionPills } from '../../components/enquiry/OptionPills';
 import { PhotoUploadField } from '../../components/enquiry/PhotoUploadField';
 import { PhoneOtpInline } from '../../components/PhoneOtpInline';
@@ -46,7 +46,7 @@ import {
 import { clearEnquiryDraft, loadEnquiryDraft, useEnquiryDraft } from './useEnquiryDraft';
 
 const SECTION_SUMMARIES: Record<SectionId, string> = {
-  personal: 'Photo, contact details and address',
+  personal: 'Live selfie, contact details and address',
   education: 'Qualification and college details',
   professional: 'Your current status and work details',
   training: 'Mode, batch timing and start date',
@@ -77,6 +77,10 @@ export function EnquiryFormPage() {
 
   const phoneDigits = values.phone.replace(/\D/g, '');
   const phoneVerified = verifiedPhone !== null && verifiedPhone === phoneDigits;
+
+  // Company / Experience / Designation exist ONLY for working statuses.
+  // Derived once here so the render guard and the validator can never drift.
+  const showProfessional = showProfessionalFields(values.currentStatus);
 
   const setField = useCallback(<K extends keyof EnquiryFormData>(
     key: K,
@@ -344,8 +348,8 @@ export function EnquiryFormPage() {
           <div className="mb-5 flex items-start gap-3 p-4 rounded-2xl border border-[#F4EBE6] bg-white shadow-sm">
             <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
             <p className="font-inter text-[13px] text-[#555555] flex-1">
-              We restored your saved draft. Please re-upload your photo — it isn't
-              saved between visits.
+              We restored your saved draft. Please capture your photo again — it
+              isn't saved between visits.
             </p>
             <button
               type="button"
@@ -593,12 +597,12 @@ export function EnquiryFormPage() {
 
               <FormField label="State" required error={errors.state}>
                 {({ id }) => (
-                  <select
+                  <SelectControl
                     id={id}
                     value={values.state}
                     aria-invalid={Boolean(errors.state)}
+                    hasError={Boolean(errors.state)}
                     onChange={(e) => setField('state', e.target.value)}
-                    className={`${inputClass(Boolean(errors.state))} cursor-pointer`}
                   >
                     <option value="">Select your state</option>
                     {STATE_OPTIONS.map((s) => (
@@ -606,7 +610,7 @@ export function EnquiryFormPage() {
                         {s.label}
                       </option>
                     ))}
-                  </select>
+                  </SelectControl>
                 )}
               </FormField>
             </div>
@@ -629,12 +633,12 @@ export function EnquiryFormPage() {
                 error={errors.highestQualification}
               >
                 {({ id }) => (
-                  <select
+                  <SelectControl
                     id={id}
                     value={values.highestQualification}
                     aria-invalid={Boolean(errors.highestQualification)}
+                    hasError={Boolean(errors.highestQualification)}
                     onChange={(e) => setField('highestQualification', e.target.value)}
-                    className={`${inputClass(Boolean(errors.highestQualification))} cursor-pointer`}
                   >
                     <option value="">Select qualification</option>
                     {QUALIFICATION_OPTIONS.map((q) => (
@@ -642,7 +646,7 @@ export function EnquiryFormPage() {
                         {q.label}
                       </option>
                     ))}
-                  </select>
+                  </SelectControl>
                 )}
               </FormField>
 
@@ -719,8 +723,13 @@ export function EnquiryFormPage() {
                 </FormField>
               ) : null}
 
-              {showProfessionalFields(values.currentStatus) ? (
+              {/* Strictly conditional: rendered only for Working Professional /
+                  Business Owner / Freelancer. `showProfessional` is derived from
+                  the same PROFESSIONAL_STATUSES list the validator uses, so the
+                  inputs cannot render (or be required) for any other status. */}
+              {showProfessional ? (
                 <motion.div
+                  key="professional-fields"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   transition={{ duration: 0.3, ease: EASE_OUT }}
@@ -758,12 +767,12 @@ export function EnquiryFormPage() {
 
                   <FormField label="Work Experience" required error={errors.workExperience}>
                     {({ id }) => (
-                      <select
+                      <SelectControl
                         id={id}
                         value={values.workExperience}
                         aria-invalid={Boolean(errors.workExperience)}
+                        hasError={Boolean(errors.workExperience)}
                         onChange={(e) => setField('workExperience', e.target.value)}
-                        className={`${inputClass(Boolean(errors.workExperience))} cursor-pointer`}
                       >
                         <option value="">Select experience</option>
                         {WORK_EXPERIENCE_OPTIONS.map((w) => (
@@ -771,7 +780,7 @@ export function EnquiryFormPage() {
                             {w.label}
                           </option>
                         ))}
-                      </select>
+                      </SelectControl>
                     )}
                   </FormField>
                 </motion.div>
@@ -829,14 +838,23 @@ export function EnquiryFormPage() {
             onOpenChange={(open) => setCollapsed((p) => ({ ...p, career: open }))}
           >
             <div className="space-y-4">
-              <OptionPills
-                legend="Career Goal"
-                required
-                options={CAREER_GOAL_OPTIONS}
-                value={values.careerGoal}
-                onChange={setCareerGoal}
-                error={errors.careerGoal}
-              />
+              <FormField label="Career Goal" required error={errors.careerGoal}>
+                {({ id }) => (
+                  <SelectControl
+                    id={id}
+                    value={values.careerGoal}
+                    aria-invalid={Boolean(errors.careerGoal)}
+                    hasError={Boolean(errors.careerGoal)}
+                    onChange={(e) => setCareerGoal(e.target.value)}
+                  >
+                    {CAREER_GOAL_OPTIONS.map((goal) => (
+                      <option key={goal.value} value={goal.value}>
+                        {goal.label}
+                      </option>
+                    ))}
+                  </SelectControl>
+                )}
+              </FormField>
 
               {values.careerGoal === 'Other' ? (
                 <FormField label="Please specify" required error={errors.careerGoalOther}>
@@ -873,12 +891,12 @@ export function EnquiryFormPage() {
                 error={errors.knowledgeStatus}
               >
                 {({ id }) => (
-                  <select
+                  <SelectControl
                     id={id}
                     value={values.knowledgeStatus}
                     aria-invalid={Boolean(errors.knowledgeStatus)}
+                    hasError={Boolean(errors.knowledgeStatus)}
                     onChange={(e) => setKnowledgeStatus(e.target.value)}
-                    className={`${inputClass(Boolean(errors.knowledgeStatus))} cursor-pointer`}
                   >
                     <option value="">Select your knowledge level</option>
                     {KNOWLEDGE_STATUS_OPTIONS.map((k) => (
@@ -886,7 +904,7 @@ export function EnquiryFormPage() {
                         {k.label}
                       </option>
                     ))}
-                  </select>
+                  </SelectControl>
                 )}
               </FormField>
 
@@ -960,7 +978,7 @@ export function EnquiryFormPage() {
           </CollapsibleSection>
 
           {/* ── Consent + submit ─────────────────────────────── */}
-          <div className="rounded-2xl border border-[#F4EBE6] bg-white shadow-sm p-5 sm:p-7 space-y-4">
+          <div className="rounded-2xl border border-[#EFE9E3] bg-white p-5 shadow-[0_1px_3px_rgba(16,24,40,0.04)] space-y-4 sm:p-6">
             {formError ? (
               <div
                 role="alert"
@@ -1009,7 +1027,7 @@ export function EnquiryFormPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 px-8 rounded-full bg-[#F15A29] hover:bg-[#D8420F] text-white font-sora font-[700] text-[15px] tracking-wide shadow-md shadow-[#F15A29]/25 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-75 group"
+              className="w-full rounded-xl bg-[#F15A29] px-8 py-3.5 font-sora text-[15px] font-[700] tracking-[0.01em] text-white shadow-[0_4px_14px_rgba(241,90,41,0.28)] transition duration-200 ease-out hover:bg-[#D8420F] hover:shadow-[0_6px_18px_rgba(241,90,41,0.34)] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-70 group"
             >
               {isSubmitting ? (
                 <>

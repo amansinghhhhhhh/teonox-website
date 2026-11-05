@@ -1,6 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Camera, ImageIcon, Trash2, Upload } from 'lucide-react';
-import { formatBytes, validateImageFile } from '../../utils/image';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Camera, ImageIcon, RefreshCcw, Trash2, Upload, X } from 'lucide-react';
+import {
+  captureSelfie,
+  formatBytes,
+  isCameraSupported,
+  startCamera,
+  stopCamera,
+  validateImageFile,
+} from '../../utils/image';
 
 interface PhotoUploadFieldProps {
   /** Current File (already compressed by the parent before setField). */
@@ -13,14 +20,30 @@ interface PhotoUploadFieldProps {
 }
 
 /**
- * Optional photo upload with live preview. Uses a plain file input with
- * `accept="image/*"` so mobile offers both gallery and camera capture.
- * The object URL is revoked on replace and unmount to avoid leaks.
+ * Compulsory photo capture with two paths:
+ *
+ *  1. **Live selfie** — `getUserMedia` opens the front camera in an inline
+ *     preview (permission prompt is the browser's own), and the frame is
+ *     grabbed to a JPEG on capture.
+ *  2. **Gallery/file fallback** — a plain `accept="image/*"` input, which
+ *     also covers devices without a usable camera.
+ *
+ * The live stream is stopped on capture, on cancel and on unmount so the
+ * camera light never stays on. The object URL is revoked on replace and
+ * unmount to avoid leaks.
  */
 export function PhotoUploadField({ file, onChange, onError, error }: PhotoUploadFieldProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [cameraOpen, setCameraOpen] = useState(false);
+  const [cameraBusy, setCameraBusy] = useState(false);
+  const [cameraError, setCameraError] = useState('');
+
+  const cameraAvailable = isCameraSupported();
 
   // Build/revoke the preview URL whenever the file changes.
   useEffect(() => {
@@ -33,10 +56,51 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
     return () => URL.revokeObjectURL(url);
   }, [file]);
 
-  const handleFiles = (files: FileList | null) => {
-    const next = files?.[0];
-    if (!next) return;
+  // Never leave the camera running after the field unmounts.
+  useEffect(
+    () => () => {
+      stopCamera(streamRef.current);
+      streamRef.current = null;
+    },
+    [],
+  );
 
+  // Attach the stream once the <video> element is on screen.
+  useEffect(() => {
+    if (!cameraOpen) return;
+    const video = videoRef.current;
+    const stream = streamRef.current;
+    if (!video || !stream) return;
+
+    video.srcObject = stream;
+    const played = video.play();
+    if (played && typeof played.catch === 'function') played.catch(() => undefined);
+  }, [cameraOpen]);
+
+  const closeCamera = useCallback(() => {
+    stopCamera(streamRef.current);
+    streamRef.current = null;
+    setCameraOpen(false);
+    setCameraBusy(false);
+    setCameraError('');
+  }, []);
+
+  const openCamera = async () => {
+    if (cameraBusy) return;
+    setCameraError('');
+    setCameraBusy(true);
+    try {
+      streamRef.current = await startCamera();
+      setCameraOpen(true);
+    } catch (err) {
+      setCameraError(err instanceof Error ? err.message : 'Could not open the camera.');
+    } finally {
+      setCameraBusy(false);
+    }
+  };
+
+  const acceptFile = (next: File | undefined | null) => {
+    if (!next) return;
     const check = validateImageFile(next);
     if (!check.valid) {
       onError?.(check.message || 'Invalid image file.');
@@ -46,26 +110,138 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
     onChange(next);
   };
 
+  const handleFiles = (files: FileList | null) => acceptFile(files?.[0]);
+
+  const handleCapture = async () => {
+    if (cameraBusy) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    setCameraError('');
+    setCameraBusy(true);
+    try {
+      const captured = await captureSelfie(video);
+      const check = validateImageFile(captured);
+      if (!check.valid) {
+        setCameraError(check.message || 'Invalid image file.');
+        return;
+      }
+      onError?.(null);
+      onChange(captured);
+      closeCamera();
+    } catch (err) {
+      setCameraError(err instanceof Error ? err.message : 'Could not capture the photo.');
+    } finally {
+      setCameraBusy(false);
+    }
+  };
+
   const clear = () => {
     onError?.(null);
     onChange(null);
+    closeCamera();
     if (inputRef.current) inputRef.current.value = '';
   };
 
+  const openGallery = () => {
+    closeCamera();
+    inputRef.current?.click();
+  };
+
+  const label = (
+    <span className="block font-sora text-[13px] font-[600] text-[#111111] mb-1.5">
+      Photo <span className="text-[#F15A29] ml-0.5">*</span>
+      <span className="ml-2 font-inter text-[11.5px] font-[400] text-[#888888]">
+        Live selfie or upload
+      </span>
+    </span>
+  );
+
+  const errorLine = cameraError || error ? (
+    <p role="alert" className="font-inter text-[11.5px] text-[#DC2626] mt-1.5">
+      {cameraError || error}
+    </p>
+  ) : null;
+
+  const hiddenInput = (
+    <input
+      ref={inputRef}
+      type="file"
+      accept="image/*"
+      className="sr-only"
+      id="enquiry-photo-input"
+      onChange={(e) => handleFiles(e.target.files)}
+    />
+  );
+
+  // ── Live camera panel ────────────────────────────────────────────────
+  if (cameraOpen) {
+    return (
+      <div>
+        {label}
+        {hiddenInput}
+
+        <div className="overflow-hidden rounded-2xl border border-[#EFE9E3] bg-[#0E0E10] shadow-[0_1px_3px_rgba(16,24,40,0.06)]">
+          <div className="relative aspect-[4/3] sm:aspect-[16/10]">
+            <video
+              ref={videoRef}
+              playsInline
+              muted
+              autoPlay
+              className="absolute inset-0 h-full w-full object-cover -scale-x-100"
+            />
+            {/* Face guide ring */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="h-[74%] aspect-square rounded-full border-2 border-white/45 shadow-[0_0_0_9999px_rgba(0,0,0,0.28)]" />
+            </div>
+            <span className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-white backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D4D]" /> Live
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2.5 bg-white px-4 py-3.5">
+            <button
+              type="button"
+              onClick={handleCapture}
+              disabled={cameraBusy}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#F15A29] px-4 py-2.5 font-sora text-[13.5px] font-[700] text-white transition-colors hover:bg-[#D8420F] cursor-pointer disabled:opacity-70"
+            >
+              <Camera size={15} />
+              {cameraBusy ? 'Capturing…' : 'Capture Selfie'}
+            </button>
+            <button
+              type="button"
+              onClick={closeCamera}
+              disabled={cameraBusy}
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-4 py-2.5 font-sora text-[13.5px] font-[600] text-[#555555] transition-colors hover:border-[#D6CFC8] hover:text-[#111111] cursor-pointer disabled:opacity-70"
+            >
+              <X size={15} /> Cancel
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-2 flex items-center justify-between gap-3">
+          <p className="font-inter text-[11.5px] text-[#888888]">
+            Look straight at the camera and keep your face inside the circle.
+          </p>
+          <button
+            type="button"
+            onClick={openGallery}
+            className="shrink-0 font-sora text-[12px] font-[600] text-[#0066FF] hover:underline cursor-pointer"
+          >
+            Upload instead
+          </button>
+        </div>
+
+        {errorLine}
+      </div>
+    );
+  }
+
   return (
     <div>
-      <span className="block font-sora text-[13px] font-[600] text-[#111111] mb-1.5">
-        Photo <span className="text-[#888888] font-[400] font-inter text-[12px]">(optional)</span>
-      </span>
-
-      <input
-        ref={inputRef}
-        type="file"
-        accept="image/*"
-        className="sr-only"
-        id="enquiry-photo-input"
-        onChange={(e) => handleFiles(e.target.files)}
-      />
+      {label}
+      {hiddenInput}
 
       {!previewUrl ? (
         <div
@@ -79,65 +255,89 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
             setDragActive(false);
             handleFiles(e.dataTransfer.files);
           }}
-          className={`flex flex-col sm:flex-row items-center gap-4 px-5 py-5 rounded-2xl border border-dashed transition-colors ${
+          className={`rounded-2xl border border-dashed px-5 py-6 transition-colors ${
             dragActive
               ? 'border-[#F15A29] bg-[#F15A29]/5'
               : error
                 ? 'border-[#DC2626]/50 bg-white'
-                : 'border-[#E4DAD2] bg-[#FAF8F5]/40'
+                : 'border-[#E4DAD2] bg-white'
           }`}
         >
-          <span className="shrink-0 w-12 h-12 rounded-full bg-[#F15A29]/10 text-[#F15A29] flex items-center justify-center">
-            <Camera size={20} />
-          </span>
+          <div className="flex flex-col items-center gap-3 text-center">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFF1EB] text-[#F15A29]">
+              <Camera size={19} />
+            </span>
 
-          <div className="flex-1 text-center sm:text-left">
-            <p className="font-inter text-[13.5px] text-[#555555]">
-              Upload your photo — JPG, PNG or WebP, up to 2MB.
-            </p>
-            <p className="font-inter text-[11.5px] text-[#888888] mt-0.5">
-              Take a selfie with your camera or pick one from your gallery.
-            </p>
-          </div>
+            <div>
+              <p className="font-sora text-[14px] font-[600] text-[#111111]">
+                Capture a live selfie
+              </p>
+              <p className="mt-1 font-inter text-[12.5px] leading-relaxed text-[#888888]">
+                Use your camera, or upload a JPG, PNG or WebP up to 2MB.
+              </p>
+            </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={() => inputRef.current?.click()}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#111111] hover:bg-[#F15A29] text-white font-sora font-[600] text-[13px] transition-colors cursor-pointer"
-            >
-              <Upload size={14} /> Choose Photo
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              {cameraAvailable ? (
+                <button
+                  type="button"
+                  onClick={openCamera}
+                  disabled={cameraBusy}
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#111111] px-4 py-2.5 font-sora text-[13px] font-[600] text-white transition-colors hover:bg-[#F15A29] cursor-pointer disabled:opacity-70"
+                >
+                  <Camera size={14} />
+                  {cameraBusy ? 'Opening…' : 'Start Camera'}
+                </button>
+              ) : null}
+
+              <button
+                type="button"
+                onClick={openGallery}
+                className="inline-flex items-center gap-2 rounded-xl border border-[#E7E2DC] bg-white px-4 py-2.5 font-sora text-[13px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
+              >
+                <Upload size={14} /> Upload Photo
+              </button>
+            </div>
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-4 px-4 py-4 rounded-2xl border border-[#F4EBE6] bg-white">
+        <div className="flex items-center gap-4 rounded-2xl border border-[#EFE9E3] bg-white px-4 py-4 shadow-[0_1px_3px_rgba(16,24,40,0.04)]">
           <img
             src={previewUrl}
-            alt="Selected photo preview"
-            className="w-16 h-16 rounded-xl object-cover border border-[#F4EBE6]"
+            alt="Your photo"
+            className="h-16 w-16 rounded-xl border border-[#EFE9E3] object-cover"
           />
-          <div className="flex-1 min-w-0">
-            <p className="font-inter text-[13.5px] text-[#111111] truncate">
-              {file?.name || 'photo'}
+          <div className="min-w-0 flex-1">
+            <p className="truncate font-inter text-[13.5px] text-[#111111]">
+              {file?.name || 'photo.jpg'}
             </p>
-            <p className="font-inter text-[11.5px] text-[#888888] flex items-center gap-1 mt-0.5">
+            <p className="mt-0.5 flex items-center gap-1 font-inter text-[11.5px] text-[#888888]">
               <ImageIcon size={12} /> {file ? formatBytes(file.size) : ''}
             </p>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex shrink-0 items-center gap-2">
+            {cameraAvailable ? (
+              <button
+                type="button"
+                onClick={openCamera}
+                aria-label="Retake with camera"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-3 py-2 font-sora text-[12.5px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
+              >
+                <RefreshCcw size={13} /> Retake
+              </button>
+            ) : null}
             <button
               type="button"
-              onClick={() => inputRef.current?.click()}
-              className="px-3.5 py-2 rounded-full border border-[#EFEFEF] text-[13px] font-sora font-[600] text-[#555555] hover:border-[#F15A29] hover:text-[#F15A29] transition-colors cursor-pointer"
+              onClick={openGallery}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-3 py-2 font-sora text-[12.5px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
             >
-              Replace
+              <Upload size={13} /> Replace
             </button>
             <button
               type="button"
               onClick={clear}
               aria-label="Remove photo"
-              className="p-2 rounded-full border border-[#EFEFEF] text-[#888888] hover:border-[#DC2626] hover:text-[#DC2626] transition-colors cursor-pointer"
+              className="rounded-xl border border-[#E7E2DC] bg-white p-2 text-[#888888] transition-colors hover:border-[#DC2626] hover:text-[#DC2626] cursor-pointer"
             >
               <Trash2 size={15} />
             </button>
@@ -145,11 +345,7 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
         </div>
       )}
 
-      {error ? (
-        <p role="alert" className="font-inter text-[11.5px] text-[#DC2626] mt-1.5">
-          {error}
-        </p>
-      ) : null}
+      {errorLine}
     </div>
   );
 }

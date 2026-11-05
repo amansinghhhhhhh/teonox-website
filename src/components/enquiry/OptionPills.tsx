@@ -15,7 +15,7 @@ interface OptionPillsProps {
 
 /**
  * Pill-style single-choice radio group used for Gender, Preferred Mode,
- * Preferred Batch, Timeline, Career Goal, Discovery, etc.
+ * Preferred Batch, Timeline, Current Status, Discovery, etc.
  */
 export function OptionPills({
   legend,
@@ -31,7 +31,7 @@ export function OptionPills({
 
   return (
     <fieldset className="min-w-0">
-      <legend className="block font-sora text-[13px] font-[600] text-[#111111] mb-2">
+      <legend className="block font-sora text-[12.5px] font-[600] tracking-[0.01em] text-[#3D3A37] mb-2">
         {legend}
         {required ? <span className="text-[#F15A29] ml-0.5">*</span> : null}
       </legend>
@@ -43,12 +43,12 @@ export function OptionPills({
           return (
             <label
               key={option.value}
-              className={`relative flex items-center gap-2 px-3.5 py-2.5 rounded-2xl border text-[13.5px] font-inter cursor-pointer transition-all select-none ${
+              className={`relative flex items-center gap-2.5 rounded-xl border px-3.5 py-2.5 text-[13.5px] font-inter select-none transition duration-200 ease-out cursor-pointer ${
                 checked
-                  ? 'border-[#F15A29] bg-[#F15A29]/5 text-[#111111] font-[600]'
+                  ? 'border-[#F15A29] bg-[#FFF7F3] text-[#111111] font-[600] shadow-[0_0_0_3px_rgba(241,90,41,0.10)]'
                   : error
-                    ? 'border-[#DC2626]/40 bg-white text-[#555555] hover:border-[#F15A29]/40'
-                    : 'border-[#EFEFEF] bg-[#FAF8F5]/40 text-[#555555] hover:border-[#F15A29]/40 hover:bg-white'
+                    ? 'border-[#F04438]/35 bg-white text-[#555555] hover:border-[#F04438]/60'
+                    : 'border-[#E7E2DC] bg-white text-[#555555] hover:border-[#D6CFC8] hover:bg-[#FCFBFA]'
               }`}
             >
               <input
@@ -60,12 +60,12 @@ export function OptionPills({
                 className="sr-only peer"
               />
               <span
-                className={`shrink-0 w-3.5 h-3.5 rounded-full border-2 transition-all ${
-                  checked
-                    ? 'border-[#F15A29] bg-[#F15A29] shadow-[inset_0_0_0_2.5px_#FFFFFF]'
-                    : 'border-[#D6D0CB] bg-white'
+                className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition duration-200 ${
+                  checked ? 'border-[#F15A29]' : 'border-[#CFC7C0] bg-white'
                 }`}
-              />
+              >
+                {checked ? <span className="h-2 w-2 rounded-full bg-[#F15A29]" /> : null}
+              </span>
               <span className="leading-tight">{option.label}</span>
             </label>
           );

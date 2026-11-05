@@ -94,8 +94,13 @@ export function validateEnquiryForm(values: EnquiryFormData): EnquiryErrors {
   const errors: EnquiryErrors = {};
 
   // ── Personal ──────────────────────────────────────────────────────────────
-  const photoCheck = validateImageFile(values.photo);
-  if (!photoCheck.valid && photoCheck.message) errors.photo = photoCheck.message;
+  // Photo is compulsory — either a live selfie or a gallery upload.
+  if (!values.photo) {
+    errors.photo = 'A live selfie or photo is required.';
+  } else {
+    const photoCheck = validateImageFile(values.photo);
+    if (!photoCheck.valid && photoCheck.message) errors.photo = photoCheck.message;
+  }
 
   errors.fullName = required(values.fullName.trim(), 'Full Name is required.');
   errors.fatherName = required(values.fatherName.trim(), "Father's Name is required.");

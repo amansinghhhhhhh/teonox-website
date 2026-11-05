@@ -108,13 +108,23 @@ export const TIMELINE_OPTIONS: FieldOption[] = [
 
 // ── Section 5 · Career Goals ────────────────────────────────────────────────
 
+/**
+ * Exact product list. `Select` is the placeholder entry (empty value) so the
+ * dropdown reads correctly and validation still treats it as "nothing chosen".
+ */
 export const CAREER_GOAL_OPTIONS: FieldOption[] = [
-  'Job / Placement Support',
-  'Business / Freelancing',
-  'Skill Enhancement',
-  'Career Switch',
-  'Other',
-].map(opt);
+  { value: '', label: 'Select' },
+  { value: 'Get a Job in Digital Marketing', label: 'Get a Job in Digital Marketing' },
+  { value: 'Career Change', label: 'Career Change' },
+  { value: 'Salary Growth', label: 'Salary Growth' },
+  { value: 'Start Freelancing', label: 'Start Freelancing' },
+  { value: 'Start a Digital Marketing Agency', label: 'Start a Digital Marketing Agency' },
+  { value: 'Grow Existing Business', label: 'Grow Existing Business' },
+  { value: 'Learn New Skills', label: 'Learn New Skills' },
+  { value: 'Personal Branding', label: 'Personal Branding' },
+  { value: 'Become a consultant', label: 'Become a consultant' },
+  { value: 'Other', label: 'Other' },
+];
 
 // ── Section 6 · Digital Marketing Knowledge ─────────────────────────────────
 

@@ -19,8 +19,8 @@ interface CollapsibleSectionProps {
 }
 
 /**
- * Rounded white card with a numbered header that toggles its body.
- * Header stays clickable when collapsed; body height animates smoothly.
+ * Rounded card with a numbered header that toggles its body. The header stays
+ * clickable when collapsed and the body height animates smoothly.
  */
 export function CollapsibleSection({
   sectionId,
@@ -47,39 +47,45 @@ export function CollapsibleSection({
   return (
     <section
       id={`section-${id}`}
-      className="rounded-2xl border border-[#F4EBE6] bg-white shadow-sm scroll-mt-32"
+      className="scroll-mt-32 rounded-2xl border border-[#EFE9E3] bg-white shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
     >
       <button
         type="button"
         onClick={toggle}
         aria-expanded={isOpen}
         aria-controls={`section-body-${id}`}
-        className="w-full flex items-center gap-4 px-5 sm:px-7 py-5 text-left cursor-pointer group"
+        className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl px-5 py-[18px] text-left transition-colors hover:bg-[#FDFCFA] sm:px-6"
       >
-        <span className="shrink-0 w-9 h-9 rounded-full bg-[#F15A29]/10 text-[#F15A29] font-mono text-[13px] font-bold flex items-center justify-center">
+        <span
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-[12.5px] font-bold transition-colors ${
+            errorCount > 0
+              ? 'bg-[#F04438] text-white'
+              : 'bg-[#FFF1EB] text-[#F15A29]'
+          }`}
+        >
           {String(step).padStart(2, '0')}
         </span>
 
-        <span className="flex-1 min-w-0">
-          <span className="block font-sora font-[700] text-[15px] sm:text-[17px] text-[#111111] group-hover:text-[#F15A29] transition-colors">
+        <span className="min-w-0 flex-1">
+          <span className="block font-sora text-[15px] font-[700] tracking-[-0.01em] text-[#111111] transition-colors group-hover:text-[#F15A29] sm:text-[16px]">
             {title}
           </span>
           {summary ? (
-            <span className="block font-inter text-[12px] text-[#888888] mt-0.5 truncate">
+            <span className="mt-0.5 block truncate font-inter text-[12px] text-[#9A9490]">
               {summary}
             </span>
           ) : null}
         </span>
 
         {errorCount > 0 ? (
-          <span className="shrink-0 font-mono text-[11px] font-bold text-white bg-[#DC2626] rounded-full px-2 py-0.5">
+          <span className="shrink-0 rounded-full bg-[#F04438] px-2 py-0.5 font-mono text-[11px] font-bold text-white">
             {errorCount}
           </span>
         ) : null}
 
         <ChevronDown
           size={18}
-          className={`shrink-0 text-[#888888] group-hover:text-[#F15A29] transition-transform duration-300 ${
+          className={`shrink-0 text-[#9A9490] transition-transform duration-300 group-hover:text-[#F15A29] ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
@@ -92,7 +98,9 @@ export function CollapsibleSection({
         transition={{ duration: 0.3, ease: EASE_OUT }}
         className="overflow-hidden"
       >
-        <div className="px-5 sm:px-7 pb-6 pt-1">{children}</div>
+        <div className="space-y-4 border-t border-[#F4F1ED] px-5 pt-5 pb-6 sm:px-6">
+          {children}
+        </div>
       </motion.div>
     </section>
   );
