@@ -66,14 +66,14 @@ export function FormField({
  */
 const CONTROL_BASE =
   'w-full rounded-xl border border-[#E8E1DC] bg-[#FAF8F5]/60 px-4 py-3 text-sm font-semibold text-[#201A17] ' +
-  'placeholder:text-[#A9A29B] bg-white focus:bg-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#F15A29] transition-all duration-200 ease-out';
+  'placeholder:text-[#A9A29B] bg-white focus:bg-white focus:border-[#F15A29] focus:outline-none transition-all duration-200 ease-out';
 
 /** Fallback for callers that still import the constant directly. */
 export const INPUT_CLASS = `${CONTROL_BASE} border-[#E7E2DC] hover:border-[#D6CFC8]`;
 
 export const inputClass = (hasError?: boolean): string =>
   hasError
-    ? 'w-full rounded-xl border border-[#F04438] bg-white px-4 py-3 text-sm font-semibold text-[#201A17] placeholder:text-[#F04438] focus:border-[#F04438] focus:outline-none focus:ring-2 focus:ring-[#F04438]/15 transition-all duration-200 ease-out'
+    ? 'w-full rounded-xl border border-[#F04438] bg-white px-4 py-3 text-sm font-semibold text-[#201A17] placeholder:text-[#F04438] focus:border-[#F04438] focus:outline-none transition-all duration-200 ease-out'
     : INPUT_CLASS;
 
 interface SelectControlProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
