@@ -125,6 +125,8 @@ interface RouteMeta {
   description: string;
   canonical: string;
   ogType?: string;
+  /** Robots directive. Defaults to 'index, follow' when omitted. */
+  robots?: string;
 }
 
 const META_MAP: Record<string, RouteMeta> = {
@@ -203,6 +205,13 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
     canonical: '/terms-and-conditions',
   },
+  '/enquiry-form': {
+    title: 'Enquiry Form | TEONOX',
+    description: 'Fill out the TEONOX enquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes.',
+    canonical: '/enquiry-form',
+    // Pre-launch: keep the form out of the index until signoff.
+    robots: 'noindex, nofollow',
+  },
 };
 
 function escapeHtml(str: string): string {
@@ -214,9 +223,11 @@ function buildMetaTags(meta: RouteMeta): string {
   const desc = escapeHtml(meta.description);
   const canonicalUrl = `${BASE_URL}${meta.canonical}`;
   const ogType = meta.ogType || 'website';
+  const robots = escapeHtml(meta.robots || 'index, follow');
 
   return `<title>${title}</title>
     <meta name="description" content="${desc}">
+    <meta name="robots" content="${robots}">
     <link rel="canonical" href="${canonicalUrl}">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${desc}">
@@ -360,11 +371,16 @@ function serveWithMeta(html: string) {
     // og:description / og:url with homepage data.
     //
     // Order matters: strip first, then insert — the reverse would strip the
-    // tags we just injected. buildMetaTags() re-emits description, canonical
-    // and every og:* key, so nothing is lost by removing them wholesale.
-    // twitter:* is deliberately left alone: it is not re-emitted below.
+    // tags we just injected. buildMetaTags() re-emits description, robots,
+    // canonical and every og:* key, so nothing is lost by removing them
+    // wholesale. twitter:* is deliberately left alone: it is not re-emitted.
+    //
+    // The template ships a global <meta name="robots" content="index, follow">,
+    // so it must be stripped here too — otherwise the enquiry route's
+    // noindex would arrive as two conflicting robots tags.
     let modified = html
       .replace(/(?:\r?\n\s*)?<meta name="description" content="[^"]*"\s*\/?>/g, '')
+      .replace(/(?:\r?\n\s*)?<meta name="robots" content="[^"]*"\s*\/?>/g, '')
       .replace(/(?:\r?\n\s*)?<link rel="canonical" href="[^"]*"\s*\/?>/g, '')
       .replace(/(?:\r?\n\s*)?<meta property="og:[a-z_:]+" content="[^"]*"\s*\/?>/g, '')
       .replace(/<title>[^<]*<\/title>/, metaHtml);

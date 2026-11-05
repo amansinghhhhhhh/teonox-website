@@ -45,8 +45,9 @@ const ThankYouPage = lazyWithRetry(() => import('./components/ThankYouPage').the
 const CareerUnlockedPage = lazyWithRetry(() => import('./pages/CareerUnlocked/CareerUnlockedPage').then((m) => ({ default: m.CareerUnlockedPage })));
 const CareerUnlockedThankYouPage = lazyWithRetry(() => import('./pages/CareerUnlocked/CareerUnlockedThankYouPage').then((m) => ({ default: m.CareerUnlockedThankYouPage })));
 const OnlineProgrammePage = lazyWithRetry(() => import('./pages/programmes/OnlineProgrammePage').then((m) => ({ default: m.OnlineProgrammePage })));
+const EnquiryFormPage = lazyWithRetry(() => import('./pages/enquiry/EnquiryFormPage').then((m) => ({ default: m.EnquiryFormPage })));
 
-export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'thank-you' | 'career-unlocked' | 'career-unlocked-thank-you' | 'not-found';
+export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'thank-you' | 'career-unlocked' | 'career-unlocked-thank-you' | 'enquiry-form' | 'not-found';
 
 interface Route {
   page: Page;
@@ -69,6 +70,7 @@ const PAGE_PATHS: Record<Page, string> = {
   'thank-you': '/thank-you',
   'career-unlocked': '/career-unlocked',
   'career-unlocked-thank-you': '/career-unlocked/thank-you',
+  'enquiry-form': '/enquiry-form',
   'not-found': '/404',
 };
 
@@ -90,6 +92,8 @@ function parsePath(pathname: string): Route {
       return { page: 'why-teonox' };
     case 'admissions':
       return { page: 'admissions' };
+    case 'enquiry-form':
+      return { page: 'enquiry-form' };
     case 'privacy-policy':
       return { page: 'privacy-policy' };
     case 'terms-and-conditions':
@@ -509,6 +513,9 @@ export default function App() {
         ) : currentPage === 'contact' ? (
           /* Dedicated Contact Page */
           <ContactPage onEnquireClick={(topic, source, formName) => handleEnquireClick(topic || 'Contact Page Enquiry', source || '', formName || '')} />
+        ) : currentPage === 'enquiry-form' ? (
+          /* Dedicated multi-section Enquiry Form Page */
+          <EnquiryFormPage />
         ) : currentPage === 'about' ? (
           /* Dedicated About Us Brand Storytelling Page */
           <AboutUsPage onEnquireClick={(topic) => handleEnquireClick(topic || 'About TEONOX')} />

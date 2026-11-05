@@ -92,6 +92,13 @@ const META_MAP = {
     description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
     canonical: '/terms-and-conditions',
   },
+  '/enquiry-form': {
+    title: 'Enquiry Form | TEONOX',
+    description: 'Fill out the TEONOX enquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes.',
+    canonical: '/enquiry-form',
+    // Pre-launch: keep the form out of the index until signoff.
+    robots: 'noindex, nofollow',
+  },
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────
@@ -124,9 +131,11 @@ function buildMetaTags(meta) {
   const desc = escapeHtml(meta.description);
   const canonicalUrl = `${BASE_URL}${meta.canonical}`;
   const ogType = meta.ogType || 'website';
+  const robots = escapeHtml(meta.robots || 'index, follow');
 
   return `    <title>${title}</title>
     <meta name="description" content="${desc}">
+    <meta name="robots" content="${robots}">
     <link rel="canonical" href="${canonicalUrl}">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${desc}">
@@ -152,8 +161,13 @@ function injectMeta(htmlTemplate, meta, routePath) {
   // would otherwise double them up. Strip first, then insert — the reverse
   // would remove the block we just wrote. buildMetaTags() re-emits all of
   // these keys. twitter:* is left alone: it is not re-emitted.
+  //
+  // The template also ships a global <meta name="robots" content="index, follow">,
+  // which must be stripped here — otherwise the enquiry route's noindex
+  // would arrive as two conflicting robots tags.
   let html = htmlTemplate
     .replace(/(?:\r?\n\s*)?<meta name="description" content="[^"]*"\s*\/?>/g, '')
+    .replace(/(?:\r?\n\s*)?<meta name="robots" content="[^"]*"\s*\/?>/g, '')
     .replace(/(?:\r?\n\s*)?<link rel="canonical" href="[^"]*"\s*\/?>/g, '')
     .replace(/(?:\r?\n\s*)?<meta property="og:[a-z_:]+" content="[^"]*"\s*\/?>/g, '')
     .replace(/<title>[^<]*<\/title>/, metaBlock);

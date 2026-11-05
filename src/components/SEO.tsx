@@ -11,6 +11,8 @@ interface SEOProps {
   ogImage?: string;
   ogType?: 'website' | 'article';
   jsonLd?: object | object[];
+  /** Robots directive for this route. Defaults to 'index, follow'. */
+  robots?: string;
 }
 
 export function SEO({
@@ -20,6 +22,7 @@ export function SEO({
   ogImage,
   ogType = 'website',
   jsonLd,
+  robots = 'index, follow',
 }: SEOProps) {
   const fullTitle = title.toLowerCase().includes(SITE_NAME.toLowerCase()) ? title : `${title} | ${SITE_NAME}`;
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
@@ -29,6 +32,7 @@ export function SEO({
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      <meta name="robots" content={robots} />
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
       {/* Open Graph */}
