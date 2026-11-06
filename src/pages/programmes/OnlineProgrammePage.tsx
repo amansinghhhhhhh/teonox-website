@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ArrowLeft, WifiOff } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { SEO } from '../../components/SEO';
 import { Navbar } from '../../components/Navbar';
@@ -11,6 +12,8 @@ import { validateEmail, validatePhone, validateRequired } from '../../utils/vali
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
 import '../../pages/programmes/online-programme.css';
+import { BatchScheduleSection } from '../../components/BatchScheduleSection';
+import { BATCH_SCHEDULE, includesBatchSchedule } from '../../data/batchSchedule';
 
 function navigateTo(path: string) {
   if (path.startsWith('#')) {
@@ -488,7 +491,14 @@ export function OnlineProgrammePage() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" as="style" onLoad={() => { const l = document.querySelector('link[rel="preload"]') as HTMLLinkElement | null; if (l) l.rel = 'stylesheet'; }} />
-        <div dangerouslySetInnerHTML={{ __html: rawHtmlBody }} />
+        <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[0] }} />
+        {typeof window !== 'undefined' &&
+        includesBatchSchedule(
+          window.location.pathname.split('/').filter(Boolean)[1] || ''
+        ) && (
+          <BatchScheduleSection rows={BATCH_SCHEDULE} slug={window.location.pathname.split('/').filter(Boolean)[1] || ''} />
+        )}
+        <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[1] ?? '' }} />
       </div>
       <Footer onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} onNavigate={(path, label) => navigateTo(path)} />
       <OnlineProgrammeOtpGate />

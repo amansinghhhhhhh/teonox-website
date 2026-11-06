@@ -1151,6 +1151,8 @@ export const rawHtmlBody = `<!-- Hero -->
   </div>
 </section>
 
+<!-- BATCH_SCHEDULE_SLOT -->
+
 <!-- Final CTA -->
 <section class="teonox-online-final-cta-section teonox-online-section-padding" id="teonox-online-final-cta">
   <div class="teonox-online-container" style="position:relative;z-index:1;">
