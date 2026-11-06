@@ -26,6 +26,7 @@ export interface EnquiryFormData {
   state: string;
   pinCode: string;
   zipCode: string;
+  stateOther: string;
 
   // ── Educational Information ──────────────────────────
   highestQualification: string;
@@ -81,6 +82,7 @@ export const DEFAULT_ENQUIRY_VALUES: EnquiryFormData = {
   state: '',
   pinCode: '',
   zipCode: '',
+  stateOther: '',
 
   highestQualification: '',
   fieldOfStudy: '',

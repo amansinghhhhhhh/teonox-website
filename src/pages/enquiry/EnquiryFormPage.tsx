@@ -685,6 +685,22 @@ export function EnquiryFormPage() {
             </div>
           </CollapsibleSection>
 
+          {values.state === 'Others' ? (
+            <FormField label="Specify Other State" required error={errors.stateOther}>
+              {({ id }) => (
+                <input
+                  id={id}
+                  type="text"
+                  placeholder="e.g. Telangana"
+                  value={values.stateOther}
+                  aria-invalid={Boolean(errors.stateOther)}
+                  onChange={(e) => setField('stateOther', e.target.value)}
+                  className={inputClass(Boolean(errors.stateOther))}
+                />
+              )}
+            </FormField>
+          ) : null}
+
           {/* 3 · Professional Information */}
           <CollapsibleSection
             sectionId="professional"
