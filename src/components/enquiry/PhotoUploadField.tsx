@@ -316,7 +316,7 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
             className="h-16 w-16 rounded-xl border border-[#EFE9E3] object-cover flex-shrink-0"
           />
           <div className="min-w-0 flex-1 flex flex-col gap-1.5 max-w-xs">
-            <p className="truncate font-inter text-[13.5px] text-[#111111]">
+            <p className="truncate max-w-[200px] sm:max-w-xs block font-inter text-[13.5px] text-[#111111]">
               {file?.name || 'photo.jpg'}
             </p>
             <p className="font-inter text-[11px] text-[#888888]">
