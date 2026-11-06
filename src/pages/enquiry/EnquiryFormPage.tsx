@@ -1010,7 +1010,7 @@ export function EnquiryFormPage() {
             {/* ── Draft Toast ───────────────────────────────────── */}
             {draftNotice ? (
               <div
-                className="fixed bottom-6 right-6 z-50 max-w-sm rounded-xl border border-[#F1EAE4] bg-white p-4 shadow-xl"
+                className="fixed bottom-6 left-6 z-50 max-w-sm rounded-xl border border-[#F1EAE4] bg-white p-4 shadow-xl hidden sm:flex"
               >
                 <div className="flex items-start gap-2">
                   <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
