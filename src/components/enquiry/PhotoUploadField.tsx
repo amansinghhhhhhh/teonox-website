@@ -309,7 +309,7 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-4 rounded-2xl border border-[#EFE9E3] bg-white px-4 py-4 shadow-[0_1px_3px_rgba(16,24,40,0.04)]">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 rounded-2xl border border-[#EFE9E3] bg-white px-4 py-4 shadow-[0_1px_3px_rgba(16,24,40,0.04)]">
           <img
             src={previewUrl}
             alt="Your photo"
