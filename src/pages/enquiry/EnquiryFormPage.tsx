@@ -73,7 +73,7 @@ export function EnquiryFormPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null);
-  const [draftNotice, setDraftNotice] = useState(Boolean(restoredValues));
+  
 
   const phoneDigits = values.phone.replace(/\D/g, '');
   const phoneVerified = verifiedPhone !== null && verifiedPhone === phoneDigits;
@@ -1007,27 +1007,7 @@ export function EnquiryFormPage() {
               </p>
             ) : null}
 
-            {/* ── Draft Toast ───────────────────────────────────── */}
-            {draftNotice ? (
-              <div
-                className="fixed bottom-6 left-6 z-50 max-w-sm rounded-xl border border-[#F1EAE4] bg-white p-4 shadow-xl hidden sm:flex"
-              >
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
-                  <p className="font-inter text-sm text-[#201A17]">
-                    We restored your saved draft. Please capture your photo again — it
-                    isn't saved between visits.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setDraftNotice(false)}
-                  className="absolute top-1.5 right-1.5 text-[#6B6B6B] hover:text-[#F15A29] font-sora font-bold transition-colors"
-                >
-                  ✕
-                </button>
-              </div>
-            ) : null}
+            
 
             <button
               type="submit"
