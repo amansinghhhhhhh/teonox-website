@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sunrise, Sun, Moon, Wifi, Building2 } from 'lucide-react';
+import { includesBatchSchedule, BATCH_SCHEDULE } from '../../data/batchSchedule';
 
 /**
  * Responsive Batch Schedule section — rendered right above the final CTA
@@ -13,8 +14,7 @@ import { Sunrise, Sun, Moon, Wifi, Building2 } from 'lucide-react';
  *  - slug:      string      (programme slug, used only for badge logic)
  */
 export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: string }) {
-  const scheduleIncludes =
-    includesBatchSchedule(slug) ?? BATCH_SCHEDULE_SLUGS.some((s) => s.toLowerCase() === (slug ?? '').toLowerCase());
+  const scheduleIncludes = includesBatchSchedule(slug);
 
   if (!scheduleIncludes) return null;
 
