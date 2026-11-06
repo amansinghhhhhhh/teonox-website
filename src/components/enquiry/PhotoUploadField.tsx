@@ -305,23 +305,23 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
           <img
             src={previewUrl}
             alt="Your photo"
-            className="h-16 w-16 rounded-xl border border-[#EFE9E3] object-cover"
+            className="h-16 w-16 rounded-xl border border-[#EFE9E3] object-cover flex-shrink-0"
           />
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 flex flex-col gap-1.5">
             <p className="truncate font-inter text-[13.5px] text-[#111111]">
               {file?.name || 'photo.jpg'}
             </p>
-            <p className="mt-0.5 flex items-center gap-1 font-inter text-[11.5px] text-[#888888]">
-              <ImageIcon size={12} /> {file ? formatBytes(file.size) : ''}
+            <p className="font-inter text-[11px] text-[#888888]">
+              {file ? formatBytes(file.size) : ''}
             </p>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center gap-2">
             {cameraAvailable ? (
               <button
                 type="button"
                 onClick={openCamera}
                 aria-label="Retake with camera"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-3 py-2 font-sora text-[12.5px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-3 py-2 font-sora text-[12px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
               >
                 <RefreshCcw size={13} /> Retake
               </button>
@@ -329,7 +329,7 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
             <button
               type="button"
               onClick={openGallery}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-3 py-2 font-sora text-[12.5px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-white px-3 py-2 font-sora text-[12px] font-[600] text-[#555555] transition-colors hover:border-[#F15A29] hover:text-[#F15A29] cursor-pointer"
             >
               <Upload size={13} /> Replace
             </button>
@@ -337,9 +337,9 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
               type="button"
               onClick={clear}
               aria-label="Remove photo"
-              className="rounded-xl border border-[#E7E2DC] bg-white p-2 text-[#888888] transition-colors hover:border-[#DC2626] hover:text-[#DC2626] cursor-pointer"
+              className="shrink-0 rounded-xl bg-[#F15A29] px-3 py-1.5 font-sora text-[12px] font-[600] text-white transition-colors hover:bg-[#D8420F] cursor-pointer"
             >
-              <Trash2 size={15} />
+              <Trash2 size={14} /> Remove
             </button>
           </div>
         </div>
