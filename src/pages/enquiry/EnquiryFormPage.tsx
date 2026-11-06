@@ -272,7 +272,7 @@ export function EnquiryFormPage() {
       await submitForm('Enquiry Form', fields);
       clearEnquiryDraft();
       gtag('event', 'generate_lead', { form_name: 'Enquiry Form' });
-      redirectToThankYou('Enquiry Form', 'enquiry-form');
+      redirectToThankYou('Inquiry Form', 'enquiry-form');
     } catch {
       setIsSubmitting(false);
       setFormError('Something went wrong. Please try again.');
@@ -297,7 +297,7 @@ export function EnquiryFormPage() {
     <div className="bg-[#FBF9F7] min-h-screen pt-24 sm:pt-28 pb-24 text-[#111111]">
       <SEO
         title="Enquiry Form | TEONOX"
-        description="Fill out the TEONOX enquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes."
+        description="Fill out the TEONOX inquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes."
         canonical="/enquiry-form"
         robots="noindex, nofollow"
         jsonLd={{
@@ -320,7 +320,7 @@ export function EnquiryFormPage() {
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },
-          { name: 'Enquiry Form', path: '/enquiry-form' },
+          { name: 'Inquiry Form', path: '/enquiry-form' },
         ]}
       />
 
@@ -333,7 +333,7 @@ export function EnquiryFormPage() {
           className="text-center mb-10 sm:mb-12"
         >
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#F15A29]">
-            Admissions Enquiry
+            Admissions Inquiry
           </span>
           <h1 className="font-sora text-base sm:text-lg font-bold text-[#201A17] leading-[1.15] tracking-tight mb-3">
             Tell us about yourself
@@ -573,6 +573,22 @@ export function EnquiryFormPage() {
                         setField('pinCode', e.target.value.replace(/\D/g, '').slice(0, 6))
                       }
                       className={inputClass(Boolean(errors.pinCode))}
+                    />
+                  )}
+                </FormField>
+                <FormField label="ZIP Code" required error={errors.zipCode}>
+                  {({ id }) => (
+                    <input
+                      id={id}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={5}
+                      autoComplete="postal-code"
+                      placeholder="e.g. 94105"
+                      value={values.zipCode}
+                      aria-invalid={Boolean(errors.zipCode)}
+                      onChange={(e) => setField('zipCode', e.target.value.replace(/\D/g).slice(0, 5))}
+                      className={inputClass(Boolean(errors.zipCode))}
                     />
                   )}
                 </FormField>
@@ -1021,7 +1037,7 @@ export function EnquiryFormPage() {
                 </>
               ) : (
                 <>
-                  <span>Submit Enquiry</span>
+                  <span>Submit Inquiry</span>
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </>
               )}

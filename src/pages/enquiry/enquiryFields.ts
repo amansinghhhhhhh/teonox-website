@@ -13,7 +13,7 @@ const opt = (value: string): FieldOption => ({ value, label: value });
 
 export const GENDER_OPTIONS: FieldOption[] = ['Male', 'Female', 'Other'].map(opt);
 
-/** 28 states + 8 union territories. */
+/** 28 states + 8 union territories + "Others". */
 export const STATE_OPTIONS: FieldOption[] = [
   'Andhra Pradesh',
   'Arunachal Pradesh',
@@ -51,6 +51,7 @@ export const STATE_OPTIONS: FieldOption[] = [
   'Ladakh',
   'Lakshadweep',
   'Puducherry',
+  'Others',
 ].map(opt);
 
 // ── Section 2 · Educational Information ─────────────────────────────────────

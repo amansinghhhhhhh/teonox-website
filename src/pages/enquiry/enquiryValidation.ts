@@ -66,6 +66,8 @@ const isValidPhone = (raw: string): boolean => {
 /** Indian pin code: 6 digits, no leading zero. Kept as a string (leading zeros). */
 const isValidPinCode = (raw: string): boolean => /^[1-9][0-9]{5}$/.test(raw.trim());
 
+const isValidZipCode = (raw: string): boolean => /^\d{5}$/.test(raw.trim());
+
 /** Minimum eligible age for the programmes. */
 const MIN_AGE_YEARS = 16;
 
@@ -140,6 +142,12 @@ export function validateEnquiryForm(values: EnquiryFormData): EnquiryErrors {
     errors.pinCode = 'Pin Code is required.';
   } else if (!isValidPinCode(values.pinCode)) {
     errors.pinCode = 'Enter a valid 6-digit pin code.';
+  }
+
+  if (!values.zipCode.trim()) {
+    errors.zipCode = 'ZIP Code is required.';
+  } else if (!isValidZipCode(values.zipCode)) {
+    errors.zipCode = 'Enter a valid 5-digit ZIP Code.';
   }
 
   // ── Education ─────────────────────────────────────────────────────────────
