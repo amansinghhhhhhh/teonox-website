@@ -61,7 +61,7 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
 
   return (
     <section
-      className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm my-8"
+      className="bg-white rounded-[28px] border border-[#ECECEC] p-6 sm:p-10 shadow-sm my-12"
       id="batch-schedule"
     >
       <h2
@@ -84,10 +84,10 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
             </colgroup>
             <thead>
               <tr className="bg-[#FAF8F5] text-[#666666] text-[13px] sm:text-[14px] font-semibold">
-                <th className="p-4 sm:p-5">Month</th>
-                <th className="p-4 sm:p-5">Morning Batch</th>
-                <th className="p-4 sm:p-5">Afternoon Batch</th>
-                <th className="p-4 sm:p-5">Evening Batch</th>
+                <th className="p-6 sm:p-7">Month</th>
+                <th className="p-6 sm:p-7">Morning Batch</th>
+                <th className="p-6 sm:p-7">Afternoon Batch</th>
+                <th className="p-6 sm:p-7">Evening Batch</th>
               </tr>
             </thead>
             <tbody>
@@ -96,16 +96,16 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
                 const bg = monthBgClass(modes);
                 return (
                   <tr key={mIdx} className={bg}>
-                    <td className="p-4 sm:p-5 font-medium text-[#111111]">
+                    <td className="p-6 sm:p-7 font-medium text-[#111111]">
                       {row.month}
                     </td>
-                    <td className="p-4 sm:p-5">
+                    <td className="p-6 sm:p-7">
                       {timeSlot(row.morning.time, row.morning.mode, modeIcon(row.morning.mode))}
                     </td>
-                    <td className="p-4 sm:p-5">
+                    <td className="p-6 sm:p-7">
                       {timeSlot(row.afternoon.time, row.afternoon.mode, modeIcon(row.afternoon.mode))}
                     </td>
-                    <td className="p-4 sm:p-5">
+                    <td className="p-6 sm:p-7">
                       {timeSlot(row.evening.time, row.evening.mode, modeIcon(row.evening.mode))}
                     </td>
                   </tr>
