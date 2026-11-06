@@ -344,23 +344,6 @@ export function EnquiryFormPage() {
           </p>
         </motion.header>
 
-        {draftNotice ? (
-          <div className="mb-6 flex items-start gap-3 p-5 rounded-2xl border border-[#F1EAE4] bg-[#FEFAF8] shadow-sm">
-            <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
-            <p className="font-inter text-sm text-[#201A17] flex-1">
-              We restored your saved draft. Please capture your photo again — it
-              isn't saved between visits.
-            </p>
-            <button
-              type="button"
-              onClick={() => setDraftNotice(false)}
-              className="font-sora text-sm font-semibold text-[#201A17] hover:text-[#F15A29] cursor-pointer"
-            >
-              Dismiss
-            </button>
-          </div>
-        ) : null}
-
         {/* ── Form ───────────────────────────────────────────── */}
         <form noValidate onSubmit={handleSubmit} className="space-y-5">
           {/* 1 · Personal Information */}
@@ -1022,6 +1005,28 @@ export function EnquiryFormPage() {
               <p role="alert" className="font-inter text-[11.5px] text-[#DC2626] -mt-2">
                 {errors.consent}
               </p>
+            ) : null}
+
+            {/* ── Draft Toast ───────────────────────────────────── */}
+            {draftNotice ? (
+              <div
+                className="fixed bottom-6 right-6 z-50 max-w-sm rounded-xl border border-[#F1EAE4] bg-white p-4 shadow-xl"
+              >
+                <div className="flex items-start gap-2">
+                  <AlertCircle size={16} className="text-[#F15A29] shrink-0 mt-0.5" />
+                  <p className="font-inter text-sm text-[#201A17]">
+                    We restored your saved draft. Please capture your photo again — it
+                    isn't saved between visits.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setDraftNotice(false)}
+                  className="absolute top-1.5 right-1.5 text-[#6B6B6B] hover:text-[#F15A29] font-sora font-bold transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
             ) : null}
 
             <button
