@@ -513,7 +513,7 @@ export default function App() {
         ) : currentPage === 'contact' ? (
           /* Dedicated Contact Page */
           <ContactPage onEnquireClick={(topic, source, formName) => handleEnquireClick(topic || 'Contact Page Enquiry', source || '', formName || '')} />
-        ) : currentPage === 'enquiry-form' ? (
+        ) : currentPage === 'inquiry-form' ? (
           /* Dedicated multi-section Enquiry Form Page */
           <EnquiryFormPage />
         ) : currentPage === 'about' ? (
