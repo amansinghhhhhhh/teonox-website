@@ -298,15 +298,15 @@ export function EnquiryFormPage() {
       <SEO
         title="Enquiry Form | TEONOX"
         description="Fill out the TEONOX inquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes."
-        canonical="/enquiry-form"
+        canonical="/inquiry-form"
         robots="noindex, nofollow"
         jsonLd={{
           '@context': 'https://schema.org',
           '@graph': [
             {
               '@type': 'ContactPage',
-              '@id': `${BASE_URL}/enquiry-form/#webpage`,
-              url: `${BASE_URL}/enquiry-form`,
+              '@id': `${BASE_URL}/inquiry-form/#webpage`,
+              url: `${BASE_URL}/inquiry-form`,
               name: 'TEONOX Enquiry Form',
               description:
                 'Enquiry form for digital marketing and AI course admissions in Pune.',
@@ -320,7 +320,7 @@ export function EnquiryFormPage() {
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },
-          { name: 'Inquiry Form', path: '/enquiry-form' },
+          { name: 'Inquiry Form', path: '/inquiry-form' },
         ]}
       />
 
