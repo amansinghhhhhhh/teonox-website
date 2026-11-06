@@ -7,6 +7,8 @@ import {
   startCamera,
   stopCamera,
   validateImageFile,
+  ALLOWED_IMAGE_TYPES,
+  MAX_IMAGE_BYTES,
 } from '../../utils/image';
 
 interface PhotoUploadFieldProps {
@@ -158,8 +160,14 @@ export function PhotoUploadField({ file, onChange, onError, error }: PhotoUpload
   );
 
   const errorLine = cameraError || error ? (
-    <p role="alert" className="font-inter text-[11.5px] text-[#DC2626] mt-1.5">
+    <p role="alert" className="font-inter text-sm text-[#DC2626] mt-2 flex items-center gap-2">
       {cameraError || error}
+      {file && file.size > MAX_IMAGE_BYTES && (
+        <span className="text-xs text-[#F15A29] ml-1">— file too large (max 2MB)</span>
+      )}
+      {file && !ALLOWED_IMAGE_TYPES.includes(file.type) && (
+        <span className="text-xs text-[#F15A29] ml-1">— supported: JPG/PNG/WebP</span>
+      )}
     </p>
   ) : null;
 

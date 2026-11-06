@@ -324,7 +324,7 @@ export function EnquiryFormPage() {
         ]}
       />
 
-      <div className="w-[88%] max-w-3xl mx-auto">
+      <div className="w-[88%] max-w-4xl mx-auto">
         {/* ── Header ─────────────────────────────────────────── */}
         <motion.header
           initial={{ opacity: 0, y: 18 }}
