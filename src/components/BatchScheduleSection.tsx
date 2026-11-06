@@ -1,6 +1,8 @@
 import React from 'react';
 import { Sunrise, Sun, Moon, Wifi, Building2 } from 'lucide-react';
-import { includesBatchSchedule, BATCH_SCHEDULE } from '../../data/batchSchedule';
+import { includesBatchSchedule, BATCH_SCHEDULE } from '../data/batchSchedule';
+
+export { includesBatchSchedule };
 
 /**
  * Responsive Batch Schedule section — rendered right above the final CTA
@@ -166,13 +168,3 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
 /* --------------------------------------------------------------------------
  * Exported for ProgramV2Layout.tsx and OnlineProgrammePage.tsx use
  * -------------------------------------------------------------------------*/
-export const includesBatchSchedule = (
-  slug: string,
-): boolean => {
-  if (!slug) return false;
-  const normalised = slug
-    .toLowerCase()
-    .replace(/\/+$/, '')
-    .replace(/-v2$/, '');
-  return BATCH_SCHEDULE_SLUGS.some((s) => s.toLowerCase() === normalised);
-};
