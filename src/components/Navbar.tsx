@@ -95,7 +95,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
               onClick={onEnquireClick}
               className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#FF6A2B] text-white hover:bg-[#D8420F] font-sora text-[13.5px] font-[600] transition-all shadow-sm shadow-[#FF6A2B]/20 active:scale-95 cursor-pointer"
             >
-              <span>Enquire Now</span>
+              <span>Inquire Now</span>
               <ArrowUpRight className="w-4 h-4" />
             </button>
 
@@ -139,7 +139,7 @@ export function Navbar({ onEnquireClick, activeSection, onNavigate }: NavbarProp
                 }}
                 className="w-full flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FF6A2B] text-white font-sora font-semibold text-base shadow-md shadow-[#FF6A2B]/20 cursor-pointer"
               >
-                <span>Enquire Now</span>
+                <span>Inquire Now</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
             </div>

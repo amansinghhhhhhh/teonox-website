@@ -70,7 +70,7 @@ const PAGE_PATHS: Record<Page, string> = {
   'thank-you': '/thank-you',
   'career-unlocked': '/career-unlocked',
   'career-unlocked-thank-you': '/career-unlocked/thank-you',
-  'enquiry-form': '/enquiry-form',
+  'inquiry-form': '/inquiry-form',
   'not-found': '/404',
 };
 
@@ -92,8 +92,8 @@ function parsePath(pathname: string): Route {
       return { page: 'why-teonox' };
     case 'admissions':
       return { page: 'admissions' };
-    case 'enquiry-form':
-      return { page: 'enquiry-form' };
+    case 'inquiry-form':
+      return { page: 'inquiry-form' };
     case 'privacy-policy':
       return { page: 'privacy-policy' };
     case 'terms-and-conditions':

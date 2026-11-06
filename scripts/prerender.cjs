@@ -92,10 +92,10 @@ const META_MAP = {
     description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
     canonical: '/terms-and-conditions',
   },
-  '/enquiry-form': {
+  '/inquiry-form': {
     title: 'Enquiry Form | TEONOX',
     description: 'Fill out the TEONOX enquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes.',
-    canonical: '/enquiry-form',
+    canonical: '/inquiry-form',
     // Pre-launch: keep the form out of the index until signoff.
     robots: 'noindex, nofollow',
   },
