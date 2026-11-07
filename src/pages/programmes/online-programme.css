@@ -34,13 +34,23 @@
   --radius-full: 9999px;
   --transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
 }
-/* Updated reset: exclude the batch-schedule subtree from the aggressive margin/padding reset */
-.tl-landing-page *:not(.batch-schedule, .batch-schedule *, .batch-schedule *::before, .batch-schedule *::after),
-.tl-landing-page *::before:not(.batch-schedule, .batch-schedule *, .batch-schedule *::before, .batch-schedule *::after),
-.tl-landing-page *::after:not(.batch-schedule, .batch-schedule *, .batch-schedule *::before, .batch-schedule *::after) {
+/* Clean reset: global reset that won't break on LightningCSS */
+.tl-landing-page *, 
+.tl-landing-page *::before, 
+.tl-landing-page *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Explicit override to protect BatchSchedule component */
+.batch-schedule, 
+.batch-schedule *, 
+.batch-schedule *::before, 
+.batch-schedule *::after {
+  margin: revert !important;
+  padding: revert !important;
+  box-sizing: border-box !important;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
