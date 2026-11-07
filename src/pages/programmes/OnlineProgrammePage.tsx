@@ -492,8 +492,8 @@ export function OnlineProgrammePage() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" as="style" onLoad={() => { const l = document.querySelector('link[rel="preload"]') as HTMLLinkElement | null; if (l) l.rel = 'stylesheet'; }} />
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[0] }} />
-        <section style={{ width: '100%', paddingTop: '64px', paddingBottom: '120px', marginBottom: '80px', display: 'block' }}>
-          <div style={{ maxWidth: '1200px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
+        <section className="bg-[#FAF8F5] pt-16 pb-32">
+          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {typeof window !== 'undefined' && (
               <BatchSchedule schedule={DEFAULT_SCHEDULE} />
             )}
