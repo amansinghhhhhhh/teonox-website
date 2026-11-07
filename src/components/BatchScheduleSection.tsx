@@ -22,19 +22,19 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
 
   // Determine the mode badge class for a slot
   function slotClass(mode: SessionMode | null, time: string) {
-    if (!mode) return 'bg-[#AAAAAA] text-white self-center';
-    if (mode === 'Online') return 'bg-[#FFF1EB] text-[#F15A29] border-[#F8E3D8] self-center';
-    return 'bg-[#111111] text-white self-center';
+    if (!mode) return 'bg-transparent text-[#666666] self-center';
+    if (mode === 'Online') return 'bg-[#FFF1EB] text-[#F15A29] border border-[#F8E3D8] border-opacity-50 self-center rounded-[12px]';
+    return 'bg-[#111111] text-white border border-[#2A2A2A] border-opacity-50 self-center rounded-[12px]';
   }
 
   // Determines the overall section background/border per month mode mix
   function monthBgClass(modes: SessionMode | null[]): string {
     const hasOnline = modes.includes('Online');
     const hasOffline = modes.includes('Offline');
-    if (hasOnline && hasOffline) return 'bg-[#FAF8F5] border-[#ECECEC]';
-    if (hasOnline) return 'bg-[#FFF1EB] border-[#F8E3D8]';
-    if (hasOffline) return 'bg-[#F8F6F2] border-[#E2E8F0]';
-    return 'bg-white border-[#ECECEC]';
+    if (hasOnline && hasOffline) return 'bg-[#FAF8F5] border border-[#ECECEC]/50';
+    if (hasOnline) return 'bg-[#FFF1EB] border border-[#F8E3D8]/50';
+    if (hasOffline) return 'bg-[#F8F6F2] border border-[#E2E8F0]/50';
+    return 'bg-white border border-[#ECECEC]/50';
   }
 
   function modeIcon(mode: SessionMode | null) {
@@ -67,8 +67,7 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
       <h2
         className="font-sora text-[26px] sm:text-[34px] font-[800] text-[#111111] tracking-tight mb-6"
       >
-        {/* Title comes from the caller's context; if empty, fall back to static */}
-        Batch Schedule — Business Digital Marketing with AI (Online & Offline)
+        Batch Schedule
       </h2>
 
       {/* Desktop: table layout (sm+); Mobile: card grid below */}
@@ -126,7 +125,7 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
             return (
               <div
                 key={mIdx}
-                className={`p-5 rounded-[20px] ${bg} border border-[#ECECEC] transition-colors hover:border-[#F15A29]`}
+                className={`p-6 rounded-[24px] ${bg} border border-[#ECECEC]/50 transition-colors hover:border-[#F15A29]/50`}
               >
                 <h3
                   className="font-sora text-[15px] sm:text-[16px] font-[700] text-[#111111] mb-3"
@@ -136,21 +135,21 @@ export function BatchScheduleSection({ rows, slug }: { rows: BatchRow[]; slug: s
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     {modeIcon(row.morning.mode)}
-                    <span className="font-inter text-[13px] text-[#666666]">
+                    <span className="font-inter text-[13px] text-[#444444]">
                       Morning:{' '}
                       {row.morning.time === '—' ? '—' : row.morning.time}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     {modeIcon(row.afternoon.mode)}
-                    <span className="font-inter text-[13px] text-[#666666]">
+                    <span className="font-inter text-[13px] text-[#444444]">
                       Afternoon:{' '}
                       {row.afternoon.time === '—' ? '—' : row.afternoon.time}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     {modeIcon(row.evening.mode)}
-                    <span className="font-inter text-[13px] text-[#666666]">
+                    <span className="font-inter text-[13px] text-[#444444]">
                       Evening:{' '}
                       {row.evening.time === '—' ? '—' : row.evening.time}
                     </span>
