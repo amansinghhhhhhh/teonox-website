@@ -1,0 +1,319 @@
+/* ==========================================================================
+   BatchSchedule
+   Brand palette only. Body font (Inter) inherits from the site; month names
+   use Sora. No inline styles.
+   Desktop: header band + one row of cards per month.
+   Below 760px: one block per month with stacked slot cards.
+   ========================================================================== */
+
+.batch-schedule {
+  /* ---- tokens: edit here only ---- */
+  --bs-accent: #ff6a2b; /* Primary Orange */
+  --bs-accent-deep: #d8420f; /* Orange Deeper */
+  --bs-orange-pale: #ffe4cf; /* Orange Pale */
+  --bs-orange-light: #fff6ee; /* Orange Light */
+  --bs-orange-border: #f8e3d8; /* Orange Border */
+  --bs-line: #f0dfce; /* Line Divider */
+  --bs-ink: #201a17; /* Text Primary */
+  --bs-muted: #666666; /* Text Secondary */
+  --bs-dash: #b8ada2; /* Text Muted */
+  --bs-surface: #ffffff;
+  --bs-off-white: #fafafa;
+
+  --bs-gap: 0.75rem;
+  --bs-cols: minmax(0, 0.8fr) repeat(3, minmax(0, 1fr));
+
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  background: var(--bs-surface);
+  border: 1px solid var(--bs-orange-border);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 36px -26px rgba(216, 66, 15, 0.35);
+  color: var(--bs-ink);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* ---------- rows ---------- */
+  &__row {
+    display: grid;
+    grid-template-columns: var(--bs-cols);
+    column-gap: var(--bs-gap);
+    align-items: stretch;
+  }
+
+  &__head {
+    margin-bottom: var(--bs-gap);
+
+    .batch-schedule__row {
+      align-items: center;
+      background: var(--bs-orange-light);
+      border: 1px solid var(--bs-orange-border);
+      border-radius: 1rem;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--bs-gap);
+  }
+
+  /* ---------- header ---------- */
+  &__head-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    color: var(--bs-ink);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__chip {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--bs-surface);
+    border: 1px solid var(--bs-orange-border);
+    color: var(--bs-accent);
+
+    .batch-schedule__icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  /* ---------- month ---------- */
+  &__month {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.15rem;
+    padding: 0 1rem;
+  }
+
+  &__month-name {
+    font-family: "Sora", sans-serif; /* headings font */
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &__month-year {
+    color: var(--bs-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  /* ---------- cells ---------- */
+  &__cell {
+    display: flex;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  &__slot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.55rem;
+    width: 100%;
+    min-height: 5.5rem;
+    padding: 0.9rem 1rem;
+    background: var(--bs-surface);
+    border: 1px solid var(--bs-orange-border);
+    border-radius: 1rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      border-color: var(--bs-accent);
+      box-shadow: 0 10px 22px -14px rgba(255, 106, 43, 0.55);
+    }
+
+    &--empty {
+      align-items: center;
+      background: var(--bs-off-white);
+      border: 1px dashed var(--bs-line);
+
+      &:hover {
+        border-color: var(--bs-line);
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__time {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.7rem 0.2rem 0.55rem;
+    border: 1px solid var(--bs-orange-border);
+    border-radius: 999px;
+    background: var(--bs-surface);
+    color: var(--bs-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    .batch-schedule__icon {
+      width: 0.9rem;
+      height: 0.9rem;
+      color: var(--bs-accent);
+    }
+  }
+
+  /* online = filled, offline = outlined */
+  &__slot--online &__pill {
+    background: var(--bs-orange-pale);
+    border-color: var(--bs-orange-pale);
+    color: var(--bs-accent-deep);
+
+    .batch-schedule__icon {
+      color: var(--bs-accent-deep);
+    }
+  }
+
+  &__dash {
+    display: block;
+    width: 1rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--bs-dash);
+  }
+
+  &__icon {
+    flex: 0 0 auto;
+    display: block;
+  }
+
+  /* ---------- screen-reader only ---------- */
+  &__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ======================================================================
+     Tablet
+     ====================================================================== */
+  @media (max-width: 1000px) {
+    --bs-gap: 0.6rem;
+
+    &__time {
+      font-size: 0.9375rem;
+    }
+
+    &__slot {
+      padding: 0.8rem 0.85rem;
+    }
+
+    &__head-cell {
+      padding: 0.7rem 0.85rem;
+    }
+
+    &__month {
+      padding: 0 0.85rem;
+    }
+  }
+
+  /* ======================================================================
+     Mobile: one block per month, slot cards stacked
+     ====================================================================== */
+  @media (max-width: 760px) {
+    padding: 0.75rem;
+    border-radius: 1.25rem;
+
+    &__head {
+      display: none;
+    }
+
+    &__body {
+      row-gap: 0;
+    }
+
+    &__row {
+      grid-template-columns: 1fr;
+      row-gap: 0.5rem;
+      padding: 1rem 0.25rem;
+      border-bottom: 1px solid var(--bs-line);
+    }
+
+    &__body &__row:first-child {
+      padding-top: 0.25rem;
+    }
+
+    &__body &__row:last-child {
+      padding-bottom: 0.25rem;
+      border-bottom: 0;
+    }
+
+    &__month {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0 0.25rem 0.25rem;
+    }
+
+    &__cell {
+      flex-direction: column;
+      gap: 0.3rem;
+
+      &::before {
+        content: attr(data-label);
+        padding-left: 0.25rem;
+        color: var(--bs-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+
+    &__cell--empty {
+      display: none;
+    }
+
+    &__slot {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 0;
+      gap: 0.4rem 0.75rem;
+      padding: 0.75rem 1rem;
+    }
+
+    &__time {
+      font-size: 0.9375rem;
+    }
+  }
+}

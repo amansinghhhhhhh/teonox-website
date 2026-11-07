@@ -12,8 +12,8 @@ import { validateEmail, validatePhone, validateRequired } from '../../utils/vali
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
 import '../../pages/programmes/online-programme.css';
-import { OnlineBatchScheduleTable } from '../../components/OnlineBatchScheduleTable';
-import { BATCH_SCHEDULE } from '../../data/batchSchedule';
+import BatchSchedule, { DEFAULT_SCHEDULE } from '../../components/BatchSchedule';
+
 
 function navigateTo(path: string) {
   if (path.startsWith('#')) {
@@ -492,9 +492,13 @@ export function OnlineProgrammePage() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" as="style" onLoad={() => { const l = document.querySelector('link[rel="preload"]') as HTMLLinkElement | null; if (l) l.rel = 'stylesheet'; }} />
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[0] }} />
-        {typeof window !== 'undefined' && (
-          <OnlineBatchScheduleTable rows={BATCH_SCHEDULE} />
-        )}
+        <section style={{ width: '100%', paddingTop: '64px', paddingBottom: '120px', marginBottom: '80px', display: 'block' }}>
+          <div style={{ maxWidth: '1200px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
+            {typeof window !== 'undefined' && (
+              <BatchSchedule schedule={DEFAULT_SCHEDULE} />
+            )}
+          </div>
+        </section>
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[1] ?? '' }} />
       </div>
       <Footer onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} onNavigate={(path, label) => navigateTo(path)} />
@@ -502,3 +506,8 @@ export function OnlineProgrammePage() {
     </>
   );
 }
+
+
+
+
+

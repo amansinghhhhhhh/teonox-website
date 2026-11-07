@@ -60,9 +60,9 @@ import certSemrushLogo from '../../assets/tools/semrush.svg';
 import certMetaLogo from '../../assets/tools/meta.svg';
 import certLinkedinLogo from '../../assets/tools/linkedin.png';
 import certOpenaiLogo from '../../assets/tools/openai.png';
-import { BatchScheduleSection, includesBatchSchedule } from '../BatchScheduleSection';
+import BatchSchedule from '../BatchSchedule'; import { includesBatchSchedule } from '../../data/batchSchedule';
 
-import { BATCH_SCHEDULE } from '../../data/batchSchedule';
+
 
 interface ProgramV2LayoutProps {
   detail: ProgramDetailData;
@@ -1062,8 +1062,8 @@ export function ProgramV2Layout({ detail, onEnquire, onBrochure, heroLoading = f
         </section>
       )}
 
-        {detail.id && includesBatchSchedule(detail.id) && (
-          <BatchScheduleSection rows={BATCH_SCHEDULE} slug={detail.id} />
+        {includesBatchSchedule(detail.id) && (
+          <BatchSchedule />
         )}
 
       {/* ────────────────────────────────────────
@@ -1147,3 +1147,11 @@ export function ProgramV2Layout({ detail, onEnquire, onBrochure, heroLoading = f
     </div>
   );
 }
+
+
+
+
+
+
+
+
