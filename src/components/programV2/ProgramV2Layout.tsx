@@ -62,6 +62,8 @@ import certLinkedinLogo from '../../assets/tools/linkedin.png';
 import certOpenaiLogo from '../../assets/tools/openai.png';
 import { BatchScheduleSection, includesBatchSchedule } from '../BatchScheduleSection';
 
+import { BATCH_SCHEDULE } from '../../data/batchSchedule';
+
 interface ProgramV2LayoutProps {
   detail: ProgramDetailData;
   onEnquire?: (label: string) => void;
