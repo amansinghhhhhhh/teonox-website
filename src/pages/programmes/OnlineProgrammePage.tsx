@@ -12,7 +12,8 @@ import { validateEmail, validatePhone, validateRequired } from '../../utils/vali
 import { rawHtmlBody } from './rawHtml';
 import '../../index.css';
 import '../../pages/programmes/online-programme.css';
-import BatchSchedule, { DEFAULT_SCHEDULE } from '../../components/BatchSchedule';
+import { BATCH_SCHEDULE } from '../../data/batchSchedule';
+import BatchScheduleOnline from "../../components/BatchScheduleOnline";
 
 
 function navigateTo(path: string) {
@@ -493,11 +494,7 @@ export function OnlineProgrammePage() {
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" as="style" onLoad={() => { const l = document.querySelector('link[rel="preload"]') as HTMLLinkElement | null; if (l) l.rel = 'stylesheet'; }} />
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[0] }} />
         <section className="bg-[#FAF8F5] pt-16 pb-32">
-          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            {typeof window !== 'undefined' && (
-              <BatchSchedule schedule={DEFAULT_SCHEDULE} />
-            )}
-          </div>
+          <BatchScheduleOnline />
         </section>
         <div dangerouslySetInnerHTML={{ __html: rawHtmlBody.split('<!-- BATCH_SCHEDULE_SLOT -->')[1] ?? '' }} />
       </div>
@@ -506,6 +503,7 @@ export function OnlineProgrammePage() {
     </>
   );
 }
+
 
 
 

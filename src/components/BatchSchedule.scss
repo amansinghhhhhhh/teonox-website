@@ -1,3 +1,8 @@
+/* 
+   FIX: Removed problematic global `margin: auto !important` and aligned columns. 
+   Alignment fixes for Batch Schedule.
+*/
+
 /* ==========================================================================
    BatchSchedule
    Brand palette only. Body font (Inter) inherits from the site; month names
@@ -7,10 +12,9 @@
    ========================================================================== */
 
 .batch-schedule {
-  /* Scope-breaking: ensure we reset or protect against global .tl-landing-page * reset */
+  /* Scope-breaking: use specific resets instead of blanket margin: auto !important */
   &, & *, &::before, &::after {
     box-sizing: border-box;
-    margin: auto !important; /* Restore standard browser margins instead of 0 */
   }
 
   /* ---- tokens: edit here only ---- */
@@ -27,7 +31,7 @@
   --bs-off-white: #fafafa;
 
   --bs-gap: 0.75rem;
-  --bs-cols: minmax(0, 0.8fr) repeat(3, minmax(0, 1fr));
+  --bs-cols: 1.2fr repeat(3, 1fr);
 
   font-family: inherit;
   width: 100%;
@@ -120,10 +124,8 @@
   /* ---------- cells ---------- */
   &__cell {
     display: flex;
-
-    &::before {
-      content: none;
-    }
+    flex-direction: column;
+    justify-content: center;
   }
 
   &__slot {
@@ -146,12 +148,12 @@
     }
 
     &--empty {
-      align-items: center;
+      justify-content: center;
       background: var(--bs-off-white);
-      border: 1px dashed var(--bs-line);
+      border: 1px dashed var(--bs-dash);
 
       &:hover {
-        border-color: var(--bs-line);
+        border-color: var(--bs-dash);
         box-shadow: none;
       }
     }
