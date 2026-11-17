@@ -26,6 +26,16 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// ─── 301 Redirect Middleware (www to non-www canonical enforcement) ───
+app.use((req, res, next) => {
+  const host = req.headers.host || '';
+  if (host.startsWith('www.')) {
+    const nonWwwHost = host.replace(/^www\./, '');
+    return res.redirect(301, `https://${nonWwwHost}${req.originalUrl}`);
+  }
+  next();
+});
+
 // ─── Dynamic Sitemap ───────────────────────────────────────────────
 // Generates sitemap.xml on-the-fly from live WordPress data.
 // No build/push needed — updates automatically when blogs are added/removed.
