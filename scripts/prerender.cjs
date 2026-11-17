@@ -132,6 +132,12 @@ function buildMetaTags(meta) {
   const canonicalUrl = `${BASE_URL}${meta.canonical}`;
   const ogType = meta.ogType || 'website';
   const robots = escapeHtml(meta.robots || 'index, follow');
+  if (meta.robots === 'noindex, nofollow') {
+    return `    <title>${title}</title>
+    <meta name="description" content="${desc}">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="${canonicalUrl}">`;
+  }
 
   return `    <title>${title}</title>
     <meta name="description" content="${desc}">
@@ -143,6 +149,7 @@ function buildMetaTags(meta) {
     <meta property="og:url" content="${canonicalUrl}">
     <meta property="og:type" content="${ogType}">
     <meta property="og:site_name" content="${SITE_NAME}">`;
+
 }
 
 // Route-specific <head> extras (e.g. LCP image preloads)
