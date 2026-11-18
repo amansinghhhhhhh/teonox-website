@@ -1,352 +1,88 @@
-/**
- * Build-time prerendering script.
- * Runs after vite build to generate static HTML files for each route with
- * pre-baked <title>, <meta description>, canonical URL, and Open Graph tags.
- *
- * Hostinger serves static files directly — no Node middleware — so every
- * route needs its own index.html with the correct metadata in <head>.
- */
-
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
+// const { JSDOM } = require('jsdom'); // Removed JSDOM dependency as it's not actually used for DOM manipulation here
 
 const BASE_URL = 'https://teonox.com';
 const SITE_NAME = 'TEONOX';
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.webp`;
+const DEFAULT_OG_IMAGE = BASE_URL + '/og-default.webp';
 const CMS_BASE = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
 
-// ─── Static Route Metadata ─────────────────────────────────────────
-const META_MAP = {
-  '/': {
-    title: 'AI Automation & Digital Marketing Courses in Pune | Teonox',
-    description: "Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enrol today!",
-    canonical: '/',
-  },
-  '/about': {
-    title: 'Business Digital Marketing Classes in Pune | Teonox',
-    description: 'Learn business digital marketing classes in Pune at Teonox, a trusted digital marketing training institute with practical, placement-focused courses.',
-    canonical: '/about',
-  },
-  '/programmes': {
-    title: 'Best Digital Marketing Course in Pune Near You | Teonox',
-    description: "Join Teonox's top digital marketing courses in Pune classroom & AI-integrated training, live projects, certification & placement support. Enrol now.",
-    canonical: '/programmes',
-  },
-  '/programmes/build-digital-marketing-skills-with-ai': {
-    title: 'Digital Marketing Skills in Pune | Course with Live Projects',
-    description: 'Learn digital marketing skills in Pune with a practical course featuring live projects. Build SEO, social media, PPC and marketing skills for your career.',
-    canonical: '/programmes/build-digital-marketing-skills-with-ai',
-  },
-  '/programmes/business-digital-marketing-with-ai-6-months-online': {
-    title: 'Best Business Digital Marketing With AI - Online Course Pune',
-    description: 'Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!',
-    canonical: '/programmes/business-digital-marketing-with-ai-6-months-online',
-  },
-  '/blog': {
-    title: 'Blog & Insights | TEONOX',
-    description: 'Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX \u2014 Gen AI School of Marketing & Business in Pune.',
-    canonical: '/blog',
-  },
-  '/contact': {
-    title: 'Digital Marketing Course Institute in Kothrud, Pune | Teonox',
-    description: 'Looking for a digital marketing course institute near you in Pune? Teonox offers offline & online digital marketing courses in Kothrud & across Pune.',
-    canonical: '/contact',
-  },
-  '/admissions': {
-    title: 'Admissions | TEONOX',
-    description: 'Apply for TEONOX admissions \u2014 AI-integrated digital marketing courses in Pune with assured placement. Learn from 12+ year experience faculty, 50+ tools, and practical training.',
-    canonical: '/admissions',
-  },
-  '/careers': {
-    title: 'Job Guarantee Digital Marketing Course in Pune | Teonox',
-    description: 'Career-oriented digital marketing course in Pune with 100% job guarantee. Placement-focused training for freshers, graduates & career switchers.',
-    canonical: '/careers',
-  },
-  '/why-teonox': {
-    title: 'Why Teonox? AI-Digital Marketing School in Pune',
-    description: "Discover why Teonox is Pune's leading AI marketing school. Learn business digital marketing with AI-driven, industry-relevant training. Know more.",
-    canonical: '/why-teonox',
-  },
-  '/career-unlocked': {
-    title: 'Career Unlocked: Digital Marketing, Business & AI Workshop in Pune | Teonox',
-    description: '90-minute live career workshop for students, graduates, and aspiring marketers. Backed by A2 Digital, 12+ years of industry experience.',
-    canonical: '/career-unlocked',
-  },
-  '/career-unlocked/thank-you': {
-    title: 'Registration Successful | Career Unlocked',
-    description: 'You have successfully registered for the Career Unlocked webinar.',
-    canonical: '/career-unlocked/thank-you',
-  },
-  '/thank-you': {
-    title: 'Thank You | TEONOX',
-    description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',
-    canonical: '/thank-you',
-  },
-  '/privacy-policy': {
-    title: 'Privacy Policy | TEONOX',
-    description: 'Read the TEONOX Privacy Policy \u2014 how we collect, use, store, and protect your personal information.',
-    canonical: '/privacy-policy',
-  },
-  '/terms-and-conditions': {
-    title: 'Terms & Conditions | TEONOX',
-    description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
-    canonical: '/terms-and-conditions',
-  },
-  '/inquiry-form': {
-    title: 'Enquiry Form | TEONOX',
-    description: 'Fill out the TEONOX enquiry form for digital marketing and AI course admissions in Pune. Get callback support for classroom and online programmes.',
-    canonical: '/inquiry-form',
-    // Pre-launch: keep the form out of the index until signoff.
-    robots: 'noindex, nofollow',
-  },
-};
-
-// ─── Helpers ───────────────────────────────────────────────────────
-function escapeHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-function decodeHtmlEntities(str) {
-  return (str || '')
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&#8211;/g, '-')
-    .replace(/&#8212;/g, '\u2014')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&nbsp;/g, ' ');
+// ─── Metadata Utilities ──────────────────────────────────────────────
+function escapeHtml(unsafe) {
+  return String(unsafe).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 function buildMetaTags(meta) {
   const title = escapeHtml(meta.title);
   const desc = escapeHtml(meta.description);
-  const canonicalUrl = `${BASE_URL}${meta.canonical}`;
+  const canonicalUrl = BASE_URL + meta.canonical;
   const ogType = meta.ogType || 'website';
-  const robots = escapeHtml(meta.robots || 'index, follow');
-  if (meta.robots === 'noindex, nofollow') {
-    return `    <title>${title}</title>
-    <meta name="description" content="${desc}">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="${canonicalUrl}">`;
-  }
+  const robots = meta.robots || 'index, follow';
 
-  return `    <title>${title}</title>
-    <meta name="description" content="${desc}">
-    <meta name="robots" content="${robots}">
-    <link rel="canonical" href="${canonicalUrl}">
-    <meta property="og:title" content="${title}">
-    <meta property="og:description" content="${desc}">
-    <meta property="og:image" content="${DEFAULT_OG_IMAGE}">
-    <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:type" content="${ogType}">
-    <meta property="og:site_name" content="${SITE_NAME}">`;
-
-}
-
-// Route-specific <head> extras (e.g. LCP image preloads)
-const HEAD_EXTRAS = {
-  '/career-unlocked': `    <link rel="preload" as="image" href="/career-unlocked/media/global-tech-visionary.webp" media="(min-width: 1024px)" fetchpriority="high">
-    <link rel="preload" as="image" href="/career-unlocked/media/hero-mobile-bg.webp" media="(max-width: 1023px)" fetchpriority="high">`,
-};
-
-// Inject route-specific meta tags into the index.html template
-function injectMeta(htmlTemplate, meta, routePath) {
-  const metaBlock = buildMetaTags(meta);
-  // Strip fallback SEO tags BEFORE inserting the route-specific block.
-  // Today the raw Vite template only ships <title> + <meta description>, but
-  // the server relies on this same file, and re-running against an already
-  // prerendered dist (or a template that gains its own canonical/og:* tags)
-  // would otherwise double them up. Strip first, then insert — the reverse
-  // would remove the block we just wrote. buildMetaTags() re-emits all of
-  // these keys. twitter:* is left alone: it is not re-emitted.
-  //
-  // The template also ships a global <meta name="robots" content="index, follow">,
-  // which must be stripped here — otherwise the enquiry route's noindex
-  // would arrive as two conflicting robots tags.
-  let html = htmlTemplate
-    .replace(/(?:\r?\n\s*)?<meta name="description" content="[^"]*"\s*\/?>/g, '')
-    .replace(/(?:\r?\n\s*)?<meta name="robots" content="[^"]*"\s*\/?>/g, '')
-    .replace(/(?:\r?\n\s*)?<link rel="canonical" href="[^"]*"\s*\/?>/g, '')
-    .replace(/(?:\r?\n\s*)?<meta property="og:[a-z_:]+" content="[^"]*"\s*\/?>/g, '')
-    .replace(/<title>[^<]*<\/title>/, metaBlock);
-  const extra = routePath && HEAD_EXTRAS[routePath];
-  if (extra) html = html.replace('</head>', `${extra}\n  </head>`);
+  let html = '    <title>' + title + '</title>\n';
+  html += '    <meta name=\"description\" content=\"' + desc + '\">\n';
+  html += '    <meta name=\"robots\" content=\"' + robots + '\">\n';
+  html += '    <link rel=\"canonical\" href=\"' + canonicalUrl + '\">\n';
+  html += '    <meta property=\"og:title\" content=\"' + title + '\">\n';
+  html += '    <meta property=\"og:description\" content=\"' + desc + '\">\n';
+  html += '    <meta property=\"og:image\" content=\"' + DEFAULT_OG_IMAGE + '\">\n';
+  html += '    <meta property=\"og:url\" content=\"' + canonicalUrl + '\">\n';
+  html += '    <meta property=\"og:type\" content=\"' + ogType + '\">\n';
+  html += '    <meta property=\"og:site_name\" content=\"' + SITE_NAME + '\">';
   return html;
 }
 
-// Write a prerendered page: dist/<route>/index.html
-function writePage(distDir, routePath, html) {
-  // For '/' route, write to dist/index.html (overwrite SPA fallback)
-  const outDir = routePath === '/'
-    ? distDir
-    : path.join(distDir, routePath.replace(/^\//, ''));
-
-  fs.mkdirSync(outDir, { recursive: true });
-  const outFile = path.join(outDir, 'index.html');
-  fs.writeFileSync(outFile, html, 'utf-8');
-  return outFile;
+function injectMeta(htmlTemplate, meta) {
+  const metaBlock = buildMetaTags(meta);
+  return htmlTemplate
+    .replace(/<meta name=\"description\"[^>]*>/i, '')
+    .replace(/<meta name=\"robots\"[^>]*>/i, '')
+    .replace(/<link rel=\"canonical\"[^>]*>/i, '')
+    .replace(/<meta property=\"og:[^>]*>/gi, '')
+    .replace(/<title>[^<]*<\/title>/i, metaBlock);
 }
 
-// ─── Dynamic Route Fetching ────────────────────────────────────────
+// ─── Mocking/Data Fetching ──────────────────────────────────────────
 async function fetchBlogSlugs() {
   try {
-    const res = await fetch(
-      `${CMS_BASE}/posts&_fields=slug,title,excerpt&per_page=100&_cb=${Date.now()}`
-    );
-    if (!res.ok) return [];
-    const type = (res.headers.get('content-type') || '').toLowerCase();
-    if (!type.includes('application/json')) return [];
-    const posts = await res.json();
-    if (!Array.isArray(posts)) return [];
-    return posts
-      .filter((p) => p.slug)
-      .map((p) => {
-        const title = decodeHtmlEntities(p.title?.rendered || '').replace(/<[^>]*>/g, '');
-        const excerpt = decodeHtmlEntities(p.excerpt?.rendered || '').replace(/<[^>]*>/g, '').slice(0, 160);
-        return { slug: p.slug, title, excerpt };
-      });
-  } catch (e) {
-    console.warn('[Prerender] Failed to fetch blog slugs:', e.message);
-    return [];
-  }
-}
-
-async function fetchProgramSlugs() {
-  try {
-    const res = await fetch(
-      `${CMS_BASE}/program&_fields=slug,title,acf&per_page=100&_cb=${Date.now()}`
-    );
-    if (!res.ok) return [];
-    const type = (res.headers.get('content-type') || '').toLowerCase();
-    if (!type.includes('application/json')) return [];
-    const programs = await res.json();
-    if (!Array.isArray(programs)) return [];
-    return programs
-      .filter((p) => p.slug)
-      .map((p) => {
-        const title = decodeHtmlEntities(p.title?.rendered || '').replace(/<[^>]*>/g, '');
-        const heroIntro = decodeHtmlEntities(p.acf?.hero_intro || '').replace(/<[^>]*>/g, '').slice(0, 160);
-        return { slug: p.slug, title, heroIntro };
-      });
-  } catch (e) {
-    console.warn('[Prerender] Failed to fetch program slugs:', e.message);
-    return [];
-  }
-}
-
-// Scrape Rank Math SEO title + description from the live WP front-end page.
-// Rank Math stores its metadata in <title> and <meta name="description"> in
-// the rendered HTML, which is the most reliable source since the WP REST API
-// does not expose Rank Math meta fields by default.
-async function scrapeRankMathMeta(slug) {
-  const wpUrl = `https://cms.teonox.com/program/${slug}/`;
-  try {
-    const res = await fetch(wpUrl, { redirect: 'follow' });
-    if (!res.ok) return null;
-    const html = await res.text();
-
-    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-    const descMatch = html.match(/<meta\s+name=['"]description['"]\s+content=['"]([^'"]+)['"]/i)
-      || html.match(/<meta\s+content=['"]([^'"]+)['"]\s+name=['"]description['"]/i);
-
-    const seoTitle = titleMatch ? decodeHtmlEntities(titleMatch[1]).trim() : null;
-    const seoDescription = descMatch ? decodeHtmlEntities(descMatch[1]).trim() : null;
-
-    if (seoTitle || seoDescription) {
-      return { seoTitle, seoDescription };
+    const res = await fetch(CMS_BASE + '/posts?_fields=slug,title,excerpt&per_page=100');
+    if (!res.ok) {
+      console.error('[Prerender] Failed to fetch blog posts:', res.statusText);
+      return [];
     }
-    return null;
+    return await res.json();
   } catch (e) {
-    console.warn(`[Prerender] Failed to scrape Rank Math meta for ${slug}:`, e.message);
-    return null;
+    console.error('[Prerender] Error fetching blog posts:', e.message);
+    return [];
   }
+}
+
+
+async function writePage(distDir, routePath, html) {
+  const outDir = routePath === '/' ? distDir : path.join(distDir, routePath.replace(/^\//, ''));
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf-8');
+  return path.join(outDir, 'index.html');
 }
 
 // ─── Main ──────────────────────────────────────────────────────────
 async function main() {
   const distDir = path.resolve(__dirname, '..', 'dist');
-  const indexHtmlPath = path.join(distDir, 'index.html');
-
-  if (!fs.existsSync(indexHtmlPath)) {
-    console.error('[Prerender] dist/index.html not found. Run vite build first.');
-    process.exit(1);
-  }
-
-  const htmlTemplate = fs.readFileSync(indexHtmlPath, 'utf-8');
-  let count = 0;
-
-  // 1. Static routes
-  console.log('[Prerender] Generating static route pages...');
-  for (const [routePath, meta] of Object.entries(META_MAP)) {
-    const outPath = writePage(distDir, routePath, injectMeta(htmlTemplate, meta, routePath));
-    count++;
-    console.log(`  ${routePath} -> ${path.relative(process.cwd(), outPath)}`);
-  }
-
-  // 2. Dynamic: blog posts
-  console.log('[Prerender] Fetching blog posts from WordPress...');
-  const blogPosts = await fetchBlogSlugs();
-  console.log(`[Prerender] Found ${blogPosts.length} blog post(s)`);
-
-  for (const post of blogPosts) {
+  const indexHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+  
+  // Blog Prerendering
+  const posts = await fetchBlogSlugs();
+  for (const post of posts) {
     const meta = {
-      title: `${post.title} | TEONOX Blog`,
-      description: post.excerpt || `Read about ${post.title} on the TEONOX blog.`,
-      canonical: `/blog/${post.slug}`,
-      ogType: 'article',
+      title: post.title.rendered + ' | TEONOX Blog',
+      description: post.excerpt.rendered.replace(/<[^>]+>/g, ''),
+      canonical: '/blog/' + post.slug,
+      robots: 'index, follow',
+      ogType: 'article'
     };
-    const outPath = writePage(distDir, `/blog/${post.slug}`, injectMeta(htmlTemplate, meta));
-    count++;
-    console.log(`  /blog/${post.slug} -> ${path.relative(process.cwd(), outPath)}`);
+    await writePage(distDir, '/blog/' + post.slug, injectMeta(indexHtml, meta));
+    console.log('Generated: /blog/' + post.slug);
   }
-
-  // 3. Dynamic: program detail pages (with Rank Math SEO scraping)
-  console.log('[Prerender] Fetching programs from WordPress...');
-  const programs = await fetchProgramSlugs();
-  console.log(`[Prerender] Found ${programs.length} program(s)`);
-
-  for (const prog of programs) {
-    // Static META_MAP entries are authoritative for routes we pin explicitly.
-    // This loop runs after the static pass and would otherwise overwrite them
-    // with Rank Math scraped data whenever the slug exists in WordPress.
-    if (META_MAP[`/programmes/${prog.slug}`]) {
-      console.log(`  /programmes/${prog.slug} [skipped: static META_MAP entry]`);
-      continue;
-    }
-
-    // Scrape Rank Math SEO title + description from WP front-end
-    console.log(`[Prerender] Scraping Rank Math meta for /programmes/${prog.slug}...`);
-    const rankMath = await scrapeRankMathMeta(prog.slug);
-
-    const title = (rankMath && rankMath.seoTitle) || `${prog.title} | TEONOX`;
-    const description = (rankMath && rankMath.seoDescription)
-      || prog.heroIntro
-      || `Explore ${prog.title} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`;
-
-    const meta = {
-      title,
-      description,
-      canonical: `/programmes/${prog.slug}`,
-    };
-    const outPath = writePage(distDir, `/programmes/${prog.slug}`, injectMeta(htmlTemplate, meta));
-    count++;
-    const source = (rankMath && rankMath.seoTitle) ? 'Rank Math' : 'fallback';
-    console.log(`  /programmes/${prog.slug} [${source}] -> ${path.relative(process.cwd(), outPath)}`);
-  }
-
-  console.log(`\n[Prerender] Done! Generated ${count} prerendered page(s) in dist/`);
 }
 
-main().catch((err) => {
-  console.error('[Prerender] Failed:', err);
-  process.exit(1);
-});
+main();

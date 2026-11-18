@@ -1,3 +1,4 @@
+import { BatchRow } from '../data/batchSchedule';
 import React from 'react';
 import { BATCH_SCHEDULE, includesBatchSchedule } from '../data/batchSchedule';
 

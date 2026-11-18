@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
+﻿import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TeonoxStorySections } from './components/TeonoxStorySections';
@@ -70,7 +70,7 @@ const PAGE_PATHS: Record<Page, string> = {
   'thank-you': '/thank-you',
   'career-unlocked': '/career-unlocked',
   'career-unlocked-thank-you': '/career-unlocked/thank-you',
-  'inquiry-form': '/inquiry-form',
+  'enquiry-form': '/inquiry-form',
   'not-found': '/404',
 };
 
@@ -93,7 +93,7 @@ function parsePath(pathname: string): Route {
     case 'admissions':
       return { page: 'admissions' };
     case 'inquiry-form':
-      return { page: 'inquiry-form' };
+      return { page: 'enquiry-form' };
     case 'privacy-policy':
       return { page: 'privacy-policy' };
     case 'terms-and-conditions':
@@ -134,7 +134,7 @@ function normalizePath(path: string): string {
 
 /**
  * Create a minimal Program stub for any route segment. The actual content is
- * resolved dynamically by ProgramDetailPage via the WP REST API — no static
+ * resolved dynamically by ProgramDetailPage via the WP REST API â€” no static
  * maps needed here. Returns null for empty slugs.
  */
 const ONLINE_PROGRAMME_SLUG = 'business-digital-marketing-with-ai-6-months-online';
@@ -513,7 +513,7 @@ export default function App() {
         ) : currentPage === 'contact' ? (
           /* Dedicated Contact Page */
           <ContactPage onEnquireClick={(topic, source, formName) => handleEnquireClick(topic || 'Contact Page Enquiry', source || '', formName || '')} />
-        ) : currentPage === 'inquiry-form' ? (
+        ) : currentPage === 'enquiry-form' ? (
           /* Dedicated multi-section Enquiry Form Page */
           <EnquiryFormPage />
         ) : currentPage === 'about' ? (
@@ -525,6 +525,15 @@ export default function App() {
         ) : currentPage === 'terms-and-conditions' ? (
           /* Terms & Conditions Legal Page */
           <TermsAndConditionsPage onNavigate={(href, label) => handleNavClick(href, label)} />
+        ) : currentPage === 'blog' && selectedPost ? (
+          /* Blog Detail Page */
+          <BlogDetailPage 
+            post={selectedPost} 
+            onBack={() => navigate('/blog')}
+            onSelectPost={(post) => handleSelectPost(post)}
+            onEnquireClick={(topic) => handleEnquireClick(topic)} 
+            onExplorePrograms={() => navigate('/programmes')}
+          />
         ) : currentPage === 'blog' ? (
           /* Premium Editorial Blog Page */
           <BlogPage
@@ -631,7 +640,7 @@ export default function App() {
               onEnquireHire={() => handleEnquireClick('Hire Talent from TEONOX')}
             />
 
-            {/* TEONOX Culture — hero, pillars, feature block, industry experts */}
+            {/* TEONOX Culture â€” hero, pillars, feature block, industry experts */}
             <TeonoxCultureSection
               onVisitCampus={() => handleEnquireClick('Visit Campus / Campus Tour')}
             />
@@ -688,3 +697,5 @@ export default function App() {
     </div>
   );
 }
+
+

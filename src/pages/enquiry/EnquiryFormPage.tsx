@@ -587,7 +587,7 @@ export function EnquiryFormPage() {
                       placeholder="e.g. 94105"
                       value={values.zipCode}
                       aria-invalid={Boolean(errors.zipCode)}
-                      onChange={(e) => setField('zipCode', e.target.value.replace(/\D/g).slice(0, 5))}
+                      onChange={(e) => setField('zipCode', e.target.value.replace(/\D/g, '').slice(0, 5))}
                       className={inputClass(Boolean(errors.zipCode))}
                     />
                   )}

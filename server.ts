@@ -358,16 +358,8 @@ function serveWithMeta(html: string) {
   return async (req: express.Request, res: express.Response) => {
     const meta = await resolveRouteMeta(req.path);
     if (!meta) {
-      // Dead /blog/:slug (WordPress returned [] / 404 / fetch failed):
-      // 301 to the blog index instead of rendering the SPA 404. This drains
-      // indexed SEO-spam URLs (e.g. /blog/5-star-casinos-in-uk) with a
-      // permanent redirect while leaving every other unknown path on the
-      // SPA fallback.
-      const cleanPath = req.path.replace(/\/+$/, '') || '/';
-      const slugSegments = cleanPath.split('/').filter(Boolean);
-      if (slugSegments.length === 2 && slugSegments[0] === 'blog') {
-        return res.redirect(301, '/blog');
-      }
+      // If the route meta cannot be resolved (e.g. CMS unreachable), 
+      // do not automatically redirect. Let the SPA attempt to load it.
       return res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
     }
 
@@ -824,7 +816,7 @@ async function startServer() {
 
     // 301 redirect /programs → /programmes (SEO link equity preservation)
     app.get('/programs', (_req, res) => { res.redirect(301, '/programmes'); });
-    app.get('/programs/*', (req, res) => { res.redirect(301, `/programmes${req.params[0]}`); });
+    app.get('/programs/:path(*)', (req, res) => { res.redirect(301, `/programmes/${req.params.path}`); });
 
     // All remaining GET requests → serve index.html with injected meta tags
     app.get('*', serveWithMeta(indexHtml));

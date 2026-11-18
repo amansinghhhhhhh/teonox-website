@@ -95,9 +95,10 @@ export function BlogPage({ onSelectPost, onExplorePrograms }: BlogPageProps) {
     fetchLiveCategories().then(
       ({ categories }) => {
         if (isMounted) {
-          setCategoryTabs(['All', ...categories]);
+          const uniqueCategories = Array.from(new Set(['All', ...categories.filter(c => c !== 'All')]));
+          setCategoryTabs(uniqueCategories);
           setSelectedCategory((current) =>
-            current === 'All' || categories.includes(current) ? current : 'All'
+            current === 'All' || uniqueCategories.includes(current) ? current : 'All'
           );
         }
       },
