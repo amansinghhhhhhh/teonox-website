@@ -47,7 +47,7 @@ const PROGRAM_IDS = [
   'seo-specialization',
   'social-media-marketing',
 ];
-import routes from "./routes.json";
+import routes from "./src/routes.json";
 export const STATIC_ROUTES = routes;
 
 const STATIC_PAGES = STATIC_ROUTES.map((r) => ({ path: r.path, priority: r.priority, changefreq: r.changefreq }));
