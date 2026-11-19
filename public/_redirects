@@ -1,2 +1,3 @@
-/enquiry-form   /inquiry-form   301
+# /enquiry-form is the correct URL, /inquiry-form is the old one.
+/inquiry-form   /enquiry-form   301
 /*    /index.html   200

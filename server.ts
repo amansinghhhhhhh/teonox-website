@@ -47,18 +47,10 @@ const PROGRAM_IDS = [
   'seo-specialization',
   'social-media-marketing',
 ];
-const STATIC_PAGES: Array<{ path: string; priority: string; changefreq: string }> = [
-  { path: '/', priority: '1.0', changefreq: 'weekly' },
-  { path: '/about', priority: '0.8', changefreq: 'monthly' },
-  { path: '/programmes', priority: '0.9', changefreq: 'weekly' },
-  { path: '/blog', priority: '0.8', changefreq: 'weekly' },
-  { path: '/contact', priority: '0.7', changefreq: 'monthly' },
-  { path: '/admissions', priority: '0.8', changefreq: 'monthly' },
-  { path: '/careers', priority: '0.7', changefreq: 'monthly' },
-  { path: '/why-teonox', priority: '0.7', changefreq: 'monthly' },
-  { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
-  { path: '/terms-and-conditions', priority: '0.3', changefreq: 'yearly' },
-];
+import routes from "./routes.json";
+export const STATIC_ROUTES = routes;
+
+const STATIC_PAGES = STATIC_ROUTES.map((r) => ({ path: r.path, priority: r.priority, changefreq: r.changefreq }));
 
 async function fetchLiveBlogSlugs(): Promise<Array<{ slug: string; lastmod: string }>> {
   try {
@@ -328,6 +320,7 @@ async function fetchProgramMeta(slug: string): Promise<RouteMeta | null> {
 
 // Resolve metadata for any SPA path (static or dynamic)
 async function resolveRouteMeta(pathname: string): Promise<RouteMeta | null> {
+
   const clean = pathname.replace(/\/+$/, '') || '/';
 
   // Exact static match
@@ -817,6 +810,11 @@ async function startServer() {
     // 301 redirect /programs → /programmes (SEO link equity preservation)
     app.get('/programs', (_req, res) => { res.redirect(301, '/programmes'); });
     app.get('/programs/:path(*)', (req, res) => { res.redirect(301, `/programmes/${req.params.path}`); });
+
+    // Serve /webinar
+    app.get(['/webinar', '/webinar/'], (_req, res) => {
+      res.sendFile(path.join(distPath, 'webinar.html'));
+    });
 
     // All remaining GET requests → serve index.html with injected meta tags
     app.get('*', serveWithMeta(indexHtml));
