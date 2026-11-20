@@ -10,6 +10,7 @@
   { "path": "/privacy-policy", "title": "Privacy Policy", "priority": "0.3", "changefreq": "yearly" },
   { "path": "/terms-and-conditions", "title": "Terms & Conditions", "priority": "0.3", "changefreq": "yearly" },
   { "path": "/webinar", "title": "Webinar", "priority": "0.9", "changefreq": "weekly" },
-  { "path": "/enquiry-form", "title": "Enquiry Form", "priority": "0.5", "changefreq": "monthly" }
+  { "path": "/enquiry-form", "title": "Enquiry Form", "priority": "0.5", "changefreq": "monthly" },
+  { "path": "/marketing-uncovered", "title": "Marketing Uncovered", "priority": "0.9", "changefreq": "weekly" }
 ]
 

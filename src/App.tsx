@@ -43,11 +43,12 @@ const TermsAndConditionsPage = lazyWithRetry(() => import('./components/TermsAnd
 const NotFoundPage = lazyWithRetry(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 const ThankYouPage = lazyWithRetry(() => import('./components/ThankYouPage').then((m) => ({ default: m.ThankYouPage })));
 const CareerUnlockedPage = lazyWithRetry(() => import('./pages/CareerUnlocked/CareerUnlockedPage').then((m) => ({ default: m.CareerUnlockedPage })));
+const MarketingUncoveredPage = lazyWithRetry(() => import('./pages/MarketingUncovered/MarketingUncoveredPage').then((m) => ({ default: m.MarketingUncoveredPage })));
 const CareerUnlockedThankYouPage = lazyWithRetry(() => import('./pages/CareerUnlocked/CareerUnlockedThankYouPage').then((m) => ({ default: m.CareerUnlockedThankYouPage })));
 const OnlineProgrammePage = lazyWithRetry(() => import('./pages/programmes/OnlineProgrammePage').then((m) => ({ default: m.OnlineProgrammePage })));
 const EnquiryFormPage = lazyWithRetry(() => import('./pages/enquiry/EnquiryFormPage').then((m) => ({ default: m.EnquiryFormPage })));
 
-export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'thank-you' | 'career-unlocked' | 'career-unlocked-thank-you' | 'enquiry-form' | 'not-found';
+export type Page = 'home' | 'about' | 'blog' | 'contact' | 'programs' | 'careers' | 'why-teonox' | 'admissions' | 'privacy-policy' | 'terms-and-conditions' | 'thank-you' | 'career-unlocked' | 'career-unlocked-thank-you' | 'marketing-uncovered' | 'enquiry-form' | 'not-found';
 
 interface Route {
   page: Page;
@@ -70,6 +71,7 @@ const PAGE_PATHS: Record<Page, string> = {
   'thank-you': '/thank-you',
   'career-unlocked': '/career-unlocked',
   'career-unlocked-thank-you': '/career-unlocked/thank-you',
+  'marketing-uncovered': '/marketing-uncovered',
   'enquiry-form': '/enquiry-form',
   'not-found': '/404',
 };
@@ -104,6 +106,8 @@ function parsePath(pathname: string): Route {
       return { page: 'thank-you' };
     case 'career-unlocked':
       return second === 'thank-you' ? { page: 'career-unlocked-thank-you' } : { page: 'career-unlocked' };
+    case 'marketing-uncovered':
+      return { page: 'marketing-uncovered' };
     // /programmes/<slug> -> single programme detail page (primary route)
     // /programmes -> programme listing page
     case 'programmes':
@@ -453,7 +457,7 @@ export default function App() {
       </a>
 
       {/* Navigation */}
-      {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && (
+      {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && currentPage !== 'marketing-uncovered' && (
         <Navbar
           onEnquireClick={() => handleEnquireClick()}
           activeSection={getActiveNavLabel()}
@@ -547,6 +551,8 @@ export default function App() {
           <CareerUnlockedThankYouPage />
         ) : currentPage === 'career-unlocked' ? (
           <CareerUnlockedPage />
+        ) : currentPage === 'marketing-uncovered' ? (
+          <MarketingUncoveredPage />
         ) : currentPage === 'thank-you' ? (
           <ThankYouPage />
         ) : currentPage === 'not-found' ? (
@@ -671,7 +677,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && (
+      {!(selectedProgram && selectedProgram.id === ONLINE_PROGRAMME_SLUG) && currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && currentPage !== 'marketing-uncovered' && (
         <Footer
           onEnquireClick={() => handleEnquireClick()}
           onNavigate={(href, label) => handleNavClick(href, label)}
@@ -695,7 +701,7 @@ export default function App() {
         defaultCourse={brochureDefaultCourse}
       />
 
-      {currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && <FloatingControls />}
+      {currentPage !== 'career-unlocked' && currentPage !== 'career-unlocked-thank-you' && currentPage !== 'marketing-uncovered' && <FloatingControls />}
     </div>
   );
 }

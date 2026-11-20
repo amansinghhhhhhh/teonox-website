@@ -1,0 +1,332 @@
+/* Page-scoped overrides layered on top of career-unlocked.css. */
+
+/*
+ * career-unlocked.css sets overflow-x:hidden on the wrapper, which turns the
+ * wrapper into a scroll container and can stop the sticky header from sticking.
+ * `clip` prevents horizontal overflow without creating that scroll container.
+ */
+.career-unlocked-lp.marketing-uncovered-lp {
+  overflow-x: clip;
+}
+
+/* Long bracketed placeholders (mode / venue) must wrap, never widen the page. */
+.career-unlocked-lp.marketing-uncovered-lp .wrap {
+  min-width: 0;
+}
+
+/*
+ * index.css caps every h1/h2/h3 at 22px with !important below 640px. Because
+ * that rule lives in Tailwind's `base` cascade layer, an unlayered !important
+ * rule cannot beat it. Register these overrides inside the same layer (loaded
+ * later, and more specific) so the hero keeps its scale on phones.
+ */
+@layer base {
+  @media (max-width: 639px) {
+    .career-unlocked-lp.marketing-uncovered-lp h1 {
+      font-size: clamp(30px, 8.4vw, 38px) !important;
+      line-height: 1.04 !important;
+    }
+
+    .career-unlocked-lp.marketing-uncovered-lp h2 {
+      font-size: clamp(23px, 6.4vw, 30px) !important;
+      line-height: 1.12 !important;
+    }
+  }
+}
+
+/* Faint light-on-dark dot texture for the dark bands. */
+.career-unlocked-lp.marketing-uncovered-lp .mu-dot-grid-light {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ---------------------------------------------------------------- *
+ * Full-bleed hero banner
+ * ---------------------------------------------------------------- */
+
+.hero-bg {
+  background-image: url('/images/marketing-uncovered-hero.webp');
+  background-size: cover;
+  background-position: 22% 50%;
+  background-repeat: no-repeat;
+}
+
+/* Desktop: subtle horizontal gradient fade from cream (#FAF6EF) on the left
+   to transparent on the right, so the photo stays crisp and the text column
+   remains legible without washing out the entire banner. */
+@media (min-width: 1024px) {
+  .hero-bg {
+    background-position: 22% 50%;
+    background-size: cover;
+  }
+
+  /* Left solid cream (0%–42%), soft fade (42%–62%), nearly transparent (62%–100%) */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(250, 246, 239, 1) 0%,
+        rgba(250, 246, 239, 1) 42%,
+        rgba(250, 246, 239, 0) 62%,
+        rgba(250, 246, 239, 0) 100%
+      );
+    pointer-events: none;
+  }
+}
+
+/* Stacked layout: copy spans nearly the full width, so use a vertical wash */
+@media (max-width: 1023px) {
+  .hero-bg {
+    background-position: 64% 44%;
+    background-size: cover;
+  }
+
+  /* Vertical gradient: cream at top, transparent at bottom so text remains readable */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(250, 246, 239, 1) 0%,
+        rgba(250, 246, 239, 0) 62%
+      );
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-bg {
+    background: #FFFFFF;
+  }
+}
+
+/* ---------------------------------------------------------------- *
+ * Hero load-in
+ * ---------------------------------------------------------------- */
+
+@keyframes mu-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mu-hero-media-in {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-hero-copy > * {
+  animation: mu-hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-hero-copy > *:nth-child(1) {
+  animation-delay: 0.04s;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-hero-copy > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-hero-copy > *:nth-child(3) {
+  animation-delay: 0.18s;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-hero-copy > *:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-hero-media {
+  animation: mu-hero-media-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------------------------------------------------------------- *
+ * Scroll reveals
+ *
+ * The hook only primes blocks that start below the fold, so content is
+ * visible without JS and above-the-fold content never flashes.
+ * ---------------------------------------------------------------- */
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-reveal.is-primed {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------- *
+ * Hover micro-interactions
+ * ---------------------------------------------------------------- */
+
+/* Light sweep across primary CTAs. */
+.career-unlocked-lp.marketing-uncovered-lp .mu-cta::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: -60%;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.42),
+    transparent
+  );
+  transform: translateX(0) skewX(-16deg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-cta:hover::after {
+  transform: translateX(420%) skewX(-16deg);
+  opacity: 1;
+}
+
+/* Light sweep across the workshop detail cards. */
+.career-unlocked-lp.marketing-uncovered-lp .mu-sheen::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  bottom: -40%;
+  left: -60%;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: translateX(0) skewX(-16deg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-sheen:hover::after {
+  transform: translateX(420%) skewX(-16deg);
+  opacity: 1;
+}
+
+/* Soft orange spotlight inside the dark audience cards. */
+.career-unlocked-lp.marketing-uncovered-lp .mu-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 100% 0%,
+    rgba(255, 107, 26, 0.16),
+    transparent 62%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.career-unlocked-lp.marketing-uncovered-lp .mu-spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- *
+ * FAQ
+ * ---------------------------------------------------------------- */
+
+/* Open FAQ state: warm fill, orange frame and a soft glow. */
+.career-unlocked-lp.marketing-uncovered-lp details.faq[open] {
+  border-color: rgba(255, 107, 26, 0.6);
+  background-color: #fffbf6;
+  box-shadow: 0 18px 40px -24px rgba(226, 74, 11, 0.45);
+}
+
+.career-unlocked-lp.marketing-uncovered-lp details.faq > summary {
+  list-style: none;
+}
+
+/*
+ * Smoothly expand/collapse answers where the browser supports animating
+ * `auto` sizes. Older browsers keep the default instant toggle.
+ */
+@supports (interpolate-size: allow-keywords) {
+  .career-unlocked-lp.marketing-uncovered-lp details.faq {
+    interpolate-size: allow-keywords;
+  }
+
+  .career-unlocked-lp.marketing-uncovered-lp details.faq::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.26s ease 0.05s,
+      content-visibility 0.38s allow-discrete;
+  }
+
+  .career-unlocked-lp.marketing-uncovered-lp details.faq[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------- *
+ * Accessibility
+ * ---------------------------------------------------------------- */
+
+.career-unlocked-lp.marketing-uncovered-lp a:focus-visible,
+.career-unlocked-lp.marketing-uncovered-lp summary:focus-visible {
+  outline: 2px solid #ff6b1a;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career-unlocked-lp.marketing-uncovered-lp .mu-reveal,
+  .career-unlocked-lp.marketing-uncovered-lp .mu-hero-copy > *,
+  .career-unlocked-lp.marketing-uncovered-lp .mu-hero-media {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .career-unlocked-lp.marketing-uncovered-lp .mu-cta::after,
+  .career-unlocked-lp.marketing-uncovered-lp .mu-sheen::after {
+    display: none;
+  }
+
+  .career-unlocked-lp.marketing-uncovered-lp *,
+  .career-unlocked-lp.marketing-uncovered-lp *::before,
+  .career-unlocked-lp.marketing-uncovered-lp *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -202,6 +202,12 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',
     canonical: '/thank-you',
   },
+  '/marketing-uncovered': {
+    title: 'Marketing Uncovered: Career Discovery Workshop | Teonox',
+    description: 'Explore the world of marketing, AI, and business in this 90-minute career discovery workshop by TEONOX.',
+    canonical: '/marketing-uncovered',
+  },
+
   '/terms-and-conditions': {
     title: 'Terms & Conditions | TEONOX',
     description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
