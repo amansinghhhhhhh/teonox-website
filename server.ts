@@ -799,6 +799,7 @@ async function startServer() {
     // Serve real static assets (JS, CSS, images, PDFs) — but NOT index.html
     app.use(express.static(distPath, {
       index: false,
+      redirect: false,
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.html')) {
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -820,6 +821,21 @@ async function startServer() {
     // Serve /webinar
     app.get(['/webinar', '/webinar/'], (_req, res) => {
       res.sendFile(path.join(distPath, 'webinar.html'));
+    });
+
+    // Serve prerendered marketing-uncovered page
+    app.get('/marketing-uncovered', (_req, res) => {
+      const marketingUncoveredPath = path.join(distPath, 'marketing-uncovered', 'index.html');
+      if (fs.existsSync(marketingUncoveredPath)) {
+        res.sendFile(marketingUncoveredPath);
+      } else {
+        // Fall back to serving index.html with meta injection if prerendered file doesn't exist
+        res.sendFile(path.join(distPath, 'index.html'), (err) => {
+          if (err) {
+            res.status(500).send('Error serving prerendered page');
+          }
+        });
+      }
     });
 
     // All remaining GET requests → serve index.html with injected meta tags
