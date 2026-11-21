@@ -66,7 +66,7 @@ async function writePage(distDir, routePath, html) {
 }
 
 // Generate marketing-uncovered page static HTML from the designer's pure HTML/CSS/JS.
-const PAYMENT_URL = 'https://tagmango.com/your-payment-link';
+const PAYMENT_URL = 'https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e';
 const DESIGNER_MARKETING_DIR = path.resolve(__dirname, '..', 'designer', 'marketing-uncovered');
 
 function sanitizeDesignerScript(source) {

@@ -7,7 +7,7 @@ import '../CareerUnlocked/career-unlocked.css';
 import './marketing-uncovered.css';
 
 // Single source of truth for every CTA on this page.
-const PAYMENT_URL = 'https://tagmango.com/your-payment-link';
+const PAYMENT_URL = 'https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e';
 
 const CAREER_PATHS = [
   'Performance Marketing',

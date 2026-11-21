@@ -60,7 +60,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
   <header class="site-header">
     <div class="wrap header-inner">
       <a href="#top" class="logo"><img src="/marketing-uncovered/media/logo-on-light.png" alt="TEONOX — Learn, Apply, Lead" width="114" height="44" /></a>
-      <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm">Book My Seat <svg><use href="#i-arrow-right"/></svg></a>
+      <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm">Book My Seat <svg><use href="#i-arrow-right"/></svg></a>
     </div>
   </header>
 </div>
@@ -88,7 +88,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
         <span class="meta-badge">INDIA + GLOBAL OPPORTUNITIES</span>
       </div>
 
-      <div class="hero-cta"><a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book My Seat <svg><use href="#i-arrow-right"/></svg></a></div>
+      <div class="hero-cta"><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book My Seat <svg><use href="#i-arrow-right"/></svg></a></div>
     </div>
   </section>
 
@@ -129,7 +129,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
         <div class="detail-card"><span class="detail-icon"><svg><use href="#i-globe"/></svg></span><small>MODE</small><strong>Online / Offline</strong><p>To be configured at the time of booking.</p></div>
         <div class="detail-card"><span class="detail-icon"><svg><use href="#i-pin"/></svg></span><small>VENUE</small><strong>TEONOX, Kothrud, Pune</strong><p>For offline sessions.</p></div>
       </div>
-      <div class="center-cta"><a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a></div>
+      <div class="center-cta"><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a></div>
     </div>
   </section>
 
@@ -415,7 +415,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
           <div class="brand-tile" title="A2 Digital"><img src="/marketing-uncovered/media/brands/a2-digital.jpg" alt="A2 Digital" loading="lazy" /></div>
         </div>
       </div>
-      <div class="center-cta"><a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a></div>
+      <div class="center-cta"><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a></div>
     </div>
   </section>
 
@@ -437,7 +437,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
         </div></div>
         <div class="slider-nav"><button type="button" class="nav-btn" data-prev aria-label="Previous"><svg><use href="#i-chevron-left"/></svg></button><div class="dots" data-dots></div><button type="button" class="nav-btn" data-next aria-label="Next"><svg><use href="#i-chevron-right"/></svg></button></div>
       </div>
-      <div class="center-cta"><a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book My Seat <svg><use href="#i-arrow-right"/></svg></a></div>
+      <div class="center-cta"><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book My Seat <svg><use href="#i-arrow-right"/></svg></a></div>
     </div>
   </section>
 
@@ -470,7 +470,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
             <p><svg><use href="#i-pin"/></svg> Online / Offline · TEONOX, Kothrud, Pune</p>
             <span class="seats-left">Free registration</span>
           </div>
-          <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this day <svg><use href="#i-arrow-right"/></svg></a>
+          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this day <svg><use href="#i-arrow-right"/></svg></a>
         </div>
         <div class="session-card">
           <div class="session-info">
@@ -480,12 +480,12 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
             <p><svg><use href="#i-pin"/></svg> Online / Offline · TEONOX, Kothrud, Pune</p>
             <span class="seats-left">Free registration</span>
           </div>
-          <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this day <svg><use href="#i-arrow-right"/></svg></a>
+          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this day <svg><use href="#i-arrow-right"/></svg></a>
         </div>
       </div>
       <div class="questions">
         <p>Questions first?</p>
-        <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a>
+        <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a>
       </div>
     </div>
   </section>
@@ -522,8 +522,8 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
           <span class="final-tag plain"><svg><use href="#i-pin"/></svg> TEONOX, Kothrud, Pune</span>
         </div>
         <div class="final-actions">
-          <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book Your Workshop Seat <svg><use href="#i-arrow-right"/></svg></a>
-          <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a>
+          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book Your Workshop Seat <svg><use href="#i-arrow-right"/></svg></a>
+          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a>
         </div>
       </div>
       <div class="mascot"><img src="/marketing-uncovered/media/nox.png" alt="TEONOX mascot" loading="lazy" /></div>
@@ -544,7 +544,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
         <li><svg><use href="#i-instagram"/></svg><a href="https://www.instagram.com/teonoxofficial" target="_blank" rel="noopener noreferrer">@teonoxofficial</a></li>
       </ul></div>
       <div><h4>Explore</h4><ul class="footer-list links">
-        <li><a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer">Workshop details</a></li><li><a href="#faq">FAQ</a></li><li><a href="#top">Back to top</a></li>
+        <li><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer">Workshop details</a></li><li><a href="#faq">FAQ</a></li><li><a href="#top">Back to top</a></li>
       </ul></div>
       <div><h4>Workshop</h4><ul class="footer-list links">
         <li>90 Minutes</li><li>Every Wednesday &amp; Saturday</li><li>Online / Offline</li>
@@ -558,7 +558,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
 <button type="button" class="to-top" id="to-top" aria-label="Back to top"><svg><use href="#i-arrow-up"/></svg></button>
 <div class="sticky-bar" id="sticky-bar">
   <div class="sticky-info"><i></i><span><small>Marketing Uncovered</small><strong>Free · 90 minutes · Wed &amp; Sat</strong></span></div>
-  <a href="https://tagmango.com/your-payment-link" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm">Book seat</a>
+  <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm">Book seat</a>
 </div>
 
 <script src="/marketing-uncovered/script.js"></script>`;

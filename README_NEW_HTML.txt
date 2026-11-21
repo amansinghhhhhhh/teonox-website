@@ -21,7 +21,7 @@ VERIFIED FEATURES:
   - A 90-minute Career Discovery Workshop by TEONOX – School of Marketing, AI & Business.
   - RESERVE YOUR SPOT and BOOK YOUR WORKSHOP SEAT CTAs
 
-✅ All 4 CTAs point to PAYMENT_URL = 'https://tagmango.com/your-payment-link'
+✅ All 4 CTAs point to PAYMENT_URL = 'https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e'
 
 ✅ Responsive breakpoints:
   - Desktop (1024px+): hero image + horizontal gradient overlay
@@ -56,10 +56,10 @@ COPY STRINGS VERIFIED (9 matches found):
 - Line 382: TEONOX – School of Marketing, AI & Business h3
 
 CTA LINKS (4 matches, all PAYMENT_URL):
-- Line 82: https://tagmango.com/your-payment-link
-- Line 114: https://tagmango.com/your-payment-link
-- Line 331: https://tagmango.com/your-payment-link
-- Line 360: https://tagmango.com/your-payment-link
+- Line 82: https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e
+- Line 114: https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e
+- Line 331: https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e
+- Line 360: https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e
 
 RESPONSIVE BREAKPOINTS IN CSS:
 - Mobile max-width: 639px → background: #FFFFFF solid white
