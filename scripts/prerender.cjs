@@ -42,6 +42,33 @@ function injectMeta(htmlTemplate, meta) {
     .replace(/<title>[^<]*<\/title>/i, metaBlock);
 }
 
+// ─── Google Profile JSON-LD ────────────────────────────────────────
+// The SEO team's schema lives verbatim in index.html. Read it from there so
+// the exact values (including full hyperlink targets) are used everywhere.
+const GOOGLE_PROFILE_PATTERN = /<script type="application\/ld\+json">[\s\S]*?"@type":\s*"LocalBusiness"[\s\S]*?<\/script>/;
+
+function getGoogleProfileSchema() {
+  const sourcePath = path.resolve(__dirname, '..', 'index.html');
+  const source = fs.readFileSync(sourcePath, 'utf-8');
+  const match = source.match(GOOGLE_PROFILE_PATTERN);
+  if (!match) {
+    throw new Error('Google Profile JSON-LD block not found in index.html');
+  }
+  const json = match[0]
+    .replace(/^<script type="application\/ld\+json">/, '')
+    .replace(/<\/script>$/, '');
+  JSON.parse(json);
+  return match[0];
+}
+
+function ensureGoogleProfileSchema(html, schemaBlock) {
+  if (html.includes(schemaBlock)) return html;
+  if (GOOGLE_PROFILE_PATTERN.test(html)) {
+    return html.replace(GOOGLE_PROFILE_PATTERN, schemaBlock);
+  }
+  return html.replace('</head>', `  ${schemaBlock}\n  </head>`);
+}
+
 // ─── Mocking/Data Fetching ──────────────────────────────────────────
 async function fetchBlogSlugs() {
   try {
@@ -120,7 +147,7 @@ function transformDesignerMarketingHtml(source) {
   return html;
 }
 
-async function writeMarketingUncoveredPage(distDir) {
+async function writeMarketingUncoveredPage(distDir, googleProfileSchema) {
   const outDir = path.join(distDir, 'marketing-uncovered');
   fs.mkdirSync(outDir, { recursive: true });
 
@@ -137,7 +164,7 @@ async function writeMarketingUncoveredPage(distDir) {
   };
 
   const transformedHtml = transformDesignerMarketingHtml(designerHtml);
-  const html = injectMeta(transformedHtml, meta);
+  const html = ensureGoogleProfileSchema(injectMeta(transformedHtml, meta), googleProfileSchema);
   await writePage(distDir, '/marketing-uncovered', html);
 
   const cssContent = designerCss.replace(/overflow-x:\s*hidden\s*;/g, 'overflow-x: clip;');
@@ -196,7 +223,17 @@ async function writeMarketingUncoveredPage(distDir) {
 // ─── Main ──────────────────────────────────────────────────────────
 async function main() {
   const distDir = path.resolve(__dirname, '..', 'dist');
-  const indexHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+  const googleProfileSchema = getGoogleProfileSchema();
+  const indexPath = path.join(distDir, 'index.html');
+  let indexHtml = fs.readFileSync(indexPath, 'utf-8');
+
+  // Vite normally preserves the JSON-LD verbatim. Normalize it from the
+  // source template anyway so every generated page uses the exact block.
+  const normalizedIndexHtml = ensureGoogleProfileSchema(indexHtml, googleProfileSchema);
+  if (normalizedIndexHtml !== indexHtml) {
+    fs.writeFileSync(indexPath, normalizedIndexHtml, 'utf-8');
+    indexHtml = normalizedIndexHtml;
+  }
   
   // Blog Prerendering
   const posts = await fetchBlogSlugs();
@@ -213,7 +250,7 @@ async function main() {
   }
   
   // Marketing Uncovered Prerendering
-  await writeMarketingUncoveredPage(distDir);
+  await writeMarketingUncoveredPage(distDir, googleProfileSchema);
 }
 
 main();
