@@ -1,14 +1,29 @@
 import { Helmet } from 'react-helmet-async';
 import { ORG, COURSE_DEFAULTS, courseUrl, BASE_URL } from '../../utils/schema';
+import auditSchemas from '../../data/schemaAudit.json';
 
 interface CourseSchemaProps {
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
   slug: string;
   courseWorkload?: string;
 }
 
 export function CourseSchema({ name, description, slug, courseWorkload }: CourseSchemaProps) {
+  const auditCourse = (auditSchemas.courses as Record<string, object | undefined>)[slug];
+
+  if (auditCourse) {
+    return (
+      <Helmet>
+        <script
+          type="application/ld+json"
+          data-schema-id={`course:${slug}`}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(auditCourse).replace(/</g, '\\u003c') }}
+        />
+      </Helmet>
+    );
+  }
+
   const url = courseUrl(slug);
   const courseId = `${url}#course`;
   const instanceId = `${url}#course-instance`;
@@ -66,6 +81,7 @@ export function CourseSchema({ name, description, slug, courseWorkload }: Course
     <Helmet>
       <script
         type="application/ld+json"
+        data-schema-id={`course:${slug}`}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
       />
     </Helmet>

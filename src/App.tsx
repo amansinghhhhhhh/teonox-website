@@ -24,7 +24,7 @@ import { TeonoxCultureSection } from './components/sections/TeonoxCultureSection
 import { LifeAtTeonoxSection } from './components/sections/LifeAtTeonoxSection';
 import { CertificationsSection } from './components/CertificationsSection';
 import { SEO } from './components/SEO';
-import { ORG, WEBSITE, BASE_URL } from './utils/schema';
+import auditSchemas from './data/schemaAudit.json';
 import { Program, BlogPost } from './types';
 import { INSIGHTS_DATA } from './data';
 import { fetchLiveBlogDetail } from './services/blogService';
@@ -138,6 +138,26 @@ function normalizePath(path: string): string {
   return withSlash.length > 1 ? withSlash.replace(/\/+$/, '') : '/';
 }
 
+/** Minimal BlogPost built from the report entry, used when the CMS is unavailable. */
+function auditBlogStub(slug: string): BlogPost | null {
+  const entry = (auditSchemas.blogPosts as Record<string, any>)[slug];
+  if (!entry) return null;
+  const authorName =
+    entry.author && typeof entry.author === 'object' ? entry.author.name : entry.author;
+  return {
+    id: slug,
+    slug,
+    category: 'Insights',
+    title: entry.headline,
+    excerpt: entry.headline,
+    author: authorName || 'By TEONOX Team',
+    date: entry.datePublished,
+    image: entry.image,
+    content: [entry.headline],
+    link: entry.mainEntityOfPage,
+  };
+}
+
 /**
  * Create a minimal Program stub for any route segment. The actual content is
  * resolved dynamically by ProgramDetailPage via the WP REST API â€” no static
@@ -182,6 +202,10 @@ function getInitialRouteState(): {
     const cached = INSIGHTS_DATA.posts.find((p) => p.id === route.postId || p.slug === route.postId);
     if (cached) {
       return { page: 'blog', program: null, post: cached, blogLoading: false };
+    }
+    const auditStub = auditBlogStub(route.postId);
+    if (auditStub) {
+      return { page: 'blog', program: null, post: auditStub, blogLoading: false };
     }
     // Directly-linked article not in cache - show skeleton while the live API resolves it
     return { page: 'blog', program: null, post: null, blogLoading: true };
@@ -263,14 +287,18 @@ export default function App() {
       setSelectedPost(cached);
       return;
     }
+    const auditStub = auditBlogStub(idOrSlug);
+    if (auditStub) {
+      setSelectedPost(auditStub);
+    }
     requestedPostIdRef.current = idOrSlug;
-    setBlogLoading(true);
+    if (!auditStub) setBlogLoading(true);
     try {
       const post = await fetchLiveBlogDetail(idOrSlug);
         if (requestedPostIdRef.current === idOrSlug) {
         if (post) {
           setSelectedPost(post);
-        } else {
+        } else if (!auditStub) {
           setCurrentPage('not-found');
         }
       }
@@ -565,20 +593,13 @@ export default function App() {
               title="AI Automation & Digital Marketing Courses in Pune | Teonox"
               description="Upskill with Teonox's AI automation & digital marketing courses in Pune. 100% placement support for students, graduates & career switchers. Enrol today!"
               canonical="/"
+              jsonLdId="home"
               jsonLd={{
                 '@context': 'https://schema.org',
                 '@graph': [
-                  ORG,
-                  WEBSITE,
-                  {
-                    '@type': 'WebPage',
-                    '@id': `${BASE_URL}/#webpage`,
-                    url: `${BASE_URL}/`,
-                    name: 'AI Automation & Digital Marketing Courses in Pune | TEONOX',
-                    isPartOf: { '@id': `${BASE_URL}/#website` },
-                    about: { '@id': `${BASE_URL}/#organization` },
-                    inLanguage: 'en-IN',
-                  },
+                  auditSchemas.homepage.organization,
+                  auditSchemas.homepage.website,
+                  auditSchemas.homepage.webpage,
                   {
                     '@type': 'FAQPage',
                     mainEntity: FAQ_DATA.map((faq) => ({

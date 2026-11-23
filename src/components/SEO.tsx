@@ -11,6 +11,10 @@ interface SEOProps {
   ogImage?: string;
   ogType?: 'website' | 'article';
   jsonLd?: object | object[];
+  /** Optional marker for de-duplicating server-injected schema blocks. */
+  jsonLdId?: string;
+  /** Identifies who owns the block (e.g. prerender vs React) for safe cleanup. */
+  jsonLdSource?: string;
   /** Robots directive for this route. Defaults to 'index, follow'. */
   robots?: string;
 }
@@ -22,6 +26,8 @@ export function SEO({
   ogImage,
   ogType = 'website',
   jsonLd,
+  jsonLdId,
+  jsonLdSource,
   robots = 'index, follow',
 }: SEOProps) {
   const fullTitle = title.toLowerCase().includes(SITE_NAME.toLowerCase()) ? title : `${title} | ${SITE_NAME}`;
@@ -53,6 +59,8 @@ export function SEO({
       {jsonLd && (
         <script
           type="application/ld+json"
+          data-schema-id={jsonLdId}
+          data-schema-source={jsonLdSource}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
       )}

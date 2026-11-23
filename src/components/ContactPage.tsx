@@ -24,7 +24,7 @@ import bookCounsellingImg from '../assets/images/contact/book-counselling.webp';
 import campusImg from '../assets/images/contact/campus.webp';
 import { SEO } from './SEO';
 import { BreadcrumbSchema } from './schema/BreadcrumbSchema';
-import { ORG, BASE_URL } from '../utils/schema';
+import auditSchemas from '../data/schemaAudit.json';
 import { EASE_OUT } from '../utils/easing';
 
 interface ContactPageProps {
@@ -154,19 +154,13 @@ export function ContactPage({ onEnquireClick }: ContactPageProps) {
         title="Digital Marketing Course Institute in Kothrud, Pune | Teonox"
         description="Looking for a digital marketing course institute near you in Pune? Teonox offers offline & online digital marketing courses in Kothrud & across Pune."
         canonical="/contact"
+        jsonLdId="contact"
         jsonLd={{
           '@context': 'https://schema.org',
           '@graph': [
-            {
-              '@type': 'ContactPage',
-              '@id': `${BASE_URL}/contact/#webpage`,
-              url: `${BASE_URL}/contact`,
-              name: 'Contact TEONOX',
-              description: 'Contact TEONOX in Kothrud, Pune for information about AI, digital marketing, business and automation programmes.',
-              isPartOf: { '@id': `${BASE_URL}/#website` },
-              about: { '@id': ORG['@id'] },
-            },
-            ORG,
+            auditSchemas.contact,
+            auditSchemas.homepage.organization,
+            auditSchemas.homepage.website,
           ],
         }}
       />

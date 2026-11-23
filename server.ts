@@ -838,6 +838,17 @@ async function startServer() {
       }
     });
 
+    // Serve prerendered blog detail pages (with their report BlogPosting JSON-LD)
+    app.get(['/blog/:slug', '/blog/:slug/'], (req, res, next) => {
+      const slug = String(req.params.slug || '');
+      if (!/^[a-z0-9-]+$/i.test(slug)) return next();
+      const blogPagePath = path.join(distPath, 'blog', slug, 'index.html');
+      if (fs.existsSync(blogPagePath)) {
+        return res.sendFile(blogPagePath);
+      }
+      next();
+    });
+
     // All remaining GET requests → serve index.html with injected meta tags
     app.get('*', serveWithMeta(indexHtml));
   }

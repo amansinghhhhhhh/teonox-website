@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, WifiOff } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { SEO } from '../../components/SEO';
+import { CourseSchema } from '../../components/schema/CourseSchema';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
@@ -486,6 +487,7 @@ export function OnlineProgrammePage() {
         description="Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!"
         canonical="/programmes/business-digital-marketing-with-ai-6-months-online"
       />
+      <CourseSchema slug="business-digital-marketing-with-ai-6-months-online" />
       <Navbar onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
       <div className="tl-landing-page">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />

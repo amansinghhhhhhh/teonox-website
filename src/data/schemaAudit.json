@@ -1,0 +1,691 @@
+{
+  "homepage": {
+    "organization": {
+      "@type": ["EducationalOrganization"],
+      "@id": "https://teonox.com/#organization",
+      "name": "Teonox",
+      "url": "https://teonox.com/",
+      "logo": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+      "image": "https://teonox.com/assets/what-is-teonox-DHE0MN1_.webp",
+      "description": "AI automation and digital marketing courses in Pune with placement support for students, graduates and career switchers.",
+      "telephone": "9890004828",
+      "email": "info@teonox.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Office No. 13, 4th Floor, Revolution Mall, Kothrud, Pune",
+        "addressLocality": "Pune",
+        "addressRegion": "Maharashtra",
+        "postalCode": "411038",
+        "addressCountry": "IN"
+      },
+      "areaServed": "Pune",
+      "sameAs": [
+        "https://www.linkedin.com/company/teonox",
+        "https://www.instagram.com/teonoxofficial",
+        "https://www.facebook.com/teonoxofficial",
+        "https://www.youtube.com/@teonoxofficial"
+      ]
+    },
+    "website": {
+      "@type": "WebSite",
+      "@id": "https://teonox.com/#website",
+      "url": "https://teonox.com/",
+      "name": "Teonox",
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "inLanguage": "en-IN"
+    },
+    "webpage": {
+      "@type": "WebPage",
+      "@id": "https://teonox.com/#webpage",
+      "url": "https://teonox.com/",
+      "name": "AI Automation & Digital Marketing Courses in Pune | Teonox",
+      "isPartOf": { "@id": "https://teonox.com/#website" },
+      "about": { "@id": "https://teonox.com/#organization" }
+    }
+  },
+  "courses": {
+    "business-digital-marketing-with-ai-6-months-online": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["EducationalOrganization", "Organization"],
+          "@id": "https://teonox.com/#organization",
+          "name": "Teonox",
+          "url": "https://teonox.com/",
+          "image": "https://teonox.com/og-default.webp",
+          "description": "Teonox offers AI automation and digital marketing courses in Pune with placement support for students, graduates and career switchers.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "addressCountry": "IN"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Pune" },
+            { "@type": "Country", "name": "India" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://teonox.com/#website",
+          "url": "https://teonox.com/",
+          "name": "Teonox",
+          "inLanguage": "en-IN",
+          "publisher": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online#webpage",
+          "url": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online",
+          "name": "Best Business Digital Marketing With AI - Online Course Pune",
+          "description": "Upskill with Teonox AI automation and business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!",
+          "inLanguage": "en-IN",
+          "isPartOf": { "@id": "https://teonox.com/#website" },
+          "about": { "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online#course" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg"
+          },
+          "breadcrumb": { "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://teonox.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Programmes", "item": "https://teonox.com/programmes" },
+            { "@type": "ListItem", "position": 3, "name": "Business Digital Marketing with AI (6 Months, Online)", "item": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online" }
+          ]
+        },
+        {
+          "@type": "Course",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online#course",
+          "name": "Business Digital Marketing with AI (6 Months, Online)",
+          "description": "A 6-month online Business Digital Marketing with AI programme by Teonox, Pune. Covers digital marketing and AI automation skills, with placement support for students, graduates and career switchers.",
+          "url": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online",
+          "image": "https://teonox.com/og-default.webp",
+          "inLanguage": "en",
+          "teaches": [
+            "Digital marketing",
+            "AI automation for marketing",
+            "Search engine optimisation",
+            "Social media marketing",
+            "Performance marketing"
+          ],
+          "provider": { "@id": "https://teonox.com/#organization" },
+          "timeRequired": "P6M",
+          "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "online",
+            "inLanguage": "en"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai-6-months-online#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the duration of the Business Digital Marketing with AI online course?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Business Digital Marketing with AI online programme from Teonox runs for 6 months."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the Business Digital Marketing with AI course online?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. This version of the programme is delivered online, and Teonox is based in Pune, India."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can join this course?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The programme is designed for students, graduates and career switchers who want to build digital marketing and AI automation skills."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Teonox provide placement support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Teonox provides placement support to students, graduates and career switchers enrolled in its programmes."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "business-digital-marketing-with-ai": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["EducationalOrganization", "Organization"],
+          "@id": "https://teonox.com/#organization",
+          "name": "Teonox",
+          "url": "https://teonox.com/",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "description": "Teonox offers AI automation and digital marketing courses in Pune with placement support for students, graduates and career switchers.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "addressCountry": "IN"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Pune" },
+            { "@type": "Country", "name": "India" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://teonox.com/#website",
+          "url": "https://teonox.com/",
+          "name": "Teonox",
+          "inLanguage": "en-IN",
+          "publisher": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai#webpage",
+          "url": "https://teonox.com/programmes/business-digital-marketing-with-ai",
+          "name": "Business Digital Marketing Course with AI in Pune | Teonox",
+          "description": "Business Digital Marketing with AI programme by Teonox in Pune. Learn digital marketing and AI automation with placement support for students, graduates and career switchers.",
+          "inLanguage": "en-IN",
+          "isPartOf": { "@id": "https://teonox.com/#website" },
+          "about": { "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai#course" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://teonox.com/og-default.webp"
+          },
+          "breadcrumb": { "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://teonox.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Programmes", "item": "https://teonox.com/programmes" },
+            { "@type": "ListItem", "position": 3, "name": "Business Digital Marketing with AI", "item": "https://teonox.com/programmes/business-digital-marketing-with-ai" }
+          ]
+        },
+        {
+          "@type": "Course",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai#course",
+          "name": "Business Digital Marketing with AI",
+          "description": "Business Digital Marketing with AI programme by Teonox, Pune. Covers digital marketing and AI automation skills, with placement support for students, graduates and career switchers.",
+          "url": "https://teonox.com/programmes/business-digital-marketing-with-ai",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "inLanguage": "en",
+          "teaches": [
+            "Digital marketing",
+            "AI automation for marketing",
+            "Search engine optimisation",
+            "Social media marketing",
+            "Performance marketing"
+          ],
+          "provider": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://teonox.com/programmes/business-digital-marketing-with-ai#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What will I learn in the Business Digital Marketing with AI programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You will learn digital marketing fundamentals together with AI automation skills used in modern marketing work."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can join this programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The programme is designed for students, graduates and career switchers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Teonox provide placement support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Teonox provides placement support to students, graduates and career switchers enrolled in its programmes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is Teonox located?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Teonox offers its AI automation and digital marketing courses in Pune, Maharashtra, India."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "performance-marketing": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["EducationalOrganization", "Organization"],
+          "@id": "https://teonox.com/#organization",
+          "name": "Teonox",
+          "url": "https://teonox.com/",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "description": "Teonox offers AI automation and digital marketing courses in Pune with placement support for students, graduates and career switchers.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "addressCountry": "IN"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Pune" },
+            { "@type": "Country", "name": "India" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://teonox.com/#website",
+          "url": "https://teonox.com/",
+          "name": "Teonox",
+          "inLanguage": "en-IN",
+          "publisher": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://teonox.com/programmes/performance-marketing#webpage",
+          "url": "https://teonox.com/programmes/performance-marketing",
+          "name": "Performance Marketing Course in Pune | Teonox",
+          "description": "Performance Marketing programme by Teonox in Pune. Learn paid advertising, tracking and optimisation with placement support for students, graduates and career switchers.",
+          "inLanguage": "en-IN",
+          "isPartOf": { "@id": "https://teonox.com/#website" },
+          "about": { "@id": "https://teonox.com/programmes/performance-marketing#course" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg"
+          },
+          "breadcrumb": { "@id": "https://teonox.com/programmes/performance-marketing#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://teonox.com/programmes/performance-marketing#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://teonox.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Programmes", "item": "https://teonox.com/programmes" },
+            { "@type": "ListItem", "position": 3, "name": "Performance Marketing", "item": "https://teonox.com/programmes/performance-marketing" }
+          ]
+        },
+        {
+          "@type": "Course",
+          "@id": "https://teonox.com/programmes/performance-marketing#course",
+          "name": "Performance Marketing",
+          "description": "Performance Marketing programme by Teonox, Pune. Covers paid advertising, conversion tracking and campaign optimisation, with placement support for students, graduates and career switchers.",
+          "url": "https://teonox.com/programmes/performance-marketing",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "inLanguage": "en",
+          "teaches": [
+            "Performance marketing",
+            "Paid advertising",
+            "Conversion tracking",
+            "Campaign optimisation",
+            "Analytics and reporting"
+          ],
+          "provider": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://teonox.com/programmes/performance-marketing#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is performance marketing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Performance marketing is a form of digital marketing where results such as leads, sign-ups or sales are measured and optimised, and spend is tied to those outcomes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What will I learn in the Performance Marketing programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You will learn paid advertising, conversion tracking, campaign optimisation and analytics and reporting."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can join this programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The programme is designed for students, graduates and career switchers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Teonox provide placement support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Teonox provides placement support to students, graduates and career switchers enrolled in its programmes."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "seo-specialization": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["EducationalOrganization", "Organization"],
+          "@id": "https://teonox.com/#organization",
+          "name": "Teonox",
+          "url": "https://teonox.com/",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "description": "Teonox offers AI automation and digital marketing courses in Pune with placement support for students, graduates and career switchers.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "addressCountry": "IN"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Pune" },
+            { "@type": "Country", "name": "India" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://teonox.com/#website",
+          "url": "https://teonox.com/",
+          "name": "Teonox",
+          "inLanguage": "en-IN",
+          "publisher": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://teonox.com/programmes/seo-specialization#webpage",
+          "url": "https://teonox.com/programmes/seo-specialization",
+          "name": "SEO Specialization Course in Pune | Teonox",
+          "description": "SEO Specialization programme by Teonox in Pune. Learn search engine optimisation with placement support for students, graduates and career switchers.",
+          "inLanguage": "en-IN",
+          "isPartOf": { "@id": "https://teonox.com/#website" },
+          "about": { "@id": "https://teonox.com/programmes/seo-specialization#course" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg"
+          },
+          "breadcrumb": { "@id": "https://teonox.com/programmes/seo-specialization#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://teonox.com/programmes/seo-specialization#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://teonox.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Programmes", "item": "https://teonox.com/programmes" },
+            { "@type": "ListItem", "position": 3, "name": "SEO Specialization", "item": "https://teonox.com/programmes/seo-specialization" }
+          ]
+        },
+        {
+          "@type": "Course",
+          "@id": "https://teonox.com/programmes/seo-specialization#course",
+          "name": "SEO Specialization",
+          "description": "SEO Specialization programme by Teonox, Pune. Covers keyword research, on-page and technical SEO, content optimisation and link building, with placement support for students, graduates and career switchers.",
+          "url": "https://teonox.com/programmes/seo-specialization",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "inLanguage": "en",
+          "teaches": [
+            "Search engine optimisation",
+            "Keyword research",
+            "On-page SEO",
+            "Technical SEO",
+            "Link building"
+          ],
+          "provider": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://teonox.com/programmes/seo-specialization#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What will I learn in the SEO Specialization programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You will learn search engine optimisation, including keyword research, on-page SEO, technical SEO and link building."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can join this programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The programme is designed for students, graduates and career switchers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Teonox provide placement support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Teonox provides placement support to students, graduates and career switchers enrolled in its programmes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is Teonox located?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Teonox offers its AI automation and digital marketing courses in Pune, Maharashtra, India."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "social-media-marketing": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["EducationalOrganization", "Organization"],
+          "@id": "https://teonox.com/#organization",
+          "name": "Teonox",
+          "url": "https://teonox.com/",
+          "image": "https://teonox.com/og-default.webp",
+          "description": "Teonox offers AI automation and digital marketing courses in Pune with placement support for students, graduates and career switchers.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "addressCountry": "IN"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Pune" },
+            { "@type": "Country", "name": "India" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://teonox.com/#website",
+          "url": "https://teonox.com/",
+          "name": "Teonox",
+          "inLanguage": "en-IN",
+          "publisher": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://teonox.com/programmes/social-media-marketing#webpage",
+          "url": "https://teonox.com/programmes/social-media-marketing",
+          "name": "Social Media Marketing Course in Pune | Teonox",
+          "description": "Social Media Marketing programme by Teonox in Pune. Learn content, community and paid social with placement support for students, graduates and career switchers.",
+          "inLanguage": "en-IN",
+          "isPartOf": { "@id": "https://teonox.com/#website" },
+          "about": { "@id": "https://teonox.com/programmes/social-media-marketing#course" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg"
+          },
+          "breadcrumb": { "@id": "https://teonox.com/programmes/social-media-marketing#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://teonox.com/programmes/social-media-marketing#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://teonox.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Programmes", "item": "https://teonox.com/programmes" },
+            { "@type": "ListItem", "position": 3, "name": "Social Media Marketing", "item": "https://teonox.com/programmes/social-media-marketing" }
+          ]
+        },
+        {
+          "@type": "Course",
+          "@id": "https://teonox.com/programmes/social-media-marketing#course",
+          "name": "Social Media Marketing",
+          "description": "Social Media Marketing programme by Teonox, Pune. Covers content planning, community management and paid social advertising, with placement support for students, graduates and career switchers.",
+          "url": "https://teonox.com/programmes/social-media-marketing",
+          "image": "https://teonox.com/assets/teonox_logo_header-B9pBbkhl.svg",
+          "inLanguage": "en",
+          "teaches": [
+            "Social media marketing",
+            "Content planning",
+            "Community management",
+            "Paid social advertising",
+            "Social media analytics"
+          ],
+          "provider": { "@id": "https://teonox.com/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://teonox.com/programmes/social-media-marketing#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What will I learn in the Social Media Marketing programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You will learn content planning, community management, paid social advertising and social media analytics."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can join this programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The programme is designed for students, graduates and career switchers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Teonox provide placement support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Teonox provides placement support to students, graduates and career switchers enrolled in its programmes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is Teonox located?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Teonox offers its AI automation and digital marketing courses in Pune, Maharashtra, India."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "blogPosts": {
+    "tag-read-consent-state-before-default-was-set": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "A Tag Read Consent State Before a Default Was Set: How to Fix It in Google Tag Manager",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/10/A-Tag-Read-Consent-1024x576.png",
+      "datePublished": "19/10/2026",
+      "dateModified": "19/10/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/tag-read-consent-state-before-default-was-set"
+    },
+    "why-your-marketing-reports-look-good": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Why Your Marketing Reports Look Good, But Your Business Doesn't Grow",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/11/Business-Digital-Marketing-With-AI-Tools-1024x576.png",
+      "datePublished": "03/11/2026",
+      "dateModified": "03/11/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/why-your-marketing-reports-look-good"
+    },
+    "google-analytics-dashboards": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Google Analytics Dashboards: How to Build One (and Why You Should)",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/10/Google-Analytics-Dashboards-1024x576.png",
+      "datePublished": "16/10/2026",
+      "dateModified": "16/10/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/google-analytics-dashboards"
+    },
+    "ga4-unassigned-traffic": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "GA4 Unassigned Traffic: What It Means and How to Fix It",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/10/GA4-Unassigned-Traffic-1024x576.png",
+      "datePublished": "16/10/2026",
+      "dateModified": "16/10/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/ga4-unassigned-traffic"
+    },
+    "digital-marketing-classes-in-pune-offline-vs-online": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Digital Marketing Classes in Pune: Offline vs Online Training Guide for Students",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/10/AI-Digital-Marketing-Classes-1024x576.png",
+      "datePublished": "03/10/2026",
+      "dateModified": "03/10/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/digital-marketing-classes-in-pune-offline-vs-online"
+    },
+    "best-digital-marketing-courses-in-pune-with-placement": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Best Digital Marketing Courses in Pune with Placement: Fees, Skills, Projects & Career Opportunities",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/09/Best-Digital-Marketing-Courses-in-Pune-1024x576.jpg",
+      "datePublished": "23/09/2026",
+      "dateModified": "23/09/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/best-digital-marketing-courses-in-pune-with-placement"
+    },
+    "how-generative-ai-is-changing-digital-marketing-careers-in-pune": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How Generative AI Is Changing Digital Marketing Careers in Pune",
+      "image": "https://cms.teonox.com/wp-content/uploads/2026/09/Digital-Marketing-Careers-in-Pune-1024x576.jpg",
+      "datePublished": "17/09/2026",
+      "dateModified": "17/09/2026",
+      "author": { "@type": "Person", "name": "Mr Amit", "url": "https://teonox.com/about" },
+      "publisher": { "@id": "https://teonox.com/#organization" },
+      "mainEntityOfPage": "https://teonox.com/blog/how-generative-ai-is-changing-digital-marketing-careers-in-pune"
+    }
+  },
+  "contact": {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "url": "https://teonox.com/contact",
+    "name": "Talk to a Digital Marketing Course Institute Near You",
+    "isPartOf": { "@id": "https://teonox.com/#website" },
+    "about": { "@id": "https://teonox.com/#organization" }
+  }
+}
