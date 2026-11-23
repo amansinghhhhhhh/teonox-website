@@ -158,6 +158,8 @@ export interface ProgramDetailData {
 export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   'business-digital-marketing-with-ai': {
     id: 'business-digital-marketing-with-ai',
+    seoTitle: 'Business Digital Marketing With AI | TEONOX',
+    seoDescription: 'Become a complete digital marketer, trained across AI, SEO, paid ads, analytics, and business growth.',
     programTitle: 'BUSINESS DIGITAL MARKETING WITH AI',
     badge: 'FLAGSHIP CERTIFICATION PROGRAMME',
     subHeading: 'Complete Digital Marketing Mastery Across AI, SEO, Paid Ads, Analytics & Business Growth',
@@ -444,6 +446,8 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   },
   'social-media-marketing': {
     id: 'social-media-marketing',
+    seoTitle: 'Specialisation in Social Media Marketing | TEONOX',
+    seoDescription: 'Social Media Strategy, Content Creation, Community Management, Analytics & Paid Social.',
     programTitle: 'SPECIALISATION IN SOCIAL MEDIA MARKETING',
     badge: '8-WEEK ADVANCED SPECIALISATION PROGRAMME',
     subHeading: 'Advanced Content Systems, Algorithms, Communities, Influence & Social Commerce',
@@ -764,6 +768,8 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   },
   'seo-specialization': {
     id: 'seo-specialization',
+    seoTitle: 'Specialisation in Search Engine Optimisation | TEONOX',
+    seoDescription: 'Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth.',
     programTitle: 'SPECIALISATION IN SEARCH ENGINE OPTIMISATION',
     badge: '8-WEEK ADVANCED SPECIALISATION PROGRAMME',
     subHeading: 'Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth',
@@ -1064,6 +1070,8 @@ export const PROGRAM_DETAILS_MAP: Record<string, ProgramDetailData> = {
   },
   'performance-marketing': {
     id: 'performance-marketing',
+    seoTitle: 'Specialisation in Performance Marketing | TEONOX',
+    seoDescription: 'Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling.',
     programTitle: 'SPECIALISATION IN PERFORMANCE MARKETING',
     badge: '8-WEEK ADVANCED SPECIALISATION PROGRAMME',
     subHeading: 'Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling',

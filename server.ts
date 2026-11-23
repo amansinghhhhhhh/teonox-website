@@ -4,6 +4,13 @@ import path from "path";
 import crypto from "crypto";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
+import {
+  normalizeProgramSeoDescription,
+  normalizeProgramSeoTitle,
+  normalizeProgramSlug,
+  resolveCmsProgramSlug,
+  stripProgramHtmlTags,
+} from "./src/data/programCmsMap";
 
 // Load .env from the app dir OR Hostinger's hbuilds layout, where the env
 // file lives outside the deploy dir (…/hbuilds/config/.env) while the app
@@ -41,6 +48,9 @@ app.use((req, res, next) => {
 // No build/push needed — updates automatically when blogs are added/removed.
 const BASE_URL = 'https://teonox.com';
 const CMS_BASE = 'https://cms.teonox.com/index.php?rest_route=/wp/v2';
+// Correct REST base used for Rank Math programme metadata. The legacy
+// index.php?rest_route= URL above now redirects to the public blog HTML.
+const CMS_PROGRAM_REST_BASE = 'https://cms.teonox.com/wp-json/wp/v2/program';
 const PROGRAM_IDS = [
   'business-digital-marketing-with-ai',
   'performance-marketing',
@@ -157,6 +167,51 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!',
     canonical: '/programmes/business-digital-marketing-with-ai-6-months-online',
   },
+  // React-only programme routes: no matching CMS item today, so these static
+  // values keep their metadata route-specific. A future CMS program with the
+  // same slug is picked up automatically because dynamic CMS lookup runs first.
+  '/programmes/business-digital-marketing-with-ai': {
+    title: 'Business Digital Marketing With AI | TEONOX',
+    description: 'Become a complete digital marketer, trained across AI, SEO, paid ads, analytics, and business growth.',
+    canonical: '/programmes/business-digital-marketing-with-ai',
+  },
+  '/programmes/performance-marketing': {
+    title: 'Specialisation in Performance Marketing | TEONOX',
+    description: 'Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling.',
+    canonical: '/programmes/performance-marketing',
+  },
+  '/programmes/seo-specialization': {
+    title: 'Specialisation in Search Engine Optimisation | TEONOX',
+    description: 'Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth.',
+    canonical: '/programmes/seo-specialization',
+  },
+  '/programmes/social-media-marketing': {
+    title: 'Specialisation in Social Media Marketing | TEONOX',
+    description: 'Social Media Strategy, Content Creation, Community Management, Analytics & Paid Social.',
+    canonical: '/programmes/social-media-marketing',
+  },
+  // CMS-backed routes also carry static fallbacks so an API outage never
+  // drops them back to the homepage title/description.
+  '/programmes/business-digital-marketing-with-ai-6-months': {
+    title: 'Business Digital Marketing With AI | TEONOX',
+    description: 'Become a complete digital marketer, trained across AI, SEO, paid ads, analytics, and business growth.',
+    canonical: '/programmes/business-digital-marketing-with-ai-6-months',
+  },
+  '/programmes/specialisation-in-performance-marketing': {
+    title: 'Specialisation in Performance Marketing | TEONOX',
+    description: 'Advanced Paid Media, Tracking, Attribution, Experimentation, Analytics & Scaling.',
+    canonical: '/programmes/specialisation-in-performance-marketing',
+  },
+  '/programmes/specialisation-in-search-engine-optimisation': {
+    title: 'Specialisation in Search Engine Optimisation | TEONOX',
+    description: 'Advanced SEO, AI Search, Technical SEO, Digital Authority & Organic Growth.',
+    canonical: '/programmes/specialisation-in-search-engine-optimisation',
+  },
+  '/programmes/specialisation-in-social-media-marketing': {
+    title: 'Specialisation in Social Media Marketing | TEONOX',
+    description: 'Social Media Strategy, Content Creation, Community Management, Analytics & Paid Social.',
+    canonical: '/programmes/specialisation-in-social-media-marketing',
+  },
   '/blog': {
     title: 'Blog & Insights | TEONOX',
     description: 'Read the latest insights on AI, digital marketing, automation, and career growth from TEONOX \u2014 Gen AI School of Marketing & Business in Pune.',
@@ -233,21 +288,24 @@ function buildMetaTags(meta: RouteMeta): string {
   const ogType = meta.ogType || 'website';
   const robots = escapeHtml(meta.robots || 'index, follow');
 
-  return `<title>${title}</title>
-    <meta name="description" content="${desc}">
-    <meta name="robots" content="${robots}">
-    <link rel="canonical" href="${canonicalUrl}">
-    <meta property="og:title" content="${title}">
-    <meta property="og:description" content="${desc}">
-    <meta property="og:image" content="${DEFAULT_OG_IMAGE}">
-    <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:type" content="${ogType}">
-    <meta property="og:site_name" content="${SITE_NAME}">`;
+  // react-helmet-async claims head tags with data-rh. Marking the injected
+  // tags the same way lets Helmet replace them instead of appending a second
+  // <title>/description/og:* set on hydration.
+  return `<title data-rh="true">${title}</title>
+    <meta data-rh="true" name="description" content="${desc}">
+    <meta data-rh="true" name="robots" content="${robots}">
+    <link data-rh="true" rel="canonical" href="${canonicalUrl}">
+    <meta data-rh="true" property="og:title" content="${title}">
+    <meta data-rh="true" property="og:description" content="${desc}">
+    <meta data-rh="true" property="og:image" content="${DEFAULT_OG_IMAGE}">
+    <meta data-rh="true" property="og:url" content="${canonicalUrl}">
+    <meta data-rh="true" property="og:type" content="${ogType}">
+    <meta data-rh="true" property="og:site_name" content="${SITE_NAME}">`;
 }
 
 // Simple in-memory cache for dynamic route metadata (avoid repeated WP API calls)
 const dynamicMetaCache = new Map<string, { meta: RouteMeta; ts: number }>();
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL = 60 * 1000; // 60s — Rank Math edits propagate within a minute
 
 function getCachedDynamicMeta(key: string): RouteMeta | null {
   const entry = dynamicMetaCache.get(key);
@@ -294,28 +352,43 @@ async function fetchBlogMeta(slug: string): Promise<RouteMeta | null> {
 }
 
 async function fetchProgramMeta(slug: string): Promise<RouteMeta | null> {
-  const cacheKey = `program:${slug}`;
+  const routeSlug = normalizeProgramSlug(slug);
+  if (!routeSlug) return null;
+
+  const cacheKey = `program:${routeSlug}`;
   const cached = getCachedDynamicMeta(cacheKey);
   if (cached) return cached;
 
   try {
-    const isNumeric = /^\d+$/.test(slug);
-    const url = isNumeric
-      ? `${WP_PROGRAM_BASE}/${slug}&_fields=title,acf`
-      : `${WP_PROGRAM_BASE}&slug=${encodeURIComponent(slug)}&_fields=title,acf&per_page=1`;
+    const cmsSlug = resolveCmsProgramSlug(routeSlug);
+    const fields = '_fields=id,slug,title,acf,rank_math_seo';
+    const url = /^\d+$/.test(cmsSlug)
+      ? `${CMS_PROGRAM_REST_BASE}/${cmsSlug}?${fields}`
+      : `${CMS_PROGRAM_REST_BASE}?slug=${encodeURIComponent(cmsSlug)}&${fields}&per_page=1`;
+
     const res = await fetch(`${url}&_cb=${Date.now()}`);
     if (!res.ok) return null;
     const data = await res.json();
-    const post = isNumeric ? data : (Array.isArray(data) ? data[0] : null);
+    const post = Array.isArray(data) ? data[0] : data;
     if (!post) return null;
 
-    const title = decodeHtmlEntities(post.title?.rendered || '').replace(/<[^>]*>/g, '');
-    const heroIntro = decodeHtmlEntities(post.acf?.hero_intro || '').replace(/<[^>]*>/g, '').slice(0, 160);
+    const rankTitle = normalizeProgramSeoTitle(post.rank_math_seo?.title || '');
+    const rankDescription = normalizeProgramSeoDescription(post.rank_math_seo?.description || '');
+    if (!rankTitle && !rankDescription) return null;
+
+    const wpTitle = stripProgramHtmlTags(post.title?.rendered || '');
+    const heroIntro = stripProgramHtmlTags(post.acf?.hero_intro || '').slice(0, 160);
+    const staticMeta = META_MAP[`/programmes/${routeSlug}`];
 
     const meta: RouteMeta = {
-      title: `${title} | TEONOX`,
-      description: heroIntro || `Explore ${title} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`,
-      canonical: `/programmes/${slug}`,
+      title: rankTitle || staticMeta?.title || (wpTitle ? `${wpTitle} | TEONOX` : 'Programme | TEONOX'),
+      description:
+        rankDescription ||
+        heroIntro ||
+        staticMeta?.description ||
+        `Explore ${wpTitle || 'this programme'} at TEONOX \u2014 Gen AI School of Marketing & Business in Pune.`,
+      // Always canonicalise to the on-site route, never the CMS permalink/slug.
+      canonical: `/programmes/${routeSlug}`,
     };
     setCachedDynamicMeta(cacheKey, meta);
     return meta;
@@ -328,20 +401,25 @@ async function fetchProgramMeta(slug: string): Promise<RouteMeta | null> {
 async function resolveRouteMeta(pathname: string): Promise<RouteMeta | null> {
 
   const clean = pathname.replace(/\/+$/, '') || '/';
-
-  // Exact static match
-  if (META_MAP[clean]) return META_MAP[clean];
+  const segments = clean.split('/').filter(Boolean);
 
   // Dynamic: /blog/:slug
-  const segments = clean.split('/').filter(Boolean);
   if (segments.length === 2 && segments[0] === 'blog') {
-    return fetchBlogMeta(segments[1]);
+    return (await fetchBlogMeta(segments[1])) || META_MAP[clean] || null;
   }
 
-  // Dynamic: /programmes/:slug or /programs/:slug or /program/:slug
+  // Dynamic: /programmes/:slug or /programs/:slug or /program/:slug.
+  // Check the CMS before META_MAP so Rank Math edits win even for routes that
+  // also have a static fallback entry. META_MAP still covers React-only
+  // routes, empty Rank Math fields, and a temporarily unreachable CMS.
   if (segments.length === 2 && (segments[0] === 'programmes' || segments[0] === 'programs' || segments[0] === 'program')) {
-    return fetchProgramMeta(segments[1]);
+    const dynamic = await fetchProgramMeta(segments[1]);
+    if (dynamic) return dynamic;
+    return META_MAP[clean] || null;
   }
+
+  // Exact static match for every other route
+  if (META_MAP[clean]) return META_MAP[clean];
 
   return null;
 }
@@ -380,11 +458,11 @@ function serveWithMeta(html: string) {
     // so it must be stripped here too — otherwise the enquiry route's
     // noindex would arrive as two conflicting robots tags.
     let modified = html
-      .replace(/(?:\r?\n\s*)?<meta name="description" content="[^"]*"\s*\/?>/g, '')
-      .replace(/(?:\r?\n\s*)?<meta name="robots" content="[^"]*"\s*\/?>/g, '')
-      .replace(/(?:\r?\n\s*)?<link rel="canonical" href="[^"]*"\s*\/?>/g, '')
-      .replace(/(?:\r?\n\s*)?<meta property="og:[a-z_:]+" content="[^"]*"\s*\/?>/g, '')
-      .replace(/<title>[^<]*<\/title>/, metaHtml);
+      .replace(/(?:\r?\n\s*)?<meta\s+name="description"[^>]*>/g, '')
+      .replace(/(?:\r?\n\s*)?<meta\s+name="robots"[^>]*>/g, '')
+      .replace(/(?:\r?\n\s*)?<link\s+rel="canonical"[^>]*>/g, '')
+      .replace(/(?:\r?\n\s*)?<meta\s+property="og:[a-z_:]+"[^>]*>/g, '')
+      .replace(/(?:\r?\n\s*)?<title[^>]*>[^<]*<\/title>/, metaHtml);
 
     const clean = req.path.replace(/\/+$/, '') || '/';
     const extra = HEAD_EXTRAS[clean];

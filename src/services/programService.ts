@@ -5,6 +5,12 @@ import perfImg from '../assets/images/uploaded_performance.webp';
 import seoImg from '../assets/images/uploaded_seo.webp';
 import socialImg from '../assets/images/uploaded_social_media.webp';
 import { CMS_URL, decodeHtmlEntities, stripHtml, safeJson } from '../utils/html';
+import {
+  normalizeProgramSeoDescription,
+  normalizeProgramSeoTitle,
+  normalizeProgramSlug,
+  resolveCmsProgramSlug,
+} from '../data/programCmsMap';
 
 /**
  * Normalised data for a single program card on the /programmes listing page.
@@ -293,35 +299,47 @@ export function stripV2Prefixes<T>(value: T): T {
   return value;
 }
 
-// ─── Rank Math SEO scraping ─────────────────────────────────────────
-// The WP REST API does not expose Rank Math meta fields by default.
-// Instead we scrape the live WP front-end page and extract <title> and
-// <meta name="description"> which Rank Math injects into the HTML.
-const _rankMathCache: Record<string, { seoTitle?: string; seoDescription?: string }> = {};
+// ─── Rank Math SEO via CMS REST ─────────────────────────────────────
+// The CMS exposes Rank Math fields as `rank_math_seo: { title, description }`
+// on every /wp/v2/program item. A short-lived cache keeps SEO edits responsive
+// without firing a request on every render.
+export interface ProgramSeoMeta {
+  title?: string;
+  description?: string;
+}
 
-async function scrapeRankMathMeta(slug: string): Promise<{ seoTitle?: string; seoDescription?: string }> {
-  if (_rankMathCache[slug]) return _rankMathCache[slug];
+const RANK_MATH_TTL = 60 * 1000;
+const _rankMathCache: Record<string, { meta: ProgramSeoMeta; ts: number }> = {};
 
-  const wpUrl = `https://cms.teonox.com/program/${slug}/`;
+export async function fetchProgramSeoMeta(routeSlug: string): Promise<ProgramSeoMeta> {
+  const key = normalizeProgramSlug(routeSlug);
+  if (!key) return {};
+
+  const cached = _rankMathCache[key];
+  if (cached && Date.now() - cached.ts < RANK_MATH_TTL) return cached.meta;
+
+  const cmsSlug = resolveCmsProgramSlug(key);
+  const fields = '_fields=id,slug,rank_math_seo';
+  const url = /^\d+$/.test(cmsSlug)
+    ? `${CMS_URL}/program/${cmsSlug}?${fields}`
+    : `${CMS_URL}/program?slug=${encodeURIComponent(cmsSlug)}&${fields}&per_page=1&_cb=${Date.now()}`;
+
   try {
-    const res = await fetch(wpUrl, { redirect: 'follow' });
-    if (!res.ok) return {};
-    const html = await res.text();
+    const res = await fetch(url, { headers: { Accept: 'application/json' } });
+    const data = await safeJson(res);
+    if (!res.ok || !data) return cached?.meta || {};
 
-    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-    const descMatch =
-      html.match(/<meta\s+name=['"]description['"]\s+content=['"]([^'"]+)['"]/i) ||
-      html.match(/<meta\s+content=['"]([^'"]+)['"]\s+name=['"]description['"]/i);
+    const post = Array.isArray(data) ? data[0] : data;
+    const meta: ProgramSeoMeta = {
+      title: normalizeProgramSeoTitle(post?.rank_math_seo?.title || ''),
+      description: normalizeProgramSeoDescription(post?.rank_math_seo?.description || ''),
+    };
+    if (!meta.title && !meta.description) return cached?.meta || {};
 
-    const result: { seoTitle?: string; seoDescription?: string } = {};
-    if (titleMatch) result.seoTitle = decodeHtmlEntities(titleMatch[1]).trim();
-    if (descMatch) result.seoDescription = decodeHtmlEntities(descMatch[1]).trim();
-
-    _rankMathCache[slug] = result;
-    return result;
-  } catch (e) {
-    console.warn('[programService] Failed to scrape Rank Math meta for', slug, e);
-    return {};
+    _rankMathCache[key] = { meta, ts: Date.now() };
+    return meta;
+  } catch {
+    return cached?.meta || {};
   }
 }
 
@@ -650,10 +668,14 @@ export async function fetchLiveProgramDetail(
             detail = { ...detail, designedForImage: resolvedUrl };
           }
         }
-        // Scrape Rank Math SEO title + description from the WP front-end page.
-        const rankMath = await scrapeRankMathMeta(match.slug);
-        if (rankMath.seoTitle || rankMath.seoDescription) {
-          detail = { ...detail, ...rankMath };
+        // Rank Math SEO title + description from the CMS REST field.
+        const rankMath = await fetchProgramSeoMeta(key);
+        if (rankMath.title || rankMath.description) {
+          detail = {
+            ...detail,
+            seoTitle: rankMath.title || detail.seoTitle,
+            seoDescription: rankMath.description || detail.seoDescription,
+          };
         }
         return { detail, isLive: true, notFound: false };
       }

@@ -6,6 +6,7 @@ import { fetchLiveProgramDetail, stripV2Prefixes } from '../services/programServ
 import { ProgramV2Layout } from './programV2/ProgramV2Layout';
 import { SEO } from './SEO';
 import { CourseSchema } from './schema/CourseSchema';
+import { useProgramHeadDedupe } from '../hooks/useProgramHeadDedupe';
 
 interface ProgramDetailPageProps {
   program?: Program | null;
@@ -96,6 +97,13 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
     };
   }, [identifier]);
 
+  // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
+  const displayDetail = liveDetail ? stripV2Prefixes(liveDetail) : null;
+
+  // Strip the server-injected head tags on the same commit that mounts <SEO>,
+  // so Helmet replaces them instead of leaving duplicate title/og/meta tags.
+  useProgramHeadDedupe(Boolean(displayDetail) && !notFound);
+
   // Empty identifier means the URL was invalid — show error state immediately
   if (!identifier || notFound) {
     return (
@@ -123,9 +131,6 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
       </div>
     );
   }
-
-  // Prefer live WordPress CMS content, fall back to static data while loading/unreachable.
-  const displayDetail = liveDetail ? stripV2Prefixes(liveDetail) : null;
 
   // Skeleton while resolving a slug that has no static fallback yet.
   if (loading && !displayDetail) {
@@ -182,9 +187,10 @@ export function ProgramDetailPage({ program, onBack, onEnquire, onBrochure }: Pr
         description={displayDetail?.seoDescription || displayDetail?.heroIntro || `Explore ${program?.title || 'this programme'} at TEONOX — Gen AI School of Marketing & Business in Pune.`}
         canonical={`/programmes/${canonicalSlug}`}
       />
+      {/* Schema copy stays on programme content, independent of Rank Math edits. */}
       <CourseSchema
         name={displayDetail?.programTitle || program?.title || ''}
-        description={displayDetail?.seoDescription || displayDetail?.heroIntro || ''}
+        description={displayDetail?.heroIntro || ''}
         slug={canonicalSlug}
       />
       <div className="w-[88%] max-w-7xl mx-auto relative z-10">

@@ -6,6 +6,8 @@ import { CourseSchema } from '../../components/schema/CourseSchema';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { submitForm as submitLeadForm } from '../../services/formService';
+import { fetchProgramSeoMeta } from '../../services/programService';
+import { useProgramHeadDedupe } from '../../hooks/useProgramHeadDedupe';
 import { shouldVerifyOtp } from '../../hooks/usePhoneOtp';
 import { PhoneOtpInline } from '../../components/PhoneOtpInline';
 import { redirectToThankYou } from '../../utils/thankYou';
@@ -16,6 +18,14 @@ import '../../pages/programmes/online-programme.css';
 import { BATCH_SCHEDULE } from '../../data/batchSchedule';
 import BatchScheduleOnline from "../../components/BatchScheduleOnline";
 
+
+const ONLINE_PROGRAMME_SLUG = 'business-digital-marketing-with-ai-6-months-online';
+
+const ONLINE_PROGRAMME_FALLBACK_SEO = {
+  title: 'Best Business Digital Marketing With AI - Online Course Pune',
+  description:
+    'Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!',
+};
 
 function navigateTo(path: string) {
   if (path.startsWith('#')) {
@@ -183,6 +193,33 @@ function OnlineProgrammeOtpGate() {
 }
 
 export function OnlineProgrammePage() {
+  // Helmet is deliberately withheld until CMS SEO settles so the server-injected
+  // tags stay authoritative on first paint (no stale-title flash / duplicates).
+  const [programSeo, setProgramSeo] = useState<{ title: string; description: string } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchProgramSeoMeta(ONLINE_PROGRAMME_SLUG)
+      .then((meta) => {
+        if (cancelled) return;
+        setProgramSeo({
+          title: meta.title || ONLINE_PROGRAMME_FALLBACK_SEO.title,
+          description: meta.description || ONLINE_PROGRAMME_FALLBACK_SEO.description,
+        });
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setProgramSeo(ONLINE_PROGRAMME_FALLBACK_SEO);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // <SEO> mounts as soon as the CMS/fallback title is known; clear the
+  // server-injected head tags in that same commit to avoid duplicate tags.
+  useProgramHeadDedupe(Boolean(programSeo));
+
   useEffect(() => {
     // --- Global Window Handlers ---
     (window as any).openApplyModal = () => {
@@ -482,12 +519,14 @@ export function OnlineProgrammePage() {
 
   return (
     <>
-      <SEO
-        title="Best Business Digital Marketing With AI - Online Course Pune"
-        description="Upskill with Teonox AI automation and Business digital marketing online courses in Pune. Assured placement support for students, graduates and career switchers. Enrol today!"
-        canonical="/programmes/business-digital-marketing-with-ai-6-months-online"
-      />
-      <CourseSchema slug="business-digital-marketing-with-ai-6-months-online" />
+      {programSeo && (
+        <SEO
+          title={programSeo.title}
+          description={programSeo.description}
+          canonical={`/programmes/${ONLINE_PROGRAMME_SLUG}`}
+        />
+      )}
+      <CourseSchema slug={ONLINE_PROGRAMME_SLUG} />
       <Navbar onEnquireClick={() => { if (typeof window !== 'undefined' && (window as any).openApplyModal) (window as any).openApplyModal(); }} activeSection="programmes" onNavigate={(path, label) => navigateTo(path)} />
       <div className="tl-landing-page">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
