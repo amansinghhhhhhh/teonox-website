@@ -56,10 +56,10 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
 
 <!-- ============ HEADER ============ -->
 <div class="topbar">
-  <div class="announce">Marketing Uncovered · Every Wednesday &amp; Saturday · 90 Minutes · <span class="orange">Free registration</span> · TEONOX, Kothrud, Pune</div>
+  <div class="announce">Marketing Uncovered · Wednesday, 25 Nov · 6:00 PM · 90 Minutes · <span class="orange">Free registration</span> · TEONOX, Kothrud, Pune</div>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a href="#top" class="logo"><img src="/marketing-uncovered/media/logo-on-light.png" alt="TEONOX — Learn, Apply, Lead" width="114" height="44" /></a>
+      <a href="#top" class="logo"><img src="/marketing-uncovered/media/logo-on-dark.png" alt="TEONOX — Learn, Apply, Lead" width="114" height="44" /></a>
       <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm">Book My Seat <svg><use href="#i-arrow-right"/></svg></a>
     </div>
   </header>
@@ -69,32 +69,78 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <img class="hero-bg hero-bg-desktop" src="/marketing-uncovered/media/hero-bg.png" alt="" aria-hidden="true" />
-    <img class="hero-bg hero-bg-mobile" src="/marketing-uncovered/media/hero-bg.png" alt="" aria-hidden="true" />
-    <div class="hero-fade"></div><div class="hero-fade-mobile"></div>
+    <img class="hero-fallback" src="/marketing-uncovered/media/hero-bg.png" alt="" aria-hidden="true" />
+    <!-- Client-provided hero videos: desktop and mobile variants -->
+    <video class="hero-video hero-video-desktop" autoplay muted loop playsinline preload="metadata" poster="/marketing-uncovered/media/hero-bg.png" aria-hidden="true">
+      <source src="/marketing-uncovered/media/hero-desktop.mp4" type="video/mp4" />
+    </video>
+    <video class="hero-video hero-video-mobile" autoplay muted loop playsinline preload="metadata" poster="/marketing-uncovered/media/hero-mobile-bg.jpg" aria-hidden="true">
+      <source src="/marketing-uncovered/media/hero-mobile.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-scrim"></div>
+    <div class="hero-tones" aria-hidden="true">
+      <span class="hero-tone hero-tone-1"></span>
+      <span class="hero-tone hero-tone-2"></span>
+      <span class="hero-tone hero-tone-3"></span>
+    </div>
+    <div class="hero-orbs" aria-hidden="true">
+      <span class="hero-orb hero-orb-1"></span>
+      <span class="hero-orb hero-orb-2"></span>
+      <span class="hero-orb hero-orb-3"></span>
+    </div>
+    <div class="hero-particles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
     <div class="wrap hero-inner">
       <span class="hero-badge">A 90-Minute Career Discovery Workshop</span>
       <h1>MARKETING <em>UNCOVERED</em></h1>
-      <h2 class="hero-subtitle">Is Marketing the Career You've Been Looking For?</h2>
-
-      <div class="ticket">
-        <div class="ticket-price">Free</div>
-        <div class="ticket-copy"><strong>Commitment Pass</strong><span>Attend the full workshop</span></div>
+      <p class="hero-subtitle">Is Marketing the Career You've Been Looking For?</p>
+      <div class="hero-highlights">
+        <span class="hero-highlight">LIVE · 90 MINUTES</span>
+        <span class="hero-highlight hero-highlight-date"><svg><use href="#i-calendar"/></svg> Wednesday, 25 Nov · 6:00 PM</span>
       </div>
-
-      <div class="meta-badges">
-        <span class="meta-badge">90 MINUTES · FULLY INTERACTIVE</span>
-        <span class="meta-badge">BACKED BY A2 DIGITAL · 12+ YEARS</span>
-        <span class="meta-badge">INDIA + GLOBAL OPPORTUNITIES</span>
-      </div>
+      <p class="hero-lead">
+        Built for
+        <span class="role-cycler" aria-label="Marketing career paths covered in this workshop">
+          <span class="role-cycler-window" aria-live="polite" aria-atomic="true">
+            <span class="role-cycler-item is-active" aria-hidden="false">Students &amp; Freshers</span>
+            <span class="role-cycler-item" aria-hidden="true">Aspiring Marketers</span>
+            <span class="role-cycler-item" aria-hidden="true">Performance &amp; Paid Media</span>
+            <span class="role-cycler-item" aria-hidden="true">Brand &amp; Growth</span>
+            <span class="role-cycler-item" aria-hidden="true">Career Switchers</span>
+          </span>
+          <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </span>
+      </p>
 
       <div class="hero-cta"><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book My Seat <svg><use href="#i-arrow-right"/></svg></a></div>
+
+      <div class="hero-trust" aria-label="Workshop details and credentials">
+        <div class="hero-pass">
+          <div class="hero-pass-copy"><strong>Commitment Pass</strong><span>Attend the full workshop</span></div>
+          <div class="ticket-price ticket-countdown" id="commitment-countdown" role="timer" aria-live="polite" aria-label="Time remaining until the Marketing Uncovered session">
+            <div class="countdown-grid">
+              <span class="countdown-unit"><strong data-countdown-days>--</strong><small>DAYS</small></span>
+              <span class="countdown-unit"><strong data-countdown-hours>--</strong><small>HRS</small></span>
+              <span class="countdown-unit"><strong data-countdown-minutes>--</strong><small>MIN</small></span>
+              <span class="countdown-unit"><strong data-countdown-seconds>--</strong><small>SEC</small></span>
+            </div>
+            <span class="countdown-ended">SESSION STARTED</span>
+          </div>
+        </div>
+        <div class="hero-credentials">
+          <span>90 MINUTES · FULLY INTERACTIVE</span>
+          <span>BACKED BY A2 DIGITAL · 12+ YEARS</span>
+          <span>INDIA + GLOBAL OPPORTUNITIES</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <div class="marquee"><div class="marquee-track">
-    <span>MARKETING UNCOVERED</span><span class="star">✦</span><span>90 MINUTES</span><span class="star">✦</span><span>EVERY WEDNESDAY &amp; SATURDAY</span><span class="star">✦</span><span>FREE REGISTRATION</span><span class="star">✦</span><span>ONLINE / OFFLINE</span><span class="star">✦</span>
-    <span>MARKETING UNCOVERED</span><span class="star">✦</span><span>90 MINUTES</span><span class="star">✦</span><span>EVERY WEDNESDAY &amp; SATURDAY</span><span class="star">✦</span><span>FREE REGISTRATION</span><span class="star">✦</span><span>ONLINE / OFFLINE</span><span class="star">✦</span>
+    <span>MARKETING UNCOVERED</span><span class="star">✦</span><span>90 MINUTES</span><span class="star">✦</span><span>WEDNESDAY, 25 NOV · 6:00 PM</span><span class="star">✦</span><span>FREE REGISTRATION</span><span class="star">✦</span><span>ONLINE / OFFLINE</span><span class="star">✦</span>
+    <span>MARKETING UNCOVERED</span><span class="star">✦</span><span>90 MINUTES</span><span class="star">✦</span><span>WEDNESDAY, 25 NOV · 6:00 PM</span><span class="star">✦</span><span>FREE REGISTRATION</span><span class="star">✦</span><span>ONLINE / OFFLINE</span><span class="star">✦</span>
   </div></div>
 
   <!-- ============ INTRO ============ -->
@@ -121,11 +167,11 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
       <div class="section-head">
         <span class="eyebrow"><i></i> Workshop details</span><div class="rule"></div>
         <h2>Everything You Need to Know</h2>
-        <p>Short on time? Here are the essentials — 90 minutes, twice a week, designed for complete beginners.</p>
+        <p>Short on time? Here are the essentials — one focused 90-minute session, designed for complete beginners.</p>
       </div>
       <div class="details-grid">
         <div class="detail-card"><span class="detail-icon"><svg><use href="#i-clock"/></svg></span><small>DURATION</small><strong>90 Minutes</strong><p>One focused, interactive session.</p></div>
-        <div class="detail-card"><span class="detail-icon"><svg><use href="#i-calendar"/></svg></span><small>DAYS</small><strong>Every Wednesday &amp; Saturday</strong><p>Pick a batch that suits you.</p></div>
+        <div class="detail-card"><span class="detail-icon"><svg><use href="#i-calendar"/></svg></span><small>DATE &amp; TIME</small><strong>Wednesday, 25 Nov</strong><p>6:00 PM · one focused interactive session.</p></div>
         <div class="detail-card"><span class="detail-icon"><svg><use href="#i-globe"/></svg></span><small>MODE</small><strong>Online / Offline</strong><p>To be configured at the time of booking.</p></div>
         <div class="detail-card"><span class="detail-icon"><svg><use href="#i-pin"/></svg></span><small>VENUE</small><strong>TEONOX, Kothrud, Pune</strong><p>For offline sessions.</p></div>
       </div>
@@ -460,27 +506,17 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
   <!-- ============ BOOK YOUR BATCH ============ -->
   <section class="section tinted reveal" data-reveal id="book-your-batch">
     <div class="wrap">
-      <div class="section-head"><span class="eyebrow"><i></i> Book your batch</span><div class="rule"></div><h2>Choose Your Marketing Uncovered Session</h2></div>
+      <div class="section-head"><span class="eyebrow"><i></i> Upcoming session</span><div class="rule"></div><h2>Join the Upcoming Marketing Uncovered Session</h2></div>
       <div class="session-grid">
         <div class="session-card active">
           <div class="session-info">
-            <span class="session-day">Every week</span>
-            <strong>Wednesday</strong>
-            <p><svg><use href="#i-clock"/></svg> 90-minute interactive session</p>
+            <span class="session-day">Upcoming session</span>
+            <strong>Wednesday, 25 Nov</strong>
+            <p><svg><use href="#i-clock"/></svg> 6:00 PM · 90-minute interactive session</p>
             <p><svg><use href="#i-pin"/></svg> Online / Offline · TEONOX, Kothrud, Pune</p>
             <span class="seats-left">Free registration</span>
           </div>
-          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this day <svg><use href="#i-arrow-right"/></svg></a>
-        </div>
-        <div class="session-card">
-          <div class="session-info">
-            <span class="session-day">Every week</span>
-            <strong>Saturday</strong>
-            <p><svg><use href="#i-clock"/></svg> 90-minute interactive session</p>
-            <p><svg><use href="#i-pin"/></svg> Online / Offline · TEONOX, Kothrud, Pune</p>
-            <span class="seats-left">Free registration</span>
-          </div>
-          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this day <svg><use href="#i-arrow-right"/></svg></a>
+          <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="session-btn">Choose this session <svg><use href="#i-arrow-right"/></svg></a>
         </div>
       </div>
       <div class="questions">
@@ -501,7 +537,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
       <div class="faq-list" data-accordion>
         <div class="faq-item"><button type="button" class="faq-btn"><span>Do I need prior knowledge of Digital Marketing?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>No. This workshop is designed for beginners. You don't need any prior experience or technical knowledge.</p></div></div>
         <div class="faq-item"><button type="button" class="faq-btn"><span>How long is the workshop?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>The workshop is 90 minutes long.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-btn"><span>When are the workshops conducted?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>Every Wednesday and Saturday.</p></div></div>
+        <div class="faq-item"><button type="button" class="faq-btn"><span>When are the workshops conducted?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>The upcoming workshop is Wednesday, 25 Nov at 6:00 PM.</p></div></div>
         <div class="faq-item"><button type="button" class="faq-btn"><span>Is this a course or a workshop?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>Marketing Uncovered is a career discovery workshop. Its purpose is to help you understand the marketing industry and decide whether it interests you as a career.</p></div></div>
         <div class="faq-item"><button type="button" class="faq-btn"><span>Will I learn practical things about marketing?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>Yes. You'll explore how marketing works, the different specialisations, the skills involved and how businesses use marketing in the real world.</p></div></div>
         <div class="faq-item"><button type="button" class="faq-btn"><span>Who can register?</span><svg class="acc-toggle"><use href="#i-plus"/></svg></button><div class="faq-panel"><p>College students, freshers, working professionals and anyone curious about exploring a career in marketing.</p></div></div>
@@ -517,7 +553,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
         <p class="final-lead">Before you choose marketing, uncover what it really takes. Join Marketing Uncovered, an interactive career discovery experience by TEONOX.</p>
         <div class="brand-line"><i></i><strong>Marketing Uncovered</strong></div>
         <div class="final-tags">
-          <span class="final-tag"><i></i> Every Wednesday &amp; Saturday</span>
+          <span class="final-tag"><i></i> Wednesday, 25 Nov · 6:00 PM</span>
           <span class="final-tag"><i></i> 90 Minutes</span>
           <span class="final-tag plain"><svg><use href="#i-pin"/></svg> TEONOX, Kothrud, Pune</span>
         </div>
@@ -547,7 +583,7 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
         <li><a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer">Workshop details</a></li><li><a href="#faq">FAQ</a></li><li><a href="#top">Back to top</a></li>
       </ul></div>
       <div><h4>Workshop</h4><ul class="footer-list links">
-        <li>90 Minutes</li><li>Every Wednesday &amp; Saturday</li><li>Online / Offline</li>
+        <li>90 Minutes</li><li>Wednesday, 25 Nov · 6:00 PM</li><li>Online / Offline</li>
       </ul></div>
     </div>
     <div class="footer-bottom"><span>© 2026 TEONOX · School of Marketing, AI &amp; Business. All rights reserved.</span></div>
@@ -556,9 +592,20 @@ export const rawHtmlBody = `<!-- ===== SVG icon sprite ===== -->
 
 <!-- ============ FLOATING UI ============ -->
 <button type="button" class="to-top" id="to-top" aria-label="Back to top"><svg><use href="#i-arrow-up"/></svg></button>
-<div class="sticky-bar" id="sticky-bar">
-  <div class="sticky-info"><i></i><span><small>Marketing Uncovered</small><strong>Free · 90 minutes · Wed &amp; Sat</strong></span></div>
-  <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm">Book seat</a>
+<div class="sticky-bar" id="sticky-bar" role="region" aria-label="Marketing Uncovered registration">
+  <div class="sticky-inner">
+    <div class="sticky-info"><i></i><span><small>Marketing Uncovered · Wednesday, 25 Nov · 6:00 PM</small><strong>90-minute live workshop · Free registration</strong></span></div>
+    <div class="sticky-countdown ticket-countdown" id="sticky-countdown" role="timer" aria-label="Time remaining until the Marketing Uncovered session">
+      <div class="countdown-grid">
+        <span class="countdown-unit"><strong data-countdown-days>--</strong><small>DAYS</small></span>
+        <span class="countdown-unit"><strong data-countdown-hours>--</strong><small>HRS</small></span>
+        <span class="countdown-unit"><strong data-countdown-minutes>--</strong><small>MIN</small></span>
+        <span class="countdown-unit"><strong data-countdown-seconds>--</strong><small>SEC</small></span>
+      </div>
+      <span class="countdown-ended">SESSION STARTED</span>
+    </div>
+    <a href="https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e" target="_blank" rel="noopener noreferrer" class="btn btn-solid sticky-cta">Book seat <svg><use href="#i-arrow-right"/></svg></a>
+  </div>
 </div>
 
 <script src="/marketing-uncovered/script.js"></script>`;

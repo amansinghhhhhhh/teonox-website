@@ -142,7 +142,7 @@ function transformDesignerMarketingHtml(source) {
   // Static assets must resolve from /marketing-uncovered (the URL has no trailing slash).
   html = html.replace(/(href|src)="(styles\.css|script\.js|icon\.svg|apple-touch-icon\.png)"/g,
     (_match, attr, file) => `${attr}="/marketing-uncovered/${file}"`);
-  html = html.replace(/(href|src)="media\//g, (_match, attr) => `${attr}="/marketing-uncovered/media/`);
+  html = html.replace(/(href|src|poster)="media\//g, (_match, attr) => `${attr}="/marketing-uncovered/media/`);
 
   return html;
 }
@@ -167,6 +167,10 @@ async function writeMarketingUncoveredPage(distDir, googleProfileSchema) {
   const html = ensureGoogleProfileSchema(injectMeta(transformedHtml, meta), googleProfileSchema);
   await writePage(distDir, '/marketing-uncovered', html);
 
+  const publicDir = path.resolve(__dirname, '..', 'public', 'marketing-uncovered');
+  fs.mkdirSync(publicDir, { recursive: true });
+  fs.writeFileSync(path.join(publicDir, 'index.html'), html, 'utf-8');
+
   const cssContent = designerCss.replace(/overflow-x:\s*hidden\s*;/g, 'overflow-x: clip;');
   const scriptContent = sanitizeDesignerScript(designerScript);
 
@@ -186,8 +190,6 @@ async function writeMarketingUncoveredPage(distDir, googleProfileSchema) {
   }
 
   // Also sync to public/marketing-uncovered for dev mode / SPA
-  const publicDir = path.resolve(__dirname, '..', 'public', 'marketing-uncovered');
-  fs.mkdirSync(publicDir, { recursive: true });
   fs.writeFileSync(path.join(publicDir, 'styles.css'), cssContent, 'utf-8');
   fs.writeFileSync(path.join(publicDir, 'script.js'), scriptContent, 'utf-8');
   fs.cpSync(path.join(DESIGNER_MARKETING_DIR, 'media'), path.join(publicDir, 'media'), { recursive: true, force: true });

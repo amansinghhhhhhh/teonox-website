@@ -7,7 +7,7 @@
   var CTA = 'Reserve Your Spot — Free';
   var WHATSAPP = '919890004828';
   var VENUE = 'TEONOX, Kothrud, Pune';
-  var NEXT_DATE = 'Every Wednesday & Saturday';
+  var NEXT_DATE = 'Wednesday, 25 Nov · 6:00 PM';
   var STORAGE_KEY = 'teonox_marketing_uncovered_pass';
 
   function wa(msg) {
@@ -29,6 +29,8 @@
   var progress = $('#progress');
   var sticky = $('#sticky-bar');
   var toTop = $('#to-top');
+  var topbar = $('.topbar');
+  var hero = $('.hero');
 
   function onScroll() {
     var el = document.documentElement;
@@ -36,8 +38,13 @@
     progress.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
     sticky.classList.toggle('show', window.scrollY > 480);
     toTop.classList.toggle('show', window.scrollY > 500);
+    if (topbar) {
+      var heroBottom = hero ? hero.offsetTop + hero.offsetHeight - topbar.offsetHeight : 80;
+      topbar.classList.toggle('is-scrolled', window.scrollY > heroBottom);
+    }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
   toTop.addEventListener('click', function () {
@@ -50,6 +57,163 @@
   window.addEventListener('online', setOnline);
   window.addEventListener('offline', setOnline);
   setOnline();
+
+  /* ---------------- Commitment pass + sticky countdown ---------------- */
+  function initCommitmentCountdown() {
+    var roots = $$('.ticket-countdown');
+    if (!roots.length) return;
+
+    var targetTime = new Date('2026-11-25T18:00:00+05:30').getTime();
+
+    function setText(el, value) {
+      if (!el || el.textContent === value) return;
+      el.textContent = value;
+      el.classList.remove('is-ticking');
+      void el.offsetWidth;
+      el.classList.add('is-ticking');
+    }
+    function pad(value) { return value < 10 ? '0' + value : String(value); }
+
+    function renderRoot(root) {
+      var fields = {
+        days: $('[data-countdown-days]', root),
+        hours: $('[data-countdown-hours]', root),
+        minutes: $('[data-countdown-minutes]', root),
+        seconds: $('[data-countdown-seconds]', root)
+      };
+      var remaining = targetTime - Date.now();
+      if (!isFinite(remaining) || remaining <= 0) {
+        root.classList.add('is-ended');
+        root.setAttribute('aria-label', 'Marketing Uncovered session started');
+        return false;
+      }
+      var totalSeconds = Math.floor(remaining / 1000);
+      setText(fields.days, pad(Math.floor(totalSeconds / 86400)));
+      setText(fields.hours, pad(Math.floor((totalSeconds % 86400) / 3600)));
+      setText(fields.minutes, pad(Math.floor((totalSeconds % 3600) / 60)));
+      setText(fields.seconds, pad(totalSeconds % 60));
+      return true;
+    }
+
+    function renderAll() {
+      var active = true;
+      roots.forEach(function (root) {
+        if (!renderRoot(root)) active = false;
+      });
+      return active;
+    }
+
+    if (!renderAll()) return;
+    var timer = window.setInterval(function () {
+      if (!renderAll()) window.clearInterval(timer);
+    }, 1000);
+  }
+  initCommitmentCountdown();
+
+  /* ---------------- Audience role cycler ---------------- */
+  (function () {
+    var items = $$('.role-cycler-item');
+    if (items.length < 2) return;
+
+    var index = 0;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timer = null;
+
+    function show(next) {
+      index = next;
+      items.forEach(function (item, i) {
+        var active = i === next;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+    }
+    function start() {
+      if (!timer && !reduceMotion) {
+        timer = window.setInterval(function () { show((index + 1) % items.length); }, 3200);
+      }
+    }
+    function stop() {
+      if (timer) { window.clearInterval(timer); timer = null; }
+    }
+
+    show(0);
+    if (reduceMotion) return;
+
+    var cycler = $('.role-cycler');
+    if (cycler) {
+      cycler.addEventListener('mouseenter', stop);
+      cycler.addEventListener('mouseleave', start);
+      cycler.addEventListener('focusin', stop);
+      cycler.addEventListener('focusout', start);
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+    start();
+  })();
+
+  /* ---------------- Hero video playback ---------------- */
+  (function () {
+    var videos = $$('.hero-video');
+    if (!videos.length) return;
+
+    var desktop = $('.hero-video-desktop');
+    var mobile = $('.hero-video-mobile');
+    var query = window.matchMedia ? window.matchMedia('(max-width: 768px)') : null;
+
+    function prefersMobile() {
+      return query ? query.matches : window.innerWidth <= 768;
+    }
+    function activeVideos() {
+      if (desktop && mobile) return prefersMobile() ? [mobile] : [desktop];
+      return videos;
+    }
+    function showFallback() {
+      var fallback = $('.hero-fallback');
+      if (fallback) fallback.style.opacity = '1';
+    }
+    function play(video) {
+      video.muted = true;
+      var promise = video.play();
+      if (promise && typeof promise.catch === 'function') {
+        promise.catch(function () { showFallback(); });
+      }
+    }
+    function sync() {
+      var active = activeVideos();
+      videos.forEach(function (video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        if (active.indexOf(video) === -1) {
+          video.pause();
+        } else if (video.paused && !document.hidden) {
+          play(video);
+        }
+      });
+    }
+
+    videos.forEach(function (video) {
+      video.addEventListener('canplay', function () {
+        if (activeVideos().indexOf(video) !== -1 && video.paused && !document.hidden) play(video);
+      });
+    });
+    if (query) {
+      if (typeof query.addEventListener === 'function') query.addEventListener('change', sync);
+      else if (typeof query.addListener === 'function') query.addListener(sync);
+    }
+    window.addEventListener('resize', sync, { passive: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) videos.forEach(function (video) { video.pause(); });
+      else sync();
+    });
+    sync();
+  })();
 
   /* ---------------- Reveal on scroll ---------------- */
   var reveals = $$('[data-reveal]');
