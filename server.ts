@@ -814,6 +814,16 @@ async function startServer() {
       },
     }));
 
+    // Exact legacy programme URLs -> /programmes (301, both slash variants)
+    const LEGACY_PROGRAMME_REDIRECT_PATHS = [
+      '/programmes/build-digital-marketing-skills-with-ai',
+      '/programmesspecialization-in-performance-marketing',
+    ];
+    app.get(
+      LEGACY_PROGRAMME_REDIRECT_PATHS.flatMap((path) => [path, `${path}/`]),
+      (_req, res) => res.redirect(301, '/programmes'),
+    );
+
     // 301 redirect /programs → /programmes (SEO link equity preservation)
     app.get('/programs', (_req, res) => { res.redirect(301, '/programmes'); });
     app.get('/programs/:path(*)', (req, res) => { res.redirect(301, `/programmes/${req.params.path}`); });

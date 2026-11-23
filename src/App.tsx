@@ -76,6 +76,15 @@ const PAGE_PATHS: Record<Page, string> = {
   'not-found': '/404',
 };
 
+const LEGACY_PROGRAMME_REDIRECT_PATHS = new Set([
+  '/programmes/build-digital-marketing-skills-with-ai',
+  '/programmesspecialization-in-performance-marketing',
+]);
+
+function isLegacyProgrammeRedirect(pathname: string): boolean {
+  return LEGACY_PROGRAMME_REDIRECT_PATHS.has(pathname.replace(/\/+$/, '') || '/');
+}
+
 // Parse a window.location.pathname into a Route
 function parsePath(pathname: string): Route {
   const clean = pathname.replace(/\/+$/, '') || '/';
@@ -191,6 +200,10 @@ function getInitialRouteState(): {
   post: BlogPost | null;
   blogLoading: boolean;
 } {
+  if (isLegacyProgrammeRedirect(window.location.pathname)) {
+    return { page: 'programs', program: null, post: null, blogLoading: false };
+  }
+
   const route = parsePath(window.location.pathname);
 
   if (route.programId) {
@@ -314,6 +327,10 @@ export default function App() {
   const navigate = useCallback(
     (href: string, opts?: { replace?: boolean; noScroll?: boolean }) => {
       const { path, anchor } = parseHref(href);
+      if (isLegacyProgrammeRedirect(path)) {
+        window.location.replace('/programmes');
+        return;
+      }
       const route = parsePath(path);
       const url = normalizePath(path);
 
@@ -366,6 +383,10 @@ export default function App() {
   // Sync component state from the current URL (initial load + back/forward)
   const syncFromUrl = useCallback(
     (opts?: { scroll?: boolean }) => {
+      if (isLegacyProgrammeRedirect(window.location.pathname)) {
+        window.location.replace('/programmes');
+        return;
+      }
       const route = parsePath(window.location.pathname);
       const hash = window.location.hash;
       setSelectedPost(null);
