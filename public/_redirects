@@ -1,3 +1,8 @@
 # /enquiry-form is the correct URL, /inquiry-form is the old one.
 /inquiry-form   /enquiry-form   301
+
+# Standalone Marketing Uncovered landing page (both slash variants)
+/marketing-uncovered    /marketing-uncovered/index.html   200
+/marketing-uncovered/   /marketing-uncovered/index.html   200
+
 /*    /index.html   200

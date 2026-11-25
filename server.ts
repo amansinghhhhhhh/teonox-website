@@ -257,12 +257,6 @@ const META_MAP: Record<string, RouteMeta> = {
     description: 'Thank you for contacting TEONOX. Our team will reach out shortly.',
     canonical: '/thank-you',
   },
-  '/marketing-uncovered': {
-    title: 'Marketing Uncovered: Career Discovery Workshop | Teonox',
-    description: 'Explore the world of marketing, AI, and business in this 90-minute career discovery workshop by TEONOX.',
-    canonical: '/marketing-uncovered',
-  },
-
   '/terms-and-conditions': {
     title: 'Terms & Conditions | TEONOX',
     description: 'Read the TEONOX Terms & Conditions \u2014 governing your access to and use of our website, programmes, and services.',
@@ -857,6 +851,21 @@ app.use('/api', (req, res) => {
   res.status(404).json({ ok: false, error: `api_not_found: ${req.method} ${req.path}` });
 });
 
+// ─── Standalone Marketing Uncovered landing page ─────────────────────
+// Served as a plain prerendered document (never mounted in the React SPA).
+// Registered before startServer() so it wins over Vite middleware and the
+// production SPA fallback for both slash variants. Static assets under
+// /marketing-uncovered/* fall through to express.static / Vite as usual.
+app.get(['/marketing-uncovered', '/marketing-uncovered/'], (_req, res) => {
+  const baseDir = process.env.NODE_ENV === 'production' ? 'dist' : 'public';
+  const pagePath = path.join(process.cwd(), baseDir, 'marketing-uncovered', 'index.html');
+  if (fs.existsSync(pagePath)) {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    return res.sendFile(pagePath);
+  }
+  res.status(404).send('Marketing Uncovered page not found');
+});
+
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -909,21 +918,6 @@ async function startServer() {
     // Serve /webinar
     app.get(['/webinar', '/webinar/'], (_req, res) => {
       res.sendFile(path.join(distPath, 'webinar.html'));
-    });
-
-    // Serve prerendered marketing-uncovered page
-    app.get('/marketing-uncovered', (_req, res) => {
-      const marketingUncoveredPath = path.join(distPath, 'marketing-uncovered', 'index.html');
-      if (fs.existsSync(marketingUncoveredPath)) {
-        res.sendFile(marketingUncoveredPath);
-      } else {
-        // Fall back to serving index.html with meta injection if prerendered file doesn't exist
-        res.sendFile(path.join(distPath, 'index.html'), (err) => {
-          if (err) {
-            res.status(500).send('Error serving prerendered page');
-          }
-        });
-      }
     });
 
     // Serve prerendered blog detail pages (with their report BlogPosting JSON-LD)

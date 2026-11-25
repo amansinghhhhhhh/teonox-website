@@ -133,6 +133,29 @@ if (!profileMatch) {
   }
 }
 
+// ─── 2b. Marketing Uncovered standalone landing page ─────────────────
+const marketingUncoveredRelativePath = 'dist/marketing-uncovered/index.html';
+const marketingUncoveredHtml = read(marketingUncoveredRelativePath);
+if (marketingUncoveredHtml != null) {
+  expectExactlyOnce(marketingUncoveredRelativePath, marketingUncoveredHtml, GA_LOADER, 'GA4 loader (marketing-uncovered)');
+  expectExactlyOnce(marketingUncoveredRelativePath, marketingUncoveredHtml, GA_CONFIG, 'GA4 config (marketing-uncovered)');
+  if (profileMatch) {
+    expectExactlyOnce(marketingUncoveredRelativePath, marketingUncoveredHtml, profileMatch[0], 'canonical LocalBusiness JSON-LD (marketing-uncovered)');
+  }
+  if (!marketingUncoveredHtml.includes('rel="canonical" href="https://teonox.com/marketing-uncovered"')) {
+    fail(`${marketingUncoveredRelativePath}: missing canonical https://teonox.com/marketing-uncovered`);
+  }
+  if (!marketingUncoveredHtml.includes('href="/marketing-uncovered/css/style.css"')) {
+    fail(`${marketingUncoveredRelativePath}: missing absolute stylesheet /marketing-uncovered/css/style.css`);
+  }
+  if (!marketingUncoveredHtml.includes('src="/marketing-uncovered/js/main.js"')) {
+    fail(`${marketingUncoveredRelativePath}: missing absolute script /marketing-uncovered/js/main.js`);
+  }
+  if (/\b(?:href|src|poster|data-src)="(?:css|js|media)\//.test(marketingUncoveredHtml)) {
+    fail(`${marketingUncoveredRelativePath}: contains un-rewritten relative asset path`);
+  }
+}
+
 const auditSource = read('src/data/schemaAudit.json');
 let audit = null;
 if (auditSource != null) {

@@ -5,6 +5,7 @@ const CMS_BASE = 'https://cms.teonox.com/wp-json/wp/v2';
 
 const routesData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'routes.json'), 'utf8'));
 const STATIC_PAGES = routesData.map(r => ({ path: r.path, priority: r.priority, changefreq: r.changefreq }));
+const auditSchemas = require('../src/data/schemaAudit.json');
 
 async function fetchLiveBlogSlugs() {
   try {
@@ -38,9 +39,19 @@ async function main() {
   const distDir = path.resolve(__dirname, '..', 'dist');
   if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
   
-  const blogs = await fetchLiveBlogSlugs();
-  const programs = await fetchLiveProgramSlugs();
   const today = new Date().toISOString().split('T')[0];
+
+  // Live CMS slugs + the 7 audit slugs that prerender always generates. The
+  // merge keeps the sitemap valid during a CMS outage (e.g. Hostinger 503) and
+  // mirrors the same audit/live union used by scripts/prerender.cjs.
+  const liveBlogs = await fetchLiveBlogSlugs();
+  const blogMap = new Map();
+  for (const post of liveBlogs) blogMap.set(post.slug, post);
+  for (const slug of Object.keys(auditSchemas.blogPosts || {})) {
+    if (!blogMap.has(slug)) blogMap.set(slug, { slug, lastmod: today });
+  }
+  const blogs = [...blogMap.values()];
+  const programs = await fetchLiveProgramSlugs();
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   

@@ -153,134 +153,118 @@ async function writePage(distDir, routePath, html) {
   return path.join(outDir, 'index.html');
 }
 
-// Generate marketing-uncovered page static HTML from the designer's pure HTML/CSS/JS.
-const PAYMENT_URL = 'https://learn.teonox.com/web/checkout/6af840ffc14ddf1c3575796e';
+// ─── Marketing Uncovered standalone landing page ────────────────────
+// Source of truth lives at designer/marketing-uncovered/. The incoming
+// index.html is stored as marketing-uncovered.html so it can never shadow
+// the SPA's root index.html. The generated document is written to BOTH
+// public/ (dev serving) and dist/ (production serving).
 const DESIGNER_MARKETING_DIR = path.resolve(__dirname, '..', 'designer', 'marketing-uncovered');
 
-function sanitizeDesignerScript(source) {
-  let cleaned = source;
-  const modalIndex = cleaned.indexOf('/* ---------------- Booking modal ---------------- */');
-  if (modalIndex !== -1) {
-    cleaned = cleaned.slice(0, modalIndex) + '\n})();\n';
-  }
-  return cleaned;
-}
-
-function transformDesignerMarketingHtml(source) {
-  let html = source;
-
-  // Remove the entire booking modal, including both <form> elements.
-  const modalComment = '<!-- ============ BOOKING MODAL ============ -->';
-  const scriptTag = '<script src="script.js"></script>';
-  const modalStart = html.indexOf(modalComment);
-  const scriptStart = html.indexOf(scriptTag);
-  if (modalStart !== -1 && scriptStart > modalStart) {
-    html = html.slice(0, modalStart) + html.slice(scriptStart);
-  }
-
-  // Remove the floating WhatsApp pill.
-  html = html.replace(/<a class="float-pill float-pill-wa"[\s\S]*?<\/a>\s*/i, '');
-
-  // Every booking/reserve CTA goes straight to the payment link.
-  html = html.replace(/href="#reserve"/g, `href="${PAYMENT_URL}" target="_blank" rel="noopener noreferrer"`);
-
-  // Session buttons become real links to payment.
-  html = html.replace(
-    /<button type="button" class="session-btn js-book">([\s\S]*?)<\/button>/g,
-    (_match, inner) => `<a href="${PAYMENT_URL}" target="_blank" rel="noopener noreferrer" class="session-btn">${inner}</a>`
+function rewriteMarketingAssetPaths(html) {
+  return html.replace(
+    /\b(href|src|poster|data-src)=(["'])(?:\.\/)?(css|js|media)\//gi,
+    (_match, attr, quote, dir) => `${attr}=${quote}/marketing-uncovered/${dir}/`,
   );
-
-  // WhatsApp CTA buttons become payment CTAs.
-  const paymentCta = `<a href="${PAYMENT_URL}" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Reserve Your Spot <svg><use href="#i-arrow-right"/></svg></a>`;
-  html = html.replace(/<a class="btn btn-wa"[^>]*id="wa-question"[^>]*>[\s\S]*?<\/a>/gi, paymentCta);
-  html = html.replace(/<a class="btn btn-wa"[^>]*id="wa-final"[^>]*>[\s\S]*?<\/a>/gi, paymentCta);
-
-  // Defensive cleanup: no WhatsApp links, no forms, no booking-script hooks.
-  html = html.replace(/<a\b[^>]*href="https:\/\/(?:wa\.me|api\.whatsapp\.com)[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
-  html = html.replace(/<form\b[\s\S]*?<\/form>/gi, '');
-  html = html.replace(/\s+js-book\b/g, '');
-
-  // Static assets must resolve from /marketing-uncovered (the URL has no trailing slash).
-  html = html.replace(/(href|src)="(styles\.css|script\.js|icon\.svg|apple-touch-icon\.png)"/g,
-    (_match, attr, file) => `${attr}="/marketing-uncovered/${file}"`);
-  html = html.replace(/(href|src|poster)="media\//g, (_match, attr) => `${attr}="/marketing-uncovered/media/`);
-
-  return html;
 }
 
-async function writeMarketingUncoveredPage(distDir, googleProfileSchema) {
-  const outDir = path.join(distDir, 'marketing-uncovered');
-  fs.mkdirSync(outDir, { recursive: true });
+function rewriteMarketingCssPaths(css) {
+  return css.replace(
+    /url\((["']?)(?:\.\/)?(media|css|js)\//g,
+    (_match, quote, dir) => `url(${quote}/marketing-uncovered/${dir}/`,
+  );
+}
 
-  const designerHtml = fs.readFileSync(path.join(DESIGNER_MARKETING_DIR, 'index.html'), 'utf-8');
-  const designerCss = fs.readFileSync(path.join(DESIGNER_MARKETING_DIR, 'styles.css'), 'utf-8');
-  const designerScript = fs.readFileSync(path.join(DESIGNER_MARKETING_DIR, 'script.js'), 'utf-8');
+function rewriteMarketingJsPaths(js) {
+  return js.replace(
+    /(["'`])(?:\.\/)?media\//g,
+    (_match, quote) => `${quote}/marketing-uncovered/media/`,
+  );
+}
+
+function getGa4Snippet() {
+  const source = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf-8');
+  const match = source.match(
+    /<!--\s*GA4:[\s\S]*?-->\s*<script[^>]*src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-YZ0K65RBRD"[^>]*><\/script>\s*<script>[\s\S]*?<\/script>/,
+  );
+  if (!match) throw new Error('GA4 snippet not found in index.html');
+  return match[0];
+}
+
+function injectGa4(html) {
+  const snippet = getGa4Snippet();
+  if (html.includes(snippet)) return html;
+  return html.replace('</head>', `    ${snippet}\n  </head>`);
+}
+
+function injectMarketingHeadExtras(html, meta) {
+  const title = escapeHtml(meta.title);
+  const description = escapeHtml(meta.description);
+  const canonicalUrl = BASE_URL + meta.canonical;
+  let extras = '';
+
+  if (!html.includes('rel="icon"')) {
+    extras += '    <link rel="icon" type="image/svg+xml" href="/favicon.svg">\n';
+  }
+  if (!html.includes('name="twitter:card"')) {
+    extras += [
+      '    <meta name="twitter:card" content="summary_large_image">',
+      `    <meta name="twitter:title" content="${title}">`,
+      `    <meta name="twitter:description" content="${description}">`,
+      `    <meta name="twitter:image" content="${DEFAULT_OG_IMAGE}">`,
+      `    <meta name="twitter:url" content="${canonicalUrl}">`,
+    ].join('\n') + '\n';
+  }
+
+  return extras ? html.replace('</head>', extras + '  </head>') : html;
+}
+
+function writeMarketingUncoveredPage(distDir, googleProfileSchema) {
+  const sourceHtmlPath = path.join(DESIGNER_MARKETING_DIR, 'marketing-uncovered.html');
+  const sourceCssPath = path.join(DESIGNER_MARKETING_DIR, 'css', 'style.css');
+  const sourceJsPath = path.join(DESIGNER_MARKETING_DIR, 'js', 'main.js');
+  const sourceMediaDir = path.join(DESIGNER_MARKETING_DIR, 'media');
+
+  if (!fs.existsSync(sourceHtmlPath)) {
+    console.warn('[Prerender] Marketing Uncovered source HTML not found; skipping');
+    return;
+  }
 
   const meta = {
-    title: 'Marketing Uncovered: Career Discovery Workshop | Teonox',
-    description: 'Explore the world of marketing, AI, and business in this 90-minute career discovery workshop by TEONOX.',
+    title: 'Marketing Uncovered: Career Discovery Workshop in Pune | TEONOX',
+    description:
+      'Don’t choose your next career based on trends. Discover what the marketing industry is really like in this 90-minute career discovery workshop by TEONOX in Pune.',
     canonical: '/marketing-uncovered',
     robots: 'index, follow',
     ogType: 'website',
   };
 
-  const transformedHtml = transformDesignerMarketingHtml(designerHtml);
-  const html = ensureGoogleProfileSchema(injectMeta(transformedHtml, meta), googleProfileSchema);
-  await writePage(distDir, '/marketing-uncovered', html);
+  let html = fs.readFileSync(sourceHtmlPath, 'utf-8');
+  html = rewriteMarketingAssetPaths(html);
+  html = injectMeta(html, meta);
+  html = injectGa4(html);
+  html = injectMarketingHeadExtras(html, meta);
+  html = ensureGoogleProfileSchema(html, googleProfileSchema);
 
-  const publicDir = path.resolve(__dirname, '..', 'public', 'marketing-uncovered');
-  fs.mkdirSync(publicDir, { recursive: true });
-  fs.writeFileSync(path.join(publicDir, 'index.html'), html, 'utf-8');
+  const css = rewriteMarketingCssPaths(fs.readFileSync(sourceCssPath, 'utf-8'));
+  const js = rewriteMarketingJsPaths(fs.readFileSync(sourceJsPath, 'utf-8'));
 
-  const cssContent = designerCss.replace(/overflow-x:\s*hidden\s*;/g, 'overflow-x: clip;');
-  const scriptContent = sanitizeDesignerScript(designerScript);
+  const outputRoots = [
+    path.resolve(__dirname, '..', 'public', 'marketing-uncovered'),
+    path.join(distDir, 'marketing-uncovered'),
+  ];
 
-  fs.writeFileSync(path.join(outDir, 'styles.css'), cssContent, 'utf-8');
-  fs.writeFileSync(path.join(outDir, 'script.js'), scriptContent, 'utf-8');
-
-  fs.cpSync(path.join(DESIGNER_MARKETING_DIR, 'media'), path.join(outDir, 'media'), { recursive: true, force: true });
-  for (const icon of [
-    'icon.svg',
-    'apple-touch-icon.png',
-    'pwa-192x192.png',
-    'pwa-512x512.png',
-    'pwa-maskable-512x512.png',
-  ]) {
-    const from = path.join(DESIGNER_MARKETING_DIR, icon);
-    if (fs.existsSync(from)) fs.copyFileSync(from, path.join(outDir, icon));
+  for (const outDir of outputRoots) {
+    fs.mkdirSync(path.join(outDir, 'css'), { recursive: true });
+    fs.mkdirSync(path.join(outDir, 'js'), { recursive: true });
+    fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf-8');
+    fs.writeFileSync(path.join(outDir, 'css', 'style.css'), css, 'utf-8');
+    fs.writeFileSync(path.join(outDir, 'js', 'main.js'), js, 'utf-8');
+    if (fs.existsSync(sourceMediaDir)) {
+      fs.cpSync(sourceMediaDir, path.join(outDir, 'media'), { recursive: true, force: true });
+    }
   }
 
-  // Also sync to public/marketing-uncovered for dev mode / SPA
-  fs.writeFileSync(path.join(publicDir, 'styles.css'), cssContent, 'utf-8');
-  fs.writeFileSync(path.join(publicDir, 'script.js'), scriptContent, 'utf-8');
-  fs.cpSync(path.join(DESIGNER_MARKETING_DIR, 'media'), path.join(publicDir, 'media'), { recursive: true, force: true });
-  for (const icon of [
-    'icon.svg',
-    'apple-touch-icon.png',
-    'pwa-192x192.png',
-    'pwa-512x512.png',
-    'pwa-maskable-512x512.png',
-  ]) {
-    const from = path.join(DESIGNER_MARKETING_DIR, icon);
-    if (fs.existsSync(from)) fs.copyFileSync(from, path.join(publicDir, icon));
-  }
-
-  // Generate src/pages/MarketingUncovered/rawHtml.ts
-  const bodyMatch = transformedHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-  const bodyContent = bodyMatch ? bodyMatch[1].trim() : transformedHtml;
-  const rawHtmlTsPath = path.resolve(__dirname, '..', 'src', 'pages', 'MarketingUncovered', 'rawHtml.ts');
-  fs.writeFileSync(rawHtmlTsPath, `export const rawHtmlBody = \`${bodyContent.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${')}\`;\n`, 'utf-8');
-
-  // Generate src/pages/MarketingUncovered/marketingUncoveredScript.js
-  const scriptJsPath = path.resolve(__dirname, '..', 'src', 'pages', 'MarketingUncovered', 'marketingUncoveredScript.js');
-  const wrappedScript = `export function initializeMarketingUncovered() {\n${scriptContent}\n}\n`;
-  fs.writeFileSync(scriptJsPath, wrappedScript, 'utf-8');
-
-  // Generate src/pages/MarketingUncovered/marketing-uncovered.css
-  const cssPath = path.resolve(__dirname, '..', 'src', 'pages', 'MarketingUncovered', 'marketing-uncovered.css');
-  fs.writeFileSync(cssPath, `/* Marketing Uncovered overrides */\n.career-unlocked-lp.marketing-uncovered-lp {\n  overflow-x: clip;\n}\n.marketing-uncovered-lp [data-reveal] {\n  opacity: 1 !important;\n  transform: none !important;\n}\n${cssContent}\n`, 'utf-8');
-
-  console.log('Generated: /marketing-uncovered (designer HTML/CSS/JS + media + React sync)');
+  console.log('Generated: /marketing-uncovered (public + dist)');
 }
 
 // ─── Main ──────────────────────────────────────────────────────────
@@ -338,9 +322,9 @@ async function main() {
     await writePage(distDir, '/blog/' + slug, pageHtml);
     console.log('Generated: /blog/' + slug);
   }
-  
-  // Marketing Uncovered Prerendering
-  await writeMarketingUncoveredPage(distDir, googleProfileSchema);
+
+  // Marketing Uncovered standalone landing page (public + dist)
+  writeMarketingUncoveredPage(distDir, googleProfileSchema);
 }
 
 main();
